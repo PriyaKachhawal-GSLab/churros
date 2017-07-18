@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "eventId": {
+      "type": "string"
+    },
+    "elementInstanceId": {
+      "type": "integer"
+    }
+  },
+  "required": ["eventId", "elementInstanceId"]
+}
