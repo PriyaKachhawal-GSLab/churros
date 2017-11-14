@@ -20,7 +20,7 @@ suite.forElement('social', 'status', { payload: payload }, (test) => {
   test.should.supportPagination();
 
   it('should allow POST and DELETE likes', () => {
-    let pageId,accessToken,statusId;
+    let pageId,accessToken,statusId,commentId;
     return cloud.get(`/hubs/social/pages`)
       .then(r => pageId = r.body[0].id)
       .then(r => cloud.get(`/hubs/social/pages/${pageId}/page-access-token`))
@@ -28,12 +28,9 @@ suite.forElement('social', 'status', { payload: payload }, (test) => {
       .then(r => cloud.post(`/hubs/social/user/${pageId}/status`,payload))
       .then(r => statusId = r.body.id)
       .then(r => cloud.withOptions({ qs: {pageToken: accessToken } }).post(`/hubs/social/status/${statusId}/like`))
+      .then(r => cloud.withOptions({ qs: {pageToken: accessToken } }).post(`/hubs/social/status/${statusId}/comments`,comments))
+      .then(r => commentId = r.body.id)
+      .then(r => cloud.withOptions({ qs: {pageToken: accessToken } }).delete(`/hubs/social/user/comment/${commentId}`))
       .then(r => cloud.withOptions({ qs: {pageToken: accessToken } }).delete(`/hubs/social/user/likes/${statusId}`));
-  });
-  it(`should allow POST for ${test.api}/{id}/comments`, () => {
-    let statusId;
-    return cloud.get(test.api)
-      .then(r => statusId = r.body[0].id)
-      .then(r => cloud.post(`${test.api}/${statusId}/comments`, comments));
   });
 });

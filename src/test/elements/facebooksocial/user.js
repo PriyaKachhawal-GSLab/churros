@@ -60,11 +60,4 @@ suite.forElement('social', 'user',{ payload:payload }, (test) => {
       .then(r => contextId = r.body.context.id)
       .then(r =>cloud.get(`${test.api}/context/${contextId}`));
   });
-
-  it('should allow CREATE for hubs/social/status/{statusId}/comments and DELETE /hubs/social/user/comment/{commentId} ', () => {
-    let commentId;
-    return cloud.post(`hubs/social/status/${statusId}/comments`,payload)
-      .then(r => commentId = r.body.id)
-      .then(r =>cloud.delete(`${test.api}/comment/${commentId}`));
-  });
 });

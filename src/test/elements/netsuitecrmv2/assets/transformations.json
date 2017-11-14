@@ -54,5 +54,19 @@
       "path": "id",
       "vendorPath": "internalId"
     }]
+  },
+  "files": {
+    "vendorName": "File",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "folders": {
+    "vendorName": "Folder",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
   }
 }

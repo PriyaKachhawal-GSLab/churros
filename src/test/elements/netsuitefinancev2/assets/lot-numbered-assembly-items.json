@@ -64,7 +64,7 @@
     "internalId": "121",
     "name": "Cost of Goods Sold"
   },
-  "itemId": "<<random.words>>",
+  "itemId": "ChurrosLotNumberedAssem",
   "isDonationItem": false,
   "onSpecial": false,
   "effectiveBomControl": {
@@ -83,7 +83,7 @@
         }
       }
     ],
-    "replaceAll": false
+    "replaceAll": true
   },
   "matchBillToReceipt": false,
   "overallQuantityPricingType": {
@@ -138,6 +138,95 @@
   "wipAcct": {
     "internalId": "163",
     "name": "5100 Mfg WIP"
+  },
+  "locationsList": {
+    "locations": [
+      {
+        "quantityAvailable": 0,
+        "locationId": {
+          "internalId": "6"
+        },
+        "supplyType": {
+          "internalId": "BUILD",
+          "name": "Build"
+        },
+        "isWip": false,
+        "location": "6",
+        "costingLotSize": 1,
+        "location_display": "Denver"
+      },
+      {
+        "quantityAvailable": 0,
+        "locationId": {
+          "internalId": "7"
+        },
+        "supplyType": {
+          "internalId": "BUILD",
+          "name": "Build"
+        },
+        "isWip": false,
+        "location": "7",
+        "costingLotSize": 1,
+        "location_display": "Denver : Den - test"
+      },
+      {
+        "quantityAvailable": 0,
+        "locationId": {
+          "internalId": "8"
+        },
+        "supplyType": {
+          "internalId": "BUILD",
+          "name": "Build"
+        },
+        "isWip": false,
+        "location": "8",
+        "costingLotSize": 1,
+        "location_display": "Denver : Denver"
+      },
+      {
+        "quantityAvailable": 0,
+        "locationId": {
+          "internalId": "12"
+        },
+        "supplyType": {
+          "internalId": "BUILD",
+          "name": "Build"
+        },
+        "isWip": false,
+        "location": "12",
+        "costingLotSize": 1,
+        "location_display": "Denver : Denver : Denver"
+      },
+      {
+        "quantityAvailable": 0,
+        "locationId": {
+          "internalId": "9"
+        },
+        "supplyType": {
+          "internalId": "BUILD",
+          "name": "Build"
+        },
+        "isWip": false,
+        "location": "9",
+        "costingLotSize": 1,
+        "location_display": "Denver : Test"
+      },
+      {
+        "quantityAvailable": 0,
+        "locationId": {
+          "internalId": "10"
+        },
+        "supplyType": {
+          "internalId": "BUILD",
+          "name": "Build"
+        },
+        "isWip": false,
+        "location": "10",
+        "costingLotSize": 1,
+        "location_display": "Test"
+      }
+    ],
+    "replaceAll": false
   },
   "unbuildVarianceAccount": {
     "internalId": "154",

@@ -7,6 +7,7 @@
   const logger = require('winston');
   const swaggerParser = require('swagger-parser');
   const _ = require('lodash');
+  const argv = require('optimist').argv;
 
   const createAll = (urlTemplate, list) => {
     return Object.keys(list).sort()
@@ -26,7 +27,11 @@
       hub = props.get('hub');
       instanceName = props.get('instanceName');
     });
-    it('should provision', () => expect(instanceName).to.not.equal('churros-backup'));
+    it('should provision', () => {
+      if (argv.backup !== 'only backup') {
+        expect(instanceName).to.not.equal('churros-backup');
+      }
+    });
     it('should GET /objects', () => {
       return cloud.get('/objects').then(r => hub === 'documents' ? null : expect(r).to.have.statusCode(200) && expect(r.body).to.not.be.empty);
     });
