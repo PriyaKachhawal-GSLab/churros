@@ -347,7 +347,7 @@ describe('cloud', () => {
   });
 
   it('should support withOptions with options', () => {
-    cloud.withOptions({ json: true }).withOptions({ json: false });
+    return cloud.withOptions({ json: true }).withOptions({ json: false });
   });
 
   it('should throw an error if put file validation fails', () => {
