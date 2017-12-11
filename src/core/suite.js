@@ -210,7 +210,7 @@ const itCeqlSearch = (name, api, payload, field, options) => {
   const n = name || `should support searching ${api} by ${field}`;
   boomGoesTheDynamite(n, () => {
     let id, value;
-    let tranformedObjs = props.getOptionalForKey(props.get('element'), 'transformed') || [];
+    let tranformedObjs = props.getOptionalForKey(props.getOptional('element'), 'transformed') || [];
     //Have to update field for the query if there is a transformation
     let transform = tranformedObjs.reduce((acc, cur) => acc = acc ? acc : api.split('/').slice(-2).filter(str => str === cur).length > 0 ? true : false, false);
     if (field === 'id' && transform) field = 'idTransformed';
@@ -233,7 +233,7 @@ const itCeqlSearchMultiple = (name, api, payload, field, options) => {
   const n = name || `should support searching ${api} by ${field}`;
   boomGoesTheDynamite(n, () => {
     let id, value;
-    let tranformedObjs = props.getOptionalForKey(props.get('element'), 'transformed') || [];
+    let tranformedObjs = props.getOptionalForKey(props.getOptional('element'), 'transformed') || [];
     //Have to update field for the query if there is a transformation
     let transform = tranformedObjs.reduce((acc, cur) => acc = acc ? acc : api.split('/').slice(-2).filter(str => str === cur).length > 0 ? true : false, false);
     if (field === 'id' && transform) field = 'idTransformed';
