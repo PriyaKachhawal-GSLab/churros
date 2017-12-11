@@ -71,8 +71,8 @@ before(() => {
       expect(r).to.have.statusCode(200);
       defaults(`${url}/elements/api-v2`, r.body.user, r.body.company, props.get('user'));
     })
-    .then(r => setupEventsTunnel())
-    .then(r => setupServer())
+    // .then(r => setupEventsTunnel())
+    // .then(r => setupServer())
     .catch(r => {
       // if the lifecycle fails, then we want to exit with an error and not let anything else continue
       logger.error('Well shucks...failed to finish initialization...\n  Is %s up and running?\n  Do you have the right username and password?\n', url);
