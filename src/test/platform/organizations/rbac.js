@@ -152,13 +152,13 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
     });
 
     // Postponing, as I'm afraid we have some ppl still calling GET /elements with no creds (marketing site, dev portal)
-    // it('should restrict access to viewing elements without the viewElements privilege', () => {
-    //   const opts = {qs: {page: 1, pageSize: 1}};
-    //   return removePrivilegeIfNecessary('viewElements')
-    //     .then(() => cloudWithUser().withOptions(opts).get(`/elements`, insufficientPrivilegesValidator))
-    //     .then(() => addPrivilegeIfNecessary('viewElements'))
-    //     .then(() => cloudWithUser().withOptions(opts).get(`/elements`));
-    // });
+    it('should restrict access to viewing elements without the viewElements privilege', () => {
+      const opts = {qs: {page: 1, pageSize: 1}};
+      return removePrivilegeIfNecessary('viewElements')
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements`, insufficientPrivilegesValidator))
+        .then(() => addPrivilegeIfNecessary('viewElements'))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements`));
+    });
 
     it('should restrict access to creating, editing, and deleting an element without the editElements privilege', () => {
       let elementId, elementInstanceId;
