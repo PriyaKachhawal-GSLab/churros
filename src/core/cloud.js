@@ -12,7 +12,7 @@ const _ = require('lodash');
 var exports = module.exports = {};
 
 const validator = (validationCb, api) => {
-  let tranformedObjs = props.getOptionalForKey(props.get('element'), 'transformed') || [];
+  let tranformedObjs = props.getOptionalForKey(props.getOptional('element'), 'transformed') || [];
   //Only use the transformation if it is the endpoint that has been transformed
   let transform = tranformedObjs.reduce((acc, cur) => acc = acc ? acc : api.split('/').slice(-2).filter(str => str === cur).length > 0 && !api.includes('bulk') ? true : false, false);
   let transformRes = r => {

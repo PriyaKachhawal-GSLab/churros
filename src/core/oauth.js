@@ -156,6 +156,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then((element) => element.click(), (err) => {}); // ignore this
 
       return browser.getCurrentUrl();
+    case 'dropboxbusinessv2--members':
     case 'dropboxbusiness':
     case 'dropboxbusinessv2':
     case 'dropboxv2':

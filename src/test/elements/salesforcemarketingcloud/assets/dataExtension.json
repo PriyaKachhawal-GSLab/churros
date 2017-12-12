@@ -1,0 +1,31 @@
+{
+  "Name": "churro",
+  "Description": "this is a test data extension generated from the churros",
+  "CustomerKey": "tys-bug",
+  "Fields": [
+    {
+      "Name": "email",
+      "Description": "Email Address",
+      "MaxLength": "100",
+      "IsPrimaryKey": true,
+      "IsNillable": false,
+      "IsRequired": true,
+      "FieldType": "EmailAddress"
+    },
+    {
+      "Name": "whatever",
+      "Description": "Number field",
+      "IsNillable": false,
+      "IsPrimaryKey": false,
+      "FieldType": "Number"
+    },
+    {
+      "Name": "name",
+      "Description": "text field",
+      "MaxLength": "100",
+      "IsNillable": true,
+      "IsPrimaryKey": false,
+      "FieldType": "Text"
+    }
+  ]
+}
