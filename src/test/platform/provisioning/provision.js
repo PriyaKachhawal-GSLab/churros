@@ -19,7 +19,7 @@ suite.forPlatform('provisionv2', (test) => {
 
   });
 
-   it('should create an instance or something', () => {
+   it('should create an instance of Bullhorn in V1', () => {
      return provisioner.create('bullhorn--v1')
      .then(r => {oauth2instanceId = r.body.id;});
    });
@@ -29,7 +29,7 @@ suite.forPlatform('provisionv2', (test) => {
     .then(r => expect(r.body.id).to.equal(oauth2instanceId));
    });
 
-  it('should provision instance with v2 and non default api key/secret', () => {
+  it('should provision instance with non default api key/secret', () => {
    return provisioner.create('zendesk--oauthtest-non-default')
    .then(r => {
      oauth2instanceId3 = r.body.id;
@@ -38,7 +38,7 @@ suite.forPlatform('provisionv2', (test) => {
    .then(r => expect(r.body.id).to.not.be.null);
   });
 
-  it('should provision instance with v2 and non default api key/secret', () => {
+  it('should provision instance with v2 and default api key/secret', () => {
    return provisioner.createWithDefault('zendesk--oauthtest')
    .then(r => {
      oauth2instanceId4 = r.body.id;
@@ -47,25 +47,30 @@ suite.forPlatform('provisionv2', (test) => {
    .then(r => expect(r.body.id).to.not.be.null);
   });
 
-  it('should create an instance or something', () => {
+  it('should create an instance of Zendesk in V1', () => {
     return provisioner.create('zendesk')
     .then(r => {oauth2instanceId2 = r.body.id;});
   });
 
-  it('should update instance with v2 and non default api key/secret', () => {
+  it('should update instance in V1', () => {
+   return provisioner.update('zendesk', null, null, oauth2instanceId2)
+   .then(r => expect(r.body.id).to.equal(oauth2instanceId2));
+  });
+
+  it('should update instance with non default api key/secret', () => {
    return provisioner.update('zendesk--oauthtest-non-default', null, null, oauth2instanceId2)
    .then(r => expect(r.body.id).to.equal(oauth2instanceId2));
   });
 
   //try some oauth1
 
-  it('should do some oauth1 stuff', () => provisioner.create('desk')
+  it('should provision OAuth1 element', () => provisioner.create('desk')
   .then(r => {
     oauth1instanceId = r.body.id;
     return r;
   }));
 
-  it('should do some oauth1 stuff', () => provisioner.createWithDefault('desk')
+  it('should provisionOAuth1 element in V2', () => provisioner.createWithDefault('desk')
   .then(r => {
     oauth1instanceId2 = r.body.id;
     return r;
