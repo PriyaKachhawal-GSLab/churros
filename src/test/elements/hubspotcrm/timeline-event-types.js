@@ -19,7 +19,7 @@ suite.forElement('crm', 'timeline-event-types', {payload: payload}, (test) => {
         .then(r => createdId = r.body.id)
         .then(() => cloud.patch(`${test.api}/${createdId}`, payload))
         .then(() => cloud.delete(`${test.api}/${createdId}`))
-        .then(() => cloud.get(test.api))
+        .then(() => cloud.get(test.api));
     });
 
   const eventTypesWrap = (cb) => {
