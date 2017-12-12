@@ -111,11 +111,11 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
     it('should restrict access to creating, editing, and deleting formulas without the necessary privilege', () => {
       let formulaId, formulaInstanceId;
       const cleanup = () => {
-        if (!R.isNil(formulaId)) {
-          cloudWithUser().delete(`/formulas/${formulaId}`, R.always(true));
-        }
         if (!R.isNil(formulaInstanceId)) {
           cloudWithUser().delete(`/formulas/instances/${formulaInstanceId}`, R.always(true));
+        }
+        if (!R.isNil(formulaId)) {
+          cloudWithUser().delete(`/formulas/${formulaId}`, R.always(true));
         }
       };
 
@@ -134,6 +134,7 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
         .then(() => cloudWithUser().post(`/formulas/${formulaId}/instances`, DEFAULT_FORMULA_INSTANCE))
         .then(() => removePrivilegeIfNecessary('deleteFormulas'))
         .then(() => cloudWithUser().delete(`/formulas/${formulaId}`, insufficientPrivilegesValidator))
+        .then(() => addPrivilegeIfNecessary('deleteFormulas'))
         .then(cleanup);
     });
   });
@@ -151,9 +152,8 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
       name: `rbac${tools.random()}`
     });
 
-    // Postponing, as I'm afraid we have some ppl still calling GET /elements with no creds (marketing site, dev portal)
     it('should restrict access to viewing elements without the viewElements privilege', () => {
-      const opts = {qs: {page: 1, pageSize: 1}};
+      const opts = { qs: { page: 1, pageSize: 1 } };
       return removePrivilegeIfNecessary('viewElements')
         .then(() => cloudWithUser().withOptions(opts).get(`/elements`, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('viewElements'))
@@ -163,12 +163,12 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
     it('should restrict access to creating, editing, and deleting an element without the editElements privilege', () => {
       let elementId, elementInstanceId;
       const cleanup = () => {
-        if (!R.isNil(elementId)) {
-          cloudWithUser().delete(`/elements/${elementId}`, R.always(true));
-        }
-
         if (!R.isNil(elementInstanceId)) {
           cloudWithUser().delete(`/instances/${elementInstanceId}`, R.always(true));
+        }
+
+        if (!R.isNil(elementId)) {
+          cloudWithUser().delete(`/elements/${elementId}`, R.always(true));
         }
       };
 
@@ -213,12 +213,16 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
 
       return removePrivilegeIfNecessary('createCommonObjects')
         .then(() => cloudWithUser().post(`/organizations/objects/${DEFAULT_COMMON_OBJECT.name}/definitions`, DEFAULT_COMMON_OBJECT, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().post(`/accounts/objects/${DEFAULT_COMMON_OBJECT.name}/definitions`, DEFAULT_COMMON_OBJECT, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('createCommonObjects'))
         .then(() => cloudWithUser().post(`/organizations/objects/${DEFAULT_COMMON_OBJECT.name}/definitions`, DEFAULT_COMMON_OBJECT))
+        .then(() => cloudWithUser().post(`/accounts/objects/${DEFAULT_COMMON_OBJECT.name}/definitions`, DEFAULT_COMMON_OBJECT))
         .then(() => removePrivilegeIfNecessary('editCommonObjects'))
         .then(() => cloudWithUser().put(`/organizations/objects/${DEFAULT_COMMON_OBJECT.name}/definitions`, DEFAULT_COMMON_OBJECT, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/accounts/objects/${DEFAULT_COMMON_OBJECT.name}/definitions`, DEFAULT_COMMON_OBJECT, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('editCommonObjects'))
         .then(() => cloudWithUser().put(`/organizations/objects/${DEFAULT_COMMON_OBJECT.name}/definitions`, DEFAULT_COMMON_OBJECT))
+        .then(() => cloudWithUser().put(`/accounts/objects/${DEFAULT_COMMON_OBJECT.name}/definitions`, DEFAULT_COMMON_OBJECT))
         .then(() => removePrivilegeIfNecessary('deleteCommonObjects'))
         .then(() => cloudWithUser().delete(`/organizations/objects/${DEFAULT_COMMON_OBJECT.name}/definitions`, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('deleteCommonObjects'))
@@ -330,6 +334,7 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
     it('should restrict modifying the password policy without the proper privilege', () => {
       return removePrivilegeIfNecessary('modifySecurity')
         .then(() => cloudWithUser().put(`/organizations/password-policies`, passwordPolicy, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().delete(`/organizations/password-policies`, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('modifySecurity'))
         .then(() => cloudWithUser().put(`/organizations/password-policies`, passwordPolicy))
         .then(() => cloudWithUser().delete(`/organizations/password-policies`));
