@@ -10,14 +10,14 @@ const props = require('core/props');
 const payload = {
   firstName: 'frank',
   lastName: 'ricard',
-  email: 'frank@oldschool.com',
+  email: 'frank@churros.com',
   password: 'Passw0rd!'
 };
 
 const payloadWithRoles = {
   firstName: 'frank',
   lastName: 'ricard',
-  email: 'frankwithroles@oldschool.com',
+  email: 'frankwithroles@churros.com',
   password: 'Passw0rd!',
   roles: [
     {

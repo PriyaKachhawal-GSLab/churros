@@ -19,5 +19,19 @@
       "path": "id",
       "vendorPath": "id"
     }]
+  },
+  "lists": {
+    "vendorName": "lists",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ID"
+    }]
+  },
+  "data-extensions": {
+    "vendorName": "data-extensions",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ObjectID"
+    }]
   }
 }

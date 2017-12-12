@@ -11,6 +11,7 @@ const tools = require('core/tools');
 
 suite.forPlatform('formulas', { name: 'formula config', schema: schema }, (test) => {
   before(() => cleaner.formulas.withName([invalid.name, 'complex_successful']));
+  after(() => cleaner.formulas.withName([invalid.name, 'complex_successful']));
 
   /* make sure config keys are being validated properly when creating a formula with config */
   test

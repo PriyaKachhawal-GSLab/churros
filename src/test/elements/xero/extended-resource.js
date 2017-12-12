@@ -6,7 +6,7 @@ const cloud = require('core/cloud');
 const newResource = require('./assets/newResource.json');
 
 // Test for extending xero and invoking the extended resource
-suite.forElement('document', 'extended-resource', {}, (test) => {
+suite.forElement('document', 'extended-resource', {skip:true}, (test) => {
   let newResourceId;
   // Add resource to
   before(() => cloud.post(`elements/xero/resources`, newResource)

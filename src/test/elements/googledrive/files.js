@@ -19,7 +19,10 @@ const propertiesPayload = {
   }
 };
 
+let directoryPath = faker.random.uuid();
+
 suite.forElement('documents', 'files', { payload: payload }, (test) => {
+
   it('should allow ping for googledrive', () => {
     return cloud.get(`/hubs/documents/ping`);
   });
@@ -57,7 +60,34 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
       .then(r => cloud.delete(`${test.api}/${fileId}`))
       .then(r => cloud.withOptions({ qs: { path: `${destPath}` } }).delete(`${test.api}`));
   });
-  // Test For Export Functionality
+
+  const fileWrap = (conditionChecks) => {
+    let jpgFileBody,jpgFile = __dirname + '/assets/Penguins.jpg';
+    return cloud.withOptions({ qs: { path: `/${directoryPath}/Penguins.jpg`, overwrite: 'true' } }).postFile(`${test.api}`, jpgFile)
+      .then(r => jpgFileBody = r.body)
+      .then(() => conditionChecks(jpgFileBody))
+      .then(() => cloud.delete(`${test.api}/${jpgFileBody.id}`))
+      .then(() => cloud.delete(`/hubs/documents/folders/${jpgFileBody.parentFolderId}`));
+  };
+
+  it('it should allow RS for documents/files/:id/revisions', () => {
+    const revisionChecks = (jpgFileBody) => {
+      let revisionId;
+      return cloud.get(`${test.api}/${jpgFileBody.id}/revisions`)
+        .then(r => {
+            expect(r.body[0]).to.contain.key('id');
+            revisionId = r.body[0].id;
+        })
+        .then(() => cloud.get(`${test.api}/${jpgFileBody.id}/revisions/${revisionId}`))
+        .then(r => expect(r.body).to.contain.key('mimeType'));
+    };
+    return fileWrap(revisionChecks);
+  });
+
+
+
+
+  //Test For Export Functionality
   it('Should allow export of Google Doc to plain text using media type', () => {
     let DocFile = '/ChurrosDocDoNotDelete';
     return cloud.withOptions({ qs: { path: DocFile, mediaType: 'text/plain' } }).get(test.api)

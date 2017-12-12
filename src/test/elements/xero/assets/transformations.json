@@ -25,6 +25,15 @@
           "vendorPath": "InvoiceID"
         }
       ]
+    },
+    "journal-entries": {
+      "vendorName": "journalentry",
+      "fields": [
+        {
+          "path": "id",
+          "vendorPath": "ManualJournalID"
+        }
+      ]
     }
   }
   

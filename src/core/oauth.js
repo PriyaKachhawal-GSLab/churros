@@ -156,6 +156,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then((element) => element.click(), (err) => {}); // ignore this
 
       return browser.getCurrentUrl();
+    case 'dropboxbusinessv2--members':
     case 'dropboxbusiness':
     case 'dropboxbusinessv2':
     case 'dropboxv2':
@@ -558,6 +559,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       //browser.findElement(webdriver.By.id('user_oauth_approval')).click();
       return browser.getCurrentUrl();
     case 'xero':
+    case 'xero--partner':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('email')).sendKeys(username);
       browser.findElement(webdriver.By.id('password')).sendKeys(password);
