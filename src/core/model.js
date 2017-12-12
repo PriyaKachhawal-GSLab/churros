@@ -12,7 +12,6 @@ logger
 const swaggerParser = require('swagger-parser');
 const cloud = require('core/cloud');
 const props = require('core/props');
-const moment = require('moment')
 
 const green = "\x1b[32m";
 const red = "\x1b[31m";
@@ -22,6 +21,12 @@ const getElementDocs = (elementkeyOrId) => {
     return cloud.get('/elements/' + elementkeyOrId)
         .then(r => elementObj = r.body)
         .then(r => cloud.get(`elements/${elementObj.id}/docs`));
+};
+
+const getElement = (elementkeyOrId) => {
+    let elementObj;
+    return cloud.get('/elements/' + elementkeyOrId)
+        .then(r => elementObj = r.body);
 };
 
 const dereference = (docs) => {
@@ -97,7 +102,7 @@ const doubleLogSpaces = (logSpaces) => {
 };
 
 const isEmpty = (obj) => {
-    for (var key in obj) {
+    for (let key in obj) {
         if (obj.hasOwnProperty(key))
             return false;
     }
@@ -105,31 +110,30 @@ const isEmpty = (obj) => {
 };
 
 const checkType = (docsPropertiesKey, key, keyValue, logSpaces) => {
-   
-    const keyType = typeof keyValue;       
+
+    const keyType = typeof keyValue;
     if (docsPropertiesKey.type === keyType) {
         logger.info(green, logSpaces, key);
         return;
     }
-    if((docsPropertiesKey.type === 'number' || docsPropertiesKey.type === 'integer')
-    && ((keyType === 'number' || keyType === 'integer'))) {
+    if ((docsPropertiesKey.type === 'number' || docsPropertiesKey.type === 'integer') && ((keyType === 'number' || keyType === 'integer'))) {
         logger.info(green, logSpaces, key);
         return;
     }
     // TODO : validation for date datetype
-   // const date = new Date(keyValue);
-   // logger.info(date);
-   //    const date = new Date(keyValue);
-   //    console.log(keyType);
-   //    if(keyType === 'string' && keyValue.indexOf('\'') !== -1 ||  keyValue.indexOf('-') !== -1) {
-   //        logger.info(date);
-   //    }
+    // const date = new Date(keyValue);
+    // logger.info(date);
+    //    const date = new Date(keyValue);
+    //    console.log(keyType);
+    //    if(keyType === 'string' && keyValue.indexOf('\'') !== -1 ||  keyValue.indexOf('-') !== -1) {
+    //        logger.info(date);
+    //    }
     // if(date !== 'Invalid Date' && docsPropertiesKey.type === 'date') {
     //     logger.info(green, logSpaces, key);
     //     return;
     // }
 
-    logger.error(red, logSpaces, key, ' present but types are not matched found \"', keyType ,'\"',' required ', docsPropertiesKey.type);
+    logger.error(red, logSpaces, key, ' present but types are not matched found \"', keyType, '\"', ' required ', docsPropertiesKey.type);
 };
 
 const checkPresence = (docsProperties, key, keyValue, logSpaces) => {
@@ -234,4 +238,163 @@ const validateResponseModel = (apiResponse, pattern) => {
 
 exports.validateResponseModel = (apiResponse, pattern) => validateResponseModel(apiResponse, pattern);
 
+let output = {};
+let models = {};
+let matchingObjects = {};
 
+
+function sortObject(objectToSort) {
+    let obj = {};
+    let keys = Object.keys(objectToSort);
+    keys.sort();
+
+    keys.forEach(function (key) {
+        obj[key] = objectToSort[key];
+    });
+    return obj;
+}
+
+function sortAndValidate(originalObj, suspectObj) {
+    let original = JSON.stringify(sortObject(originalObj));
+    let suspect = JSON.stringify(sortObject(suspectObj));
+
+    if (original === suspect) {
+        original = JSON.stringify(sortObject(originalObj.properties));
+        suspect = JSON.stringify(sortObject(suspectObj.properties));
+        if (original !== suspect) {
+            return true;
+        }
+        return false;
+    }
+    return true;
+}
+
+
+function addIssue(key, original, culprit) {
+
+    let clonedOriginal = JSON.parse(JSON.stringify(original));
+    let clonedCulprit = JSON.parse(JSON.stringify(culprit));
+
+    // TODO : optimize code
+    if (clonedOriginal) {
+        if (typeof clonedOriginal.model !== 'undefined') {
+            delete clonedOriginal.model;
+        }
+    }
+    if (clonedCulprit) {
+        if (typeof clonedCulprit.model !== 'undefined') {
+            delete clonedCulprit.model;
+        }
+    }
+
+    if (output.issues.hasOwnProperty(key)) {
+        logger.info(Object.keys(clonedCulprit));
+        output.issues[key].conflicts.push(clonedCulprit);
+        return;
+    }
+
+    let issue = {};
+    issue.conflicts = [];
+
+
+    issue.conflicts.push(clonedOriginal);
+    issue.conflicts.push(clonedCulprit);
+
+    output.issues[key] = issue;
+}
+
+
+
+function validateObjectLenghts(originalObj, suspectObj) {
+    let l1 = Object.keys(originalObj).length;
+    let l2 = Object.keys(suspectObj).length;
+
+    if (l1 !== l2)
+        return true;
+    return false;
+}
+
+
+function validate(resource, swaggerType) {
+
+    Object.keys(resource.model[swaggerType]).forEach(function (key) {
+
+        let modelValue = {};
+        modelValue.method = resource.method;
+        modelValue.path = resource.path;
+        modelValue.swaggerType = swaggerType === 'swagger' ? 'responseSwagger' : swaggerType;
+        modelValue.model = resource.model[swaggerType][key];
+
+        if (models.hasOwnProperty(key)) {
+            if (JSON.stringify(models[key].model) !== JSON.stringify(modelValue.model)) {
+                if (validateObjectLenghts(models[key].model, modelValue.model) || validateObjectLenghts(models[key].model.properties, modelValue.model.properties) || sortAndValidate(models[key].model, modelValue.model))
+                    addIssue(key, models[key], modelValue);
+            } else {
+                matchingObjects[key].push(modelValue);
+            }
+        } else {
+            matchingObjects[key] = [];
+            models[key] = modelValue;
+        }
+
+    });
+}
+
+const dostuff = (response) => {
+    return new Promise((res, rej) => {
+        if (response.resources) {
+            output.id = response.id;
+            output.name = response.name;
+            output.key = response.key;
+            output.issues = {};
+            response.resources.forEach(function (resource) {
+                if (resource.model) {
+                    if (Object.keys(resource.model.swagger).length) {
+                        validate(resource, 'swagger');
+
+                        if (resource.model.hasOwnProperty('requestSwagger'))
+                            validate(resource, 'requestSwagger');
+                    }
+                }
+            });
+
+            if (Object.keys(output.issues).length) {
+                Object.keys(output.issues).forEach(function (key) {
+                    //logger.info(matchingObjects[key])
+                    logger.info(matchingObjects[key]);
+                    matchingObjects[key].forEach(function (matchingObject) {
+                        delete matchingObject.model;
+                    });
+                    output.issues[key].conflicts = output.issues[key].conflicts.concat(matchingObjects[key]);
+                });
+
+            }
+            logger.info(JSON.stringify(output, undefined, 4));
+
+            res(output);
+
+        }
+        rej({});
+    });
+};
+
+
+
+
+/**
+ * check Duplicate model for an element
+ * @param  {Object} apiResponse        The API response
+ * @param  {string} pattern            The api path to find referenced model
+ */
+const checkDuplicateModel = () => {
+
+    let element = props.get('element');
+    //let elementReponse;
+
+    return getElement(element)
+        // .then(r => elementReponse = r)
+        .then(r => dostuff(r))
+        .catch(r => tools.logAndThrow('Failed to validate model :', r));
+};
+
+exports.checkDuplicateModel = () => checkDuplicateModel();  
