@@ -19,13 +19,12 @@ suite.forPlatform('provisionv2', (test) => {
 
   });
 
-   it('should create an instance of Bullhorn in V1', () => {
+   it('should create an instance of Bullhorn in V1 and update with v2', () => {
      return provisioner.create('bullhorn--v1')
-     .then(r => {oauth2instanceId = r.body.id;});
-   });
-
-   it('should re-provision instance created in v1 with v2', () => {
-    return provisioner.updateWithDefault('bullhorn--v2', config, null, oauth2instanceId)
+     .then(r => {
+       oauth2instanceId = r.body.id;
+       return provisioner.updateWithDefault('bullhorn--v2', config, null, r.body.id);
+     })
     .then(r => expect(r.body.id).to.equal(oauth2instanceId));
    });
 
@@ -47,20 +46,16 @@ suite.forPlatform('provisionv2', (test) => {
    .then(r => expect(r.body.id).to.not.be.null);
   });
 
-  it('should create an instance of Zendesk in V1', () => {
+  it('should create an instance of Zendesk in V1, update it in V1, and update it in V1 with a non-default app', () => {
     return provisioner.create('zendesk')
-    .then(r => {oauth2instanceId2 = r.body.id;});
-  });
-
-  it('should update instance in V1', () => {
-   return provisioner.update('zendesk', null, null, oauth2instanceId2)
+    .then(r => {
+      oauth2instanceId2 = r.body.id;
+      return provisioner.update('zendesk', null, null, oauth2instanceId2);
+    })
+   .then(r => expect(r.body.id).to.equal(oauth2instanceId2))
+   .then(r => provisioner.update('zendesk--oauthtest-non-default', null, null, oauth2instanceId2))
    .then(r => expect(r.body.id).to.equal(oauth2instanceId2));
-  });
-
-  it('should update instance with non default api key/secret', () => {
-   return provisioner.update('zendesk--oauthtest-non-default', null, null, oauth2instanceId2)
-   .then(r => expect(r.body.id).to.equal(oauth2instanceId2));
-  });
+ });
 
   //try some oauth1
 
