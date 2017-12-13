@@ -9,7 +9,7 @@ suite.forElement('erp', 'model', (test) => {
 
     it('should allow model vallidation for /hubs/erp/bills', () => {
        return cloud.get('/hubs/erp/bills')
-       .then(r => model.validateResponseModel(r, 'getBills'))
+       .then(r => model.validateResponseModel(r, 'getBills'));
     //   .then(r =>cloud.withOptions({qs:{where:`username='jiradev'`, page: 1, pageSize: 1 }}).get(`/hubs/helpdesk/agents/${r.body[0].key}`))
      //  .then(r => model.validateResponseModel(r, 'getAgentById'));
      });
