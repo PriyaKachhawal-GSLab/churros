@@ -5,7 +5,7 @@ const cloud = require('core/cloud');
 const model = require('core/model');
 
 
-suite.forElement('helpdesk', 'model', (test) => {
+suite.forElement('crm', 'model', (test) => {
    
    it('should allow model vallidation for /hubs/helpdesk/agents', () => {
         return model.checkDuplicateModel();
