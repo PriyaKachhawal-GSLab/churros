@@ -41,7 +41,7 @@ const cleanup = (formulaId, formulaInstanceId) => {
 
 suite.forPlatform('formulas', { name: 'FaaRs' }, test => {
   beforeEach(() => {
-    const filter = name => name === manualFormula.name;
+    const filter = name => name === manualFormula.name || name === manualFormulaForTriggerTest.name;
     return cloud
       .get('/formulas/instances')
       .then(r => Promise.all(r.body.filter(fi => filter(fi.formula.name)).map(fi => cleanup(fi.formula.id, fi.id))))
