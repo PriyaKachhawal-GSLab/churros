@@ -17,7 +17,7 @@ const manualTrigger = {
   request: {
     this:'that'
   }
-}
+};
 const faarFormulaInstance = { name: 'faar-instance' };
 const scheduledTrigger = {
   type: 'scheduled',
@@ -129,7 +129,7 @@ suite.forPlatform('formulas', { name: 'FaaRs' }, test => {
       .then(r => cloud.post(`/formulas/${formulaId}/instances`, faarFormulaInstance))
       .then(r => formulaInstanceId = r.body.id)
       .then(r => run(formulaId, formulaInstanceId, manualFormulaForTriggerTest.uri))
-      .then(r => cleanup(formulaId, formulaInstanceId))
+      .then(r => cleanup(formulaId, formulaInstanceId));
   });
 
   it('should not allow exposing a formula that does not have a manual trigger', () => {
