@@ -26,7 +26,7 @@ suite.forElement('general', 'contacts', { payload: payload }, (test) => {
   .withOptions({ qs: { where: `sortOrder = 'FIRST_NAME_ASCENDING'` } })
   .withValidation((r) => {
    expect(r).to.have.statusCode(200);
-  //could not found way to validate response. Its sorting record with first_name
+  //could not found way to validate response. It just sorting record with first_name
   }).should.return200OnGet();
 
   test.should.supportNextPagePagination(1);

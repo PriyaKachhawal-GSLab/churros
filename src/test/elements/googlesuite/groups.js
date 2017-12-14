@@ -8,11 +8,13 @@ const contactPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`)
 
 suite.forElement('general', 'groups', { payload: payload }, (test) => {
 
-  const groupMemberPayload={
+  let contactId;
+  const groupContactsPayload={
 	            "resourceNamesToAdd":[
 		     ]};
-  before(() => cloud.post(`/hubs/general/contacts`, contactPayload)
-	.then(r => groupMemberPayload.resourceNamesToAdd.push("people/"+r.body.id)));
+  before(() => cloud.post('/hubs/general/contacts', contactPayload)
+	.then(r => contactId = r.body.id)
+	.then(r => groupContactsPayload.resourceNamesToAdd.push(contactId)));
  
 
   let groupId;
@@ -26,9 +28,13 @@ suite.forElement('general', 'groups', { payload: payload }, (test) => {
    .then(r => cloud.get(`${test.api}/${groupId}`))
    .then(r => cloud.withOptions({ qs: { id: 'all' } }).get(`/hubs/general/groups-batch`))
    .then(r => cloud.patch(`${test.api}/${groupId}`, payload))
-   .then(r => cloud.patch(`${test.api}/${groupId}/members`, groupMemberPayload))
+   .then(r => cloud.patch(`${test.api}/${groupId}/contacts`, groupContactsPayload))
+   .then(r => cloud.post(`${test.api}/${groupId}/contacts/${contactId}`, null))
+   .then(r => cloud.delete(`${test.api}/${groupId}/contacts/${contactId}`, null))
    .then(r => cloud.delete(`${test.api}/${groupId}`));
   });
+ 
+  after(() => cloud.delete(`/hubs/general/contacts/${contactId}`));
 
   test.should.supportNextPagePagination(1);
 });
