@@ -1,0 +1,11 @@
+{
+  "users": {
+    "vendorName": "users",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "userId"
+      }
+    ]
+  }
+}
