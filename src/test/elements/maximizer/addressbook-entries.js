@@ -17,6 +17,15 @@ suite.forElement('crm', 'addressbook-entries', { payload: addressbookentryPayloa
   test.should.supportPagination("id");
   test.should.supportCruds();
 
+  test.withApi(test.api)
+      .withOptions({ qs: { where: `CompanyName='${addressbookentryPayload.CompanyName}'`, fields: `CompanyName,FullName` } })
+      .withValidation(r => {
+        expect(r.body.filter(obj => expect(r.body[0].CompanyName).to.equal(addressbookentryPayload.CompanyName))).to.not.be.empty;
+        expect(Object.keys(r.body[0]).length).to.equal(2);
+      })
+      .withName('should allow GET with options /addressbook-entries')
+      .should.return200OnGet();
+
   before(() =>
     cloud.post(`${test.api}`, addressbookentryPayload)
     .then(r => {
@@ -35,6 +44,8 @@ suite.forElement('crm', 'addressbook-entries', { payload: addressbookentryPayloa
       .then(r => contactId = r.body.Key)
       .then(() => cloud.withOptions({ qs: { where: `LastName='${contactPayload.LastName}'` } }).get(`/hubs/crm/contacts`))
       .then(r => expect(r.body[0].LastName).to.equal(contactPayload.LastName))
+      .then(() => cloud.withOptions({ qs: { fields:`CompanyName,FullName,LastName,Address` } }).get(`/hubs/crm/contacts`))
+      .then(r => expect(Object.keys(r.body[0]).length).to.equal(4))
       .then(() => cloud.get(`/hubs/crm/contacts/${contactId}`))
       .then(r => expect(r.body.LastName).to.equal(contactPayload.LastName))
       .then(() => contactPayload.LastName = faker.random.word())
@@ -48,6 +59,8 @@ suite.forElement('crm', 'addressbook-entries', { payload: addressbookentryPayloa
       .then(r => addressId = r.body.Key)
       .then(() => cloud.get(`/hubs/crm/addresses`))
       .then(r => expect(r.body[0]).to.contain.key('City'))
+      .then(() => cloud.withOptions({ qs: { fields:`City,Country,ZipCode` } }).get(`/hubs/crm/addresses`))
+      .then(r => expect(Object.keys(r.body[0]).length).to.equal(3))
       .then(() => addressPayload.City = faker.address.city())
       .then(() => cloud.patch(`/hubs/crm/addresses/${addressId}`, addressPayload))
       .then(() => cloud.delete(`/hubs/crm/addresses/${addressId}`));
@@ -59,6 +72,8 @@ suite.forElement('crm', 'addressbook-entries', { payload: addressbookentryPayloa
       .then(r => opportunityId = r.body.Key)
       .then(r => cloud.withOptions({ qs: { where: `Description='${opportunityPayload.Description}'` } }).get(`/hubs/crm/opportunities`))
       .then(r => expect(r.body[0].Description).to.equal(opportunityPayload.Description))
+      .then(() => cloud.withOptions({ qs: { fields:`Leader, Objective` } }).get(`/hubs/crm/opportunities`))
+      .then(r => expect(Object.keys(r.body[0]).length).to.equal(2))
       .then(() => cloud.get(`/hubs/crm/opportunities/${opportunityId}`))
       .then(r => expect(r.body.Description).to.equal(opportunityPayload.Description))
       .then(() => opportunityPayload.Description = faker.random.word())

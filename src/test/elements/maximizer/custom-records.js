@@ -23,6 +23,8 @@ suite.forElement('crm', 'custom-records', (test) => {
       })
       .then(() => cloud.withOptions({ qs: { where: `Name='${customrecordPayload.Name}'` } }).get(test.api))
       .then(r => expect(r.body[0].Name).to.equal(customrecordPayload.Name))
+      .then(() => cloud.withOptions({ qs: { fields:`Description,Name` } }).get(test.api))
+      .then(r => expect(Object.keys(r.body[0]).length).to.equal(2))
       .then(() => cloud.get(`${test.api}/${customrecordId}`))
       .then(() => customrecordPayload.Name = faker.random.word())
       .then(() => cloud.patch(`${test.api}/${customrecordId}`, customrecordPayload))
