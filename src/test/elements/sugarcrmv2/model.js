@@ -7,7 +7,7 @@ const model = require('core/model');
 
 suite.forElement('crm', 'model', (test) => {
    
-   it('should allow model vallidation for /hubs/helpdesk/agents', () => {
+   it('should allow model vallidation for /hubs/helpdesk/duplicate', () => {
         return model.checkDuplicateModel();
    });
   

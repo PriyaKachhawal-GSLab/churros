@@ -287,8 +287,7 @@ function addIssue(key, original, culprit) {
         }
     }
 
-    if (output.issues.hasOwnProperty(key)) {
-        logger.info(Object.keys(clonedCulprit));
+    if (output.issues.hasOwnProperty(key)) {        
         output.issues[key].conflicts.push(clonedCulprit);
         return;
     }
@@ -361,7 +360,7 @@ const dostuff = (response) => {
             if (Object.keys(output.issues).length) {
                 Object.keys(output.issues).forEach(function (key) {
                     //logger.info(matchingObjects[key])
-                    logger.info(matchingObjects[key]);
+                    //logger.info(matchingObjects[key]);
                     matchingObjects[key].forEach(function (matchingObject) {
                         delete matchingObject.model;
                     });

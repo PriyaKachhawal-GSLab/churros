@@ -6,12 +6,15 @@ const model = require('core/model');
 
 suite.forElement('marketing', 'model', (test) => {
 
+  
     it('should allow model vallidation for /hubs/marketing/accounts', () => {
        return cloud.get(`/hubs/marketing/accounts`)
        .then(r => model.validateResponseModel(r, 'getAccounts'))
        .then(r =>cloud.get(`/hubs/marketing/accounts/${r.body[0].id}`))
        .then(r => model.validateResponseModel(r, 'getAccountById'));
      });
+
+
      it('should allow model vallidation for /hubs/marketing/contacts', () => {
         return cloud.get(`/hubs/marketing/contacts`)
         .then(r => model.validateResponseModel(r, 'getContacts'))
