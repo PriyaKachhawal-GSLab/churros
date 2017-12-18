@@ -1,0 +1,77 @@
+{
+    "method": "POST",
+    "configuration": [],
+    "active": true,
+    "triggers": [
+        {
+            "async": true,
+            "name": "trigger",
+            "onFailure": [],
+            "id": 541,
+            "type": "manual",
+            "properties": {},
+            "onSuccess": [
+                "printItOut"
+            ]
+        }
+    ],
+    "steps": [
+        {
+            "name": "printItOut",
+            "onFailure": [],
+            "id": 1414,
+            "type": "script",
+            "properties": {
+                "body": "done({trigger});"
+            },
+            "onSuccess": [
+                "constructPayload"
+            ]
+        },
+        {
+            "name": "response",
+            "onFailure": [],
+            "id": 1416,
+            "type": "script",
+            "properties": {
+                "body": "done({jobIds:[steps.bulkUpload.response.body.id]});"
+            },
+            "onSuccess": []
+        },
+        {
+            "name": "constructPayload",
+            "onFailure": [],
+            "id": 1417,
+            "type": "script",
+            "properties": {
+                "body": "var body = {\n    type: 'workflow-multipart',\n    parts: [\n      {\n        name: 'file',\n        filename: 'file',\n        'Content-Type': 'text/plain',\n        content: trigger.args.data.join('\\n')\n      }\n    ]\n};\n\ndone({body});\n"
+            },
+            "onSuccess": [
+                "bulkUpload"
+            ]
+        },
+        {
+            "name": "bulkUpload",
+            "onFailure": [],
+            "id": 1415,
+            "type": "elementRequest",
+            "properties": {
+                "method": "POST",
+                "elementInstanceId": "${trigger.args.targetInstanceId}",
+                "api": "${trigger.args.workflow.targetConfiguration.path}",
+                "body": "${steps.constructPayload.body}"
+            },
+            "onSuccess": [
+                "response"
+            ]
+        }
+    ],
+    "uri": "/churros-bulkloader-faar",
+    "userId": 1,
+    "accountId": 1,
+    "singleThreaded": false,
+    "createdDate": "2017-12-14T20:51:08Z",
+    "name": "churros-bulkloader-faar",
+    "api": "POST /churros-bulkloader-faar",
+    "id": 674
+}
