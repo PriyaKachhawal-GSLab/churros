@@ -96,7 +96,7 @@ const createXInstances = (x, formulaId, formulaInstance) => {
 /**
  * Tests formula executions under heavy load (number of events, size of events, etc.)
  */
-suite.forPlatform('formulas', { name: 'formulas load', skip: false }, (test) => {
+suite.forPlatform('formulas', { name: 'formulas load', skip: true }, (test) => {
   let sfdcId, closeioId, kissmetricsId;
 
   before(() => cleaner.formulas.withName('complex_successful')
@@ -118,9 +118,6 @@ suite.forPlatform('formulas', { name: 'formulas load', skip: false }, (test) => 
     if (kissmetricsId) provisioner.delete(closeioId);
   });
 
-//  const numFormulaInstances = process.env.NUM_FORMULA_INSTANCES ? process.env.NUM_FORMULA_INSTANCES : 2;
-//  const numEvents = process.env.NUM_EVENTS ? process.env.NUM_EVENTS : 50;
-//  const numInOneEvent = process.env.NUM_OBJECTS_PER_EVENT ? process.env.NUM_OBJECTS_PER_EVENT : 5;
     const numFormulaInstances = process.env.NUM_FORMULA_INSTANCES ? process.env.NUM_FORMULA_INSTANCES : 1;
     const numEvents = process.env.NUM_EVENTS ? process.env.NUM_EVENTS : 1;
     const numInOneEvent = process.env.NUM_OBJECTS_PER_EVENT ? process.env.NUM_OBJECTS_PER_EVENT : 1;
@@ -260,6 +257,7 @@ suite.forPlatform('formulas', { name: 'formulas load', skip: false }, (test) => 
 
   it('should handle a high load for the Nintex Event Transformation formula', () => {
     const formula = require('./assets/formulas/customer-formulas/nintex-790');
+    formula.engine = process.env.CHURROS_FORMULAS_ENGINE;
     const formulaInstance = require('./assets/formulas/customer-formulas/nintex-790-instance');
     formulaInstance.configuration["element.instance"] = sfdcId;
     formulaInstance.configuration["event.notification.url"] = "https://httpbin.org/post";
