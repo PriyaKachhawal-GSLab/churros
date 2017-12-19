@@ -89,4 +89,24 @@ suite.forElement('documents', 'folders', (test) => {
      return folderWrap(cb);
    });
 
+   it('should allow GET /folders/contents', () => {
+     return cloud.withOptions({qs: { path: `/` } , headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
+         .then(r => expect(r.body[0]).to.contain.key('name'));
+     });
+
+   it('should allow GET /folders/contents with name', () => {
+     return cloud.withOptions({qs: { path: `/`, where: "name='dontdelete.jpg'" }, headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
+       .then(r => expect(r.body[0]).to.contain.key('name'));
+   });
+
+   it('should allow GET /folders/contents with extension', () => {
+     return cloud.withOptions({qs: { path: `/`, where: "extension='.csv'" }, headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
+       .then(r => expect(r.body[0]).to.contain.key('name'));
+   });
+
+   it('should allow GET /folders/contents with directory', () => {
+     return cloud.withOptions({qs: { path: `/`, where: "directory='true'" }, headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
+       .then(r => expect(r.body[0]).to.contain.key('name'));
+   });
+
 });

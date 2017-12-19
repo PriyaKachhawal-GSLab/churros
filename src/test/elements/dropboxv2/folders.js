@@ -87,4 +87,25 @@ suite.forElement('documents', 'folders', (test) => {
 
         return folderWrap(cb);
       });
+
+      it('should allow GET /folders/contents', () => {
+        return cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
+            .then(r => expect(r.body[0]).to.contain.key('name'));
+        });
+
+
+      it('should allow GET /folders/contents with name', () => {
+        return cloud.withOptions({ qs: { path: `/`, where: "name='dontdelete.jpg'" } }).get(`${test.api}/contents`)
+          .then(r => expect(r.body[0]).to.contain.key('name'));
+      });
+
+      it('should allow GET /folders/contents with extension', () => {
+        return cloud.withOptions({ qs: { path: `/`, where: "extension='.csv'" } }).get(`${test.api}/contents`)
+          .then(r => expect(r.body[0]).to.contain.key('name'));
+      });
+
+      it('should allow GET /folders/contents with directory', () => {
+        return cloud.withOptions({ qs: { path: `/`, where: "directory='true'" } }).get(`${test.api}/contents`)
+          .then(r => expect(r.body[0]).to.contain.key('name'));
+      });  
 });

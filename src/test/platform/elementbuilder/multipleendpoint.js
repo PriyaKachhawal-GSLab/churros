@@ -11,7 +11,8 @@ const noendpointInstancePostSchema = require('./assets/multipleendpoint/noendpoi
 suite.forPlatform('elementbuilder', {}, (test) => {
   let createdNoendpoint;
   let noendpointInstanceId;
-  before(() => cloud.post('elements', noendpointElement)
+  before(() => cloud.delete('/elements/noendpoint').catch(() => {})
+    .then(() =>   cloud.post('elements', noendpointElement))
       .then(r => createdNoendpoint = r.body)
       .then(r => provisioner.create('noendpoint', undefined, 'elements/noendpoint/instances'))
       .then(r => noendpointInstanceId = r.body.id));

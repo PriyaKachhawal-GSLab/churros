@@ -88,33 +88,88 @@ before(() => {
           // only create object definitions for the resources that are being transformed for this element.  If there
           // aren't any transformations, no need to create any object definitions.
           const transformationsFile = `${__dirname}/${element}/assets/transformations`;
-          if (!fs.existsSync(transformationsFile + '.json')) {
+          if (argv.transform === true && !fs.existsSync(transformationsFile + '.json')) {
+            let allDefs = require(objectDefinitionsFile);
+            let defined = Object.keys(allDefs);
+            return cloud.get(`/hubs/${hub}/objects`)
+            .then(objs => {
+              let transDefs = defined.reduce((acc, cur) => {
+                if (objs.body.includes(cur)) {
+                  acc[cur] = allDefs[cur];
+                }
+                return acc;
+              },{});
+              return createAll(url, transDefs)
+              .catch(() => {});
+            });
+          } else if (!fs.existsSync(transformationsFile + '.json')) {
             logger.debug(`No transformations found for ${element} so not going to create object definitions`);
             return null;
+          } else {
+            const transformations = require(transformationsFile);
+            const allObjectDefinitions = require(objectDefinitionsFile);
+            const objectDefinitions = Object.keys(allObjectDefinitions)
+              .reduce((accum, objectDefinitionName) => {
+                if (transformations[objectDefinitionName]) {
+                  accum[objectDefinitionName] = allObjectDefinitions[objectDefinitionName];
+                }
+                return accum;
+              }, {});
+
+            return createAll(url, objectDefinitions)
+            .catch(() => {});
           }
-
-          const transformations = require(transformationsFile);
-          const allObjectDefinitions = require(objectDefinitionsFile);
-          const objectDefinitions = Object.keys(allObjectDefinitions)
-            .reduce((accum, objectDefinitionName) => {
-              if (transformations[objectDefinitionName]) {
-                accum[objectDefinitionName] = allObjectDefinitions[objectDefinitionName];
-              }
-              return accum;
-            }, {});
-
-          return createAll(url, objectDefinitions)
-          .catch(() => {});
         }
       })
       .then(r => {
-        // transformations file exists? create the transformations on the instance
         const transformationsFile = `${__dirname}/${element}/assets/transformations`;
-        if (fs.existsSync(transformationsFile + '.json')) {
-          logger.debug('Setting up transformations');
-          const url = `/instances/${instanceId}/transformations/%s`;
-          return createAll(url, require(transformationsFile))
-          .catch(() => {});
+        props.setForKey(element, 'transformed', []);
+        let objsTransformed = props.getForKey(element, 'transformed');
+        if (argv.transform && fs.existsSync(transformationsFile + '.json')) {
+          let transformations = require(transformationsFile + '.json');
+          Object.keys(transformations).forEach(key => {
+            let idFields = transformations[key].fields.filter(f => f.path === 'id');
+            if (idFields.length > 0) {
+              idFields.forEach(idField => idField.path = 'idTransformed');
+            } else {
+              transformations[key].fields.push({"path": "idTransformed","vendorPath": "id"});
+            }
+          });
+
+          return Object.keys(transformations).sort()
+            .reduce((p, key) => p.then(() => {
+              return cloud.post(util.format(`/instances/${instanceId}/transformations/%s`, key), transformations[key])
+              .then(() => objsTransformed.push(key))
+              .catch(() => {});
+            }), Promise.resolve(true)); // initial
+        } else if (argv.transform && !fs.existsSync(transformationsFile + '.json')) {
+          let allDefs = require(`${__dirname}/assets/object.definitions.json`);
+          let defined = Object.keys(allDefs);
+          return cloud.get(`/hubs/${hub}/objects`)
+          .then(objs => {
+            return objs.body.sort()
+              .reduce((p, key) => p.then(() => {
+                let trans = {
+                  "vendorName": key,
+                  "fields": [
+                    {
+                      "path": "idTransformed",
+                      "vendorPath": "id"
+                    }
+                  ]
+                };
+                //creates the same transformations that were defined
+                return defined.includes(key) ? cloud.post(`/instances/${instanceId}/transformations/${key}`, trans).then(() => objsTransformed.push(key)) : Promise.resolve(null);
+              }), Promise.resolve(true)); // initial
+          });
+        } else {
+          // transformations file exists? create the transformations on the instance
+          if (fs.existsSync(transformationsFile + '.json')) {
+            logger.debug('Setting up transformations');
+            const url = `/instances/${instanceId}/transformations/%s`;
+            return createAll(url, require(transformationsFile))
+            .catch(() => {});
+          }
         }
       })
       .catch(r => {

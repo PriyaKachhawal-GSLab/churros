@@ -43,7 +43,7 @@ suite.forPlatform('visibility', (test) => {
       'email',
       '/users',
       `/accounts/${account.id}/users`,
-      {email: userEmail,firstName: 'test',lastName: 'user',password: 'password'});
+      {email: userEmail,firstName: 'test',lastName: 'user',password: 'Password123!'});
   };
 
   const deleteUser = (userEmail) => {
