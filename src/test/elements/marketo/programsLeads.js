@@ -23,7 +23,7 @@ suite.forElement('marketing', 'programsLeads', () => {
     it(`should allow bulk upload using CSV file for /hubs/marking/bulk/programsLeads`, () => {
         let bulkId;
         const filePath = `${__dirname}/assets/programsLeads.create.csv`;
-        const metaData = {"programName":programName,"source":tools.randomStr('abcdefghijklmnopqrstuvwxyz', 10),"identifierFieldName":"email"};
+        const metaData = {"programName":programName, "programStatus": "Engaged","source":tools.randomStr('abcdefghijklmnopqrstuvwxyz', 10),"identifierFieldName":"email"};
         const options = { formData: { metaData: JSON.stringify(metaData) } };
         return cloud.get(`/hubs/marketing/programs/${programId}`)
             .then((r) => {
@@ -47,6 +47,8 @@ suite.forElement('marketing', 'programsLeads', () => {
                     .then(() => {
                             return cloud.get(`hubs/marketing/programs/${programId}/leads`)
                                 .then(r => {
+                                    let expectedResult = [ 'Engaged', 'Engaged' ];
+                                    expect(r.body.filter(obj => obj.id).map(obj => obj.membership.progressionStatus)).to.eql(expectedResult);
                                     return r.body.filter(obj => obj.id).map(obj => obj.id);
                                 })
                                 .then(ids => ids.map(id => cloud.delete(`/hubs/marketing/contacts/${id}`)));
@@ -57,7 +59,7 @@ suite.forElement('marketing', 'programsLeads', () => {
     it(`should allow bulk upload using JSON file for /hubs/marking/bulk/programsLeads`, () => {
         let bulkId;
         const filePath = `${__dirname}/assets/programsLeads.json`;
-        const metaData = {"programName":programName,"source":tools.randomStr('abcdefghijklmnopqrstuvwxyz', 10),"identifierFieldName":"email","format":"json"};
+        const metaData = {"programName":programName, "programStatus": "Member", "source":tools.randomStr('abcdefghijklmnopqrstuvwxyz', 10),"identifierFieldName":"email","format":"json"};
         const options = { formData: { metaData: JSON.stringify(metaData) } };
         return cloud.get(`/hubs/marketing/programs/${programId}`)
             .then((r) => {
@@ -81,6 +83,8 @@ suite.forElement('marketing', 'programsLeads', () => {
                     .then(() => {
                         return cloud.get(`hubs/marketing/programs/${programId}/leads`)
                             .then(r => {
+                                let expectedResult = [ 'Member', 'Member' ];
+                                expect(r.body.filter(obj => obj.id).map(obj => obj.membership.progressionStatus)).to.eql(expectedResult);
                                 return r.body.filter(obj => obj.id).map(obj => obj.id);
                             })
                             .then(ids => ids.map(id => cloud.delete(`/hubs/marketing/contacts/${id}`)));
