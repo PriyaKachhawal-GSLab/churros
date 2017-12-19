@@ -88,9 +88,9 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
   let closeioId, onedriveId;
   before(() => {
     return provisioner.create('onedrivev2')
-       .then(r => onedriveId = r.body.id)
-       .then(r => provisioner.create('closeio', { 'event.notification.enabled': true, 'event.vendor.type': 'polling', 'event.poller.refresh_interval': 999999999 }))
-       .then(r => closeioId = r.body.id)
+      .then(r => onedriveId = r.body.id)
+      .then(r => provisioner.create('closeio', { 'event.notification.enabled': true, 'event.vendor.type': 'polling', 'event.poller.refresh_interval': 999999999 }))       
+      .then(r => closeioId = r.body.id)
       .catch(e => {
         console.log(`Failed to finish before()...${e}`);
         process.exit(1);
@@ -353,22 +353,6 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
     };
     return manualTriggerTest('notify-email', null, { foo: 'bar' }, 2, validator);
   });
-
-  it('should properly handle a formula with a notification step', () => {
-    const validator = (executions) => {
-      executions.map(e => {
-        expect(e.status).to.equal('success');
-
-        const ses = e.stepExecutions;
-        ses.filter(se => se.stepName !== 'end').map(validateSuccessfulStepExecution);
-
-        const consolidated = consolidateStepExecutionValues(ses);
-        expect(consolidated['end.continue']).to.equal(true);
-      });
-    };
-    return manualTriggerTest('notification-step', null, { foo: 'bar' }, 2, validator, null, null, {'notification.email': 'tester@cloud-elements.com'});
-  });
-
 
   it('should properly handle a formula with an amqp step', () => {
     const validator = (executions) => {
@@ -696,8 +680,6 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
 
 
   it('should successfully stream a bulk file using an elementRequestStream step in a formula', () => {
-    // elementRequestStream steps are not supported with bodenstein
-    if (isSkippedForBode()) { return; }
 
     const configuration = { source: closeioId, target: closeioId, 'object.name': 'accounts' };
     let bulkUploadId;
@@ -752,8 +734,6 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
   });
 
   it('should successfully stream a file via the documents hub APIs using an elementRequestStream step in a formula', () => {
-    // elementRequestStream steps are not supported with bodenstein
-    if (isSkippedForBode()) { return; }
 
     const configuration = { 'onedrivev2.instance': onedriveId };
 
