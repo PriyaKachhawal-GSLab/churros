@@ -8,7 +8,6 @@ const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 const tools = require('core/tools');
 const fs = require('fs');
-const props = require('core/props');
 
 const flattenStepExecutionValues = sevs =>
   sevs.reduce((flat, curr) => {
