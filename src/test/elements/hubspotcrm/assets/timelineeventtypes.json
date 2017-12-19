@@ -1,6 +1,3 @@
 {
-  "detailTemplate": "string",
-  "name": "string123s4",
-  "headerTemplate": "string",
-  "objectType": "CONTACT"
+  "name": "<<random.word>>"
 }

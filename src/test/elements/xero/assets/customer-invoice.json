@@ -1,0 +1,15 @@
+{
+    "Contact": {},
+    "Status": "AUTHORISED",
+    "LineItems": [
+        {
+            "Quantity": "1",
+            "UnitAmount": "5.00",
+            "Description": "Order of churros",
+            "AccountCode": "TO_BE_POPULATED_BY_CODE"
+        }
+    ],
+    "Type": "ACCREC",
+    "Date": "2017-08-08T00:00:00",
+    "DueDate": "2017-08-15T00:00:00"
+}

@@ -1,0 +1,13 @@
+{
+  "Narration": "<<finance.transactionType>>",
+  "JournalLines": [
+    {
+      "LineAmount": -5,
+      "AccountCode": "230"
+    },
+    {
+      "LineAmount": 5,
+      "AccountCode": "230"
+    }
+  ]
+}

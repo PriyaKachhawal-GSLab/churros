@@ -4,6 +4,7 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
 const expect = require('chakram').expect;
+const argv = require('optimist').argv;
 
 suite.forElement('marketing', 'bulk', null, (test) => {
 
@@ -78,11 +79,11 @@ suite.forElement('marketing', 'bulk', null, (test) => {
 
   it('should support bulk upload of a custom object using a transformation', () => {
     let bulkId;
-    const metaData = {identifierFieldName: 'id'};
+    const metaData = {identifierFieldName: argv.transform ? 'idTransformed' : 'id'};
     const opts = { formData: { metaData: JSON.stringify(metaData) } };
 
     // start bulk upload
-    return cloud.withOptions(opts).postFile('/hubs/marketing/bulk/eloquaCustomObject', `${__dirname}/assets/eloquaCustomObject.csv`)
+    return cloud.withOptions(opts).postFile('/hubs/marketing/bulk/eloquaCustomObject', argv.transform ? `${__dirname}/assets/eloquaCustomObjectTransformed.csv` : `${__dirname}/assets/eloquaCustomObject.csv`)
       .then(r => {
         expect(r.body.status).to.equal('CREATED');
         bulkId = r.body.id;

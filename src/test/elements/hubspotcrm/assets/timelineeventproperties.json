@@ -1,5 +1,5 @@
 {
-  "name":"NumericProperty1sssssss1",
-  "label":"Numeric Property",
-  "propertyType":"Numeric"
+  "name": "<<random.word>>",
+  "label": "<<random.word>>",
+  "propertyType":"String"
 }

@@ -78,7 +78,7 @@ const getPollerConfig = (element, instance) => {
       .reduce((acc, conf) => acc = conf.key === 'event.metadata' ? conf.defaultValue : acc, {})).polling).filter(str => str !== '{objectName}').join(',');
     } else {
       if (r !== 'NoConfig') instanceCopy.configuration['event.poller.configuration'] = r.replace(/\\n/g, '').replace(/\n/g, '').replace(/\t/g, '').replace(/<PUT USERNAME HERE>/g, props.getOptionalForKey(element, 'username'));
-      if (instanceCopy.configuration['event.poller.configuration']) instanceCopy.configuration["event.poller.urls"] = Object.keys(JSON.parse(instanceCopy.configuration['event.poller.configuration'])).join('|');
+      if (instanceCopy.configuration['event.poller.configuration']) instanceCopy.configuration["event.poller.urls"] = Object.keys(JSON.parse(instanceCopy.configuration['event.poller.configuration'])).join(element === 'hubspot' || element === 'hubspotcrm' ? '\n' : '|');
       else instanceCopy.configuration['event.poller.urls'] = elementObj.configuration.reduce((acc, conf) => acc = conf.key === 'event.poller.urls' ? conf.defaultValue : acc ,null);
     }
     instanceCopy.configuration['event.vendor.type'] = 'polling';
@@ -204,6 +204,7 @@ const oauth = (element, args, config) => {
         secret: args.secret,
         realmId: query.realmId,
         dataSource: query.dataSource,
+        org: query.org,
         token: query.token
       };
       if(args && args.debug) {
@@ -214,7 +215,8 @@ const oauth = (element, args, config) => {
 };
 
 const oauth1 = (element, args) => {
-  const oauthTokenUrl = `/elements/${element}/oauth/token`;
+  let urlElement = tools.getBaseElement(element);
+  const oauthTokenUrl = `/elements/${urlElement}/oauth/token`;
   return cloud.withOptions(args.options).get(oauthTokenUrl)
     .then(r => {
       expect(r).to.have.statusCode(200);

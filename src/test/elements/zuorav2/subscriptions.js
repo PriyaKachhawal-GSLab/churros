@@ -100,6 +100,24 @@ const ceqlOptions = {
              .then(r => cloud.put(`${test.api}/${id}/cancel`, cancleUpdatePayload));
 
 });
+it.skip(`should allow PUT ${test.api}/{id}/suspend and ${test.api}/{id}/resume `, () => {
+
+   let id;
+   let idNew;
+     const suspendUpdatePayload = {
+     "suspendPolicy": "Today"
+   };
+   const resumeUpdatePayload = {
+   "resumePolicy": "SpecificDate",
+   "resumeSpecificDate": "2018-11-23"
+ };
+    return cloud.post(`${test.api}`, payload)
+            .then(r => id = r.body.id)
+            .then(r => cloud.put(`${test.api}/${id}/suspend`, suspendUpdatePayload))
+            .then(r => idNew = r.body.subscriptionId)
+            .then(r => cloud.put(`${test.api}/${idNew}/resume`, resumeUpdatePayload));
+
+});
 
 
   after(() => cloud.delete(`/hubs/payment/customers/${customerId}`));

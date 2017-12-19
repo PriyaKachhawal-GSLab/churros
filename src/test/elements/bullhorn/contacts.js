@@ -1,5 +1,4 @@
 'use strict';
-const expect = require('chakram').expect;
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const payload = require('./assets/contacts');
@@ -18,6 +17,6 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
       .then(r => cloud.get(test.api))
       .then(r => cloud.get(`${test.api}/${contactId}`))
       .then(r => cloud.patch(`${test.api}/${contactId}`, updatePayload))
-      .then(r => cloud.delete(`${test.api}/${contactId}`, r => expect(r).to.have.statusCode(403)));
+      .then(r => cloud.delete(`${test.api}/${contactId}`));
   });
 });

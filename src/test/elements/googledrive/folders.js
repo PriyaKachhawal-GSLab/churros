@@ -13,7 +13,7 @@ const updatePayload ={
 
 
 suite.forElement('documents', 'folders',{ payload: payload }, (test) => {
-  let directoryPath = faker.random.word();
+  let directoryPath = faker.random.uuid();
   let jpgFile = __dirname + '/assets/Penguins.jpg';
   let pngFile = __dirname + '/assets/Dice.png';
   let textFile = __dirname + '/assets/textFile.txt';
