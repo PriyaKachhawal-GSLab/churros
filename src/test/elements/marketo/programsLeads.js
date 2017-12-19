@@ -15,8 +15,8 @@ suite.forElement('marketing', 'programsLeads', () => {
         let payload = buildProgram({ name: tools.randomStr('abcdefghijklmnopqrstuvwxyz', 10) });
         return cloud.post(`/hubs/marketing/programs`, payload)
             .then(r => {
-                programId = r.body[0].id;
-                programName = r.body[0].name;
+                programId = r.body.id;
+                programName = r.body.name;
             });
     });
 
