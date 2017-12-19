@@ -29,6 +29,13 @@ const getElement = (elementkeyOrId) => {
         .then(r => elementObj = r.body);
 };
 
+const get = (api) => {
+    let getResponse;
+    return cloud.get(api)
+        .then(r => getResponse = r.body);
+};
+
+
 const dereference = (docs) => {
     return new Promise((res, rej) => {
         var parser = new swaggerParser();
@@ -287,7 +294,7 @@ function addIssue(key, original, culprit) {
         }
     }
 
-    if (output.issues.hasOwnProperty(key)) {        
+    if (output.issues.hasOwnProperty(key)) {
         output.issues[key].conflicts.push(clonedCulprit);
         return;
     }
@@ -396,4 +403,63 @@ const checkDuplicateModel = () => {
         .catch(r => tools.logAndThrow('Failed to validate model :', r));
 };
 
-exports.checkDuplicateModel = () => checkDuplicateModel();  
+exports.checkDuplicateModel = () => checkDuplicateModel();
+
+const findMax = (response) => {
+    let max = 0;
+    let maxLengthObject = {};
+    response.forEach((singleResponse) => {
+        let singleResponseLength = Object.keys(singleResponse).length;
+        if (singleResponseLength > max) {
+            max = singleResponseLength;
+            maxLengthObject = singleResponse;
+        }
+    });  
+    return maxLengthObject;
+};
+
+const validateAndFindMax = (response) => {    
+    return new Promise((res, rej) => {
+        logger.info(typeof response);
+        if (Array.isArray(response) && response.length !== 0) {
+            res(findMax(response));
+        }
+        rej('invalid get response');
+    });
+};
+
+const filterResponse = (response) => {
+    return new Promise((res, rej) => {
+        if (typeof response === 'object') {
+            let filteredAndMappedKeys = Object.keys(response).filter((key) => {
+                // to put (key.endsWith("_c"))
+                if (typeof response[key] !== 'object') {                    
+                    return key;
+                }
+            })
+            .map((filteredKey) => {  
+                // put equalignore case
+                if(response[filteredKey] === true || response[filteredKey] === false) {
+                    return { [filteredKey] : filteredKey + "=" + response[filteredKey]};
+                } 
+                return { [filteredKey] : filteredKey + "=\'" +  response[filteredKey] + "\'"};                                          
+            });
+            logger.info('filtered', filteredAndMappedKeys);
+            res(filteredAndMappedKeys);
+        }
+        rej('cannot filter fields');
+    });
+};
+
+const searchableFields = (api) => {
+    logger.info(api);    
+
+    return get(api)
+        // .then(r => elementReponse = r)
+        .then(r => validateAndFindMax(r))
+        .then(r => filterResponse(r))
+        .catch(r => tools.logAndThrow('Failed to find searchable fields :', r));
+};
+
+exports.searchableFields = (api) => searchableFields(api);
+
