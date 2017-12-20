@@ -126,8 +126,10 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
         .then(r => formulaId = r.body.id)
         .then(() => removePrivilegeIfNecessary('editFormulas'))
         .then(() => cloudWithUser().put(`/formulas/${formulaId}`, DEFAULT_FORMULA, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().patch(`/formulas/${formulaId}`, DEFAULT_FORMULA, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('editFormulas'))
         .then(() => cloudWithUser().put(`/formulas/${formulaId}`, DEFAULT_FORMULA))
+        .then(() => cloudWithUser().patch(`/formulas/${formulaId}`, DEFAULT_FORMULA))
         .then(() => removePrivilegeIfNecessary('createFormulaInstances'))
         .then(() => cloudWithUser().post(`/formulas/${formulaId}/instances`, DEFAULT_FORMULA_INSTANCE, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('createFormulaInstances'))
@@ -204,8 +206,10 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
     it('should restrict access to viewing common objects without the viewCommonObjects privilege', () => {
       return removePrivilegeIfNecessary('viewCommonObjects')
         .then(() => cloudWithUser().get(`/organizations/objects/definitions`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().get(`/accounts/objects/definitions`, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('viewCommonObjects'))
-        .then(() => cloudWithUser().get(`/organizations/objects/definitions`));
+        .then(() => cloudWithUser().get(`/organizations/objects/definitions`))
+        .then(() => cloudWithUser().get(`/accounts/objects/definitions`));
     });
 
     it('should restrict access to creating, editing, and deleting common objects without the proper privileges', () => {
@@ -343,10 +347,16 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
 
   context('roles', () => {
     it('should restrict viewing roles if the user does not have the proper privilege for configuring organization roles', () => {
+      let roles;
       return removePrivilegeIfNecessary('configureRoles')
         .then(() => cloudWithUser().get(`/organizations/roles`, insufficientPrivilegesValidator))
+        .then(rs => roles = rs)
+        .then(() => cloudWithUser().put(`/organizations/roles`, {}, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/organizations/roles/reset`, null, insufficientPrivilegesValidator))        
         .then(() => addPrivilegeIfNecessary('configureRoles'))
-        .then(() => cloudWithUser().get(`/organizations/roles`));
+        .then(() => cloudWithUser().get(`/organizations/roles`))
+        .then(() => cloudWithUser().put(`/organizations/roles`, roles))
+        .then(() => cloudWithUser().put(`/organizations/roles/reset`));
     });
   });
 });
