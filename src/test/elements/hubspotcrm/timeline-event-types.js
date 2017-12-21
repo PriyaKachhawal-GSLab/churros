@@ -12,7 +12,15 @@ const eventsPayload = tools.requirePayload(`${__dirname}/assets/timelineevents.j
 suite.forElement('crm', 'timeline-event-types', {payload: payload}, (test) => {
 
     test.should.supportPagination("id");
-    test.should.supportCrud();
+
+    it('should support CUDS for /hubs/crm/timeline-event-types', () => {
+      let createdId = null;
+      return cloud.post(test.api, payload)
+        .then(r => createdId = r.body.id)
+        .then(() => cloud.patch(`${test.api}/${createdId}`, payload))
+        .then(() => cloud.delete(`${test.api}/${createdId}`))
+        .then(() => cloud.get(test.api));
+    });
 
   const eventTypesWrap = (cb) => {
      let eventTypes;
