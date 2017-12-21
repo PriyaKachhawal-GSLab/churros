@@ -80,6 +80,7 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
   };
 
   const insufficientPrivilegesValidator = r => expect(r).to.have.statusCode(403);
+  const sufficientPrivilegesValidator = r => expect(r.statusCode).to.not.equal(403);
 
   context('formulas', () => {
     const DEFAULT_FORMULA = {
@@ -154,16 +155,90 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
       name: `rbac${tools.random()}`
     });
 
+    const DEFAULT_ELEMENT_CONFIG = () => ({
+      key: `rbac${tools.random()}`,
+      name: 'rbacConfig',
+      type: 'TEXTFIELD_128',
+      description: "test config",
+      resellerConfig: false,
+      companyConfig: false,
+      active: true,
+      internal: false,
+      groupControl: false,
+      displayOrder: 0,
+      hideFromConsole: true,
+      required: false
+    });
+
+    const DEFAULT_ELEMENT_RESOURCE = () => ({
+      name: `rbac${tools.random()}`,
+      description: 'rbac resource',
+      path: `/rbac/${tools.random()}`,
+      vendorPath: '/vendor',
+      method: 'GET',
+      vendorMethod: 'GET'
+    });
+
+    const DEFAULT_ELEMENT_PARAMETER = () => ({
+      name: `rbac${tools.random()}`,
+      type: 'header',
+      vendorName: 'rbacParam',
+      vendorType: 'header',
+      dataType: 'string',
+      vendorDataType: 'string'
+    });
+
+    const DEFAULT_ELEMENT_HOOK = () => ({
+      body: 'done()',
+      type: 'preRequest',
+      mimeType: 'javascript',
+      isLegacy: false
+    });
+
+    const DEFAULT_ELEMENT_MODELS = () => ({
+      name: `rbac${tools.random()}`,
+      swagger: {}
+    });
+
     it('should restrict access to viewing elements without the viewElements privilege', () => {
+      let elementId, resourceId;
       const opts = { qs: { page: 1, pageSize: 1 } };
       return removePrivilegeIfNecessary('viewElements')
         .then(() => cloudWithUser().withOptions(opts).get(`/elements`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/23`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/23/export`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/23/configuration`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/23/resources`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/23/resources/123`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/23/resources/123/hooks`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/23/resources/123/hooks/123`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/23/resources/123/parameters`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/23/resources/123/models`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/23/hooks`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/23/hooks/123`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/23/parameters`, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('viewElements'))
-        .then(() => cloudWithUser().withOptions(opts).get(`/elements`));
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements`))
+        .then(elements => elementId = elements.body[0].id)
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/${elementId}`))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/${elementId}/export`))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/${elementId}/configuration`))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/${elementId}/resources`))
+        .then(resources => resourceId = resources.body[0].id)
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/${elementId}/resources/${resourceId}`))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/${elementId}/resources/${resourceId}/hooks`))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/${elementId}/resources/${resourceId}/hooks/123`, sufficientPrivilegesValidator))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/${elementId}/resources/${resourceId}/parameters`))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/${elementId}/resources/${resourceId}/models`))
+        .then(() => cloudWithUser().withOptions(opts).get(`/elements/${elementId}/hooks`))
+        .then(hs => cloudWithUser().withOptions(opts).get(`/elements/${elementId}/hooks/123`, sufficientPrivilegesValidator))
+        //TODO - this fails bc I dont own this element - fix bug
+        // .then(() => cloudWithUser().withOptions(opts).get(`/elements/${elementId}/parameters`));
+        ;
     });
 
     it('should restrict access to creating, editing, and deleting an element without the editElements privilege', () => {
-      let elementId, elementInstanceId;
+      let elementId, elementInstanceId, cloneId, resourceId;
       const cleanup = () => {
         if (!R.isNil(elementInstanceId)) {
           cloudWithUser().delete(`/instances/${elementInstanceId}`, R.always(true));
@@ -172,23 +247,87 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
         if (!R.isNil(elementId)) {
           cloudWithUser().delete(`/elements/${elementId}`, R.always(true));
         }
+
+        if (!R.isNil(cloneId)) {
+          cloudWithUser().delete(`/elements/${cloneId}`, R.always(true));
+        }
       };
 
+      // create without priv
       return removePrivilegeIfNecessary('createElements')
         .then(() => cloudWithUser().post(`/elements`, DEFAULT_ELEMENT(), insufficientPrivilegesValidator))
-        .then(() => addPrivilegeIfNecessary('createElements'))
+        .then(() => cloudWithUser().post(`/elements/23/clone`, null, insufficientPrivilegesValidator))
+        // create with priv      
+        .then(() => addPrivilegeIfNecessary('createElements'), {}, insufficientPrivilegesValidator)
         .then(() => cloudWithUser().post(`/elements`, DEFAULT_ELEMENT()))
-        .then(r => elementId = r.body.id)
+        .then(r => elementId = r.body.id)        
+        .then(() => cloudWithUser().post(`/elements/${elementId}/clone`, null, sufficientPrivilegesValidator))
+        .then(r => cloneId = r.body.id)
+        // edits without priv
         .then(() => removePrivilegeIfNecessary('editElements'))
         .then(() => cloudWithUser().put(`/elements/${elementId}`, DEFAULT_ELEMENT(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().post(`/elements/${elementId}/configuration`, DEFAULT_ELEMENT_CONFIG(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/elements/${elementId}/configuration/1`, DEFAULT_ELEMENT_CONFIG(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().delete(`/elements/${elementId}/configuration/1`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().post(`/elements/${elementId}/resources`, DEFAULT_ELEMENT_RESOURCE(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/elements/${elementId}/resources/1`, DEFAULT_ELEMENT_RESOURCE(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().delete(`/elements/${elementId}/resources/1`, insufficientPrivilegesValidator))  
+        .then(() => cloudWithUser().post(`/elements/${elementId}/resources/1/hooks`, DEFAULT_ELEMENT_HOOK(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/elements/${elementId}/resources/1/hooks/1`, DEFAULT_ELEMENT_HOOK(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().delete(`/elements/${elementId}/resources/1/hooks/1`, insufficientPrivilegesValidator))  
+        .then(() => cloudWithUser().post(`/elements/${elementId}/resources/1/parameters`, DEFAULT_ELEMENT_PARAMETER(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/elements/${elementId}/resources/1/parameters/1`, DEFAULT_ELEMENT_PARAMETER(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().delete(`/elements/${elementId}/resources/1/parameters/1`, insufficientPrivilegesValidator)) 
+        .then(() => cloudWithUser().post(`/elements/${elementId}/resources/1/models`, DEFAULT_ELEMENT_MODELS(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/elements/${elementId}/resources/1/models`, DEFAULT_ELEMENT_MODELS(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().delete(`/elements/${elementId}/resources/1/models`, insufficientPrivilegesValidator)) 
+        .then(() => cloudWithUser().post(`/elements/${elementId}/hooks`, DEFAULT_ELEMENT_HOOK(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/elements/${elementId}/hooks/1`, DEFAULT_ELEMENT_HOOK(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().delete(`/elements/${elementId}/hooks/1`, insufficientPrivilegesValidator))  
+        .then(() => cloudWithUser().post(`/elements/${elementId}/parameters`, DEFAULT_ELEMENT_PARAMETER(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/elements/${elementId}/parameters/1`, DEFAULT_ELEMENT_PARAMETER(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().delete(`/elements/${elementId}/parameters/1`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().delete(`/elements/${elementId}/active`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/elements/${elementId}/active`, null, insufficientPrivilegesValidator))
+        // edits w priv     
         .then(() => addPrivilegeIfNecessary('editElements'))
         .then(() => cloudWithUser().put(`/elements/${elementId}`, DEFAULT_ELEMENT()))
+        .then(() => cloudWithUser().post(`/elements/${elementId}/configuration`, DEFAULT_ELEMENT_CONFIG()))
+        .then(c => cloudWithUser().put(`/elements/${elementId}/configuration/${c.body.key}`, DEFAULT_ELEMENT_CONFIG()))
+        .then(c => cloudWithUser().delete(`/elements/${elementId}/configuration/${c.body.key}`))  
+        .then(() => cloudWithUser().post(`/elements/${elementId}/resources`, DEFAULT_ELEMENT_RESOURCE()))
+        .then(r => resourceId = r.body.id)
+        .then(() => cloudWithUser().put(`/elements/${elementId}/resources/${resourceId}`, DEFAULT_ELEMENT_RESOURCE()))
+        .then(() => cloudWithUser().post(`/elements/${elementId}/resources/${resourceId}/hooks`, DEFAULT_ELEMENT_HOOK()))
+        .then(h => cloudWithUser().put(`/elements/${elementId}/resources/${resourceId}/hooks/${h.body.id}`, DEFAULT_ELEMENT_HOOK()))
+        .then(h => cloudWithUser().delete(`/elements/${elementId}/resources/${resourceId}/hooks/${h.body.id}`))  
+        .then(() => cloudWithUser().post(`/elements/${elementId}/resources/${resourceId}/parameters`, DEFAULT_ELEMENT_PARAMETER()))
+        .then(p => cloudWithUser().put(`/elements/${elementId}/resources/${resourceId}/parameters/${p.body.id}`, DEFAULT_ELEMENT_PARAMETER()))
+        .then(p => cloudWithUser().delete(`/elements/${elementId}/resources/${resourceId}/parameters/${p.body.id}`)) 
+        .then(() => cloudWithUser().post(`/elements/${elementId}/resources/${resourceId}/models`, DEFAULT_ELEMENT_MODELS()))
+        .then(() => cloudWithUser().put(`/elements/${elementId}/resources/${resourceId}/models`, DEFAULT_ELEMENT_MODELS()))
+        .then(() => cloudWithUser().delete(`/elements/${elementId}/resources/${resourceId}/models`)) 
+        .then(() => cloudWithUser().delete(`/elements/${elementId}/resources/${resourceId}`))
+        .then(() => cloudWithUser().post(`/elements/${elementId}/hooks`, DEFAULT_ELEMENT_HOOK()))
+        .then(h => cloudWithUser().put(`/elements/${elementId}/hooks/${h.body.id}`, DEFAULT_ELEMENT_HOOK()))
+        .then(h => cloudWithUser().delete(`/elements/${elementId}/hooks/${h.body.id}`))
+        .then(() => cloudWithUser().post(`/elements/${elementId}/parameters`, DEFAULT_ELEMENT_PARAMETER()))
+        .then(p => cloudWithUser().put(`/elements/${elementId}/parameters/${p.body.id}`, DEFAULT_ELEMENT_PARAMETER()))
+        .then(p => cloudWithUser().delete(`/elements/${elementId}/parameters/${p.body.id}`))
+        .then(p => cloudWithUser().delete(`/elements/${elementId}/active`))
+        .then(p => cloudWithUser().put(`/elements/${elementId}/active`, null, sufficientPrivilegesValidator))
+        // delete without priv
         .then(() => removePrivilegeIfNecessary('deleteElements'))
         .then(() => cloudWithUser().delete(`/elements/${elementId}`, insufficientPrivilegesValidator))
+        // instances without priv
         .then(() => removePrivilegeIfNecessary('createElementInstances'))
         .then(() => cloudWithUser().post(`/elements/${elementId}/instances`, DEFAULT_ELEMENT_INSTANCE(), insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/elements/${elementId}/instances/12`, DEFAULT_ELEMENT_INSTANCE(), insufficientPrivilegesValidator))
+        // instances with priv
         .then(() => addPrivilegeIfNecessary('createElementInstances'))
         .then(() => cloudWithUser().post(`/elements/${elementId}/instances`, DEFAULT_ELEMENT_INSTANCE()))
+        .then(i => cloudWithUser().put(`/elements/${elementId}/instances/${i.body.id}`, DEFAULT_ELEMENT_INSTANCE()))
+        // delete with priv
         .then(() => addPrivilegeIfNecessary('deleteElements'))
         .then(cleanup);
     });
@@ -350,11 +489,11 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
       let roles;
       return removePrivilegeIfNecessary('configureRoles')
         .then(() => cloudWithUser().get(`/organizations/roles`, insufficientPrivilegesValidator))
-        .then(rs => roles = rs)
-        .then(() => cloudWithUser().put(`/organizations/roles`, {}, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/organizations/roles`, [], insufficientPrivilegesValidator))
         .then(() => cloudWithUser().put(`/organizations/roles/reset`, null, insufficientPrivilegesValidator))        
         .then(() => addPrivilegeIfNecessary('configureRoles'))
         .then(() => cloudWithUser().get(`/organizations/roles`))
+        .then(rs => roles = rs.body)
         .then(() => cloudWithUser().put(`/organizations/roles`, roles))
         .then(() => cloudWithUser().put(`/organizations/roles/reset`));
     });
