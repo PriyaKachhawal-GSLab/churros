@@ -414,11 +414,11 @@ const findMax = (response) => {
             max = singleResponseLength;
             maxLengthObject = singleResponse;
         }
-    });  
+    });
     return maxLengthObject;
 };
 
-const validateAndFindMax = (response) => {    
+const validateAndFindMax = (response) => {
     return new Promise((res, rej) => {
         logger.info(typeof response);
         if (Array.isArray(response) && response.length !== 0) {
@@ -428,22 +428,49 @@ const validateAndFindMax = (response) => {
     });
 };
 
-const filterResponse = (response) => {
+const validateSearchableFields = (whereClauseArray, api, responseLength) => {
+
+    return Promise.all(whereClauseArray.map(r => cloud.withOptions({ qs: { where: r.value } }).get(api)
+        .catch(r => r)))
+        .then(rs => {
+            // remove this logger.
+            logger.info('one success onlyh');            
+            for (let i = 0; i < whereClauseArray.length; i++) {
+                whereClauseArray[i].status = rs[i];
+            }
+            // will optimize
+            let passedKeys = whereClauseArray.filter(r => r.status.hasOwnProperty('body') ? true : false)
+            .map(r => r.key);
+            let failedKeys = whereClauseArray.filter(r => r.status.hasOwnProperty('body') ? false : true)
+            .map(r => r.key);           
+            logger.info('result');
+            logger.info({
+                passedKeys : passedKeys,
+                failedKeys : failedKeys
+            });           
+            return whereClauseArray;
+        })
+        .catch(e => {
+            logger.info('failed with some region   ');
+        });
+};
+
+const filterAndMapResponse = (response) => {
     return new Promise((res, rej) => {
         if (typeof response === 'object') {
             let filteredAndMappedKeys = Object.keys(response).filter((key) => {
                 // to put (key.endsWith("_c"))
-                if (typeof response[key] !== 'object') {                    
+                if (typeof response[key] !== 'object') {
                     return key;
                 }
             })
-            .map((filteredKey) => {  
-                // put equalignore case
-                if(response[filteredKey] === true || response[filteredKey] === false) {
-                    return { [filteredKey] : filteredKey + "=" + response[filteredKey]};
-                } 
-                return { [filteredKey] : filteredKey + "=\'" +  response[filteredKey] + "\'"};                                          
-            });
+                .map((filteredKey) => {
+                    // put equalignore case
+                    if (response[filteredKey] === true || response[filteredKey] === false) {
+                        return { key: filteredKey, value: filteredKey + "=" + response[filteredKey] };
+                    }
+                    return { key: filteredKey, value: filteredKey + "=\'" + response[filteredKey] + "\'" };
+                });
             logger.info('filtered', filteredAndMappedKeys);
             res(filteredAndMappedKeys);
         }
@@ -452,12 +479,14 @@ const filterResponse = (response) => {
 };
 
 const searchableFields = (api) => {
-    logger.info(api);    
-
-    return get(api)
-        // .then(r => elementReponse = r)
-        .then(r => validateAndFindMax(r))
-        .then(r => filterResponse(r))
+    logger.info(api);
+    let responseLength;
+    return get(api)        
+        .then(r => { responseLength  = r.length; 
+                    logger.info(responseLength);
+                     return validateAndFindMax(r);})
+        .then(r => filterAndMapResponse(r))
+        .then(r => validateSearchableFields(r, api, responseLength))        
         .catch(r => tools.logAndThrow('Failed to find searchable fields :', r));
 };
 
