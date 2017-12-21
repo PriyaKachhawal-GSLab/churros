@@ -1,0 +1,1201 @@
+{
+  "type": "object",
+  "properties": {
+    "timeTaxCodetype": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "expCostTaxCode": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "internalId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "name": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "externalId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "type": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "shipMethodtype": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "taxItem": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "internalId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "name": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "externalId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "type": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "termstype": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "type": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "timeTaxCode": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "internalId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "name": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "externalId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "type": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "accountingBooktype": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "currencytype": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "accountingBookDetailList": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "accountingBookDetail": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "replaceAll": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "channels": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "tranId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "vatRegNum": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "taxTotal": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "integer"
+                },
+                "format": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "taxItem": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "expCostTaxRate1": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "integer"
+                },
+                "format": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "itemCostDiscTaxable": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "expCostTaxRate2": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "integer"
+                },
+                "format": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "syncPartnerTeams": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "itemCostDiscTax1Amt": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "integer"
+                },
+                "format": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "giftCertApplied": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "integer"
+                },
+                "format": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "accountingBookDetailList": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "terms": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "timeDiscTax1Amt": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "integer"
+                },
+                "format": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "timeDiscPrint": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "fax": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "vsoeAutoCalc": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "toBeFaxed": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "shippingCost": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "integer"
+                },
+                "format": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "itemCostDiscPrint": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "toBePrinted": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "tranIsVsoeBundle": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "timeDiscRate": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "expCostTaxCode": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "shippingTax2Rate": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "trackingNumbers": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "isTaxable": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "externalId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "timeTaxCode": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "timeDiscTaxable": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "handlingTax2Rate": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "taxRate": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "integer"
+                },
+                "format": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "syncSalesTeams": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "itemCostDiscRate": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "timeTaxRate2": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "integer"
+                },
+                "format": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "toBeEmailed": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "shipMethod": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "tranDate": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "x-mask": {
+                  "type": "string"
+                },
+                "format": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "tax2Total": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "integer"
+                },
+                "format": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "shipIsResidential": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "status": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "terms": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "internalId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "name": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "externalId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "type": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "shipMethod": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "internalId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "name": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "externalId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "type": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "accountingBookDetail": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "exchangeRate": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "integer"
+                },
+                "format": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "currency": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "accountingBook": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "expCostTaxCodetype": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "currency": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "internalId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "name": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "externalId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "type": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "accountingBook": {
+      "type": "object",
+      "properties": {
+        "x-has-customfields": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "internalId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "name": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "externalId": {
+              "type": "object",
+              "properties": {
+                "x-samplevalue": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "type": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
