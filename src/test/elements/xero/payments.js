@@ -43,7 +43,7 @@ suite.forElement('finance', 'payments', (test) => {
         .then(() => cloud.post(`${test.api}`, paymentPayload))
         .then(r => {
             paymentId = r.body.PaymentID;
-            cloud.get(`${test.api}/${paymentId}`)
+            cloud.get(`${test.api}/${paymentId}`);
         })
         .then(() => cloud.get(`${test.api}`))
         .then(() => cloud.delete(`${test.api}/${paymentId}`))
