@@ -91,22 +91,23 @@ suite.forElement('documents', 'folders', (test) => {
 
    it('should allow GET /folders/contents', () => {
      return cloud.withOptions({qs: { path: `/` } , headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
-         .then(r => expect(r.body[0]).to.contain.key('name'));
+         .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.directory === true || obj.directory === false).length));
      });
 
    it('should allow GET /folders/contents with name', () => {
      return cloud.withOptions({qs: { path: `/`, where: "name='dontdelete.jpg'" }, headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
-       .then(r => expect(r.body[0]).to.contain.key('name'));
+       .then(r => expect(r.body[0].name).to.contain('dontdelete'));
    });
 
    it('should allow GET /folders/contents with extension', () => {
      return cloud.withOptions({qs: { path: `/`, where: "extension='.csv'" }, headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
-       .then(r => expect(r.body[0]).to.contain.key('name'));
+       .then(r => expect(r.body[0].name).to.contain('.csv'));
    });
 
    it('should allow GET /folders/contents with directory', () => {
      return cloud.withOptions({qs: { path: `/`, where: "directory='true'" }, headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
-       .then(r => expect(r.body[0]).to.contain.key('name'));
+      .then(r => expect(r.body[0].directory).to.equal(true));
    });
+
 
 });

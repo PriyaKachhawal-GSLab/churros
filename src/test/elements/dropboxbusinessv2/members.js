@@ -6,7 +6,7 @@ const props = require('core/props');
 const payload = require('./assets/members');
 
 
-suite.forElement('documents', 'members', { payload: payload,skip:true }, (test) => {
+suite.forElement('documents', 'members', { payload: payload, useElement:'dropboxbusinessv2--members', skip: true }, (test) => {
   let memberId = props.getForKey('dropboxbusinessv2', 'username');
 
   const email = 'devteammember@cloud-elements.com';
