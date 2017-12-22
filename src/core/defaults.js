@@ -7,6 +7,7 @@ const logger = require('winston');
 let baseUrl = null;
 let userSecret = null;
 let orgSecret = null;
+let elementToken = null;
 let username = null;
 
 const setDefaults = (b, u, o, un) => {
@@ -56,6 +57,7 @@ exports.reset = () => {
  * @param {string} token The element token to include on any subsequent HTTP calls
  */
 exports.token = (token) => {
+  elementToken = token;
   logger.debug('Adding token to our default request headers');
   chakram.setRequestDefaults({
     baseUrl: baseUrl,
@@ -65,5 +67,7 @@ exports.token = (token) => {
     }
   });
 };
+
+exports.getToken = () => elementToken;
 
 exports.secrets = () => ({userSecret, orgSecret});

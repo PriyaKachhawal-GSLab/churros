@@ -26,7 +26,6 @@ suite.forElement('general', 'groups', { payload: payload }, (test) => {
 	       payload.etag=r.body.etag;
               })
    .then(r => cloud.get(`${test.api}/${groupId}`))
-   .then(r => cloud.withOptions({ qs: { id: 'all' } }).get(`/hubs/general/groups-batch`))
    .then(r => cloud.patch(`${test.api}/${groupId}`, payload))
    .then(r => cloud.patch(`${test.api}/${groupId}/contacts`, groupContactsPayload))
    .then(r => cloud.post(`${test.api}/${groupId}/contacts/${contactId}`, null))

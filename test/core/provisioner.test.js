@@ -26,6 +26,7 @@ const setupProps = () => {
     'url': 'http://google.com',
     'user': 'franky',
     'oauth.callback.url': 'http://myfakecallbackurl',
+    'element': 'myelement',
     'myelement': {
       'elementId': '123',
       'username': 'frank',

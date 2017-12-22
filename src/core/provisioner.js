@@ -204,6 +204,7 @@ const oauth = (element, args, config) => {
         secret: args.secret,
         realmId: query.realmId,
         dataSource: query.dataSource,
+        org: query.org,
         token: query.token
       };
       if(args && args.debug) {
@@ -214,7 +215,8 @@ const oauth = (element, args, config) => {
 };
 
 const oauth1 = (element, args) => {
-  const oauthTokenUrl = `/elements/${element}/oauth/token`;
+  let urlElement = tools.getBaseElement(element);
+  const oauthTokenUrl = `/elements/${urlElement}/oauth/token`;
   return cloud.withOptions(args.options).get(oauthTokenUrl)
     .then(r => {
       expect(r).to.have.statusCode(200);

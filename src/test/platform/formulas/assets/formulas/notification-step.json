@@ -1,0 +1,14 @@
+{
+  "name": "notification-step",
+  "triggers": [{
+    "type": "manual",
+    "onSuccess": ["end"]
+  }],
+  "steps": [{
+    "name": "end",
+    "type": "notification",
+    "properties": {
+      "body": "done(true);"
+    }
+  }]
+}

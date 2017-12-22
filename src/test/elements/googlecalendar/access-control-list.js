@@ -16,8 +16,6 @@ suite.forElement('scheduling', 'calendars', { payload: payload }, (test) => {
   return cloud.cruds(`${test.api}/${calendarId}/access-control-list`, payload);
   });
 
-  test.withApi(`${test.api}/primary/access-control-list`).should.supportNextPagePagination(1);
-
   it('should test where for access-control-list', () => {
          return cloud.withOptions({ qs: { where : `showDeleted='true'` } }).get(`${test.api}/${calendarId}/access-control-list`)
       .then(r => {

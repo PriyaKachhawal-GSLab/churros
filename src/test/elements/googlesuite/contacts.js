@@ -17,7 +17,6 @@ suite.forElement('general', 'contacts', { payload: payload }, (test) => {
               })
    .then(r => cloud.patch(`${test.api}/${contactId}`, payload))
    .then(r => cloud.get(`${test.api}/${contactId}`))
-   .then(r => cloud.withOptions({ qs: { id: 'me' } }).get(`/hubs/general/contacts-batch`))
    .then(r => cloud.delete(`${test.api}/${contactId}`));
   });
 

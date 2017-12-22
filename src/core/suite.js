@@ -10,6 +10,8 @@ const expect = chakram.expect;
 const cloud = require('core/cloud');
 const tools = require('core/tools');
 const props = require('core/props');
+const defaults = require('core/defaults');
+const provisioner = require('core/provisioner');
 const logger = require('winston');
 const request = require('request');
 const fs = require('fs');
@@ -208,6 +210,10 @@ const itCeqlSearch = (name, api, payload, field, options) => {
   const n = name || `should support searching ${api} by ${field}`;
   boomGoesTheDynamite(n, () => {
     let id, value;
+    let tranformedObjs = props.getOptionalForKey(props.getOptional('element'), 'transformed') || [];
+    //Have to update field for the query if there is a transformation
+    let transform = tranformedObjs.reduce((acc, cur) => acc = acc ? acc : api.split('/').slice(-2).filter(str => str === cur).length > 0 ? true : false, false);
+    if (field === 'id' && transform) field = 'idTransformed';
     return cloud.post(api, payload)
       .then(r => {
         id = r.body.id;
@@ -227,6 +233,10 @@ const itCeqlSearchMultiple = (name, api, payload, field, options) => {
   const n = name || `should support searching ${api} by ${field}`;
   boomGoesTheDynamite(n, () => {
     let id, value;
+    let tranformedObjs = props.getOptionalForKey(props.getOptional('element'), 'transformed') || [];
+    //Have to update field for the query if there is a transformation
+    let transform = tranformedObjs.reduce((acc, cur) => acc = acc ? acc : api.split('/').slice(-2).filter(str => str === cur).length > 0 ? true : false, false);
+    if (field === 'id' && transform) field = 'idTransformed';
     return cloud.post(api, payload)
       .then(r => {
         id = r.body.id;
@@ -659,11 +669,39 @@ const run = (api, resource, options, defaultValidation, tests, hub) => {
   options = options || {};
   const name = options.name || resource;
   let propsSkip = false;
-  try { propsSkip = props.getOptionalForKey(props.get('element'), 'skip'); } catch (e) {}
+  try {
+    let element = props.get('element');
+    propsSkip = props.getOptionalForKey(element, 'skip');
+    //Will only run on endpoints specified if given
+    let endpoints = props.getOptionalForKey(element, 'endpoints');
+    if (endpoints && !endpoints.includes(resource)) { options.skip = true; }
+  } catch (e) {}
   if (options.skip || propsSkip) {
     describe.skip(name, () => runTests(api, options.payload, defaultValidation, tests, hub));
   } else {
-    describe(name, () => runTests(api, options.payload, defaultValidation, tests, hub));
+    describe(name, function() {
+      let ctx = this;
+      if (options.useElement) { //Run on a different cred set if given
+        let oldToken;
+        let oldInstanceId;
+        before(() => {
+          //skip if not part of endpoints
+          let endpoints = props.getOptionalForKey(options.useElement, 'endpoints');
+          if (endpoints && !endpoints.includes(resource)) { return ctx.skip(); }
+          oldToken = defaults.getToken();
+          oldInstanceId = global.instanceId;
+          return provisioner.create(options.useElement);
+        });
+        after(() => {
+          return provisioner.delete(global.instanceId).catch(() => {})
+          .then(() => {
+            defaults.token(oldToken);
+            global.instanceId = oldInstanceId;
+          });
+        });
+      }
+      return runTests(api, options.payload, defaultValidation, tests, hub);
+    });
   }
 };
 

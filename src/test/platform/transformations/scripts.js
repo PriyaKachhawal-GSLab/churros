@@ -33,12 +33,14 @@ suite.forPlatform('transformation scripts', (test) => {
       const validator = (options.validator || ((object) => expect(object.foo).to.equal('bar')));
       expect(r).to.have.statusCode(200);
       expect(r.body).to.not.be.null;
-      expect(r.body.console).to.be.undefined;
+      expect(r.body.console).to.be.empty;
       validator(r.body);
       return r;
     };
 
-    return cloud.post(`/instances/${closeioId}/objects/contacts/definitions`, definitions)
+    return cloud.delete(`/instances/${closeioId}/objects/contacts/definitions`).catch(() => {})
+      .then(r => cloud.post(`/instances/${closeioId}/objects/contacts/definitions`, definitions))
+      .then(r => cloud.delete(`/instances/${closeioId}/transformations/contacts`).catch(() => {}))
       .then(r => cloud.post(`/instances/${closeioId}/transformations/contacts`, transformation, (r) => transformationCreatedValidator(r, transformation.isLegacy ? transformation.isLegacy : false)))
       .then(r => cloud.get(`/hubs/crm/contacts/${contactId}`, validatorWrapper))
       .then(r => options.isCleanup ? cloud.delete(`/instances/${closeioId}/transformations/contacts`) : r)
