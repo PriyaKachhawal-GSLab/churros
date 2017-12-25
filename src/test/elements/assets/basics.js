@@ -60,7 +60,7 @@
           });
           //create the transformations and validating they work
           return createAll(`/instances/${instanceId}/transformations/%s`, transformations)
-          .then(() => element.includes('netsuite') ? //Making synchronous calls for netsuite
+          .then(() => element.includes('netsuite') || argv.sync ? //Making synchronous calls for netsuite
           Object.keys(transformations).reduce((acc, key) => acc.then(() => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length))), Promise.resolve(null))
           : Promise.all(Object.keys(transformations).map(key => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length)))));
         } else {
@@ -92,8 +92,8 @@
               }));
             })
             //validates the transformations are working
-            .then(() => element.includes('netsuite') ? //Making synchronous calls for netsuite
-            Object.keys(transDefs).reduce((acc, key) => acc.then(() => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length))).then(() => console.log('done', key)), Promise.then(null))
+            .then(() => element.includes('netsuite') || argv.sync ? //Making synchronous calls for netsuite
+            Object.keys(transDefs).reduce((acc, key) => acc.then(() => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length))), Promise.resolve(null))
             : Promise.all(Object.keys(transDefs).map(key => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length)))));
           });
         }
