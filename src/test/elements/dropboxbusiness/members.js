@@ -2,6 +2,7 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
+const props = require('core/props');
 const payload = require('./assets/members');
 
 suite.forElement('documents', 'members', { payload: payload,skip:true }, (test) => {
