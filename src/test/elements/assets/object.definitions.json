@@ -1025,6 +1025,15 @@
       "type": "string"
     }]
   },
+  "bills-payments": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    },{
+      "path": "id",
+      "type": "string"
+    }]
+  },
   "projects": {
     "fields": [{
       "path": "idTransformed",
