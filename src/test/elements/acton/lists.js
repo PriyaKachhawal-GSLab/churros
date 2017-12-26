@@ -65,6 +65,10 @@ suite.forElement('marketing', 'lists', { payload: payload }, (test) => {
       .then(filteredLists => cloud.post(`/hubs/marketing/lists/${filteredLists[0].id}/contacts`, contactPayload));
   });
 
+   it('should sleep for 60 seconds to avoid rate limits', () => {
+    return tools.sleep(60);
+  });
+  
   it('it should support GET a contact inside a list', () => {
     let filteredLists;
 
