@@ -102,11 +102,42 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
       name: `rbac-formula-instance${tools.random()}`,
     };
 
+    const DEFAULT_STEP = {
+      name: 'step1',
+      type: 'filter',
+      properties: {
+        body: 'done(true);'
+      }
+    };
+
+    const DEFAULT_CONFIG = {
+      name: 'myConfig',
+      key: 'myConfig',
+      type: 'value'
+    };
+
+    const DEFAULT_TRIGGER = {
+      type: 'manual',
+      onSuccess: ['done']
+    };
+
     it('should restrict access to viewing formulas without the viewFormulas privilege', () => {
+      let formula;
       return removePrivilegeIfNecessary('viewFormulas')
         .then(() => cloudWithUser().get(`/formulas`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().get(`/formulas/12`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().get(`/formulas/12/export`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().get(`/formulas/12/triggers/12`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().get(`/formulas/12/steps`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().get(`/formulas/12/steps/12`, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('viewFormulas'))
-        .then(() => cloudWithUser().get(`/formulas`));
+        .then(() => cloudWithUser().get(`/formulas`))
+        .then(fs => formula = fs.body[0])
+        .then(() => cloudWithUser().get(`/formulas/${formula.id}`))
+        .then(() => cloudWithUser().get(`/formulas/${formula.id}/export`))
+        .then(() => cloudWithUser().get(`/formulas/${formula.id}/triggers/${formula.triggers[0].id}`))
+        .then(() => cloudWithUser().get(`/formulas/${formula.id}/steps`))
+        .then(() => cloudWithUser().get(`/formulas/${formula.id}/steps/${formula.steps[0].id}`));
     });
 
     it('should restrict access to creating, editing, and deleting formulas without the necessary privilege', () => {
@@ -128,13 +159,44 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
         .then(() => removePrivilegeIfNecessary('editFormulas'))
         .then(() => cloudWithUser().put(`/formulas/${formulaId}`, DEFAULT_FORMULA, insufficientPrivilegesValidator))
         .then(() => cloudWithUser().patch(`/formulas/${formulaId}`, DEFAULT_FORMULA, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/formulas/${formulaId}/upgrade/v3`, null, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().delete(`/formulas/${formulaId}/upgrade/v3`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().post(`/formulas/${formulaId}/triggers`, DEFAULT_TRIGGER, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/formulas/${formulaId}/triggers/1`, DEFAULT_TRIGGER, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().delete(`/formulas/${formulaId}/triggers/1`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().post(`/formulas/${formulaId}/steps`, DEFAULT_STEP, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/formulas/${formulaId}/steps/1`, DEFAULT_STEP, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().delete(`/formulas/${formulaId}/steps/1`, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().post(`/formulas/${formulaId}/configuration`, DEFAULT_CONFIG, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().put(`/formulas/${formulaId}/configuration/1`, DEFAULT_CONFIG, insufficientPrivilegesValidator))
+        .then(() => cloudWithUser().delete(`/formulas/${formulaId}/configuration/1`, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('editFormulas'))
         .then(() => cloudWithUser().put(`/formulas/${formulaId}`, DEFAULT_FORMULA))
         .then(() => cloudWithUser().patch(`/formulas/${formulaId}`, DEFAULT_FORMULA))
+        .then(() => cloudWithUser().put(`/formulas/${formulaId}/upgrade/v3`, DEFAULT_FORMULA))
+        .then(() => cloudWithUser().delete(`/formulas/${formulaId}/upgrade/v3`, DEFAULT_FORMULA))
+        .then(() => cloudWithUser().post(`/formulas/${formulaId}/triggers`, DEFAULT_TRIGGER))
+        .then(t => cloudWithUser().put(`/formulas/${formulaId}/triggers/${t.body.id}`, DEFAULT_TRIGGER))
+        .then(t => cloudWithUser().delete(`/formulas/${formulaId}/triggers/${t.body.id}`))
+        .then(() => cloudWithUser().post(`/formulas/${formulaId}/steps`, DEFAULT_STEP))
+        .then(s => cloudWithUser().put(`/formulas/${formulaId}/steps/${s.body.id}`, DEFAULT_STEP))
+        .then(s => cloudWithUser().delete(`/formulas/${formulaId}/steps/${s.body.id}`))
+        .then(() => cloudWithUser().post(`/formulas/${formulaId}/configuration`, DEFAULT_CONFIG))
+        .then(c => cloudWithUser().put(`/formulas/${formulaId}/configuration/${c.body.id}`, DEFAULT_CONFIG))
+        .then(c => cloudWithUser().delete(`/formulas/${formulaId}/configuration/${c.body.id}`))
         .then(() => removePrivilegeIfNecessary('createFormulaInstances'))
         .then(() => cloudWithUser().post(`/formulas/${formulaId}/instances`, DEFAULT_FORMULA_INSTANCE, insufficientPrivilegesValidator))
+        .then(fi => cloudWithUser().put(`/formulas/${formulaId}/instances/1`, DEFAULT_FORMULA_INSTANCE, insufficientPrivilegesValidator))
+        .then(fi => cloudWithUser().delete(`/formulas/${formulaId}/instances/1/active`, insufficientPrivilegesValidator))
+        .then(fi => cloudWithUser().put(`/formulas/${formulaId}/instances/1/active`, null, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('createFormulaInstances'))
         .then(() => cloudWithUser().post(`/formulas/${formulaId}/instances`, DEFAULT_FORMULA_INSTANCE))
+        .then(fi => formulaInstanceId = fi.body.id)
+
+        .then(() => cloudWithUser().put(`/formulas/${formulaId}/instances/${formulaInstanceId}`, DEFAULT_FORMULA_INSTANCE))
+        .then(() => cloudWithUser().delete(`/formulas/${formulaId}/instances/${formulaInstanceId}/active`))
+        .then(() => cloudWithUser().put(`/formulas/${formulaId}/instances/${formulaInstanceId}/active`, null))
+        
         .then(() => removePrivilegeIfNecessary('deleteFormulas'))
         .then(() => cloudWithUser().delete(`/formulas/${formulaId}`, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('deleteFormulas'))
@@ -237,7 +299,7 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
         //TODO - this fails bc I dont own this element - fix bug
         // .then(() => cloudWithUser().withOptions(opts).get(`/elements/${elementKeyOrId}/parameters`));
         ;
-    }
+    };
 
     const runCUDElementTests = keyOrId => {
       let elementKeyOrId, elementInstanceId, cloneId, resourceId;
