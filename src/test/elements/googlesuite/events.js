@@ -12,13 +12,13 @@ suite.forElement('general', 'calendars', { payload: payload }, (test) => {
   before(() => cloud.post(test.api, calendarsPayload)
   .then(r => calendarId = r.body.id));
 
-  it('should test CRUDS of  events', () => {
+  it('should test CRUDS of / events', () => {
   return cloud.cruds(`${test.api}/${calendarId}/events`, payload);
   });
 
   test.withApi(`${test.api}/primary/events`).should.supportNextPagePagination(1);
 
-  it('should test where for events', () => {
+  it('should test where for /events', () => {
          return cloud.withOptions({ qs: { where : `maxAttendees=1` } }).get(`${test.api}/${calendarId}/events`);
       //There are no events exist for newly created calendar
 	  /*.then(r => {

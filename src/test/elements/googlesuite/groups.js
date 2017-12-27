@@ -18,7 +18,7 @@ suite.forElement('general', 'groups', { payload: payload }, (test) => {
  
 
   let groupId;
-  it('should test CRUDS of  groups', () => {
+  it('should test CRUDS of  /groups', () => {
   return cloud.get(test.api)
    .then(r => cloud.post(test.api, payload))
    .then(r => {

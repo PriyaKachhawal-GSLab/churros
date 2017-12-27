@@ -12,12 +12,12 @@ suite.forElement('general', 'calendars', { payload: payload }, (test) => {
   before(() => cloud.post(test.api, calendarsPayload)
   .then(r => calendarId = r.body.id));
 
-  it('should test CRUDS of  access-control-list', () => {
+  it('should test CRUDS of  /access-control-list', () => {
   return cloud.cruds(`${test.api}/${calendarId}/access-control-list`, payload);
   });
 
 
-  it('should test where for access-control-list', () => {
+  it('should test where for /access-control-list', () => {
          return cloud.withOptions({ qs: { where : `showDeleted='true'` } }).get(`${test.api}/${calendarId}/access-control-list`)
       .then(r => {
            expect(r.body.length).to.not.be.empty;

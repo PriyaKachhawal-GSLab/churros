@@ -8,7 +8,7 @@ const payload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
 
 suite.forElement('general', 'contacts', { payload: payload }, (test) => {
   let contactId;
-  it('should test CRUDS of  contacts', () => {
+  it('should test CRUDS of  /contacts', () => {
   return cloud.get(test.api)
    .then(r => cloud.post(test.api, payload))
    .then(r => {
