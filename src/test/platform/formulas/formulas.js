@@ -33,9 +33,9 @@ suite.forPlatform('formulas', opts, (test) => {
     }];
     const validateResults = (formulaId, formulas) => {
       formulas.filter(formula => formula.id === formulaId).forEach(formula => {
-          expect(formula).to.contain.key('name');
-          expect(formula).to.contain.key('triggers');
-          expect(formula).to.not.contain.key('steps');
+        expect(formula).to.contain.key('name');
+        expect(formula).to.contain.key('triggers');
+        expect(formula).to.not.contain.key('steps');
       });
     };
 
@@ -204,8 +204,7 @@ suite.forPlatform('formulas', opts, (test) => {
     f.steps = [{
       "name": "unsupported-by-bode",
       "type": "java",
-      "properties": {
-      }
+      "properties": {}
     }];
     f.engine = 'v3';
 
@@ -236,7 +235,7 @@ suite.forPlatform('formulas', opts, (test) => {
 
       const retrieve = formula.steps.filter(s => s.name === 'retrieve_contact')[0];
       expect(retrieve.properties.api).to.equal('/hubs/crm/contacts/${steps.looper.entry}');
-      expect(retrieve.properties.path).to.equal(undefined);      
+      expect(retrieve.properties.path).to.equal(undefined);
     };
 
     const validatorRollback = (formula) => {
@@ -313,6 +312,78 @@ suite.forPlatform('formulas', opts, (test) => {
       .then(() => cloud.patch(`${test.api}/${formulaId}`, { name: `<a href="#" onClick="javascript:alert(\'xss\');return false;">${patchName}</a>` }))
       .then(r => expect(r.body.name).to.equal(patchName))
       .then(() => cloud.delete(`${test.api}/${formulaId}`))
+      .catch(e => {
+        if (formulaId) cloud.delete(`${test.api}/${formulaId}`);
+        throw new Error(e);
+      });
+  });
+
+  it('should allow creating a v3 formula with debug logging off', () => {
+    let formulaId;
+    const f = common.genFormula({});
+
+    f.engine = 'v3';
+    f.debugLoggingEnabled = false;
+    return cloud.post(test.api, f, schema)
+      .then(r => formulaId = r.body.id)
+      .then(r => cloud.delete(`${test.api}/${formulaId}`))
+      .catch(e => {
+        if (formulaId) {
+          cloud.delete(`${test.api}/${formulaId}`);
+        }
+        throw new Error(e);
+      });
+  });
+
+  it('should not allow creating a non-v3 formula with debug logging off', () => {
+    const f = common.genFormula({});
+
+    f.debugLoggingEnabled = false;
+    return cloud.post(test.api, f, (r) => {
+      expect(r).to.have.statusCode(400);
+      expect(r.body.message).to.contain('Execution debug log cannot be disabled for formula engine v2 or lower');
+    });
+  });
+
+  it('should allow PATCHing a v3 formula to switch off debug logging', () => {
+    const f = common.genFormula({});
+
+    f.engine = 'v3';
+
+    const patchBody = {
+      debugLoggingEnabled: false
+    };
+
+    let formulaId;
+    return cloud.post(test.api, f, schema)
+      .then(r => { expect(r.body.debugLoggingEnabled).to.equal(true);
+        formulaId = r.body.id; })
+      .then(r => cloud.patch(`${test.api}/${formulaId}`, patchBody))
+      .then(r => expect(r.body.debugLoggingEnabled).to.equal(false))
+      .then(r => cloud.delete(`${test.api}/${formulaId}`))
+      .catch(e => {
+        if (formulaId) cloud.delete(`${test.api}/${formulaId}`);
+        throw new Error(e);
+      });
+  });
+
+  it('should not allow PATCHing a non-v3 formula to switch off debug logging', () => {
+    const f = common.genFormula({});
+
+    const patchBody = {
+      debugLoggingEnabled: false
+    };
+
+    let formulaId;
+    return cloud.post(test.api, f, schema)
+      .then(r => { expect(r.body.debugLoggingEnabled).to.equal(true);
+        formulaId = r.body.id; })
+      .then(r => cloud.patch(`${test.api}/${formulaId}`, patchBody, (r) => {
+        expect(r).to.have.statusCode(400);
+        expect(r.body.message).to.contain('Execution debug log cannot be disabled for formula engine ' +
+          'v2 or lower');
+      }))
+      .then(r => cloud.delete(`${test.api}/${formulaId}`))
       .catch(e => {
         if (formulaId) cloud.delete(`${test.api}/${formulaId}`);
         throw new Error(e);
