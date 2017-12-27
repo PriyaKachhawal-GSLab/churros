@@ -77,4 +77,21 @@ suite.forElement('documents', 'folders', (test) => {
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
 
+  it('should allow GET /folders/contents for root folder', () => {
+    let path = "/";
+    let query = { path: path };
+    return cloud.withOptions({ qs: query }).get("/hubs/documents/folders/contents")
+      .then(r => {
+        expect(r).to.have.statusCode(200);
+      });
+  });
+
+  it('should allow GET /folders/contents for Documents folder', () => {
+    let path = "/Documents";
+    let query = { path: path };
+    return cloud.withOptions({ qs: query }).get("/hubs/documents/folders/contents")
+      .then(r => {
+        expect(r).to.have.statusCode(200);
+      });
+  });
 });
