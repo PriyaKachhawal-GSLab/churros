@@ -94,4 +94,20 @@ suite.forElement('documents', 'folders', (test) => {
         expect(r).to.have.statusCode(200);
       });
   });
+
+  it('should allow GET /folders/contents', () => {
+    return cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
+      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.directory === true || obj.directory === false).length));
+  });
+
+  it('should allow GET /folders/contents with name', () => {
+    return cloud.withOptions({ qs: { path: `/`, where: "name='DONT_DELETE_churros'" } }).get(`${test.api}/contents`)
+      .then(r => expect(r.body[0].name).to.contain('DONT_DELETE_churros'));
+  });
+
+  it('should allow GET /folders/contents with extension', () => {
+    return cloud.withOptions({ qs: { path: `/`, where: "extension='.csv'" } }).get(`${test.api}/contents`)
+      .then(r => expect(r.body[0].name).to.contain('.csv'));
+  });
+
 });
