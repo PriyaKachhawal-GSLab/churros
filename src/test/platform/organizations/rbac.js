@@ -192,11 +192,9 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
         .then(() => addPrivilegeIfNecessary('createFormulaInstances'))
         .then(() => cloudWithUser().post(`/formulas/${formulaId}/instances`, DEFAULT_FORMULA_INSTANCE))
         .then(fi => formulaInstanceId = fi.body.id)
-
         .then(() => cloudWithUser().put(`/formulas/${formulaId}/instances/${formulaInstanceId}`, DEFAULT_FORMULA_INSTANCE))
         .then(() => cloudWithUser().delete(`/formulas/${formulaId}/instances/${formulaInstanceId}/active`))
         .then(() => cloudWithUser().put(`/formulas/${formulaId}/instances/${formulaInstanceId}/active`, null))
-        
         .then(() => removePrivilegeIfNecessary('deleteFormulas'))
         .then(() => cloudWithUser().delete(`/formulas/${formulaId}`, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('deleteFormulas'))
@@ -296,7 +294,7 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
         .then(() => cloudWithUser().withOptions(opts).get(`/elements/${elementKeyOrId}/resources/${resourceId}/models`))
         .then(() => cloudWithUser().withOptions(opts).get(`/elements/${elementKeyOrId}/hooks`))
         .then(hs => cloudWithUser().withOptions(opts).get(`/elements/${elementKeyOrId}/hooks/123`, sufficientPrivilegesValidator))
-        //TODO - this fails bc I dont own this element - fix bug
+        //TODO - this fails bc I dont own this element - this may or may not be a bug
         // .then(() => cloudWithUser().withOptions(opts).get(`/elements/${elementKeyOrId}/parameters`));
         ;
     };
