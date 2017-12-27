@@ -88,6 +88,11 @@ suite.forElement('documents', 'files', null, (test) => {
       "value": "madhuri",
       "scope": "enterprise"
     };
+    let templateKeyPayload = {
+      "path": "/" + temPayload.fields[0].key,
+      "value": "madhuri",
+      "scope": "enterprise"
+    };
 
     let path = __dirname + '/../assets/brady.jpg';
     let query1 = { path: `/brady-${faker.address.zipCode()}.jpg` };
@@ -104,7 +109,7 @@ suite.forElement('documents', 'files', null, (test) => {
       .then(r => cloud.put(`/hubs/documents/files/${fileId1}/custom-fields`, updatePayload))
       .then(r => cloud.patch(`/hubs/documents/files/${fileId1}/custom-fields`, updatePayload))
       .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).get(`/hubs/documents/files/${fileId1}/custom-fields/${tempKey}`))
-      .then(r => cloud.patch(`/hubs/documents/files/${fileId1}/custom-fields/${tempKey}`, updatePayload))
+      .then(r => cloud.patch(`/hubs/documents/files/${fileId1}/custom-fields/${tempKey}`, templateKeyPayload))
       .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).delete(`/hubs/documents/files/${fileId1}/custom-fields/${tempKey}`))
       .then(r => cloud.delete('/hubs/documents/files/' + fileId1));
 
