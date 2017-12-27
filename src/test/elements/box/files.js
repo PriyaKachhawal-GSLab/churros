@@ -19,6 +19,7 @@ suite.forElement('documents', 'files', null, (test) => {
     //We were getting a 429 before this
     setTimeout(done, 2500);
   });
+
   it('should allow PUT /files/:id/lock and DELETE /files/:id/lock', () => {
     let fileId;
     let path = __dirname + '/../assets/brady.jpg';
@@ -115,4 +116,29 @@ suite.forElement('documents', 'files', null, (test) => {
 
   });
 
+  /**
+  * /files/revisions endpoint doesn't return current revision. 
+  * While we don't offer the POST /revisions endpoint we'll need to hardcode the file data
+  */
+  it('it should allow RS for documents/files/:id/revisions', () => {
+    const fileId = 158316363797;
+    let revisionId;
+    return cloud.get(`${test.api}/${fileId}/revisions`)
+      .then(r => {
+          expect(r.body[0]).to.contain.key('id');
+          revisionId = r.body[0].id;
+      })
+      .then(() => cloud.get(`${test.api}/${fileId}/revisions/${revisionId}`));
+  });
+
+  it('it should allow RS for documents/files/revisions by path', () => {
+    let options = {qs:{path: '/TestFolderDoNoDelete/Sample WordDoc.docx'}};
+    let revisionId;
+      return cloud.withOptions(options).get(`${test.api}/revisions`)
+        .then(r => {
+            expect(r.body[0]).to.contain.key('id');
+            revisionId = r.body[0].id;
+        })
+        .then(() => cloud.withOptions(options).get(`${test.api}/revisions/${revisionId}`));
+  }); 
 });
