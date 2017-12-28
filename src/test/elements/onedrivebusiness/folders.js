@@ -91,7 +91,7 @@ let folderId;
       .then(r => {
         expect(r.body.length).to.equal(r.body.filter(obj => obj.directory === true || obj.directory === false).length);
         folderId = r.body.filter(obj => obj.name === "dontdelete_folder_churros")[0].id;
-      })
+      });
   });
 
   it('should allow GET /folders/contents with name', () => {
