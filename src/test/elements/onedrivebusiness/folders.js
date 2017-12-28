@@ -4,6 +4,7 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const payload = require('./assets/folders');
+const expect = require('chakram').expect;
 const build = (overrides) => Object.assign({}, payload, overrides);
 const folderPayload = build({ name: `churros-${tools.random()}`, path: `/${tools.random()}` });
 const folderPayload1 = build({ name: `churros-${tools.random()}`, path: `/${tools.random()}/${tools.random()}` });
@@ -83,6 +84,21 @@ suite.forElement('documents', 'folders', (test) => {
     };
 
     return folderWrap(cb);
+  });
+
+  it('should allow GET /folders/contents', () => {
+    return cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
+      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.directory === true || obj.directory === false).length));
+  });
+
+  it('should allow GET /folders/contents with name', () => {
+    return cloud.withOptions({ qs: { path: `/`, where: "name='donotdelete_text_churros'" } }).get(`${test.api}/contents`)
+      .then(r => expect(r.body[0].name).to.contain('donotdelete_text_churros'));
+  });
+
+  it('should allow GET /folders/contents with extension', () => {
+    return cloud.withOptions({ qs: { path: `/`, where: "extension='.txt'" } }).get(`${test.api}/contents`)
+      .then(r => expect(r.body[0].name).to.contain('.txt'));
   });
 
 });
