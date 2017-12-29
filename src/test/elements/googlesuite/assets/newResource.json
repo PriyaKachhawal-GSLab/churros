@@ -13,7 +13,8 @@
   },
   "ownerAccountId": 218,
   "hooks": [],
-  "parameters": [{
+  "parameters": [
+    {
       "vendorType": "query",
       "converter": "toQueryParameters",
       "dataType": "string",

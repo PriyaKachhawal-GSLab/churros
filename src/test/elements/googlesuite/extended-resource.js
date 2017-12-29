@@ -16,7 +16,7 @@ suite.forElement('general', 'extended-resource', {}, (test) => {
   after(() => cloud.delete(`elements/googlesuite/resources/${newResourceId}`));
 
   it('should test newly added account resource extended-resource', () => {
-      return cloud.get(`extended-resource`)
+    return cloud.get(`extended-resource`)
       .then(r => {
         expect(r.body).to.not.be.empty;
       });

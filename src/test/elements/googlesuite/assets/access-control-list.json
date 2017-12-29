@@ -1,6 +1,6 @@
 {
- "role": "none",
- "scope": {
-   "type": "default"
- }
+  "role": "none",
+  "scope": {
+    "type": "default"
+  }
 }

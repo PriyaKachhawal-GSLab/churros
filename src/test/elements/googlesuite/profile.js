@@ -2,7 +2,7 @@
 
 const suite = require('core/suite');
 
-suite.forElement('general', 'profile', null , (test) => {
- 
+suite.forElement('general', 'profile', null, (test) => {
+
 	test.should.return200OnGet();
 });

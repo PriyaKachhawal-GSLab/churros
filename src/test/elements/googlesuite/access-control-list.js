@@ -10,19 +10,19 @@ const calendarsPayload = tools.requirePayload(`${__dirname}/assets/calendars.jso
 suite.forElement('general', 'calendars', { payload: payload }, (test) => {
   let calendarId;
   before(() => cloud.post(test.api, calendarsPayload)
-  .then(r => calendarId = r.body.id));
+    .then(r => calendarId = r.body.id));
 
   it('should test CRUDS of  /access-control-list', () => {
-  return cloud.cruds(`${test.api}/${calendarId}/access-control-list`, payload);
+    return cloud.cruds(`${test.api}/${calendarId}/access-control-list`, payload);
   });
 
 
   it('should test where for /access-control-list', () => {
-         return cloud.withOptions({ qs: { where : `showDeleted='true'` } }).get(`${test.api}/${calendarId}/access-control-list`)
+    return cloud.withOptions({ qs: { where: `showDeleted='true'` } }).get(`${test.api}/${calendarId}/access-control-list`)
       .then(r => {
-           expect(r.body.length).to.not.be.empty;
+        expect(r.body.length).to.not.be.empty;
       });
-  });	   
- 
+  });
+
   after(() => cloud.delete(`${test.api}/${calendarId}`));
 });

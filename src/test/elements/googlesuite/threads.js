@@ -3,14 +3,14 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 
-suite.forElement('general', 'threads', null , (test) => {
+suite.forElement('general', 'threads', null, (test) => {
 
   let threadId;
   it('should test SRD /threads', () => {
-  return cloud.get(test.api)
-   .then(r => threadId = r.body[0].id)
-   .then(r => cloud.get(`${test.api}/${threadId}`))
-   .then(r => cloud.delete(`${test.api}/${threadId}`));
+    return cloud.get(test.api)
+      .then(r => threadId = r.body[0].id)
+      .then(r => cloud.get(`${test.api}/${threadId}`))
+      .then(r => cloud.delete(`${test.api}/${threadId}`));
   });
 
   test.withApi(test.api).should.supportNextPagePagination(1);

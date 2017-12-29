@@ -1,7 +1,7 @@
 {
-"emailAddresses": [
+  "emailAddresses": [
     {
-      "value":"<<internet.email>>"
+      "value": "<<internet.email>>"
     }
   ]
 }
