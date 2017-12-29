@@ -84,7 +84,6 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
       .then(r => cloud.delete('/organizations/objects/churrosTestObject/definitions'));
   });
 });
-// This is Skipped as we do not have any activities in our account
 suite.forElement('crm', `contacts/${contactsId}/activities`, { payload: payload }, (test) => {
   test.should.supportPagination();
 });
