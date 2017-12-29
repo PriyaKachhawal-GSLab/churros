@@ -12,7 +12,7 @@ suite.forElement('general', 'messages', { payload: payload } , (test) => {
    .then(r => messageId = r.body.id)
    .then(r => cloud.get(test.api))
    .then(r => cloud.get(`${test.api}/${messageId}`))
-   .then(r => cloud.post(`${test.api}/${messageId}/trash`, null));
+   .then(r => cloud.delete(`${test.api}/${messageId}`));
   });
 
   test.withApi(test.api).should.supportNextPagePagination(1);

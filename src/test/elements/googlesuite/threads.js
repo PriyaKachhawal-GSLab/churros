@@ -10,7 +10,7 @@ suite.forElement('general', 'threads', null , (test) => {
   return cloud.get(test.api)
    .then(r => threadId = r.body[0].id)
    .then(r => cloud.get(`${test.api}/${threadId}`))
-   .then(r => cloud.post(`${test.api}/${threadId}/trash`, null));
+   .then(r => cloud.delete(`${test.api}/${threadId}`));
   });
 
   test.withApi(test.api).should.supportNextPagePagination(1);
