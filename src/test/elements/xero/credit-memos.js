@@ -23,24 +23,24 @@ suite.forElement('finance', 'credit-memos', (test) => {
       .then(() => cloud.delete(`/contacts/${contactId}`));
     };
 
-    // it('should support CRUDS for /credit-memos', () => {
-    //   const cb = (contactId) => {
-    //     let creditMemoPayload = tools.requirePayload(`${__dirname}/assets/credit-memo.json`);
-    //     let creditMemoUpdate = {Reference: lorem.words()};
-    //     creditMemoPayload.Contact.ContactID = contactId;
+    it('should support CRUDS for /credit-memos', () => {
+      const cb = (contactId) => {
+        let creditMemoPayload = tools.requirePayload(`${__dirname}/assets/credit-memo.json`);
+        let creditMemoUpdate = {Reference: lorem.words()};
+        creditMemoPayload.Contact.ContactID = contactId;
         
-    //     return cloud.post(test.api, creditMemoPayload)
-    //       .then((r) => cloud.get(`${test.api}/${r.body.CreditNoteID}`))
-    //       .then((r) => cloud.patch(`${test.api}/${r.body.CreditNoteID}`, creditMemoUpdate))
-    //       .then((r) => expect(r.body.Reference).to.equal(creditMemoUpdate.Reference))
-    //       .then(() => cloud.withOptions({qs:{where: `Reference='${creditMemoUpdate.Reference}'`}}).get(test.api))
-    //       .then((r) => {
-    //         expect(r.body.length).to.equal(1);
-    //         cloud.delete(`${test.api}/${r.body[0].CreditNoteID}`);
-    //       });
-    //     };
-    //     return contactWrap(cb);
-    // });
+        return cloud.post(test.api, creditMemoPayload)
+          .then((r) => cloud.get(`${test.api}/${r.body.CreditNoteID}`))
+          .then((r) => cloud.patch(`${test.api}/${r.body.CreditNoteID}`, creditMemoUpdate))
+          .then((r) => expect(r.body.Reference).to.equal(creditMemoUpdate.Reference))
+          .then(() => cloud.withOptions({qs:{where: `Reference='${creditMemoUpdate.Reference}'`}}).get(test.api))
+          .then((r) => {
+            expect(r.body.length).to.equal(1);
+            cloud.delete(`${test.api}/${r.body[0].CreditNoteID}`);
+          });
+        };
+        return contactWrap(cb);
+    });
 
     it('should support POST /credit-memos/:id/allocations', () => {
       const cb = (contactId) => {
