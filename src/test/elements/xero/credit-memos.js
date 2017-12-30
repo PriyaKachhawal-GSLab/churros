@@ -57,7 +57,6 @@ suite.forElement('finance', 'credit-memos', (test) => {
           .then(() => {
             payload.Invoice.InvoiceID = invoiceId;
             payload.Date = Date.now();
-            console.log(JSON.stringify(payload))
           })
           .then(() => cloud.post(`${test.api}/${creditMemoId}/allocations`, payload));
       };
