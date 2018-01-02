@@ -68,5 +68,26 @@
       "path": "id",
       "vendorPath": "TxnID"
     }]
+  },
+  "creditcard-charges": {
+    "vendorName": "CreditCardCharge",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "TxnID"
+    }]
+  },
+  "vendor-credits": {
+    "vendorName": "VendorCredit",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "TxnID"
+    }]
+  },
+  "creditcard-credits": {
+    "vendorName": "CreditCardCredit",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "TxnID"
+    }]
   }
 }
