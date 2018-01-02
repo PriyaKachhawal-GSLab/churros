@@ -11,7 +11,7 @@ const logger = require('core/logger')(argv.verbose ? 'silly' : 'info');
 
 let config;
 try {
-  config = require(process.env.HOME || process.env.USERPROFILE + '/.churros/sauce.json');
+  config = require( process.env.HOME || process.env.USERPROFILE + '/.churros/sauce.json');
 } catch (e) {
   console.log('No properties found.  Make sure to run \'churros init\' first.');
   process.exit(1);
