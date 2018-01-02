@@ -21,7 +21,7 @@ const createLibraryDocuments = (transientDocumentId) => ({
   }
 });
 
-suite.forElement('esignature', 'library-documents', {skip: true}, (test) => {
+suite.forElement('esignature', 'library-documents', (test) => {
   /*
   // Commented the POST for this resource to avoid creation of new Library Documents, since the code
   // might break for GET /libraryDocuments due to time-out. Also there is no DELETE API for libraryDocuments

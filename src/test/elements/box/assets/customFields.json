@@ -1,4 +1,4 @@
 {
-"template" :"random.word",
-"scope":"enterprise"
+"scope":"enterprise",
+"template":"customer"
 }

@@ -66,7 +66,7 @@
     "vendorName": "activitypointer",
     "fields": [{
       "path": "id",
-      "vendorPath": "attributes.activitypointerid"
+      "vendorPath": "attributes.activityid"
     }]
   },
   "tasks": {

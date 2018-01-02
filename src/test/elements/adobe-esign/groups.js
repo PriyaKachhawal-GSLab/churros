@@ -9,7 +9,7 @@ const group = () => ({
   groupName: tools.random()
 });
 
-suite.forElement('esignature', 'groups', { payload: group(), skip: true }, (test) => {
+suite.forElement('esignature', 'groups', { payload: group()}, (test) => {
   test.should.supportCruds(chakram.put);
   it(`should allow GET for ${test.api}/{groupId}/users`, () => {
     let groupId;

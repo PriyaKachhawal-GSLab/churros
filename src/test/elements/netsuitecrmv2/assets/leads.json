@@ -29,7 +29,7 @@
     "name": "Honeycomb Mfg."
   },
   "shipComplete": false,
-  "phone": "<<phone.phoneNumber>>",
+  "phone": "<<random.singleNumber##20>>",
   "entityStatus": {
     "internalId": "6",
     "name": "LEAD-New"

@@ -1,5 +1,4 @@
 {
-  "customer": {
-      "name": "qwertylkb"
-  }
+  "name": "<<name.firstName>><<name.lastName>>",
+  "description": "<<random.words>>"
 }

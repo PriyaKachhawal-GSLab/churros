@@ -8,7 +8,7 @@ suite.forElement('payment', 'transactions', (test) => {
   it(`should allow GET for ${test.api}/{transactionId}`, () => {
     let transactionId;
     return cloud.get(`${test.api}`)
-      .then(r => transactionId = r.body[0].transaction.id)
+      .then(r => transactionId = r.body[0].id)
       .then(r => cloud.get(`${test.api}/${transactionId}`));
   });
 });

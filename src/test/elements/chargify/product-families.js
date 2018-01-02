@@ -18,7 +18,7 @@ suite.forElement('payment', 'product-families', (test) => {
     let productFamilyId;
     return cloud.post(test.api, payload)
       .then(r => cloud.get(test.api))
-      .then(r => productFamilyId = r.body[0].product_family.id)
+      .then(r => productFamilyId = r.body[0].id)
       .then(r => cloud.get(`${test.api}/${productFamilyId}`))
       .then(r => cloud.post(`${test.api}/${productFamilyId}/products`, updatePayload));
   });

@@ -24,7 +24,7 @@
     "vendorName": "campaign",
     "fields": [{
       "path": "id",
-      "vendorPath": "activities"
+      "vendorPath": "id"
     }]
   },
   "eloquaCustomObject": {

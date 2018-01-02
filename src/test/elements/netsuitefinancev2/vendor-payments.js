@@ -5,6 +5,6 @@ const payload = require('./assets/vendor-payments');
 
 suite.forElement('finance', 'vendor-payments', { payload: payload }, (test) => {
   	test.should.supportCruds();
-	  test.withOptions({ qs: { page: 1, pageSize: 5}}).should.return200OnGet();
+	  test.withOptions({ qs: { page: 1, pageSize: 5}}).should.supportPagination('id');
   	test.should.supportCeqlSearch('id');
 });

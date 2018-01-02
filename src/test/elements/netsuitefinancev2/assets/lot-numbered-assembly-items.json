@@ -64,7 +64,7 @@
     "internalId": "121",
     "name": "Cost of Goods Sold"
   },
-  "itemId": "<<random.words>>",
+  "itemId": "<<random.letter##25>>",
   "isDonationItem": false,
   "onSpecial": false,
   "effectiveBomControl": {
@@ -83,7 +83,7 @@
         }
       }
     ],
-    "replaceAll": false
+    "replaceAll": true
   },
   "matchBillToReceipt": false,
   "overallQuantityPricingType": {
@@ -144,76 +144,6 @@
       {
         "quantityAvailable": 0,
         "locationId": {
-          "internalId": "2"
-        },
-        "supplyType": {
-          "internalId": "BUILD",
-          "name": "Build"
-        },
-        "isWip": false,
-        "location": "2",
-        "costingLotSize": 1,
-        "location_display": "01: San Francisco"
-      },
-      {
-        "quantityAvailable": 0,
-        "locationId": {
-          "internalId": "5"
-        },
-        "supplyType": {
-          "internalId": "BUILD",
-          "name": "Build"
-        },
-        "isWip": false,
-        "location": "5",
-        "costingLotSize": 1,
-        "location_display": "01: San Francisco : QA Hold"
-      },
-      {
-        "quantityAvailable": 0,
-        "locationId": {
-          "internalId": "4"
-        },
-        "supplyType": {
-          "internalId": "BUILD",
-          "name": "Build"
-        },
-        "isWip": false,
-        "location": "4",
-        "costingLotSize": 1,
-        "location_display": "01: San Francisco : Receiving Insp."
-      },
-      {
-        "quantityAvailable": 0,
-        "locationId": {
-          "internalId": "1"
-        },
-        "supplyType": {
-          "internalId": "BUILD",
-          "name": "Build"
-        },
-        "isWip": false,
-        "location": "1",
-        "costingLotSize": 1,
-        "location_display": "02: Boston"
-      },
-      {
-        "quantityAvailable": 0,
-        "locationId": {
-          "internalId": "3"
-        },
-        "supplyType": {
-          "internalId": "BUILD",
-          "name": "Build"
-        },
-        "isWip": false,
-        "location": "3",
-        "costingLotSize": 1,
-        "location_display": "02: Boston : Overstock"
-      },
-      {
-        "quantityAvailable": 0,
-        "locationId": {
           "internalId": "6"
         },
         "supplyType": {
@@ -224,20 +154,6 @@
         "location": "6",
         "costingLotSize": 1,
         "location_display": "Denver"
-      },
-      {
-        "quantityAvailable": 0,
-        "locationId": {
-          "internalId": "11"
-        },
-        "supplyType": {
-          "internalId": "BUILD",
-          "name": "Build"
-        },
-        "isWip": false,
-        "location": "11",
-        "costingLotSize": 1,
-        "location_display": "Denver : 1"
       },
       {
         "quantityAvailable": 0,

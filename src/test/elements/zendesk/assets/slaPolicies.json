@@ -1,0 +1,13 @@
+{
+  "filter": {
+     "all": [
+       {
+         "field": "ticket_type_id",
+         "value": 2,
+         "operator": "is"
+       }
+     ],
+     "any": []
+   },
+   "title":"<<random.word>>"
+}

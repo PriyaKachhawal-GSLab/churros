@@ -1,5 +1,5 @@
 {
-    "docNumber": "<<random.word>><<random.word>>",
+    "docNumber": "<<random.alphaNumeric##20>>",
     "line": [
       {
         "detailType": "SALES_ITEM_LINE_DETAIL",

@@ -24,11 +24,11 @@ module.exports = (element, method) => {
       browser.findElement(webdriver.By.id('pwd')).submit();
       browser.sleep(3000);
       browser.findElement(webdriver.By.xpath('//*[@id="trow"]/td[1]/a'))
-      .then(el => el.click(), (err) => {});
+      .then(el => el.click().catch(() => {}), (err) => {});
       browser.findElement(webdriver.By.xpath('//*[@id="headerdiv"]/div'))
-      .then(el => el.click(), (err) => {});
+      .then(el => el.click().catch(() => {}), (err) => {});
       browser.findElement(webdriver.By.className('saveBtn'))
-      .then(el => el.click(), (err) => {});
+      .then(el => el.click().catch(() => {}), (err) => {});
       return browser.getCurrentUrl();
 
     default:

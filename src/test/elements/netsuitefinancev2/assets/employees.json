@@ -1,6 +1,6 @@
 {
   "lastName":"<<name.lastName>>",
-  "title":"<<name.jobTitle>>",
+  "title":"ChurrosTitle",
   "employeeStatus":{
     "internalId":"3",
     "name":"Regular - Full Time"
@@ -9,7 +9,7 @@
     "internalId":"1",
     "name":"USA"
   },
-  "email":"<<internet.email>>",
+  "email":"churros-employee@cloud-elements.com",
   "approver":{
     "internalId":"1302",
     "name":"Mark Jones"
@@ -24,7 +24,7 @@
     "internalId":"1",
     "name":"Honeycomb Mfg."
   },
-  "firstName":"churros",
+  "firstName":"<<name.firstName>>",
   "employeeType":{
     "internalId":"1",
     "name":"Officer"

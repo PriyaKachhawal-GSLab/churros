@@ -3,8 +3,7 @@
   "invoice": false,
   "autoRenew": true,
   "contractEffectiveDate": "2016-02-01",
-  "initialTerm": "12",
-  "initialTermPeriodType": "Week",
+  "initialTermPeriodType": "Month",
   "notes": "Test POST subscription from z-ruby-sdk",
   "renewalTerm": "3",
   "renewalTermPeriodType": "Week",
@@ -14,5 +13,5 @@
     }],
     "productRatePlanId": "aeecd727df9818433f0c9cb643e2b642"
   }],
-  "termType": "TERMED"
+  "termType": "EVERGREEN"
 }

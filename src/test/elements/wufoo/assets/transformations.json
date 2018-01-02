@@ -4,7 +4,7 @@
     "fields": [
       {
         "path": "id",
-        "vendorPath": "id"
+        "vendorPath": "Hash"
       }
     ]
   },
@@ -13,7 +13,7 @@
     "fields": [
       {
         "path": "id",
-        "vendorPath": "id"
+        "vendorPath": "Hash"
       }
     ]
   },
@@ -22,7 +22,7 @@
     "fields": [
       {
         "path": "id",
-        "vendorPath": "id"
+        "vendorPath": "Hash"
       }
     ]
   }

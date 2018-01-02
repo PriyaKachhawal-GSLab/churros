@@ -7,19 +7,14 @@ const newResource = require('./assets/newResource.json');
 
 // Test for extending hubspot crm and invoking the extended resource
 suite.forElement('crm', 'contacts-search', {}, (test) => {
-  let newResourceId;
-  // Add resource to
-  before(() => cloud.post(`elements/hubspot/resources`, newResource)
-    .then(r => newResourceId = r.body.id));
-
-  //delete new/overide resource should work fine
-  after(() => cloud.delete(`elements/hubspot/resources/${newResourceId}`));
 
   it('should test newly added account resource contacts-search', () => {
-      const options = { qs: { where: "q='test'" } };
-      return cloud.withOptions(options).get(`contacts-search`)
-      .then(r => {
-        expect(r.body).to.not.be.empty;
-      });
+    const options = { qs: { where: "q='test'" } };
+    let newResourceId;
+    return cloud.post(`elements/hubspot/resources`, newResource)
+      .then(r => newResourceId = r.body.id)
+      .then(r => cloud.withOptions(options).get(test.api))
+      .then(r => expect(r.body.length).to.be.at.least(0))
+      .then(r => cloud.delete(`elements/hubspot/resources/${newResourceId}`));
   });
 });

@@ -6,7 +6,7 @@ const payload = require('./assets/users');
 const tools = require('core/tools');
 const build = (overrides) => Object.assign({}, payload, overrides);
 let email = tools.randomEmail();
-const userPayload = build({ displayName: tools.random(), lastName: tools.random(), emails: [ email ] });
+const userPayload = build({ displayName: tools.random(), lastName: tools.random(), emails: [email] });
 
 suite.forElement('collaboration', 'users', null, (test) => {
   it(`should allow SR for ${test.api} and GET account`, () => {
@@ -17,8 +17,8 @@ suite.forElement('collaboration', 'users', null, (test) => {
       .then(r => userEmail = r.body.emails[0])
       .then(r => cloud.withOptions({ qs: { where: `email='${userEmail}'` } }).get(test.api));
   });
-  //Skipping as there is a Cisco Spark bug with DELETE /users
-  it.skip(`should allow CUD for ${test.api} with admin privileges`, () => {
+
+  it(`should allow CUD for ${test.api} with admin privileges`, () => {
     let updatePayload = (org) => ({
       "displayName": `${tools.random()}-update`,
       "emails": [
@@ -33,5 +33,5 @@ suite.forElement('collaboration', 'users', null, (test) => {
       .then(r => body = r.body)
       .then(r => cloud.put(`${test.api}/${body.id}`, updatePayload(body.orgId)))
       .then(r => cloud.delete(`${test.api}/${body.id}`));
-    });
+  });
 });

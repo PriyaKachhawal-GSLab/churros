@@ -27,5 +27,5 @@ suite.forElement('finance', 'bills', { payload: payload }, (test) => {
       .then(r => cloud.patch(`${test.api}/${id}`, update(editseq, isPaid)))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
-  test.should.supportPagination();
+  test.should.supportNextPagePagination(1);
 });

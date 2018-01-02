@@ -28,10 +28,16 @@ const shipmentsCreate = (addressId, productId) => ({
 const shipmentsUpdate = () => ({
   "comments": "UpdateThis"
 });
-
-suite.forElement('ecommerce', 'orders', { payload: payload, skip: true }, (test) => {
+/*  orders with Sales Tax Calculation set to 'automatic' in Vendor account are not allowed to be deleted
+    Hence skip the tests if Tax calculation = 'automatic' 
+*/
+suite.forElement('ecommerce', 'orders', { payload: payload}, (test) => {
   test.withOptions(options).should.supportCruds();
-  test.withOptions({ qs: { where: 'fetchShippingAddresses=\'true\'' } }).should.return200OnGet();
+  /* updated the where query from  'fetchShippingAddresses=\'true\'' to
+     'email=\'jamesjiffer@jiffylube.org\'' as fetchShippingAddresses field not present in
+    response and vendor response is failing with 504 Gateway Time-out error
+  */
+  test.withOptions({ qs: { where: 'email=\'jamesjiffer@jiffylube.org\'' } }).should.return200OnGet();
   test.withApi(`${test.api}/count`).should.return200OnGet();
   test.withApi(`${test.api}/products/count`).should.return200OnGet();
   test.withApi(`${test.api}/shipments/count`).should.return200OnGet();
@@ -80,6 +86,7 @@ suite.forElement('ecommerce', 'orders', { payload: payload, skip: true }, (test)
       .then(r => cloud.get(`${test.api}/${orderId}/shipments/${shipmentId}`))
       .then(r => cloud.patch(`${test.api}/${orderId}/shipments/${shipmentId}`, shipmentsUpdate()))
       .then(r => cloud.get(`${test.api}/${orderId}/shipments/count`))
+      //For delete orders to be success ,Sales Tax Calculation should be set to 'manual' in the vendor account
       .then(r => cloud.delete(`${test.api}/${orderId}/shipments/${shipmentId}`));
   });
   after(() => cloud.delete(`${test.api}/${orderId}`));

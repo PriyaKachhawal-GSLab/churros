@@ -4,8 +4,9 @@ const expect = require('chakram').expect;
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const suite = require('core/suite');
+const props = require('core/props');
 const folderPayload = require('./assets/folders');
-const memberId = "dbmid:AACFP-SOix67cparXiV_EkV-dwqL1zPORi8";
+let memberId = props.getForKey('dropboxbusiness', 'username');
 exports.all = () => {
   exports.files();
   exports.folders();

@@ -3,7 +3,7 @@
   "alias": "alias",
   "created_at": "2016-08-09T20:12:22.707Z",
   "details": "this is details",
-  "email": "test_user@cloud-elements.com",
+  "email": "<<internet.email>>",
   "last_login_at": "2016-08-09T20:12:22.707Z",
   "moderator": true,
   "name": "Zendesk",

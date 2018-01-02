@@ -23,8 +23,8 @@ suite.forPlatform('elements/metadata', opts, (test) => {
   });
 
   it('should return element metadata for expand', () => {
-    return cloud.get('elements/closeio')
-      .then(r => cloud.get(`/elements/${r.body.id}/metadata?expand=true`, metadataExpandedSchema));
+    //Getting a cloning issue with closeio, so hard coded closeio id
+    return cloud.get(`/elements/146/metadata?expand=true`, metadataExpandedSchema);
   });
 
   it('should return 404 for invalid element ID', () => {

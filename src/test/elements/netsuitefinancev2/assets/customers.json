@@ -1,5 +1,5 @@
 {
-  "lastName":"El Chappo",
+  "lastName":"<<name.lastName>>",
   "companyName":"Churros Company",
   "isPerson":true,
   "subsidiary":{

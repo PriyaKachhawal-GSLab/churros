@@ -3,7 +3,7 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 
-suite.forElement('marketing', 'tagTypes', { skip: true }, (test) => {
+suite.forElement('marketing', 'tagTypes', { skip: false }, (test) => {
   let tagType;
   test.should.supportPagination();
   it('should allow Sr for Tagtypes ', () => {

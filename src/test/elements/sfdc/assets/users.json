@@ -2,7 +2,7 @@
     "email": "<<internet.email>>",
     "Username": "<<internet.email>>",
     "LastName": "<<name.lastName>>",
-    "Alias": "rb",
+    "Alias": "CHURROS",
     "TimeZoneSidKey": "America/Denver",
     "LocaleSidKey": "en_US",
     "EmailEncodingKey": "UTF-8",

@@ -13,5 +13,5 @@ suite.forElement('documents', 'search',null, (test) => {
          .withOptions({ qs: { pageSize: 2,page : 501 } })
          .withValidation((r) => expect(r).to.have.statusCode(200))
          .should.return200OnGet();
-     test.should.supportPagination();
+     test.should.supportPagination('id');
 });

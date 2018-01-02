@@ -20,6 +20,13 @@
       "vendorPath": "Code"
     }]
   },
+  "equipment-cards": {
+    "vendorName": "equipmentcards",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "EquipmentCardNum"
+    }]
+  },
   "products": {
     "vendorName": "items",
     "fields": [{

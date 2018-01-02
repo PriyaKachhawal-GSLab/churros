@@ -25,9 +25,10 @@ const createWorkflows = (transientDocumentId) => ({
   }
 });
 
-suite.forElement('esignature', 'workflows', {skip: true}, (test) => {
+suite.forElement('esignature', 'workflows',  (test) => {
   test.should.supportSr();
-  it(`should allow POST for ${test.api}/{workflowId}/agreements`, () => {
+//Need to skip as there is no delete API
+  it.skip(`should allow POST for ${test.api}/{workflowId}/agreements`, () => {
     let workflowId;
     let transientDocumentId;
     return cloud.get(test.api)

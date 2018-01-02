@@ -87,6 +87,17 @@ const generateSfdcEvent = (instanceId, payload) => {
     .post(url, payload);
 };
 
+const generateCloseioPollingEvent = (instanceId, payload) => {
+  const headers = { 'Content-Type': 'application/json', 'Id': instanceId };
+  const encodedId = b64(instanceId.toString());
+
+  payload.instance_id = instanceId;
+
+  return cloud
+    .withOptions({ 'headers': headers })
+    .post('/events/closeioPolling/' + encodedId, payload);
+};
+
 const generateSfdcPollingEvent = (instanceId, payload) => {
   const headers = { 'Content-Type': 'application/json', 'Id': instanceId };
   const encodedId = b64(instanceId.toString());
@@ -242,6 +253,7 @@ module.exports = {
   provisionSfdcWithWebhook,
   generateSfdcEvent,
   generateSfdcPollingEvent,
+  generateCloseioPollingEvent,
   defaultValidator,
   execValidatorWrapper,
   testWrapper,

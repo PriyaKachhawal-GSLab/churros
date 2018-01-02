@@ -1,7 +1,7 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/ledger-accounts');
+const payload = require('core/tools').requirePayload(`${__dirname}/assets/ledger-accounts.json`);
 
 suite.forElement('finance', 'ledger-accounts',{ payload: payload }, (test) => {
   test.should.supportCruds();

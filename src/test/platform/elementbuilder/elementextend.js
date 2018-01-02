@@ -137,7 +137,7 @@ suite.forPlatform('element-extend', {}, (test) => {
       return cloud.withOptions({ qs: { accountOnly: true } }).get(`elements/closeio/resources`)
         .then(r => {
           expect(r.body).to.not.be.empty;
-          expect(r.body.length === 2).to.be.true;
+          expect(r.body.length === 1).to.be.true;
         });
     });
 
@@ -159,10 +159,10 @@ suite.forPlatform('element-extend', {}, (test) => {
     it('should return error while adding/updating or deleting parameters for system catalog resource', () => {
         let systemresource = baseElement.resources[0];
         let resourceId = systemresource.id;
-        let parameterId = systemresource.parameters[0].id;
+        let parameterId = systemresource.parameters && systemresource.parameters.length > 0 ? systemresource.parameters[0].id : undefined;
         return cloud.post(`elements/closeio/resources/${resourceId}/parameters`, newParameter, (r) => expect(r).to.have.statusCode(404))
-          .then(() => cloud.put(`elements/closeio/resources/${resourceId}/parameters/${parameterId}`, newParameter, (r) => expect(r).to.have.statusCode(404)))
-          .then(() => cloud.delete(`elements/closeio/resources/${resourceId}/parameters/${parameterId}`, (r) => expect(r).to.have.statusCode(404)));
+          .then(() => parameterId !== undefined ? cloud.put(`elements/closeio/resources/${resourceId}/parameters/${parameterId}`, newParameter, (r) => expect(r).to.have.statusCode(404)) : null)
+          .then(() =>  parameterId !== undefined ? cloud.delete(`elements/closeio/resources/${resourceId}/parameters/${parameterId}`, (r) => expect(r).to.have.statusCode(404)) : null);
     });
 
     // try adding/update parameter to new resource and it should work

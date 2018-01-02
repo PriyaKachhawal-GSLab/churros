@@ -11,7 +11,11 @@ const groupPayload = tools.requirePayload(`${__dirname}/assets/group.json`);
 suite.forElement('ecommerce', 'customers', { payload: payload }, (test) => {
   test.should.supportCruds();
   test.withApi(`${test.api}/count`).should.return200OnGet();
-  test.withOptions({ qs: { where: 'fetchShippingAddresses=\'true\'' } }).should.return200OnGet();
+  /* updated the where query from  'fetchShippingAddresses=\'true\'' to
+    where: 'email=\'jamesbrown@theking.com\'' as fetchShippingAddresses field not present in
+    response and vendor response is failing with 504 Gateway Time-out error
+  */
+  test.withOptions({ qs: { where: 'email=\'jamesbrown@theking.com\'' } }).should.return200OnGet();
   test.should.supportPagination();
   test.should.supportCeqlSearch('email');
   it('should allow CRUDS for customer/addresses', () => {

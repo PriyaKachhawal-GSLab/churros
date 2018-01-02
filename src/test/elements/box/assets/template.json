@@ -1,10 +1,10 @@
 {
-"displayName":"<<random.word>>",
+"displayName":"c<<random.alphaNumeric##10>>",
 "scope":"enterprise",
 "fields": [
     {
       "type": "string",
-      "key": "customerTeam",
-      "displayName": "Customer team"
+      "key": "c<<random.alphaNumeric##10>>",
+      "displayName": "c<<random.alphaNumeric##10>>"
     }]
 }

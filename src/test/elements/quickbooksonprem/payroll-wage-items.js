@@ -15,5 +15,5 @@ suite.forElement('finance', 'payroll-wage-items', { payload: payload }, (test) =
       .then(r => cloud.get(`${test.api}/${id}`))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
-  test.should.supportPagination();
+  test.should.supportNextPagePagination(1);
 });

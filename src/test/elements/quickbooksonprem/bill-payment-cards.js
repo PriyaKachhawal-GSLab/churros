@@ -6,9 +6,9 @@ const tools = require('core/tools');
 const payload = require('./assets/bill-payment-cards');
 const updatePayload = { "Memo": tools.random() };
 
-
-suite.forElement('finance', 'bill-payment-cards', { payload: payload }, (test) => {
-  it('should support CRUDS and Ceql searching for /hubs/finance/bill-payment-cards', () => {
+//Pagination is not working from Element
+suite.forElement('finance', 'bill-payment-cards', null, (test) => {
+  it('should support SRD for /hubs/finance/bill-payment-cards', () => {
     let id;
     let refno;
     return cloud.post(test.api, payload)

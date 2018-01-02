@@ -65,7 +65,7 @@ suite.forPlatform('events', { name: 'event analytics' }, (test) => {
     });
 
     it('should return an error for an invalid account ID for event analytics', () =>
-      cloud.get(`/instances/events/analytics?accountIds[]=0`, r => expect(r).to.have.statusCode(401))
+      cloud.get(`/instances/events/analytics?accountIds[]=0`, r => expect(r).to.have.statusCode(403))
         .then(r => expect(r.body).to.contain.all.keys(['requestId', 'message']))
     );
 
@@ -112,7 +112,7 @@ suite.forPlatform('events', { name: 'event analytics' }, (test) => {
     });
 
     it('should return an error for an invalid account ID for instance analytics', () =>
-      cloud.get(`/instances/events/analytics/instances?accountIds[]=0`, r => expect(r).to.have.statusCode(401))
+      cloud.get(`/instances/events/analytics/instances?accountIds[]=0`, r => expect(r).to.have.statusCode(403))
         .then(r => expect(r.body).to.contain.all.keys(['requestId', 'message']))
     );
 
@@ -159,7 +159,7 @@ suite.forPlatform('events', { name: 'event analytics' }, (test) => {
     });
 
     it('should return an error for an invalid account ID for account analytics', () =>
-      cloud.get(`/instances/events/analytics/accounts?accountIds[]=0`, r => expect(r).to.have.statusCode(401))
+      cloud.get(`/instances/events/analytics/accounts?accountIds[]=0`, r => expect(r).to.have.statusCode(403))
         .then(r => expect(r.body).to.contain.all.keys(['requestId', 'message']))
     );
 });

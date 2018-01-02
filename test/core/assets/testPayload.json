@@ -1,5 +1,6 @@
 {
   "firstName": "<<name.firstName>>",
   "lastName": "<<name.lastName>>",
-  "fourLetters": "<<random.alphaNumeric##4>>"
+  "fourLetters": "<<random.letter##4>>",
+  "singleNumbers": "<<random.singleNumber>>"
 }

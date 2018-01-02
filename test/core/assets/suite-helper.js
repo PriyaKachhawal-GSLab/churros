@@ -152,6 +152,14 @@ exports.mock = (baseUrl, headers, eventHeaders) => {
     .put('/foo/456')
     .reply(404, (uri, requestBody) => {
       return { message: 'No foo found with the given ID' };
+    })
+    .put('/foo/789')
+    .reply(403, (uri, requestBody) => {
+      return { message: 'Forbidden' };
+    })
+    .put('/foo/987')
+    .reply(400, (uri, requestBody) => {
+      return { message: 'Bad request' };
     });
 
   /** MOCKING OUT HTTP ENDPOINTS **/

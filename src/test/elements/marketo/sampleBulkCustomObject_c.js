@@ -1,8 +1,18 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('core/tools').requirePayload(`${__dirname}/assets/sampleBulkCustomObject_c.json`);
+const tools = require('core/tools');
+const payload = tools.requirePayload(`${__dirname}/assets/sampleBulkCustomObject_c.json`);
 
 suite.forElement('marketing', 'sampleBulkCustomObject_c', { payload: payload }, (test) => {
-  test.should.supportCrud();
+  const options = {
+    churros: {
+      updatePayload: {
+        "myAddress": "Paris Belle Epoque, Trou Aux Cerf",
+        "myCity": "Curepipe",
+        "myName": "Zeeshan Gungabasen"
+      }
+    }
+  };
+  test.withOptions(options).should.supportCrud();
 });

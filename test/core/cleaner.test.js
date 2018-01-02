@@ -2,6 +2,7 @@
 
 require('core/assertions');
 const cleaner = require('core/cleaner');
+const props = require('core/props');
 const chakram = require('chakram');
 const nock = require('nock');
 const moment = require('moment');
@@ -9,9 +10,22 @@ const BASE_URL = 'https://api.cloud-elements.com/elements/api-v2;';
 const AUTH = 'User fake, Organization fake';
 
 describe('cleaner', () => {
+  const setupProps = () => {
+    props({
+      'url': 'http://google.com',
+      'user': 'franky',
+      'oauth.callback.url': 'http://myfakecallbackurl',
+      'element': 'myelement',
+      'myelement': {
+        'elementId': '123',
+        'username': 'frank',
+        'password': 'ricard'
+      }
+    });
+  };
   /* Setup our default chakram headers */
   before(() => chakram.setRequestDefaults({ baseUrl: BASE_URL, headers: { Authorization: AUTH } }));
-
+  beforeEach(() => setupProps());
   const formulas = [{ id: 123, name: 'foo' }, { id: 456, name: 'bar' }];
 
   const genFormulaInstance = (opts) => {

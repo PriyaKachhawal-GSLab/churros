@@ -15,7 +15,7 @@ suite.forElement('payment', 'products', (test) => {
     let productId;
     let productName;
     return cloud.get(`${test.api}`)
-      .then(r => productId = r.body[0].product.id)
+      .then(r => productId = r.body[0].id)
       .then(r => cloud.get(`${test.api}/${productId}`))
       .then(r => productName = r.body.product.name)
       .then(r => cloud.patch(`${test.api}/${productId}`, updateProduct(productName)));

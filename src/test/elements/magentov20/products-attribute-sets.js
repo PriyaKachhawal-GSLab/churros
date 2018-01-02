@@ -2,27 +2,27 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const tools = require('core/tools');
+const faker = require('faker');
 const expect = require('chakram').expect;
 const productsAttributesSets = require(`./assets/productsAttributesSetsPost`);
 const ProductsAttributesSetsAttribute = require(`./assets/products-attribute-sets-attributes`);
 
 const updateProductsAttributesSets = (attributeSetId) => ({
-  "attribute_set_name": "attributeName" + tools.randomInt(),
+  "attribute_set_name": "attributeName" + faker.random.number(),
   "attribute_set_id": attributeSetId,
   "entity_type_id": 4,
   "sort_order": 1
 });
 const ProductsAttributesSetsGroup = (attributeSetId) => ({
   "group": {
-    "attribute_group_name": "groupName" + tools.randomInt(),
+    "attribute_group_name": "groupName" + faker.random.number(),
     "attribute_set_id": attributeSetId
   }
 });
 
 suite.forElement('ecommerce', 'products-attribute-sets', { payload: productsAttributesSets }, (test) => {
   let attributeSetId, attributeSetName, groupId, attributeCode;
-  productsAttributesSets.attributeSet.attribute_set_name = "attributeName" + tools.randomInt();
+  productsAttributesSets.attributeSet.attribute_set_name = "attributeName" + faker.random.number();
   it(`should allow CRDS for ${test.api}`, () => {
     return cloud.crds(test.api, productsAttributesSets);
   });
@@ -94,7 +94,7 @@ suite.forElement('ecommerce', 'products-attribute-sets', { payload: productsAttr
   it(`should allow PATCH for  ${test.api}/{attributeSetId}/groups/{groupId}`, () => { //this is fixed
     let patchPayload = {
       "group": {
-        "attribute_group_name": "groupName" + tools.randomInt()
+        "attribute_group_name": "groupName" + faker.random.number()
       }
     };
     return cloud.get(test.api)

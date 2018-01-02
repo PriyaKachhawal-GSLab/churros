@@ -12,7 +12,7 @@ suite.forElement('crm', 'leads', { payload: payload }, (test) => {
     return cloud.post(test.api, payload)
       .then(r => leadId = r.body.changedEntityId)
       .then(r => cloud.get(`${test.api}/${leadId}`))
-      .then(r => cloud.put(`${test.api}/${leadId}`, updatePayload))
+      .then(r => cloud.patch(`${test.api}/${leadId}`, updatePayload))
       .then(r => cloud.delete(`${test.api}/${leadId}`));
   });
 });

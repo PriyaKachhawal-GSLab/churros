@@ -19,8 +19,8 @@ suite.forElement('ecommerce', 'carts', { payload: shippingInformation }, (test) 
       .then(r => cloud.get(`/hubs/ecommerce/products`))
       .then(r => {
         //only grabs one that is actually in stock
-        let products = r.body.slice(0, 10).map(pro => cloud.get('/hubs/ecommerce/products/' + pro.sku).then(r => r.body));
-        return Promise.all(products).then(r => r.reduce((acc, cur) => !acc && cur.extension_attributes.stock_item.is_in_stock ? acc = cur.sku : null, null));
+        let products = r.body.slice(0, 20).map(pro => cloud.get('/hubs/ecommerce/products/' + pro.sku).then(r => r.body));
+        return Promise.all(products).then(r => r.reduce((acc, cur) => !acc && cur.extension_attributes.stock_item.is_in_stock ? acc = cur.sku : acc = acc, null));
       })
       .then(r => cartProduct.cartItem.sku = r)
       .then(r => cloud.post(`${test.api}/${cartId}/products`, cartProduct))

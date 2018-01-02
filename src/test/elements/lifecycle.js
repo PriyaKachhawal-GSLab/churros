@@ -26,7 +26,7 @@ const terminate = error => {
 };
 
 let element = argv.element;
-let instanceId;
+let instanceId, hub;
 let deleteInstance = !argv.save; //we don't always want to delete. Defaults to true
 // Setting which element we are currently running on
 props.set('element', element);
@@ -48,7 +48,6 @@ before(() => {
     if (argv.instance) {
       getInstance = cloud.get(`/instances/${argv.instance}`)
       .then(r => {
-        props.setForKey(element, 'elementId', r.body.element.id);
         defaults.token(r.body.token);
         expect(r.body.element.key).to.equal(tools.getBaseElement(element));
         deleteInstance = false;
@@ -74,8 +73,12 @@ before(() => {
         expect(r).to.have.statusCode(200);
         logger.info('Provisioned with instance id of ' + r.body.id);
         instanceId = r.body.id;
+        props.set('instanceId', instanceId);
+        hub = r.body.element.hub;
+        props.set('hub', hub);
         element = tools.getBaseElement(element);
-
+        props.setForKey(element, 'elementId', r.body.element.id);
+        props.set('instanceName', r.body.name);
         // object definitions file exists? create the object definitions on the instance
         const objectDefinitionsFile = `${__dirname}/assets/object.definitions`;
         if (fs.existsSync(objectDefinitionsFile + '.json')) {
@@ -85,33 +88,88 @@ before(() => {
           // only create object definitions for the resources that are being transformed for this element.  If there
           // aren't any transformations, no need to create any object definitions.
           const transformationsFile = `${__dirname}/${element}/assets/transformations`;
-          if (!fs.existsSync(transformationsFile + '.json')) {
+          if (argv.transform === true && !fs.existsSync(transformationsFile + '.json')) {
+            let allDefs = require(objectDefinitionsFile);
+            let defined = Object.keys(allDefs);
+            return cloud.get(`/hubs/${hub}/objects`)
+            .then(objs => {
+              let transDefs = defined.reduce((acc, cur) => {
+                if (objs.body.includes(cur)) {
+                  acc[cur] = allDefs[cur];
+                }
+                return acc;
+              },{});
+              return createAll(url, transDefs)
+              .catch(() => {});
+            });
+          } else if (!fs.existsSync(transformationsFile + '.json')) {
             logger.debug(`No transformations found for ${element} so not going to create object definitions`);
             return null;
+          } else {
+            const transformations = require(transformationsFile);
+            const allObjectDefinitions = require(objectDefinitionsFile);
+            const objectDefinitions = Object.keys(allObjectDefinitions)
+              .reduce((accum, objectDefinitionName) => {
+                if (transformations[objectDefinitionName]) {
+                  accum[objectDefinitionName] = allObjectDefinitions[objectDefinitionName];
+                }
+                return accum;
+              }, {});
+
+            return createAll(url, objectDefinitions)
+            .catch(() => {});
           }
-
-          const transformations = require(transformationsFile);
-          const allObjectDefinitions = require(objectDefinitionsFile);
-          const objectDefinitions = Object.keys(allObjectDefinitions)
-            .reduce((accum, objectDefinitionName) => {
-              if (transformations[objectDefinitionName]) {
-                accum[objectDefinitionName] = allObjectDefinitions[objectDefinitionName];
-              }
-              return accum;
-            }, {});
-
-          return createAll(url, objectDefinitions)
-          .catch(() => {});
         }
       })
       .then(r => {
-        // transformations file exists? create the transformations on the instance
         const transformationsFile = `${__dirname}/${element}/assets/transformations`;
-        if (fs.existsSync(transformationsFile + '.json')) {
-          logger.debug('Setting up transformations');
-          const url = `/instances/${instanceId}/transformations/%s`;
-          return createAll(url, require(transformationsFile))
-          .catch(() => {});
+        props.setForKey(element, 'transformed', []);
+        let objsTransformed = props.getForKey(element, 'transformed');
+        if (argv.transform && fs.existsSync(transformationsFile + '.json')) {
+          let transformations = require(transformationsFile + '.json');
+          Object.keys(transformations).forEach(key => {
+            let idFields = transformations[key].fields.filter(f => f.path === 'id');
+            if (idFields.length > 0) {
+              idFields.forEach(idField => idField.path = 'idTransformed');
+            } else {
+              transformations[key].fields.push({"path": "idTransformed","vendorPath": "id"});
+            }
+          });
+
+          return Object.keys(transformations).sort()
+            .reduce((p, key) => p.then(() => {
+              return cloud.post(util.format(`/instances/${instanceId}/transformations/%s`, key), transformations[key])
+              .then(() => objsTransformed.push(key))
+              .catch(() => {});
+            }), Promise.resolve(true)); // initial
+        } else if (argv.transform && !fs.existsSync(transformationsFile + '.json')) {
+          let allDefs = require(`${__dirname}/assets/object.definitions.json`);
+          let defined = Object.keys(allDefs);
+          return cloud.get(`/hubs/${hub}/objects`)
+          .then(objs => {
+            return objs.body.sort()
+              .reduce((p, key) => p.then(() => {
+                let trans = {
+                  "vendorName": key,
+                  "fields": [
+                    {
+                      "path": "idTransformed",
+                      "vendorPath": "id"
+                    }
+                  ]
+                };
+                //creates the same transformations that were defined
+                return defined.includes(key) ? cloud.post(`/instances/${instanceId}/transformations/${key}`, trans).then(() => objsTransformed.push(key)) : Promise.resolve(null);
+              }), Promise.resolve(true)); // initial
+          });
+        } else {
+          // transformations file exists? create the transformations on the instance
+          if (fs.existsSync(transformationsFile + '.json')) {
+            logger.debug('Setting up transformations');
+            const url = `/instances/${instanceId}/transformations/%s`;
+            return createAll(url, require(transformationsFile))
+            .catch(() => {});
+          }
         }
       })
       .catch(r => {
@@ -120,41 +178,6 @@ before(() => {
     });
 });
 
-// skipped for now because so many fail - remove the skip when fixed
-it.skip('should not allow provisioning with bad credentials', () => {
-  const config = props.all(element);
-  const type = props.getOptionalForKey(element, 'provisioning');
-  const passThrough = (r) => r;
-
-  const badConfig = Object.keys(config).reduce((accum, configKey) => {
-    accum[configKey] = 'IAmBad';
-    return accum;
-  }, {});
-
-  const elementInstance = {
-    name: tools.random(),
-    element: { key: element },
-    configuration: badConfig
-  };
-  if (type === 'oauth2' || type === 'oauth1') {
-    elementInstance.providerData = {code: 'IAmBad'};
-  }
-  const responseCodeValidator = (statusCode) => {
-    expect(statusCode).to.be.above(399);
-    //expect(statusCode).to.be.below(500);
-  };
-
-  return cloud.post(`/instances`, elementInstance, passThrough)
-     .then(r => {
-        // if we received a 200 status code, then that's actually bad, as we are validating that an element instance is *not* created with bad configs.  lets delete the newly created element instance, and then do our assertions to show the failed test
-        if (r.response.statusCode === 200) {
-           return cloud.delete(`/instances/${r.body.id}`)
-              .then(() => responseCodeValidator(r.response.statusCode));
-        }
-        // cool, element instance was *not* created, lets make sure we got the right response code
-       responseCodeValidator(r.response.statusCode);
-     });
-});
 after(done => {
   tools.resetCleanup();
   instanceId && deleteInstance ? provisioner

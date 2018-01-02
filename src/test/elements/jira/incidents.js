@@ -16,6 +16,7 @@ suite.forElement('helpdesk', 'incidents', { payload: payload }, (test) => {
   it('should allow CRUDS for /incidents/:id/comments', () => {
     let incidentId;
     return cloud.post('/hubs/helpdesk/incidents', payload)
+      .then(r => console.log('r', r.body))
       .then(r => incidentId = r.body.id)
       .then(r => cloud.cruds('/hubs/helpdesk/incidents/' + incidentId + '/comments', commentPayload))
       .then(r => cloud.delete('/hubs/helpdesk/incidents/' + incidentId));

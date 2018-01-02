@@ -52,6 +52,8 @@ const parseProps = (element) => {
       }
     }
   };
+
+  props.getOptionalForKey(element, 'extra.oauth.params') ? args.options.qs = Object.assign({}, args.options.qs, props.getOptionalForKey(element, 'extra.oauth.params')) : null;
   return new Promise((res, rej) => res(args));
 };
 
@@ -76,7 +78,7 @@ const getPollerConfig = (element, instance) => {
       .reduce((acc, conf) => acc = conf.key === 'event.metadata' ? conf.defaultValue : acc, {})).polling).filter(str => str !== '{objectName}').join(',');
     } else {
       if (r !== 'NoConfig') instanceCopy.configuration['event.poller.configuration'] = r.replace(/\\n/g, '').replace(/\n/g, '').replace(/\t/g, '').replace(/<PUT USERNAME HERE>/g, props.getOptionalForKey(element, 'username'));
-      if (instanceCopy.configuration['event.poller.configuration']) instanceCopy.configuration["event.poller.urls"] = Object.keys(JSON.parse(instanceCopy.configuration['event.poller.configuration'])).join('|');
+      if (instanceCopy.configuration['event.poller.configuration']) instanceCopy.configuration["event.poller.urls"] = Object.keys(JSON.parse(instanceCopy.configuration['event.poller.configuration'])).join(element === 'hubspot' || element === 'hubspotcrm' ? '\n' : '|');
       else instanceCopy.configuration['event.poller.urls'] = elementObj.configuration.reduce((acc, conf) => acc = conf.key === 'event.poller.urls' ? conf.defaultValue : acc ,null);
     }
     instanceCopy.configuration['event.vendor.type'] = 'polling';
@@ -84,14 +86,16 @@ const getPollerConfig = (element, instance) => {
     instanceCopy.configuration['event.notification.enabled'] = 'true';
     instanceCopy.configuration['event.poller.refresh_interval'] = '1';
     instanceCopy.configuration['event.notification.signature.key'] = '';
+    element === 'onedrivev2' ? instanceCopy.configuration['event.poller.urls'] = null : null;
     return instanceCopy;
   })
   .catch(() => instance);
 };
 
-const addParams = (instance) => {
+const addParams = (instance, element) => {
   let instanceCopy = JSON.parse(JSON.stringify(instance));
   if (argv.params) instanceCopy.configuration = Object.assign({}, instanceCopy.configuration, JSON.parse(argv.params));
+  if (element && props.getOptionalForKey(element, 'extra.oauth.params')) instanceCopy.configuration = Object.assign({}, instanceCopy.configuration, props.getOptionalForKey(element, 'extra.oauth.params'));
   return instanceCopy;
 };
 
@@ -114,7 +118,7 @@ const createInstance = (element, config, providerData, baseApi) => {
 
   if (providerData) instance.providerData = providerData;
   return getPollerConfig(tools.getBaseElement(element), instance)
-    .then(r => cloud.post(baseApi, addParams(r)))
+    .then(r => cloud.post(baseApi, addParams(r, element)))
     .then(r => {
       expect(r).to.have.statusCode(200);
       logger.debug('Created %s element instance with ID: %s', element, r.body.id);
@@ -199,7 +203,9 @@ const oauth = (element, args, config) => {
         oauth_verifier: query.oauth_verifier,
         secret: args.secret,
         realmId: query.realmId,
-        dataSource: query.dataSource
+        dataSource: query.dataSource,
+        org: query.org,
+        token: query.token
       };
       if(args && args.debug) {
         providerData.debug = true;
@@ -209,7 +215,8 @@ const oauth = (element, args, config) => {
 };
 
 const oauth1 = (element, args) => {
-  const oauthTokenUrl = `/elements/${element}/oauth/token`;
+  let urlElement = tools.getBaseElement(element);
+  const oauthTokenUrl = `/elements/${urlElement}/oauth/token`;
   return cloud.withOptions(args.options).get(oauthTokenUrl)
     .then(r => {
       expect(r).to.have.statusCode(200);

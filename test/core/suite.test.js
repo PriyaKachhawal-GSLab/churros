@@ -21,6 +21,15 @@ const eventHeaders = () => new Object({
     'Element-Instances': (value) => value === eiId
   }
 });
+props({
+  "element": 'myelement',
+  "myelement": {
+      'elementId': '123',
+      'username': 'frank',
+      'password': 'ricard',
+      'skip': false
+    }
+});
 
 describe('suite', () => {
   /** Before tests run, set up the default chakram headers */
@@ -29,7 +38,6 @@ describe('suite', () => {
       baseUrl: baseUrl,
       headers: { Authorization: auth }
     });
-    props.set('element', 'myelement');
     props.set('event.callback.url', 'https://callback.com/churrosTest');
   });
 
@@ -89,6 +97,14 @@ describe('suite', () => {
     test
       .withOptions({ qs: { page: 1, pageSize: 1 } })
       .should.return200OnGet();
+
+    test
+      .withApi('/foo/789')
+      .should.return403OnPut();
+
+    test
+      .withApi('/foo/987')
+      .should.return400OnPut();
 
     /* withApi overrides the default api that was passed in to the `suite.forPlatform` above */
     test
@@ -164,6 +180,17 @@ describe('suite', () => {
       .withOptions({ skip: true })
       .withApi(`${test.api}/api/that/is/not/mocked`)
       .should.return200OnGet();
+  });
+  suite.forElement('fakehub', 'resource', {useElement: 'myelement'}, (test) => {
+    before(() => {
+      chakram.setRequestDefaults({
+        baseUrl: baseUrl,
+        headers: {
+          Authorization: auth
+        }
+      });
+    });
+    test.withApi('/foo/123').should.return200OnGet();
   });
 });
 

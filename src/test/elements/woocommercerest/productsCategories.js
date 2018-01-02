@@ -7,7 +7,7 @@ const productsCategoriesPayload = () => ({
   "name":tools.random()
 });
 
-suite.forElement('ecommerce', 'productsCategories', { payload: productsCategoriesPayload() }, (test) => {
+suite.forElement('ecommerce', 'products-categories', { payload: productsCategoriesPayload() }, (test) => {
   test.should.supportCruds();
   // unique is "id"
   test.should.supportPagination();

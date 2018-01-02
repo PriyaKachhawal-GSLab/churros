@@ -164,4 +164,22 @@ Josh,Wyse,2
     tools.addCleanUp({url:'http://google.com', method: 'get', secrets: {}});
     setTimeout(() => expect(tools.getCleanup()).to.deep.equal([{url:'http://google.com', method: 'get', secrets: {}}]), 1000);
   });
+
+  it('should support findInArray', () => {
+    const items = [
+      {
+        id: 123,
+        name: 'josh'
+      },
+      {
+        id: 456,
+        name: 'lebron'
+      }
+    ];
+    const lebron = tools.findInArray(items, 'name', 'lebron');
+    expect(lebron).to.deep.equal(items[1]);
+
+    const u = tools.findInArray(items, 'name', 'foo');
+    expect(u).to.be.undefined;
+  });
 });

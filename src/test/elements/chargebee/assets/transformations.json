@@ -3,14 +3,18 @@
     "vendorName": "customer",
     "fields": [
       {
-        "path": "id",
-        "vendorPath": "id"
+        "path": "idTransformed",
+        "vendorPath": "customer.id"
       }
     ]
   },
   "plans": {
     "vendorName": "plans",
     "fields": [
+      {
+        "path": "id",
+        "vendorPath": "plan.id"
+      },
       {
         "path": "id",
         "vendorPath": "id"
@@ -22,7 +26,7 @@
     "fields": [
       {
         "path": "id",
-        "vendorPath": "id"
+        "vendorPath": "transaction.id"
       }
     ]
   }

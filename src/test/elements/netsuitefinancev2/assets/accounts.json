@@ -29,7 +29,7 @@
         "isResidential":false
       }
     ],
-    "replaceAll":false
+    "replaceAll":true
   },
   "companyName":"Churros Account",
   "shipComplete":false,

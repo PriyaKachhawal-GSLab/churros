@@ -1,0 +1,11 @@
+{
+  "spreadsheets": {
+    "vendorName": "spreadsheets",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "id"
+      }
+    ]
+  }
+}

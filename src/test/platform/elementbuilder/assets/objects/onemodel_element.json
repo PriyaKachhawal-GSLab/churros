@@ -120,6 +120,7 @@
       ],
       "object": {
         "name": "contacts",
+        "type": "array",
         "fields": [
           {
             "name": "id",
@@ -222,17 +223,6 @@
       "ownerAccountId": 185,
       "hooks": [],
       "parameters": [
-        {
-          "vendorType": "path",
-          "dataType": "string",
-          "name": "id",
-          "description": "The contacts ID",
-          "vendorDataType": "string",
-          "source": "request",
-          "type": "path",
-          "vendorName": "id",
-          "required": true
-        },
         {
           "vendorType": "body",
           "dataType": "contacts",

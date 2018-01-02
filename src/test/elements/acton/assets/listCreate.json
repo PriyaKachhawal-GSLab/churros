@@ -1,0 +1,14 @@
+{
+  "headings": "y",
+  "fieldseparator": "COMMA",
+  "listname": "<<lorem.word>><<random.word>>",
+  "quotecharacter": "NONE",
+  "uploadspecs": [
+    {
+      "columnHeading": "Email",
+      "ignoreColumn": "N",
+      "columnType": "EMAIL",
+      "columnIndex": "0"
+    }
+  ]
+}

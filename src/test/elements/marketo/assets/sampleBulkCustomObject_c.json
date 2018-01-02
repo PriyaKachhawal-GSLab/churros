@@ -1,6 +1,6 @@
 {
-   "myAddress":"210 Main Stret",
-   "myCity":"Addisson",
-   "myExternalId":"20171",
-   "myName":"Test Object"
+   "myAddress":"<<address.streetAddress>>",
+   "myCity":"<<address.city>>",
+   "myExternalId":"<<random.number>>",
+   "myName":"<<name.firstName>> Object"
 }

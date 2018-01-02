@@ -6,13 +6,13 @@ const cloud = require('core/cloud');
 const payload = require('./assets/folders');
 const build = (overrides) => Object.assign({}, payload, overrides);
 const folderPayload = build({ name: `churros-${tools.random()}`, path: `/${tools.random()}` });
-
+const folderPayload1 = build({ name: `churros-${tools.random()}`, path: `/${tools.random()}/${tools.random()}` });
 suite.forElement('documents', 'folders', (test) => {
 
   const folderWrap = (cb) => {
     let folder;
     let random = `${tools.random()}`;
-    folderPayload.path += `-${random}`;
+    folderPayload.path += `/${random}`;
     folderPayload.name += `-${random}`;
     return cloud.post('/hubs/documents/folders', folderPayload)
       .then(r => folder = r.body)
@@ -25,6 +25,13 @@ suite.forElement('documents', 'folders', (test) => {
     return cloud.post('/hubs/documents/folders', folderPayload)
       .then(r => folder1 = r.body)
       .then(r => cloud.withOptions({ qs: { path: folder1.path } }).delete('/hubs/documents/folders'));
+  });
+
+  it('should allow CD /folders with implicit path', () => {
+    let folder2;
+    return cloud.post('/hubs/documents/folders', folderPayload1)
+      .then(r => folder2 = r.body)
+      .then(r => cloud.withOptions({ qs: { path: folder2.path } }).delete('/hubs/documents/folders'));
   });
 
   it('should allow C /folders and DELETE /folders/:id', () => {
@@ -51,6 +58,22 @@ suite.forElement('documents', 'folders', (test) => {
       let updatedFolder;
       let folderTemp = {
         path: `/a-${folder.name}`
+      };
+      return cloud.withOptions({ qs: { path: folder.path } }).get('/hubs/documents/folders/metadata')
+        .then(r => cloud.withOptions({ qs: { path: folder.path } }).patch('/hubs/documents/folders/metadata', folderTemp))
+        .then(r => updatedFolder = r.body)
+        .then(r => cloud.get(`/hubs/documents/folders/${updatedFolder.id}/metadata`))
+        .then(r => cloud.patch(`/hubs/documents/folders/${updatedFolder.id}/metadata`, folder));
+    };
+
+    return folderWrap(cb);
+  });
+
+  it('should allow RU /folders/metadata and RU /folders/:id/metadata with implicit path', () => {
+    const cb = (folder) => {
+      let updatedFolder;
+      let folderTemp = {
+        path: `/b-${tools.randomStr(5)}/a-${folder.name}`
       };
       return cloud.withOptions({ qs: { path: folder.path } }).get('/hubs/documents/folders/metadata')
         .then(r => cloud.withOptions({ qs: { path: folder.path } }).patch('/hubs/documents/folders/metadata', folderTemp))

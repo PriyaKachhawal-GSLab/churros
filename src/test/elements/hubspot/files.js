@@ -7,8 +7,7 @@ const tools = require('core/tools');
 suite.forElement('marketing', 'files', (test) => {
   it('should allow CRUD for hubs/marketing/files', () => {
     const fieldsUpdate = {
-      "name": tools.randomStr('abcdefghijklmnopqrstuvwxyz', 10),
-      "folder_path": '/ce_Test'
+      "name": tools.randomStr('abcdefghijklmnopqrstuvwxyz', 10)
     };
     let path = __dirname + `/assets/test.txt`;
     let id;

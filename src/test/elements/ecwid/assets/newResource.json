@@ -1,0 +1,41 @@
+{
+  "method": "GET",
+  "nextResource": "",
+  "description": "GET Orders",
+  "type": "api",
+  "vendorPath": "/api/v1/5628038/orders",
+  "nextPageKey": "",
+  "path": "/extended-resource",
+  "paginationType": "VENDOR_SUPPORTED",
+  "vendorMethod": "GET",
+  "response": {
+    "contentType": "application/json"
+  },
+  "ownerAccountId": 218,
+  "hooks": [],
+  "parameters": [
+    {
+      "vendorType": "query",
+      "dataType": "string",
+      "name": "pageSize",
+      "description": "The number of resources to return in a given page",
+      "vendorDataType": "string",
+      "source": "request",
+      "type": "query",
+      "vendorName": "limit",
+      "required": false
+    },
+    {
+      "vendorType": "query",
+      "dataType": "string",
+      "name": "page",
+      "description": "The page number of resources to retrieve",
+      "vendorDataType": "string",
+      "source": "request",
+      "type": "query",
+      "vendorName": "offset",
+      "required": false
+    }
+  ],
+  "rootKey": "|orders"
+}

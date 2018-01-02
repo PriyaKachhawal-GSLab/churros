@@ -42,14 +42,20 @@ const crudsInstance = (baseUrl) => {
 
 const updateInstanceWithReprovision = (baseUrl, schema) => {
   let id;
+  let ids = [];
   return provisioner.create('closeio')
     .then(r => id = r.body.id)
+    .then(r => ids.push(id))
     .then(r => cloud.get(`${baseUrl}/${id}`, (r) => {
       expect(r).to.have.schemaAnd200(schema);
       expect(r.body.configuration).to.not.be.empty;
       expect(r.body.configuration.username).to.equal(props.getForKey('closeio', 'username'));
     }))
     .then(r => provisioner.partialOauth('closeio'))
+    .then(r => {
+      ids.push(id + 1);
+      return r;
+    })
     .then(code =>
       cloud.put(`${baseUrl}/${id}`, genInstance('closeio', { name: 'updated-instance', providerData: { code: code } }), r => {
         expect(r.body.configuration).to.not.be.empty;
@@ -65,6 +71,10 @@ const updateInstanceWithReprovision = (baseUrl, schema) => {
     .then(r => cloud.get(`/hubs/crm/accounts`))
     .then(r => expect(r.body).to.be.instanceof(Array))
     .then(r => provisioner.partialOauth('closeio'))
+    .then(r => {
+      ids.push(id + 2);
+      return r;
+    })
     .then(code => cloud.patch(`${baseUrl}/${id}`, { name: 'updated-instance', providerData: { code: code } }, r => {
       expect(r.body.configuration).to.not.be.empty;
       expect(r.body.configuration.username).to.equal(props.getForKey('closeio', 'username'));
@@ -77,10 +87,14 @@ const updateInstanceWithReprovision = (baseUrl, schema) => {
     }))
     .then(r => cloud.get(`/hubs/crm/accounts`))
     .then(r => expect(r.body).to.be.instanceof(Array))
-    .then(r => provisioner.delete(id, baseUrl))
+    .then(r => Promise.all(ids.map(d => provisioner.delete(d, baseUrl))))
     .catch(e => {
-      if (id) provisioner.delete(id, baseUrl);
-      throw new Error(e);
+      if (ids.length > 0) {
+        return Promise.all(ids.map(d => provisioner.delete(d, baseUrl)))
+        .catch(err => {}).then(() => { throw new Error(e); });
+      } else {
+        throw new Error(e);
+      }
     });
 };
 
@@ -231,13 +245,13 @@ suite.forPlatform('elements/instances', opts, (test) => {
     let instance, clone;
     return provisioner.create('closeio')
       .then(r => instance = r.body)
-      .then(r => cloud.post('elements/closeio/clone'))
+      .then(r => cloud.post('elements/closeio/clone').catch(r => cloud.get('elements/closeio')))
       .then(r => clone = r.body)
       .then(r => cloud.patch(`instances/${instance.id}`, { element: { id: clone.id } })
         .then(r => {
           expect(r.body.element.id).to.equal(clone.id);
         }))
-      .then(r => provisioner.delete(instance.id, 'elements/closeio/instances'))
+      .then(r => provisioner.delete(instance.id, '/instances'))
       .then(r => cloud.delete(`elements/${clone.key}`))
       .catch(e => {
         if (instance && clone) {
@@ -299,6 +313,14 @@ suite.forPlatform('elements/instances', opts, (test) => {
       .then(r => expect(r.body).to.deep.equal(withCorrectHub))
       .then(() => cloud.get('accounts?pageSize=1'))
       .then(r => expect(r.body).to.deep.equal(withCorrectHub));
+  });
+
+  it('should return element-instance-id on headers', () => {
+    let instanceId;
+    return provisioner.create('jira')
+      .then(r => instanceId = r.body.id)
+      .then(() => cloud.get(`/incidents`))
+      .then(r => expect(parseInt(r.response.headers['elements-element-instance-id'])).to.equal(instanceId));
   });
 
   it('should allow disabling and enabling  an instance', () => {

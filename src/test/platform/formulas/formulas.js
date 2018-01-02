@@ -47,7 +47,35 @@ suite.forPlatform('formulas', opts, (test) => {
       .then(() => cloud.delete(`/formulas/${formulaId}`));
   });
 
-  it('should allow adding and removing "scheduled" trigger to a formula', () => {
+  it('should retrieve callable formulas', () => {
+    const f = common.genFormula({});
+    f.steps = [{
+      "name": "someApi",
+      "type": "elementRequest",
+      "properties": {
+        "elementInstanceId": "${sfdc}",
+        "api": "/hubs/crm/accounts",
+        "method": "GET"
+      }
+    }];
+    const validateResults = (formulaId, r, fullResponse) => {
+      expect(r.response.headers['elements-total-count']).to.be.below(fullResponse.response.headers['elements-total-count']);
+      expect(r.response.headers['elements-returned-count']).to.be.below(fullResponse.response.headers['elements-returned-count']);
+      cloud.delete(`/formulas/${formulaId}`);
+      return false;
+    };
+
+    let formulaId;
+    let fullResponse;
+    return cloud.post(test.api, f, schema)
+      .then(r => formulaId = r.body.id)
+      .then(r => cloud.get(test.api))
+      .then(r => fullResponse = r)
+      .then(r => cloud.withOptions({ qs: { callableBy: formulaId } }).get(test.api))
+      .then(r => validateResults(formulaId, r, fullResponse));
+  });
+
+    it('should allow adding and removing "scheduled" trigger to a formula', () => {
     const f = common.genFormula({});
     const t = common.genTrigger({});
 
@@ -177,7 +205,7 @@ suite.forPlatform('formulas', opts, (test) => {
       });
   });
 
-  it('should allow setting the engine flag to use bodenstein to execute a formula', () => {
+  it('should allow setting the engine flag to v3 for a compatible a formula', () => {
     const f = common.genFormula({});
     const patchBody = {
       engine: 'v3',
@@ -199,7 +227,7 @@ suite.forPlatform('formulas', opts, (test) => {
       });
   });
 
-  it('should not allow upgrading a formula to bodenstein with unsupported steps', () => {
+  it('should not allow setting the engine flag to v3 for a formula with unsupported steps', () => {
     const f = common.genFormula({});
     f.steps = [{
       "name": "unsupported-by-bode",
@@ -213,6 +241,61 @@ suite.forPlatform('formulas', opts, (test) => {
       expect(r).to.have.statusCode(400);
       expect(r.body.message).to.contain('Invalid formula for the v3 engine');
     });
+  });
+
+  it('should allow upgrading a formula to v3 and reverting it back to v1', () => {
+    const genF = () => {
+      let f = require('./assets/formulas/complex-to-upgrade.json');
+      f.name = tools.random();
+      return f;
+    };
+
+    const validatorUpdate = (formula) => {
+      expect(formula.engine).to.equal('v3');
+
+      const looper = formula.steps.filter(s => s.name === 'looper')[0];
+      expect(looper.properties.list).to.equal('${steps.ten_ids_please.ids}');
+
+      const invalid = formula.steps.filter(s => s.name === 'invalid_request_step')[0];
+      expect(invalid.properties.api).to.equal('/nosuchresource/${steps.get_contacts.response[0].id}');
+
+      const get = formula.steps.filter(s => s.name === 'get_contacts')[0];
+      expect(get.properties.elementInstanceId).to.equal('${config.trigger_instance}');
+
+      const retrieve = formula.steps.filter(s => s.name === 'retrieve_contact')[0];
+      expect(retrieve.properties.api).to.equal('/hubs/crm/contacts/${steps.looper.entry}');
+      expect(retrieve.properties.path).to.equal(undefined);      
+    };
+
+    const validatorRollback = (formula) => {
+      expect(formula.engine).to.not.equal('v3');
+
+      const looper = formula.steps.filter(s => s.name === 'looper')[0];
+      expect(looper.properties.list).to.equal('ten_ids_please.ids');
+
+      const invalid = formula.steps.filter(s => s.name === 'invalid_request_step')[0];
+      expect(invalid.properties.api).to.equal('/nosuchresource/${get_contacts.response[0].id}');
+
+      const get = formula.steps.filter(s => s.name === 'get_contacts')[0];
+      expect(get.properties.elementInstanceId).to.equal('${trigger_instance}');
+
+      const retrieve = formula.steps.filter(s => s.name === 'retrieve_contact')[0];
+      expect(retrieve.properties.api).to.equal('/hubs/crm/contacts/{entry}');
+      expect(retrieve.properties.path).to.equal('${looper}');
+    };
+
+    let formulaId;
+    return cloud.post(test.api, genF(), schema)
+      .then(r => formulaId = r.body.id)
+      .then(r => cloud.put(`${test.api}/${formulaId}/upgrade/v3`))
+      .then(r => validatorUpdate(r.body))
+      .then(r => cloud.delete(`${test.api}/${formulaId}/upgrade/v3`))
+      .then(r => validatorRollback(r.body))
+      .then(r => cloud.delete(`${test.api}/${formulaId}`))
+      .catch(e => {
+        if (formulaId) cloud.delete(`${test.api}/${formulaId}`);
+        throw new Error(e);
+      });
   });
 
   test

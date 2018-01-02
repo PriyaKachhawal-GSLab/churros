@@ -1,0 +1,28 @@
+{
+  "method": "GET",
+  "nextResource": "",
+  "description": "Get all contact",
+  "type": "api",
+  "vendorPath": "/ContactApi.asmx",
+  "nextPageKey": "",
+  "path": "/extended-resource",
+  "paginationType": "VENDOR_SUPPORTED",
+  "vendorMethod": "POST",
+  "response": {
+    "contentType": "application/json"
+  },
+  "ownerAccountId": 3205,
+  "parameters": [
+    {
+      "vendorType": "body",
+      "dataType": "string",
+      "vendorDataType": "string",
+      "type": "value",
+      "name":"<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body> <FindContacts xmlns=\"http://connectwise.com\"> <credentials> <CompanyId>{helpdesk.connectwise.company}</CompanyId> <IntegratorLoginId>{helpdesk.connectwise.username}</IntegratorLoginId> <IntegratorPassword>{helpdesk.connectwise.password}</IntegratorPassword> </credentials> <returnFields></returnFields> </FindContacts> </soap:Body> </soap:Envelope>",
+      "vendorName": "body",
+      "required": false
+    }
+  ],
+  "rootKey": "|soap:Envelope.soap:Body"
+}
+

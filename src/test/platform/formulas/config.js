@@ -11,6 +11,7 @@ const tools = require('core/tools');
 
 suite.forPlatform('formulas', { name: 'formula config', schema: schema }, (test) => {
   before(() => cleaner.formulas.withName([invalid.name, 'complex_successful']));
+  after(() => cleaner.formulas.withName([invalid.name, 'complex_successful']));
 
   /* make sure config keys are being validated properly when creating a formula with config */
   test
@@ -43,7 +44,9 @@ suite.forPlatform('formulas', { name: 'formula config', schema: schema }, (test)
     const v = (r, key) => {
       expect(r).to.have.statusCode(200);
       expect(r.body).to.not.be.null;
-      expect(r.body.triggers[0].properties.elementInstanceId).to.equal(`\${config.${key}}`);
+      // make sure it replaces one without the config. prefix
+      expect(r.body.triggers[0].properties.elementInstanceId).to.equal(`\${${key}}`);
+      // make sure it replaces also with the config. prefix
       r.body.steps.filter((s) => s.properties.elementInstanceId !== undefined).forEach(rs => expect(rs.properties.elementInstanceId).to.equal(`\${config.${key}}`));
       return r;
     };

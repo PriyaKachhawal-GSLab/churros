@@ -1,0 +1,38 @@
+{
+  "method": "GET",
+  "nextResource": "",
+  "description": "Get all product",
+  "type": "api",
+  "vendorPath": "/",
+  "nextPageKey": "",
+  "path": "/extended-resource",
+  "paginationType": "VENDOR_SUPPORTED",
+  "vendorMethod": "GET",
+  "response": {
+    "contentType": "application/json"
+  },
+  "ownerAccountId": 3205,
+  "parameters": [
+    {
+      "vendorType": "header",
+      "dataType": "string",
+      "vendorDataType": "string",
+      "type": "value",
+      "name":"application/xml",
+      "vendorName": "Content-Type",
+      "required": false
+    }, 
+    {
+      "vendorType": "query",
+      "dataType": "string",
+      "name": "resource_name",
+      "description": "resource records need  to be retrieve",
+      "vendorDataType": "string",
+      "source": "request",
+      "type": "query",
+      "vendorName": "EDI_Name",
+      "required": true
+    }
+  ]
+}
+

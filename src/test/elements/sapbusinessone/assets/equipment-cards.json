@@ -1,0 +1,17 @@
+{
+    "ItemCode": "A00003",
+    "InternalSerialNum": "888855",
+    "ItemDescription": "Sample Postman Created",
+    "ServiceBPType": "srvcSales",
+    "StatusOfSerialNumber": "sns_Active",
+    "DefaultTechnician": 8,
+    "Street": "Plynarenska",
+    "CustomerName": "Star Company",
+    "CustomerCode": "C25000",
+    "InvoiceNumber": 0,
+    "CountryCode": "US",
+    "ContactEmployeeCode": 31,
+    "ManufacturerSerialNum": "78999",
+    "DeliveryNumber": 0,
+    "InstallLocation": "Sample Locations Info"
+}

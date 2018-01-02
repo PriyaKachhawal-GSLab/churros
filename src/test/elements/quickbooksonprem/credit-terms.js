@@ -13,5 +13,5 @@ suite.forElement('finance', 'credit-terms', (test) => {
       const validValues = r.body.filter(obj => obj.Name === `1% 10 Net 30`);
       expect(validValues.length).to.equal(r.body.length);
     }).should.return200OnGet();
-  test.should.supportPagination();
+  test.should.supportNextPagePagination(1);
 });

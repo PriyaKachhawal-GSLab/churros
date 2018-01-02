@@ -22,7 +22,7 @@
     "fields": [
       {
         "path": "id",
-        "vendorPath": "template"
+        "vendorPath": "template_id"
       }
     ]
   },

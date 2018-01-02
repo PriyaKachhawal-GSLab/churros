@@ -10,12 +10,38 @@ const cloud = require('core/cloud');
 
 suite.forElement('marketing', 'lists', { payload: payload }, (test) => {
 
+  it('it should support Create lists without CSV file', () => {
+    let opts;
+    let listId;
+    let listCreate = tools.requirePayload(`${__dirname}/assets/listCreate.json`);
+    opts = { formData: { list: JSON.stringify(listCreate) } };
+    return cloud.withOptions(opts).post(test.api, undefined)
+      .then(r => {
+        listId = r.body.id;
+        cloud.delete(`${test.api}/${listId}`);
+      });
+  });
+
+  it('it should support Create lists with CSV file', () => {
+    let opts;
+    let listId;
+    let listCreate = tools.requirePayload(`${__dirname}/assets/listCreate.json`);
+    let documentPath = __dirname + '/assets/createList.csv';
+    opts = { formData: { list: JSON.stringify(listCreate), file: fs.createReadStream(documentPath) } };
+    return cloud.withOptions(opts).post(test.api, undefined)
+      .then(r => {
+        listId = r.body.listId;
+        cloud.delete(`${test.api}/${listId}`);
+      });
+  });
+
   it('it should support CRUD lists', () => {
     let listId;
     let opts;
     let documentPath = __dirname + '/assets/updateList.csv';
     let listUpdate = tools.requirePayload(`${__dirname}/assets/listUpdate.json`);
-    return cloud.post('/hubs/marketing/lists', payload)
+    opts = { formData: { list: JSON.stringify(payload) } };
+    return cloud.withOptions(opts).post(test.api, undefined)
       .then(r => {
         listId = r.body.id;
         listUpdate.mergespecs[0].dstListId = listId;

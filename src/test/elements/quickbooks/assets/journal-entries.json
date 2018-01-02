@@ -37,5 +37,5 @@
     ],
     "privateNote": "Inventory Adjustment for Atul JE",
     "totalAmt": 500,
-    "docNumber": "<<random.word>><<random.word>>"
+    "docNumber": "<<random.alphaNumeric##20>>"
 }

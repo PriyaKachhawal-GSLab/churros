@@ -1,5 +1,5 @@
 {
-  "name": "churrosContacts",
+  "name": "churrosContacts<<random.alphaNumeric##4>>",
   "primaryKeyName": "id",
   "createdDateName": "created_dt",
   "createdDateFormat": "yyyy/mm/dd",

@@ -8,6 +8,7 @@ const logger = require('winston');
 const sleep = require('sleep');
 const fs = require('fs');
 const faker = require('faker');
+const R = require('ramda');
 
 var exports = module.exports = {};
 
@@ -222,6 +223,9 @@ const fake = (str, startDelim, endDelim) => {
     return str;
   }
 
+  faker.random.letter = () => exports.randomStr('abcdefghijklmnopqrstuvwxyz', 1);
+  faker.random.letterUppercase = () => exports.randomStr('abcdefghijklmnopqrstuvwxyz', 1).toUpperCase();
+  faker.random.singleNumber = () => Math.floor(Math.random() * 10);
   const token = str.substr(start + 2,  end - start - 2);
   const method = token.replace(endDelim, '').replace(startDelim, '');
   //allows you say specify how many words or numbers or whatnot
@@ -275,3 +279,4 @@ exports.addCleanUp = (obj) => {
 };
 exports.getCleanup = () => require(`${__dirname}/cleanup.json`);
 exports.resetCleanup = () => fs.writeFileSync(`${__dirname}/cleanup.json`, '[]');
+exports.findInArray = (items, field, value) => R.find(R.propEq(field, value))(items);

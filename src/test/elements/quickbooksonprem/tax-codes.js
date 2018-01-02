@@ -3,6 +3,7 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 
+//Pagination is not working for the element
 suite.forElement('finance', 'tax-codes', null, (test) => {
   it('should support SR, pagination and Ceql searching for /hubs/finance/tax-codes', () => {
     let id;

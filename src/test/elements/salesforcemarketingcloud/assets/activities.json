@@ -1,14 +1,14 @@
 {
-   "key":"ixn-created-via-the-api45",
-   "name":"API-Created Interaction",
-   "workflowApiVersion":1.0,
-   "triggers":[
+  "key": "ixn-created-via-the-api45",
+  "name": "API-Created Interaction",
+  "workflowApiVersion": 1.0,
+  "triggers": [
 
-   ],
-   "goals":[
+  ],
+  "goals": [
 
-   ],
-   "activities":[
+  ],
+  "activities": [
 
-   ]
+  ]
 }

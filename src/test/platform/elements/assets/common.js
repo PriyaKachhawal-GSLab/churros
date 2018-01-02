@@ -1,7 +1,7 @@
 'use strict';
 
 const cloud = require('core/cloud');
-const objectPayload = require('./element.object.payload.json');
+const objectPayload = require('core/tools').requirePayload(`${__dirname}/element.object.payload.json`);
 
 var exports = module.exports = {};
 

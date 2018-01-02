@@ -10,5 +10,5 @@ const customObjectsPayload =  {
 
 suite.forElement('marketing', 'polling', null, (test) => {
   test.withApi('/hubs/marketing/contacts').should.supportPolling(contactsPayload, 'contacts');
-  test.withApi('/hubs/marketing/custom-objects').should.supportPolling(customObjectsPayload, 'customObjects');
+  test.withApi('/hubs/marketing/custom-objects').should.supportPolling(customObjectsPayload, 'custom-objects');
 });

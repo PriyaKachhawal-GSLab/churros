@@ -9,7 +9,7 @@ suite.forElement('finance', 'creditcard-charges', { payload: payload }, (test) =
   it('should support CRUDS, pagination for /hubs/finance/creditcard-charges', () => {
     let id;
     return cloud.post(test.api, payload)
-      .then(r => id = r.body.TxnID)
+      .then(r => id = r.body.id)
       .then(r => cloud.get(test.api))
       .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(test.api))
       .then(r => cloud.get(`${test.api}/${id}`))

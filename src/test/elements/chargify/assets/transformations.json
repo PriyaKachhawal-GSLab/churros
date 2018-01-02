@@ -4,7 +4,7 @@
     "fields": [
       {
         "path": "id",
-        "vendorPath": "id"
+        "vendorPath": "customer.id"
       }
     ]
   },
@@ -13,7 +13,7 @@
     "fields": [
       {
         "path": "id",
-        "vendorPath": "id"
+        "vendorPath": "product.id"
       }
     ]
   },
@@ -22,7 +22,7 @@
     "fields": [
       {
         "path": "id",
-        "vendorPath": "id"
+        "vendorPath": "transaction.id"
       }
     ]
   },
@@ -31,7 +31,7 @@
     "fields": [
       {
         "path": "id",
-        "vendorPath": "id"
+        "vendorPath": "product_family.id"
       }
     ]
   },
@@ -40,7 +40,7 @@
     "fields": [
       {
         "path": "id",
-        "vendorPath": "id"
+        "vendorPath": "subscription.id"
       }
     ]
   }

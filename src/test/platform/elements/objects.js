@@ -3,7 +3,7 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const schema = require('./assets/element.object.schema.json');
-const payload = require('./assets/element.object.payload.json');
+const payload = require('core/tools').requirePayload(`${__dirname}/assets/element.object.payload.json`);
 
 const opts = { payload: payload, schema: schema };
 

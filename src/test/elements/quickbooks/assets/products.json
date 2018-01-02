@@ -16,6 +16,6 @@
   },
   "trackQtyOnHand": false,
 
-  "name": "<<random.word>><<random.word>>",
-  "sku": "<<random.word>><<random.word>>"
+  "name": "<<random.alphaNumeric##15>>",
+  "sku": "<<random.alphaNumeric##15>>"
 }

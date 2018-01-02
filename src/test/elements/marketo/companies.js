@@ -1,26 +1,16 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/companies');
 const tools = require('core/tools');
+const payload = tools.requirePayload(`${__dirname}/assets/companies.json`);
 const cloud = require('core/cloud');
-const build = (overrides) => Object.assign({}, payload, overrides);
-const companiesPayload = build({ company: tools.randomStr(), annualRevenue: tools.randomInt(), billingCity: tools.randomStr(), billingCountry: tools.randomStr(), externalCompanyId: tools.randomInt(), billingPostalCode: tools.randomInt(), billingState: tools.randomStr(), companyNotes: tools.randomStr(), industry: tools.randomStr(), mainPhone: tools.randomInt });
 
-suite.forElement('marketing', 'companies', { payload: companiesPayload }, (test) => {
+suite.forElement('marketing', 'companies', { payload: payload }, (test) => {
   it('should allow CRUDS for /companies', () => {
     let id, value;
-    const updatedPayload = {
-      "company": tools.randomStr(),
-      "billingCity": tools.randomStr(),
-      "billingCountry": tools.randomStr(),
-      "billingPostalCode": tools.randomInt(),
-      "billingState": tools.randomStr(),
-      "companyNotes": tools.randomStr(),
-      "industry": tools.randomStr(),
-      "mainPhone": tools.randomInt()
-    };
-    return cloud.post(test.api, companiesPayload)
+    const updatedPayload = tools.requirePayload(`${__dirname}/assets/companies.json`);
+    delete updatedPayload.externalCompanyId; //Can't update this
+    return cloud.post(test.api, payload)
       .then(r => id = r.body.id)
       .then(r => value = `id in ( ${id} )`)
       .then(r => cloud.get(`${test.api}/${id}`))

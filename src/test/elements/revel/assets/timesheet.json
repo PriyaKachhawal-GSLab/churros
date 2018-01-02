@@ -1,0 +1,9 @@
+{
+  "break_length": 1,
+  "break_type": 2,
+  "department_name": "Grocery",
+  "is_auto_clock_out": false,
+  "role_name": "Employee",
+  "role_wage": 47.47,
+  "stage": 3
+}

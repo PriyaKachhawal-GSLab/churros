@@ -1,29 +1,37 @@
 {
   "campaigns": {
-    "vendorName":"hub/v1/campaigns",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "id"
-      }
-    ]
+    "vendorName": "campaigns",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "id"
+    }]
   },
   "contacts": {
-    "vendorName": "contacts/v1/contacts",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "id"
-      }
-    ]
+    "vendorName": "contacts",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "contactID"
+    }]
   },
   "activities": {
-    "vendorName": "interaction/v1/interactions",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "id"
-      }
-    ]
+    "vendorName": "activities",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "id"
+    }]
+  },
+  "lists": {
+    "vendorName": "lists",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ID"
+    }]
+  },
+  "data-extensions": {
+    "vendorName": "data-extensions",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ObjectID"
+    }]
   }
 }

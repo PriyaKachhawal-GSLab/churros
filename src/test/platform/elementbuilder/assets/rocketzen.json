@@ -1,0 +1,965 @@
+{
+  "bulkUploadEnabled": false,
+  "image": "http://developers.cloud-elements.com/assets/img/default-ce-logo-element-builder.png",
+  "configuration": [
+    {
+      "internal": false,
+      "companyConfig": false,
+      "defaultValue": "https://onemodel.com",
+      "displayOrder": 1,
+      "active": true,
+      "description": "One Model Base URL",
+      "type": "TEXTFIELD_1000",
+      "resellerConfig": false,
+      "required": false,
+      "hideFromConsole": true,
+      "name": "Base URL",
+      "groupControl": false,
+      "key": "base.url"
+    },
+    {
+      "internal": false,
+      "companyConfig": false,
+      "defaultValue": "page",
+      "displayOrder": 1,
+      "active": true,
+      "description": "One Model Pagination Type",
+      "type": "TEXTFIELD_32",
+      "resellerConfig": false,
+      "required": false,
+      "hideFromConsole": true,
+      "name": "Pagination Type",
+      "groupControl": false,
+      "key": "pagination.type"
+    },
+    {
+      "internal": false,
+      "companyConfig": false,
+      "defaultValue": "100",
+      "displayOrder": 1,
+      "active": true,
+      "description": "One Model Max Page Size (or limit)",
+      "type": "TEXTFIELD_32",
+      "resellerConfig": false,
+      "required": false,
+      "hideFromConsole": true,
+      "name": "Max Page Size (or limit)",
+      "groupControl": false,
+      "key": "pagination.max"
+    },
+    {
+      "internal": false,
+      "companyConfig": false,
+      "defaultValue": "1",
+      "displayOrder": 1,
+      "active": true,
+      "description": "One Model Pagination Start Index",
+      "type": "TEXTFIELD_32",
+      "resellerConfig": false,
+      "required": false,
+      "hideFromConsole": true,
+      "name": "Pagination Start Index",
+      "groupControl": false,
+      "key": "pagination.page.startindex"
+    },
+    {
+      "internal": true,
+      "hideFromConsole": true,
+      "companyConfig": false,
+      "displayOrder": 100,
+      "name": "Time of Getting Token or Performing Authentication",
+      "active": true,
+      "description": "One Model Time of Getting Token or Performing Authentication",
+      "type": "TEXTFIELD_32",
+      "groupControl": false,
+      "resellerConfig": false,
+      "key": "authentication.time",
+      "required": false
+    }
+  ],
+  "objects": [
+    {
+      "bulkUploadEnabled": false,
+      "createdDateFormat": "yyyy/mm/dd",
+      "bulkDownloadEnabled": false,
+      "createdDateName": "created_dt",
+      "customFields": false,
+      "eventsEnabled": false,
+      "name": "contacts",
+      "fields": [
+        {
+          "hidden": false,
+          "displayName": "Id",
+          "format": "int64",
+          "name": "id",
+          "description": "Id field",
+          "readOnly": false,
+          "sampleValue": "122",
+          "type": "integer",
+          "primaryKey": true
+        },
+        {
+          "hidden": false,
+          "name": "first_name",
+          "readOnly": false,
+          "type": "string",
+          "primaryKey": false
+        },
+        {
+          "hidden": false,
+          "name": "facebook",
+          "readOnly": false,
+          "type": "string",
+          "primaryKey": false
+        },
+        {
+          "hidden": false,
+          "name": "last_name",
+          "readOnly": false,
+          "type": "string",
+          "primaryKey": false
+        },
+        {
+          "hidden": false,
+          "name": "phone",
+          "readOnly": false,
+          "type": "string",
+          "primaryKey": false
+        },
+        {
+          "hidden": false,
+          "name": "address",
+          "readOnly": false,
+          "type": "object",
+          "primaryKey": false
+        },
+        {
+          "hidden": false,
+          "name": "email",
+          "readOnly": false,
+          "type": "string",
+          "primaryKey": false
+        }
+      ],
+      "primaryKeyName": "id",
+      "vendorName": "Contact",
+      "searchConfiguration": {
+        "operators": [
+          "and",
+          "or"
+        ],
+        "fields": [
+          "id",
+          "email"
+        ]
+      }
+    },
+    {
+      "bulkUploadEnabled": false,
+      "bulkDownloadEnabled": false,
+      "customFields": false,
+      "eventsEnabled": false,
+      "name": "address",
+      "fields": [
+        {
+          "hidden": false,
+          "format": "int64",
+          "name": "addressId",
+          "readOnly": false,
+          "type": "integer",
+          "primaryKey": false
+        },
+        {
+          "hidden": false,
+          "name": "country",
+          "readOnly": false,
+          "type": "string",
+          "primaryKey": false
+        }
+      ]
+    }
+  ],
+  "active": true,
+  "description": "Rocket Element to do all our testing stuff...can be anything",
+  "resources": [
+    {
+      "method": "GET",
+      "nextResource": "",
+      "description": "Search for  contacts",
+      "type": "api",
+      "vendorPath": "/contacts",
+      "kind": "eb",
+      "nextPageKey": "",
+      "path": "/hubs/general/contacts",
+      "paginationType": "VENDOR_SUPPORTED",
+      "vendorMethod": "GET",
+      "response": {
+        "contentType": "application/json"
+      },
+      "hooks": [],
+      "parameters": [
+        {
+          "vendorType": "query",
+          "dataType": "string",
+          "name": "page",
+          "description": "The page number of resources to retrieve",
+          "vendorDataType": "string",
+          "source": "request",
+          "type": "query",
+          "vendorName": "page",
+          "required": false
+        },
+        {
+          "vendorType": "query",
+          "converter": "toQueryParameters",
+          "dataType": "string",
+          "name": "where",
+          "description": "The CEQL search expression.",
+          "vendorDataType": "string",
+          "source": "request",
+          "type": "query",
+          "vendorName": "converter:toQueryParameters",
+          "required": false
+        },
+        {
+          "vendorType": "query",
+          "dataType": "string",
+          "name": "pageSize",
+          "description": "The number of resources to return in a given page",
+          "vendorDataType": "string",
+          "source": "request",
+          "type": "query",
+          "vendorName": "pageSize",
+          "required": false
+        }
+      ],
+      "object": {
+        "bulkUploadEnabled": false,
+        "createdDateFormat": "yyyy/mm/dd",
+        "bulkDownloadEnabled": false,
+        "createdDateName": "created_dt",
+        "customFields": false,
+        "eventsEnabled": false,
+        "name": "contacts",
+        "fields": [
+          {
+            "request": false,
+            "hidden": false,
+            "displayName": "Id",
+            "response": true,
+            "format": "int64",
+            "name": "id",
+            "description": "Id field",
+            "readOnly": false,
+            "sampleValue": "122",
+            "type": "integer",
+            "required": false,
+            "primaryKey": true
+          },
+          {
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "first_name",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "facebook",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "email",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "last_name",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "phone",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "reference": {
+              "bulkUploadEnabled": false,
+              "bulkDownloadEnabled": false,
+              "customFields": false,
+              "eventsEnabled": false,
+              "name": "address",
+              "fields": [
+                {
+                  "request": false,
+                  "hidden": false,
+                  "response": true,
+                  "format": "int64",
+                  "name": "addressId",
+                  "readOnly": false,
+                  "type": "integer",
+                  "required": false,
+                  "primaryKey": false
+                },
+                {
+                  "request": false,
+                  "hidden": false,
+                  "response": true,
+                  "name": "country",
+                  "readOnly": false,
+                  "type": "string",
+                  "required": false,
+                  "primaryKey": false
+                }
+              ]
+            },
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "address",
+            "readOnly": false,
+            "type": "object",
+            "required": false,
+            "primaryKey": false
+          }
+        ],
+        "primaryKeyName": "id",
+        "type": "object",
+        "vendorName": "Contact",
+        "searchConfiguration": {
+          "operators": [
+            "and",
+            "or"
+          ],
+          "fields": [
+            "id",
+            "email"
+          ]
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "nextResource": "",
+      "description": "Create a(n)  contacts",
+      "type": "api",
+      "vendorPath": "/contacts",
+      "kind": "eb",
+      "nextPageKey": "",
+      "path": "/hubs/general/contacts",
+      "paginationType": "VENDOR_SUPPORTED",
+      "vendorMethod": "POST",
+      "response": {
+        "contentType": "application/json"
+      },
+      "operationId": "",
+      "hooks": [],
+      "parameters": [
+        {
+          "vendorType": "body",
+          "dataType": "contacts",
+          "name": "contacts",
+          "description": "The contacts object",
+          "vendorDataType": "contacts",
+          "source": "request",
+          "type": "body",
+          "vendorName": "contacts",
+          "required": true
+        },
+        {
+          "vendorType": "path",
+          "dataType": "string",
+          "name": "id",
+          "description": "The contacts ID",
+          "vendorDataType": "string",
+          "source": "request",
+          "type": "path",
+          "vendorName": "id",
+          "required": true
+        }
+      ],
+      "object": {
+        "bulkUploadEnabled": false,
+        "createdDateFormat": "yyyy/mm/dd",
+        "bulkDownloadEnabled": false,
+        "createdDateName": "created_dt",
+        "customFields": false,
+        "eventsEnabled": false,
+        "name": "contacts",
+        "fields": [
+          {
+            "request": false,
+            "hidden": false,
+            "displayName": "Id",
+            "response": true,
+            "format": "int64",
+            "name": "id",
+            "description": "Id field",
+            "readOnly": false,
+            "sampleValue": "122",
+            "type": "integer",
+            "required": false,
+            "primaryKey": true
+          },
+          {
+            "request": true,
+            "hidden": false,
+            "response": true,
+            "name": "first_name",
+            "readOnly": false,
+            "type": "string",
+            "required": true,
+            "primaryKey": false
+          },
+          {
+            "request": true,
+            "hidden": false,
+            "response": true,
+            "name": "facebook",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "request": true,
+            "hidden": false,
+            "response": true,
+            "name": "email",
+            "readOnly": false,
+            "type": "string",
+            "required": true,
+            "primaryKey": false
+          },
+          {
+            "request": true,
+            "hidden": false,
+            "response": true,
+            "name": "last_name",
+            "readOnly": false,
+            "type": "string",
+            "required": true,
+            "primaryKey": false
+          },
+          {
+            "request": true,
+            "hidden": false,
+            "response": true,
+            "name": "phone",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "reference": {
+              "bulkUploadEnabled": false,
+              "bulkDownloadEnabled": false,
+              "customFields": false,
+              "eventsEnabled": false,
+              "name": "address",
+              "fields": [
+                {
+                  "request": true,
+                  "hidden": false,
+                  "response": true,
+                  "format": "int64",
+                  "name": "addressId",
+                  "readOnly": false,
+                  "type": "integer",
+                  "required": false,
+                  "primaryKey": false
+                },
+                {
+                  "request": false,
+                  "hidden": false,
+                  "response": true,
+                  "name": "country",
+                  "readOnly": false,
+                  "type": "string",
+                  "required": false,
+                  "primaryKey": false
+                }
+              ]
+            },
+            "request": false,
+            "hidden": false,
+            "response": false,
+            "name": "address",
+            "readOnly": false,
+            "type": "object",
+            "required": false,
+            "primaryKey": false
+          }
+        ],
+        "primaryKeyName": "id",
+        "type": "object",
+        "vendorName": "Contact",
+        "searchConfiguration": {
+          "operators": [
+            "and",
+            "or"
+          ],
+          "fields": [
+            "id",
+            "email"
+          ]
+        }
+      },
+      "rootKey": ""
+    },
+    {
+      "method": "GET",
+      "nextResource": "",
+      "description": "Search for  contacts",
+      "type": "api",
+      "vendorPath": "/contacts",
+      "nextPageKey": "",
+      "path": "/hubs/general/contacts-nonexec",
+      "paginationType": "VENDOR_SUPPORTED",
+      "vendorMethod": "GET",
+      "response": {
+        "contentType": "application/json"
+      },
+      "hooks": [],
+      "kind": "java",
+      "parameters": [
+        {
+          "vendorType": "query",
+          "dataType": "string",
+          "name": "page",
+          "description": "The page number of resources to retrieve",
+          "vendorDataType": "string",
+          "source": "request",
+          "type": "query",
+          "vendorName": "page",
+          "required": false
+        },
+        {
+          "vendorType": "query",
+          "dataType": "string",
+          "name": "pageSize",
+          "description": "The number of resources to return in a given page",
+          "vendorDataType": "string",
+          "source": "request",
+          "type": "query",
+          "vendorName": "pageSize",
+          "required": false
+        },
+        {
+          "vendorType": "query",
+          "converter": "toQueryParameters",
+          "dataType": "string",
+          "name": "where",
+          "description": "The CEQL search expression.",
+          "vendorDataType": "string",
+          "source": "request",
+          "type": "query",
+          "vendorName": "converter:toQueryParameters",
+          "required": false
+        }
+      ]
+    },
+    {
+      "method": "DELETE",
+      "nextResource": "",
+      "description": "Delete a(n) contacts",
+      "type": "api",
+      "vendorPath": "/contacts/{id}",
+      "kind": "eb",
+      "nextPageKey": "",
+      "path": "/hubs/general/contacts/{id}",
+      "paginationType": "VENDOR_SUPPORTED",
+      "vendorMethod": "DELETE",
+      "response": {
+        "contentType": "application/json"
+      },
+      "operationId": "",
+      "hooks": [],
+      "parameters": [
+        {
+          "vendorType": "path",
+          "dataType": "string",
+          "name": "id",
+          "description": "The contacts ID",
+          "vendorDataType": "string",
+          "source": "request",
+          "type": "path",
+          "vendorName": "id",
+          "required": true
+        }
+      ],
+      "rootKey": ""
+    },
+    {
+      "method": "GET",
+      "nextResource": "",
+      "description": "Retrieve a(n)  contacts",
+      "type": "api",
+      "vendorPath": "/contacts/{id}",
+      "kind": "eb",
+      "nextPageKey": "",
+      "path": "/hubs/general/contacts/{id}",
+      "paginationType": "VENDOR_SUPPORTED",
+      "vendorMethod": "GET",
+      "response": {
+        "contentType": "application/json"
+      },
+      "operationId": "",
+      "hooks": [],
+      "parameters": [
+        {
+          "vendorType": "path",
+          "dataType": "string",
+          "name": "id",
+          "description": "The contacts ID",
+          "vendorDataType": "string",
+          "source": "request",
+          "type": "path",
+          "vendorName": "id",
+          "required": true
+        }
+      ],
+      "object": {
+        "bulkUploadEnabled": false,
+        "createdDateFormat": "yyyy/mm/dd",
+        "bulkDownloadEnabled": false,
+        "createdDateName": "created_dt",
+        "customFields": false,
+        "eventsEnabled": false,
+        "name": "contacts",
+        "fields": [
+          {
+            "request": false,
+            "hidden": false,
+            "displayName": "Id",
+            "response": true,
+            "format": "int64",
+            "name": "id",
+            "description": "Id field",
+            "readOnly": false,
+            "sampleValue": "122",
+            "type": "integer",
+            "required": false,
+            "primaryKey": true
+          },
+          {
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "first_name",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "facebook",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "email",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "last_name",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "phone",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "reference": {
+              "bulkUploadEnabled": false,
+              "bulkDownloadEnabled": false,
+              "customFields": false,
+              "eventsEnabled": false,
+              "name": "address",
+              "fields": [
+                {
+                  "request": false,
+                  "hidden": false,
+                  "response": true,
+                  "format": "int64",
+                  "name": "addressId",
+                  "readOnly": false,
+                  "type": "integer",
+                  "required": false,
+                  "primaryKey": false
+                },
+                {
+                  "request": false,
+                  "hidden": false,
+                  "response": true,
+                  "name": "country",
+                  "readOnly": false,
+                  "type": "string",
+                  "required": false,
+                  "primaryKey": false
+                }
+              ]
+            },
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "address",
+            "readOnly": false,
+            "type": "object",
+            "required": false,
+            "primaryKey": false
+          }
+        ],
+        "primaryKeyName": "id",
+        "type": "object",
+        "vendorName": "Contact",
+        "searchConfiguration": {
+          "operators": [
+            "and",
+            "or"
+          ],
+          "fields": [
+            "id",
+            "email"
+          ]
+        }
+      },
+      "rootKey": ""
+    },
+    {
+      "method": "PATCH",
+      "nextResource": "",
+      "description": "Update a(n)  contacts",
+      "type": "api",
+      "vendorPath": "/contacts/{id}",
+      "nextPageKey": "",
+      "path": "/hubs/general/contacts/{id}",
+      "paginationType": "VENDOR_SUPPORTED",
+      "vendorMethod": "PATCH",
+      "response": {
+        "contentType": "application/json"
+      },
+      "operationId": "",
+      "hooks": [],
+      "parameters": [
+        {
+          "vendorType": "body",
+          "dataType": "contacts",
+          "name": "contacts",
+          "description": "The contacts object",
+          "vendorDataType": "contacts",
+          "source": "request",
+          "type": "body",
+          "vendorName": "contacts",
+          "required": true
+        },
+        {
+          "vendorType": "path",
+          "dataType": "string",
+          "name": "id",
+          "description": "The contacts ID",
+          "vendorDataType": "string",
+          "source": "request",
+          "type": "path",
+          "vendorName": "id",
+          "required": true
+        }
+      ],
+      "object": {
+        "bulkUploadEnabled": false,
+        "createdDateFormat": "yyyy/mm/dd",
+        "bulkDownloadEnabled": false,
+        "createdDateName": "created_dt",
+        "customFields": false,
+        "eventsEnabled": false,
+        "name": "contacts",
+        "fields": [
+          {
+            "request": false,
+            "hidden": false,
+            "displayName": "Id",
+            "response": true,
+            "format": "int64",
+            "name": "id",
+            "description": "Id field",
+            "readOnly": false,
+            "sampleValue": "122",
+            "type": "integer",
+            "required": true,
+            "primaryKey": true
+          },
+          {
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "first_name",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "facebook",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "email",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "last_name",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "phone",
+            "readOnly": false,
+            "type": "string",
+            "required": false,
+            "primaryKey": false
+          },
+          {
+            "reference": {
+              "bulkUploadEnabled": false,
+              "bulkDownloadEnabled": false,
+              "customFields": false,
+              "eventsEnabled": false,
+              "name": "address",
+              "fields": [
+                {
+                  "request": false,
+                  "hidden": false,
+                  "response": true,
+                  "format": "int64",
+                  "name": "addressId",
+                  "readOnly": false,
+                  "type": "integer",
+                  "required": false,
+                  "primaryKey": false
+                },
+                {
+                  "request": false,
+                  "hidden": false,
+                  "response": true,
+                  "name": "country",
+                  "readOnly": false,
+                  "type": "string",
+                  "required": false,
+                  "primaryKey": false
+                }
+              ]
+            },
+            "request": false,
+            "hidden": false,
+            "response": true,
+            "name": "address",
+            "readOnly": false,
+            "type": "object",
+            "required": false,
+            "primaryKey": false
+          }
+        ],
+        "primaryKeyName": "id",
+        "type": "object",
+        "vendorName": "Contact",
+        "searchConfiguration": {
+          "operators": [
+            "and",
+            "or"
+          ],
+          "fields": [
+            "id",
+            "email"
+          ]
+        }
+      },
+      "rootKey": ""
+    }
+  ],
+  "protocolType": "http",
+  "cloneable": true,
+  "extended": true,
+  "transformationsEnabled": true,
+  "bulkDownloadEnabled": false,
+  "deleted": false,
+  "hub": "general",
+  "typeOauth": false,
+  "name": "Rocketzen",
+  "trialAccount": false,
+  "extendable": true,
+  "hooks": [],
+  "parameters": [],
+  "beta": false,
+  "key": "rocketzen",
+  "authentication": {
+    "type": "custom"
+  }
+}

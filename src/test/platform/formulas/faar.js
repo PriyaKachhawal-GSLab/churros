@@ -67,6 +67,41 @@ suite.forPlatform('formulas', { name: 'FaaRs' }, test => {
     return runFaarSetup(run);
   });
 
+  it('should allow exposing a FaaR and then un-exposing it via PATCH /formulas', () => {
+    const enableFaarBody = {
+      method: 'GET',
+      uri: '/churros-resource'
+    };
+
+    const disableFaarBody = {
+      method: null,
+      uri: null
+    };
+
+    const enableValidator = (formula) => {
+      expect(formula.method).to.equal(enableFaarBody.method);
+      expect(formula.uri).to.equal(enableFaarBody.uri);
+    };
+
+    const disableValidator = (formula) => {
+      expect(formula.method).to.equal(undefined);
+      expect(formula.uri).to.equal(undefined);
+    };
+
+    let formulaId;
+    return cloud.post('/formulas', manualFormulaTemplate)
+      .then(r => formulaId = r.body.id)
+      .then(r => cloud.patch(`/formulas/${formulaId}`, enableFaarBody))
+      .then(r => enableValidator(r.body))
+      .then(r => cloud.patch(`/formulas/${formulaId}`, disableFaarBody))
+      .then(r => disableValidator(r.body))
+      .then(r => cloud.delete(`/formulas/${formulaId}`))
+      .catch(e => {
+        if (formulaId) cloud.delete(`/formulas/${formulaId}`);
+        throw new Error(e);
+      });
+  });
+
   it('should not allow exposing a formula that does not have a manual trigger', () => {
     const scheduledFormula = Object.assign({}, manualFormula, { triggers: [scheduledTrigger] });
     const v = r => expect(r).to.have.statusCode(400);

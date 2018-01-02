@@ -1,13 +1,12 @@
 {
-  "company": "ABCXD",
-  "annualRevenue": 12345,
-  "billingCity": "pune",
-  "externalCompanyId": "1234",
-  "billingCountry": "India",
-  "billingPostalCode": 412105,
-  "billingState": "adfdhd",
-  "companyNotes": "asdfghj",
-  "industry": "IT",
-  "mainPhone": "9923434566"
-
+  "company": "<<company.companyName>>",
+  "annualRevenue": "<<random.singleNumber##4>>",
+  "billingCity": "<<address.city>>",
+  "externalCompanyId": "<<random.singleNumber##6>>",
+  "billingCountry": "<<address.country>>",
+  "billingPostalCode": "<<address.zipCode>>",
+  "billingState": "<<address.state>>",
+  "companyNotes": "<<random.alphaNumeric##15>>",
+  "industry": "<<random.letter##3>>",
+  "mainPhone": "<<phone.phoneNumber>>"
 }

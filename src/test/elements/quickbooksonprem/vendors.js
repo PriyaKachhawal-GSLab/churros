@@ -26,5 +26,5 @@ suite.forElement('finance', 'vendors', { payload: payload }, (test) => {
       const validValues = r.body.filter(obj => obj.Name === `TEST`);
       expect(validValues.length).to.equal(r.body.length);
     }).should.return200OnGet();
-  test.should.supportPagination();
+  test.should.supportNextPagePagination(1);
 });

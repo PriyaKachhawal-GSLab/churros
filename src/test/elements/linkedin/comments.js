@@ -7,6 +7,7 @@ const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/shares.json`);
 const comment = tools.requirePayload(`${__dirname}/assets/comments.json`);
 
+//Need to skip as there is no delete API
 suite.forElement('social', 'comments', { skip: true }, (test) => {
   let companyId, updateId;
 

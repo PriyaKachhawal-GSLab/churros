@@ -2,6 +2,7 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
+const tools = require('core/tools');
 const payload = require('./assets/files');
 const expect = require('chakram').expect;
 const faker = require('faker');
@@ -20,6 +21,9 @@ const propertiesPayload = {
 };
 
 suite.forElement('documents', 'files', { payload: payload }, (test) => {
+  let jpgFileBody,revisionId,jpgFile = __dirname + '/assets/Penguins.jpg';
+  let query = { path: `/Penguins-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` };
+
   it('should allow ping for googledrive', () => {
     return cloud.get(`/hubs/documents/ping`);
   });
@@ -57,7 +61,26 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
       .then(r => cloud.delete(`${test.api}/${fileId}`))
       .then(r => cloud.withOptions({ qs: { path: `${destPath}` } }).delete(`${test.api}`));
   });
-  // Test For Export Functionality
+
+  before(() => cloud.withOptions({ qs : query }).postFile(test.api, jpgFile)
+  .then(r => jpgFileBody = r.body));
+
+  after(() => cloud.delete(`${test.api}/${jpgFileBody.id}`));
+
+
+  it('it should allow RS for documents/files/:id/revisions', () => {
+      return cloud.get(`${test.api}/${jpgFileBody.id}/revisions`)
+      .then(r => revisionId = r.body[0].id)
+      .then(() => cloud.get(`${test.api}/${jpgFileBody.id}/revisions/${revisionId}`));
+  });
+
+  it('it should allow RS for documents/files/revisions by path', () => {
+      return cloud.withOptions({ qs: query }).get(`${test.api}/revisions`)
+      .then(r => revisionId = r.body[0].id)
+      .then(() => cloud.withOptions({ qs: query }).get(`${test.api}/revisions/${revisionId}`));
+  });
+
+  //Test For Export Functionality
   it('Should allow export of Google Doc to plain text using media type', () => {
     let DocFile = '/ChurrosDocDoNotDelete';
     return cloud.withOptions({ qs: { path: DocFile, mediaType: 'text/plain' } }).get(test.api)

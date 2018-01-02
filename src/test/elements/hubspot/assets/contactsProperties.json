@@ -10,7 +10,7 @@
   "formField": false,
   "displayMode": "current_value",
   "groupName": "conversioninformation",
-  "name": "<<random.alphaNumeric##8>>",
+  "name": "hs_<<random.alphaNumeric##8>>",
   "options": [],
   "fieldType": "text",
   "calculated": false,

@@ -6,6 +6,7 @@ const cloud = require('core/cloud');
 const provisioner = require('core/provisioner');
 const oneModelElementJson = require('./assets/objects/onemodel_element.json');
 const contactsMetadata = require('./assets/objects/contacts_metadata.json');
+const swaggerParser = require('swagger-parser');
 
 suite.forPlatform('element-objects', {}, (test) => {
   let oneModelElement;
@@ -31,6 +32,25 @@ suite.forPlatform('element-objects', {}, (test) => {
           expect(r.body.fields).to.be.array;
           expect(r.body.fields).to.have.length(8);
           expect(r.body).to.deep.equal(contactsMetadata);
+      });
+  });
+
+
+  it('should support calling generating swagger docs for the instance', () => {
+      return cloud.get(`/elements/${oneModelElement.id}/docs`, (r) => {
+          expect(r.body).to.not.be.empty;
+          let docs = r.body;
+          expect(docs.paths).to.not.be.empty;
+          expect(docs.paths['/contacts']).to.not.be.empty;
+          let contacts = docs.paths['/contacts'];
+          expect(contacts.post).to.not.be.empty;
+          expect(contacts.post.parameters).to.not.be.empty;
+          let postbodyParam = contacts.post.parameters.filter(p => p['in'] === 'body')[0];
+          expect(postbodyParam).to.not.be.empty;
+          expect(postbodyParam.schema).to.not.be.empty;
+          expect(postbodyParam.schema.properties).to.not.be.empty;
+          expect(postbodyParam.schema['x-vendor-objectname']).to.not.be.empty;
+          swaggerParser.validate(r.body);
       });
   });
 

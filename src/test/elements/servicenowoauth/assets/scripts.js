@@ -48,7 +48,6 @@ module.exports = (element, method) => {
                   });
                 }));
             })
-            .then(r => browser.findElement(webdriver.By.xpath('//*[@id="instance_detail"]/div[2]/p[2]/a')).click())
             .then(r => browser.getCurrentUrl());
         }, () => {
           console.log('not found');

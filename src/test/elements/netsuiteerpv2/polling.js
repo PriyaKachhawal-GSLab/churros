@@ -14,7 +14,7 @@ const vendorPaymentsPayload = require('./assets/vendor-payments');
 const vendorsPayload = tools.requirePayload(`${__dirname}/assets/vendors.json`);
 
 //netsuite isn't polling correctly, unskip when it works
-suite.forElement('erp', 'polling', { skip: true }, (test) => {
+suite.forElement('erp', 'polling', { skip: false }, (test) => {
   test.withApi('/hubs/erp/customers').should.supportPolling(customersPayload, 'customers');
   test.withApi('/hubs/erp/employees').should.supportPolling(employeesPayload, 'employees');
   test.withApi('/hubs/erp/estimates').should.supportPolling(estimatesPayload, 'estimates');

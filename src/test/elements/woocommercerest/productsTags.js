@@ -2,7 +2,8 @@
 
 const suite = require('core/suite');
 const expect = require('chakram').expect;
-const payload = require('./assets/productsTags');
+const tools = require('core/tools');
+const payload = tools.requirePayload(`${__dirname}/assets/productsTags.json`);
 
 suite.forElement('ecommerce', 'products-tags', { payload: payload }, (test) => {
   test.should.supportCruds();
