@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const commander = require('commander');
-const file = process.env.HOME || process.env.USERPROFILE + '/.churros/sauce.json';
+const file = (process.env.HOME || process.env.USERPROFILE) + '/.churros/sauce.json';
 
 const loadFile = () => {
   return new Promise((resolve, reject) => {

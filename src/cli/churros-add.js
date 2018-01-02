@@ -165,7 +165,7 @@ const stubElementFiles = (answers) =>
 
     const config = answers.config;
     if (config) {
-      let saucePath = process.env.HOME || process.env.USERPROFILE + '/.churros/sauce.json';
+      let saucePath = (process.env.HOME || process.env.USERPROFILE) + '/.churros/sauce.json';
       let sauceConfig = require(saucePath);
       Object.keys(config).forEach(c => {
         const value = config[c];
