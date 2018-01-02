@@ -406,21 +406,25 @@ const checkDuplicateModel = () => {
 exports.checkDuplicateModel = () => checkDuplicateModel();
 
 const findMax = (response) => {
+   // logger.info(response.length);
     let max = 0;
-    let maxLengthObject = {};
-    response.forEach((singleResponse) => {
+    let maxLengthObject = response[0];
+    response.forEach((singleResponse, i, a) => {        
         let singleResponseLength = Object.keys(singleResponse).length;
+        //logger.info("max : " + max + "length : " + singleResponseLength);
         if (singleResponseLength > max) {
             max = singleResponseLength;
             maxLengthObject = singleResponse;
+            //logger.info(i);
         }
     });
+    //logger.info(max);
     return maxLengthObject;
 };
 
 const validateAndFindMax = (response) => {
     return new Promise((res, rej) => {
-        logger.info(typeof response);
+        logger.debug(typeof response);
         if (Array.isArray(response) && response.length !== 0) {
             res(findMax(response));
         }
@@ -428,35 +432,128 @@ const validateAndFindMax = (response) => {
     });
 };
 
-const validateSearchableFields = (whereClauseArray, api, responseLength) => {
 
-    return Promise.all(whereClauseArray.map(r => cloud.withOptions({ qs: { where: r.value } }).get(api)
-        .catch(r => r)))
-        .then(rs => {
-            // remove this logger.
-            logger.info('one success onlyh');            
-            for (let i = 0; i < whereClauseArray.length; i++) {
-                whereClauseArray[i].status = rs[i];
-            }
-            // will optimize
-            let passedKeys = whereClauseArray.filter(r => r.status.hasOwnProperty('body') ? true : false)
-            .map(r => r.key);
-            let failedKeys = whereClauseArray.filter(r => r.status.hasOwnProperty('body') ? false : true)
-            .map(r => r.key);           
-            logger.info('result');
-            logger.info({
-                passedKeys : passedKeys,
-                failedKeys : failedKeys
-            });           
-            return whereClauseArray;
-        })
-        .catch(e => {
-            logger.info('failed with some region   ');
-        });
+const validateSearchableFieldsWithReduce = (whereClauseArray, api, responseLength) => {
+    return whereClauseArray.reduce((promise, r) => {
+        return promise
+            .then((result) => {
+                //console.log(`item ${item}`);
+                //return asyncFunc(item).then(result => final.push(result));
+               // logger.info(r.value);
+                return cloud.withOptions({ qs: { where: r.value } }).get(api)
+                .then(result => r.status = result.body);
+                //return asyncFunc(item).then(result => final.push(result));
+            })
+            .catch(console.error);
+    }, Promise.resolve());
 };
+
+// const validateSearchableFields = (whereClauseArray, api, responseLength) => {
+
+//     return Promise.all(whereClauseArray.map(r => 
+//         //cloud.withOptions({ qs: { where: r.value } }).get(api)
+//         cloud.withOptions({ qs: { where: 'companyName=\'Alamo Catering Group\'' } }).get(api)
+        
+//         //.then(delay(1000))
+//         .then(r => { logger.info('here'); return r;})        
+//        // .catch(delay(1000))
+//         .catch(r => { logger.info('error'); return r;})
+//          ))
+//         .then(rs => {
+//             // remove this logger.
+//             logger.debug('in validateSearchableFields');            
+//             //rs.forEach(r=>logger.info(Object.keys(r)))
+
+//             let countError = 0;
+//             let countSuccess = 0;
+//             rs.forEach(r => {
+//                 if(r.hasOwnProperty('body')) {
+//                     countSuccess++;
+//                 }
+//                 else {
+//                     countError++;
+//                 }
+
+//             });
+
+//             logger.info('countError', countError);
+//             logger.info('countSuccess', countSuccess);
+
+//             whereClauseArray.forEach((r, i, a) => r.status = rs[i]);                     
+//             let passedKeys = []; let failedKeys = []; let suspectedKeys = [];
+//             whereClauseArray.forEach(r => {                
+//                 if(r.status.hasOwnProperty('body')) {
+//                     if(r.status.body.length !== responseLength) {
+//                         passedKeys.push(r.key); 
+//                     }else {
+//                         suspectedKeys.push(r); 
+//                     }
+//                 } else {
+//                     failedKeys.push(r.key);
+//                 }
+//             });
+            
+//             logger.info(' result : ', api);
+//             logger.info({
+//                 passedKeys : passedKeys                
+//             });  
+//             logger.info({                
+//                 suspectedKeys : suspectedKeys.map(r => r.key),                
+//             });
+//             logger.info({
+//                 failedKeys : failedKeys
+//             });
+            
+//             // suspectedKeys.forEach((r, i, a) => {
+//             //     let body =  r.status.body;
+//             //     let result = body.every((single) => {
+//             //        return Object.keys(single).indexOf('cscd') > -1;                   
+//             //     }); 
+//             //     result ? passedKeys.push(r.key) : failedKeys.push(r.key);
+//             // });    
+//             // logger.info('mature result : ', api);
+//             // logger.info({
+//             //     passedKeys : passedKeys,                
+//             //     failedKeys : failedKeys
+//             // });        
+//             return whereClauseArray;
+//         })
+//         .catch(e => {
+//             logger.info('failed with some region   ');
+//         });
+// };
+
+// const reportSearchableFields = (whereClauseArray, responseLength) => {
+
+//     let passedKeys = []; let failedKeys = []; let suspectedKeys = [];
+//     whereClauseArray.forEach(r => {   
+        
+//         if(r.hasOwnProperty('status')) {
+//             if(r.status.body.length !== responseLength) {
+//                 passedKeys.push(r.key); 
+//             } else {
+//                 suspectedKeys.push(r); 
+//             }
+//         } else {
+//             failedKeys.push(r.key);
+//         }    
+//     });
+
+//     logger.info({
+//         passedKeys : passedKeys                
+//     });  
+//     logger.info({                
+//         suspectedKeys : suspectedKeys.map(r => r.key),                
+//     });
+//     logger.info({
+//         failedKeys : failedKeys
+//     });    
+// };
+    
 
 const filterAndMapResponse = (response) => {
     return new Promise((res, rej) => {
+        //logger.info(response);
         if (typeof response === 'object') {
             let filteredAndMappedKeys = Object.keys(response).filter((key) => {
                 // to put (key.endsWith("_c"))
@@ -464,13 +561,14 @@ const filterAndMapResponse = (response) => {
                     return key;
                 }
             })
-                .map((filteredKey) => {
-                    // put equalignore case
-                    if (response[filteredKey] === true || response[filteredKey] === false) {
-                        return { key: filteredKey, value: filteredKey + "=" + response[filteredKey] };
-                    }
-                    return { key: filteredKey, value: filteredKey + "=\'" + response[filteredKey] + "\'" };
-                });
+            .map((filteredKey) => {
+                // put equalignore case
+                // if (response[filteredKey] === true || response[filteredKey] === false) {
+                //     return { key: filteredKey, value: filteredKey + "=" + response[filteredKey] };
+                // }
+                return { key: filteredKey, value: filteredKey + "=\'" + response[filteredKey] + "\'" };
+            });
+            logger.debug('filtered', filteredAndMappedKeys);
             logger.info('filtered', filteredAndMappedKeys);
             res(filteredAndMappedKeys);
         }
@@ -478,17 +576,37 @@ const filterAndMapResponse = (response) => {
     });
 };
 
+
+
 const searchableFields = (api) => {
-    logger.info(api);
+
+    let whereClauseArray = {};
+    logger.debug('working for : ', api);
     let responseLength;
     return get(api)        
-        .then(r => { responseLength  = r.length; 
-                    logger.info(responseLength);
+        .then(r => { responseLength  = r.length;                     
                      return validateAndFindMax(r);})
         .then(r => filterAndMapResponse(r))
-        .then(r => validateSearchableFields(r, api, responseLength))        
-        .catch(r => tools.logAndThrow('Failed to find searchable fields :', r));
+       // .then(r => validateSearchableFields(r, api, responseLength))        
+       .then(r => {
+            whereClauseArray = r;
+            return validateSearchableFieldsWithReduce(r, api, responseLength);
+        })   
+       //.then(r => logger.info(whereClauseArray))
+       .then(r => 
+         {
+         var count = 0;
+         whereClauseArray.forEach(r => {
+          if(r.hasOwnProperty('status')) {   
+            count++;
+            logger.info(r.key);       
+          }
+    });
+    logger.info(count);
+
+})    
+    //)
+       .catch(r => tools.logAndThrow('Failed to find searchable fields :', r));
 };
 
 exports.searchableFields = (api) => searchableFields(api);
-
