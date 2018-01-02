@@ -11,8 +11,8 @@
   },
   "addressLine1": "test",
   "addressLine2": "test",
-  "city": "pune",
-  "state": "MH",
+  "city": "Dallas",
+  "state": "TX",
   "zip": "98765",
   "billToCompany": {
     "id": "644"
