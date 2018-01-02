@@ -10,7 +10,9 @@ const gen = (opts) => {
   return new Object({
     lead_id: (opts.lead_id) || 'lead_' + random,
     name: (opts.name || 'mr. churros ' + random),
-    officeEmail: (opts.officeEmail || 'churros@churros.com')
+    officeEmail: (opts.officeEmail || 'churros@churros.com'),
+    urls:[{type: "home", url:"no.net"}],
+    homePhone: "303-555-1212"
   });
 };
 
