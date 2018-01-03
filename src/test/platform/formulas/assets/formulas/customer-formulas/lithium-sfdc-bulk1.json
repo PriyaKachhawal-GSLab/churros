@@ -1,0 +1,200 @@
+{
+	"id": 1415,
+	"name": "bulk1sfdc",
+	"userId": 160341,
+	"accountId": 156249,
+	"createdDate": "2017-01-23T20:21:09Z",
+	"steps": [{
+		"id": 14572,
+		"onSuccess": ["formulaInstance"],
+		"onFailure": [],
+		"name": "canRun",
+		"type": "filter",
+		"properties": {
+			"body": "var run = config.canrun;\n\nif(run == \"yes\"){\n  done(true)\n}\nelse {\n  done(false)\n}"
+		}
+	}, {
+		"id": 14580,
+		"onSuccess": ["putBodyCanRun"],
+		"onFailure": [],
+		"name": "returnId",
+		"type": "script",
+		"properties": {
+			"body": "var arr = steps.formulaInstance.response.body;\nvar formulaInstance2;\nvar newendtime = new Date().toISOString(); \nvar lithiumInstance;\nvar instance2name;\n\nfor(var j=0; j<arr.length; j++){\n  if(arr[j].formula.name.includes('bulk2sfdc')){\n    instance2name = arr[j].name;\n    formulaInstance2 = arr[j].id;\n    lithiumInstance = arr[j].configuration['lithiumlsw.instance.id'];\n  }\n}\n\nfor(var i=0; i<arr.length; i++){\n  if(arr[i].formula.name.includes('bulk1sfdc')){\n    config.formulainstanceid = arr[i].id;\n    done({\"formulaInstance2\": formulaInstance2, \"lastruntime\": arr[i].configuration.lastruntime, \"sfdcinstanceid\" : arr[i].configuration['sfdc.instance.id'], \"canrun\" : arr[i].configuration.canrun, \"endtime\": arr[i].configuration.endtime, \"formulainstanceid\" : arr[i].id, \"newendtime\": newendtime, \"formulaOneId\" : arr[i].formula.id, \"lithiumInstance\" : lithiumInstance, \"active\": arr[i].active, \"instance2name\": instance2name, \"instance1name\": arr[i]['name']});\n  }\n}\ndone({});"
+		}
+	}, {
+		"id": 14573,
+		"onSuccess": ["returnId"],
+		"onFailure": ["failureNotification"],
+		"name": "formulaInstance",
+		"type": "request",
+		"properties": {
+			"retryAttempts": "5",
+			"retry": "true",
+			"method": "GET",
+			"retryDelay": "500",
+			"api": "/formulas/instances"
+		}
+	}, {
+		"id": 14578,
+		"onSuccess": ["get-transformation"],
+		"onFailure": ["failureNotification"],
+		"name": "putCanRun",
+		"type": "request",
+		"properties": {
+			"path": "${steps.returnId}",
+			"retryAttempts": "5",
+			"body": "${steps.putBodyCanRun}",
+			"retry": "true",
+			"method": "PUT",
+			"retryDelay": "500",
+			"api": "/formulas/{formulaOneId}/instances/{formulainstanceid}"
+		}
+	}, {
+		"id": 14574,
+		"onSuccess": ["return-transformation"],
+		"onFailure": ["failureNotification"],
+		"name": "get-transformation",
+		"type": "request",
+		"properties": {
+			"path": "${steps.returnId}",
+			"method": "GET",
+			"api": "/instances/{lithiumInstance}/transformations/sfdc_Contact_authorsBatch"
+		}
+	}, {
+		"id": 14581,
+		"onSuccess": ["bulkQuery"],
+		"onFailure": [],
+		"name": "return-transformation",
+		"type": "script",
+		"properties": {
+			"body": "var transformation = steps['get-transformation'].response.body.script.body;\nvar array = transformation.split(\" \");\nvar fieldArray = [];\n\nfor(var i=0; i<array.length; i++){\n\tif(array[i].startsWith('originalObject')){\n\t\tfieldArray.push(array[i].slice(15,array[i].indexOf(';')));\n\t}\n}\n\ndone({query: fieldArray.join(',')});\n"
+		}
+	}, {
+		"id": 14571,
+		"onSuccess": ["bulkHeader"],
+		"onFailure": [],
+		"name": "bulkQuery",
+		"type": "script",
+		"properties": {
+			"body": "var fieldString = steps['return-transformation'].query;\nvar obj = steps.returnId;\n\nif(config.lastruntime === null || config.lastruntime === undefined || config.lastruntime === \"\" || config.lastruntime == \"none\"){\n  done( { \"q\" : \"select \" + fieldString + \" from Contact\",\n          \"to\" : obj.newendtime } );\n}\nelse{\n  done( { \"q\" : \"select \" + fieldString + \" from Contact\",\n          \"from\" : config.lastruntime,\n          \"to\" : obj.newendtime} );\n}\n"
+		}
+	}, {
+		"id": 14570,
+		"onSuccess": ["postBulk"],
+		"onFailure": [],
+		"name": "bulkHeader",
+		"type": "script",
+		"properties": {
+			"body": "var obj = steps.returnId;\n\ndone({'Elements-Async-Callback-Url' : '/formulas/instances/'+obj.formulaInstance2+'/executions'});"
+		}
+	}, {
+		"id": 14575,
+		"onSuccess": ["putBody"],
+		"onFailure": ["failureNotification"],
+		"name": "postBulk",
+		"type": "elementRequest",
+		"properties": {
+			"elementInstanceId": "${sfdc.instance.id}",
+			"headers": "${steps.bulkHeader}",
+			"retryAttempts": "5",
+			"retry": "true",
+			"query": "${steps.bulkQuery}",
+			"method": "POST",
+			"retryDelay": "500",
+			"api": "/hubs/crm/bulk/query"
+		}
+	}, {
+		"id": 14576,
+		"onSuccess": ["putConfigs"],
+		"onFailure": [],
+		"name": "putBody",
+		"type": "script",
+		"properties": {
+			"body": "var obj = steps.returnId;\n\ndone({\"active\": obj.active,\n      \"name\": obj.instance1name,\n      \"configuration\": {\n        \"canrun\": \"no\",\n        \"lastruntime\": obj.lastruntime,  //this patches \"none\" if first run - patches last run's endtime if not first run\n        \"formulainstanceid\": obj.formulainstanceid,\n        \"endtime\": obj.newendtime,\n        \"sfdc.instance.id\": obj['sfdcinstanceid'],\n        \"email\":config.email\n        }\n      });"
+		}
+	}, {
+		"id": 14579,
+		"onSuccess": [],
+		"onFailure": ["failureNotification"],
+		"name": "putConfigs",
+		"type": "request",
+		"properties": {
+			"path": "${steps.returnId}",
+			"retryAttempts": "5",
+			"body": "${steps.putBody}",
+			"retry": "true",
+			"method": "PUT",
+			"retryDelay": "500",
+			"api": "/formulas/{formulaOneId}/instances/{formulainstanceid}"
+		}
+	}, {
+		"id": 28955,
+		"onSuccess": [],
+		"onFailure": [],
+		"name": "failureNotification",
+		"type": "script",
+		"properties": {
+			"body": "notify.email(config.email,'Error','There was an error');\ndone({});"
+		}
+	}, {
+		"id": 14577,
+		"onSuccess": ["putCanRun"],
+		"onFailure": [],
+		"name": "putBodyCanRun",
+		"type": "script",
+		"properties": {
+			"body": "var obj = steps.returnId;\n\ndone({\"active\" : obj.active,\n      \"configuration\": {\n        \"canrun\": \"no\",\n        \"lastruntime\": obj.lastruntime,  //this patches \"none\" if first run - patches last run's endtime if not first run\n        \"formulainstanceid\": obj.formulainstanceid,\n        \"endtime\": obj.endtime,\n        \"sfdc.instance.id\": obj['sfdcinstanceid'],\n        \"email\": config.email\n      },\n      \"name\":obj.instance1name});"
+		}
+	}],
+	"triggers": [{
+		"id": 1259,
+		"onSuccess": ["canRun"],
+		"onFailure": [],
+		"type": "scheduled",
+		"async": true,
+		"name": "trigger",
+		"properties": {
+			"cron": "0 0/1 * 1/1 * ? *"
+		}
+	}],
+	"active": true,
+	"singleThreaded": false,
+	"configuration": [{
+		"id": 3199,
+		"key": "canrun",
+		"name": "canRun",
+		"type": "value",
+		"required": true
+	}, {
+		"id": 7815,
+		"key": "email",
+		"name": "email",
+		"type": "value",
+		"required": true
+	}, {
+		"id": 3203,
+		"key": "endtime",
+		"name": "endTime",
+		"type": "value",
+		"required": true
+	}, {
+		"id": 3202,
+		"key": "formulainstanceid",
+		"name": "formulaInstanceId",
+		"type": "value",
+		"required": true
+	}, {
+		"id": 3201,
+		"key": "lastruntime",
+		"name": "lastRunTime",
+		"type": "value",
+		"required": true
+	}, {
+		"id": 3200,
+		"key": "sfdc.instance.id",
+		"name": "sfdc.instance.id",
+		"type": "elementInstance",
+		"required": true
+	}]
+}
