@@ -9,7 +9,7 @@
       "name": "buildQuery",
       "type": "script",
       "properties": {
-        "body": "done ({\n  \"downloadQuery\" : {\n    \"path\":\"/DONT_DELETE_churros_small.csv\"\n  },\n  \"uploadQuery\" : {\n    \"path\":\"/churros_deletes_me.csv\"\n  }\n});"
+        "body": "done ({\n  \"downloadQuery\" : {\n    \"path\":\"/DONT_DELETE_churros.txt\"\n  },\n  \"uploadQuery\" : {\n    \"path\":\"/churros_deletes_me.csv\"\n  }\n});"
       }
     },
     {
