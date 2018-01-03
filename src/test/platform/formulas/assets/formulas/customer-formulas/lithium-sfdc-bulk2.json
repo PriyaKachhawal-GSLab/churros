@@ -77,13 +77,13 @@
         "name": "fileStream",
         "type": "elementRequestStream",
         "properties": {
-          "downloadApi": "/hubs/crm/bulk/${trigger.args.id}/Contact",
           "downloadMethod": "GET",
+          "downloadApi": "/hubs/crm/bulk/${trigger.args.id}/Contact",
           "uploadApi": "/hubs/social/bulk/sfdc_Contact_authorsBatch",
           "uploadElementInstanceId": "${config.lithiumlsw.instance.id}",
           "downloadElementInstanceId": "${config.sfdc.instance.id}",
-          "uploadMethod": "POST",
-          "downloadHeaders": "${steps.buildStreamHeaders}"
+          "downloadHeaders": "${steps.buildStreamHeaders}",
+          "uploadMethod": "POST"
         }
       },
       {
@@ -114,8 +114,8 @@
           "api": "/formulas/instances",
           "retryAttempts": "5",
           "retryDelay": "500",
-          "method": "GET",
-          "retry": "true"
+          "retry": "true",
+          "method": "GET"
         }
       },
       {
@@ -153,13 +153,12 @@
         "name": "putConfigs",
         "type": "request",
         "properties": {
-          "api": "/formulas/{formulaOneId}/instances/{formulainstanceid}",
+          "api": "/formulas/${steps.returnId.formulaOneId}/instances/${steps.returnId.formulainstanceid}",
           "retryAttempts": "5",
           "body": "${steps.putBody}",
           "retryDelay": "500",
-          "path": "${steps.returnId}",
-          "method": "PUT",
-          "retry": "true"
+          "retry": "true",
+          "method": "PUT"
         }
       },
       {
@@ -173,11 +172,10 @@
         "name": "putConfigs-retry",
         "type": "request",
         "properties": {
-          "api": "/formulas/{formulaOneId}/instances/{formulainstanceid}",
+          "api": "/formulas/${steps.returnId.formulaOneId}/instances/${steps.returnId.formulainstanceid}",
           "retryAttempts": "5",
           "body": "${steps.putBody-retry}",
           "retryDelay": "500",
-          "path": "${steps.returnId}",
           "method": "PUT",
           "retry": "true"
         }
@@ -191,14 +189,13 @@
         "name": "put-counter-update",
         "type": "request",
         "properties": {
-          "api": "/formulas/{formulaTwoId}/instances/{formulaInstance2}",
-          "retryAttempts": "5",
+          "api": "/formulas/${steps.returnId.formulaTwoId}/instances/${steps.returnId.formulaInstance2}",
           "acceptableStatusCodes": "",
+          "retryAttempts": "5",
           "body": "${steps.counter-update-body}",
           "retryDelay": "500",
-          "path": "${steps.returnId}",
-          "method": "PUT",
-          "retry": "true"
+          "retry": "true",
+          "method": "PUT"
         }
       },
       {
@@ -210,10 +207,9 @@
         "name": "put-counter-update-clone",
         "type": "request",
         "properties": {
-          "api": "/formulas/{formulaTwoId}/instances/{formulaInstance2}",
+          "api": "/formulas/${steps.returnId.formulaTwoId}/instances/${steps.returnId.formulaInstance2}",
           "acceptableStatusCodes": "",
           "body": "${steps.counter-to-zero-body}",
-          "path": "${steps.returnId}",
           "method": "PUT"
         }
       },
@@ -253,6 +249,7 @@
         "properties": {}
       }
     ],
+    "engine": "v3",
     "active": true,
     "singleThreaded": false,
     "configuration": [

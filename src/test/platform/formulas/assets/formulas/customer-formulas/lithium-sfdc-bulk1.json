@@ -62,10 +62,10 @@
         "name": "formulaInstance",
         "type": "request",
         "properties": {
-          "api": "/formulas/instances",
           "retryAttempts": "5",
-          "retryDelay": "500",
+          "api": "/formulas/instances",
           "method": "GET",
+          "retryDelay": "500",
           "retry": "true"
         }
       },
@@ -80,8 +80,7 @@
         "name": "get-transformation",
         "type": "request",
         "properties": {
-          "api": "/instances/{lithiumInstance}/transformations/sfdc_Contact_authorsBatch",
-          "path": "${steps.returnId}",
+          "api": "/instances/${steps.returnId.lithiumInstance}/transformations/sfdc_Contact_authorsBatch",
           "method": "GET"
         }
       },
@@ -96,13 +95,13 @@
         "name": "postBulk",
         "type": "elementRequest",
         "properties": {
-          "elementInstanceId": "${sfdc.instance.id}",
-          "api": "/hubs/crm/bulk/query",
           "retryAttempts": "5",
-          "retryDelay": "500",
-          "headers": "${steps.bulkHeader}",
+          "api": "/hubs/crm/bulk/query",
+          "elementInstanceId": "${config.sfdc.instance.id}",
           "query": "${steps.bulkQuery}",
           "method": "POST",
+          "retryDelay": "500",
+          "headers": "${steps.bulkHeader}",
           "retry": "true"
         }
       },
@@ -141,12 +140,11 @@
         "name": "putCanRun",
         "type": "request",
         "properties": {
-          "api": "/formulas/{formulaOneId}/instances/{formulainstanceid}",
           "retryAttempts": "5",
+          "api": "/formulas/${steps.returnId.formulaOneId}/instances/${steps.returnId.formulainstanceid}",
           "body": "${steps.putBodyCanRun}",
-          "retryDelay": "500",
-          "path": "${steps.returnId}",
           "method": "PUT",
+          "retryDelay": "500",
           "retry": "true"
         }
       },
@@ -159,12 +157,11 @@
         "name": "putConfigs",
         "type": "request",
         "properties": {
-          "api": "/formulas/{formulaOneId}/instances/{formulainstanceid}",
           "retryAttempts": "5",
+          "api": "/formulas/${steps.returnId.formulaOneId}/instances/${steps.returnId.formulainstanceid}",
           "body": "${steps.putBody}",
-          "retryDelay": "500",
-          "path": "${steps.returnId}",
           "method": "PUT",
+          "retryDelay": "500",
           "retry": "true"
         }
       },
@@ -208,6 +205,7 @@
         }
       }
     ],
+    "engine": "v3",
     "active": true,
     "singleThreaded": false,
     "configuration": [

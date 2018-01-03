@@ -102,10 +102,9 @@
         "name": "getIncidentCase",
         "type": "elementRequest",
         "properties": {
-          "api": "/hubs/crm/Case/{objectId}",
-          "elementInstanceId": "${sfdc.instance.id}",
           "method": "GET",
-          "path": "${trigger.event}"
+          "api": "/hubs/crm/Case/${trigger.event.objectId}",
+          "elementInstanceId": "${config.sfdc.instance.id}"
         }
       },
       {
@@ -119,10 +118,10 @@
         "name": "get-queue",
         "type": "elementRequest",
         "properties": {
+          "method": "GET",
           "api": "/hubs/crm/Group",
-          "elementInstanceId": "${sfdc.instance.id}",
           "query": "${steps.build-queue-query}",
-          "method": "GET"
+          "elementInstanceId": "${config.sfdc.instance.id}"
         }
       },
       {
@@ -136,13 +135,12 @@
         "name": "get-user",
         "type": "elementRequest",
         "properties": {
-          "retryAttempts": "5",
-          "api": "/hubs/crm/users/{OwnerId}",
-          "elementInstanceId": "${sfdc.instance.id}",
           "method": "GET",
-          "path": "${steps.getIncidentCase.response.body}",
-          "retryDelay": "500",
           "retry": "true",
+          "retryDelay": "500",
+          "api": "/hubs/crm/users/${steps.getIncidentCase.response.body.OwnerId}",
+          "retryAttempts": "5",
+          "elementInstanceId": "${config.sfdc.instance.id}",
           "acceptableStatusCodes": "200,404"
         }
       },
@@ -165,11 +163,10 @@
         "name": "patchToAuthor",
         "type": "elementRequest",
         "properties": {
-          "api": "/hubs/social/authors/{authorId}",
-          "elementInstanceId": "${lithiumlsw.instance.id}",
-          "body": "${steps.caseEscalationBody}",
           "method": "PATCH",
-          "path": "${steps.retrieveAuthorId}"
+          "api": "/hubs/social/authors/${steps.retrieveAuthorId.authorId}",
+          "elementInstanceId": "${config.lithiumlsw.instance.id}",
+          "body": "${steps.caseEscalationBody}"
         }
       },
       {
@@ -200,6 +197,7 @@
         }
       }
     ],
+    "engine": "v3",
     "active": true,
     "singleThreaded": false,
     "configuration": [
