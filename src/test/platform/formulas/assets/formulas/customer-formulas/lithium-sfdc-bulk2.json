@@ -1,17 +1,10 @@
 {
-    "id": 19148,
     "name": "bulk2sfdc",
-    "description": "",
-    "userId": 485,
-    "accountId": 1937,
-    "createdDate": "2018-01-03T20:44:33Z",
     "steps": [
       {
-        "id": 99852,
         "onSuccess": [
           "fileStream"
         ],
-        "onFailure": [],
         "name": "buildStreamHeaders",
         "type": "script",
         "properties": {
@@ -19,7 +12,6 @@
         }
       },
       {
-        "id": 99858,
         "onSuccess": [
           "putConfigs-retry"
         ],
@@ -33,11 +25,9 @@
         }
       },
       {
-        "id": 99855,
         "onSuccess": [
           "put-counter-update-clone"
         ],
-        "onFailure": [],
         "name": "counter-to-zero-body",
         "type": "script",
         "properties": {
@@ -45,11 +35,9 @@
         }
       },
       {
-        "id": 99846,
         "onSuccess": [
           "put-counter-update"
         ],
-        "onFailure": [],
         "name": "counter-update-body",
         "type": "script",
         "properties": {
@@ -57,9 +45,6 @@
         }
       },
       {
-        "id": 99848,
-        "onSuccess": [],
-        "onFailure": [],
         "name": "errorNotice",
         "type": "script",
         "properties": {
@@ -67,7 +52,6 @@
         }
       },
       {
-        "id": 99853,
         "onSuccess": [
           "putBody"
         ],
@@ -87,7 +71,6 @@
         }
       },
       {
-        "id": 99851,
         "onSuccess": [
           "buildStreamHeaders"
         ],
@@ -101,7 +84,6 @@
         }
       },
       {
-        "id": 99849,
         "onSuccess": [
           "returnId"
         ],
@@ -119,11 +101,9 @@
         }
       },
       {
-        "id": 99861,
         "onSuccess": [
           "putConfigs"
         ],
-        "onFailure": [],
         "name": "putBody",
         "type": "script",
         "properties": {
@@ -131,11 +111,9 @@
         }
       },
       {
-        "id": 99860,
         "onSuccess": [
           "counter-filter"
         ],
-        "onFailure": [],
         "name": "putBody-retry",
         "type": "script",
         "properties": {
@@ -143,7 +121,6 @@
         }
       },
       {
-        "id": 99854,
         "onSuccess": [
           "counter-to-zero-body"
         ],
@@ -162,7 +139,6 @@
         }
       },
       {
-        "id": 99859,
         "onSuccess": [
           "counter-update-body"
         ],
@@ -181,8 +157,6 @@
         }
       },
       {
-        "id": 99847,
-        "onSuccess": [],
         "onFailure": [
           "errorNotice"
         ],
@@ -199,8 +173,6 @@
         }
       },
       {
-        "id": 99856,
-        "onSuccess": [],
         "onFailure": [
           "errorNotice"
         ],
@@ -214,9 +186,6 @@
         }
       },
       {
-        "id": 99857,
-        "onSuccess": [],
-        "onFailure": [],
         "name": "retry-formula",
         "type": "retryFormulaExecution",
         "properties": {
@@ -224,11 +193,9 @@
         }
       },
       {
-        "id": 99850,
         "onSuccess": [
           "filterStatus"
         ],
-        "onFailure": [],
         "name": "returnId",
         "type": "script",
         "properties": {
@@ -238,44 +205,34 @@
     ],
     "triggers": [
       {
-        "id": 17329,
         "onSuccess": [
           "getFormulaInstance"
         ],
-        "onFailure": [],
         "type": "manual",
-        "async": true,
-        "name": "trigger",
-        "properties": {}
+        "name": "trigger"
       }
     ],
     "engine": "v3",
-    "active": true,
-    "singleThreaded": false,
     "configuration": [
       {
-        "id": 31953,
         "key": "counter",
         "name": "counter",
         "type": "value",
         "required": true
       },
       {
-        "id": 31954,
         "key": "email",
         "name": "email",
         "type": "value",
         "required": true
       },
       {
-        "id": 31955,
         "key": "lithiumlsw.instance.id",
         "name": "lithiumlsw.instance.id",
         "type": "elementInstance",
         "required": true
       },
       {
-        "id": 31956,
         "key": "sfdc.instance.id",
         "name": "sfdc.instance.id",
         "type": "elementInstance",

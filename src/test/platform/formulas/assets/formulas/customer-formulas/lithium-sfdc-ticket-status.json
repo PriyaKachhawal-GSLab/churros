@@ -1,16 +1,10 @@
 {
-    "id": 19146,
     "name": "Salesforce - Ticket Status",
-    "userId": 485,
-    "accountId": 1937,
-    "createdDate": "2018-01-03T20:42:47Z",
     "steps": [
       {
-        "id": 99820,
         "onSuccess": [
           "get-queue"
         ],
-        "onFailure": [],
         "name": "build-queue-query",
         "type": "script",
         "properties": {
@@ -18,11 +12,9 @@
         }
       },
       {
-        "id": 99821,
         "onSuccess": [
           "patchToAuthor"
         ],
-        "onFailure": [],
         "name": "caseEscalationBody",
         "type": "script",
         "properties": {
@@ -30,9 +22,6 @@
         }
       },
       {
-        "id": 99822,
-        "onSuccess": [],
-        "onFailure": [],
         "name": "errorNotice",
         "type": "script",
         "properties": {
@@ -40,11 +29,9 @@
         }
       },
       {
-        "id": 99823,
         "onSuccess": [
           "caseEscalationBody"
         ],
-        "onFailure": [],
         "name": "filterAuthorId",
         "type": "filter",
         "properties": {
@@ -52,11 +39,9 @@
         }
       },
       {
-        "id": 99824,
         "onSuccess": [
           "getIncidentCase"
         ],
-        "onFailure": [],
         "name": "filterIncidentCase",
         "type": "filter",
         "properties": {
@@ -64,7 +49,6 @@
         }
       },
       {
-        "id": 99825,
         "onSuccess": [
           "get-user"
         ],
@@ -78,7 +62,6 @@
         }
       },
       {
-        "id": 99826,
         "onSuccess": [
           "retrieveAuthorId"
         ],
@@ -92,7 +75,6 @@
         }
       },
       {
-        "id": 99827,
         "onSuccess": [
           "filterSocialEscalation"
         ],
@@ -108,7 +90,6 @@
         }
       },
       {
-        "id": 99828,
         "onSuccess": [
           "retrieveAuthorId"
         ],
@@ -125,7 +106,6 @@
         }
       },
       {
-        "id": 99829,
         "onSuccess": [
           "filterUserNotFound"
         ],
@@ -145,9 +125,6 @@
         }
       },
       {
-        "id": 99830,
-        "onSuccess": [],
-        "onFailure": [],
         "name": "gracefulFinish",
         "type": "script",
         "properties": {
@@ -155,8 +132,6 @@
         }
       },
       {
-        "id": 99831,
-        "onSuccess": [],
         "onFailure": [
           "errorNotice"
         ],
@@ -170,11 +145,9 @@
         }
       },
       {
-        "id": 99832,
         "onSuccess": [
           "filterAuthorId"
         ],
-        "onFailure": [],
         "name": "retrieveAuthorId",
         "type": "script",
         "properties": {
@@ -184,13 +157,10 @@
     ],
     "triggers": [
       {
-        "id": 17326,
         "onSuccess": [
           "filterIncidentCase"
         ],
-        "onFailure": [],
         "type": "event",
-        "async": true,
         "name": "trigger",
         "properties": {
           "elementInstanceId": "${sfdc.instance.id}"
@@ -198,32 +168,26 @@
       }
     ],
     "engine": "v3",
-    "active": true,
-    "singleThreaded": false,
     "configuration": [
       {
-        "id": 31943,
         "key": "caseintegrationname",
         "name": "caseintegrationname",
         "type": "value",
         "required": true
       },
       {
-        "id": 31944,
         "key": "email",
         "name": "email",
         "type": "value",
         "required": true
       },
       {
-        "id": 31945,
         "key": "lithiumlsw.instance.id",
         "name": "lithiumlsw.instance.id",
         "type": "elementInstance",
         "required": true
       },
       {
-        "id": 31946,
         "key": "sfdc.instance.id",
         "name": "sfdc.instance.id",
         "type": "elementInstance",

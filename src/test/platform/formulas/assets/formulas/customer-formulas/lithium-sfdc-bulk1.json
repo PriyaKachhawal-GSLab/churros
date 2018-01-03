@@ -1,16 +1,10 @@
 {
-    "id": 19147,
     "name": "bulk1sfdc",
-    "userId": 485,
-    "accountId": 1937,
-    "createdDate": "2018-01-03T20:44:08Z",
     "steps": [
       {
-        "id": 99840,
         "onSuccess": [
           "postBulk"
         ],
-        "onFailure": [],
         "name": "bulkHeader",
         "type": "script",
         "properties": {
@@ -18,11 +12,9 @@
         }
       },
       {
-        "id": 99839,
         "onSuccess": [
           "bulkHeader"
         ],
-        "onFailure": [],
         "name": "bulkQuery",
         "type": "script",
         "properties": {
@@ -30,11 +22,9 @@
         }
       },
       {
-        "id": 99833,
         "onSuccess": [
           "formulaInstance"
         ],
-        "onFailure": [],
         "name": "canRun",
         "type": "filter",
         "properties": {
@@ -42,9 +32,6 @@
         }
       },
       {
-        "id": 99844,
-        "onSuccess": [],
-        "onFailure": [],
         "name": "failureNotification",
         "type": "script",
         "properties": {
@@ -52,7 +39,6 @@
         }
       },
       {
-        "id": 99835,
         "onSuccess": [
           "returnId"
         ],
@@ -85,7 +71,6 @@
         }
       },
       {
-        "id": 99841,
         "onSuccess": [
           "putBody"
         ],
@@ -106,11 +91,9 @@
         }
       },
       {
-        "id": 99842,
         "onSuccess": [
           "putConfigs"
         ],
-        "onFailure": [],
         "name": "putBody",
         "type": "script",
         "properties": {
@@ -118,11 +101,9 @@
         }
       },
       {
-        "id": 99845,
         "onSuccess": [
           "putCanRun"
         ],
-        "onFailure": [],
         "name": "putBodyCanRun",
         "type": "script",
         "properties": {
@@ -130,7 +111,6 @@
         }
       },
       {
-        "id": 99836,
         "onSuccess": [
           "get-transformation"
         ],
@@ -149,8 +129,6 @@
         }
       },
       {
-        "id": 99843,
-        "onSuccess": [],
         "onFailure": [
           "failureNotification"
         ],
@@ -166,11 +144,9 @@
         }
       },
       {
-        "id": 99834,
         "onSuccess": [
           "putBodyCanRun"
         ],
-        "onFailure": [],
         "name": "returnId",
         "type": "script",
         "properties": {
@@ -178,11 +154,9 @@
         }
       },
       {
-        "id": 99838,
         "onSuccess": [
           "bulkQuery"
         ],
-        "onFailure": [],
         "name": "return-transformation",
         "type": "script",
         "properties": {
@@ -192,13 +166,10 @@
     ],
     "triggers": [
       {
-        "id": 17328,
         "onSuccess": [
           "canRun"
         ],
-        "onFailure": [],
         "type": "scheduled",
-        "async": true,
         "name": "trigger",
         "properties": {
           "cron": "0 0/1 * 1/1 * ? *"
@@ -206,46 +177,38 @@
       }
     ],
     "engine": "v3",
-    "active": true,
-    "singleThreaded": false,
     "configuration": [
       {
-        "id": 31947,
         "key": "canrun",
         "name": "canRun",
         "type": "value",
         "required": true
       },
       {
-        "id": 31948,
         "key": "email",
         "name": "email",
         "type": "value",
         "required": true
       },
       {
-        "id": 31949,
         "key": "endtime",
         "name": "endTime",
         "type": "value",
         "required": true
       },
       {
-        "id": 31950,
         "key": "formulainstanceid",
         "name": "formulaInstanceId",
         "type": "value",
         "required": true
       },
       {
-        "id": 31951,
         "key": "lastruntime",
         "name": "lastRunTime",
         "type": "value",
         "required": true
       },
       {
-        "id": 31952,
         "key": "sfdc.instance.id",
         "name": "sfdc.instance.id",
         "type": "elementInstance",
