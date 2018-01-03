@@ -1,222 +1,288 @@
 {
-	"id": 1417,
-	"name": "bulk2sfdc",
-	"description": "",
-	"userId": 160341,
-	"accountId": 156249,
-	"createdDate": "2017-01-23T20:21:28Z",
-	"steps": [{
-		"id": 14601,
-		"onSuccess": ["put-counter-update"],
-		"onFailure": [],
-		"name": "counter-update-body",
-		"type": "script",
-		"properties": {
-			"body": "var obj = steps.returnId;\n\ndone({\"active\" : obj['2active'],\n      \"configuration\": {\n      \"counter\": config.counter + 1,\n      \"sfdc.instance.id\": obj.sfdcinstanceid,\n      \"lithiumlsw.instance.id\": obj.lithiuminstanceid,\n      \"email\": config.email\n      },\n      \"name\":obj['2name']});\n"
-		}
-	}, {
-		"id": 14610,
-		"onSuccess": [],
-		"onFailure": ["errorNotice"],
-		"name": "put-counter-update",
-		"type": "request",
-		"properties": {
-			"retry": "true",
-			"body": "${steps.counter-update-body}",
-			"acceptableStatusCodes": "",
-			"retryAttempts": "5",
-			"method": "PUT",
-			"retryDelay": "500",
-			"api": "/formulas/{formulaTwoId}/instances/{formulaInstance2}",
-			"path": "${steps.returnId}"
-		}
-	}, {
-		"id": 14602,
-		"onSuccess": [],
-		"onFailure": [],
-		"name": "errorNotice",
-		"type": "script",
-		"properties": {
-			"body": "notify.email(config.email, 'Bulk Job Failed');\ndone(true);"
-		}
-	}, {
-		"id": 14605,
-		"onSuccess": ["returnId"],
-		"onFailure": ["errorNotice"],
-		"name": "getFormulaInstance",
-		"type": "request",
-		"properties": {
-			"retry": "true",
-			"retryAttempts": "5",
-			"method": "GET",
-			"retryDelay": "500",
-			"api": "/formulas/instances"
-		}
-	}, {
-		"id": 14613,
-		"onSuccess": ["filterStatus"],
-		"onFailure": [],
-		"name": "returnId",
-		"type": "script",
-		"properties": {
-			"body": "var arr = steps.getFormulaInstance.response.body;\nvar formulaInstance2;\nvar formulaTwoId;\nvar lithiuminstanceid;\nvar formula2name;\nvar formula2active;\n\nfor(var j=0; j<arr.length; j++){\n  if(arr[j].formula.name.includes('bulk2sfdc')){\n    formulaInstance2 = arr[j].id;\n    formulaTwoId = arr[j].formula.id;\n    lithiuminstanceid = arr[j].configuration['lithiumlsw.instance.id'];\n    formula2name = arr[j].name;\n    formula2active = arr[j].active;\n  }\n}\n\nfor(var i=0; i<arr.length; i++){\n  if(arr[i].formula.name.includes('bulk1sfdc')){\n    config.formulainstanceid = arr[i].id;\n    done({\"lithiuminstanceid\": lithiuminstanceid, \"formulaInstance2\": formulaInstance2, \"formulaTwoId\": formulaTwoId, \"lastruntime\": arr[i].configuration.lastruntime, \"sfdcinstanceid\" : arr[i].configuration['sfdc.instance.id'], \"canrun\" : arr[i].configuration.canrun, \"endtime\": arr[i].configuration.endtime, \"formulainstanceid\" : arr[i].id, \"formulaOneId\" : arr[i].formula.id, \"active\":arr[i].active, \"name\":arr[i].name, \"2active\": formula2active,\"2name\":formula2name});\n  }\n}\n\n"
-		}
-	}, {
-		"id": 14604,
-		"onSuccess": ["buildStreamHeaders"],
-		"onFailure": ["putBody-retry"],
-		"name": "filterStatus",
-		"type": "filter",
-		"properties": {
-			"body": "if(trigger.args.status == 'COMPLETED'){\n  done(true);\n}\nelse{\n  done(false);\n}"
-		}
-	}, {
-		"id": 14598,
-		"onSuccess": ["fileStream"],
-		"onFailure": [],
-		"name": "buildStreamHeaders",
-		"type": "script",
-		"properties": {
-			"body": "done({\n  'Accept': \"text/csv\"\n});"
-		}
-	}, {
-		"id": 14603,
-		"onSuccess": ["putBody"],
-		"onFailure": ["retry-formula"],
-		"name": "fileStream",
-		"type": "elementRequestStream",
-		"properties": {
-			"downloadMethod": "GET",
-			"downloadElementInstanceId": "${config.sfdc.instance.id}",
-			"downloadApi": "/hubs/crm/bulk/${trigger.args.id}/Contact",
-			"downloadHeaders": "${steps.buildStreamHeaders}",
-			"uploadApi": "/hubs/social/bulk/sfdc_Contact_authorsBatch",
-			"uploadElementInstanceId": "${config.lithiumlsw.instance.id}",
-			"uploadMethod": "POST"
-		}
-	}, {
-		"id": 14608,
-		"onSuccess": ["counter-to-zero-body"],
-		"onFailure": ["errorNotice"],
-		"name": "putConfigs",
-		"type": "request",
-		"properties": {
-			"body": "${steps.putBody}",
-			"retry": "true",
-			"retryAttempts": "5",
-			"method": "PUT",
-			"retryDelay": "500",
-			"api": "/formulas/{formulaOneId}/instances/{formulainstanceid}",
-			"path": "${steps.returnId}"
-		}
-	}, {
-		"id": 14600,
-		"onSuccess": ["put-counter-update-clone"],
-		"onFailure": [],
-		"name": "counter-to-zero-body",
-		"type": "script",
-		"properties": {
-			"body": "var obj = steps.returnId;\n\ndone({\"active\" : obj['2active'],\n      \"configuration\": {\n      \"counter\": 0,\n      \"sfdc.instance.id\": obj.sfdcinstanceid,\n      \"lithiumlsw.instance.id\": obj.lithiuminstanceid,\n      \"email\": config.email\n      },\n      \"name\":obj['2name']});\n"
-		}
-	}, {
-		"id": 14611,
-		"onSuccess": [],
-		"onFailure": ["errorNotice"],
-		"name": "put-counter-update-clone",
-		"type": "request",
-		"properties": {
-			"body": "${steps.counter-to-zero-body}",
-			"acceptableStatusCodes": "",
-			"method": "PUT",
-			"api": "/formulas/{formulaTwoId}/instances/{formulaInstance2}",
-			"path": "${steps.returnId}"
-		}
-	}, {
-		"id": 14612,
-		"onSuccess": [],
-		"onFailure": [],
-		"name": "retry-formula",
-		"type": "retryFormulaExecution",
-		"properties": {
-			"retryAttempts": "3"
-		}
-	}, {
-		"id": 14599,
-		"onSuccess": ["putConfigs-retry"],
-		"onFailure": ["errorNotice"],
-		"name": "counter-filter",
-		"type": "filter",
-		"properties": {
-			"body": "if(config.counter >= 3){\n  done(false);\n} else{\n  done(true);\n}"
-		}
-	}, {
-		"id": 14609,
-		"onSuccess": ["counter-update-body"],
-		"onFailure": ["errorNotice"],
-		"name": "putConfigs-retry",
-		"type": "request",
-		"properties": {
-			"retry": "true",
-			"body": "${steps.putBody-retry}",
-			"retryAttempts": "5",
-			"method": "PUT",
-			"retryDelay": "500",
-			"api": "/formulas/{formulaOneId}/instances/{formulainstanceid}",
-			"path": "${steps.returnId}"
-		}
-	}, {
-		"id": 14607,
-		"onSuccess": ["counter-filter"],
-		"onFailure": [],
-		"name": "putBody-retry",
-		"type": "script",
-		"properties": {
-			"body": "var obj = steps.returnId;\n\ndone({\"active\" : obj.active,\n      \"configuration\": {\n      \"canrun\": \"yes\",\n      \"lastruntime\": obj.lastruntime,\n      \"formulainstanceid\": obj.formulainstanceid,\n      \"endtime\": obj.endtime,\n      \"sfdc.instance.id\": obj.sfdcinstanceid,\n      \"email\":config.email\n      },\n      \"name\":obj.name});"
-		}
-	}, {
-		"id": 14606,
-		"onSuccess": ["putConfigs"],
-		"onFailure": [],
-		"name": "putBody",
-		"type": "script",
-		"properties": {
-			"body": "var obj = steps.returnId;\nvar name = obj['name'];\n\ndone({\"active\" : obj.active,\n      \"configuration\": {\n      \"canrun\": \"yes\",\n      \"lastruntime\": obj.endtime,\n      \"formulainstanceid\": obj.formulainstanceid,\n      \"endtime\": \"none\",\n      \"sfdc.instance.id\": obj.sfdcinstanceid,\n      \"email\": config.email\n      },\n      \"name\":name});"
-		}
-	}],
-	"triggers": [{
-		"id": 1261,
-		"onSuccess": ["getFormulaInstance"],
-		"onFailure": [],
-		"type": "manual",
-		"async": true,
-		"name": "trigger",
-		"properties": {}
-	}],
-	"active": true,
-	"singleThreaded": false,
-	"configuration": [{
-		"id": 3211,
-		"key": "counter",
-		"name": "counter",
-		"type": "value",
-		"required": true
-	}, {
-		"id": 3208,
-		"key": "email",
-		"name": "email",
-		"type": "value",
-		"required": true
-	}, {
-		"id": 3210,
-		"key": "lithiumlsw.instance.id",
-		"name": "lithiumlsw.instance.id",
-		"type": "elementInstance",
-		"required": true
-	}, {
-		"id": 3209,
-		"key": "sfdc.instance.id",
-		"name": "sfdc.instance.id",
-		"type": "elementInstance",
-		"required": true
-	}]
-}
+    "id": 19148,
+    "name": "bulk2sfdc",
+    "description": "",
+    "userId": 485,
+    "accountId": 1937,
+    "createdDate": "2018-01-03T20:44:33Z",
+    "steps": [
+      {
+        "id": 99852,
+        "onSuccess": [
+          "fileStream"
+        ],
+        "onFailure": [],
+        "name": "buildStreamHeaders",
+        "type": "script",
+        "properties": {
+          "body": "done({\n  'Accept': \"text/csv\"\n});"
+        }
+      },
+      {
+        "id": 99858,
+        "onSuccess": [
+          "putConfigs-retry"
+        ],
+        "onFailure": [
+          "errorNotice"
+        ],
+        "name": "counter-filter",
+        "type": "filter",
+        "properties": {
+          "body": "if(config.counter >= 3){\n  done(false);\n} else{\n  done(true);\n}"
+        }
+      },
+      {
+        "id": 99855,
+        "onSuccess": [
+          "put-counter-update-clone"
+        ],
+        "onFailure": [],
+        "name": "counter-to-zero-body",
+        "type": "script",
+        "properties": {
+          "body": "var obj = steps.returnId;\n\ndone({\"active\" : obj['2active'],\n      \"configuration\": {\n      \"counter\": 0,\n      \"sfdc.instance.id\": obj.sfdcinstanceid,\n      \"lithiumlsw.instance.id\": obj.lithiuminstanceid,\n      \"email\": config.email\n      },\n      \"name\":obj['2name']});\n"
+        }
+      },
+      {
+        "id": 99846,
+        "onSuccess": [
+          "put-counter-update"
+        ],
+        "onFailure": [],
+        "name": "counter-update-body",
+        "type": "script",
+        "properties": {
+          "body": "var obj = steps.returnId;\n\ndone({\"active\" : obj['2active'],\n      \"configuration\": {\n      \"counter\": config.counter + 1,\n      \"sfdc.instance.id\": obj.sfdcinstanceid,\n      \"lithiumlsw.instance.id\": obj.lithiuminstanceid,\n      \"email\": config.email\n      },\n      \"name\":obj['2name']});\n"
+        }
+      },
+      {
+        "id": 99848,
+        "onSuccess": [],
+        "onFailure": [],
+        "name": "errorNotice",
+        "type": "script",
+        "properties": {
+          "body": "notify.email(config.email, 'Bulk Job Failed');\ndone(true);"
+        }
+      },
+      {
+        "id": 99853,
+        "onSuccess": [
+          "putBody"
+        ],
+        "onFailure": [
+          "retry-formula"
+        ],
+        "name": "fileStream",
+        "type": "elementRequestStream",
+        "properties": {
+          "downloadApi": "/hubs/crm/bulk/${trigger.args.id}/Contact",
+          "downloadMethod": "GET",
+          "uploadApi": "/hubs/social/bulk/sfdc_Contact_authorsBatch",
+          "uploadElementInstanceId": "${config.lithiumlsw.instance.id}",
+          "downloadElementInstanceId": "${config.sfdc.instance.id}",
+          "uploadMethod": "POST",
+          "downloadHeaders": "${steps.buildStreamHeaders}"
+        }
+      },
+      {
+        "id": 99851,
+        "onSuccess": [
+          "buildStreamHeaders"
+        ],
+        "onFailure": [
+          "putBody-retry"
+        ],
+        "name": "filterStatus",
+        "type": "filter",
+        "properties": {
+          "body": "if(trigger.args.status == 'COMPLETED'){\n  done(true);\n}\nelse{\n  done(false);\n}"
+        }
+      },
+      {
+        "id": 99849,
+        "onSuccess": [
+          "returnId"
+        ],
+        "onFailure": [
+          "errorNotice"
+        ],
+        "name": "getFormulaInstance",
+        "type": "request",
+        "properties": {
+          "api": "/formulas/instances",
+          "retryAttempts": "5",
+          "retryDelay": "500",
+          "method": "GET",
+          "retry": "true"
+        }
+      },
+      {
+        "id": 99861,
+        "onSuccess": [
+          "putConfigs"
+        ],
+        "onFailure": [],
+        "name": "putBody",
+        "type": "script",
+        "properties": {
+          "body": "var obj = steps.returnId;\nvar name = obj['name'];\n\ndone({\"active\" : obj.active,\n      \"configuration\": {\n      \"canrun\": \"yes\",\n      \"lastruntime\": obj.endtime,\n      \"formulainstanceid\": obj.formulainstanceid,\n      \"endtime\": \"none\",\n      \"sfdc.instance.id\": obj.sfdcinstanceid,\n      \"email\": config.email\n      },\n      \"name\":name});"
+        }
+      },
+      {
+        "id": 99860,
+        "onSuccess": [
+          "counter-filter"
+        ],
+        "onFailure": [],
+        "name": "putBody-retry",
+        "type": "script",
+        "properties": {
+          "body": "var obj = steps.returnId;\n\ndone({\"active\" : obj.active,\n      \"configuration\": {\n      \"canrun\": \"yes\",\n      \"lastruntime\": obj.lastruntime,\n      \"formulainstanceid\": obj.formulainstanceid,\n      \"endtime\": obj.endtime,\n      \"sfdc.instance.id\": obj.sfdcinstanceid,\n      \"email\":config.email\n      },\n      \"name\":obj.name});"
+        }
+      },
+      {
+        "id": 99854,
+        "onSuccess": [
+          "counter-to-zero-body"
+        ],
+        "onFailure": [
+          "errorNotice"
+        ],
+        "name": "putConfigs",
+        "type": "request",
+        "properties": {
+          "api": "/formulas/{formulaOneId}/instances/{formulainstanceid}",
+          "retryAttempts": "5",
+          "body": "${steps.putBody}",
+          "retryDelay": "500",
+          "path": "${steps.returnId}",
+          "method": "PUT",
+          "retry": "true"
+        }
+      },
+      {
+        "id": 99859,
+        "onSuccess": [
+          "counter-update-body"
+        ],
+        "onFailure": [
+          "errorNotice"
+        ],
+        "name": "putConfigs-retry",
+        "type": "request",
+        "properties": {
+          "api": "/formulas/{formulaOneId}/instances/{formulainstanceid}",
+          "retryAttempts": "5",
+          "body": "${steps.putBody-retry}",
+          "retryDelay": "500",
+          "path": "${steps.returnId}",
+          "method": "PUT",
+          "retry": "true"
+        }
+      },
+      {
+        "id": 99847,
+        "onSuccess": [],
+        "onFailure": [
+          "errorNotice"
+        ],
+        "name": "put-counter-update",
+        "type": "request",
+        "properties": {
+          "api": "/formulas/{formulaTwoId}/instances/{formulaInstance2}",
+          "retryAttempts": "5",
+          "acceptableStatusCodes": "",
+          "body": "${steps.counter-update-body}",
+          "retryDelay": "500",
+          "path": "${steps.returnId}",
+          "method": "PUT",
+          "retry": "true"
+        }
+      },
+      {
+        "id": 99856,
+        "onSuccess": [],
+        "onFailure": [
+          "errorNotice"
+        ],
+        "name": "put-counter-update-clone",
+        "type": "request",
+        "properties": {
+          "api": "/formulas/{formulaTwoId}/instances/{formulaInstance2}",
+          "acceptableStatusCodes": "",
+          "body": "${steps.counter-to-zero-body}",
+          "path": "${steps.returnId}",
+          "method": "PUT"
+        }
+      },
+      {
+        "id": 99857,
+        "onSuccess": [],
+        "onFailure": [],
+        "name": "retry-formula",
+        "type": "retryFormulaExecution",
+        "properties": {
+          "retryAttempts": "3"
+        }
+      },
+      {
+        "id": 99850,
+        "onSuccess": [
+          "filterStatus"
+        ],
+        "onFailure": [],
+        "name": "returnId",
+        "type": "script",
+        "properties": {
+          "body": "var arr = steps.getFormulaInstance.response.body;\nvar formulaInstance2;\nvar formulaTwoId;\nvar lithiuminstanceid;\nvar formula2name;\nvar formula2active;\n\nfor(var j=0; j<arr.length; j++){\n  if(arr[j].formula.name.includes('bulk2sfdc')){\n    formulaInstance2 = arr[j].id;\n    formulaTwoId = arr[j].formula.id;\n    lithiuminstanceid = arr[j].configuration['lithiumlsw.instance.id'];\n    formula2name = arr[j].name;\n    formula2active = arr[j].active;\n  }\n}\n\nfor(var i=0; i<arr.length; i++){\n  if(arr[i].formula.name.includes('bulk1sfdc')){\n    config.formulainstanceid = arr[i].id;\n    done({\"lithiuminstanceid\": lithiuminstanceid, \"formulaInstance2\": formulaInstance2, \"formulaTwoId\": formulaTwoId, \"lastruntime\": arr[i].configuration.lastruntime, \"sfdcinstanceid\" : arr[i].configuration['sfdc.instance.id'], \"canrun\" : arr[i].configuration.canrun, \"endtime\": arr[i].configuration.endtime, \"formulainstanceid\" : arr[i].id, \"formulaOneId\" : arr[i].formula.id, \"active\":arr[i].active, \"name\":arr[i].name, \"2active\": formula2active,\"2name\":formula2name});\n  }\n}\n\n"
+        }
+      }
+    ],
+    "triggers": [
+      {
+        "id": 17329,
+        "onSuccess": [
+          "getFormulaInstance"
+        ],
+        "onFailure": [],
+        "type": "manual",
+        "async": true,
+        "name": "trigger",
+        "properties": {}
+      }
+    ],
+    "active": true,
+    "singleThreaded": false,
+    "configuration": [
+      {
+        "id": 31953,
+        "key": "counter",
+        "name": "counter",
+        "type": "value",
+        "required": true
+      },
+      {
+        "id": 31954,
+        "key": "email",
+        "name": "email",
+        "type": "value",
+        "required": true
+      },
+      {
+        "id": 31955,
+        "key": "lithiumlsw.instance.id",
+        "name": "lithiumlsw.instance.id",
+        "type": "elementInstance",
+        "required": true
+      },
+      {
+        "id": 31956,
+        "key": "sfdc.instance.id",
+        "name": "sfdc.instance.id",
+        "type": "elementInstance",
+        "required": true
+      }
+    ]
+  }

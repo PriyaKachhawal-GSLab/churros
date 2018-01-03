@@ -1,0 +1,235 @@
+{
+    "id": 19146,
+    "name": "Salesforce - Ticket Status",
+    "userId": 485,
+    "accountId": 1937,
+    "createdDate": "2018-01-03T20:42:47Z",
+    "steps": [
+      {
+        "id": 99820,
+        "onSuccess": [
+          "get-queue"
+        ],
+        "onFailure": [],
+        "name": "build-queue-query",
+        "type": "script",
+        "properties": {
+          "body": "var incident = steps['getIncidentCase'].response.body;\n\nvar q = \"Id='\"+ incident.OwnerId +\"'\";\n\ndone({where: q});\n"
+        }
+      },
+      {
+        "id": 99821,
+        "onSuccess": [
+          "patchToAuthor"
+        ],
+        "onFailure": [],
+        "name": "caseEscalationBody",
+        "type": "script",
+        "properties": {
+          "body": "var status = steps.getIncidentCase.response.body.Status;\n// var closed = steps.getIncidentCase.response.body.ClosedDate ? steps.getIncidentCase.response.body.ClosedDate : \"\";\nvar incident = steps.getIncidentCase.response.body;\n// var humandate = new Date(closed).toDateString();\nvar ticketId = steps.getIncidentCase.response.body.Id;\n// var owner = steps['get-user'].response.body.Name;\nvar ticket = steps['getIncidentCase'].response.body.CaseNumber;\nvar lastUpdated = incident.LastModifiedDate;\n\n\n// if(owner){\n//   agent = owner;\n// }else{\n//   agent = \"\";\n// }\n\nvar owner = '';\nif(steps['get-user'].response.body.Name){\n  owner = steps['get-user'].response.body.Name;\n} else{\n  owner = steps['get-queue'].response.body[0].Name;\n}\n\n\n// done( {\"handles\" : \n//           {\"crm\" : [\n//                     {\"id\":ticketId,\n//                     \"networkinstance\":\"Case Escalation\",\n//                     \"ticket\":ticket,\n//                     \"closedate\": humandate,\n//                     \"agentassigned\":agent,\n//                     \"status\":status\n//                     }\n//                   ]\n//           }\n//       }\n    // )\n\nvar payload = {\n    \"handles\" : \n          {\"crm\" : [\n                    {\"id\":ticketId,\n                    \"networkinstance\":config.caseintegrationname,\n                    \"ticket\":ticket,\n                    \"lastupdated\":new Date(lastUpdated).toDateString(),\n                    \"agentassigned\":owner,\n                    \"status\":status\n                    }\n                   ]\n          }\n}\n\nif(incident.ClosedDate){\n  payload.handles.crm[0].closedate = new Date(incident.ClosedDate).toDateString();\n}\n\ndone(payload);"
+        }
+      },
+      {
+        "id": 99822,
+        "onSuccess": [],
+        "onFailure": [],
+        "name": "errorNotice",
+        "type": "script",
+        "properties": {
+          "body": "// var body = 'An error occured in the Ticket status formula <br><br>Instance Name: '+ info.formulaInstanceName + '<br>Instance ID: '+info.formulaInstanceId+'<br>Execution ID: '+info.formulaExecutionId+'<br><br>';\n\n// notify.email(config.email, 'Ticket Status Error', body);\n// done(true);\nfunction isFailedResponse (step) {\n  return (step && step.response && step.response.code && step.response.code != \"200\");\n}\n\nvar msg = '';\nvar errorStep;\n\nvar stepArray = ['getIncidentCase','get-user','get-queue','patchToAuthor'];\nfor(var i=0;i<stepArray.length;i++){\n  if(isFailedResponse(steps[stepArray[i]])){\n    msg = steps[stepArray[i]].response.body.message;\n    errorStep = stepArray[i];\n  }\n}\n\n\nvar samplePayload = {\n  \"events\": [\n    {\n      \"objectType\": \"Case\",\n      \"objectId\": trigger.event.objectId,\n      \"eventType\": \"UPDATED\",\n      \"elementKey\": \"sfdc\",\n      \"hubKey\": \"crm\"\n    }\n  ],\n  \"instance_id\": info.formulaInstanceId\n}\n\nvar body = 'An error occured in the Ticket status formula <br><br>Instance Name: '+ info.formulaInstanceName + '<br>Instance ID: '+info.formulaInstanceId+'<br>Execution ID: '+info.formulaExecutionId+'<br><br>';\n\nbody = body + 'Step that errored: '+ errorStep + '<br>Response: ' + msg +'<br><br><br>Please see below payload to assist in retriggering formula<br><br>' + samplePayload;\n\nnotify.email(config.email, 'Ticket Status Error', body);\ndone(true);\n "
+        }
+      },
+      {
+        "id": 99823,
+        "onSuccess": [
+          "caseEscalationBody"
+        ],
+        "onFailure": [],
+        "name": "filterAuthorId",
+        "type": "filter",
+        "properties": {
+          "body": "if(steps.retrieveAuthorId.authorId == 'none'){\ndone(false);\n}\ndone(true);"
+        }
+      },
+      {
+        "id": 99824,
+        "onSuccess": [
+          "getIncidentCase"
+        ],
+        "onFailure": [],
+        "name": "filterIncidentCase",
+        "type": "filter",
+        "properties": {
+          "body": "var type = trigger.event.objectType;\nvar eventType = trigger.event.eventType;\n\nif((type === 'Case') && (eventType === 'UPDATED')){\n  done(true);\n}\ndone(false);"
+        }
+      },
+      {
+        "id": 99825,
+        "onSuccess": [
+          "get-user"
+        ],
+        "onFailure": [
+          "gracefulFinish"
+        ],
+        "name": "filterSocialEscalation",
+        "type": "filter",
+        "properties": {
+          "body": "var subject = steps.getIncidentCase.response.body.Subject;\n\nif(subject == 'Social Escalation'){\n  done(true);\n}else{\n  done(false);\n}"
+        }
+      },
+      {
+        "id": 99826,
+        "onSuccess": [
+          "retrieveAuthorId"
+        ],
+        "onFailure": [
+          "build-queue-query"
+        ],
+        "name": "filterUserNotFound",
+        "type": "filter",
+        "properties": {
+          "body": "let caseResponse = steps['get-user'].response.code;\n\nif(caseResponse === 200){\n  done(true);\n}else{\n  done(false);\n}"
+        }
+      },
+      {
+        "id": 99827,
+        "onSuccess": [
+          "filterSocialEscalation"
+        ],
+        "onFailure": [
+          "errorNotice"
+        ],
+        "name": "getIncidentCase",
+        "type": "elementRequest",
+        "properties": {
+          "api": "/hubs/crm/Case/{objectId}",
+          "elementInstanceId": "${sfdc.instance.id}",
+          "method": "GET",
+          "path": "${trigger.event}"
+        }
+      },
+      {
+        "id": 99828,
+        "onSuccess": [
+          "retrieveAuthorId"
+        ],
+        "onFailure": [
+          "errorNotice"
+        ],
+        "name": "get-queue",
+        "type": "elementRequest",
+        "properties": {
+          "api": "/hubs/crm/Group",
+          "elementInstanceId": "${sfdc.instance.id}",
+          "query": "${steps.build-queue-query}",
+          "method": "GET"
+        }
+      },
+      {
+        "id": 99829,
+        "onSuccess": [
+          "filterUserNotFound"
+        ],
+        "onFailure": [
+          "errorNotice"
+        ],
+        "name": "get-user",
+        "type": "elementRequest",
+        "properties": {
+          "retryAttempts": "5",
+          "api": "/hubs/crm/users/{OwnerId}",
+          "elementInstanceId": "${sfdc.instance.id}",
+          "method": "GET",
+          "path": "${steps.getIncidentCase.response.body}",
+          "retryDelay": "500",
+          "retry": "true",
+          "acceptableStatusCodes": "200,404"
+        }
+      },
+      {
+        "id": 99830,
+        "onSuccess": [],
+        "onFailure": [],
+        "name": "gracefulFinish",
+        "type": "script",
+        "properties": {
+          "body": "done({body:'end'})"
+        }
+      },
+      {
+        "id": 99831,
+        "onSuccess": [],
+        "onFailure": [
+          "errorNotice"
+        ],
+        "name": "patchToAuthor",
+        "type": "elementRequest",
+        "properties": {
+          "api": "/hubs/social/authors/{authorId}",
+          "elementInstanceId": "${lithiumlsw.instance.id}",
+          "body": "${steps.caseEscalationBody}",
+          "method": "PATCH",
+          "path": "${steps.retrieveAuthorId}"
+        }
+      },
+      {
+        "id": 99832,
+        "onSuccess": [
+          "filterAuthorId"
+        ],
+        "onFailure": [],
+        "name": "retrieveAuthorId",
+        "type": "script",
+        "properties": {
+          "body": "var subject = steps.getIncidentCase.response.body.Subject;\nvar description = steps.getIncidentCase.response.body.Description ? steps.getIncidentCase.response.body.Description : \"N/A\";\nvar parseArr = [];\nvar authorId;\n\n\nif(subject.indexOf('Social Escalation')!=-1){\nif(description.indexOf('(LRID)')!=-1){\n  parseArr = description.split('(LRID)');\n  authorId = parseArr[1].substring(1,37);\n  done({\"authorId\":authorId});\n} \n}\n\ndone({\"authorId\":\"none\"});"
+        }
+      }
+    ],
+    "triggers": [
+      {
+        "id": 17326,
+        "onSuccess": [
+          "filterIncidentCase"
+        ],
+        "onFailure": [],
+        "type": "event",
+        "async": true,
+        "name": "trigger",
+        "properties": {
+          "elementInstanceId": "${sfdc.instance.id}"
+        }
+      }
+    ],
+    "active": true,
+    "singleThreaded": false,
+    "configuration": [
+      {
+        "id": 31943,
+        "key": "caseintegrationname",
+        "name": "caseintegrationname",
+        "type": "value",
+        "required": true
+      },
+      {
+        "id": 31944,
+        "key": "email",
+        "name": "email",
+        "type": "value",
+        "required": true
+      },
+      {
+        "id": 31945,
+        "key": "lithiumlsw.instance.id",
+        "name": "lithiumlsw.instance.id",
+        "type": "elementInstance",
+        "required": true
+      },
+      {
+        "id": 31946,
+        "key": "sfdc.instance.id",
+        "name": "sfdc.instance.id",
+        "type": "elementInstance",
+        "required": true
+      }
+    ]
+  }
