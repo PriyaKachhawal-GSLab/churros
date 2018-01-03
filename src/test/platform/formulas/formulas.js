@@ -47,7 +47,35 @@ suite.forPlatform('formulas', opts, (test) => {
       .then(() => cloud.delete(`/formulas/${formulaId}`));
   });
 
-  it('should allow adding and removing "scheduled" trigger to a formula', () => {
+  it('should retrieve callable formulas', () => {
+    const f = common.genFormula({});
+    f.steps = [{
+      "name": "someApi",
+      "type": "elementRequest",
+      "properties": {
+        "elementInstanceId": "${sfdc}",
+        "api": "/hubs/crm/accounts",
+        "method": "GET"
+      }
+    }];
+    const validateResults = (formulaId, r, fullResponse) => {
+      expect(r.response.headers['elements-total-count']).to.be.below(fullResponse.response.headers['elements-total-count']);
+      expect(r.response.headers['elements-returned-count']).to.be.below(fullResponse.response.headers['elements-returned-count']);
+      cloud.delete(`/formulas/${formulaId}`);
+      return false;
+    };
+
+    let formulaId;
+    let fullResponse;
+    return cloud.post(test.api, f, schema)
+      .then(r => formulaId = r.body.id)
+      .then(r => cloud.get(test.api))
+      .then(r => fullResponse = r)
+      .then(r => cloud.withOptions({ qs: { callableBy: formulaId } }).get(test.api))
+      .then(r => validateResults(formulaId, r, fullResponse));
+  });
+
+    it('should allow adding and removing "scheduled" trigger to a formula', () => {
     const f = common.genFormula({});
     const t = common.genTrigger({});
 

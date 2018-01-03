@@ -1,17 +1,18 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/creditcard-charges');
+const payload = require('./assets/creditcard-credits');
 const cloud = require('core/cloud');
-const updatePayload = { "Subtotal": "25600.00" };
+const updatePayload = { "Memo": "Sample Credit Card Credit Updated"};
 
-suite.forElement('finance', 'creditcard-charges', { payload: payload }, (test) => {
-  it('should support CRUDS, pagination for /hubs/finance/creditcard-charges', () => {
+suite.forElement('finance', 'creditcard-credits', { payload: payload }, (test) => {
+  it('should support CRUDS, pagination for /hubs/finance/creditcard-credits', () => {
     let id;
     return cloud.post(test.api, payload)
       .then(r => id = r.body.id)
       .then(r => cloud.get(test.api))
       .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(test.api))
+      .then(r => cloud.withOptions({ qs: { where: `RefNumber = '12345'` } }).get(test.api))
       .then(r => cloud.get(`${test.api}/${id}`))
       .then(r => updatePayload.EditSequence = r.body.EditSequence)
       .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
