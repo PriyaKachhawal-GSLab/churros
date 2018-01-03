@@ -3,10 +3,21 @@ const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
 const manualFormulaTemplate = require('./assets/formulas/faar');
-const manualFormula = Object.assign({}, manualFormulaTemplate, {
+const manualFormulaTemplateRequestTest = require('./assets/formulas/faar-modified-request-key');
+
+const setupManualFormula = (template) => Object.assign({}, template, {
   uri: '/churros-resource',
   method: 'POST',
 });
+const manualFormula = setupManualFormula(manualFormulaTemplate);
+
+const manualFormulaForTriggerTest = setupManualFormula(manualFormulaTemplateRequestTest);
+
+const manualTrigger = {
+  request: {
+    this:'that'
+  }
+};
 const faarFormulaInstance = { name: 'faar-instance' };
 const scheduledTrigger = {
   type: 'scheduled',
@@ -30,7 +41,7 @@ const cleanup = (formulaId, formulaInstanceId) => {
 
 suite.forPlatform('formulas', { name: 'FaaRs' }, test => {
   beforeEach(() => {
-    const filter = name => name === manualFormula.name;
+    const filter = name => name === manualFormula.name || name === manualFormulaForTriggerTest.name;
     return cloud
       .get('/formulas/instances')
       .then(r => Promise.all(r.body.filter(fi => filter(fi.formula.name)).map(fi => cleanup(fi.formula.id, fi.id))))
@@ -100,6 +111,25 @@ suite.forPlatform('formulas', { name: 'FaaRs' }, test => {
         if (formulaId) cloud.delete(`/formulas/${formulaId}`);
         throw new Error(e);
       });
+  });
+
+  it('should not overwrite request key when formula is executed', () => {
+    let formulaId, formulaInstanceId;
+    const run = (formula, formulaInstance) => {
+      const opts = { headers: { 'Elements-Formula-Instance-Id': formulaInstance} };
+      return cloud.withOptions(opts).post(manualFormulaForTriggerTest.uri, manualTrigger).then(r => {
+        expect(r.body).to.be.an('array');
+        expect(r.body[3].trigger.args.request).to.have.property('this');
+        return r;
+      });
+    };
+
+    return cloud.post('/formulas', manualFormulaForTriggerTest)
+      .then(r => formulaId = r.body.id)
+      .then(r => cloud.post(`/formulas/${formulaId}/instances`, faarFormulaInstance))
+      .then(r => formulaInstanceId = r.body.id)
+      .then(r => run(formulaId, formulaInstanceId, manualFormulaForTriggerTest.uri))
+      .then(r => cleanup(formulaId, formulaInstanceId));
   });
 
   it('should not allow exposing a formula that does not have a manual trigger', () => {
