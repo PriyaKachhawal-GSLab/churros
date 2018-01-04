@@ -5,16 +5,17 @@ const expect = require('chakram').expect;
 const suite = require('core/suite');
 const tools = require('core/tools');
 const lorem = require('faker').lorem;
+let creditMemoPayload = tools.requirePayload(`${__dirname}/assets/credit-memo.json`);
+let allocationCreditMemo = tools.requirePayload(`${__dirname}/assets/credit-memo-POST-allocations.json`);
+let allocationInvoice = tools.requirePayload(`${__dirname}/assets/invoice-POST-allocations.json`);
+let payload = tools.requirePayload(`${__dirname}/assets/credit-memo-allocation.json`);
 
 suite.forElement('finance', 'credit-memos', (test) => {
+    let contactId;
     afterEach(done => {
         // to avoid rate limit errors
         setTimeout(done, 5000);
     });
-
-    test.should.supportPagination();
-
-    let contactId;
 
     before(() => {     
       let contactPayload = tools.requirePayload(`${__dirname}/assets/contact.json`);    
@@ -25,10 +26,10 @@ suite.forElement('finance', 'credit-memos', (test) => {
     after(() => 
       cloud.delete(`/contacts/${contactId}`
     ));
-    
+    test.should.supportPagination();
 
+  
     it('should support CRUDS for /credit-memos', () => {
-      let creditMemoPayload = tools.requirePayload(`${__dirname}/assets/credit-memo.json`);
       let creditMemoUpdate = {Reference: lorem.words()};
       creditMemoPayload.Contact.ContactID = contactId;
       
@@ -39,14 +40,11 @@ suite.forElement('finance', 'credit-memos', (test) => {
         .then(() => cloud.withOptions({qs:{where: `Reference='${creditMemoUpdate.Reference}'`}}).get(test.api))
         .then((r) => {
           expect(r.body.length).to.equal(1);
-          cloud.delete(`${test.api}/${r.body[0].CreditNoteID}`);
+          return cloud.delete(`${test.api}/${r.body[0].CreditNoteID}`);
         });
     });
 
     it('should support POST /credit-memos/:id/allocations', () => {
-      let allocationCreditMemo = tools.requirePayload(`${__dirname}/assets/credit-memo-POST-allocations.json`);
-      let allocationInvoice = tools.requirePayload(`${__dirname}/assets/invoice-POST-allocations.json`);
-      let payload = tools.requirePayload(`${__dirname}/assets/credit-memo-allocation.json`);
       let creditMemoId, invoiceId;
       allocationCreditMemo.Contact.ContactID = contactId;
       allocationInvoice.Contact.ContactID = contactId;
