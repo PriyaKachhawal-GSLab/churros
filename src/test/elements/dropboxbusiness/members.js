@@ -2,10 +2,11 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
+const props = require('core/props');
 const payload = require('./assets/members');
 
 suite.forElement('documents', 'members', { payload: payload,skip:true }, (test) => {
-  const memberId = 'dbmid:AACFP-SOix67cparXiV_EkV-dwqL1zPORi8';
+  let memberId = props.getForKey('dropboxbusiness', 'username');
   const email = 'devteammember@cloud-elements.com';
   const external_id = 'company_id:342432';
 

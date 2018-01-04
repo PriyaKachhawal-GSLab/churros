@@ -1,20 +1,17 @@
 {
-  "AppliedToTxn": [{
-    "TxnID": "16D1-1484948017",
-    "TxnType": "Invoice",
-    "BalanceRemaining": "296.67",
-    "TxnDate": "2011-06-17",
-    "RefNumber": "4567",
-    "Amount": "10836.00"
-  }],
+  "AppliedToTxn": [
+      {
+          "TxnID": "xxxxx",
+          "TxnType": "Invoice"
+      }
+  ],
   "TxnDate": "2011-06-17",
-  "RefNumber": "WEB000001",
-  "TotalAmount": "10836.00",
-  "TxnID": "3465-1484948122",
+  "RefNumber": "WEB00033",
+  "TotalAmount": "10.00",
   "ARAccountRef": {
     "FullName": "Accounts Receivable"
   },
   "CustomerRef": {
-    "FullName": "Bauman, Mark"
+    "ListID": "xxxxx"
   }
 }

@@ -1,4 +1,4 @@
 {
-    "FirstName": "Claude",
+    "FirstName": "<<name.firstName>>",
     "LastName": "<<name.lastName>>"
 }

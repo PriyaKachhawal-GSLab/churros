@@ -122,7 +122,25 @@ describe('provisioner', () => {
       .reply(404, (uri, requestBody) => {
         return { message: 'No element found with key badelement' };
       })
+      .put('/instances/4567', {
+        name: 'churros-instance',
+        element: { key: 'myoauth1element' }
+      })
+      .reply(200, (uri, requestBody) => {
+        requestBody.id = 4567;
+        return requestBody;
+      })
+      .put('/instances/45678', {
+        name: 'churros-instance',
+        element: { key: 'myoauth2element' }
+      })
+      .reply(200, (uri, requestBody) => {
+        requestBody.id = 45678;
+        return requestBody;
+      })
       .delete('/instances/123')
+      .reply(200)
+      .delete('/instances/45678')
       .reply(200)
       .delete('/instances/456')
       .reply(404);
@@ -142,6 +160,16 @@ describe('provisioner', () => {
       .reply(200, () => {
         return {key: 'myoauth2element', id: 123, configuration: [{key: 'event.poller.configuration', defaultValue: "NoConfig"}]};
       })
+      .get('/elements/myoauth1element')
+      .reply(200, () => {
+        return {key: 'myoauth1element', id: 123, configuration: [{key: 'event.poller.configuration', defaultValue: "NoConfig"}]};
+      })
+      .get('/instances/4567')
+      .reply(200, () => ({
+          id:4567,
+          name: 'churros-instance',
+          element: { key: 'myoauth1element' }
+      }))
       .get('/elements/123/metadata')
       .reply(200, () => {
         return {events : {supported: true, methods: ['polling', 'webhook']}};
@@ -186,6 +214,15 @@ describe('provisioner', () => {
       .reply(200, () => new Object({
         oauthUrl: 'http://frankthetanksoauthurl.com'
       }));
+    nock(baseUrl, headers())
+      .get('/elements/123/oauth/url/default')
+      .query(true)
+      .reply(200, () => new Object({
+        oauthUrl: 'http://frankthetanksoauthurl.com',
+        configuration:{
+          secret:'1234'
+        }
+      }));
 
     nock(baseUrl, headers())
       .get('/elements/noTokenUrl/oauth/url')
@@ -226,6 +263,49 @@ describe('provisioner', () => {
       .then(r => mockery.disable());
   });
 
+  it('should allow updating an oauth1 element instance', () => {
+    setupProps();
+    return provisioner.update('myoauth1element', null, null, 4567)
+      .then(r => {
+        expect(r).not.to.be.null;
+        expect(r.body).not.to.be.null;
+        expect(r.body.id).to.equal(4567);
+        expect(r.body.providerData).not.to.be.null;
+        expect(r.body.providerData.secret).to.equal('secret');
+        expect(r.body.providerData.oauth_verifier).to.equal('josephbluepulaski');
+      })
+      .then(r => mockery.disable());
+  });
+
+  it('should allow creating a default oauth1 element instance', () => {
+    setupProps();
+    return provisioner.createWithDefault('myoauth1element')
+      .then(r => {
+        expect(r).not.to.be.null;
+        expect(r.body).not.to.be.null;
+        expect(r.body.id).to.equal(123);
+        expect(r.body.providerData).not.to.be.null;
+        expect(r.body.providerData.secret).to.equal('1234');
+        expect(r.body.providerData.oauth_verifier).to.equal('josephbluepulaski');
+      })
+      .then(r => mockery.disable());
+  });
+
+  it('should allow updating a default oauth1 element instance', () => {
+    setupProps();
+    return provisioner.updateWithDefault('myoauth1element', null, null, 4567)
+      .then(r => {
+        expect(r).not.to.be.null;
+        expect(r.body).not.to.be.null;
+        expect(r.body.id).to.equal(4567);
+        expect(r.body.providerData).not.to.be.null;
+        expect(r.body.providerData.secret).to.equal('1234');
+        expect(r.body.providerData.oauth_verifier).to.equal('josephbluepulaski');
+      })
+      .then(r => mockery.disable());
+  });
+
+
   it('should throw an error if oauth1 element is missing required props', () => {
     setupProps();
     props.set('oauth.callback.url', null);
@@ -250,6 +330,45 @@ describe('provisioner', () => {
       .then(r => mockery.disable());
   });
 
+    it('should allow updating an oauth2 element instance', () => {
+      setupProps();
+      return provisioner.update('myoauth2element', null, null, 45678)
+        .then(r => {
+          expect(r).not.to.be.null;
+          expect(r.body).not.to.be.null;
+          expect(r.body.id).to.equal(45678);
+          expect(r.body.providerData).not.to.be.null;
+          expect(r.body.providerData.code).to.equal('speakercity');
+        })
+        .then(r => mockery.disable());
+    });
+
+    it('should allow creating a default oauth2 element instance', () => {
+      setupProps();
+      return provisioner.createWithDefault('myoauth2element')
+        .then(r => {
+          expect(r).not.to.be.null;
+          expect(r.body).not.to.be.null;
+          expect(r.body.id).to.equal(123);
+          expect(r.body.providerData).not.to.be.null;
+          expect(r.body.providerData.code).to.equal('speakercity');
+        })
+        .then(r => mockery.disable());
+    });
+
+    it('should allow updating a default oauth2 element instance', () => {
+      setupProps();
+      return provisioner.updateWithDefault('myoauth2element', null, null, 45678)
+        .then(r => {
+          expect(r).not.to.be.null;
+          expect(r.body).not.to.be.null;
+          expect(r.body.id).to.equal(45678);
+          expect(r.body.providerData).not.to.be.null;
+          expect(r.body.providerData.code).to.equal('speakercity');
+        })
+        .then(r => mockery.disable());
+    });
+
   it('should allow creating an oauth2 element instance with debug', () => {
     setupProps();
     return provisioner.create('myoauth2element', {debug : true})
@@ -263,6 +382,7 @@ describe('provisioner', () => {
       })
       .then(r => mockery.disable());
   });
+
 
   it('should allow creating an oauth2 external instance', () => {
     setupProps();

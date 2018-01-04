@@ -14,11 +14,12 @@ suite.forElement('finance', 'payments', (test) => {
     
     test.should.supportPagination();
     
-    it(`should support CRS for /payments`, () => {
+    it(`should support CRDS for /payments`, () => {
         const bankAccountName = 'ToBank-DoNotDelete';
-        let invoiceNumber, accountId;
+        let invoiceNumber, invoiceId, accountId, paymentId;
         let paymentPayload = require('./assets/payment.json');
         let invoicePayload = require('./assets/payment-invoice.json');
+        let invoiceUpdate = {Status: "VOIDED"};
         
         invoicePayload.Contact.Name = faker.name.findName();
         return cloud.withOptions({qs: {where: `Name='Sales'`}}).get('/ledger-accounts')
@@ -27,6 +28,7 @@ suite.forElement('finance', 'payments', (test) => {
         .then(r => {
             expect(r.body).to.not.be.empty;
             invoiceNumber = r.body.InvoiceNumber;
+            invoiceId = r.body.id;
         })
         .then(() => cloud.withOptions({qs: {where: `Name='${bankAccountName}'`}}).get('/ledger-accounts'))
         .then(r => {
@@ -39,7 +41,12 @@ suite.forElement('finance', 'payments', (test) => {
             paymentPayload.Invoice.InvoiceNumber = invoiceNumber;
         })
         .then(() => cloud.post(`${test.api}`, paymentPayload))
-        .then(r => cloud.get(`${test.api}/${r.body.PaymentID}`))
-        .then(r => cloud.get(`${test.api}`));
+        .then(r => {
+            paymentId = r.body.PaymentID;
+            return cloud.get(`${test.api}/${paymentId}`);
+        })
+        .then(() => cloud.get(`${test.api}`))
+        .then(() => cloud.delete(`${test.api}/${paymentId}`))
+        .then(() => cloud.patch(`/invoices/${invoiceId}`, invoiceUpdate));
     });
 });

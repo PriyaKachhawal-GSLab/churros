@@ -57,20 +57,15 @@ suite.forElement('documents', 'folders',{ payload: payload }, (test) => {
                     .then(() => cloud.withOptions({ qs: { path: `/${directoryPath}/textFile.txt`, overwrite: 'true' } }).postFile(`/hubs/documents/files`, textFile))
                     .then(r => textFileBody = r.body));
 
-          after(() =>
-                  cloud.delete(`/hubs/documents/files/${jpgFileBody.id}`)
-                  .then(() => cloud.delete(`/hubs/documents/files/${pngFileBody.id}`))
-                  .then(() => cloud.delete(`/hubs/documents/files/${textFileBody.id}`))
-                  .then(() => cloud.delete(`${test.api}/${jpgFileBody.parentFolderId}`)));
+          after(() =>  cloud.withOptions({ qs: { path: `/${directoryPath}`} }).delete(`/hubs/documents/folders`));
 
       it('should allow GET /folders/contents', () => {
-          return cloud.withOptions({ qs: { path: `/${directoryPath}` } }).get(`${test.api}/contents`)
-            .then(r => expect(r.body[0]).to.contain.key('name'));
+          return cloud.withOptions({ qs: { path: `/${directoryPath}` } }).get(`${test.api}/contents`);
       });
 
       it('should allow GET /folders/contents with name like', () => {
           return cloud.withOptions({ qs: { path: `/${directoryPath}`, where: "name like 'Dice'" } }).get(`${test.api}/contents`)
-            .then(r => expect(r.body[0].properties.mimeType).to.equal("image/png"));
+            .then(r => expect(r.body[0].name).to.contain('Dice'));
       });
 
       it('should allow GET /folders/contents with name equals', () => {
@@ -80,17 +75,17 @@ suite.forElement('documents', 'folders',{ payload: payload }, (test) => {
 
       it('should allow GET /folders/contents with name IN', () => {
           return cloud.withOptions({ qs: { path: `/${directoryPath}`, where: "name IN ('Penguins.jpg','Dice.png')" } }).get(`${test.api}/contents`)
-            .then(r => expect(r.body.filter(obj => obj.name === 'Penguins.jpg' || obj.name === 'Dice.png')).to.not.be.empty);
+            .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.name === 'Penguins.jpg' || obj.name === 'Dice.png').length));
       });
 
       it('should allow GET /folders/contents with extension', () => {
-          return cloud.withOptions({ qs: { path: `/${directoryPath}`, where: "extension='jpg'" } }).get(`${test.api}/contents`)
-            .then(r => expect(r.body[0].properties.mimeType).to.equal("image/jpeg"));
+          return cloud.withOptions({ qs: { path: `/${directoryPath}`, where: "extension='txt'" } }).get(`${test.api}/contents`)
+            .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.properties.mimeType === 'text/plain').length));
       });
 
       it('should allow GET /folders/contents with mimeType', () => {
           return cloud.withOptions({ qs: { path: `/${directoryPath}`, where: "mimeType='text/plain'" } }).get(`${test.api}/contents`)
-            .then(r => expect(r.body[0].properties.mimeType).to.equal("text/plain"));
+            .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.properties.mimeType === 'text/plain').length));
       });
 
 });
