@@ -1,8 +1,7 @@
 /** @module core/provisioner */
 'use strict';
 
-const chakram = require('chakram');
-const expect = chakram.expect;
+const expect = require('chakram').expect;
 const tools = require('core/tools');
 const props = require('core/props');
 const urlParser = require('url');
