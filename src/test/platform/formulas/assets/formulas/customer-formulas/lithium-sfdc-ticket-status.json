@@ -1,5 +1,5 @@
 {
-    "name": "Salesforce - Ticket Status",
+    "name": "Lithium - Ticket Status",
     "steps": [
       {
         "onSuccess": [
@@ -45,7 +45,7 @@
         "name": "filterIncidentCase",
         "type": "filter",
         "properties": {
-          "body": "var type = trigger.event.objectType;\nvar eventType = trigger.event.eventType;\n\nif((type === 'Case') && (eventType === 'UPDATED')){\n  done(true);\n}\ndone(false);"
+          "body": "var eventType = trigger.event.eventType;\n\nif((eventType === 'UPDATED')){\n  done(true);\n}\ndone(false);"
         }
       },
       {
@@ -58,7 +58,7 @@
         "name": "filterSocialEscalation",
         "type": "filter",
         "properties": {
-          "body": "var subject = steps.getIncidentCase.response.body.Subject;\n\nif(subject == 'Social Escalation'){\n  done(true);\n}else{\n  done(false);\n}"
+          "body": "var subject = steps.getIncidentCase.response.body.Status;\n\nif(subject == 'New'){\n  done(true);\n}else{\n  done(false);\n}"
         }
       },
       {
@@ -151,7 +151,7 @@
         "name": "retrieveAuthorId",
         "type": "script",
         "properties": {
-          "body": "var subject = steps.getIncidentCase.response.body.Subject;\nvar description = steps.getIncidentCase.response.body.Description ? steps.getIncidentCase.response.body.Description : \"N/A\";\nvar parseArr = [];\nvar authorId;\n\n\nif(subject.indexOf('Social Escalation')!=-1){\nif(description.indexOf('(LRID)')!=-1){\n  parseArr = description.split('(LRID)');\n  authorId = parseArr[1].substring(1,37);\n  done({\"authorId\":authorId});\n} \n}\n\ndone({\"authorId\":\"none\"});"
+          "body": "done({\"authorId\":\"none\"});"
         }
       }
     ],

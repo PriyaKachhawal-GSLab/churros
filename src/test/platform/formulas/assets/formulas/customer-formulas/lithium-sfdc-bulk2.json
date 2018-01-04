@@ -63,7 +63,7 @@
         "properties": {
           "downloadMethod": "GET",
           "downloadApi": "/hubs/crm/bulk/${trigger.args.id}/Contact",
-          "uploadApi": "/hubs/social/bulk/sfdc_Contact_authorsBatch",
+          "uploadApi": "/hubs/social/bulk/authors",
           "uploadElementInstanceId": "${config.lithiumlsw.instance.id}",
           "downloadElementInstanceId": "${config.sfdc.instance.id}",
           "downloadHeaders": "${steps.buildStreamHeaders}",

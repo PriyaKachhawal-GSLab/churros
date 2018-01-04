@@ -18,7 +18,7 @@
         "name": "bulkQuery",
         "type": "script",
         "properties": {
-          "body": "var fieldString = steps['return-transformation'].query;\nvar obj = steps.returnId;\n\nif(config.lastruntime === null || config.lastruntime === undefined || config.lastruntime === \"\" || config.lastruntime == \"none\"){\n  done( { \"q\" : \"select \" + fieldString + \" from Contact\",\n          \"to\" : obj.newendtime } );\n}\nelse{\n  done( { \"q\" : \"select \" + fieldString + \" from Contact\",\n          \"from\" : config.lastruntime,\n          \"to\" : obj.newendtime} );\n}\n"
+          "body": "var fieldString = 'FirstName, LastName, Email';\nvar obj = steps.returnId;\n\nif(config.lastruntime === null || config.lastruntime === undefined || config.lastruntime === \"\" || config.lastruntime == \"none\"){\n  done( { \"q\" : \"select \" + fieldString + \" from Contact\" } );\n}\nelse{\n  done( { \"q\" : \"select \" + fieldString + \" from Contact\",\n          \"from\" : config.lastruntime,\n          \"to\" : obj.newendtime} );\n}\n"
         }
       },
       {
@@ -53,21 +53,6 @@
           "method": "GET",
           "retryDelay": "500",
           "retry": "true"
-        }
-      },
-      {
-        "id": 99837,
-        "onSuccess": [
-          "return-transformation"
-        ],
-        "onFailure": [
-          "failureNotification"
-        ],
-        "name": "get-transformation",
-        "type": "request",
-        "properties": {
-          "api": "/instances/${steps.returnId.lithiumInstance}/transformations/sfdc_Contact_authorsBatch",
-          "method": "GET"
         }
       },
       {
@@ -112,7 +97,7 @@
       },
       {
         "onSuccess": [
-          "get-transformation"
+          "bulkQuery"
         ],
         "onFailure": [
           "failureNotification"
@@ -152,16 +137,6 @@
         "properties": {
           "body": "var arr = steps.formulaInstance.response.body;\nvar formulaInstance2;\nvar newendtime = new Date().toISOString(); \nvar lithiumInstance;\nvar instance2name;\n\nfor(var j=0; j<arr.length; j++){\n  if(arr[j].formula.name.includes('bulk2sfdc')){\n    instance2name = arr[j].name;\n    formulaInstance2 = arr[j].id;\n    lithiumInstance = arr[j].configuration['lithiumlsw.instance.id'];\n  }\n}\n\nfor(var i=0; i<arr.length; i++){\n  if(arr[i].formula.name.includes('bulk1sfdc')){\n    config.formulainstanceid = arr[i].id;\n    done({\"formulaInstance2\": formulaInstance2, \"lastruntime\": arr[i].configuration.lastruntime, \"sfdcinstanceid\" : arr[i].configuration['sfdc.instance.id'], \"canrun\" : arr[i].configuration.canrun, \"endtime\": arr[i].configuration.endtime, \"formulainstanceid\" : arr[i].id, \"newendtime\": newendtime, \"formulaOneId\" : arr[i].formula.id, \"lithiumInstance\" : lithiumInstance, \"active\": arr[i].active, \"instance2name\": instance2name, \"instance1name\": arr[i]['name']});\n  }\n}\ndone({});"
         }
-      },
-      {
-        "onSuccess": [
-          "bulkQuery"
-        ],
-        "name": "return-transformation",
-        "type": "script",
-        "properties": {
-          "body": "var transformation = steps['get-transformation'].response.body.script.body;\nvar array = transformation.split(\" \");\nvar fieldArray = [];\n\nfor(var i=0; i<array.length; i++){\n\tif(array[i].startsWith('originalObject')){\n\t\tfieldArray.push(array[i].slice(15,array[i].indexOf(';')));\n\t}\n}\n\ndone({query: fieldArray.join(',')});\n"
-        }
       }
     ],
     "triggers": [
@@ -169,11 +144,8 @@
         "onSuccess": [
           "canRun"
         ],
-        "type": "scheduled",
-        "name": "trigger",
-        "properties": {
-          "cron": "0 0/1 * 1/1 * ? *"
-        }
+        "type": "manual",
+        "name": "trigger"
       }
     ],
     "engine": "v3",
