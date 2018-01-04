@@ -31,7 +31,7 @@ suite.forElement('collaboration', 'users', payload, (test) => {
   // test for patch /users-profile
   let userProfilePayload = {
     'name': 'first_name',
-    'value': tools.randomStr()
+    'value': tools.randomStr('abcdefghijklmnopqrstuvwxyz', 8)
   };
   // test for patch /users-profile
   it(`should allow PATCH ${test.api}-profile`, () => {
