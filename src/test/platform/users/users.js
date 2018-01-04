@@ -147,6 +147,23 @@ suite.forPlatform('users', { schema: schema, payload: payload }, (test) => {
     .then(() => cloud.get(`/instances`, r => expect(r).to.have.status(404)));
   });
 
+  it('should support user deletion', () => {
+    let userSecret;
+    let userId;
+    return cloud.post(`/accounts/${accountId}/users`, payload2)
+    .then(r => { userSecret = r.body.secret; userId = r.body.id; })
+    // Create a pipedrive instance with the new user's credentials
+    .then(() => defaults.withDefaults(userSecret, orgSecret, payload2.email))
+    .then(() => provisioner.create('pipedrive'))
+    // Validate that the instance is there for the new user
+    .then(() => defaults.withDefaults(userSecret, orgSecret, payload2.email))
+    .then(() => cloud.get(`/instances`))
+    .then(r => expect(r.body.length).to.equal(1))
+    // Delete the user
+    .then(() => defaults.reset())
+    .then(() => cloud.delete(`/users/${userId}`));
+  });
+
   describe('user roles', () => {
     before(() => {
       return cleanup()
