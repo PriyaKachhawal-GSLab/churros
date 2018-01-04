@@ -14,6 +14,7 @@ suite.forElement('crm', 'candidates', { payload: payload }, (test) => {
       .then(r => candidateId = r.body.changedEntityId)
       .then(r => cloud.get(test.api))
       .then(r => cloud.get(`${test.api}/${candidateId}`))
+      .then(r => cloud.withOptions({ qs: { fields: 'id,address.countryCode,secondaryAddress.countryCode' } }).get(`${test.api}/${candidateId}`))
       .then(r => cloud.patch(`${test.api}/${candidateId}`, updatePayload))
       .then(r => cloud.delete(`${test.api}/${candidateId}`));
   });

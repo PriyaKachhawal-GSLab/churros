@@ -17,6 +17,7 @@ suite.forElement('crm', 'notes', { payload: notesPayload }, (test) => {
     return cloud.post(test.api, payload)
       .then(r => noteId = r.body.changedEntityId)
       .then(r => cloud.get(`${test.api}/${noteId}`))
+      .then(r => cloud.withOptions({ qs: { fields: 'id,personReference.firstName' } }).get(`${test.api}/${noteId}`))
       .then(r => cloud.patch(`${test.api}/${noteId}`, updatePayload))
       .then(r => cloud.delete(`${test.api}/${noteId}`));
   });
