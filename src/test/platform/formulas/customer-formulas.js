@@ -6,10 +6,8 @@ const common = require('./assets/common');
 const {createXInstances, genCaseWebhookEvent, genWebhookEvent, pollAllExecutions, simulateTrigger} = require('./assets/load-common');
 const cloud = require('core/cloud');
 const fSchema = require('./assets/schemas/formula.schema');
-const fiSchema = require('./assets/schemas/formula.instance.schema');
 const chakram = require('chakram');
 const expect = chakram.expect;
-const logger = require('winston');
 const provisioner = require('core/provisioner');
 const tools = require('core/tools');
 
