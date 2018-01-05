@@ -369,7 +369,7 @@ suite.forPlatform('formulas', opts, (test) => {
     f.debugLoggingEnabled = false;
     return cloud.post(test.api, f, (r) => {
       expect(r).to.have.statusCode(400);
-      expect(r.body.message).to.contain('Execution debug log cannot be disabled for formula engine v2 or lower');
+      expect(r.body.message).to.contain('Execution debug logging can be disabled only for formula engine v3');
     });
   });
 
@@ -408,8 +408,7 @@ suite.forPlatform('formulas', opts, (test) => {
         formulaId = r.body.id; })
       .then(r => cloud.patch(`${test.api}/${formulaId}`, patchBody, (r) => {
         expect(r).to.have.statusCode(400);
-        expect(r.body.message).to.contain('Execution debug log cannot be disabled for formula engine ' +
-          'v2 or lower');
+        expect(r.body.message).to.contain('Execution debug logging can be disabled only for formula engine v3');
       }))
       .then(r => cloud.delete(`${test.api}/${formulaId}`))
       .catch(e => {
