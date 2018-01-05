@@ -1,6 +1,5 @@
 'use strict';
 
-const suite = require('core/suite');
 const cloud = require('core/cloud');
 const defaults = require('core/defaults');
 const provisioner = require('core/provisioner');
