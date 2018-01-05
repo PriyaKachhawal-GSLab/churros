@@ -7,6 +7,8 @@
 const cloud = require('core/cloud');
 const logger = require('winston');
 const moment = require('moment');
+const chakram = require('chakram');
+const expect = chakram.expect;
 
 var exports = module.exports = {};
 
@@ -46,7 +48,16 @@ const cleanFormulas = (field, values) => {
           return instances;
         })
         .then(rs => Promise.all(rs.map(r => cloud.delete(`/formulas/${r.formula.id}/instances/${r.id}`))))
-        .then(() => Promise.all(rs.map(f => cloud.delete(`/formulas/${f.id}`))));
+        .then(() => Promise.all(rs.map(f =>
+          cloud.delete(`/formulas/${f.id}`)
+            // retry if fail due to async formula instance delete
+            .catch(e => new Promise(resolve => setTimeout(resolve, 1000))
+              .then(() => {
+                logger.debug(`Attempting retry of formula ${f.id} delete`);
+                return cloud.delete(`/formulas/${f.id}`)
+              })
+            ))
+          ))
     });
 };
 
