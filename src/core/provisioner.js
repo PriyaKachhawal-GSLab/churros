@@ -57,6 +57,7 @@ const parseProps = (element) => {
 };
 
 const getPollerConfig = (element, instance, polling) => {
+  console.log(`Polling! ${polling}`);
   if (!polling) return Promise.resolve(instance);
   let elementObj;
   return cloud.get('/elements/' + element)
@@ -269,7 +270,7 @@ const orchestrateCreate = (element, args, baseApi, cb, polling) => {
  * @param {boolean} polling Whether to enable polling or not
  * @return {Promise}  A promise that will resolve to the response after the partial OAuth flow is complete
  */
-exports.partialOauth = (element, args, baseApi, polling) => orchestrateCreate(element, args, baseApi, (type, config, r) => r.code, polling == null ? argv.polling : polling);
+exports.partialOauth = (element, args, baseApi, polling) => orchestrateCreate(element, args, baseApi, (type, config, r) => r.code, typeof polling === 'undefined' ? argv.polling : polling);
 
 /**
  * Provision an element instance
@@ -286,10 +287,10 @@ exports.create = (element, args, baseApi, polling) => {
     if (external && type === 'oauth2') return createExternalInstance(element, config.ec, r);
     if (external && type === 'oauth1') throw Error('External Authentication via churros is not yet implemented for OAuth1');
 
-    return createInstance(element, config, r, baseApi, polling == null ? argv.polling : polling);
+    return createInstance(element, config, r, baseApi, typeof polling === 'undefined' ? argv.polling : polling);
   };
 
-  return orchestrateCreate(element, args, baseApi, cb, polling == null ? argv.polling : polling);
+  return orchestrateCreate(element, args, baseApi, cb, typeof polling === 'undefined' ? argv.polling : polling);
 };
 
 /**
