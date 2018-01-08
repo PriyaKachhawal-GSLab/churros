@@ -23,6 +23,11 @@ const propertiesPayload = {
 suite.forElement('documents', 'files', { payload: payload }, (test) => {
   let jpgFileBody,revisionId,jpgFile = __dirname + '/assets/Penguins.jpg';
   let query = { path: `/Penguins-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` };
+  
+  before(() => cloud.withOptions({ qs : query }).postFile(test.api, jpgFile)
+  .then(r => jpgFileBody = r.body));
+
+  after(() => cloud.delete(`${test.api}/${jpgFileBody.id}`));
 
   it('should allow ping for googledrive', () => {
     return cloud.get(`/hubs/documents/ping`);
@@ -62,12 +67,6 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
       .then(r => cloud.withOptions({ qs: { path: `${destPath}` } }).delete(`${test.api}`));
   });
 
-  before(() => cloud.withOptions({ qs : query }).postFile(test.api, jpgFile)
-  .then(r => jpgFileBody = r.body));
-
-  after(() => cloud.delete(`${test.api}/${jpgFileBody.id}`));
-
-
   it('it should allow RS for documents/files/:id/revisions', () => {
       return cloud.get(`${test.api}/${jpgFileBody.id}/revisions`)
       .then(r => revisionId = r.body[0].id)
@@ -85,7 +84,6 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
     let DocFile = '/ChurrosDocDoNotDelete';
     return cloud.withOptions({ qs: { path: DocFile, mediaType: 'text/plain' } }).get(test.api)
       .then(r => {
-        expect(r.body).to.not.be.null;
         expect(r.body).to.contain('Sample Word Doc');
       });
   });
@@ -93,7 +91,6 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
     let SSFile = '/ChurrosSSDoNotDelete';
     return cloud.withOptions({ qs: { path: SSFile, mediaType: 'text/csv' } }).get(test.api)
       .then(r => {
-        expect(r.body).to.not.be.null;
         expect(r.body).to.contain('Test1,Test2,Tes3,Test4');
       });
   });
@@ -101,7 +98,6 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
     let PPTFile = '/ChurrosPPTDoNotDelete';
     return cloud.withOptions({ qs: { path: PPTFile, mediaType: 'text/plain' } }).get(test.api)
       .then(r => {
-        expect(r.body).to.not.be.null;
         expect(r.body).to.contain('Churros PPT Test');
       });
   });
@@ -109,7 +105,6 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
     let PNGFile = '/ChurrosPNGDoNotDelete';
     return cloud.withOptions({ qs: { path: PNGFile, mediaType: 'application/pdf' } }).get(test.api)
       .then(r => {
-        expect(r.body).to.not.be.null;
         expect(r.body).to.contain('%PDF-1.4');
       });
   });

@@ -13,7 +13,7 @@ const updatePayload ={
 
 
 suite.forElement('documents', 'folders',{ payload: payload }, (test) => {
-  let directoryPath = faker.random.uuid();
+  let directoryPath = faker.random.uuid(), directoryId;
   let jpgFile = __dirname + '/assets/Penguins.jpg';
   let pngFile = __dirname + '/assets/Dice.png';
   let textFile = __dirname + '/assets/textFile.txt';
@@ -55,7 +55,9 @@ suite.forElement('documents', 'folders',{ payload: payload }, (test) => {
                     .then(() => cloud.withOptions({ qs: { path: `/${directoryPath}/Dice.png`, overwrite: 'true' } }).postFile(`/hubs/documents/files`, pngFile))
                     .then(r => pngFileBody = r.body)
                     .then(() => cloud.withOptions({ qs: { path: `/${directoryPath}/textFile.txt`, overwrite: 'true' } }).postFile(`/hubs/documents/files`, textFile))
-                    .then(r => textFileBody = r.body));
+                    .then(r => textFileBody = r.body)
+                    .then(() => cloud.withOptions({qs:{ path: `/${directoryPath}`}}).get(`${test.api}/metadata`))
+                    .then(r => directoryId = r.body.id));
 
           after(() =>  cloud.withOptions({ qs: { path: `/${directoryPath}`} }).delete(`/hubs/documents/folders`));
 
@@ -86,6 +88,22 @@ suite.forElement('documents', 'folders',{ payload: payload }, (test) => {
       it('should allow GET /folders/contents with mimeType', () => {
           return cloud.withOptions({ qs: { path: `/${directoryPath}`, where: "mimeType='text/plain'" } }).get(`${test.api}/contents`)
             .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.properties.mimeType === 'text/plain').length));
+      });
+      
+      it('should not return the path for GET /folders/contents?includePath=false', () => {
+        return cloud.withOptions({ qs: { includePath: false, path: `/${directoryPath}`} }).get(`${test.api}/contents`)
+          .then(r => {
+            expect(r.body[0].name).to.exist;
+            expect(r.body[0].path).to.be.undefined;
+          });
+      });
+
+      it('should not return the path for GET /folders/:id/contents?includePath=false', () => {
+        return cloud.withOptions({ qs: { includePath: false} }).get(`${test.api}/${directoryId}/contents`)
+          .then(r => {
+            expect(r.body[0].name).to.exist;
+            expect(r.body[0].path).to.be.undefined;
+          });
       });
 
 });
