@@ -27,7 +27,6 @@ suite.forElement('documents', 'folders', (test) => {
       .then(r => cloud.withOptions({ qs: { path: folder1.path } }).delete('/hubs/documents/folders'));
   });
 
-
   it('should allow C /folders and DELETE /folders/:id', () => {
     let folder2;
     return cloud.post('/hubs/documents/folders', folderPayload)
