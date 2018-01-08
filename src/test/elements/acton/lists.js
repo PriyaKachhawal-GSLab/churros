@@ -89,9 +89,9 @@ suite.forElement('marketing', 'lists', { payload: payload }, (test) => {
       .then(contacts => cloud.patch(`/hubs/marketing/lists/${filteredLists[0].id}/contacts/${contacts.body[0].id}`, contactUpdatePayload));
   });
 
-  it('should sleep for 60 seconds to avoid rate limits', () => {
-    return tools.sleep(60);
-  });
+ // it('should sleep for 60 seconds to avoid rate limits', () => {
+ //   return tools.sleep(60);
+ // });
 
   it('it should support DELETE a contact inside a list', () => {
     let filteredLists;
