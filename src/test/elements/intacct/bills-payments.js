@@ -15,4 +15,5 @@ suite.forElement('finance', 'bills-payments', (test) => {
       expect(validValues.length).to.equal(r.body.length);
     })
     .should.return200OnGet();
+     test.should.supportNextPagePagination(1,false);
 });

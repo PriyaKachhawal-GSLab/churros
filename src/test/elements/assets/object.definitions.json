@@ -1,9 +1,9 @@
 {
   "accounts": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -21,16 +21,16 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "activities": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -52,7 +52,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -61,7 +61,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -70,7 +70,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -79,7 +79,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -88,7 +88,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -97,7 +97,16 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "checking-accounts": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -106,7 +115,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -115,7 +124,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -124,16 +133,16 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "comments": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -145,9 +154,9 @@
   },
   "contacts": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -201,16 +210,16 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "customers": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -232,7 +241,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -241,7 +250,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -250,7 +259,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -259,7 +268,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -268,16 +277,16 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "shipments": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -289,9 +298,9 @@
   },
   "addresses": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -303,9 +312,9 @@
   },
   "eloquaCustomObject": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -321,9 +330,9 @@
   },
   "employees": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -337,7 +346,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -346,7 +355,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -355,7 +364,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -364,7 +373,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -373,7 +382,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -382,29 +391,30 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "incidents": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    },
-    {
-      "path": "junk",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      }, {
+        "path": "id",
+        "type": "string"
+      },
+      {
+        "path": "junk",
+        "type": "string"
+      }
+    ]
   },
   "incident-types": {
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -413,16 +423,16 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "leads": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -442,9 +452,9 @@
   },
   "lists": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -462,7 +472,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -471,16 +481,16 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "opportunities": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -526,7 +536,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -535,16 +545,16 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "owners": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -558,7 +568,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -567,16 +577,16 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "products": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -592,9 +602,9 @@
   },
   "tasks": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -612,7 +622,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -621,7 +631,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -630,7 +640,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -639,7 +649,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -648,16 +658,16 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "vendors": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -671,7 +681,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -680,7 +690,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -689,7 +699,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -698,19 +708,19 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "segments": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-  },
+        "path": "idTransformed",
+        "type": "string"
+      },
       {
         "path": "id",
-        "type":"string"
+        "type": "string"
       }
     ]
   },
@@ -718,7 +728,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -727,7 +737,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -736,7 +746,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -745,7 +755,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -754,7 +764,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -763,7 +773,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -772,7 +782,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -781,7 +791,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -790,7 +800,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -799,7 +809,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -808,7 +818,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -817,7 +827,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -826,7 +836,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -835,7 +845,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -844,7 +854,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -853,7 +863,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -862,7 +872,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -871,16 +881,16 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "authors": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -894,7 +904,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -903,7 +913,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -912,7 +922,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -921,7 +931,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -930,7 +940,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -939,7 +949,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -948,7 +958,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -957,7 +967,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -966,7 +976,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -975,7 +985,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -984,7 +994,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -993,7 +1003,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1002,7 +1012,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1011,7 +1021,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1020,7 +1030,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1029,7 +1039,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1038,7 +1048,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1047,7 +1057,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1056,7 +1066,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1065,7 +1075,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1074,7 +1084,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1083,7 +1093,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1092,7 +1102,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1101,7 +1111,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1110,7 +1120,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1119,7 +1129,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1128,7 +1138,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1137,7 +1147,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1146,7 +1156,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1155,7 +1165,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1164,7 +1174,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1173,7 +1183,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1182,7 +1192,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }, {
@@ -1194,7 +1204,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1203,7 +1213,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1212,7 +1222,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1221,7 +1231,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1230,7 +1240,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1239,7 +1249,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1248,7 +1258,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1257,7 +1267,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1266,16 +1276,16 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "statuses": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -1289,7 +1299,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1298,7 +1308,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1307,7 +1317,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1316,7 +1326,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1325,7 +1335,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1334,7 +1344,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1343,16 +1353,16 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "activity-calls": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -1370,16 +1380,16 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "activity-events": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -1393,7 +1403,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1402,7 +1412,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1411,7 +1421,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1420,7 +1430,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1429,7 +1439,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1438,7 +1448,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1447,7 +1457,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1456,7 +1466,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1465,7 +1475,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1474,7 +1484,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1483,7 +1493,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1492,7 +1502,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1501,7 +1511,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1510,7 +1520,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1519,7 +1529,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1528,7 +1538,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1537,7 +1547,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1546,7 +1556,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1555,7 +1565,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -1564,239 +1574,241 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
- "price-rules": {
+  "price-rules": {
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
- },
- "products-attribute-sets-groups": {
- "fields": [{
-   "path": "idTransformed",
-   "type": "string"
-  },{
-   "path": "id",
-   "type": "string"
- }]
-},
- "location": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "sampleBulkCustomObject_c" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
-   "spreadsheets": {
-     "fields": [{
-       "path": "idTransformed",
-       "type": "string"
-      },{
-       "path": "id",
-       "type": "string"
-     }]
-   },
- "productsCategories": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "vendor-credits": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "changes": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   },
-   {
-     "path": "junk",
-     "type": "string"
-   }]
- },
- "drafts" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "problems": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   },
-   {
-     "path": "junk",
-     "type": "string"
-   }]
- },
- "checks" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "employee-schedules" : {
-   "fields": [{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "posting-periods" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "inventory-sites": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "inventory-adjustments": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "bill-payment-checks": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "equipment-cards": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "bill-payment-cards": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "employee-schedules" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "roles" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "timesheets" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "tips" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "creditcard-charges": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "creditcard-credits": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "data-extensions" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- }
+  },
+  "products-attribute-sets-groups": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "location": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "sampleBulkCustomObject_c": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "spreadsheets": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "productsCategories": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "vendor-credits": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "changes": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
+        "path": "id",
+        "type": "string"
+      },
+      {
+        "path": "junk",
+        "type": "string"
+      }
+    ]
+  },
+  "drafts": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "problems": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
+        "path": "id",
+        "type": "string"
+      },
+      {
+        "path": "junk",
+        "type": "string"
+      }
+    ]
+  },
+  "checks": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "employee-schedules": {
+    "fields": [{
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "posting-periods": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "inventory-sites": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "inventory-adjustments": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "bill-payment-checks": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "equipment-cards": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "bill-payment-cards": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "employee-schedules": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "roles": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "timesheets": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "tips": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "creditcard-charges": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "creditcard-credits": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "data-extensions": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  }
 }
