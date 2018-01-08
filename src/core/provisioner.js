@@ -70,7 +70,6 @@ const parseProps = (element, useDefaultUrl) => {
 };
 
 const getPollerConfig = (element, instance, polling) => {
-  console.log(`Polling! ${polling}`);
   if (!polling) return Promise.resolve(instance);
   let elementObj;
   return cloud.get('/elements/' + element)
@@ -249,11 +248,11 @@ const oauth1 = (element, args) => {
  * @param  {string} element   The element key
  * @param  {object} args      The args to pass on the create instance call
  * @param  {string} baseApi   The base API
- * @param  {boolean} polling Whether to enable polling or not
  * @param  {string} elementId The element ID to use if using the default oauth url
+ * @param  {boolean} polling Whether to enable polling or not
  * @return {Promise}         JS promise that resolves to the instance created
  */
-const orchestrateCreate = (element, args, baseApi, cb, elementId) => {
+const orchestrateCreate = (element, args, baseApi, cb, elementId, polling) => {
   const useDefaultUrl = !!elementId;
   const type = props.getOptionalForKey(element, 'provisioning');
   const config = genConfig(props.all(element), args);
@@ -275,7 +274,7 @@ const orchestrateCreate = (element, args, baseApi, cb, elementId) => {
       const cp = `${__dirname}/../test/elements/${element}/provisioner`;
       return require(cp).create(config);
     default:
-      return createOrUpdateInstance(element, config, undefined, baseApi, polling);
+      return createOrUpdateInstance(element, config, undefined, baseApi, undefined, polling);
   }
 };
 
@@ -287,7 +286,7 @@ const orchestrateCreate = (element, args, baseApi, cb, elementId) => {
  * @param {boolean} polling Whether to enable polling or not
  * @return {Promise}  A promise that will resolve to the response after the partial OAuth flow is complete
  */
-exports.partialOauth = (element, args, baseApi, polling) => orchestrateCreate(element, args, baseApi, (type, config, r) => r.code, typeof polling === 'undefined' ? argv.polling : polling);
+exports.partialOauth = (element, args, baseApi, polling) => orchestrateCreate(element, args, baseApi, (type, config, r) => r.code, undefined, typeof polling === 'undefined' ? argv.polling : polling);
 
 /**
  * Provision an element instance
@@ -304,9 +303,9 @@ exports.create = (element, args, baseApi, polling) => {
     if (external && type === 'oauth2') return createExternalInstance(element, config.ec, r);
     if (external && type === 'oauth1') throw Error('External Authentication via churros is not yet implemented for OAuth1');
 
-    return createOrUpdateInstance(element, config, r, baseApi, typeof polling === 'undefined' ? argv.polling : polling);
+    return createOrUpdateInstance(element, config, r, baseApi, undefined, typeof polling === 'undefined' ? argv.polling : polling);
   };
-  return orchestrateCreate(element, args, baseApi, cb, typeof polling === 'undefined' ? argv.polling : polling);
+  return orchestrateCreate(element, args, baseApi, cb, undefined, typeof polling === 'undefined' ? argv.polling : polling);
 };
 
 /**
