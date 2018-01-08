@@ -107,6 +107,35 @@
     }
   ]
 },
+"checking-accounts": {
+  "vendorName": "",
+  "fields": [
+
+    {
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }
+  ]
+},
+"sales-orders": {
+  "vendorName": "",
+  "fields": [
+    {
+      "path": "id",
+      "vendorPath": "sotransactionid"
+    }
+  ]
+},
+"bills-payments": {
+  "vendorName": "",
+  "fields": [
+
+    {
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }
+  ]
+},
 "sales-orders": {
   "vendorName": "",
   "fields": [
@@ -187,14 +216,5 @@
       "vendorPath": "icitemid"
     }
   ]
-},
-"attachments": {
-  "vendorName": "",
-  "fields": [
-   {
-     "path": "id",
-     "vendorPath": "supdocid"
-   }
-  ]
- }
+}
 }
