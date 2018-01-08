@@ -8,6 +8,10 @@ const payload = tools.requirePayload(`${__dirname}/assets/contact.json`);
 const specialCharPayload = tools.requirePayload(`${__dirname}/assets/specialCharContact.json`);
 
 suite.forElement('helpdesk', 'contacts', {payload:payload}, (test) => {
+  after(() => Promise.all([
+    cloud.delete(`${test.api}/${payload.name}`).catch(() => {}),
+    cloud.delete(`${test.api}/${specialCharPayload.name}`).catch(() => {})
+  ]));
   it(`should allow CRUDS for ${test.api} with Ceql search`, () => {
     let contactId;
     return cloud.post(test.api, payload)
