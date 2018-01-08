@@ -39,6 +39,13 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       }, 5000);
       browser.findElement(webdriver.By.className('btn')).click();
       return browser.getCurrentUrl();
+    case 'bullhorn--v1':
+    case 'bullhorn--v2':
+      browser.get(r.body.oauthUrl);
+      browser.findElement(webdriver.By.id('un')).sendKeys(username);
+      browser.findElement(webdriver.By.id('pw')).sendKeys(password);
+      browser.findElement(webdriver.By.id('btn')).click();
+      return browser.getCurrentUrl();
     case 'ciscospark':
       browser.get(r.body.oauthUrl);
       browser.isElementPresent(webdriver.By.id('IDToken1'));
@@ -179,7 +186,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then((element) => element.click(), (err) => {}); // ignore this
 
       browser.wait(() => {
-        return browser.getTitle().then((title) => !title);
+        return browser.getTitle().then((title) => !title || title === 'Cloud Elements');
       }, 5000);
 
       return browser.getCurrentUrl();
@@ -573,6 +580,8 @@ const manipulateDom = (element, browser, r, username, password, config) => {
 
 
     case 'zendesk':
+    case 'zendesk--oauthtest':
+    case 'zendesk--oauthtest-non-default':
       browser.get(r.body.oauthUrl);
       browser.switchTo().frame(0);
       browser.findElement(webdriver.By.id('user_email')).sendKeys(username);

@@ -9,7 +9,7 @@ suite.forElement('finance', 'vendor-credits', { payload: payload }, (test) => {
   it('should support CRUDS, pagination for /hubs/finance/vendor-credits', () => {
     let id;
     return cloud.post(test.api, payload)
-      .then(r => id = r.body.TxnID)
+      .then(r => id = r.body.id)
       .then(r => cloud.get(test.api))
       .then(r => cloud.get(`${test.api}/${id}`))
       .then(r => updatePayload.EditSequence = r.body.EditSequence)

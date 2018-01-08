@@ -33,7 +33,8 @@ const fromOptions = (url, options) => {
       polling: options.polling,
       backup: options.backup === undefined ? 'use backup' : options.backup, //defaults to use back up instance
       transform: options.transform,
-      sync: options.sync
+      sync: options.sync,
+      file: options.file
     });
   });
 };
@@ -91,7 +92,7 @@ const run = (suite, options, cliArgs) => {
     .map(e => resources.push(e)) :
     resources.push(suite.split('/')[1]);
 
-  let args = `--timeout 600000 --reporter spec --ui bdd`;
+  let args = `--timeout 300000 --reporter spec --ui bdd`;
   if (test) args += ` --grep '${test}'`;
   if (cliArgs.url) args += ` --url ${cliArgs.url}`;
   if (cliArgs.user) args += ` --user ${cliArgs.user}`;
@@ -109,6 +110,7 @@ const run = (suite, options, cliArgs) => {
   if (cliArgs.backup) args += ` --backup '${cliArgs.backup}'`;
   if (cliArgs.transform) args += ` --transform`;
   if (cliArgs.sync) args += ` --sync`;
+  if (cliArgs.file) args += ` --file ${cliArgs.file}`;
   // loop over each element, constructing the proper paths to pass to mocha
   let cmd = "";
   if (resources.includes('.DS_Store')) resources.splice(resources.indexOf('.DS_Store'), 1);

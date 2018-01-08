@@ -7,6 +7,11 @@ const payload = tools.requirePayload(`${__dirname}/assets/payments.json`);
 const updatePayload = { "Memo": tools.random(), "TotalAmount": "136.00" };
 
 suite.forElement('finance', 'payments', (test) => {
+  before(() => cloud.get(`/invoices`)
+    .then(r => {
+      payload.AppliedToTxn[0].TxnID = r.body[0].id;
+      payload.CustomerRef.ListID = r.body[0].CustomerRef.ListID;
+    }));
   it('should support CRUDS and Ceql searching for /hubs/finance/payments', () => {
     let id;
     return cloud.post(test.api, payload)

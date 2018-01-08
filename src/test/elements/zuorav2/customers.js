@@ -17,7 +17,7 @@ suite.forElement('payment', 'customers', { payload: payload }, (test) => {
       }
     }
   };
- const ceqlOptions = {
+  const ceqlOptions = {
     name: "should support CreatedDate > {date} Ceql search",
     qs: { where: 'CreatedDate>\'2017-02-22T08:21:00.000Z\'' }
   };
@@ -62,14 +62,11 @@ suite.forElement('payment', 'customers', { payload: payload }, (test) => {
 
   it(`should allow GET ${test.api}/id/history,GET ${test.api}/id/payments`, () => {
     return cloud.get(`${test.api}/${customerId}/history`);
-
   });
   it(`GET ${test.api}/id/payments`, () => {
     return cloud.get(`${test.api}/${customerId}/payments`);
-
   });
   it.skip(`should allow CS for ${test.api}/id/subscriptions `, () => {
-
     return cloud.post(`${test.api}/${customerId}/subscriptions`, subscriptionPayload)
       .then(r => cloud.get(`${test.api}/${customerId}/subscriptions`));
   });

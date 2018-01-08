@@ -1,6 +1,5 @@
 {
   "JournalCreditLine": [{
-    "TxnLineID": "298-1484947972",
     "ClassRef": {
       "FullName": "Overhead"
     },
@@ -14,7 +13,6 @@
     "Memo": "Opening Balance Adjustment - Net of Sales Tax on Open Invoices as of Start Date"
   }],
   "JournalDebitLine": [{
-    "TxnLineID": "297-1484947972",
     "ClassRef": {
       "FullName": "Overhead"
     },

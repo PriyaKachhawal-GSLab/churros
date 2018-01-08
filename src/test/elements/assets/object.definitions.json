@@ -1025,6 +1025,15 @@
       "type": "string"
     }]
   },
+  "bills-payments": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    },{
+      "path": "id",
+      "type": "string"
+    }]
+  },
   "projects": {
     "fields": [{
       "path": "idTransformed",
@@ -1755,6 +1764,24 @@
    }]
  },
  "tips" : {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ },
+ "creditcard-charges": {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ },
+ "creditcard-credits": {
    "fields": [{
      "path": "idTransformed",
      "type": "string"

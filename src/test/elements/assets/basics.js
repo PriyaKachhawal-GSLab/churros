@@ -42,6 +42,7 @@
     it('metadata', () => cloud.get(`elements/${props.getForKey(element, 'elementId')}/metadata`).then(r => expect(r.body).to.not.be.empty && expect(r).to.have.statusCode(200)));
     it('transformations', function() {
       argv.transform ? this.skip() : null; //no need to do this twice
+      let isSync = argv.sync || ['netsuite', 'quickbooksonprem'].filter(e => element.includes(e)).length > 0;
       let error;
       // clear current transformations
       return cloud.delete(`/instances/${instanceId}/transformations`).catch(() => {})
@@ -58,9 +59,15 @@
               transformations[key].fields.push({"path": "idTransformed","vendorPath": "id"});
             }
           });
+
+          if (typeof argv.file === 'string') transformations = Object.keys(transformations).filter(o => o === argv.file).reduce((acc, cur) => {
+            acc[cur] = transformations[cur];
+            return acc;
+          },{});
+
           //create the transformations and validating they work
           return createAll(`/instances/${instanceId}/transformations/%s`, transformations)
-          .then(() => element.includes('netsuite') || argv.sync ? //Making synchronous calls for netsuite
+          .then(() => isSync ? //Making synchronous calls
           Object.keys(transformations).reduce((acc, key) => acc.then(() => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length))), Promise.resolve(null))
           : Promise.all(Object.keys(transformations).map(key => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length)))));
         } else {
@@ -69,6 +76,7 @@
           let defined = Object.keys(allDefs);
           return cloud.get(`/hubs/${hub}/objects`)
           .then(objs => {
+            if (typeof argv.file === 'string') objs.body = objs.body.filter(key => key === argv.file);
             let transDefs = defined.reduce((acc, cur) => {
               if (objs.body.includes(cur)) {
                 acc[cur] = allDefs[cur];
@@ -92,7 +100,7 @@
               }));
             })
             //validates the transformations are working
-            .then(() => element.includes('netsuite') || argv.sync ? //Making synchronous calls for netsuite
+            .then(() => isSync ? //Making synchronous calls
             Object.keys(transDefs).reduce((acc, key) => acc.then(() => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length))), Promise.resolve(null))
             : Promise.all(Object.keys(transDefs).map(key => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length)))));
           });

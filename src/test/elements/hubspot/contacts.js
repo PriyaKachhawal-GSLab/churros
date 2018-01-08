@@ -19,6 +19,8 @@ const options = {
 suite.forElement('marketing', 'contacts', { payload: payload }, (test) => {
   test.withOptions(options).should.supportCruds();
   test.should.supportNextPagePagination(1);
+
+  test.withName('should allow pagination for all contacts with page and nextPage').withOptions({qs: { all: true }}).should.supportNextPagePagination(2);
   it('should allow CRUD for hubs/marketing/contacts/properties', () => {
     let id;
     const fieldsUpdate = {

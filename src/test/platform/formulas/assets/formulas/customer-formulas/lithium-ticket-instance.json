@@ -1,0 +1,9 @@
+{
+    "name": "Lithium Test - Ticket Status",
+    "configuration": {
+      "caseintegrationname": "Churros",
+      "email": "churros@churros.com",
+      "lithiumlsw.instance.id": "{REPLACE}",
+      "sfdc.instance.id": "{REPLACE}"
+    }
+}

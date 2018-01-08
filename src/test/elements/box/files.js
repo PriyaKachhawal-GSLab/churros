@@ -19,6 +19,7 @@ suite.forElement('documents', 'files', null, (test) => {
     //We were getting a 429 before this
     setTimeout(done, 2500);
   });
+
   it('should allow PUT /files/:id/lock and DELETE /files/:id/lock', () => {
     let fileId;
     let path = __dirname + '/../assets/brady.jpg';
@@ -88,6 +89,11 @@ suite.forElement('documents', 'files', null, (test) => {
       "value": "madhuri",
       "scope": "enterprise"
     };
+    let templateKeyPayload = {
+      "path": "/" + temPayload.fields[0].key,
+      "value": "madhuri",
+      "scope": "enterprise"
+    };
 
     let path = __dirname + '/../assets/brady.jpg';
     let query1 = { path: `/brady-${faker.address.zipCode()}.jpg` };
@@ -104,10 +110,35 @@ suite.forElement('documents', 'files', null, (test) => {
       .then(r => cloud.put(`/hubs/documents/files/${fileId1}/custom-fields`, updatePayload))
       .then(r => cloud.patch(`/hubs/documents/files/${fileId1}/custom-fields`, updatePayload))
       .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).get(`/hubs/documents/files/${fileId1}/custom-fields/${tempKey}`))
-      .then(r => cloud.patch(`/hubs/documents/files/${fileId1}/custom-fields/${tempKey}`, updatePayload))
+      .then(r => cloud.patch(`/hubs/documents/files/${fileId1}/custom-fields/${tempKey}`, templateKeyPayload))
       .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).delete(`/hubs/documents/files/${fileId1}/custom-fields/${tempKey}`))
       .then(r => cloud.delete('/hubs/documents/files/' + fileId1));
 
   });
 
+  /**
+  * /files/revisions endpoint doesn't return current revision. 
+  * While we don't offer the POST /revisions endpoint we'll need to hardcode the file data
+  */
+  it('it should allow RS for documents/files/:id/revisions', () => {
+    const fileId = 158316363797;
+    let revisionId;
+    return cloud.get(`${test.api}/${fileId}/revisions`)
+      .then(r => {
+          expect(r.body[0]).to.contain.key('id');
+          revisionId = r.body[0].id;
+      })
+      .then(() => cloud.get(`${test.api}/${fileId}/revisions/${revisionId}`));
+  });
+
+  it('it should allow RS for documents/files/revisions by path', () => {
+    let options = {qs:{path: '/TestFolderDoNoDelete/Sample WordDoc.docx'}};
+    let revisionId;
+      return cloud.withOptions(options).get(`${test.api}/revisions`)
+        .then(r => {
+            expect(r.body[0]).to.contain.key('id');
+            revisionId = r.body[0].id;
+        })
+        .then(() => cloud.withOptions(options).get(`${test.api}/revisions/${revisionId}`));
+  }); 
 });

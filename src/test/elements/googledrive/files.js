@@ -2,6 +2,7 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
+const tools = require('core/tools');
 const payload = require('./assets/files');
 const expect = require('chakram').expect;
 const faker = require('faker');
@@ -19,9 +20,14 @@ const propertiesPayload = {
   }
 };
 
-let directoryPath = faker.random.uuid();
-
 suite.forElement('documents', 'files', { payload: payload }, (test) => {
+  let jpgFileBody,revisionId,jpgFile = __dirname + '/assets/Penguins.jpg';
+  let query = { path: `/Penguins-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` };
+  
+  before(() => cloud.withOptions({ qs : query }).postFile(test.api, jpgFile)
+  .then(r => jpgFileBody = r.body));
+
+  after(() => cloud.delete(`${test.api}/${jpgFileBody.id}`));
 
   it('should allow ping for googledrive', () => {
     return cloud.get(`/hubs/documents/ping`);
@@ -61,38 +67,23 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
       .then(r => cloud.withOptions({ qs: { path: `${destPath}` } }).delete(`${test.api}`));
   });
 
-  const fileWrap = (conditionChecks) => {
-    let jpgFileBody,jpgFile = __dirname + '/assets/Penguins.jpg';
-    return cloud.withOptions({ qs: { path: `/${directoryPath}/Penguins.jpg`, overwrite: 'true' } }).postFile(`${test.api}`, jpgFile)
-      .then(r => jpgFileBody = r.body)
-      .then(() => conditionChecks(jpgFileBody))
-      .then(() => cloud.delete(`${test.api}/${jpgFileBody.id}`))
-      .then(() => cloud.delete(`/hubs/documents/folders/${jpgFileBody.parentFolderId}`));
-  };
-
   it('it should allow RS for documents/files/:id/revisions', () => {
-    const revisionChecks = (jpgFileBody) => {
-      let revisionId;
       return cloud.get(`${test.api}/${jpgFileBody.id}/revisions`)
-        .then(r => {
-            expect(r.body[0]).to.contain.key('id');
-            revisionId = r.body[0].id;
-        })
-        .then(() => cloud.get(`${test.api}/${jpgFileBody.id}/revisions/${revisionId}`))
-        .then(r => expect(r.body).to.contain.key('mimeType'));
-    };
-    return fileWrap(revisionChecks);
+      .then(r => revisionId = r.body[0].id)
+      .then(() => cloud.get(`${test.api}/${jpgFileBody.id}/revisions/${revisionId}`));
   });
 
-
-
+  it('it should allow RS for documents/files/revisions by path', () => {
+      return cloud.withOptions({ qs: query }).get(`${test.api}/revisions`)
+      .then(r => revisionId = r.body[0].id)
+      .then(() => cloud.withOptions({ qs: query }).get(`${test.api}/revisions/${revisionId}`));
+  });
 
   //Test For Export Functionality
   it('Should allow export of Google Doc to plain text using media type', () => {
     let DocFile = '/ChurrosDocDoNotDelete';
     return cloud.withOptions({ qs: { path: DocFile, mediaType: 'text/plain' } }).get(test.api)
       .then(r => {
-        expect(r.body).to.not.be.null;
         expect(r.body).to.contain('Sample Word Doc');
       });
   });
@@ -100,7 +91,6 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
     let SSFile = '/ChurrosSSDoNotDelete';
     return cloud.withOptions({ qs: { path: SSFile, mediaType: 'text/csv' } }).get(test.api)
       .then(r => {
-        expect(r.body).to.not.be.null;
         expect(r.body).to.contain('Test1,Test2,Tes3,Test4');
       });
   });
@@ -108,7 +98,6 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
     let PPTFile = '/ChurrosPPTDoNotDelete';
     return cloud.withOptions({ qs: { path: PPTFile, mediaType: 'text/plain' } }).get(test.api)
       .then(r => {
-        expect(r.body).to.not.be.null;
         expect(r.body).to.contain('Churros PPT Test');
       });
   });
@@ -116,7 +105,6 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
     let PNGFile = '/ChurrosPNGDoNotDelete';
     return cloud.withOptions({ qs: { path: PNGFile, mediaType: 'application/pdf' } }).get(test.api)
       .then(r => {
-        expect(r.body).to.not.be.null;
         expect(r.body).to.contain('%PDF-1.4');
       });
   });
