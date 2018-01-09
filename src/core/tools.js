@@ -25,6 +25,9 @@ exports.random = () => Math.random().toString(36).substring(7);
 exports.randomStr = (possible, len) => {
     let text = "";
     if (!Boolean(possible) || typeof(possible) != "string") {
+      if (typeof(possible) == "number"){
+        len = possible;
+      }
       possible = "abcdefghijklmnopqrstuvwxyz";
     }
     if (!Boolean(len) || typeof(len) != "number") {

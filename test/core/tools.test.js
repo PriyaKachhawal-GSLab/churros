@@ -22,10 +22,16 @@ describe('tools', () => {
     expect(random).to.have.lengthOf(8);
   });
 
-  it('should support generating a random string with bad inputs', () => {
-    const random = tools.randomStr(5, "aAeEiIoOuU");
+  it('should support generating a random string with only a number', () => {
+    const random = tools.randomStr(5);
     expect(random).to.be.a('string');
     expect(random).to.have.lengthOf(5);
+  });
+
+  it('should support generating a random string with only a string', () => {
+    const random = tools.randomStr("aAeEiIoOuU");
+    expect(random).to.be.a('string');
+    expect(random).to.have.lengthOf(8);
   });
 
   it('should support generating a random string with null inputs', () => {
