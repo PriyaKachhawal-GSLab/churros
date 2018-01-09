@@ -109,7 +109,7 @@ suite.forElement('documents', 'folders', (test) => {
       });
 
       it('should allow GET /folders/contents with directory', () => {
-        return cloud.withOptions({ qs: { path: `/`, where: "directory='.csv'" } }).get(`${test.api}/contents`)
+        return cloud.withOptions({ qs: { path: `/`, where: "directory='true'" } }).get(`${test.api}/contents`)
           .then(r => expect(r.body[0].directory).to.equal(true));
       });
 
