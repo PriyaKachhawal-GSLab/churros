@@ -545,9 +545,11 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
         const statusCode = r.response.statusCode;
         expect(statusCode).to.be.oneOf([200, 500]);
       };
-      return removePrivilegeIfNecessary('viewLogs')
+      return removePrivilegeIfNecessary('viewLogsOrg')
+        .then(() => removePrivilegeIfNecessary('viewLogsAccount'))
         .then(() => cloudWithUser().get(`/audit-logs`, insufficientPrivilegesValidator))
-        .then(() => addPrivilegeIfNecessary('viewLogs'))
+        .then(() => addPrivilegeIfNecessary('viewLogsOrg'))
+        .then(() => addPrivilegeIfNecessary('viewLogsAccount'))
         .then(() => cloudWithUser().get(`/audit-logs`, customValidator));
     });
   });
