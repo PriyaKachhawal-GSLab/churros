@@ -104,10 +104,12 @@ suite.forElement('documents', 'folders', (test) => {
     return cloud.withOptions({ qs: { path: `/`, where: "extension='.csv'" } }).get(`${test.api}/contents`)
       .then(r => expect(r.body[0].name).to.contain('.csv'));
   });
-  it('should return parentFolderId for Get /folders/content', ()=> {
+
+  it('should return parentFolderId for GET /folders/content', ()=> {
     return cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
         .then(r => expect(r.body.parentFolderId).to.not.equal(null));
   });
+  
   it('should allow GET /folders/contents with directory', () => {
     return cloud.withOptions({ qs: { path: `/`, where: "directory='true'" } }).get(`${test.api}/contents`)
       .then(r => expect(r.body[0].directory).to.equal(true));

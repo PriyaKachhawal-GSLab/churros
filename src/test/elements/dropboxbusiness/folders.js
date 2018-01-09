@@ -103,10 +103,12 @@ suite.forElement('documents', 'folders', (test) => {
      return cloud.withOptions({qs: { path: `/`, where: "extension='.csv'" }, headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
        .then(r => expect(r.body[0].name).to.contain('.csv'));
    });
-   it('should return parentId for Get /folders/content', ()=> {
+
+   it('should return parentId for GET /folders/content', ()=> {
      return cloud.withOptions({qs: { path: `/` } , headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
          .then(r => expect(r.body.parentFolderId).to.not.equal(null));
    });
+
    it('should allow GET /folders/contents with directory', () => {
      return cloud.withOptions({qs: { path: `/`, where: "directory='true'" }, headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
       .then(r => expect(r.body[0].directory).to.equal(true));
