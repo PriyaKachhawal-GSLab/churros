@@ -48,7 +48,7 @@ const validator = (validationCb, api) => {
 };
 
 const post = (api, payload, validationCb, options) => {
-  logger.debug('POST %s with options %s and body %s', api, options, JSON.stringify(payload));
+  logger.debug('POST %s with options %s and body %s', api, JSON.stringify(options), JSON.stringify(payload));
   return chakram.post(api, payload, options)
     .then(r => validator(validationCb, api)(r))
     .catch(r => tools.logAndThrow('Failed to create or validate: %s', r, api));

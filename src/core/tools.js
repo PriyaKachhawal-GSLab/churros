@@ -173,6 +173,50 @@ exports.updateMetadata = (obj) => {
   return obj;
 };
 
+/**
+* Gets the integer limit from a CEQL statement
+* @param {object} obj CEQL object like `{qs: q:'select * from contacts limit 100 where id = 12'}
+**/
+exports.getLimit = (obj) => {
+  let limit = obj ? obj.qs ? obj.qs.q ? obj.qs.q.includes('limit') ? obj.qs.q.substring(obj.qs.q.indexOf('limit') + 6) : '' : '' : '' : '';
+  if (limit && limit.includes('where')) {
+    limit = limit.substring(0, limit.indexOf('where'));
+  }
+
+  if (!R.isEmpty(limit) && !R.isEmpty(limit.trim()) && !isNaN(limit.trim())) {
+    return parseInt(limit.trim());
+  }
+
+  return -1;
+};
+
+/**
+* Gets an array of transformations fields for a particular element object
+* @param {array} fields ['id', 'createdDate']
+**/
+exports.getFieldsFromTransformation = (element, objectName) => {
+  const transformationsFile = `${__dirname}/../test/elements/${element}/assets/transformations`;
+  // if there is already a transformation file here
+  if (fs.existsSync(`${transformationsFile}.json`)) {
+    const transformations = require(`${transformationsFile}.json`);
+    if (transformations[objectName] && transformations[objectName].fields) {
+      return transformations[objectName].fields.map(o => o.path);
+    }
+  }
+
+  return null;
+};
+
+/**
+* Gets reduced response for particular fields
+* @param {array} arrResp [{ "key": "value"}, { "key", "value"}]
+* @param {array} fields ['id', 'createdDate']
+**/
+exports.getFieldsMap = (arrResp, fields) => arrResp.filter(obj => !(R.isEmpty(obj) || R.isNil(obj))).map(obj => (Object.keys(obj).filter(k => fields.includes(k)).sort().reduce((acc, k) => {
+    acc[k] = obj[k];
+    return acc;
+}, {})));
+
 exports.csvParse = (str) => {
   let uploadArr = str.split('\n').map(line => line.split(','));
   let firstLine = uploadArr.splice(0, 1)[0];
