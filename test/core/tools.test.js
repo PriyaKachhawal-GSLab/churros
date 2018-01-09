@@ -133,7 +133,7 @@ describe('tools', () => {
   it('should get fields from transformations file', () => {
     const element = 'netsuitefinancev2';
     const objectName = 'bulkCustomerNfv2';
-    const fields = ['id', 'bulk-companyName', 'bulk-email'];
+    const fields = ['id', 'bulk-lastModifiedDate', 'bulk-dateCreated'];
     expect(tools.getFieldsFromTransformation(element, objectName)).to.deep.equal(fields);
   });
   it('should get reduced response from getFieldsMap', () => {
