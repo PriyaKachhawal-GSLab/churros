@@ -352,11 +352,10 @@ const itBulkDownload = (name, hub, metadata, options, opts, endpoint) => {
       // get bulk query results in JSON
       .then(r => getJson ? cloud.withOptions(jsonMeta)
         .get(`/hubs/${hub}/bulk/${bulkId}/${endpoint}`, r => {
-          if (fields != null) {
+          if (fields !== null) {
             let bulkDownloadResults = tools.getFieldsMap(r.body.split('\n').map(obj => { try { return JSON.parse(obj); } catch (e) { return ''; } }), fields);
             expect(bulkDownloadResults).to.deep.equal(tools.getFieldsMap(bulkResults, fields));
           } else {
-            console.log('wat', r.body);
             let bulkDownloadResults = tools.getKey(r.body.split('\n').map(obj => { try { return JSON.parse(obj); } catch (e) { return ''; } }), 'id');
             expect(bulkDownloadResults).to.deep.equal(tools.getKey(bulkResults, 'id'));
           }
@@ -365,7 +364,7 @@ const itBulkDownload = (name, hub, metadata, options, opts, endpoint) => {
       .then(r => getCsv ? cloud.withOptions(csvMeta)
         .get(`/hubs/${hub}/bulk/${bulkId}/${endpoint}`, r => {
           if (typeof r.body === 'string') {
-            if (fields != null) {
+            if (fields !== null) {
               let bulkDownloadResults = tools.getFieldsMap(tools.csvParse(r.body), fields);
               expect(bulkDownloadResults).to.deep.equal(tools.getFieldsMap(bulkResults, fields));
             } else {
