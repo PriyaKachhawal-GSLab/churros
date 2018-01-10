@@ -19,12 +19,16 @@ const publicActions = [
 
 suite.forElement('collaboration', 'channels', (test) => {
   let privateChannelId, publicChannelId;
+  let invitedUser = { 'users': '' };
   payload.name = tools.random();
   before((done) => cloud.withOptions({ qs: { private: true } }).post(test.api, payload)
     .then(r => {
       privateChannelId = r.body.id;
       payload.name = tools.random();
     })
+    .then(r => cloud.get(`users`))
+    .then(r => invitedUser.users = r.body[2].id)
+    .then(r => cloud.withOptions({ qs: { private: true } }).post(`${test.api}/${privateChannelId}/user`, invitedUser))
     .then(r => cloud.post(test.api, payload))
     .then(r => publicChannelId = r.body.id)
     .then(r => done()));
@@ -89,9 +93,9 @@ suite.forElement('collaboration', 'channels', (test) => {
     { 'action': 'rename', 'name': tools.random() },
     { 'action': 'purpose', 'purpose': 'eat yummy churros' },
     { 'action': 'topic', 'topic': 'tasty desserts' },
-    { 'action': 'invite', 'user': 'U2S6WE012'},
     { 'action': 'leave' }
   ];
+
   privateActions.forEach(ac => {
       it(`should allow PATCH ${test.api}/:channelId/actions?action='${ac.action}' for private channels (groups)`, () =>
         cloud.withOptions({ qs: { private: true } }).patch(`${test.api}/${privateChannelId}/actions`, ac));
