@@ -34,6 +34,12 @@ describe('tools', () => {
     expect(random).to.have.lengthOf(8);
   });
 
+  it('should support generating a random string even when length is 0', () => {
+    const random = tools.randomStr("aAeEiIoOuU", 0);
+    expect(random).to.be.a('string');
+    expect(random).to.have.lengthOf(8);
+  });
+
   it('should support generating a random string with null inputs', () => {
     const random = tools.randomStr(null, "aAeEiIoOuU");
     expect(random).to.be.a('string');
