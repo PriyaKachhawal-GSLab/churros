@@ -61,13 +61,13 @@ suite.forPlatform('organizations/roles', test => {
     };
 
     const badSystemValidator = r => {
-      expect(r).to.have.statusCode(400)
-      expect(r.body.message).to.equal("User can not add the 'system' privilege to any role.")
+      expect(r).to.have.statusCode(400);
+      expect(r.body.message).to.equal("User can not add the 'system' privilege to any role.");
     };
 
     const badIntelligencealidator = r => {
-      expect(r).to.have.statusCode(400)
-      expect(r.body.message).to.equal("User can not add the 'intelligence' privilege to the 'default-user' role.")
+      expect(r).to.have.statusCode(400);
+      expect(r.body.message).to.equal("User can not add the 'intelligence' privilege to the 'default-user' role.");
     };
 
     return cloud.put('/organizations/roles/reset')
