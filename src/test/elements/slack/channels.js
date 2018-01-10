@@ -8,11 +8,8 @@ const payload = require('./assets/channels');
 // define all public supported actions and payloads
 const publicActions = [
   { 'action': 'join', 'name': 'random' },
-  { 'action': 'read', 'ts': Date.parse(new Date()).toString() },
-  { 'action': 'leave' },
-  { 'action': 'archive' }
-];
-const publicActions2 = [
+  { 'action': 'read', 'ts': Math.trunc(Date.parse(new Date())/1000).toString() },
+  { 'action': 'archive' },
   { 'action': 'unarchive' },
   { 'action': 'rename', 'name': tools.random() },
   { 'action': 'purpose', 'purpose': 'eat yummy churros' },
@@ -86,25 +83,24 @@ suite.forElement('collaboration', 'channels', (test) => {
   //TODO (@tylertoth) a few of these fail due various issues. Need to reorganize these...
   // define all private supported actions and payloads
   const privateActions = [
-    { 'action': 'read', 'ts': Date.parse(new Date()).toString() },
-    { 'action': 'leave' },
-    { 'action': 'archive' }
-  ];
-  const privateActions2 = [
+    { 'action': 'read', 'ts': Math.trunc(Date.parse(new Date())/1000).toString() },
+    { 'action': 'archive' },
     { 'action': 'unarchive' },
     { 'action': 'rename', 'name': tools.random() },
     { 'action': 'purpose', 'purpose': 'eat yummy churros' },
     { 'action': 'topic', 'topic': 'tasty desserts' },
+    { 'action': 'invite', 'user': 'U2S6WE012'},
     { 'action': 'leave' }
   ];
-  it(`should allow PATCH ${test.api}/:channelId/actions for private channels (groups)`, () => {
-    privateActions.forEach(ac => (cloud.withOptions({ qs: { private: true } }).patch(`${test.api}/${privateChannelId}/actions`, ac)));
-    privateActions2.forEach(ac => (cloud.withOptions({ qs: { private: true } }).patch(`${test.api}/${privateChannelId}/actions`, ac)));
-  });
-
-  it(`should allow PATCH ${test.api}/:channelId/actions for public channels`, () => {
-    publicActions.forEach(ac => (cloud.withOptions({ qs: { private: false } }).patch(`${test.api}/${publicChannelId}/actions`, ac)));
-    publicActions2.forEach(ac => (cloud.withOptions({ qs: { private: false } }).patch(`${test.api}/${publicChannelId}/actions`, ac)));
-  });
+  privateActions.forEach(ac => {
+      it(`should allow PATCH ${test.api}/:channelId/actions?action='${ac.action}' for private channels (groups)`, () =>
+        cloud.withOptions({ qs: { private: true } }).patch(`${test.api}/${privateChannelId}/actions`, ac))
+    }
+  );
+  publicActions.forEach(ac => {
+      it(`should allow PATCH ${test.api}/:channelId/actions?action='${ac.action}' for public channels`, () =>
+        cloud.withOptions({ qs: { private: false } }).patch(`${test.api}/${publicChannelId}/actions`, ac))
+    }
+  );
 
 });
