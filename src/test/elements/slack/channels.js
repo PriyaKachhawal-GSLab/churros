@@ -94,12 +94,12 @@ suite.forElement('collaboration', 'channels', (test) => {
   ];
   privateActions.forEach(ac => {
       it(`should allow PATCH ${test.api}/:channelId/actions?action='${ac.action}' for private channels (groups)`, () =>
-        cloud.withOptions({ qs: { private: true } }).patch(`${test.api}/${privateChannelId}/actions`, ac))
+        cloud.withOptions({ qs: { private: true } }).patch(`${test.api}/${privateChannelId}/actions`, ac));
     }
   );
   publicActions.forEach(ac => {
       it(`should allow PATCH ${test.api}/:channelId/actions?action='${ac.action}' for public channels`, () =>
-        cloud.withOptions({ qs: { private: false } }).patch(`${test.api}/${publicChannelId}/actions`, ac))
+        cloud.withOptions({ qs: { private: false } }).patch(`${test.api}/${publicChannelId}/actions`, ac));
     }
   );
 
