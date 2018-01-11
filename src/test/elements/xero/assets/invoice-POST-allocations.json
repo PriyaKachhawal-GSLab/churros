@@ -1,0 +1,18 @@
+{
+  "Type": "ACCREC",
+  "Contact": {
+    "ContactID": ""
+  },
+  "Date": "2020-08-30",
+  "DueDate": "2020-09-20",
+  "Status":"AUTHORISED",
+  "LineAmountTypes": "Exclusive",
+  "LineItems": {
+    "LineItem": {
+      "Description": "<<commerce.product>>",
+      "Quantity": 5,
+      "UnitAmount": 1000,
+      "AccountCode": "400"
+    }
+  }
+}
