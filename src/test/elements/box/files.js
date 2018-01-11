@@ -63,7 +63,7 @@ suite.forElement('documents', 'files', (test) => {
       })
       .then(r => cloud.withOptions({ qs: { path: filePath1, overwrite: false } }).post('/hubs/documents/files/copy', { path: filePath2 }, r => { expect(r).to.have.statusCode(409); }))
       .then(r => cloud.get(`/hubs/documents/files/${fileId2}/metadata`))
-      .then(r => { expect(r).to.have.statusCode(200) && expect(r.body.id).to.equal(fileId2) })
+      .then(r => expect(r).to.have.statusCode(200) && expect(r.body.id).to.equal(fileId2))
       .then(r => cloud.delete('/hubs/documents/files/' + fileId1))
       .then(r => cloud.delete('/hubs/documents/files/' + fileId2));
   });
@@ -82,9 +82,6 @@ suite.forElement('documents', 'files', (test) => {
       "value": "madhuri",
       "scope": "enterprise"
     };
-
-    let path = __dirname + '/../assets/brady.jpg';
-    let query1 = { path: `/brady-${faker.address.zipCode()}.jpg` };
     return cloud.post('/hubs/documents/custom-fields/templates', temPayload)
       .then(r => {
         tempKey = r.body.templateKey;
@@ -98,7 +95,6 @@ suite.forElement('documents', 'files', (test) => {
       .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).get(`/hubs/documents/files/${id}/custom-fields/${tempKey}`))
       .then(r => cloud.patch(`/hubs/documents/files/${id}/custom-fields/${tempKey}`, templateKeyPayload))
       .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).delete(`/hubs/documents/files/${id}/custom-fields/${tempKey}`));
-
   });
 
   /**
