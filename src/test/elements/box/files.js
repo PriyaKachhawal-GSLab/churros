@@ -159,4 +159,15 @@ suite.forElement('documents', 'files', (test) => {
       .then(r => cloud.withOptions({ qs: { path } }).delete(`${test.api}/comments/${commentId2}`));
   });
 
+  it(`should handle raw parameter for ${test.api}/comments`, () => {
+    let commentId;
+    return cloud.post(`${test.api}/${id}/comments`, commentPayload1)
+      .then(r => commentId = r.body.id)
+      .then(r => cloud.withOptions({ qs: { raw: true }}).get(`${test.api}/${id}/comments`))
+      .then(r => expect(r.body.filter(obj => obj.raw)).to.not.be.empty)
+      .then(r => cloud.get(`${test.api}/${id}/comments`))
+      .then(r => expect(r.body.filter(obj => obj.raw)).to.be.empty)
+      .then(r => cloud.delete(`${test.api}/${id}/comments/${commentId}`))
+  })
+
 });
