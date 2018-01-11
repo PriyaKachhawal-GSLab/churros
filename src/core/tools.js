@@ -8,6 +8,7 @@ const logger = require('winston');
 const sleep = require('sleep');
 const fs = require('fs');
 const faker = require('faker');
+const R = require('ramda');
 
 var exports = module.exports = {};
 
@@ -278,3 +279,4 @@ exports.addCleanUp = (obj) => {
 };
 exports.getCleanup = () => require(`${__dirname}/cleanup.json`);
 exports.resetCleanup = () => fs.writeFileSync(`${__dirname}/cleanup.json`, '[]');
+exports.findInArray = (items, field, value) => R.find(R.propEq(field, value))(items);

@@ -24,7 +24,7 @@ suite.forElement('documents', 'links', null, (test) => {
         const cb = (file) => {
             return cloud.withOptions({ qs: { path: file.path } }).get('/hubs/documents/files/links?raw=true')
                 .then(r => {
-                    expect(r.body.expires).to.be.null;
+                    expect(r.body.expires).to.be.undefined;
                     expect(r.body.raw.linkPermissions.requestedVisibility).to.equal('PUBLIC');
                     expect(r.body.providerViewLink).to.contain('dl=0');
                     expect(r.body.providerLink).to.contain('dl=1');

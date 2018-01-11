@@ -4,11 +4,12 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const payload = require('./assets/folders');
+const expect = require('chakram').expect;
 const build = (overrides) => Object.assign({}, payload, overrides);
 const folderPayload = build({ name: `churros-${tools.random()}`, path: `/${tools.random()}` });
 const folderPayload1 = build({ name: `churros-${tools.random()}`, path: `/${tools.random()}/${tools.random()}` });
 suite.forElement('documents', 'folders', (test) => {
-
+let folderId;
   const folderWrap = (cb) => {
     let folder;
     let random = `${tools.random()}`;
@@ -83,6 +84,29 @@ suite.forElement('documents', 'folders', (test) => {
     };
 
     return folderWrap(cb);
+  });
+
+  before(() => cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
+      .then(r => folderId = r.body.filter(obj => obj.name === "dontdelete_folder_churros")[0].id));
+
+  it('should allow GET /folders/contents with name', () => {
+    return cloud.withOptions({ qs: { path: `/dontdelete_folder_churros`, where: "name='dontdelete_text_churros'" } }).get(`${test.api}/contents`)
+      .then(r => expect(r.body[0].name).to.contain('dontdelete_text_churros'));
+  });
+
+  it('should allow GET /folders/contents with extension', () => {
+    return cloud.withOptions({ qs: { path: `/dontdelete_folder_churros`, where: "extension='.txt'" } }).get(`${test.api}/contents`)
+      .then(r => expect(r.body[0].name).to.contain('.txt'));
+  });
+
+  it('should allow GET /folders/:id/contents with name', () => {
+    return cloud.withOptions({ qs: { where: "name='dontdelete_text_churros'" } }).get(`${test.api}/${folderId}/contents`)
+      .then(r => expect(r.body[0].name).to.contain('dontdelete_text_churros'));
+  });
+
+  it('should allow GET /folders/:id/contents with extension', () => {
+    return cloud.withOptions({ qs: { where: "extension='.txt'" } }).get(`${test.api}/${folderId}/contents`)
+      .then(r => expect(r.body[0].name).to.contain('.txt'));
   });
 
 });

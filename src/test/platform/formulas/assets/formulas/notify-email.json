@@ -1,0 +1,14 @@
+{
+  "name": "notify-email",
+  "triggers": [{
+    "type": "manual",
+    "onSuccess": ["end"]
+  }],
+  "steps": [{
+    "name": "end",
+    "type": "script",
+    "properties": {
+      "body": "notify.email('tester@cloud-elements.com', 'test subject', 'test message'); done(trigger.args);"
+    }
+  }]
+}

@@ -9,7 +9,7 @@
       "name": "buildQuery",
       "type": "script",
       "properties": {
-        "body": "done ({\n  \"downloadQuery\" : {\n    \"path\":\"/DONT_DELETE_churros_small.csv\"\n  },\n  \"uploadQuery\" : {\n    \"path\":\"/churros_delete_me.csv\"\n  }\n});"
+        "body": "done ({\n  \"downloadQuery\" : {\n    \"path\":\"/DONT_DELETE_churros.txt\"\n  },\n  \"uploadQuery\" : {\n    \"path\":\"/churros_deletes_me.csv\"\n  }\n});"
       }
     },
     {
@@ -21,8 +21,8 @@
       "type": "elementRequestStream",
       "properties": {
         "uploadApi": "/hubs/documents/files",
-        "uploadElementInstanceId": "${config.dropbox.instance}",
-        "downloadElementInstanceId": "${config.dropbox.instance}",
+        "uploadElementInstanceId": "${config.onedrivev2.instance}",
+        "downloadElementInstanceId": "${config.onedrivev2.instance}",
         "uploadMethod": "POST",
         "downloadQuery": "${steps.buildQuery.downloadQuery}",
         "uploadQuery": "${steps.buildQuery.uploadQuery}",
@@ -36,7 +36,7 @@
       "name": "deleteFile",
       "type": "elementRequest",
       "properties": {
-        "elementInstanceId": "${config.dropbox.instance}",
+        "elementInstanceId": "${config.onedrivev2.instance}",
         "method": "DELETE",
         "query": "${steps.buildQuery.uploadQuery}",
         "api": "/hubs/documents/files"
@@ -56,8 +56,8 @@
   ],
   "configuration": [
     {
-      "key": "dropbox.instance",
-      "name": "dropbox.instance",
+      "key": "onedrivev2.instance",
+      "name": "onedrivev2.instance",
       "type": "elementInstance",
       "required": true
     }

@@ -4,6 +4,7 @@ const expect = require('chakram').expect;
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const schema = require('./assets/element.schema.json');
+const faker = require('faker');
 
 const deleteElementByKey = (key) => cloud.delete(`/elements/${key}`, () => {});
 
@@ -31,6 +32,7 @@ suite.forPlatform('element import', {}, (test) => {
         expect(r.body).to.not.be.empty;
         expect(r.body.name).to.equal('http://autotask.net/ATWS/v1_5/');
         atElement = r.body;
+        atElement.key = `churrosImport${faker.address.zipCode()}`;
       })
       // Create the element
       .then(r => crudElement('key', atElement, atElement, schema));

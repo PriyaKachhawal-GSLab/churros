@@ -1,0 +1,378 @@
+{
+	"singleThreaded": false,
+	"engine": "v3",
+	"configuration": [{
+		"name": "Act-On Element",
+		"description": "Instance of Act-On Element",
+		"type": "elementInstance",
+		"key": "acton.instance.id",
+		"required": true
+	}, {
+		"name": "ReadyTalk Element",
+		"description": "Instance of ReadyTalk Element",
+		"type": "elementInstance",
+		"key": "readytalk.instance.id",
+		"required": true
+	}, {
+		"name": "Meeting ID",
+		"description": "ID of ReadyTalk Meeting to synchronize",
+		"type": "value",
+		"key": "readytalk.meeting.id",
+		"required": true
+	}],
+	"name": "ReadyTalk to Act-On",
+	"active": true,
+	"description": "Sync webinar data from ReadyTalk meetings to Act-On contacts",
+	"triggers": [{
+		"async": true,
+		"name": "trigger",
+		"type": "event",
+		"properties": {
+			"elementInstanceId": "${acton.instance.id}"
+		},
+		"onSuccess": ["getExecutions"]
+	}],
+	"steps": [{
+		"name": "fetchJobs",
+		"type": "request",
+		"properties": {
+			"method": "GET",
+			"api": "/jobs"
+		},
+		"onSuccess": ["findJob"]
+	}, {
+		"name": "getExecutions",
+		"type": "request",
+		"properties": {
+			"method": "GET",
+			"api": "/formulas/${info.formulaId}/instances/${info.formulaInstanceId}/executions"
+		},
+		"onSuccess": ["findPreviousExecution"]
+	}, {
+		"name": "findPreviousExecution",
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "if (steps.getExecutions.response.body.length < 2) {\n     done({\n        hasPreviousExecution: false\n    });\n}\nelse {\n    done({\n        hasPreviousExecution: true,\n        id: steps.getExecutions.response.body[1].id,\n        formulaInstanceId: info.formulaInstanceId,\n        formulaId: info.formulaId\n    });\n}\n"
+		},
+		"onSuccess": ["ifPreviousExecution"]
+	}, {
+		"name": "ifPreviousExecution",
+		"onFailure": ["getMeetingDetails"],
+		"type": "filter",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "done(steps.findPreviousExecution.hasPreviousExecution);"
+		},
+		"onSuccess": ["getPreviousExecution"]
+	}, {
+		"name": "getPreviousExecution",
+		"type": "request",
+		"properties": {
+			"method": "GET",
+			"api": "/formulas/${steps.findPreviousExecution.formulaId}/instances/${steps.findPreviousExecution.formulaInstanceId}/executions/${steps.findPreviousExecution.id}"
+		},
+		"onSuccess": ["ifPreviousExecutionFinished"]
+	}, {
+		"name": "ifPreviousExecutionFinished",
+		"type": "filter",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "if (steps.getPreviousExecution.response.body.updatedDate !== null) {\n    done(true);\n}\n\nvar stepExecutions = steps.getPreviousExecution.response.body.stepExecutions;\n\nvar lastStepExecution = stepExecutions[stepExecutions.length-1];\n\ndone((Date.now() - Date.parse(lastStepExecution.createdDate))/1000/60/60 > 1);"
+		},
+		"onSuccess": ["getMeetingDetails"]
+	}, {
+		"name": "getMeetingDetails",
+		"type": "elementRequest",
+		"properties": {
+			"method": "GET",
+			"elementInstanceId": "${config.readytalk.instance.id}",
+			"api": "/hubs/marketing/meetings/${config.readytalk.meeting.id}"
+		},
+		"onSuccess": ["checkForInstanceCreation"]
+	}, {
+		"name": "checkForInstanceCreation",
+		"onFailure": ["fetchJobs"],
+		"type": "filter",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "done(trigger.event['trigger.formula.instance.action'] == 'create');"
+		},
+		"onSuccess": ["constructJobCreationRequest"]
+	}, {
+		"name": "constructJobCreationRequest",
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "var now = new Date();\nvar expirationDate = new Date();\nexpirationDate.setUTCDate(now.getUTCDate()+3);\n\nvar request = {\n    name: \"rt2m-\" + info.formulaInstanceId,\n    method:\"POST\",\n    uri:\"/elements/api-v2/formulas/\" + info.formulaId + \"/instances/\" + info.formulaInstanceId + \"/executions\",\n    trigger:{\n        cron:\"0 \" + now.getMinutes() + \" * * * ?\"\n    },\n    instanceId: config.acton.instance.id,\n    body: {\n        instance_id: config.acton.instance.id,\n        events: [\n            {\n                type: \"poll\",\n                expiration: expirationDate.toISOString()\n            }\n        ]\n    },\n    description: \"Poller for \" + info.formulaInstanceName + \" (\" + info.formulaName + \")\"\n}\n\n\ndone(request);\n"
+		},
+		"onSuccess": ["createPollingJob"]
+	}, {
+		"name": "createPollingJob",
+		"type": "request",
+		"properties": {
+			"method": "POST",
+			"elementInstanceId": "${config.readytalk.instance.id}",
+			"api": "/jobs",
+			"body": "${steps.constructJobCreationRequest}"
+		},
+		"onSuccess": ["getFirstActonCallTime"]
+	}, {
+		"name": "getFirstActonCallTime",
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "done({\n  startTime: Date.now()\n});"
+		},
+		"onSuccess": ["getLists"]
+	}, {
+		"name": "getLists",
+		"type": "elementRequest",
+		"properties": {
+			"method": "GET",
+			"elementInstanceId": "${config.acton.instance.id}",
+			"api": "/hubs/marketing/lists?pageSize=1000"
+		},
+		"onSuccess": ["findMeetingList"]
+	}, {
+		"name": "findMeetingList",
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "var lists = steps.getLists.response.body;\nvar meeting = steps.getMeetingDetails.response.body;\n\nvar response = {\n    exists: false\n}\n\nfor each (list in lists) {\n    if (list.name.endsWith('(' + meeting.id + ')')) {\n        response.exists = true;\n        response.id = list.id;\n    }\n}\n\ndone(response);"
+		},
+		"onSuccess": ["ifMeetingListExists"]
+	}, {
+		"name": "ifMeetingListExists",
+		"onFailure": ["constructMeetingListPayload"],
+		"type": "filter",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "done(steps.findMeetingList.exists);"
+		},
+		"onSuccess": ["fetchMeetingList"]
+	}, {
+		"name": "fetchMeetingList",
+		"type": "elementRequest",
+		"properties": {
+			"method": "GET",
+			"elementInstanceId": "${config.acton.instance.id}",
+			"api": "/hubs/marketing/lists/${steps.findMeetingList.id}/contacts?pageSize=1000"
+		},
+		"onSuccess": ["getMeetingList"]
+	}, {
+		"name": "getMeetingList",
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "var result = {};\n\nif (steps.fetchMeetingList) {\n    result.data = steps.fetchMeetingList.response.body;\n    result.id = steps.findMeetingList.id;\n}\nelse {\n    result.data = [];\n    result.id = steps.createMeetingList.response.body.id\n}\n\ndone(result);"
+		},
+		"onSuccess": ["getChats"]
+	}, {
+		"name": "getChats",
+		"onFailure": ["getPostEventSurveys"],
+		"type": "elementRequest",
+		"properties": {
+			"method": "GET",
+			"elementInstanceId": "${config.readytalk.instance.id}",
+			"api": "/hubs/marketing/meetings/${config.readytalk.meeting.id}/chats"
+		},
+		"onSuccess": ["getPostEventSurveys"]
+	}, {
+		"name": "getPostEventSurveys",
+		"onFailure": ["constructRegistrationsWhereClause"],
+		"type": "elementRequest",
+		"properties": {
+			"method": "GET",
+			"elementInstanceId": "${config.readytalk.instance.id}",
+			"api": "/hubs/marketing/meetings/${config.readytalk.meeting.id}/surveys"
+		},
+		"onSuccess": ["constructRegistrationsWhereClause"]
+	}, {
+		"name": "constructRegistrationsWhereClause",
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "done({pageSize: 2000});"
+		},
+		"onSuccess": ["listRegistrations"]
+	}, {
+		"name": "listRegistrations",
+		"type": "elementRequest",
+		"properties": {
+			"method": "GET",
+			"elementInstanceId": "${config.readytalk.instance.id}",
+			"query": "${steps.constructRegistrationsWhereClause}",
+			"api": "/hubs/marketing/meetings/${config.readytalk.meeting.id}/registrations"
+		},
+		"onSuccess": ["parseRegistrations"]
+	}, {
+		"name": "parseRegistrations",
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "var emailQuestionText = \"Email\";\nfunction isEmail(registrationAnswer) {\n  return registrationAnswer.question.questionText == emailQuestionText\n}\n\nvar registrations = steps.listRegistrations.response.body;\nvar registrationIndexesByEmail = {};\nfor (var i = 0; i < registrations.length; i++) {\n  var registration = registrations[i];\n  var registrationAnswers = registration.registrationAnswer;\n  var email = registrationAnswers.filter(isEmail)[0].response[0].value;\n  if (registrationIndexesByEmail[email]) {\n    registrationIndexesByEmail[email].push(i)\n  }\n  else {\n    registrationIndexesByEmail[email] = [i];\n  }\n}\n\nvar contacts = [];\n\nfor (var email in registrationIndexesByEmail) {\n  contacts.push({\n    email: email,\n    registrationIndexes: registrationIndexesByEmail[email]\n  })\n}\ndone({contacts: contacts});"
+		},
+		"onSuccess": ["loopContacts"]
+	}, {
+		"name": "loopContacts",
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "if (steps.loopContacts === null || steps.loopContacts.done) {\n   var contacts = steps.parseRegistrations.contacts;\n   if (contacts && contacts.length === 0) {\n     done({\n       done: true\n     });\n   }\n   var remainingItems = contacts;\n   done({\n      currentContact: remainingItems[0],\n      remainingItems: remainingItems.splice(1),\n      done: false\n   });\n} else if (steps.loopContacts.remainingItems && steps.loopContacts.remainingItems.length === 0) {\n   done({\n      done: true\n   });\n} else {\n    done({\n      currentContact: steps.loopContacts.remainingItems[0],\n      remainingItems: steps.loopContacts.remainingItems.splice(1),\n      done: false\n   });\n}\n"
+		},
+		"onSuccess": ["determineContinueRegistrationsLoop"]
+	}, {
+		"name": "determineContinueRegistrationsLoop",
+		"type": "filter",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "done(!steps.loopContacts.done);"
+		},
+		"onSuccess": ["findDataForCurrentContact"]
+	}, {
+		"name": "findDataForCurrentContact",
+		"onFailure": ["loopContacts"],
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "const moment = require('moment');\n// let time = moment().format('dddd');\n\nvar registrationIndexes = steps.loopContacts.currentContact.registrationIndexes;\nvar surveys = steps.getPostEventSurveys.response.body;\nvar chats = steps.getChats.response.body;\nvar registrations = steps.listRegistrations.response.body;\nvar meetingDetails = steps.getMeetingDetails.response.body;\n\n// var incomingDateFormat = new java.text.SimpleDateFormat(\"yyyy-MM-dd'T'HH:mm:ss.SSSXXX\");\n// var outgoingDateFormat = new java.text.SimpleDateFormat(\"MMM d, yyyy 'at' H:mm z\");\n\n// outgoingDateFormat.setTimeZone(java.util.TimeZone.getTimeZone(meetingDetails.timeZone));\n\nvar response = {\n    email: steps.loopContacts.currentContact.email,\n    chatQuestions: [],\n    pollAnswers: [],\n    pollQuestions: [],\n    surveyAnswers: [],\n    surveyQuestions: []\n}\n\nfunction recordFirst(property, value) {\n    if (typeof response[property] === 'undefined') {\n        response[property] = value;\n    }\n}\n\nfunction recordFirstIndexed(property, index, value) {\n    if (typeof response[property][index] === 'undefined') {\n        response[property][index] = value;\n    }\n}\n\nfunction recordMin(property, value) {\n    if (typeof response[property] === 'undefined') {\n        response[property] = value;\n    }\n    else if (response[property] > value) {\n        response[property] = value;\n    }\n}\n\nfunction recordMax(property, value) {\n    if (typeof response[property] === 'undefined') {\n        response[property] = value;\n    }\n    else if (response[property] < value) {\n        response[property] = value;\n    }\n}\n\nfunction recordSum(property, value) {\n    if (typeof response[property] === 'undefined') {\n        response[property] = value;\n    }\n    else {\n        response[property] = response[property] + value;\n    }\n}\n\nfor each (var registrationIndex in registrationIndexes) {\n    var registration = registrations[registrationIndex];\n    recordFirst('firstName', registration.firstName);\n    recordFirst('lastName', registration.lastName);\n    recordFirst('joinMeetingUrl', registration.joinMeetingUrl);\n    if (meetingDetails.status == 'CLOSED') {\n        recordFirst('attended', registration.attended);\n    }\n    if (registration.attendance) {\n        for each (entry in registration.attendance) {\n            recordSum('duration',entry.durationInMinutes)\n            recordMin('firstEntry', moment(entry.entryTime, \"YYYY-MM-DD'T'HH:mm:ss.SSSZ\").getTime());\n            recordMax('lastExit', moment(entry.entryTime, \"YYYY-MM-DD'T'HH:mm:ss.SSSZ\").getTime());\n        }\n    }\n    if (registration.pollAnswer) {\n      print(registration.pollAnswer);\n        var pollAnswers = Java.from(registration.pollAnswer);\n        for (var i = 0;i < pollAnswers.length;i++) {\n            var entry = pollAnswers[i];\n            if (response.pollQuestions.every(function(question)question !== entry.question.questionText)) {\n                response.pollQuestions.push(entry.question.questionText);\n                var answerText = \"\";\n                for each (answer in entry.response) {\n                    answerText = answerText + ';' + answer.value;\n                }\n                response.pollAnswers.push(answerText.substr(1));\n            }\n        }\n    }\n}\n\nif (response.firstEntry) {\n    response.firstEntry = moment(new Date(response.firstEntry), \"MMM D, YYYY 'at' H:mm\"); // TODO - timezone\n}\nif (response.lastExit) {\n    response.lastExit = moment(new Date(response.lastExit), \"MMM D, YYYY 'at' H:mm\"); // TODO - timezone\n}\nif (response.attended) {\n    for each (chat in chats) {\n        var registrationIndex = registrationIndexes.filter(function (i)registrations[i].id == chat.sender.registrationId);\n        if (registrationIndex.length > 0) {\n            recordSum('chatsCount', 1);\n            if (chat.tag) {\n                if (chat.tag.contains('ANSWERED')) {\n                    response.chatQuestions.push(chat.message + ' (answered)');\n                }\n                else {\n                    recordSum('flaggedQuestionCount', 1);\n                    response.chatQuestions.push(chat.message);\n                }\n            }\n        }\n    }\n    for each (survey in surveys) {\n        var registrationIndex = registrationIndexes.filter(function (i)registrations[i].id == survey.registrationId);\n        if (registrationIndex.length > 0 && survey.surveyAttendance) {\n            for (var i = 0; i < survey.surveyAttendance.length; i++) {\n                var surveyAttendance = survey.surveyAttendance[i];\n                for (var j = 0; j < surveyAttendance.answer.length; j++) {\n                    var answer = surveyAttendance.answer[j];\n                    recordFirstIndexed('surveyQuestions', j, answer.question.questionText);\n                    var answerText = \"\";\n                    for (var k = 0; k < answer.response.length; k++) {\n                        answerText = answerText + ';' + answer.response[k].value;\n                    }\n                    recordFirstIndexed('surveyAnswers', j, answerText.substr(1));\n                }\n            }\n        }\n    }\n}\ndone(response);\n"
+		},
+		"onSuccess": ["findContactInList"]
+	}, {
+		"name": "findContactInList",
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "var response = {\n    exists: false,\n    listId: steps.findMeetingList.id\n}\n\nvar email = steps.findDataForCurrentContact.email.toLowerCase();\nvar contacts = steps.getMeetingList.data;\nfor each (contact in contacts) {\n    if (contact.Email.toLowerCase() === email) {\n        response.exists = true;\n        response.id = contact._contact_id_;\n        response.contact = contact;\n    }\n}\n\n\ndone(response);"
+		},
+		"onSuccess": ["ifContactAlreadyExists"]
+	}, {
+		"name": "ifContactAlreadyExists",
+		"onFailure": ["constructContactCreationPayload"],
+		"type": "filter",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "done(steps.findContactInList.exists);"
+		},
+		"onSuccess": ["constructContactUpdatePayload"]
+	}, {
+		"name": "constructContactUpdatePayload",
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "var data = steps.findDataForCurrentContact;\nvar contact = steps.findContactInList.contact;\n\nvar result = {\n    payload: {\n        email: data.email,\n    }\n}\n\nvar payload = result.payload;\n\nfunction setValue(name, value) {\n    if (!contact[name] && !(typeof value === 'undefined' || value === null)) {\n        payload[name] = value;\n    }\n}\n\nsetValue('first name', data.firstName);\nsetValue('last name', data.lastName);\nsetValue('attended', data.attended);\nsetValue('join meeting url', data.joinMeetingUrl);\nsetValue('duration', data.duration);\nsetValue('first entry', data.firstEntry);\nsetValue('last exit', data.lastExit);\nsetValue('chats count', data.chatsCount);\nsetValue('flagged question count', data.flaggedQuestionCount);\n\nfor (var i = 0;i<data.chatQuestions.length;i++) {\n    var chatQuestionField = 'chat question ' + (i+1);\n    if (i < 5) {\n        setValue(chatQuestionField, data.chatQuestions[i]);\n    }\n}\n\nfor (var i = 0;i<data.pollQuestions.length;i++) {\n    var pollQuestionField = 'poll question ' + (i+1);\n    if (i < 5) {\n        setValue(pollQuestionField, data.pollQuestions[i]);\n    }\n}\n\nfor (var i = 0;i<data.pollAnswers.length;i++) {\n    var pollAnswerField = 'poll answer ' + (i+1);\n    if (1 < 5) {\n        setValue(pollAnswerField, data.pollAnswers[i]);\n    }\n}\n\nfor (var i = 0;i<data.surveyQuestions.length;i++) {\n    var surveyQuestionField = 'survey question ' + (i+1);\n    if (i < 5) {\n        payload[surveyQuestionField] = data.surveyQuestions[i];\n    }\n}\n\nfor (var i = 0;i<data.surveyAnswers.length;i++) {\n    var surveyAnswerField = 'survey answer ' + (i+1);\n    if (1 < 5) {\n        payload[surveyAnswerField] = data.surveyAnswers[i];\n    }\n}\n\ndone(result);"
+		},
+		"onSuccess": ["checkIfNeedUpdate"]
+	}, {
+		"name": "checkIfNeedUpdate",
+		"onFailure": ["loopContacts"],
+		"type": "filter",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "done(steps.constructContactUpdatePayload.payload.size() > 1);"
+		},
+		"onSuccess": ["updateContact"]
+	}, {
+		"name": "updateContact",
+		"onFailure": ["trackRate"],
+		"type": "elementRequest",
+		"properties": {
+			"method": "PATCH",
+			"elementInstanceId": "${config.acton.instance.id}",
+			"api": "/hubs/marketing/lists/${steps.findContactInList.listId}/contacts/${steps.findContactInList.id}",
+			"mimeType": "application/javascript",
+			"body": "${steps.constructContactUpdatePayload.payload}"
+		},
+		"onSuccess": ["trackRate"]
+	}, {
+		"name": "trackRate",
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "if (steps.trackRate) {\n  if (steps.trackRate.callCount >= 19) {\n    done({\n      callCount: 0,\n      startTime: steps.trackRate.startTime + 60*1000\n    });\n  }\n  else {\n    done({\n      callCount: steps.trackRate.callCount+1,\n      startTime: steps.trackRate.startTime\n    });\n  }\n}\nelse {\n  done({\n    callCount: 3,\n    startTime: steps.getFirstActonCallTime.startTime\n  });\n}"
+		},
+		"onSuccess": ["ifNeedToWait"]
+	}, {
+		"name": "ifNeedToWait",
+		"onFailure": ["loopContacts"],
+		"type": "filter",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "done(Date.now() < steps.trackRate.startTime)"
+		},
+		"onSuccess": ["waitUpTo5Seconds"]
+	}, {
+		"name": "waitUpTo5Seconds",
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "const fiveSecondsFromNow = Date.now() + 5*1000;\nwhile (Date.now() < steps.trackRate.startTime && Date.now() < fiveSecondsFromNow) {}\ndone({done:true});"
+		},
+		"onSuccess": ["ifNeedToWait"]
+	}, {
+		"name": "constructContactCreationPayload",
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "var data = steps.findDataForCurrentContact;\n\nvar result = {\n    payload: [\n        {\n            email: data.email,\n            'first name': data.firstName,\n            'last name': data.lastName,\n            'join meeting url': data.joinMeetingUrl\n        }\n    ]\n}\n\nvar payload = result.payload[0];\n\nif (data.firstEntry) {\n    payload['first entry'] = data.firstEntry;\n}\n\nif (data.lastExit) {\n    payload['last exit'] = data.lastExit;\n}\n\nif (data.duration) {\n    payload.duration = data.duration;\n}\n\nif (data.containsKey('attended')) {\n    payload.attended = data.attended;\n}\n\nif (data.containsKey('chatsCount')) {\n    payload['chats count'] = data.chatsCount;\n}\n\nif (data.containsKey('flaggedQuestionCount')) {\n    payload['flagged question count'] = data.flaggedQuestionCount;\n}\n\nfor (var i = 0;i<data.chatQuestions.length;i++) {\n    var chatQuestionField = 'chat question ' + (i+1);\n    if (i < 5) {\n        payload[chatQuestionField] = data.chatQuestions[i];\n    }\n}\n\nfor (var i = 0;i<data.pollQuestions.length;i++) {\n    var pollQuestionField = 'poll question ' + (i+1);\n    if (i < 5) {\n        payload[pollQuestionField] = data.pollQuestions[i];\n    }\n}\n\nfor (var i = 0;i<data.pollAnswers.length;i++) {\n    var pollAnswerField = 'poll answer ' + (i+1);\n    if (1 < 5) {\n        payload[pollAnswerField] = data.pollAnswers[i];\n    }\n}\n\nfor (var i = 0;i<data.surveyQuestions.length;i++) {\n    var surveyQuestionField = 'survey question ' + (i+1);\n    if (i < 5) {\n        payload[surveyQuestionField] = data.surveyQuestions[i];\n    }\n}\n\nfor (var i = 0;i<data.surveyAnswers.length;i++) {\n    var surveyAnswerField = 'survey answer ' + (i+1);\n    if (1 < 5) {\n        payload[surveyAnswerField] = data.surveyAnswers[i];\n    }\n}\n\ndone(result);"
+		},
+		"onSuccess": ["createContact"]
+	}, {
+		"name": "createContact",
+		"onFailure": ["trackRate"],
+		"type": "elementRequest",
+		"properties": {
+			"method": "POST",
+			"elementInstanceId": "${config.acton.instance.id}",
+			"api": "/hubs/marketing/lists/${steps.getMeetingList.id}/contacts",
+			"body": "${steps.constructContactCreationPayload.payload}"
+		},
+		"onSuccess": ["trackRate"]
+	}, {
+		"name": "constructMeetingListPayload",
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "var meeting = steps.getMeetingDetails.response.body;\n\nvar response = {\n    listname: meeting.title + ' - ' + meeting.startDate + ' (' + meeting.id + ')',\n    foldername: \"ReadyTalk\",\n    uploadspecs: [\n        {\n            columnHeading: \"Email\",\n            columnType: \"EMAIL\",\n            ignoreColumn: \"N\",\n            columnIndex: 0\n        },\n        {\n            columnHeading: \"First Name\",\n            columnType: \"FIRSTNAME\",\n            ignoreColumn: \"N\",\n            columnIndex: 1\n        },\n        {\n            columnHeading: \"Last Name\",\n            columnType: \"LASTNAME\",\n            ignoreColumn: \"N\",\n            columnIndex: 2\n        },\n        {\n            columnHeading: \"Attended\",\n            ignoreColumn: \"N\",\n            columnIndex: 3\n        },\n        {\n            columnHeading: \"Join Meeting URL\",\n            ignoreColumn: \"N\",\n            columnIndex: 4\n        },\n        {\n            columnHeading: \"Duration\",\n            ignoreColumn: \"N\",\n            columnIndex: 5\n        },\n        {\n            columnHeading: \"First Entry\",\n            ignoreColumn: \"N\",\n            columnIndex: 6\n        },\n        {\n            columnHeading: \"Last Exit\",\n            ignoreColumn: \"N\",\n            columnIndex: 7\n        },\n        {\n            columnHeading: \"Chats Count\",\n            ignoreColumn: \"N\",\n            columnIndex: 8\n        },\n        {\n            columnHeading: \"Flagged Question Count\",\n            ignoreColumn: \"N\",\n            columnIndex: 9\n        },\n        {\n            columnHeading: \"Chat Question 1\",\n            ignoreColumn: \"N\",\n            columnIndex: 10\n        },\n        {\n            columnHeading: \"Chat Question 2\",\n            ignoreColumn: \"N\",\n            columnIndex: 11\n        },\n        {\n            columnHeading: \"Chat Question 3\",\n            ignoreColumn: \"N\",\n            columnIndex: 12\n        },\n        {\n            columnHeading: \"Chat Question 4\",\n            ignoreColumn: \"N\",\n            columnIndex: 13\n        },\n        {\n            columnHeading: \"Chat Question 5\",\n            ignoreColumn: \"N\",\n            columnIndex: 14\n        },\n        {\n            columnHeading: \"Survey Question 1\",\n            ignoreColumn: \"N\",\n            columnIndex: 15\n        },\n        {\n            columnHeading: \"Survey Answer 1\",\n            ignoreColumn: \"N\",\n            columnIndex: 16\n        },\n        {\n            columnHeading: \"Survey Question 2\",\n            ignoreColumn: \"N\",\n            columnIndex: 17\n        },\n        {\n            columnHeading: \"Survey Answer 2\",\n            ignoreColumn: \"N\",\n            columnIndex: 18\n        },\n        {\n            columnHeading: \"Survey Question 3\",\n            ignoreColumn: \"N\",\n            columnIndex: 19\n        },\n        {\n            columnHeading: \"Survey Answer 3\",\n            ignoreColumn: \"N\",\n            columnIndex: 20\n        },\n        {\n            columnHeading: \"Survey Question 4\",\n            ignoreColumn: \"N\",\n            columnIndex: 21\n        },\n        {\n            columnHeading: \"Survey Answer 4\",\n            ignoreColumn: \"N\",\n            columnIndex: 22\n        },\n        {\n            columnHeading: \"Survey Question 5\",\n            ignoreColumn: \"N\",\n            columnIndex: 23\n        },\n        {\n            columnHeading: \"Survey Answer 5\",\n            ignoreColumn: \"N\",\n            columnIndex: 24\n        },\n        {\n            columnHeading: \"Poll Question 1\",\n            ignoreColumn: \"N\",\n            columnIndex: 25\n        },\n        {\n            columnHeading: \"Poll Answer 1\",\n            ignoreColumn: \"N\",\n            columnIndex: 26\n        },\n        {\n            columnHeading: \"Poll Question 2\",\n            ignoreColumn: \"N\",\n            columnIndex: 27\n        },\n        {\n            columnHeading: \"Poll Answer 2\",\n            ignoreColumn: \"N\",\n            columnIndex: 28\n        },\n        {\n            columnHeading: \"Poll Question 3\",\n            ignoreColumn: \"N\",\n            columnIndex: 29\n        },\n        {\n            columnHeading: \"Poll Answer 3\",\n            ignoreColumn: \"N\",\n            columnIndex: 30\n        },\n        {\n            columnHeading: \"Poll Question 4\",\n            ignoreColumn: \"N\",\n            columnIndex: 31\n        },\n        {\n            columnHeading: \"Poll Answer 4\",\n            ignoreColumn: \"N\",\n            columnIndex: 32\n        },\n        {\n            columnHeading: \"Poll Question 5\",\n            ignoreColumn: \"N\",\n            columnIndex: 33\n        },\n        {\n            columnHeading: \"Poll Answer 5\",\n            ignoreColumn: \"N\",\n            columnIndex: 34\n        }    ]\n}\n\ndone(response);"
+		},
+		"onSuccess": ["createMeetingList"]
+	}, {
+		"name": "createMeetingList",
+		"type": "elementRequest",
+		"properties": {
+			"method": "POST",
+			"elementInstanceId": "${config.acton.instance.id}",
+			"api": "/hubs/marketing/lists",
+			"mimeType": "application/javascript",
+			"body": "${steps.constructMeetingListPayload}"
+		},
+		"onSuccess": ["getMeetingList"]
+	}, {
+		"name": "findJob",
+		"type": "script",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "var jobs = steps.fetchJobs.response.body;\n\nvar response = {};\n\nfor each (job in jobs) {\n    if (job.description === \"Poller for \" + info.formulaInstanceName + \" (\" + info.formulaName + \")\") {\n        response.id = job.id;\n        response.trigger = job.trigger;\n    }\n}\n\ndone(response);"
+		},
+		"onSuccess": ["checkForPollingExpiration"]
+	}, {
+		"name": "checkForPollingExpiration",
+		"onFailure": ["getFirstActonCallTime"],
+		"type": "filter",
+		"properties": {
+			"mimeType": "application/javascript",
+			"body": "var meeting = steps.getMeetingDetails.response.body;\nvar end = new Date(meeting.startDateIso8601);\nend.setSeconds(end.getSeconds()+meeting.durationInSeconds);\nend.setDate(end.getDate()+3);\nvar now = new Date();\n\ndone(end < now);\n"
+		},
+		"onSuccess": ["deleteJob"]
+	}, {
+		"name": "deleteJob",
+		"onFailure": ["getFirstActonCallTime"],
+		"type": "request",
+		"properties": {
+			"method": "DELETE",
+			"api": "/jobs/${steps.findJob.id}"
+		},
+		"onSuccess": ["getFirstActonCallTime"]
+	}]
+}

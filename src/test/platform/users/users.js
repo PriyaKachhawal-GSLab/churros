@@ -2,22 +2,23 @@
 
 const cloud = require('core/cloud');
 const suite = require('core/suite');
+const props = require('core/props');
 const schema = require('./assets/users.schema');
 const roleSchema = require('./assets/role.schema');
 const rolesSchema = require('./assets/roles.schema');
 const expect = require('chakram').expect;
-const props = require('core/props');
+const moment = require('moment');
 const payload = {
   firstName: 'frank',
   lastName: 'ricard',
-  email: 'frank@oldschool.com',
+  email: 'frank@churros.com',
   password: 'Passw0rd!'
 };
 
 const payloadWithRoles = {
   firstName: 'frank',
   lastName: 'ricard',
-  email: 'frankwithroles@oldschool.com',
+  email: 'frankwithroles@churros.com',
   password: 'Passw0rd!',
   roles: [
     {
@@ -64,6 +65,9 @@ suite.forPlatform('users', { schema: schema, payload: payload }, (test) => {
       lastName = lastName || payload.lastName;
       expect(r.body.length).to.be.above(0);
       expect(r.body.filter(user => user.firstName === firstName && user.lastName === lastName).length).to.equal(amount);
+      const today = moment().format('YYYY[-]MM[-]DD');
+      const loggedInUser = r.body.find(user => user.email === props.get('user'));
+      expect(loggedInUser.lastLoginDate).to.equal(today);
     };
 
     const validatePatch = (r) => {

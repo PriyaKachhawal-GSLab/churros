@@ -1,0 +1,29 @@
+{
+    "CurrencyRef": {
+        "FullName": "US Dollar"
+    },
+    "ExchangeRate": "1",
+    "PayeeEntityRef": {
+        "FullName": "A Cheung Limited"
+    },
+    "TxnDate": "2017-12-20",
+    "Amount": "5.00",
+    "RefNumber": "12345",
+    "AccountRef": {
+        "FullName": "CalOil Credit Card"
+    },
+    "ExpenseLineRet": [
+        {
+            "BillableStatus": "Billable",
+            "Amount": "5.00",
+            "AccountRef": {
+                "FullName": "Automobile:Insurance{129}"
+            },
+            "CustomerRef": {
+                "FullName": "3rd New Customer"
+            }
+        }
+    ],
+    "Memo": "Sample Credit Card Credit",
+    "TxnNumber": "123456"
+}

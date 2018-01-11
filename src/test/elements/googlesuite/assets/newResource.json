@@ -1,0 +1,53 @@
+{
+  "method": "GET",
+  "nextResource": "",
+  "description": "Searching Groups.",
+  "type": "api",
+  "vendorPath": "https://people.googleapis.com/v1/contactGroups",
+  "nextPageKey": "",
+  "path": "/extended-resource",
+  "paginationType": "VENDOR_SUPPORTED",
+  "vendorMethod": "GET",
+  "response": {
+    "contentType": "application/json"
+  },
+  "ownerAccountId": 218,
+  "hooks": [],
+  "parameters": [
+    {
+      "vendorType": "query",
+      "converter": "toQueryParameters",
+      "dataType": "string",
+      "name": "where",
+      "description": "The CEQL search expression.",
+      "vendorDataType": "string",
+      "source": "request",
+      "type": "query",
+      "vendorName": "converter:toQueryParameters",
+      "required": false
+    },
+    {
+      "vendorType": "query",
+      "dataType": "string",
+      "name": "pageSize",
+      "description": "The number of resources to return in a given page",
+      "vendorDataType": "string",
+      "source": "request",
+      "type": "query",
+      "vendorName": "pageSize",
+      "required": false
+    },
+    {
+      "vendorType": "query",
+      "dataType": "string",
+      "name": "Nextpage",
+      "description": "The nextpage Token",
+      "vendorDataType": "string",
+      "source": "request",
+      "type": "query",
+      "vendorName": "pageToken",
+      "required": false
+    }
+  ],
+  "rootKey": "|contactGroups"
+}

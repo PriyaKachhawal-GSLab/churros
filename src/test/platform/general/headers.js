@@ -17,12 +17,12 @@ suite.forPlatform('general', {}, (test) => {
   });
 
   describe('cors headers', () => {
-    it('should return the proper Access-Control-Expose-Headers header', () => 
+    it('should return the proper Access-Control-Expose-Headers header', () =>
       chakram.get('/elements/api-v2/elements', { baseUrl: props.get('url'), headers: { 'Origin': 'churros' } })
         .then(r => {
           return expect(r).to.have.header(
-          'Access-Control-Expose-Headers', 
-          'Elements-Returned-Count, Elements-Total-Count,  Elements-Request-Id, Elements-Next-Page-Token, Elements-Trace-Id, Elements-Error, Content-Disposition'
+          'Access-Control-Expose-Headers',
+          'Elements-Returned-Count, Elements-Total-Count, Elements-Request-Id, Elements-Next-Page-Token, Elements-Trace-Id, Elements-Error, Content-Disposition'
           );
         })
       );

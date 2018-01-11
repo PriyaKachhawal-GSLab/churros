@@ -22,7 +22,7 @@
   describe('Basic tests', () => {
     let element, instanceId, hub, instanceName;
     before(() => {
-      element = props.get('element');
+      element = tools.getBaseElement(props.get('element'));
       instanceId = props.get('instanceId');
       hub = props.get('hub');
       instanceName = props.get('instanceName');
@@ -40,7 +40,9 @@
       .then(s => new Promise((res, rej) => swaggerParser.validate(s.body, (err, api) => err ? rej(err) : res()))));
 
     it('metadata', () => cloud.get(`elements/${props.getForKey(element, 'elementId')}/metadata`).then(r => expect(r.body).to.not.be.empty && expect(r).to.have.statusCode(200)));
-    it('transformations', () => {
+    it('transformations', function() {
+      argv.transform ? this.skip() : null; //no need to do this twice
+      let isSync = argv.sync || ['netsuite', 'quickbooksonprem'].filter(e => element.includes(e)).length > 0;
       let error;
       // clear current transformations
       return cloud.delete(`/instances/${instanceId}/transformations`).catch(() => {})
@@ -57,15 +59,24 @@
               transformations[key].fields.push({"path": "idTransformed","vendorPath": "id"});
             }
           });
+
+          if (typeof argv.file === 'string') transformations = Object.keys(transformations).filter(o => o === argv.file).reduce((acc, cur) => {
+            acc[cur] = transformations[cur];
+            return acc;
+          },{});
+
           //create the transformations and validating they work
           return createAll(`/instances/${instanceId}/transformations/%s`, transformations)
-          .then(() => Promise.all(Object.keys(transformations).map(key => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length)))));
+          .then(() => isSync ? //Making synchronous calls
+          Object.keys(transformations).reduce((acc, key) => acc.then(() => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length))), Promise.resolve(null))
+          : Promise.all(Object.keys(transformations).map(key => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length)))));
         } else {
           //create defintions before the transformations
           let allDefs = require(`${__dirname}/../assets/object.definitions.json`);
           let defined = Object.keys(allDefs);
           return cloud.get(`/hubs/${hub}/objects`)
           .then(objs => {
+            if (typeof argv.file === 'string') objs.body = objs.body.filter(key => key === argv.file);
             let transDefs = defined.reduce((acc, cur) => {
               if (objs.body.includes(cur)) {
                 acc[cur] = allDefs[cur];
@@ -88,10 +99,10 @@
                 return defined.includes(key) ? cloud.post(`/instances/${instanceId}/transformations/${key}`, trans) : Promise.resolve(null);
               }));
             })
-            .then(() => {
-              //validates the transformations are working
-              return Promise.all(Object.keys(transDefs).map(key => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length))));
-            });
+            //validates the transformations are working
+            .then(() => isSync ? //Making synchronous calls
+            Object.keys(transDefs).reduce((acc, key) => acc.then(() => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length))), Promise.resolve(null))
+            : Promise.all(Object.keys(transDefs).map(key => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length)))));
           });
         }
       })

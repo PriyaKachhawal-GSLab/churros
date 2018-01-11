@@ -31,7 +31,10 @@ const fromOptions = (url, options) => {
       params: options.params,
       save: options.save === undefined ? false : true,
       polling: options.polling,
-      backup: options.backup === undefined ? 'use backup' : options.backup //defaults to use back up instance
+      backup: options.backup === undefined ? 'use backup' : options.backup, //defaults to use back up instance
+      transform: options.transform,
+      sync: options.sync,
+      file: options.file
     });
   });
 };
@@ -89,7 +92,7 @@ const run = (suite, options, cliArgs) => {
     .map(e => resources.push(e)) :
     resources.push(suite.split('/')[1]);
 
-  let args = `--timeout 600000 --reporter spec --ui bdd`;
+  let args = `--timeout 300000 --reporter spec --ui bdd`;
   if (test) args += ` --grep '${test}'`;
   if (cliArgs.url) args += ` --url ${cliArgs.url}`;
   if (cliArgs.user) args += ` --user ${cliArgs.user}`;
@@ -105,6 +108,9 @@ const run = (suite, options, cliArgs) => {
   if (cliArgs.params) args += ` --params '${cliArgs.params}'`;
   if (cliArgs.save) args += ` --save '${cliArgs.save}'`;
   if (cliArgs.backup) args += ` --backup '${cliArgs.backup}'`;
+  if (cliArgs.transform) args += ` --transform`;
+  if (cliArgs.sync) args += ` --sync`;
+  if (cliArgs.file) args += ` --file ${cliArgs.file}`;
   // loop over each element, constructing the proper paths to pass to mocha
   let cmd = "";
   if (resources.includes('.DS_Store')) resources.splice(resources.indexOf('.DS_Store'), 1);
@@ -171,6 +177,8 @@ commander
   .option('-P, --params <json>', 'add additional parameters for provisioning')
   .option('--save', 'don\'t run the clean up process before')
   .option('--backup <arg>', 'options to use backup instance. options: ["use backup", "no backup", "only backup"]. Defaults to "use backup"')
+  .option('--transform', 'creates a transformation on all resources and runs test off new transformations')
+  .option('--sync', 'runs the basic tests synchronously')
   .on('--help', () => {
     console.log('  Examples:');
     console.log('');
@@ -182,6 +190,8 @@ commander
     console.log('    $ churros test elements/zuorav2 --params \'{"zuorav2.sandbox": true}\'');
     console.log('    $ churros test elements/zuorav2 --save');
     console.log('    $ churros test elements/hubspot --backup "no backup"');
+    console.log('    $ churros test elements/box --transform');
+    console.log('    $ churros test elements/pardot --sync');
     console.log('    $ churros test elements');
     console.log('    $ churros test elements --exclude autopilot --exclude bigcommerce');
     console.log('    $ churros test elements --start freshbooks');

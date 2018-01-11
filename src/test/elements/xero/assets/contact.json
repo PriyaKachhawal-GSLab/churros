@@ -1,0 +1,17 @@
+{
+    "Balances": {
+      "AccountsPayable": {
+        "Outstanding": 10,
+        "Overdue": 0
+      },
+      "AccountsReceivable": {
+        "Outstanding": 0,
+        "Overdue": 0
+      }
+    },
+    "FirstName": "Test",
+    "IsCustomer": true,
+    "IsSupplier": true,
+    "LastName": "Account",
+    "Name":"<<name.findName>>"
+}

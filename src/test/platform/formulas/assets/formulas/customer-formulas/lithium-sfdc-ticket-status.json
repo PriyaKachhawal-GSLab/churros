@@ -1,0 +1,197 @@
+{
+    "name": "Lithium - Ticket Status",
+    "steps": [
+      {
+        "onSuccess": [
+          "get-queue"
+        ],
+        "name": "build-queue-query",
+        "type": "script",
+        "properties": {
+          "body": "var incident = steps['getIncidentCase'].response.body;\n\nvar q = \"Id='\"+ incident.OwnerId +\"'\";\n\ndone({where: q});\n"
+        }
+      },
+      {
+        "onSuccess": [
+          "patchToAuthor"
+        ],
+        "name": "caseEscalationBody",
+        "type": "script",
+        "properties": {
+          "body": "var status = steps.getIncidentCase.response.body.Status;\n// var closed = steps.getIncidentCase.response.body.ClosedDate ? steps.getIncidentCase.response.body.ClosedDate : \"\";\nvar incident = steps.getIncidentCase.response.body;\n// var humandate = new Date(closed).toDateString();\nvar ticketId = steps.getIncidentCase.response.body.Id;\n// var owner = steps['get-user'].response.body.Name;\nvar ticket = steps['getIncidentCase'].response.body.CaseNumber;\nvar lastUpdated = incident.LastModifiedDate;\n\n\n// if(owner){\n//   agent = owner;\n// }else{\n//   agent = \"\";\n// }\n\nvar owner = '';\nif(steps['get-user'].response.body.Name){\n  owner = steps['get-user'].response.body.Name;\n} else{\n  owner = steps['get-queue'].response.body[0].Name;\n}\n\n\n// done( {\"handles\" : \n//           {\"crm\" : [\n//                     {\"id\":ticketId,\n//                     \"networkinstance\":\"Case Escalation\",\n//                     \"ticket\":ticket,\n//                     \"closedate\": humandate,\n//                     \"agentassigned\":agent,\n//                     \"status\":status\n//                     }\n//                   ]\n//           }\n//       }\n    // )\n\nvar payload = {\n    \"handles\" : \n          {\"crm\" : [\n                    {\"id\":ticketId,\n                    \"networkinstance\":config.caseintegrationname,\n                    \"ticket\":ticket,\n                    \"lastupdated\":new Date(lastUpdated).toDateString(),\n                    \"agentassigned\":owner,\n                    \"status\":status\n                    }\n                   ]\n          }\n}\n\nif(incident.ClosedDate){\n  payload.handles.crm[0].closedate = new Date(incident.ClosedDate).toDateString();\n}\n\ndone(payload);"
+        }
+      },
+      {
+        "name": "errorNotice",
+        "type": "script",
+        "properties": {
+          "body": "// var body = 'An error occured in the Ticket status formula <br><br>Instance Name: '+ info.formulaInstanceName + '<br>Instance ID: '+info.formulaInstanceId+'<br>Execution ID: '+info.formulaExecutionId+'<br><br>';\n\n// notify.email(config.email, 'Ticket Status Error', body);\n// done(true);\nfunction isFailedResponse (step) {\n  return (step && step.response && step.response.code && step.response.code != \"200\");\n}\n\nvar msg = '';\nvar errorStep;\n\nvar stepArray = ['getIncidentCase','get-user','get-queue','patchToAuthor'];\nfor(var i=0;i<stepArray.length;i++){\n  if(isFailedResponse(steps[stepArray[i]])){\n    msg = steps[stepArray[i]].response.body.message;\n    errorStep = stepArray[i];\n  }\n}\n\n\nvar samplePayload = {\n  \"events\": [\n    {\n      \"objectType\": \"Case\",\n      \"objectId\": trigger.event.objectId,\n      \"eventType\": \"UPDATED\",\n      \"elementKey\": \"sfdc\",\n      \"hubKey\": \"crm\"\n    }\n  ],\n  \"instance_id\": info.formulaInstanceId\n}\n\nvar body = 'An error occured in the Ticket status formula <br><br>Instance Name: '+ info.formulaInstanceName + '<br>Instance ID: '+info.formulaInstanceId+'<br>Execution ID: '+info.formulaExecutionId+'<br><br>';\n\nbody = body + 'Step that errored: '+ errorStep + '<br>Response: ' + msg +'<br><br><br>Please see below payload to assist in retriggering formula<br><br>' + samplePayload;\n\nnotify.email(config.email, 'Ticket Status Error', body);\ndone(true);\n "
+        }
+      },
+      {
+        "onSuccess": [
+          "caseEscalationBody"
+        ],
+        "name": "filterAuthorId",
+        "type": "filter",
+        "properties": {
+          "body": "if(steps.retrieveAuthorId.authorId == 'none'){\ndone(false);\n}\ndone(true);"
+        }
+      },
+      {
+        "onSuccess": [
+          "getIncidentCase"
+        ],
+        "name": "filterIncidentCase",
+        "type": "filter",
+        "properties": {
+          "body": "var eventType = trigger.event.eventType;\n\nif((eventType === 'UPDATED')){\n  done(true);\n}\ndone(false);"
+        }
+      },
+      {
+        "onSuccess": [
+          "get-user"
+        ],
+        "onFailure": [
+          "gracefulFinish"
+        ],
+        "name": "filterSocialEscalation",
+        "type": "filter",
+        "properties": {
+          "body": "var subject = steps.getIncidentCase.response.body.Status;\n\nif(subject == 'New'){\n  done(true);\n}else{\n  done(false);\n}"
+        }
+      },
+      {
+        "onSuccess": [
+          "retrieveAuthorId"
+        ],
+        "onFailure": [
+          "build-queue-query"
+        ],
+        "name": "filterUserNotFound",
+        "type": "filter",
+        "properties": {
+          "body": "let caseResponse = steps['get-user'].response.code;\n\nif(caseResponse === 200){\n  done(true);\n}else{\n  done(false);\n}"
+        }
+      },
+      {
+        "onSuccess": [
+          "filterSocialEscalation"
+        ],
+        "onFailure": [
+          "errorNotice"
+        ],
+        "name": "getIncidentCase",
+        "type": "elementRequest",
+        "properties": {
+          "method": "GET",
+          "api": "/hubs/crm/Case/${trigger.event.objectId}",
+          "elementInstanceId": "${config.sfdc.instance.id}"
+        }
+      },
+      {
+        "onSuccess": [
+          "retrieveAuthorId"
+        ],
+        "onFailure": [
+          "errorNotice"
+        ],
+        "name": "get-queue",
+        "type": "elementRequest",
+        "properties": {
+          "method": "GET",
+          "api": "/hubs/crm/Group",
+          "query": "${steps.build-queue-query}",
+          "elementInstanceId": "${config.sfdc.instance.id}"
+        }
+      },
+      {
+        "onSuccess": [
+          "filterUserNotFound"
+        ],
+        "onFailure": [
+          "errorNotice"
+        ],
+        "name": "get-user",
+        "type": "elementRequest",
+        "properties": {
+          "method": "GET",
+          "retry": "true",
+          "retryDelay": "500",
+          "api": "/hubs/crm/users/${steps.getIncidentCase.response.body.OwnerId}",
+          "retryAttempts": "5",
+          "elementInstanceId": "${config.sfdc.instance.id}",
+          "acceptableStatusCodes": "200,404"
+        }
+      },
+      {
+        "name": "gracefulFinish",
+        "type": "script",
+        "properties": {
+          "body": "done({body:'end'})"
+        }
+      },
+      {
+        "onFailure": [
+          "errorNotice"
+        ],
+        "name": "patchToAuthor",
+        "type": "elementRequest",
+        "properties": {
+          "method": "PATCH",
+          "api": "/hubs/social/authors/${steps.retrieveAuthorId.authorId}",
+          "elementInstanceId": "${config.lithiumlsw.instance.id}",
+          "body": "${steps.caseEscalationBody}"
+        }
+      },
+      {
+        "onSuccess": [
+          "filterAuthorId"
+        ],
+        "name": "retrieveAuthorId",
+        "type": "script",
+        "properties": {
+          "body": "done({\"authorId\":\"none\"});"
+        }
+      }
+    ],
+    "triggers": [
+      {
+        "onSuccess": [
+          "filterIncidentCase"
+        ],
+        "type": "event",
+        "name": "trigger",
+        "properties": {
+          "elementInstanceId": "${sfdc.instance.id}"
+        }
+      }
+    ],
+    "engine": "v3",
+    "configuration": [
+      {
+        "key": "caseintegrationname",
+        "name": "caseintegrationname",
+        "type": "value",
+        "required": true
+      },
+      {
+        "key": "email",
+        "name": "email",
+        "type": "value",
+        "required": true
+      },
+      {
+        "key": "lithiumlsw.instance.id",
+        "name": "lithiumlsw.instance.id",
+        "type": "elementInstance",
+        "required": true
+      },
+      {
+        "key": "sfdc.instance.id",
+        "name": "sfdc.instance.id",
+        "type": "elementInstance",
+        "required": true
+      }
+    ]
+  }

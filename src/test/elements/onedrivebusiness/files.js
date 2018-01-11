@@ -6,6 +6,7 @@ const cloud = require('core/cloud');
 
 suite.forElement('documents', 'files', (test) => {
   let path = __dirname + '/assets/brady.jpg';
+  let fileId,filePath,revisionId;
   let query = { path: `/bradyChurros-${tools.random()}.jpg` };
 
   const fileWrap = (cb) => {
@@ -110,4 +111,25 @@ suite.forElement('documents', 'files', (test) => {
     };
     return fileWrap(cb);
   });
+
+  before(() => cloud.withOptions({ qs : { path: `/brady-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` } }).postFile(test.api, path)
+    .then(r => {
+      fileId = r.body.id;
+      filePath = r.body.path;
+    }));
+
+    after(() => cloud.delete(`${test.api}/${fileId}`));
+
+    it('it should allow RS for documents/files/:id/revisions', () => {
+        return cloud.get(`${test.api}/${fileId}/revisions`)
+        .then(r => revisionId = r.body[0].id)
+        .then(() => cloud.get(`${test.api}/${fileId}/revisions/${revisionId}`));
+    });
+
+   it('it should allow RS for documents/files/revisions by path', () => {
+        return cloud.withOptions({ qs: { path : `${filePath}` } }).get(`${test.api}/revisions`)
+        .then(r => revisionId = r.body[0].id)
+        .then(() => cloud.withOptions({ qs: { path : `${filePath}` } }).get(`${test.api}/revisions/${revisionId}`));
+    });
+
 });

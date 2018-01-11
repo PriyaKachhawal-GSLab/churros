@@ -1,6 +1,6 @@
 {
-  "name": "<<commerce.department>>",
+  "name": "<<commerce.department>><<random.number>>",
   "active": true,
   "subDepartment": false,
-  "fullyQualifiedName": "<<commerce.department>>"
+  "fullyQualifiedName": "<<commerce.department>><<random.number>>"
 }

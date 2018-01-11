@@ -14,4 +14,5 @@ const options = {
 
 suite.forElement('helpdesk', 'slaPolicies', { payload: payload, skip: false }, (test) => {
  test.withOptions(options).should.supportCruds();
+ test.should.supportPagination();
 });

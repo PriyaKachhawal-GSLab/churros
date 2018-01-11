@@ -3,6 +3,9 @@
     "vendorName": "customers",
     "fields": [{
       "path": "id",
+      "vendorPath": "Id"
+    }, {
+      "path": "id",
       "vendorPath": "accountId"
     }]
   },
@@ -37,6 +40,9 @@
   "subscriptions": {
     "vendorName": "subscriptions",
     "fields": [{
+      "path": "id",
+      "vendorPath": "Id"
+    }, {
       "path": "id",
       "vendorPath": "subscriptionId"
     }]

@@ -10,7 +10,7 @@ const folderPayload = build({ name: `churros-${tools.random()}`, path: `/${tools
 const expect = require('chakram').expect;
 
 suite.forElement('documents', 'folders', (test) => {
-
+let folderId;
   const folderWrap = (cb) => {
     let folder;
     let random = `${tools.random()}`;
@@ -75,6 +75,47 @@ suite.forElement('documents', 'folders', (test) => {
       .then(r => cloud.post(test.api, nestedFolder))
       .then(r => expect(r.body.path).to.equal(nestedFolder.path)) //validates that we are decoding the path properly
       .then(r => cloud.delete(`${test.api}/${id}`));
+  });
+
+  it('should allow GET /folders/contents for root folder', () => {
+    let path = "/";
+    let query = { path: path };
+    return cloud.withOptions({ qs: query }).get("/hubs/documents/folders/contents")
+      .then(r => {
+        expect(r).to.have.statusCode(200);
+      });
+  });
+
+  it('should allow GET /folders/contents for Documents folder', () => {
+    let path = "/Documents";
+    let query = { path: path };
+    return cloud.withOptions({ qs: query }).get("/hubs/documents/folders/contents")
+      .then(r => {
+        expect(r).to.have.statusCode(200);
+      });
+  });
+
+  before(() => cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
+      .then(r => folderId = r.body.filter(obj => obj.name === "dontdelete_folder_churros")[0].id));
+
+  it('should allow GET /folders/contents with name', () => {
+    return cloud.withOptions({ qs: { path: `/dontdelete_folder_churros`, where: "name='dontdelete_text_churros'" } }).get(`${test.api}/contents`)
+      .then(r => expect(r.body[0].name).to.contain('dontdelete_text_churros'));
+  });
+
+  it('should allow GET /folders/contents with extension', () => {
+    return cloud.withOptions({ qs: { path: `/dontdelete_folder_churros`, where: "extension='.txt'" } }).get(`${test.api}/contents`)
+      .then(r => expect(r.body[0].name).to.contain('.txt'));
+  });
+
+  it('should allow GET /folders/:id/contents with name', () => {
+    return cloud.withOptions({ qs: { where: "name='dontdelete_text_churros'" } }).get(`${test.api}/${folderId}/contents`)
+      .then(r => expect(r.body[0].name).to.contain('dontdelete_text_churros'));
+  });
+
+  it('should allow GET /folders/:id/contents with extension', () => {
+    return cloud.withOptions({ qs: { where: "extension='.txt'" } }).get(`${test.api}/${folderId}/contents`)
+      .then(r => expect(r.body[0].name).to.contain('.txt'));
   });
 
 });

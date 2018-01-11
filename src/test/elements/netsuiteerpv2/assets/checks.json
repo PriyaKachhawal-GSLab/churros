@@ -1,41 +1,4 @@
 {
-  "landedCostsList": {
-    "landedCost": [
-      {
-        "category": {
-          "internalId": "1"
-        }
-      },
-      {
-        "category": {
-          "internalId": "2"
-        }
-      }
-    ],
-    "replaceAll": false
-  },
-  "address": "Safety Net Security\nPO Box 3950\nSan Jose CA 95118",
-  "toBePrinted": false,
-  "landedCostPerLine": false,
-  "landedCostMethod": {
-    "value": "_weight"
-  },
-  "userTotal": 200,
-  "customForm": {
-    "internalId": "215"
-  },
-  "memo": "111-2224",
-  "subsidiary": {
-    "internalId": "1"
-  },
-  "exchangeRate": 1,
-  "postingPeriod": {
-    "internalId": "291"
-  },
-  "currency": {
-    "internalId": "1"
-  },
-  "tranDate": "2017-09-25",
   "expenseList": {
     "expense": [
       {
@@ -51,9 +14,6 @@
       }
     ],
     "replaceAll": true
-  },
-  "account": {
-    "internalId": "1"
   },
   "entity": {
     "internalId": "14"

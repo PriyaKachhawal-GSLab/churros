@@ -1,0 +1,11 @@
+{
+    "name": "Lithium Test - Sfdc bulk1",
+    "configuration": {
+      "canrun": "yes",
+      "email": "churros@churros.com",
+      "lastruntime": "none",
+      "endtime": "blah",
+      "formulainstanceid": "{REPLACE}",
+      "sfdc.instance.id": "{REPLACE}"
+    }
+}

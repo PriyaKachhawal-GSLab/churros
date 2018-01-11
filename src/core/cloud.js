@@ -5,20 +5,34 @@ const fs = require('fs');
 const chakram = require('chakram');
 const expect = chakram.expect;
 const logger = require('winston');
+const argv = require('optimist').argv;
+const props = require('core/props');
+const _ = require('lodash');
 
 var exports = module.exports = {};
 
-const validator = (validationCb) => {
+const validator = (validationCb, api) => {
+  let tranformedObjs = props.getOptionalForKey(props.getOptional('element'), 'transformed') || [];
+  //Only use the transformation if it is the endpoint that has been transformed
+  let transform = tranformedObjs.reduce((acc, cur) => acc = acc ? acc : api.split('/').slice(-2).filter(str => str === cur).length > 0 && !api.includes('bulk') ? true : false, false);
+  let transformRes = r => {
+    if (transform && argv.transform && _.isArray(r.body)) r.body.forEach(obj => _.isPlainObject(obj) ? obj.id = obj.idTransformed : null);
+    if (transform && argv.transform && _.isPlainObject(r.body)) r.body.id = r.body.idTransformed;
+  };
   if (typeof validationCb === 'function') {
     return (r) => {
       logger.debug(`Validating response against validation callback.  Response body: ${tools.stringify(r.body)}`);
       validationCb(r);
+      transformRes(r);
+
       return r;
     };
   } else if (typeof validationCb === 'undefined' || (typeof validationCb === 'object' && validationCb === null)) {
     return (r) => {
       if (typeof r.body === 'object') logger.debug(`Validating that response is 200.  Response body: ${tools.stringify(r.body)}`);
       expect(r).to.have.statusCode(200);
+      transformRes(r);
+
       return r;
     };
   } else {
@@ -26,6 +40,8 @@ const validator = (validationCb) => {
     return (r) => {
       logger.debug(`Validating response against JSON schema. Response body: ${tools.stringify(r.body)}`);
       expect(r).to.have.schemaAnd200(validationCb);
+      transformRes(r);
+
       return r;
     };
   }
@@ -34,7 +50,7 @@ const validator = (validationCb) => {
 const post = (api, payload, validationCb, options) => {
   logger.debug('POST %s with options %s and body %s', api, options, JSON.stringify(payload));
   return chakram.post(api, payload, options)
-    .then(r => validator(validationCb)(r))
+    .then(r => validator(validationCb, api)(r))
     .catch(r => tools.logAndThrow('Failed to create or validate: %s', r, api));
 };
 /**
@@ -50,7 +66,7 @@ exports.post = (api, payload, validationCb) => post(api, payload, validationCb, 
 const get = (api, validationCb, options) => {
   logger.debug('GET %s with options %s', api, JSON.stringify(options));
   return chakram.get(api, options)
-    .then(r => validator(validationCb)(r))
+    .then(r => validator(validationCb, api)(r))
     .catch(r => tools.logAndThrow('Failed to retrieve or validate: %s', r, api));
 };
 
@@ -74,7 +90,7 @@ const update = (api, payload, validationCb, chakramCb, options) => {
   logger.debug('%s %s with options %s', chakramCb === chakram.patch ? 'PATCH' : 'PUT', api, options);
 
   return chakramCb(api, payload, options)
-    .then(r => validator(validationCb)(r))
+    .then(r => validator(validationCb, api)(r))
     .catch(r => tools.logAndThrow('Failed to update %s', r, api));
 };
 exports.update = (api, payload, validationCb, chakramCb) => update(api, payload, validationCb, chakramCb, null);
@@ -102,7 +118,7 @@ exports.put = (api, payload, validationCb) => put(api, payload, validationCb, nu
 const remove = (api, validationCb, options) => {
   logger.debug('DELETE %s with options %s', api, options);
   return chakram.delete(api, null, options)
-    .then(r => validator(validationCb)(r))
+    .then(r => validator(validationCb, api)(r))
     .catch(r => tools.logAndThrow('Failed to delete %s', r, api));
 };
 
@@ -128,7 +144,7 @@ const postFile = (api, filePath, validationCb, options) => {
 
   logger.debug('POST %s with multipart/form-data file', api);
   return chakram.post(api, validationCb, options)
-    .then(r => validator(validationCb)(r))
+    .then(r => validator(validationCb, api)(r))
     .catch(r => tools.logAndThrow('Failed to upload file to %s', r, api));
 };
 exports.postFile = postFile;

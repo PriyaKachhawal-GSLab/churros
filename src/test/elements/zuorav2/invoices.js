@@ -23,7 +23,7 @@ suite.forElement('payment', 'invoices', { payload: invoicesPayload }, (test) => 
     name: "should support CreatedDate > {date} Ceql search",
     qs: { where: 'CreatedDate>\'2017-02-22T08:21:00.000Z\'' }
   };
-  before(() => {
+  before(done => {
     cloud.withOptions({ qs: { where: 'expand=true' } }).get(`/hubs/payment/products`)
       .then(r => {
         var match = r.body.filter(function(list) {
@@ -43,7 +43,8 @@ suite.forElement('payment', 'invoices', { payload: invoicesPayload }, (test) => 
       .then(r => customerId = r.body.id ? r.body.id : r.body.accountId)
       .then(r => subscriptionPayload.accountKey = customerId)
       .then(r => cloud.post(`/hubs/payment/subscriptions`, subscriptionPayload))
-      .then(r => invoicesPayload.AccountId = customerId);
+      .then(r => invoicesPayload.AccountId = customerId)
+      .then(r => done());
   });
   test.should.supportNextPagePagination(2);
   test.withName(ceqlOptions.name).withOptions(ceqlOptions).should.return200OnGet();

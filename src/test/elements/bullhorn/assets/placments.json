@@ -1,0 +1,11 @@
+{
+"candidate": {
+          "id": 204,
+           "name": "<<random.word>>"
+                    },
+ "employmentType":"Permanent",
+"jobOrder": {
+      "id": 50,
+    "title": "<<random.word>>"
+    }
+}

@@ -1025,6 +1025,15 @@
       "type": "string"
     }]
   },
+  "bills-payments": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    },{
+      "path": "id",
+      "type": "string"
+    }]
+  },
   "projects": {
     "fields": [{
       "path": "idTransformed",
@@ -1729,24 +1738,63 @@
  },
  "employee-schedules" : {
    "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
      "path": "id",
      "type": "string"
    }]
  },
  "roles" : {
    "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
      "path": "id",
      "type": "string"
    }]
  },
  "timesheets" : {
    "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
      "path": "id",
      "type": "string"
    }]
  },
  "tips" : {
    "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ },
+ "creditcard-charges": {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ },
+ "creditcard-credits": {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ },
+ "data-extensions" : {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
      "path": "id",
      "type": "string"
    }]
