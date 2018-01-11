@@ -8,7 +8,7 @@ suite.forElement('employee', 'locations', (test) => {
 
   let locId, paymentId;
   before(() => cloud.get(test.api)
-    .then(r => locId = r.body[1].id));
+    .then(r => locId = r.body[3].id));
 
   it(`should allow GET with where begin_time for ${test.api}/:id/payments`, () => {
     return cloud.withOptions({ qs: { where: "begin_time='2017-10-03T18:18:45Z'" } }).get(`${test.api}/${locId}/payments`)
