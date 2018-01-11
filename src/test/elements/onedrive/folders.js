@@ -4,6 +4,8 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const folderPayload = require('./assets/folders');
+const specialCharsFolderPayload = require('./assets/folders-special-chars');
+const faker = require('faker');
 
 suite.forElement('documents', 'folders', (test) => {
   let random = `${tools.random()}`;
@@ -74,6 +76,16 @@ suite.forElement('documents', 'folders', (test) => {
     };
 
     return folderWrap(cb);
+  });
+
+  it('should allow CD /folders with special characters', () => {
+    let folder1;
+    let randoText = 'åbc≈¥Ω' + faker.random.uuid();
+    specialCharsFolderPayload.name += randoText;
+    specialCharsFolderPayload.path += randoText;
+    return cloud.post('/hubs/documents/folders', folderPayload)
+      .then(r => folder1 = r.body)
+      .then(r => cloud.withOptions({ qs: { path: folder1.path } }).delete('/hubs/documents/folders'));
   });
 
 });
