@@ -5,9 +5,9 @@ const cloud = require('core/cloud');
 const expenseReportsPayload = require('./assets/expense-reports');
 
 
-suite.forElement('finance', 'expense-reports', (test) => {
+suite.forElement('erp', 'expense-reports', (test) => {
   test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
-  it('should allow CRUDS /hubs/finance/expense-reports', () => {
+  it('should allow CRUDS /hubs/erp/expense-reports', () => {
     let internalId;
     return cloud.post(test.api, expenseReportsPayload)
       .then(r => internalId = r.body.internalId)

@@ -3,7 +3,7 @@
 const suite = require('core/suite');
 const payload = require('./assets/customer-refunds');
 
-suite.forElement('finance', 'customer-refunds', { payload: payload }, (test) => {
+suite.forElement('erp', 'customer-refunds', { payload: payload }, (test) => {
   const options = {
     churros: {
       updatePayload: {

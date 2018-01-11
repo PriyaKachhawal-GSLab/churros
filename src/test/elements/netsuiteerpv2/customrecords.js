@@ -5,9 +5,9 @@ const cloud = require('core/cloud');
 const customRecordsPayload = require('./assets/customrecords');
 
 
-suite.forElement('finance', 'custom-record-types', (test) => {
+suite.forElement('erp', 'custom-record-types', (test) => {
     test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
-    it('should allow CRUDS /hubs/finance/customrecords', () => {
+    it('should allow CRUDS /hubs/erp/customrecords', () => {
       let customRecordTypeId = 478;
       let customRecordId;
       return cloud.post(`${test.api}/${customRecordTypeId}/custom-records`, customRecordsPayload)

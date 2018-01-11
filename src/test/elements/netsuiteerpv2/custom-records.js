@@ -5,6 +5,6 @@ const payload = require('./assets/custom-records');
 //custom-record-types/{476}/custom-records
 //custom-record-types/{476}/custom-records/{id}
 
-suite.forElement('crm', 'custom-records', { payload: payload }, (test) => {
+suite.forElement('erp', 'custom-records', { payload: payload }, (test) => {
   test.withApi(`custom-record-types/476/custom-records`).should.supportCruds();
 });
