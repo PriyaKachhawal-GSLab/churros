@@ -28,20 +28,20 @@ suite.forElement('finance', 'credit-memos', (test) => {
     test.should.supportPagination();
 
   
-    // it('should support CRUDS for /credit-memos', () => {
-    //   let creditMemoUpdate = {Reference: lorem.words()};
-    //   creditMemoPayload.Contact.ContactID = contactId;
+    it('should support CRUDS for /credit-memos', () => {
+      let creditMemoUpdate = {Reference: lorem.words()};
+      creditMemoPayload.Contact.ContactID = contactId;
       
-    //   return cloud.post(test.api, creditMemoPayload)
-    //     .then((r) => cloud.get(`${test.api}/${r.body.CreditNoteID}`))
-    //     .then((r) => cloud.patch(`${test.api}/${r.body.CreditNoteID}`, creditMemoUpdate))
-    //     .then((r) => expect(r.body.Reference).to.equal(creditMemoUpdate.Reference))
-    //     .then(() => cloud.withOptions({qs:{where: `Reference='${creditMemoUpdate.Reference}'`}}).get(test.api))
-    //     .then((r) => {
-    //       expect(r.body.length).to.equal(1);
-    //       return cloud.delete(`${test.api}/${r.body[0].CreditNoteID}`);
-    //     });
-    // });
+      return cloud.post(test.api, creditMemoPayload)
+        .then((r) => cloud.get(`${test.api}/${r.body.CreditNoteID}`))
+        .then((r) => cloud.patch(`${test.api}/${r.body.CreditNoteID}`, creditMemoUpdate))
+        .then((r) => expect(r.body.Reference).to.equal(creditMemoUpdate.Reference))
+        .then(() => cloud.withOptions({qs:{where: `Reference='${creditMemoUpdate.Reference}'`}}).get(test.api))
+        .then((r) => {
+          expect(r.body.length).to.equal(1);
+          return cloud.delete(`${test.api}/${r.body[0].CreditNoteID}`);
+        });
+    });
 
     it('should support POST /credit-memos/:id/allocations', () => {
       let creditMemoId, invoiceId;
