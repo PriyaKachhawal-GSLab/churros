@@ -167,7 +167,6 @@ suite.forElement('documents', 'files', (test) => {
       .then(r => expect(r.body.filter(obj => obj.raw)).to.not.be.empty)
       .then(r => cloud.get(`${test.api}/${id}/comments`))
       .then(r => expect(r.body.filter(obj => obj.raw)).to.be.empty)
-      .then(r => cloud.delete(`${test.api}/${id}/comments/${commentId}`))
-  })
-
+      .then(r => cloud.delete(`${test.api}/${id}/comments/${commentId}`));
+  });
 });
