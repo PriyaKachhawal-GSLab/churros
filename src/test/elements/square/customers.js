@@ -2,7 +2,6 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const chakram = require('chakram');
 const customerPayload = tools.requirePayload(`${__dirname}/assets/customer.json`);
 
 suite.forElement('employee', 'customers', { payload : customerPayload }, (test) => {
