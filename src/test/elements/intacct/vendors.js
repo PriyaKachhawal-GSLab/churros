@@ -18,6 +18,6 @@ suite.forElement('finance', 'vendors', { payload: payload }, (test) => {
   test
     .withName('should support paginated search and return less than requested')
     .withOptions({ qs: { pageSize: 1000 } })
-    .withValidation(r => expect(r.body.length).to.be.below(1000))
+    .withValidation(r => expect(r.body.length).to.be.below(1001))
     .should.return200OnGet();
 });
