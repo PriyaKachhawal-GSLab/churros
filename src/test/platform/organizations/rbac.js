@@ -485,12 +485,6 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
   });
 
   context('account management', () => {
-    const viewTest = (level, levelPrivilegeSuffix) => {
-      return removePrivilegeIfNecessary(`viewUsers${levelPrivilegeSuffix}`)
-        .then(() => cloudWithUser().get(`/${level}/${defaultAccountId}/users`, insufficientPrivilegesValidator))
-        .then(() => addPrivilegeIfNecessary(`viewUsers${levelPrivilegeSuffix}`))
-        .then(() => cloudWithUser().get(`/${level}/${defaultAccountId}/users`));
-    };
 
     it('should restrict viewing account users without the proper privilege', () => {
       return removePrivilegeIfNecessary(`viewUsersAccount`)
