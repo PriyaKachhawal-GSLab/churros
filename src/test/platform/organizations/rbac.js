@@ -474,11 +474,13 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
       contextBackgroundColor: '#aedce7',
     };
 
-    it('should restrict access to updating the organization branding information with the proper privilege', () => {
+    it('should restrict access to updating the organization branding information but not retrieving it with the proper privilege', () => {
       return removePrivilegeIfNecessary('manageUiBranding')
+        .then(() => cloudWithUser().get(`/organizations/branding`, sufficientPrivilegesValidator))
         .then(() => cloudWithUser().delete(`/organizations/branding`, insufficientPrivilegesValidator))
         .then(() => cloudWithUser().put(`/organizations/branding`, branding, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('manageUiBranding'))
+        .then(() => cloudWithUser().get(`/organizations/branding`, sufficientPrivilegesValidator))
         .then(() => cloudWithUser().put(`/organizations/branding`, branding))
         .then(() => cloudWithUser().delete(`/organizations/branding`));
     });
