@@ -15,7 +15,7 @@ const tools = require('core/tools');
  * Tests customer formula executions. Tests under heavy load (number of events, size of events, etc.) when applicable.
  */
 suite.forPlatform('formulas', { name: 'customer-formulas', skip: false }, (test) => {
-  let sfdcId, kissmetricsId, lithiumId;
+  let sfdcId, kissmetricsId, lithiumId, fbLeadAdsId, sailthruId;
 
   const numFormulaInstances = process.env.NUM_FORMULA_INSTANCES ? process.env.NUM_FORMULA_INSTANCES : 1;
   const numEvents = process.env.NUM_EVENTS ? process.env.NUM_EVENTS : 1;
@@ -31,7 +31,11 @@ suite.forPlatform('formulas', { name: 'customer-formulas', skip: false }, (test)
     .then(r => provisioner.create('kissmetrics'))
     .then(r => kissmetricsId = r.body.id)
     .then(r => provisioner.create('lithiumlsw'))
-    .then(r => lithiumId = r.body.id));
+    .then(r => lithiumId = r.body.id)
+    .then(r => provisioner.create('sailthru'))
+    .then(r => sailthruId = r.body.id)
+    .then(r => provisioner.create('facebookleadads'))
+    .then(r => fbLeadAdsId = r.body.id));
 
   /** Clean up */
   after(() => {
@@ -158,6 +162,31 @@ suite.forPlatform('formulas', { name: 'customer-formulas', skip: false }, (test)
       .catch(e => {
         if (formula1Id) common.deleteFormula(formula1Id);
         if (formula2Id) common.deleteFormula(formula2Id);
+        throw new Error(e);
+    });
+  });
+
+  it('should handle a high load for the Sailthru Facebook Lead Ads formula', () => {
+    const formula = require('./assets/formulas/customer-formulas/sailthru');
+    formula.engine = process.env.CHURROS_FORMULAS_ENGINE;
+    const formulaInstance = require('./assets/formulas/customer-formulas/sailthru-instance');
+    formulaInstance.configuration['facebookleadads.instance.id'] = fbLeadAdsId;
+    formulaInstance.configuration['sailthru.instance.id'] = sailthruId;
+
+    let formulaId;
+    let formulaInstances = [];
+    let deletes = [];
+    return cloud.post(test.api, formula, fSchema)
+      .then(r => formulaId = r.body.id)
+      .then(() => createXInstances(numFormulaInstances, formulaId, formulaInstance))
+      .then(ids => ids.map(id => formulaInstances.push(id)))
+      .then(r => simulateTrigger(numEvents, sfdcId, genCaseWebhookEvent('update', numInOneEvent), common.generateSfdcEvent))
+      .then(r => pollAllExecutions(formulaId, formulaInstances, numInOneEvent * numEvents, 1))
+      .then(r => formulaInstances.forEach(id => deletes.push(cloud.delete(`/formulas/${formulaId}/instances/${id}`))))
+      .then(r => chakram.all(deletes))
+      .then(r => common.deleteFormula(formulaId))
+      .catch(e => {
+        if (formulaId) common.deleteFormula(formulaId);
         throw new Error(e);
     });
   });
