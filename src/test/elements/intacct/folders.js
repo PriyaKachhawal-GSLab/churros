@@ -11,7 +11,7 @@ suite.forElement('finance', 'folders', { payload: payload }, (test) => {
   it(`should allow CRUDS for ${test.api}`, () => {
     let docid;
     return cloud.get(test.api)
-      .then(r => docid = r.body[1].id)
+      .then(r => docid = r.body[0].id)
       .then(r => cloud.post(`${test.api}`, payload))
       .then(r => cloud.get(`${test.api}/${docid}`))
       .then(r => cloud.patch(`${test.api}/${docid}`, patchPayload))
