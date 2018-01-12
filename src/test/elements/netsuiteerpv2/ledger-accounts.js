@@ -2,6 +2,9 @@
 
 const suite = require('core/suite');
 const payload = require('./assets/ledger-accounts');
+const tools = require('core/tools');
+
+payload.acctName = tools.random();
 
 suite.forElement('erp', 'ledger-accounts',{ payload: payload }, (test) => {
   test.should.supportCruds();
