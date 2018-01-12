@@ -1,0 +1,367 @@
+{
+    "id": 19456,
+    "name": "Sync Facebook Lead Ads to Sailthru",
+    "description": "Sync Facebook Lead Ad data to Sailthru",
+    "userId": 485,
+    "accountId": 1937,
+    "createdDate": "2018-01-12T17:08:20Z",
+    "steps": [
+      {
+        "id": 102189,
+        "onSuccess": [
+          "filterWebhookType"
+        ],
+        "onFailure": [],
+        "name": "CallEventApi",
+        "type": "script",
+        "properties": {
+          "scriptEngine": "v1",
+          "body": "\nreturn {    \n   \t\t\"event\" : \"facebook_lead_ad_conversion\",    \n   \t\t\"id\" : steps.constructUserPayload.email,\n   \t\t\"key\" : \"email\", \n   \t\t\"vars\" : steps.constructUserPayload.body.vars,\n   \t}",
+          "mimeType": "application/javascript"
+        }
+      },
+      {
+        "id": 102194,
+        "onSuccess": [
+          "createUser"
+        ],
+        "onFailure": [
+          "loopLeads"
+        ],
+        "name": "constructCreateUserPayload",
+        "type": "script",
+        "properties": {
+          "scriptEngine": "v1",
+          "body": "var email = steps.constructUserPayload.email;\nvar body = steps.constructUserPayload.body;\nbody.id = email;\nreturn body;",
+          "mimeType": "application/javascript"
+        }
+      },
+      {
+        "id": 102193,
+        "onSuccess": [
+          "filterHasEmail"
+        ],
+        "onFailure": [],
+        "name": "constructUserPayload",
+        "type": "script",
+        "properties": {
+          "scriptEngine": "v1",
+          "body": "var lead = steps.getLeadId;\nvar leadgen = steps.getFacebookLead.response.body;\nvar form = steps.getFormDetails.response.body;\nvar fieldData = leadgen.field_data;\nvar email = \"\";\nvar body = {vars:{},lists:{}};\nvar webhook_type = trigger.event.objectType;\n\n// Add the user to a list called Facebook Lead Ads. \nbody.lists[\"facebook_lead_ads\"] = 1;\n\nif (lead.formId !== null) {\n    // form data \n   \n   //if (!form.message) {\n      body.vars.form_name = \"\"+form.name+\"\";\n      body.vars.facebook_lead_form_name = \"\"+form.name+\"\";\n      body.vars.facebook_form = form;\n   //} \n\n  body.vars.facebook_form_id = \"\"+lead.formId+\"\";\n\n} \n\n// temporary to make sure we keep the form name\nif (webhook_type == 'leadgen_fat') {\n  body.vars.facebook_lead_form_name = steps.loopLeads.entry.value.form_name;\n  body.vars.form_name = steps.loopLeads.entry.value.form_name;\n} \n\n// Set the Source\nif (lead.formId === null) {\n    body.vars.facebook_lead_type = \"CTA\";\n    body.lists[\"facebook_cta\"] = 1;\n} else {\n  body.vars.facebook_lead_type = \"Lead Ad\";\n}\n\n\n\nfieldData.forEach(function(data) {\n  if (data.name === 'email') {\n    email = data.values[0];\n  } else {\n    body.vars[data.name] = data.values.length === 1 ? data.values[0] : data.values;\n  }\n});\n\nbody.vars.facebook_leadgen_id = \"\"+leadgen.id+\"\";\n\n// This should always be set on a lead ad, but may not be present on a CTA\nif (lead.pageId) {\n// deprecate this in the future.\n  body.vars.page_id = \"\"+lead.pageId+\"\";\n  // in this update add another var to specifically call out the FB form name\n  body.vars.facebook_page_id = \"\"+lead.pageId+\"\";\n} \n\n// only set the var if it exists for each of the facebook lead ad Data .\nif (leadgen.ad_id) {\n  body.vars.facebook_ad_id = \"\"+leadgen.ad_id+\"\";\n}\n\nif (leadgen.adgroup_name) {\n  body.vars.facebook_adgroup_name = \"\"+leadgen.adgroup_name+\"\";\n}\n\nif (leadgen.adset_name) {\n  body.vars.facebook_adset_name = \"\"+leadgen.adset_name+\"\";\n}\n\nif (leadgen.adgroup_id) {\n  body.vars.facebook_adgroup_id = \"\"+leadgen.adgroup_id+\"\";\n}\n\nif (leadgen.campaign_name) {\n  body.vars.facebook_campaign_name = \"\"+leadgen.campaign_name+\"\";\n}\n\nif (leadgen.campaign_id) {\n  body.vars.facebook_campaign_id = \"\"+leadgen.campaign_id+\"\";\n}\n\nbody.vars.signup_time = leadgen.created_time;\nbody.vars.source = \"facebook\";\nbody.optout_email = \"none\";\n\nreturn {\n  email: email,\n  body: body\n}\n\n///// OLD \n\n// var leadgen = steps.loopLeads.entry.value;\n// var fieldData = leadgen.field_data;\n// var email = \"\";\n// var body = {vars:{},lists:{}};\n// fieldData.forEach(function(data) {\n//   if (data.name === 'email') {\n//     email = data.values[0];\n//   } else {\n//     body.vars[data.name] = data.values.length === 1 ? data.values[0] : data.values;\n//   }\n// });\n\n// body.vars.facebook_leadgen_id = \"\"+leadgen.leadgen_id+\"\";\n// body.vars.facebook_ad_id = \"\"+leadgen.ad_id+\"\";\n// body.vars.facebook_adgroup_name = \"\"+leadgen.adgroup_name+\"\";\n// body.vars.facebook_adset_name = \"\"+leadgen.adset_name+\"\";\n// body.vars.facebook_adgroup_id = \"\"+leadgen.adgroup_id+\"\";\n// body.vars.facebook_campaign_name = \"\"+leadgen.campaign_name+\"\";\n// body.vars.facebook_campaign_id = \"\"+leadgen.campaign_id+\"\";\n// body.vars.form_name = leadgen.form_name;\n// body.vars.facebook_lead_form_name = leadgen.form_name;\n// body.vars.page_id = \"\"+leadgen.page_id+\"\";\n// body.vars.signup_time = leadgen.created_time;\n// body.vars.source = \"facebook\";\n// body.optout_email = \"none\";\n\n// body.lists[\"facebook_lead_ads\"] = 1;\n\n// return {\n//   email: email,\n//   body: body\n// }",
+          "mimeType": "application/javascript"
+        }
+      },
+      {
+        "id": 102203,
+        "onSuccess": [
+          "CallEventApi"
+        ],
+        "onFailure": [
+          "loopLeads"
+        ],
+        "name": "createUser",
+        "type": "elementRequest",
+        "properties": {
+          "api": "/hubs/marketing/users",
+          "body": "${steps.constructCreateUserPayload}",
+          "method": "POST",
+          "elementInstanceId": "${sailthru.instance.id}"
+        }
+      },
+      {
+        "id": 102197,
+        "onSuccess": [
+          "filter-pageId"
+        ],
+        "onFailure": [
+          "getAllFormulaInstances"
+        ],
+        "name": "does-pageId-exist",
+        "type": "filter",
+        "properties": {
+          "scriptEngine": "v1",
+          "body": "if (config.pageid) {\n  return true;\n}\nelse {\n  return false;\n}",
+          "mimeType": "application/javascript"
+        }
+      },
+      {
+        "id": 102198,
+        "onSuccess": [
+          "getUser"
+        ],
+        "onFailure": [
+          "loopLeads"
+        ],
+        "name": "filterHasEmail",
+        "type": "filter",
+        "properties": {
+          "scriptEngine": "v1",
+          "body": "var email = steps.constructUserPayload.email;\nreturn email != \"\";\n",
+          "mimeType": "application/javascript"
+        }
+      },
+      {
+        "id": 102200,
+        "onSuccess": [
+          "loopLeads"
+        ],
+        "onFailure": [
+          "selfDestruct"
+        ],
+        "name": "filterInstancesCount",
+        "type": "filter",
+        "properties": {
+          "scriptEngine": "v1",
+          "body": "var instances = Java.from(steps.getAllFormulaInstances.response.body);\nif (instances.length > 1) {\n  return false;\n} else {\n  return true;\n}\n",
+          "mimeType": "application/javascript"
+        }
+      },
+      {
+        "id": 102187,
+        "onSuccess": [
+          "getFormDetails"
+        ],
+        "onFailure": [
+          "getFormDetails"
+        ],
+        "name": "filterLeadAdsCTA",
+        "type": "filter",
+        "properties": {
+          "scriptEngine": "v1",
+          "body": "var lead = steps.getLeadId;\n\nif (lead.formId !== null) {\n return true;\n} else {\n   return false;\n}"
+        }
+      },
+      {
+        "id": 102195,
+        "onSuccess": [
+          "loopLeads"
+        ],
+        "onFailure": [],
+        "name": "filter-pageId",
+        "type": "filter",
+        "properties": {
+          "scriptEngine": "v1",
+          "body": "var leadgencheck = trigger.body.message.raw.entry[0].id;\n\nif (leadgencheck == config.pageid) {\n  return true;\n}\nelse {\n  return false;\n}",
+          "mimeType": "application/javascript"
+        }
+      },
+      {
+        "id": 102199,
+        "onSuccess": [
+          "updateUser"
+        ],
+        "onFailure": [
+          "constructCreateUserPayload"
+        ],
+        "name": "filterUserExists",
+        "type": "filter",
+        "properties": {
+          "scriptEngine": "v1",
+          "body": "var user = steps.getUser.response.body;\nreturn steps.getUser.response.body.length > 0;",
+          "mimeType": "application/javascript"
+        }
+      },
+      {
+        "id": 102188,
+        "onSuccess": [
+          "SendEventToSailthru"
+        ],
+        "onFailure": [
+          "loopLeads"
+        ],
+        "name": "filterWebhookType",
+        "type": "filter",
+        "properties": {
+          "scriptEngine": "v1",
+          "body": "var t = trigger.event.objectType;\nif (t == 'leadgen') {\n  return true;\n} else {\n  return false;\n}"
+        }
+      },
+      {
+        "id": 102202,
+        "onSuccess": [
+          "filterInstancesCount"
+        ],
+        "onFailure": [],
+        "name": "getAllFormulaInstances",
+        "type": "request",
+        "properties": {
+          "path": "${info}",
+          "api": "/formulas/{formulaId}/instances",
+          "method": "GET"
+        }
+      },
+      {
+        "id": 102190,
+        "onSuccess": [
+          "filterLeadAdsCTA"
+        ],
+        "onFailure": [],
+        "name": "getFacebookLead",
+        "type": "elementRequest",
+        "properties": {
+          "query": "${fields=campaign_id,campaign_name,adset_id,ad_name,created_time,form_id,field_data,id,is_organic,post,adset_name,ad_id,custom_disclaimer_responses,retailer_item_id}",
+          "path": "${steps.getLeadId}",
+          "retryDelay": "750",
+          "api": "/hubs/marketing/leads/{leadId}",
+          "retryAttempts": "5",
+          "retry": "true",
+          "method": "GET",
+          "elementInstanceId": "${config.facebookleadads.instance.id}"
+        }
+      },
+      {
+        "id": 102186,
+        "onSuccess": [
+          "constructUserPayload"
+        ],
+        "onFailure": [
+          "constructUserPayload"
+        ],
+        "name": "getFormDetails",
+        "type": "elementRequest",
+        "properties": {
+          "query": "${fields=id,name,creator,legal_content}",
+          "path": "${steps.getLeadId.leadgen}",
+          "retryDelay": "750",
+          "api": "/hubs/marketing/pages/{form_id}?fields=id,name,creator,legal_content",
+          "retryAttempts": "5",
+          "retry": "true",
+          "method": "GET",
+          "elementInstanceId": "${config.facebookleadads.instance.id}"
+        }
+      },
+      {
+        "id": 102192,
+        "onSuccess": [
+          "getFacebookLead"
+        ],
+        "onFailure": [],
+        "name": "getLeadId",
+        "type": "script",
+        "properties": {
+          "scriptEngine": "v1",
+          "body": "var leadgen = steps.loopLeads.entry.value;\nvar leadId = leadgen.leadgen_id;\n\nif (leadgen.form_id) {\n  id = leadgen.form_id;\n} else {\n  id = null;\n}\n\nif (leadgen.page_id) {\n  pid = leadgen.page_id;\n} else {\n  pid = null;\n}\n\nreturn {\n\tleadId : leadId,\n\tleadgen : leadgen,\n\tformId : id,\n\tpageId : pid,\n}"
+        }
+      },
+      {
+        "id": 102205,
+        "onSuccess": [
+          "filterUserExists"
+        ],
+        "onFailure": [
+          "loopLeads"
+        ],
+        "name": "getUser",
+        "type": "elementRequest",
+        "properties": {
+          "path": "${steps.constructUserPayload}",
+          "api": "/hubs/marketing/users?where=email='{email}'",
+          "method": "GET",
+          "elementInstanceId": "${sailthru.instance.id}"
+        }
+      },
+      {
+        "id": 102191,
+        "onSuccess": [
+          "getLeadId"
+        ],
+        "onFailure": [],
+        "name": "loopLeads",
+        "type": "loop",
+        "properties": {
+          "list": "${trigger.body.message.raw.entry[0].changes}",
+          "mimeType": "application/javascript"
+        }
+      },
+      {
+        "id": 102201,
+        "onSuccess": [],
+        "onFailure": [],
+        "name": "selfDestruct",
+        "type": "request",
+        "properties": {
+          "path": "${info}",
+          "api": "/formulas/{formulaId}/instances/{formulaInstanceId}",
+          "method": "DELETE"
+        }
+      },
+      {
+        "id": 102204,
+        "onSuccess": [
+          "loopLeads"
+        ],
+        "onFailure": [
+          "loopLeads"
+        ],
+        "name": "SendEventToSailthru",
+        "type": "elementRequest",
+        "properties": {
+          "api": "/hubs/marketing/trigger-events/fire",
+          "body": "${steps.CallEventApi}",
+          "method": "POST",
+          "elementInstanceId": "${sailthru.instance.id}"
+        }
+      },
+      {
+        "id": 102196,
+        "onSuccess": [
+          "CallEventApi"
+        ],
+        "onFailure": [
+          "loopLeads"
+        ],
+        "name": "updateUser",
+        "type": "elementRequest",
+        "properties": {
+          "path": "${steps.constructUserPayload}",
+          "api": "/hubs/marketing/users/{email}",
+          "body": "${steps.constructUserPayload.body}",
+          "method": "PATCH",
+          "elementInstanceId": "${sailthru.instance.id}",
+          "mimeType": "application/javascript"
+        }
+      }
+    ],
+    "triggers": [
+      {
+        "id": 17631,
+        "onSuccess": [
+          "does-pageId-exist"
+        ],
+        "onFailure": [],
+        "type": "event",
+        "async": true,
+        "name": "trigger",
+        "properties": {
+          "elementInstanceId": "${facebookleadads.instance.id}"
+        }
+      }
+    ],
+    "active": true,
+    "debugLoggingEnabled": true,
+    "singleThreaded": false,
+    "configuration": [
+      {
+        "id": 32626,
+        "key": "facebookleadads.instance.id",
+        "name": "facebookleadadsInstance",
+        "type": "elementInstance",
+        "description": "The Facebook Lead Ads element instance",
+        "required": true
+      },
+      {
+        "id": 32627,
+        "key": "pageid",
+        "name": "pageId",
+        "type": "value",
+        "required": true
+      },
+      {
+        "id": 32628,
+        "key": "sailthru.instance.id",
+        "name": "sailthruInstance",
+        "type": "elementInstance",
+        "description": "The Sailthru marketing element instance",
+        "required": true
+      }
+    ]
+  }
