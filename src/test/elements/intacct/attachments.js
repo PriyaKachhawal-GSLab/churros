@@ -2,8 +2,9 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const payload = require('./assets/attachment');
-const schema = require('./assets/objects.attachments.json');
+const tools = require('core/tools');
+
+const payload = tools.requirePayload(`${__dirname}/assets/attachment.json`);
 
 suite.forElement('finance', 'attachments', { payload: payload }, (test) => {
   it(`should allow CRUDS for ${test.api}`, () => {
@@ -16,5 +17,5 @@ suite.forElement('finance', 'attachments', { payload: payload }, (test) => {
       .then(r => cloud.delete(`${test.api}/${docid}`));
   });
   test.should.supportPagination();
-  test.withValidation(schema).withName('should support updated > {date} Ceql search').withOptions({ qs: { where: 'creationdate>\'11/21/2017\'' } }).should.return200OnGet();
+  test.withName('should support updated > {date} Ceql search').withOptions({ qs: { where: 'creationdate>\'11/21/2017\'' } }).should.return200OnGet();
 });

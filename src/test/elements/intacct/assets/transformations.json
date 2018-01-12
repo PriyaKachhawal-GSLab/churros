@@ -159,5 +159,12 @@
       "path": "id",
       "vendorPath": "RECORDNO"
     }]
+  },
+  "folders": {
+    "vendorName": "folders",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "name"
+    }]
   }
 }
