@@ -493,7 +493,10 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
     };
 
     it('should restrict viewing account users without the proper privilege', () => {
-      return viewTest('acounts', 'Account');
+      return removePrivilegeIfNecessary(`viewUsersAccount`)
+        .then(() => cloudWithUser().get(`/accounts/${defaultAccountId}/users`, insufficientPrivilegesValidator))
+        .then(() => addPrivilegeIfNecessary(`viewUsersAccount`))
+        .then(() => cloudWithUser().get(`/accounts/${defaultAccountId}/users`));
     });
 
     it('should restrict creating, editing, and deleting a new account user without the proper privileges', () => {
@@ -515,7 +518,10 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
     });
 
     it('should restrict viewing organization users without the proper privilege', () => {
-      return viewTest('organizations', 'Org');
+      return removePrivilegeIfNecessary(`viewUsersOrg`)
+        .then(() => cloudWithUser().get(`/organizations/users`, insufficientPrivilegesValidator))
+        .then(() => addPrivilegeIfNecessary(`viewUsersOrg`))
+        .then(() => cloudWithUser().get(`/organizations/users`));
     });
 
     it('should restrict creating, editing, and eleting a new organization user without the proper privileges', () => {
