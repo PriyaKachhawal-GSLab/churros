@@ -11,7 +11,7 @@ suite.forElement('finance', 'bills-payments', (test) => {
     .withName('should support Ceql date search')
     .withValidation(r => {
       expect(r).to.statusCode(200);
-      const validValues = r.body.filter(obj => obj.WHENMODIFIED == '06/23/2013 14:25:17');
+      const validValues = r.body.filter(obj => obj.WHENMODIFIED === '06/23/2013 14:25:17');
       expect(validValues.length).to.equal(r.body.length);
     })
     .should.return200OnGet();
