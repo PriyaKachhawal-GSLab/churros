@@ -1798,5 +1798,23 @@
      "path": "id",
      "type": "string"
    }]
+ },
+ "exchange-rates": {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ },
+ "exchange-rate-entries": {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
  }
 }

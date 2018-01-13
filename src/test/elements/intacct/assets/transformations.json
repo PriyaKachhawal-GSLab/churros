@@ -159,5 +159,19 @@
       "path": "id",
       "vendorPath": "RECORDNO"
     }]
+  },
+  "exchange-rates": {
+    "vendorName": "exchange-rates",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "exchange-rate-entries": {
+    "vendorName": "exchange-rate-entries",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
   }
 }
