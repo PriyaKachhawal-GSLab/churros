@@ -10,6 +10,12 @@ const accountsPayloadUpdate = tools.requirePayload(`${__dirname}/assets/accounts
 suite.forElement('helpdesk', 'accounts', (test) => {
   test.should.supportPagination();
 
+  test.withApi(test.api)
+    .withOptions({ qs: { where: "letter='cb'" } })
+    .withValidation(r => expect(r.body[0].customer.name === 'cb').to.not.be.empty)
+    .withName('should allow GET with option letter')
+    .should.return200OnGet();
+
   it('should allow CRUDS for employees', () => {
     let aId;
     return cloud.post(test.api, accountsPayload)
