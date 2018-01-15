@@ -87,6 +87,14 @@ const generateSfdcEvent = (instanceId, payload) => {
     .post(url, payload);
 };
 
+const generateFBEvent = (instanceId, payload) => {
+  const url = `/events/facebookleadads`;
+  const opts = { headers: { 'Element-Instances': instanceId } };
+  return cloud
+    .withOptions(opts)
+    .post(url, payload);
+};
+
 const generateCloseioPollingEvent = (instanceId, payload) => {
   const headers = { 'Content-Type': 'application/json', 'Id': instanceId };
   const encodedId = b64(instanceId.toString());
@@ -253,6 +261,7 @@ module.exports = {
   provisionSfdcWithWebhook,
   generateSfdcEvent,
   generateSfdcPollingEvent,
+  generateFBEvent,
   generateCloseioPollingEvent,
   defaultValidator,
   execValidatorWrapper,
