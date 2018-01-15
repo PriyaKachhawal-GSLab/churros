@@ -1816,5 +1816,14 @@
      "path": "id",
      "type": "string"
    }]
+ },
+ "exchange-rate-types": {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
  }
 }

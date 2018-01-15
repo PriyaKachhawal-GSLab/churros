@@ -173,5 +173,12 @@
       "path": "id",
       "vendorPath": "RECORDNO"
     }]
+  },
+    "exchange-rate-types": {
+      "vendorName": "exchange-rate-types",
+      "fields": [{
+        "path": "id",
+        "vendorPath": "ID"
+      }]
   }
 }
