@@ -91,9 +91,6 @@
         "onSuccess": [
           "loopLeads"
         ],
-        "onFailure": [
-          "selfDestruct"
-        ],
         "name": "filterInstancesCount",
         "type": "filter",
         "properties": {
@@ -240,16 +237,6 @@
         "properties": {
           "list": "${trigger.body.message.raw.entry[0].changes}",
           "mimeType": "application/javascript"
-        }
-      },
-      {
-        "onSuccess": [],
-        "onFailure": [],
-        "name": "selfDestruct",
-        "type": "request",
-        "properties": {
-          "method": "DELETE",
-          "api": "/formulas/${info.formulaId}/instances/${info.formulaInstanceId}"
         }
       },
       {
