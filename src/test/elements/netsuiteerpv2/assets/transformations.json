@@ -258,6 +258,13 @@
       "vendorPath": "internalId"
     }]
   },
+  "expense-reports": {
+    "vendorName": "Expense-Reports",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
   "credit-terms": {
     "vendorName": "Credit-Term",
     "fields": [{

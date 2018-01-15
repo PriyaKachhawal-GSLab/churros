@@ -5,6 +5,6 @@ const payload =  require('core/tools').requirePayload(`${__dirname}/assets/non-i
 
 suite.forElement('erp', 'non-inventory-resale-items', { payload: payload }, (test) => {
   	test.should.supportCruds();
-	test.withOptions({ qs: { page: 1, pageSize: 5}}).should.return200OnGet();
+	test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
   	test.should.supportCeqlSearch('id');
 });

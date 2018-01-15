@@ -10,7 +10,7 @@ suite.forElement('erp', 'expense-reports', (test) => {
   it('should allow CRUDS /hubs/erp/expense-reports', () => {
     let internalId;
     return cloud.post(test.api, expenseReportsPayload)
-      .then(r => internalId = r.body.internalId)
+      .then(r => internalId = r.body.id)
       .then(r => cloud.get(test.api))
       .then(r => cloud.get(`${test.api}/${internalId}`))
       .then(r => cloud.patch(`${test.api}/${internalId}`, {}))

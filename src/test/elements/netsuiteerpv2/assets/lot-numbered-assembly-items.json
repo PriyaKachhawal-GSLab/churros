@@ -64,7 +64,7 @@
     "internalId": "121",
     "name": "Cost of Goods Sold"
   },
-  "itemId": "<<random.letter##25>>",
+  "itemId": "<<random.words>>",
   "isDonationItem": false,
   "onSpecial": false,
   "effectiveBomControl": {
