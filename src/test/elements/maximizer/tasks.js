@@ -32,9 +32,9 @@ suite.forElement('crm', 'tasks', (test) => {
       .then(() => cloud.patch(`${test.api}/${taskId}`, taskPayload))
       .then(r => expect(r.body.Activity).to.equal(taskPayload.Activity))
       .then(() => cloud.delete(`${test.api}/${taskId}`))
-      .catch(e => { if (response) {return cloud.delete(`${test.api}/${response.id}`)
-      .catch(() => {})
-      .then(() => { throw new Error(e); });} else { throw new Error(e);}});
-
+      .catch(e => {
+        if (taskId) cloud.delete(`${test.api}/${taskId}`);
+        throw new Error(e);
+      });
   });
 });

@@ -53,9 +53,10 @@ suite.forElement('crm', 'addressbook-entries', { payload: addressbookentryPayloa
       .then(() => contactPayload.LastName = faker.name.lastName())
       .then(() => cloud.patch(`/hubs/crm/contacts/${contactId}`, contactPayload))
       .then(() => cloud.delete(`/hubs/crm/contacts/${contactId}`))
-      .catch(e => { if (response) {return cloud.delete(`${test.api}/${response.id}`)
-      .catch(() => {})
-      .then(() => { throw new Error(e); });} else { throw new Error(e);}});
+      .catch(e => {
+        if (contactId) cloud.delete(`/hubs/crm/contacts/${contactId}`);
+        throw new Error(e);
+      });
   });
 
   it('should allow CUDS for /addresses', () => {
@@ -69,10 +70,10 @@ suite.forElement('crm', 'addressbook-entries', { payload: addressbookentryPayloa
       .then(() => addressPayload.City = faker.address.city())
       .then(() => cloud.patch(`/hubs/crm/addresses/${addressId}`, addressPayload))
       .then(() => cloud.delete(`/hubs/crm/addresses/${addressId}`))
-      .catch(e => { if (response) {return cloud.delete(`${test.api}/${response.id}`)
-      .catch(() => {})
-      .then(() => { throw new Error(e); });} else { throw new Error(e);}});
-
+      .catch(e => {
+        if (addressId) cloud.delete(`/hubs/crm/addresses/${addressId}`);
+        throw new Error(e);
+      });
   });
 
   it('should allow CRUDS for /opportunities', () => {
@@ -90,10 +91,10 @@ suite.forElement('crm', 'addressbook-entries', { payload: addressbookentryPayloa
       .then(() => opportunityPayload.Description = faker.random.word())
       .then(() => cloud.patch(`/hubs/crm/opportunities/${opportunityId}`, opportunityPayload))
       .then(() => cloud.delete(`/hubs/crm/opportunities/${opportunityId}`))
-      .catch(e => { if (response) {return cloud.delete(`${test.api}/${response.id}`)
-      .catch(() => {})
-      .then(() => { throw new Error(e); });} else { throw new Error(e);}});
-
+      .catch(e => {
+        if (opportunityId) cloud.delete(`/hubs/crm/opportunities/${opportunityId}`);
+        throw new Error(e);
+      });
   });
 
 });

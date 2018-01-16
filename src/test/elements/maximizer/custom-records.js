@@ -32,9 +32,10 @@ suite.forElement('crm', 'custom-records', (test) => {
       .then(() => cloud.patch(`${test.api}/${customrecordId}`, customrecordPayload))
       .then(r => expect(r.body.Name).to.equal(customrecordPayload.Name))
       .then(() => cloud.delete(`${test.api}/${customrecordId}`))
-      .catch(e => { if (response) {return cloud.delete(`${test.api}/${response.id}`)
-      .catch(() => {})
-      .then(() => { throw new Error(e); });} else { throw new Error(e);}});
+      .catch(e => {
+        if (customrecordId) cloud.delete(`${test.api}/${customrecordId}`);
+        throw new Error(e);
+      });
 
   });
 });
