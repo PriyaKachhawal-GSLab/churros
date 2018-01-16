@@ -20,6 +20,13 @@
       "vendorPath": "employeeid"
     }]
   },
+    "expense-reports": {
+    "vendorName": "expense-reports",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "expensereportid"
+    }]
+  },
   "journals": {
     "vendorName": "journals",
     "fields": [{
