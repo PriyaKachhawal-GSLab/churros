@@ -17,7 +17,7 @@ suite.forPlatform('formulas', { name: 'formula analytics' }, (test) => {
 
   if (props.get('url').indexOf('snapshot') < 0 && props.get('url').indexOf('staging') < 0 && props.get('url').indexOf('production') < 0) {
     logger.warn('Unable to run formula analytics locally. Skipping.');
-    return;
+    //return;
   }
 
   /**
@@ -141,6 +141,17 @@ suite.forPlatform('formulas', { name: 'formula analytics' }, (test) => {
       .then(r => expect(r.body).to.have.length(61) &&
         expect(r.body.reduce((accum, curr) => accum + curr.success, 0)).to.be.at.least(3) &&
         r.body.map(s => expect(s).to.have.contain.keys(['success', 'failed', 'timestamp'])));
+    };
+
+    return testIt('manual-trigger', {}, 3, 2, execValidator, null, 'success', 1);
+  });
+
+  it('should return current status analytics of 3 executions', () => {
+    const execValidator = (executions, fId, fiId) => {
+      // Get the execution analytics without from and to dates
+      return cloud.get(`/formulas/analytics/statuses/now`)
+      .then(r => expect(r.body).to.have.length(1) && r.body.map(s => expect(s).to.contain.all.keys(['success', 'failed', 'queued', 'cancelled', 'unknown', 'pending', 'accountId', 'retries']) && expect(s.success).to.equal(3)))
+      // Get the execution analytics with from and to dates
     };
 
     return testIt('manual-trigger', {}, 3, 2, execValidator, null, 'success', 1);
