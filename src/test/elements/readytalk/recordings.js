@@ -6,7 +6,7 @@ const expect = require('chakram').expect;
 
 suite.forElement('marketing', 'recordings', null, (test) => {
   test.should.supportSr();
-  test.withOptions({ qs: { page: 1, pageSize: 5}}).should.return200OnGet();
+  test.withOptions({ qs: { page: 1, pageSize: 5}}).should.supportPagination();
   it('should get all meetings and then get recording by Id, registrations', () => {
     let recordingId;
     return cloud.get(test.api)
