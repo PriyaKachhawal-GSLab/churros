@@ -3,6 +3,7 @@
 const suite = require('core/suite');
 const payload = require('core/tools').requirePayload(`${__dirname}/assets/campaigns.json`);
 const cloud = require('core/cloud');
+const tools = require('core/tools');
 
 const updatePayload = () => ({
   "recipients": {
@@ -45,8 +46,18 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
       .then(r => cloud.get(`${test.api}/${campaignId}/comments/${commentId}`))
       .then(r => cloud.patch(`${test.api}/${campaignId}/comments/${commentId}`, commentsUpdate()))
       .then(r => cloud.post(`${test.api}/${campaignId}/comments`, commentsPayload()))
-      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(`${test.api}/${campaignId}/comments`))
+      .then(r => cloud.withOptions({qs: { page: 1, pageSize: 1 } }).get(`${test.api}/${campaignId}/comments`))
       .then(r => cloud.delete(`${test.api}/${campaignId}/comments/${commentId}`))
-      .then(r => cloud.delete(`${test.api}/${campaignId}`));
+      .then(r => cloud.delete(`${test.api}/${campaignId}`))
+  });
+/*Need to skip because the campaign/{id}/email-activities/{emailId} is read only
+Since there is no post to this endpoint, the values below are hardcoded for initial testing
+This test is just for reference to future-proof in case the endpoint breaks down the road */
+  it.skip('should allow R for campaigns/{id}/email-activity', () => {
+    let campaignId = '03747e516a';
+    let emailId = -1;
+    return cloud.get(`${test.api}/${campaignId}/email-activity`)
+      .then (r => emailId = r.body.emails[0].email_id)
+      .then(r => cloud.get(`${test.api}/${campaignId}/email-activity/${emailId}`))
   });
 });
