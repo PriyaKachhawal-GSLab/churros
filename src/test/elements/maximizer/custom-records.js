@@ -26,9 +26,15 @@ suite.forElement('crm', 'custom-records', (test) => {
       .then(() => cloud.withOptions({ qs: { fields:`Description,Name` } }).get(test.api))
       .then(r => expect(Object.keys(r.body[0]).length).to.equal(2))
       .then(() => cloud.get(`${test.api}/${customrecordId}`))
-      .then(() => customrecordPayload.Name = faker.random.word())
+      .then(() => cloud.withOptions({ qs: { fields:`Description,Name` } }).get(`${test.api}/${customrecordId}`))
+      .then(r => expect(Object.keys(r.body).length).to.equal(2))
+      .then(() => customrecordPayload.Name = faker.name.findName())
       .then(() => cloud.patch(`${test.api}/${customrecordId}`, customrecordPayload))
       .then(r => expect(r.body.Name).to.equal(customrecordPayload.Name))
-      .then(() => cloud.delete(`${test.api}/${customrecordId}`));
+      .then(() => cloud.delete(`${test.api}/${customrecordId}`))
+      .catch(e => { if (response) {return cloud.delete(`${test.api}/${response.id}`)
+      .catch(() => {})
+      .then(() => { throw new Error(e); });} else { throw new Error(e);}});
+
   });
 });

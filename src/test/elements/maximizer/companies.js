@@ -20,7 +20,7 @@ suite.forElement('crm', 'companies', { payload : companyPayload }, (test) => {
   test.withApi(test.api)
       .withOptions({ qs: { where: `CompanyName='${companyPayload.CompanyName}'`, fields: `CompanyName,FullName` } })
       .withValidation(r => {
-         expect(r.body.filter(obj => expect(r.body[0].CompanyName).to.equal(companyPayload.CompanyName))).to.not.be.empty;
+         expect(r.body.filter(obj => obj.CompanyName === companyPayload.CompanyName).length).to.equal(r.body.length);
          expect(Object.keys(r.body[0]).length).to.equal(2);
       })
       .withName('should allow GET with options /companies')

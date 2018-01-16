@@ -26,9 +26,15 @@ suite.forElement('crm', 'tasks', (test) => {
       .then(() => cloud.withOptions({ qs: { fields:`Activity,Creator,Priority` } }).get(test.api))
       .then(r => expect(Object.keys(r.body[0]).length).to.equal(3))
       .then(() => cloud.get(`${test.api}/${taskId}`))
+      .then(() => cloud.withOptions({ qs: { fields:`Activity,Creator,Priority` } }).get(`${test.api}/${taskId}`))
+      .then(r => expect(Object.keys(r.body).length).to.equal(3))
       .then(() => taskPayload.Activity = faker.random.word())
       .then(() => cloud.patch(`${test.api}/${taskId}`, taskPayload))
       .then(r => expect(r.body.Activity).to.equal(taskPayload.Activity))
-      .then(() => cloud.delete(`${test.api}/${taskId}`));
+      .then(() => cloud.delete(`${test.api}/${taskId}`))
+      .catch(e => { if (response) {return cloud.delete(`${test.api}/${response.id}`)
+      .catch(() => {})
+      .then(() => { throw new Error(e); });} else { throw new Error(e);}});
+
   });
 });
