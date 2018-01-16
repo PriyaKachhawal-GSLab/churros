@@ -1,0 +1,11 @@
+{
+  "messages": {
+    "vendorName": "messages",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "sid"
+      }
+    ]
+  }
+}
