@@ -14,7 +14,7 @@ const tools = require('core/tools');
 /**
  * Tests customer formula executions. Tests under heavy load (number of events, size of events, etc.) when applicable.
  */
-suite.forPlatform('formulas', { name: 'customer-formulas', skip: false }, (test) => {
+suite.forPlatform('formulas', { name: 'customer-formulas', skip: true }, (test) => {
   let sfdcId, kissmetricsId, lithiumId;
 
   const numFormulaInstances = process.env.NUM_FORMULA_INSTANCES ? process.env.NUM_FORMULA_INSTANCES : 1;
