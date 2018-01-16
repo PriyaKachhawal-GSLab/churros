@@ -1,77 +1,93 @@
 {
-    "method": "POST",
-    "configuration": [],
+    "accountId": 2547,
     "active": true,
-    "triggers": [
-        {
-            "async": true,
-            "name": "trigger",
-            "onFailure": [],
-            "id": 541,
-            "type": "manual",
-            "properties": {},
-            "onSuccess": [
-                "printItOut"
-            ]
-        }
-    ],
+    "api": "POST /churros-bulkloader-faar",
+    "configuration": [],
+    "createdDate": "2018-01-15T12:50:44Z",
+    "debugLoggingEnabled": true,
+    "id": 45300,
+    "method": "POST",
+    "name": "churros-bulkloader-faar",
+    "singleThreaded": false,
     "steps": [
         {
+            "id": 100837,
+            "name": "bulkUploadEven",
+            "onFailure": [],
+            "onSuccess": [
+                "response"
+            ],
+            "properties": {
+                "api": "${trigger.args.workflow.targetConfiguration.path}",
+                "body": "${steps.constructPayloads.bodyEven}",
+                "elementInstanceId": "${trigger.args.targetInstanceId}",
+                "method": "POST"
+            },
+            "type": "elementRequest"
+        },
+        {
+            "id": 100838,
+            "name": "bulkUploadOdd",
+            "onFailure": [],
+            "onSuccess": [
+                "bulkUploadEven"
+            ],
+            "properties": {
+                "api": "${trigger.args.workflow.targetConfiguration.path}",
+                "body": "${steps.constructPayloads.bodyOdd}",
+                "elementInstanceId": "${trigger.args.targetInstanceId}",
+                "method": "POST"
+            },
+            "type": "elementRequest"
+        },
+        {
+            "id": 100836,
+            "name": "constructPayloads",
+            "onFailure": [],
+            "onSuccess": [
+                "bulkUploadOdd"
+            ],
+            "properties": {
+                "body": "var bodyOdd = {\n    type: 'workflow-multipart',\n    parts: [\n      {\n        name: 'file',\n        filename: 'file',\n        'Content-Type': 'text/plain',\n        content: trigger.args.data.filter((row, index) => index%2 === 1).join('\\n')\n      }\n    ]\n};\n\nvar bodyEven = {\n    type: 'workflow-multipart',\n    parts: [\n      {\n        name: 'file',\n        filename: 'file',\n        'Content-Type': 'text/plain',\n        content: trigger.args.data.filter((row, index) => index%2 === 0).join('\\n')\n      }\n    ]\n};\n\ndone({\n  bodyOdd: bodyOdd,\n  bodyEven: bodyEven\n});\n"
+            },
+            "type": "script"
+        },
+        {
+            "id": 100835,
             "name": "printItOut",
             "onFailure": [],
-            "id": 1414,
-            "type": "script",
+            "onSuccess": [
+                "constructPayloads"
+            ],
             "properties": {
                 "body": "done({trigger});"
             },
-            "onSuccess": [
-                "constructPayload"
-            ]
+            "type": "script"
         },
         {
+            "id": 100839,
             "name": "response",
             "onFailure": [],
-            "id": 1416,
-            "type": "script",
+            "onSuccess": [],
             "properties": {
-                "body": "done({jobIds:[steps.bulkUpload.response.body.id]});"
+                "body": "done({\n  jobs:[\n    {\n      jobId:steps.bulkUploadOdd.response.body.id,\n      category: 'odd'\n      \n    },\n    {\n      jobId:steps.bulkUploadEven.response.body.id,\n      category: 'even'\n    }]\n});"
             },
-            "onSuccess": []
-        },
+            "type": "script"
+        }
+    ],
+    "triggers": [
         {
-            "name": "constructPayload",
+            "async": true,
+            "id": 38719,
+            "name": "trigger",
             "onFailure": [],
-            "id": 1417,
-            "type": "script",
-            "properties": {
-                "body": "var body = {\n    type: 'workflow-multipart',\n    parts: [\n      {\n        name: 'file',\n        filename: 'file',\n        'Content-Type': 'text/plain',\n        content: trigger.args.data.join('\\n')\n      }\n    ]\n};\n\ndone({body});\n"
-            },
             "onSuccess": [
-                "bulkUpload"
-            ]
-        },
-        {
-            "name": "bulkUpload",
-            "onFailure": [],
-            "id": 1415,
-            "type": "elementRequest",
-            "properties": {
-                "method": "POST",
-                "elementInstanceId": "${trigger.args.targetInstanceId}",
-                "api": "${trigger.args.workflow.targetConfiguration.path}",
-                "body": "${steps.constructPayload.body}"
-            },
-            "onSuccess": [
-                "response"
-            ]
+                "printItOut"
+            ],
+            "properties": {},
+            "type": "manual"
         }
     ],
     "uri": "/churros-bulkloader-faar",
-    "userId": 1,
-    "accountId": 1,
-    "singleThreaded": false,
-    "createdDate": "2017-12-14T20:51:08Z",
-    "name": "churros-bulkloader-faar",
-    "api": "POST /churros-bulkloader-faar",
-    "id": 674
+    "userId": 2908
 }

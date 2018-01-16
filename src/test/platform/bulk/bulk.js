@@ -97,6 +97,8 @@ suite.forPlatform('bulk', (test) => {
         expect(r.body[ 0 ].groupName).to.equal(bulkId);
         expect(r.body[ 0 ].status).to.equal('COMPLETED');
       })))
+      .then(r => cloud.withOptions({ qs: { parentBulkLoaderId: r.body[0].bulkLoaderId } }).get('/bulkloader'))
+      .then(r => expect(r.body.length).to.equal(2))
       .then(() => cloud.delete(`/formulas/${bulkFormula.id}`));
   });
 
