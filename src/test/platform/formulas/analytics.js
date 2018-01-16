@@ -148,10 +148,9 @@ suite.forPlatform('formulas', { name: 'formula analytics' }, (test) => {
 
   it('should return current status analytics of 3 executions', () => {
     const execValidator = (executions, fId, fiId) => {
-      // Get the execution analytics without from and to dates
+      // Get the current execution statuses
       return cloud.get(`/formulas/analytics/statuses/now`)
-      .then(r => expect(r.body).to.have.length(1) && r.body.map(s => expect(s).to.contain.all.keys(['success', 'failed', 'queued', 'cancelled', 'unknown', 'pending', 'accountId', 'retries']) && expect(s.success).to.equal(3)))
-      // Get the execution analytics with from and to dates
+      .then(r => expect(r.body).to.have.length(1) && r.body.map(s => expect(s).to.contain.all.keys(['success', 'failed', 'queued', 'cancelled', 'unknown', 'pending', 'accountId', 'retries']) && expect(s.success).to.equal(3)));
     };
 
     return testIt('manual-trigger', {}, 3, 2, execValidator, null, 'success', 1);
