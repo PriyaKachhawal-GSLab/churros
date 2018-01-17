@@ -15,11 +15,7 @@ const tools = require('core/tools');
  * Tests customer formula executions. Tests under heavy load (number of events, size of events, etc.) when applicable.
  */
 suite.forPlatform('formulas', { name: 'customer-formulas', skip: true }, (test) => {
-<<<<<<< HEAD
   let sfdcId, kissmetricsId, lithiumId, fbLeadAdsId, sailthruId;
-=======
-  let sfdcId, kissmetricsId, lithiumId;
->>>>>>> master
 
   const numFormulaInstances = process.env.NUM_FORMULA_INSTANCES ? process.env.NUM_FORMULA_INSTANCES : 1;
   const numEvents = process.env.NUM_EVENTS ? process.env.NUM_EVENTS : 1;
