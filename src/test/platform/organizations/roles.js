@@ -44,4 +44,44 @@ suite.forPlatform('organizations/roles', test => {
       .then(() => cloud.get('/organizations/roles'))
       .then(r => expect(r.body).to.deep.equal(defaults));
   });
+
+  it('should not allow adding internal privileges to a role', () => {
+    let defaults, defaultUserRole;
+    const modifyAccountRole = role => {
+      return role.name !== 'Account' ? role : {
+        id: role.id,
+        key: role.key,
+        name: role.name,
+        active: role.active,
+        description: role.description,
+        privileges: [{
+          key: 'system'
+        }]
+      };
+    };
+
+    const badSystemValidator = r => {
+      expect(r).to.have.statusCode(403);
+      expect(r.body.message).to.equal("User can not add the 'system' privilege to any role.");
+    };
+
+    const badIntelligencealidator = r => {
+      expect(r).to.have.statusCode(403);
+      expect(r.body.message).to.equal("User can not add the 'intelligence' privilege to the 'default-user' role.");
+    };
+
+    return cloud.put('/organizations/roles/reset')
+      .then(() => cloud.get('/organizations/roles'))
+      .then(r => {
+        defaults = r.body;
+        defaultUserRole = R.clone(R.head(R.filter(R.propEq('key', 'default-user'), r.body)));
+        defaultUserRole.privileges = [{
+          key: 'intelligence'
+        }];
+      })
+      .then(() => cloud.put('/organizations/roles', defaults.map(modifyAccountRole), badSystemValidator))
+      .then(() => cloud.put(`/organizations/roles/${defaultUserRole.id}`, defaultUserRole, badIntelligencealidator))
+      .then(() => cloud.get('/organizations/roles'))
+      .then(r => expect(r.body).to.deep.equal(defaults));
+  });
 });
