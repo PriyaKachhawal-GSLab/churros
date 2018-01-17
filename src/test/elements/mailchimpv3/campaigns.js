@@ -56,7 +56,7 @@ This test is just for reference to future-proof in case the endpoint breaks down
     let campaignId = '03747e516a';
     let emailId = -1;
     return cloud.get(`${test.api}/${campaignId}/email-activity`)
-      .then (r => emailId = r.body.emails[0].email_id);
-      .then(r => cloud.get(`${test.api}/${campaignId}/email-activity/${emailId}`))
+      .then (r => emailId = r.body.emails[0].email_id)
+      .then(r => cloud.get(`${test.api}/${campaignId}/email-activity/${emailId}`));
   });
 });
