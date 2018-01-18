@@ -6,5 +6,5 @@ const payload = tools.requirePayload(`${__dirname}/assets/exchange-rates.json`);
 
 suite.forElement('payment', 'exchange-rates', { payload: payload , skip:true}, (test) => {
   test.should.supportCrs();
-  test.should.supportNextPagePagination(2)
+  test.should.supportNextPagePagination(2);
 });
