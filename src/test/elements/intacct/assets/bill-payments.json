@@ -1,0 +1,14 @@
+{
+  "financialentity": "CHK-WFB0004",
+  "vendorid": "V100",
+  "paymentmethod": "Cash",
+  "paymentdate": "10/25/2010",
+  "appymtdetails":
+    {
+      "appymtdetail": {
+        "trx_paymentamount": "50",
+        "recordkey": "82"
+      }
+    }
+
+}

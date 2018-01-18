@@ -1,200 +1,163 @@
 {
-"contacts": {
-  "vendorName": "",
-  "fields": [
-    {
+  "contacts": {
+    "vendorName": "contacts",
+    "fields": [{
       "path": "id",
       "vendorPath": "contactid"
-    }
-  ]
-},
-"departments": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "departments": {
+    "vendorName": "departments",
+    "fields": [{
       "path": "id",
       "vendorPath": "departmentid"
-    }
-  ]
-},
-"employees": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "employees": {
+    "vendorName": "employees",
+    "fields": [{
       "path": "id",
       "vendorPath": "employeeid"
-    }
-  ]
-},
-"journals": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "journals": {
+    "vendorName": "journals",
+    "fields": [{
       "path": "id",
       "vendorPath": "journalid"
-    }
-  ]
-},
-"locations": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "locations": {
+    "vendorName": "locations",
+    "fields": [{
       "path": "id",
       "vendorPath": "locationid"
-    }
-  ]
-},
-"classes": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "classes": {
+    "vendorName": "classes",
+    "fields": [{
       "path": "id",
       "vendorPath": "classid"
-    }
-  ]
-},
-"customers": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "customers": {
+    "vendorName": "customers",
+    "fields": [{
       "path": "id",
       "vendorPath": "customerid"
-    }
-  ]
-},
-"bills": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "bills": {
+    "vendorName": "bills",
+    "fields": [{
       "path": "id",
       "vendorPath": "billid"
-    }
-  ]
-},
-"invoices": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "invoices": {
+    "vendorName": "invoices",
+    "fields": [{
       "path": "id",
       "vendorPath": "invoiceid"
-    }
-  ]
-},
-"payments": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "payments": {
+    "vendorName": "payments",
+    "fields": [{
       "path": "id",
       "vendorPath": "arpaymentid"
-    }
-  ]
-},
-"projects": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "projects": {
+    "vendorName": "projects",
+    "fields": [{
       "path": "id",
       "vendorPath": "projectid"
-    }
-  ]
-},
-"purchase-orders": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "purchase-orders": {
+    "vendorName": "purchase-orders",
+    "fields": [{
       "path": "id",
       "vendorPath": "potransactionid"
-    }
-  ]
-},
-"sales-orders": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "sales-orders": {
+    "vendorName": "sales-orders",
+    "fields": [{
       "path": "id",
       "vendorPath": "sotransactionid"
-    }
-  ]
-},
-"terms": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "terms": {
+    "vendorName": "terms",
+    "fields": [{
       "path": "id",
       "vendorPath": "termid"
-    }
-  ]
-},
-"vendors": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "vendors": {
+    "vendorName": "vendors",
+    "fields": [{
       "path": "id",
       "vendorPath": "vendorid"
-    }
-  ]
-},
-"vouchers": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "vouchers": {
+    "vendorName": "vouchers",
+    "fields": [{
       "path": "id",
       "vendorPath": "apadjustmentid"
-    }
-  ]
-},
-"warehouses": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "warehouses": {
+    "vendorName": "warehouses",
+    "fields": [{
       "path": "id",
       "vendorPath": "warehouseid"
-    }
-  ]
-},
-"ledger-accounts": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "ledger-accounts": {
+    "vendorName": "ledger-accounts",
+    "fields": [{
       "path": "id",
       "vendorPath": "glaccountid"
-    }
-  ]
-},
-"terms": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "terms": {
+    "vendorName": "terms",
+    "fields": [{
       "path": "id",
       "vendorPath": "name"
-    }
-  ]
-},
-"transactions": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "transactions": {
+    "vendorName": "transactions",
+    "fields": [{
       "path": "id",
       "vendorPath": "gltransactionid"
-    }
-  ]
-},
-"items": {
-  "vendorName": "",
-  "fields": [
-    {
+    }]
+  },
+  "items": {
+    "vendorName": "items",
+    "fields": [{
       "path": "id",
       "vendorPath": "icitemid"
-    }
-  ]
-},
-"attachments": {
-  "vendorName": "",
-  "fields": [
-   {
-     "path": "id",
-     "vendorPath": "supdocid"
-   }
-  ]
- }
+    }]
+  },
+  "attachments": {
+    "vendorName": "attachments",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "supdocid"
+    }]
+  },
+  "bills-payments": {
+    "vendorName": "bills-payments",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  }
 }

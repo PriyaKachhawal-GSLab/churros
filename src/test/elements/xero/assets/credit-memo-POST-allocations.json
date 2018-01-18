@@ -1,0 +1,17 @@
+{
+  "Type": "ACCRECCREDIT",
+  "Status": "AUTHORISED",
+  "Contact": {
+    "ContactID": ""
+  },
+  "Date": "2020-03-29",
+  "LineAmountTypes": "Exclusive",
+  "LineItems": {
+    "LineItem": {
+      "Description": "<<commerce.product>>",
+      "Quantity": 5,
+      "UnitAmount": 1000,
+      "AccountCode": "400"
+    }
+  }
+}

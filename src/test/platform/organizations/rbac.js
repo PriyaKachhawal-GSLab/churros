@@ -29,7 +29,7 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
     return cloud.withOptions(opts).get('/accounts')
       .then(r => {
         expect(r.body.length).to.equal(1);
-        const user = { email: `churros+rbac${tools.random()}@churros.com`, firstName: 'frank', lastName: 'ricard', password: 'bingobango' };
+        const user = { email: `churros+rbac${tools.random()}@churros.com`, firstName: 'frank', lastName: 'ricard', password: 'Bingobango1!' };
         defaultAccountId = r.body[0].id;
         return cloud.post(`/accounts/${defaultAccountId}/users`, user);
       })
@@ -474,30 +474,29 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
       contextBackgroundColor: '#aedce7',
     };
 
-    it('should restrict access to updating the organization branding information with the proper privilege', () => {
+    it('should restrict access to updating the organization branding information but not retrieving it with the proper privilege', () => {
       return removePrivilegeIfNecessary('manageUiBranding')
+        .then(() => cloudWithUser().get(`/organizations/branding`, sufficientPrivilegesValidator))
         .then(() => cloudWithUser().delete(`/organizations/branding`, insufficientPrivilegesValidator))
         .then(() => cloudWithUser().put(`/organizations/branding`, branding, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('manageUiBranding'))
+        .then(() => cloudWithUser().get(`/organizations/branding`, sufficientPrivilegesValidator))
         .then(() => cloudWithUser().put(`/organizations/branding`, branding))
         .then(() => cloudWithUser().delete(`/organizations/branding`));
     });
   });
 
   context('account management', () => {
-    const viewTest = (level, levelPrivilegeSuffix) => {
-      return removePrivilegeIfNecessary(`viewUsers${levelPrivilegeSuffix}`)
-        .then(() => cloudWithUser().get(`/${level}/${defaultAccountId}/users`, insufficientPrivilegesValidator))
-        .then(() => addPrivilegeIfNecessary(`viewUsers${levelPrivilegeSuffix}`))
-        .then(() => cloudWithUser().get(`/${level}/${defaultAccountId}/users`));
-    };
 
     it('should restrict viewing account users without the proper privilege', () => {
-      return viewTest('acounts', 'Account');
+      return removePrivilegeIfNecessary(`viewUsersAccount`)
+        .then(() => cloudWithUser().get(`/accounts/${defaultAccountId}/users`, insufficientPrivilegesValidator))
+        .then(() => addPrivilegeIfNecessary(`viewUsersAccount`))
+        .then(() => cloudWithUser().get(`/accounts/${defaultAccountId}/users`));
     });
 
     it('should restrict creating, editing, and deleting a new account user without the proper privileges', () => {
-      const user = { email: `churros+rbac${tools.random()}@churros.com`, firstName: 'joseph-account', lastName: 'pulaski', password: 'bingobango' };
+      const user = { email: `churros+rbac${tools.random()}@churros.com`, firstName: 'joseph-account', lastName: 'pulaski', password: 'Bingobango1!' };
       let userId;
       return removePrivilegeIfNecessary('addUsersAccount')
         .then(() => cloudWithUser().post(`/accounts/${defaultAccountId}/users`, user, insufficientPrivilegesValidator))
@@ -515,11 +514,14 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
     });
 
     it('should restrict viewing organization users without the proper privilege', () => {
-      return viewTest('organizations', 'Org');
+      return removePrivilegeIfNecessary(`viewUsersOrg`)
+        .then(() => cloudWithUser().get(`/organizations/users`, insufficientPrivilegesValidator))
+        .then(() => addPrivilegeIfNecessary(`viewUsersOrg`))
+        .then(() => cloudWithUser().get(`/organizations/users`));
     });
 
     it('should restrict creating, editing, and eleting a new organization user without the proper privileges', () => {
-      const user = { email: `churros+rbac${tools.random()}@churros.com`, firstName: 'joseph-organization', lastName: 'pulaski', password: 'bingobango' };
+      const user = { email: `churros+rbac${tools.random()}@churros.com`, firstName: 'joseph-organization', lastName: 'pulaski', password: 'Bingobango1!' };
       let userId;
       return removePrivilegeIfNecessary('addUsersOrg')
         .then(() => cloudWithUser().post(`/organizations/users`, user, insufficientPrivilegesValidator))
@@ -545,9 +547,11 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
         const statusCode = r.response.statusCode;
         expect(statusCode).to.be.oneOf([200, 500]);
       };
-      return removePrivilegeIfNecessary('viewLogs')
+      return removePrivilegeIfNecessary('viewLogsOrg')
+        .then(() => removePrivilegeIfNecessary('viewLogsAccount'))
         .then(() => cloudWithUser().get(`/audit-logs`, insufficientPrivilegesValidator))
-        .then(() => addPrivilegeIfNecessary('viewLogs'))
+        .then(() => addPrivilegeIfNecessary('viewLogsOrg'))
+        .then(() => addPrivilegeIfNecessary('viewLogsAccount'))
         .then(() => cloudWithUser().get(`/audit-logs`, customValidator));
     });
   });
