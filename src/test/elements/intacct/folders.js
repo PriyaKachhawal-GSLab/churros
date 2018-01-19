@@ -61,5 +61,5 @@ suite.forElement('finance', 'folders', { payload: foldersPayload }, (test) => {
       const validValues = r.body.filter(obj => obj.description = 'Test');
       expect(validValues.length).to.equal(r.body.length);
     })
-    .should.return200OnGet()
+    .should.return200OnGet();
 });
