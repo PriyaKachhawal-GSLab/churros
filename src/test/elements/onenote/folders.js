@@ -8,7 +8,7 @@ const payload = require('./assets/folders');
 payload.path = payload.path + `-${faker.random.number()}`;
 
 //Need to skip as there is no delete API
-suite.forElement('documents', 'folders', { payload: payload }, {skip: true}, (test) => {
+suite.forElement('documents', 'folders', { payload: payload, skip: true}, (test) => {
   let srcPath, folderId;
 
   it('should allow C for hubs/documents/folders and SR for hubs/documents/folders/metadata and hubs/documents/folders/content by path', () => {
