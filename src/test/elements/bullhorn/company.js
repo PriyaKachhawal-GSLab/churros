@@ -1,6 +1,7 @@
 'use strict';
 
 const suite = require('core/suite');
+const expect = require('chakram').expect;
 const cloud = require('core/cloud');
 const tools = require('core/tools');
 const payload = tools.requirePayload(`${__dirname}/assets/company.json`);
@@ -14,7 +15,13 @@ suite.forElement('crm', 'companies', { payload: payload }, (test) => {
       .then(r => companyId = r.body.changedEntityId)
       .then(r => cloud.get(test.api))
       .then(r => cloud.get(`${test.api}/${companyId}`))
-      .then(r => cloud.withOptions({ qs: { fields: 'id,department.name' } }).get(`${test.api}/${companyId}`))
+      .then(r => cloud.withOptions({ qs: { fields: 'id,department.name' } })
+        .get(`${test.api}/${companyId}`)
+        .then(r => {
+          expect(r.body).to.contain.key('id');
+          expect(r.body).to.contain.key('department');
+          expect(r.body.department).to.contain.key('name');
+        }))
       .then(r => cloud.patch(`${test.api}/${companyId}`, updatePayload));
 
 

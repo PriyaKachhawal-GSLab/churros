@@ -1,4 +1,8 @@
-{ "clientCorporation": {
-    "id": 51
-}
+{
+  "clientCorporation": {
+    "id": 51,
+    "secondaryAddress": {
+      "countryCode": "US"
+    }
+  }
 }
