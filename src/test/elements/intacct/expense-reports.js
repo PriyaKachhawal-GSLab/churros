@@ -3,74 +3,10 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
+const expect = require('chakram').expect;
+
 const payload = tools.requirePayload(`${__dirname}/assets/expense-reports.json`);
-
-const exepensePatch = {
-  "employeeid": "1",
-  "datecreated": {
-    "year": "2016",
-    "month": "09",
-    "day": "09"
-  },
-  "dateposted": {
-    "year": "2016",
-    "month": "09",
-    "day": "09"
-  },
-  "state": "Submitted",
-  "description": "Travel to client",
-  "memo": "FFFF",
-  "itemid": "desk",
-  "basecurr": "USD",
-  "currency": "USD",
-  "updateexpenses": {
-    "expense": [{
-      "employeeid": "2",
-      "expensetype": "Telephone",
-      "currency": "USD",
-      "trx_amount": "12",
-      "exchratetype": "Test",
-      "form1099": "false",
-      "locationid": "100",
-      "memo": "Marriott",
-      "paidfor": "Hotel",
-      "amount": "50",
-      "exchratedate": {
-        "year": "2015",
-        "month": "09",
-        "day": "01"
-      },
-      "expensedate": {
-        "year": "2015",
-        "month": "09",
-        "day": "01"
-      },
-      "customfields": {
-        "customfield": [{
-            "customfieldname": "TESTDATer1",
-            "customfieldvalue": "12/10/2001"
-          },
-          {
-            "customfieldname": "TESTTEXTer1",
-            "customfieldvalue": "CustomFieldTexter1"
-          }
-        ]
-      }
-    }]
-  },
-  "customfields": {
-    "customfield": [{
-        "customfieldname": "TESTDATer1",
-        "customfieldvalue": "12/10/2001"
-      },
-      {
-        "customfieldname": "TESTTEXTer1",
-        "customfieldvalue": "CustomFieldTexter1"
-      }
-    ]
-  }
-};
-
+const exepensePatch = tools.requirePayload(`${__dirname}/assets/expense-report-patch.json`);
 suite.forElement('finance', 'expense-reports', { payload: payload }, (test) => {
   it(`should allow CRDS for ${test.api}`, () => {
     return cloud.crds(test.api, payload);
@@ -83,5 +19,13 @@ suite.forElement('finance', 'expense-reports', { payload: payload }, (test) => {
       .then(r => cloud.delete(`${test.api}/${expenseId}`));
   });
   test.should.supportPagination();
-  test.withName('should support updated > {date} Ceql search').withOptions({ qs: { where: "status='Draft'" } }).should.return200OnGet();
+  test
+     .withOptions({ qs: { where: `status='Draft'` } })
+     .withName('should support Ceql status search')
+     .withValidation(r => {
+       expect(r).to.statusCode(200);
+       const validValues = r.body.filter(obj => obj.status = 'Draft');
+       expect(validValues.length).to.equal(r.body.length);
+     })
+     .should.return200OnGet();
 });
