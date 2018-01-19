@@ -1,14 +1,14 @@
 {
-  "financialentity": "CHK-WFB0004",
-  "vendorid": "V100",
-  "paymentmethod": "Cash",
-  "paymentdate": "10/25/2010",
-  "appymtdetails":
-    {
-      "appymtdetail": {
-        "trx_paymentamount": "50",
-        "recordkey": "82"
-      }
-    }
-
+ "FINANCIALENTITY": "CHK-WFB0004",
+ "VENDORID": "APDM0597",
+ "PAYMENTMETHOD": "Cash",
+ "PAYMENTDATE": "10/25/2010",
+ "APPYMTDETAILS": 
+ {
+ "APPYMTDETAIL": {
+ "TRX_PAYMENTAMOUNT": "50",
+ "RECORDKEY": "1903"
+ }
+ }
+ 
 }
