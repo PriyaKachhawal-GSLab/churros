@@ -146,13 +146,6 @@
       "vendorPath": "icitemid"
     }]
   },
-  "attachments": {
-    "vendorName": "attachments",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "supdocid"
-    }]
-  },
   "bills-payments": {
     "vendorName": "bills-payments",
     "fields": [{
