@@ -1736,6 +1736,15 @@
      "type": "string"
    }]
  },
+ "addressbook-entries": {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ },
  "employee-schedules" : {
    "fields": [{
      "path": "idTransformed",
