@@ -90,7 +90,7 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
   });
 
   //Skipping as soba PR is on hold
-  it.skip('should not return the path for GET /folders/contents?includePath=false', () => {
+  it('should not return the path for GET /folders/contents?includePath=false', () => {
     return cloud.withOptions({ qs: { includePath: false, path: `/${directoryPath}` } }).get(`${test.api}/contents`)
       .then(r => {
         expect(r.body[0].name).to.exist;
@@ -99,7 +99,7 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
   });
 
   //Skipping as soba PR is on hold
-  it.skip('should not return the path for GET /folders/:id/contents?includePath=false', () => {
+  it('should not return the path for GET /folders/:id/contents?includePath=false', () => {
     return cloud.withOptions({ qs: { includePath: false } }).get(`${test.api}/${directoryId}/contents`)
       .then(r => {
         expect(r.body[0].name).to.exist;
