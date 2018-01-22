@@ -47,7 +47,7 @@ suite.forElement('general', 'folders', (test) => {
 
   test.withApi(`/hubs/general/system-info`)
     .withName(`Retrieve system-info`)
-    .withValidation(r => expect(r.body['server'] !== ""))
+    .withValidation(r => expect(r.body.server !== ""))
     .should.return200OnGet();
 
     test.withApi(`/hubs/general/reports/${reportId}`)
