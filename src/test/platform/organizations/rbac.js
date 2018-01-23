@@ -29,7 +29,7 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
     return cloud.withOptions(opts).get('/accounts')
       .then(r => {
         expect(r.body.length).to.equal(1);
-        const user = { email: `churros+rbac${tools.random()}@churros.com`, firstName: 'frank', lastName: 'ricard', password: 'bingobango' };
+        const user = { email: `churros+rbac${tools.random()}@churros.com`, firstName: 'frank', lastName: 'ricard', password: 'Bingobango1!' };
         defaultAccountId = r.body[0].id;
         return cloud.post(`/accounts/${defaultAccountId}/users`, user);
       })
@@ -497,7 +497,7 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
     });
 
     it('should restrict creating, editing, and deleting a new account user without the proper privileges', () => {
-      const user = { email: `churros+rbac${tools.random()}@churros.com`, firstName: 'joseph-account', lastName: 'pulaski', password: 'bingobango' };
+      const user = { email: `churros+rbac${tools.random()}@churros.com`, firstName: 'joseph-account', lastName: 'pulaski', password: 'Bingobango1!' };
       let userId;
       return removePrivilegeIfNecessary('addUsersAccount')
         .then(() => cloudWithUser().post(`/accounts/${defaultAccountId}/users`, user, insufficientPrivilegesValidator))
@@ -519,7 +519,7 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
     });
 
     it('should restrict creating, editing, and eleting a new organization user without the proper privileges', () => {
-      const user = { email: `churros+rbac${tools.random()}@churros.com`, firstName: 'joseph-organization', lastName: 'pulaski', password: 'bingobango' };
+      const user = { email: `churros+rbac${tools.random()}@churros.com`, firstName: 'joseph-organization', lastName: 'pulaski', password: 'Bingobango1!' };
       let userId;
       return removePrivilegeIfNecessary('addUsersOrg')
         .then(() => cloudWithUser().post(`/organizations/users`, user, insufficientPrivilegesValidator))

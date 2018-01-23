@@ -92,7 +92,7 @@ const run = (suite, options, cliArgs) => {
     .map(e => resources.push(e)) :
     resources.push(suite.split('/')[1]);
 
-  let args = `--timeout 600000 --reporter spec --ui bdd`;
+  let args = `--timeout 300000 --reporter spec --ui bdd`;
   if (test) args += ` --grep '${test}'`;
   if (cliArgs.url) args += ` --url ${cliArgs.url}`;
   if (cliArgs.user) args += ` --user ${cliArgs.user}`;

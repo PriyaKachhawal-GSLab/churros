@@ -1,7 +1,7 @@
 {
   "person": {
-    "lastName": "prsonccdssddc",
-    "firstName": "AHolxxdddddffffxlyss",
-    "email": "Holly.Rofff234on@cloud-elements.com"
+    "lastName": "<<name.lastName>>",
+    "firstName": "<<name.firstName>>",
+    "email": "<<internet.email>>"
   }
 }
