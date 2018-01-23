@@ -28,6 +28,17 @@ suite.forPlatform('organizations/users', {payload: user, schema: userSchema}, (t
     .then(r => expect(r.body).to.have.length(1) && expect(r.body[0].firstName).to.equal('churros'));
   });
 
+  it('should support deactivating and activating a user', () => {
+    let userId;
+    return cloud.post('/organizations/users', user)
+    .then(r => { userId = r.body.id; return r; })
+    .then(r => expect(r.body.active).to.be.true)
+    .then(() => cloud.patch(`/organizations/users/${userId}`, { active: false }))
+    .then(r => expect(r.body.active).to.be.false)
+    .then(() => cloud.patch(`/organizations/users/${userId}`, { active: true }))
+    .then(r => expect(r.body.active).to.be.true);
+  });
+
   suite.forPlatform('organizations/users', {payload: user, schema: usersSchema}, (test) => {
     test.should.supportS();
   });

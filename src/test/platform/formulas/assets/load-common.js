@@ -34,6 +34,15 @@ const genCaseWebhookEvent = (action, num) => {
   return { action: action, objects: events };
 };
 
+const genFacebookLAWebhookEvent = (action, num) => {
+  const event = require('./events/facebook-leadads-leadgen');
+  const events = [];
+  for (let i = 0; i < num; i++) {
+    events.push(event);
+  }
+  return { entry: event.entry, action: action, objects: events, objectType: 'leadgen' };
+};
+
 const simulateTrigger = (num, instanceId, payload, simulateCb) => {
   const all = [];
   for (let i = 0; i < num; i++) {
@@ -102,6 +111,7 @@ module.exports = {
   createXInstances,
   genCloseioEvent,
   genCaseWebhookEvent,
+  genFacebookLAWebhookEvent,
   genWebhookEvent,
   pollAllExecutions,
   simulateTrigger

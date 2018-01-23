@@ -3,6 +3,8 @@
 const cloud = require('core/cloud');
 const suite = require('core/suite');
 const props = require('core/props');
+const defaults = require('core/defaults');
+const provisioner = require('core/provisioner');
 const schema = require('./assets/users.schema');
 const roleSchema = require('./assets/role.schema');
 const rolesSchema = require('./assets/roles.schema');
@@ -12,6 +14,13 @@ const payload = {
   firstName: 'frank',
   lastName: 'ricard',
   email: 'frank@churros.com',
+  password: 'Passw0rd!'
+};
+
+const payload2 = {
+  firstName: 'bernard',
+  lastName: 'campbell',
+  email: 'bernard@churros.com',
   password: 'Passw0rd!'
 };
 
@@ -39,25 +48,29 @@ suite.forPlatform('users', { schema: schema, payload: payload }, (test) => {
   const cleanup = () => {
     return cloud.get(`/users`)
       .then(r => {
-        const usersToDelete = r.body.filter(user => user.email === payload.email || user.email === payloadWithRoles.email);
+        const usersToDelete = r.body.filter(user => user.email === payload.email || user.email === payloadWithRoles.email || user.email === payload2.email);
         return usersToDelete ?
           Promise.all(usersToDelete.map(u => cloud.delete(`/users/${u.id}`))) :
           true;
       });
   };
 
-  let accountId, userId, currUserId;
+  let accountId, userId, currUserId, orgSecret;
   before(() => {
     return cleanup()
       .then(r => cloud.get(`/accounts`))
       .then(r => accountId = r.body.filter(account => account.defaultAccount)[0].id)
       .then(r => cloud.post(`/accounts/${accountId}/users`, payload, schema))
       .then(r => { expect(r.body).to.have.property('roles'); userId = r.body.id; })
+      .then(() => cloud.get(`/organizations/me`))
+      .then(r => orgSecret = r.body.secret)
       .then(() => cloud.get(`/users`))
       .then(r => currUserId = r.body.filter(u => u.email === props.get('user'))[0].id);
   });
 
   after(() => cleanup());
+
+  afterEach(() => { defaults.reset(); return cleanup(); });
 
   it('should support CRUDS for users', () => {
     const validate = (r, amount, firstName, lastName) => {
@@ -83,6 +96,72 @@ suite.forPlatform('users', { schema: schema, payload: payload }, (test) => {
       .then(r => cloud.delete(`/users/${userId}`))
       .then(r => cloud.get(`/users`))
       .then(r => validate(r, 0, updatePayload.firstName, updatePayload.lastName));
+  });
+
+  it('should keep instances for non-permanent user deactivation', () => {
+    let userSecret;
+    let userId;
+    return cloud.post(`/accounts/${accountId}/users`, payload2)
+    .then(r => { userSecret = r.body.secret; userId = r.body.id; })
+    // Create a pipedrive instance with the new user's credentials
+    .then(() => defaults.withDefaults(userSecret, orgSecret, payload2.email))
+    .then(() => provisioner.create('pipedrive'))
+    // Validate that the instance is there for the new user
+    .then(() => defaults.withDefaults(userSecret, orgSecret, payload2.email))
+    .then(() => cloud.get(`/instances`))
+    .then(r => expect(r.body.length).to.equal(1))
+    // Deactivate the user "non-permanently"
+    .then(() => defaults.reset())
+    .then(() => cloud.patch(`/users/${userId}`, { active: false }))
+    .then(r => expect(r.body.active).to.be.false)
+    // Reactivate the user
+    .then(() => cloud.patch(`/users/${userId}`, { active: true }))
+    .then(r => expect(r.body.active).to.be.true)
+    // Validate that the instance no longer exists for that user
+    .then(() => defaults.withDefaults(userSecret, orgSecret, payload2.email))
+    .then(() => cloud.get(`/instances`))
+    .then(r => expect(r.body.length).to.equal(1));
+  });
+
+  it('should delete instances for permanent user deactivation', () => {
+    let userSecret;
+    let userId;
+    return cloud.post(`/accounts/${accountId}/users`, payload2)
+    .then(r => { userSecret = r.body.secret; userId = r.body.id; })
+    // Create a pipedrive instance with the new user's credentials
+    .then(() => defaults.withDefaults(userSecret, orgSecret, payload2.email))
+    .then(() => provisioner.create('pipedrive'))
+    // Validate that the instance is there for the new user
+    .then(() => defaults.withDefaults(userSecret, orgSecret, payload2.email))
+    .then(() => cloud.get(`/instances`))
+    .then(r => expect(r.body.length).to.equal(1))
+    // Deactivate the user "permanently"
+    .then(() => defaults.reset())
+    .then(() => cloud.patch(`/users/${userId}?permanent=true`, { active: false }))
+    .then(r => expect(r.body.active).to.be.false)
+    // Reactivate the user
+    .then(() => cloud.patch(`/users/${userId}`, { active: true }))
+    .then(r => expect(r.body.active).to.be.true)
+    // Validate that the instance no longer exists for that user
+    .then(() => defaults.withDefaults(userSecret, orgSecret, payload.email))
+    .then(() => cloud.get(`/instances`, r => expect(r).to.have.status(404)));
+  });
+
+  it('should support user deletion', () => {
+    let userSecret;
+    let userId;
+    return cloud.post(`/accounts/${accountId}/users`, payload2)
+    .then(r => { userSecret = r.body.secret; userId = r.body.id; })
+    // Create a pipedrive instance with the new user's credentials
+    .then(() => defaults.withDefaults(userSecret, orgSecret, payload2.email))
+    .then(() => provisioner.create('pipedrive'))
+    // Validate that the instance is there for the new user
+    .then(() => defaults.withDefaults(userSecret, orgSecret, payload2.email))
+    .then(() => cloud.get(`/instances`))
+    .then(r => expect(r.body.length).to.equal(1))
+    // Delete the user
+    .then(() => defaults.reset())
+    .then(() => cloud.delete(`/users/${userId}`));
   });
 
   describe('user roles', () => {
