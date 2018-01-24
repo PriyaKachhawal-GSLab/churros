@@ -373,6 +373,13 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       return browser.getCurrentUrl();
     case 'marketo':
       return 'https://foo.bar.com?code=' + config.code; // good gracious, why does this work?...
+    case 'maximizer':
+      browser.get(r.body.oauthUrl);
+      browser.findElement(webdriver.By.id('UserId')).sendKeys(username);
+      browser.findElement(webdriver.By.id('password')).sendKeys(password);
+      browser.findElement(webdriver.By.id('okClick')).click();
+      browser.sleep(2000);
+      return browser.getCurrentUrl();
     case 'namely':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('user_email')).sendKeys(username);

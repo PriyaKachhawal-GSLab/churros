@@ -16,6 +16,36 @@ describe('tools', () => {
     expect(random).to.have.lengthOf(4);
   });
 
+  it('should support generating a random string without inputs', () => {
+    const random = tools.randomStr();
+    expect(random).to.be.a('string');
+    expect(random).to.have.lengthOf(8);
+  });
+
+  it('should support generating a random string with only a number', () => {
+    const random = tools.randomStr(5);
+    expect(random).to.be.a('string');
+    expect(random).to.have.lengthOf(5);
+  });
+
+  it('should support generating a random string with only a string', () => {
+    const random = tools.randomStr("aAeEiIoOuU");
+    expect(random).to.be.a('string');
+    expect(random).to.have.lengthOf(8);
+  });
+
+  it('should support generating a random string even when length is 0', () => {
+    const random = tools.randomStr("aAeEiIoOuU", 0);
+    expect(random).to.be.a('string');
+    expect(random).to.have.lengthOf(8);
+  });
+
+  it('should support generating a random string with null inputs', () => {
+    const random = tools.randomStr(null, "aAeEiIoOuU");
+    expect(random).to.be.a('string');
+    expect(random).to.have.lengthOf(8);
+  });
+
   it('should support generating a random email address', () => {
     const random = tools.randomEmail();
     expect(random).to.be.a('string');

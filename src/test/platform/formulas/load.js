@@ -12,7 +12,7 @@ const provisioner = require('core/provisioner');
 /**
  * Tests formula executions under heavy load (number of events, size of events, etc.)
  */
-suite.forPlatform('formulas', { name: 'formulas load', skip: false }, (test) => {
+suite.forPlatform('formulas', { name: 'formulas load', skip: true }, (test) => {
   let sfdcId, closeioId;
 
   const numFormulaInstances = process.env.NUM_FORMULA_INSTANCES ? process.env.NUM_FORMULA_INSTANCES : 1;

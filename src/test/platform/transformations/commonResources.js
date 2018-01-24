@@ -21,7 +21,7 @@ suite.forPlatform('common-resources', {}, () => {
 
   it('should support returning all common resources that exist', () => {
     const v = r => {
-      expect(r).to.have.statusCode(200);
+      expect(r.response.statusCode).to.equal(200);
       expect(r.body).to.be.an('array');
 
       // find newly created common resource and validate the fields

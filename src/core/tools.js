@@ -24,7 +24,15 @@ exports.random = () => Math.random().toString(36).substring(7);
  */
 exports.randomStr = (possible, len) => {
     let text = "";
-
+    if (!possible || typeof(possible) !== "string") {
+      if (typeof(possible) === "number"){
+        len = possible;
+      }
+      possible = "abcdefghijklmnopqrstuvwxyz";
+    }
+    if (!len || typeof(len) !== "number") {
+      len = 8;
+    }
     for( let i=0; i < len; i++ ) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
       }
