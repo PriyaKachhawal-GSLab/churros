@@ -70,4 +70,20 @@ suite.forPlatform('usage', { schema: usageSchema }, (test) => {
       .then(() => cloud.withOptions({ qs: { from: futureToday, to: futureTomorrow } }).get('usage/analytics/times', expectFoHunderdNFer))
       .then(() => cloud.withOptions({ qs: { from: futureToday, to: futureTomorrow } }).get('usage/analytics/statuses', expectFoHunderdNFer));
   });
+
+  it('usage APIs should return empty list if no logs found', () => {
+    const expectEmptyArray = (r) => {
+      expect(r.body.usage.length).to.equal(0);
+    };
+
+    const expectZero = (r) => {
+      expect(r.body.instancesCreatedCount).to.equal(0);
+    }
+
+    return cloud.withOptions({ qs: { from: futureToday, to: futureTomorrow } }).get('usage/analytics/activity/element-instances', expectEmptyArray)
+    .then(r => cloud.withOptions({ qs: { from: futureToday, to: futureTomorrow } }).get('usage/analytics/activity/formula-instances', expectEmptyArray))
+    .then(r => cloud.withOptions({ qs: { from: futureToday, to: futureTomorrow } }).get('usage/analytics/activity/element-instances/created-count', expectZero))
+    .then(r => cloud.withOptions({ qs: { from: futureToday, to: futureTomorrow } }).get('usage/analytics/activity/formula-instances/created-count', expectZero));
+  });
+
 });
