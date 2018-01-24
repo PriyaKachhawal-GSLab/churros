@@ -1816,5 +1816,13 @@
      "path": "id",
      "type": "string"
    }]
- }
+ },"checking-accounts": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  }
 }
