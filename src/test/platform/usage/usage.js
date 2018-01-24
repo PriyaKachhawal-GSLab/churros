@@ -78,7 +78,7 @@ suite.forPlatform('usage', { schema: usageSchema }, (test) => {
 
     const expectZero = (r) => {
       expect(r.body.instancesCreatedCount).to.equal(0);
-    }
+    };
 
     return cloud.withOptions({ qs: { from: futureToday, to: futureTomorrow } }).get('usage/analytics/activity/element-instances', expectEmptyArray)
     .then(r => cloud.withOptions({ qs: { from: futureToday, to: futureTomorrow } }).get('usage/analytics/activity/formula-instances', expectEmptyArray))
