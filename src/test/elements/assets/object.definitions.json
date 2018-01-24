@@ -1834,6 +1834,9 @@
       "path": "id",
       "type": "string"
     }, {
+      "path": "idTransformed",
+      "type": "string"
+    }, {
       "path": "bulk-dateCreated",
       "type": "string"
     }, {

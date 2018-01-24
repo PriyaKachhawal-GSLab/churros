@@ -203,10 +203,10 @@ exports.getLimit = (obj) => {
 * @param {array} fields ['id', 'createdDate']
 **/
 exports.getFieldsFromTransformation = (element, objectName) => {
-  const transformationsFile = `${__dirname}/../test/elements/${element}/assets/transformations`;
+  const transformationsFile = `${__dirname}/../test/elements/${element}/assets/transformations.json`;
   // if there is already a transformation file here
-  if (fs.existsSync(`${transformationsFile}.json`)) {
-    const transformations = require(`${transformationsFile}.json`);
+  if (fs.existsSync(transformationsFile)) {
+    const transformations = require(transformationsFile);
     if (transformations[objectName] && transformations[objectName].fields) {
       return transformations[objectName].fields.map(o => o.path);
     }
