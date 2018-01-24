@@ -16,7 +16,7 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
   let jpgFile = __dirname + '/assets/Penguins.jpg';
   let pngFile = __dirname + '/assets/Dice.png';
   let textFile = __dirname + '/assets/textFile.txt';
-  let jpgFileBody, pngFileBody, textFileBody, date1, date2;;
+  let jpgFileBody, pngFileBody, textFileBody, date1, date2;
 
   before(() =>
     cloud.withOptions({ qs: { path: `/${directoryPath}/Penguins.jpg`, overwrite: 'true' } }).postFile(`/hubs/documents/files`, jpgFile)
