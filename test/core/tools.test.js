@@ -147,6 +147,20 @@ describe('tools', () => {
     const updatedMetadata = { qs: { q: 'select * from contacts where city = \'Tampa\'', where: 'city = \'Tampa\'' } };
     return expect(tools.updateMetadata(OGmetadata)).to.deep.equal(updatedMetadata);
   });
+  it('should fail metadata', () => {
+    const OGmetadata = null;
+    const updatedMetadata = null;
+    expect(tools.updateMetadata(OGmetadata)).to.deep.equal(updatedMetadata);
+
+    const OGmetadata1 = {};
+    const updatedMetadata1 = {};
+    expect(tools.updateMetadata(OGmetadata1)).to.deep.equal(updatedMetadata1);
+
+    const OGmetadata2 = { qs: {} };
+    const updatedMetadata2 = { qs: { where: ''}};
+    expect(tools.updateMetadata(OGmetadata2)).to.deep.equal(updatedMetadata2);
+  });
+
   it('should get limit from CEQL query', () => {
     const limitMetadata = { qs: { q: 'select * from contacts limit 100' } };
     expect(tools.getLimit(limitMetadata)).to.deep.equal(100);
@@ -160,11 +174,26 @@ describe('tools', () => {
     const whereLimitMetadata2 = { qs: { q: 'select * from contacts limit 100 where city = \'Tampa\'' } };
     expect(tools.getLimit(whereLimitMetadata2)).to.deep.equal(100);
   });
+  it('should fail limit', () => {
+    const OGmetadata = null;
+    expect(tools.getLimit(OGmetadata)).to.deep.equal(-1);
+
+    const OGmetadata1 = {};
+    expect(tools.getLimit(OGmetadata1)).to.deep.equal(-1);
+
+    const OGmetadata2 = { qs: {} };
+    expect(tools.getLimit(OGmetadata2)).to.deep.equal(-1);
+  });
   it('should get fields from transformations file', () => {
     const element = 'netsuitefinancev2';
     const objectName = 'bulkCustomerNfv2';
     const fields = ['id', 'bulk-lastModifiedDate', 'bulk-dateCreated'];
     expect(tools.getFieldsFromTransformation(element, objectName)).to.deep.equal(fields);
+  });
+  it('should fail get fields from transformations file', () => {
+    const element = 'netsuitefinancev2';
+    const objectName = 'nah';
+    expect(tools.getFieldsFromTransformation(element, objectName)).to.deep.equal(null);
   });
   it('should get reduced response from getFieldsMap', () => {
     const body = [{"id":"1","firstName":"t1","lastName":"to1","junk1":"a","junk2":"b"},{"id":"2","firstName":"t2","lastName":"to2","junk1":"a","junk2":"b"},{"id":"3","firstName":"t3","lastName":"to3","junk1":"a","junk2":"b"}];
