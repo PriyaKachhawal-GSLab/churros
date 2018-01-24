@@ -15,7 +15,7 @@ const setDefaults = (b, u, o, un) => {
   chakram.setRequestDefaults({
     baseUrl: b,
     headers: {
-      Authorization: `User ${userSecret}, Organization ${orgSecret}`,
+      Authorization: `User ${u}, Organization ${o}`,
       'User-Agent': `Churrosbot/${un}`
     }
   });
@@ -71,3 +71,8 @@ exports.token = (token) => {
 exports.getToken = () => elementToken;
 
 exports.secrets = () => ({userSecret, orgSecret});
+
+exports.withDefaults = (u, o, un) => {
+  validate(baseUrl, u, o, un);
+  setDefaults(baseUrl, u, o, un);
+};
