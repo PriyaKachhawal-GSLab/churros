@@ -75,19 +75,19 @@ suite.forElement('helpdesk', 'incidents', { payload: payload }, (test) => {
 
   before(() => cloud.get(test.api)
     .then(r => {
-      customField = r.body[0].fields['customfield_10100'];
+      customField = r.body[0].fields.customfield_10100;
       summary = r.body[0].fields.summary;
     }));
 
 
   it(`should allow GET /incidents with option defultfields LIKE`, () => {
     return cloud.withOptions({ qs: { where: `summary LIKE '${summary}'` } }).get(test.api)
-      .then(r => expect(r.body[0].fields.summary).to.contains(`${summary}`))
+      .then(r => expect(r.body[0].fields.summary).to.contains(`${summary}`));
   });
 
   it(`should allow GET /incidents with option customfields`, () => {
     return cloud.withOptions({ qs: { where: `customfield_10100 = '${customField}'` } }).get(test.api)
-      .then(r => expect(r.body[0].fields['customfield_10100']).to.be.equal(`${customField}`))
+      .then(r => expect(r.body[0].fields.customfield_10100).to.be.equal(`${customField}`));
   });
 
 });
