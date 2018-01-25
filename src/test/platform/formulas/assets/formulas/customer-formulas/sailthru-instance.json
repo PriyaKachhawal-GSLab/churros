@@ -1,0 +1,8 @@
+{
+    "name": "Sailthru Test - Facebook Lead Ads",
+    "configuration": {
+      "pageid": "0",
+      "facebookleadads.instance.id": "{REPLACE}",
+      "sailthru.instance.id": "{REPLACE}"
+    }
+}
