@@ -3,12 +3,16 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
+const expect = require('chakram').expect;
 const payload = require('./assets/incidents');
 const commentPayload = require('./assets/incidentComments');
 const incidentProperties = tools.requirePayload(`${__dirname}/assets/incidentProperties.json`);
 const notifyPayload = require('./assets/notification');
 
 suite.forElement('helpdesk', 'incidents', { payload: payload }, (test) => {
+
+  let summary, customField;
+
   test.should.supportCruds();
   test.should.supportPagination();
   test.should.supportCeqlSearch('id');
@@ -68,4 +72,22 @@ suite.forElement('helpdesk', 'incidents', { payload: payload }, (test) => {
       .then(r => cloud.delete(`/hubs/helpdesk/incidents/${incidentId}/properties/${incidentPropertyId}`))
       .then(r => cloud.delete(`${test.api}/${incidentId}`));
   });
+
+  before(() => cloud.get(test.api)
+    .then(r => {
+      customField = r.body[0].fields['customfield_10100'];
+      summary = r.body[0].fields.summary;
+    }));
+
+
+  it(`should allow GET /incidents with option defultfields LIKE`, () => {
+    return cloud.withOptions({ qs: { where: `summary LIKE '${summary}'` } }).get(test.api)
+      .then(r => expect(r.body[0].fields.summary).to.contains(`${summary}`))
+  });
+
+  it(`should allow GET /incidents with option customfields`, () => {
+    return cloud.withOptions({ qs: { where: `customfield_10100 = '${customField}'` } }).get(test.api)
+      .then(r => expect(r.body[0].fields['customfield_10100']).to.be.equal(`${customField}`))
+  });
+
 });
