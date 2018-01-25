@@ -1,218 +1,178 @@
 {
   "contacts": {
     "vendorName": "contacts",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "contactid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "contactid"
+    }]
   },
   "departments": {
     "vendorName": "departments",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "departmentid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "departmentid"
+    }]
   },
   "employees": {
     "vendorName": "employees",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "employeeid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "employeeid"
+    }]
   },
   "journals": {
     "vendorName": "journals",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "journalid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "journalid"
+    }]
   },
   "locations": {
     "vendorName": "locations",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "locationid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "locationid"
+    }]
   },
   "classes": {
     "vendorName": "classes",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "classid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "classid"
+    }]
   },
   "customers": {
     "vendorName": "customers",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "customerid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "customerid"
+    }]
   },
   "bills": {
     "vendorName": "bills",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "billid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "billid"
+    }]
   },
   "invoices": {
     "vendorName": "invoices",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "invoiceid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "invoiceid"
+    }]
   },
   "payments": {
     "vendorName": "payments",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "arpaymentid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "arpaymentid"
+    }]
   },
   "projects": {
     "vendorName": "projects",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "projectid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "projectid"
+    }]
   },
   "purchase-orders": {
     "vendorName": "purchase-orders",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "potransactionid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "potransactionid"
+    }]
   },
   "sales-orders": {
     "vendorName": "sales-orders",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "sotransactionid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "sotransactionid"
+    }]
   },
   "terms": {
     "vendorName": "terms",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "name"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "termid"
+    }]
   },
   "vendors": {
     "vendorName": "vendors",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "vendorid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "vendorid"
+    }]
   },
   "vouchers": {
     "vendorName": "vouchers",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "apadjustmentid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "apadjustmentid"
+    }]
   },
   "warehouses": {
     "vendorName": "warehouses",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "warehouseid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "warehouseid"
+    }]
   },
   "ledger-accounts": {
     "vendorName": "ledger-accounts",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "glaccountid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "glaccountid"
+    }]
+  },
+  "terms": {
+    "vendorName": "terms",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "name"
+    }]
   },
   "transactions": {
     "vendorName": "transactions",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "gltransactionid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "gltransactionid"
+    }]
   },
   "items": {
     "vendorName": "items",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "icitemid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "icitemid"
+    }]
   },
   "attachments": {
     "vendorName": "attachments",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "supdocid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "supdocid"
+    }]
   },
   "bills-payments": {
     "vendorName": "bills-payments",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "RECORDNO"
-      }
-    ]
-  },
-  "checking-accounts": {
-    "vendorName": "",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "RECORDNO"
-      }
-    ]
-  },
-  "expense-reports": {
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]},
+    "checking-accounts": {
+      "vendorName": "",
+      "fields": [
+        {
+          "path": "id",
+          "vendorPath": "RECORDNO"
+        }
+      ]
+    },
+    "expense-reports": {
     "vendorName": "expense-reports",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "expensereportid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "expensereportid"
+    }]
   }
-}
+  }
