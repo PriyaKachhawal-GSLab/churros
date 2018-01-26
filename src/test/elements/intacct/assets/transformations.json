@@ -158,7 +158,7 @@
     "fields": [{
       "path": "id",
       "vendorPath": "RECORDNO"
-    }],
+    }]},
     "checking-accounts": {
       "vendorName": "",
       "fields": [
@@ -167,5 +167,12 @@
           "vendorPath": "RECORDNO"
         }
       ]
-    }
+    },
+    "expense-reports": {
+    "vendorName": "expense-reports",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "expensereportid"
+    }]
+  }
   }
