@@ -89,6 +89,8 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
       .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.properties.mimeType === 'text/plain').length));
   });
 
+  test.withOptions({ qs: { path: '/' } }).withApi('/folders/contents').should.supportPagination('id');
+
   //Skipping as soba PR is on hold
   it.skip('should not return the path for GET /folders/contents?includePath=false', () => {
     return cloud.withOptions({ qs: { includePath: false, path: `/${directoryPath}` } }).get(`${test.api}/contents`)

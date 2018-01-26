@@ -19,8 +19,10 @@ suite.forElement('documents', 'search', null, (test) => {
     let folder;
     return cloud.post('/folders', folderPayload)
       .then(r => folder = r.body)
-      .then(r => cloud.withOptions({ qs: { calculateFolderPath: false, path: folderPayload.path } }).get(test.api))
+      .then(r => cloud.withOptions({ qs: { calculateFolderPath: true, path: folderPayload.path } }).get(test.api))
       .then(r => expect(r.body).to.have.lengthOf(1) && expect(r.body[0].path).to.equal(folder.path))
+      .then(r => cloud.withOptions({ qs: { calculateFolderPath: false, path: folderPayload.path, text: 'test' } }).get(test.api))
+      .then(r => expect(r.body).to.not.be.empty && expect(r.body.filter(obj => obj.path)).to.be.empty && expect(r.body.filter(obj => obj.name.includes('test'))).to.not.be.empty)
       .then(r => cloud.delete(`/folders/${folder.id}`));
   });
 

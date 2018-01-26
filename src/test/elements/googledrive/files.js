@@ -23,7 +23,7 @@ const propertiesPayload = {
 suite.forElement('documents', 'files', { payload: payload }, (test) => {
   let jpgFileBody,revisionId,jpgFile = __dirname + '/assets/Penguins.jpg';
   let query = { path: `/Penguins-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` };
-  
+
   before(() => cloud.withOptions({ qs : query }).postFile(test.api, jpgFile)
   .then(r => jpgFileBody = r.body));
 
@@ -67,41 +67,41 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
       .then(r => cloud.withOptions({ qs: { path: `${destPath}` } }).delete(`${test.api}`));
   });
 
-  it('it should allow RS for documents/files/:id/revisions', () => {
+  it('should allow RS for documents/files/:id/revisions', () => {
       return cloud.get(`${test.api}/${jpgFileBody.id}/revisions`)
       .then(r => revisionId = r.body[0].id)
       .then(() => cloud.get(`${test.api}/${jpgFileBody.id}/revisions/${revisionId}`));
   });
 
-  it('it should allow RS for documents/files/revisions by path', () => {
+  it('should allow RS for documents/files/revisions by path', () => {
       return cloud.withOptions({ qs: query }).get(`${test.api}/revisions`)
       .then(r => revisionId = r.body[0].id)
       .then(() => cloud.withOptions({ qs: query }).get(`${test.api}/revisions/${revisionId}`));
   });
 
   //Test For Export Functionality
-  it('Should allow export of Google Doc to plain text using media type', () => {
+  it('should allow export of Google Doc to plain text using media type', () => {
     let DocFile = '/ChurrosDocDoNotDelete';
     return cloud.withOptions({ qs: { path: DocFile, mediaType: 'text/plain' } }).get(test.api)
       .then(r => {
         expect(r.body).to.contain('Sample Word Doc');
       });
   });
-  it('Should allow export of Google Sheets to csv using media type', () => {
+  it('should allow export of Google Sheets to csv using media type', () => {
     let SSFile = '/ChurrosSSDoNotDelete';
     return cloud.withOptions({ qs: { path: SSFile, mediaType: 'text/csv' } }).get(test.api)
       .then(r => {
         expect(r.body).to.contain('Test1,Test2,Tes3,Test4');
       });
   });
-  it('Should allow export of Google Presentations to text using media type', () => {
+  it('should allow export of Google Presentations to text using media type', () => {
     let PPTFile = '/ChurrosPPTDoNotDelete';
     return cloud.withOptions({ qs: { path: PPTFile, mediaType: 'text/plain' } }).get(test.api)
       .then(r => {
         expect(r.body).to.contain('Churros PPT Test');
       });
   });
-  it('Should allow export of Google Drawing to pdf using media type', () => {
+  it('should allow export of Google Drawing to pdf using media type', () => {
     let PNGFile = '/ChurrosPNGDoNotDelete';
     return cloud.withOptions({ qs: { path: PNGFile, mediaType: 'application/pdf' } }).get(test.api)
       .then(r => {
