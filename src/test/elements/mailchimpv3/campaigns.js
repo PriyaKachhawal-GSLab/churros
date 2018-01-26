@@ -52,11 +52,11 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
 /*Need to skip because the campaign/{id}/email-activities/{emailId} is read only
 Since there is no post to this endpoint, the values below are hardcoded for initial testing
 This test is just for reference to future-proof in case the endpoint breaks down the road */
-  it.skip('should allow R for campaigns/{id}/email-activity', () => {
+  it.skip('should allow R for campaigns/{id}/email-activities', () => {
     let campaignId = '03747e516a';
     let emailId = -1;
-    return cloud.get(`${test.api}/${campaignId}/email-activity`)
+    return cloud.get(`${test.api}/${campaignId}/email-activities`)
       .then (r => emailId = r.body.emails[0].email_id)
-      .then(r => cloud.get(`${test.api}/${campaignId}/email-activity/${emailId}`));
+      .then(r => cloud.get(`${test.api}/${campaignId}/email-activities/${emailId}`));
   });
 });
