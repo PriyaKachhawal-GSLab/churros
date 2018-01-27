@@ -187,5 +187,138 @@
       "path": "id",
       "vendorPath": "internalId"
     }]
+  },
+  "payroll-items": {
+    "vendorName": "PayrollItem",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "non-inventory-resale-items": {
+    "vendorName": "NonInventoryResaleItem",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "lot-numbered-assembly-items": {
+    "vendorName": "lotnumberedassemblyitem",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "lot-numbered-inventory-items": {
+    "vendorName": "lotnumberedinventoryitem",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "serialized-inventory-items": {
+    "vendorName": "serializedinventoryitem",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "serialized-assembly-items": {
+    "vendorName": "serializedassemblyitem",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "service-resale-items": {
+    "vendorName": "ServiceResaleItem",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "ledger-accounts": {
+    "vendorName": "Ledger-Account",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "tax-rates": {
+    "vendorName": "Tax-Rate",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "tax-codes": {
+    "vendorName": "Tax-Code",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "expense-reports": {
+    "vendorName": "Expense-Reports",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "credit-terms": {
+    "vendorName": "Credit-Term",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "classifications": {
+    "vendorName": "Classification",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "departments": {
+    "vendorName": "Department",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "locations": {
+    "vendorName": "Location",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "subsidiaries": {
+      "vendorName": "Subsidiary",
+      "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "posting-periods": {
+      "vendorName": "AccountingPeriod",
+      "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "checks": {
+      "vendorName": "Check",
+      "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "custom-records": {
+    "vendorName": "CustomRecord",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
   }
 }
