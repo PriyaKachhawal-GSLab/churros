@@ -10,7 +10,7 @@ const folderPayload = build({ name: `churros-${tools.random()}`, path: `/${tools
 const expect = require('chakram').expect;
 
 suite.forElement('documents', 'folders', (test) => {
-let folderId;
+//let folderId;
   const folderWrap = (cb) => {
     let folder;
     let random = `${tools.random()}`;
