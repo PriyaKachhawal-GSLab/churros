@@ -60,6 +60,14 @@ exports.mock = (baseUrl, headers, eventHeaders) => {
       out.status = 'CREATED';
       out.id = 123;
       return out;
+    })
+    .post('/hubs/fakebulkhub/bulk/query')
+    .query({ q: 'select * from limitedEndpoint limit 5', where: '' })
+    .reply(200, (uri, requestBody) => {
+      var out = {};
+      out.status = 'CREATED';
+      out.id = 123;
+      return out;
     });
 
   nock(baseUrl, eventHeaders())
@@ -93,13 +101,24 @@ exports.mock = (baseUrl, headers, eventHeaders) => {
     .query({ foo: 'bar' })
     .reply(200, () => [genPayload({ id: 123 })])
     .get('/hubs/fakehub/endpoint')
-    .query({where: 'id = 123'})
-    .reply(200, () => new Array(10).fill({id:'123'}))
+    .query({ where: 'id = 123' })
+    .reply(200, () => new Array(10).fill({ id: '123' }))
+    .get('/hubs/fakebulkhub/limitedEndpoint')
+    .query({ q: 'select * from limitedEndpoint limit 5', where: '' })
+    .reply(200, () => new Array(5).fill({ id: '123' }))
     .get('/hubs/fakehub/bulk/123/status')
     .reply(200, (uri, requestBody) => {
       var out = {};
       out.status = 'COMPLETED';
       out.recordsCount = 10;
+      out.recordsFailedCount = 0;
+      return out;
+    })
+    .get('/hubs/fakebulkhub/bulk/123/status')
+    .reply(200, (uri, requestBody) => {
+      var out = {};
+      out.status = 'COMPLETED';
+      out.recordsCount = 5;
       out.recordsFailedCount = 0;
       return out;
     })
@@ -115,13 +134,18 @@ exports.mock = (baseUrl, headers, eventHeaders) => {
       };
     });
 
-    nock(baseUrl, { reqheaders: { accept: "application/json" } })
+  nock(baseUrl, { reqheaders: { accept: "application/json" } })
     .get('/hubs/fakehub/bulk/123/endpoint')
-    .reply(200, () => new Array(10).fill(JSON.stringify({"id":'123'})).join('\n'));
-    nock(baseUrl, { reqheaders: { accept: "text/csv" } })
+    .reply(200, () => new Array(10).fill(JSON.stringify({ "id": '123' })).join('\n'))
+    .get('/hubs/fakebulkhub/bulk/123/limitedEndpoint')
+    .query({ q: 'select * from limitedEndpoint limit 5' })
+    .reply(200, () => new Array(5).fill(JSON.stringify({ "id": '123' })).join('\n'));
+  nock(baseUrl, { reqheaders: { accept: "text/csv" } })
     .get('/hubs/fakehub/bulk/123/endpoint')
-    .reply(200, () => ["id"].concat(new Array(10).fill('123')).join('\n').concat('\n'));
-
+    .reply(200, () => ["id"].concat(new Array(10).fill('123')).join('\n').concat('\n'))
+    .get('/hubs/fakebulkhub/bulk/123/limitedEndpoint')
+    .query({ q: 'select * from limitedEndpoint limit 5' })
+    .reply(200, () => ["id"].concat(new Array(5).fill('123')).join('\n').concat('\n'));
 
   /** PATCH && PUT **/
   nock(baseUrl, headers())
