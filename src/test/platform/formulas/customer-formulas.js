@@ -3,7 +3,7 @@
 const cleaner = require('core/cleaner');
 const suite = require('core/suite');
 const common = require('./assets/common');
-const {createXInstances, genCaseWebhookEvent, genWebhookEvent, pollAllExecutions, simulateTrigger} = require('./assets/load-common');
+const {createXInstances, genCaseWebhookEvent, genFacebookLAWebhookEvent, genWebhookEvent, pollAllExecutions, simulateTrigger} = require('./assets/load-common');
 const cloud = require('core/cloud');
 const fSchema = require('./assets/schemas/formula.schema');
 const chakram = require('chakram');
@@ -15,7 +15,7 @@ const tools = require('core/tools');
  * Tests customer formula executions. Tests under heavy load (number of events, size of events, etc.) when applicable.
  */
 suite.forPlatform('formulas', { name: 'customer-formulas', skip: true }, (test) => {
-  let sfdcId, kissmetricsId, lithiumId;
+  let sfdcId, kissmetricsId, lithiumId, fbLeadAdsId, sailthruId;
 
   const numFormulaInstances = process.env.NUM_FORMULA_INSTANCES ? process.env.NUM_FORMULA_INSTANCES : 1;
   const numEvents = process.env.NUM_EVENTS ? process.env.NUM_EVENTS : 1;
@@ -26,18 +26,25 @@ suite.forPlatform('formulas', { name: 'customer-formulas', skip: true }, (test) 
     .then(() => cleaner.formulas.withName('Lithium - Ticket Status'))
     .then(() => cleaner.formulas.withName('bulk1sfdc'))
     .then(() => cleaner.formulas.withName('bulk2sfdc'))
+    .then(() => cleaner.formulas.withName('Sailthru - Facebook Lead Ads'))
     .then(r => common.provisionSfdcWithWebhook())
     .then(r => sfdcId = r.body.id)
     .then(r => provisioner.create('kissmetrics'))
     .then(r => kissmetricsId = r.body.id)
     .then(r => provisioner.create('lithiumlsw'))
-    .then(r => lithiumId = r.body.id));
+    .then(r => lithiumId = r.body.id)
+    .then(r => provisioner.create('sailthru'))
+    .then(r => sailthruId = r.body.id)
+    .then(r => provisioner.create('facebookleadads', { 'event.notification.enabled': true }))
+    .then(r => fbLeadAdsId = r.body.id));
 
   /** Clean up */
   after(() => {
     if (sfdcId) provisioner.delete(sfdcId);
     if (kissmetricsId) provisioner.delete(kissmetricsId);
     if (lithiumId) provisioner.delete(lithiumId);
+    if (fbLeadAdsId) provisioner.delete(fbLeadAdsId);
+    if (sailthruId) provisioner.delete(sailthruId);
   });
 
   it('should handle a high load for the KissMetrics Events/Props formula', () => {
@@ -158,6 +165,31 @@ suite.forPlatform('formulas', { name: 'customer-formulas', skip: true }, (test) 
       .catch(e => {
         if (formula1Id) common.deleteFormula(formula1Id);
         if (formula2Id) common.deleteFormula(formula2Id);
+        throw new Error(e);
+    });
+  });
+
+  it('should handle a high load for the Sailthru Facebook Lead Ads formula', () => {
+    const formula = require('./assets/formulas/customer-formulas/sailthru');
+    formula.engine = process.env.CHURROS_FORMULAS_ENGINE;
+    const formulaInstance = require('./assets/formulas/customer-formulas/sailthru-instance');
+    formulaInstance.configuration['facebookleadads.instance.id'] = fbLeadAdsId;
+    formulaInstance.configuration['sailthru.instance.id'] = sailthruId;
+
+    let formulaId;
+    let formulaInstances = [];
+    let deletes = [];
+    return cloud.post(test.api, formula, fSchema)
+      .then(r => formulaId = r.body.id)
+      .then(() => createXInstances(numFormulaInstances, formulaId, formulaInstance))
+      .then(ids => ids.map(id => formulaInstances.push(id)))
+      .then(r => simulateTrigger(numEvents, fbLeadAdsId, genFacebookLAWebhookEvent('update', numInOneEvent), common.generateFBEvent))
+      .then(r => pollAllExecutions(formulaId, formulaInstances, numInOneEvent * numEvents, 1))
+      .then(r => formulaInstances.forEach(id => deletes.push(cloud.delete(`/formulas/${formulaId}/instances/${id}`))))
+      .then(r => chakram.all(deletes))
+      .then(r => common.deleteFormula(formulaId))
+      .catch(e => {
+        if (formulaId) common.deleteFormula(formulaId);
         throw new Error(e);
     });
   });

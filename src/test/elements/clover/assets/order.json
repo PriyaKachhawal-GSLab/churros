@@ -1,0 +1,11 @@
+{
+    "note": "This is my latest order",
+    "isVat": false,
+    "manualTransaction": true,
+    "title": "<<random.word>>",
+    "testMode": true,
+    "currency": "USD",
+    "taxRemoved": true,
+    "state": "open",
+    "groupLineItems": true
+  }

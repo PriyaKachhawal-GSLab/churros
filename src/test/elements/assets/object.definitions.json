@@ -1106,6 +1106,15 @@
       "type": "string"
     }]
   },
+  "expense-reports": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    },{
+      "path": "id",
+      "type": "string"
+    }]
+  },
   "time-activities": {
     "fields": [{
       "path": "idTransformed",
@@ -1736,6 +1745,15 @@
      "type": "string"
    }]
  },
+ "addressbook-entries": {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ },
  "employee-schedules" : {
    "fields": [{
      "path": "idTransformed",
@@ -1798,5 +1816,25 @@
      "path": "id",
      "type": "string"
    }]
- }
+ },"checking-accounts": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "expense-reports": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  }
 }
