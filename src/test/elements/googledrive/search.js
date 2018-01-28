@@ -27,13 +27,23 @@ suite.forElement('documents', 'search', null, (test) => {
       .then(r => cloud.delete(`/folders/${folder.id}`));
   });
 
-test.withApi(test.api)
+  test.withApi(test.api)
     .withName(`should allow GET for /search with use of the orderBy createdDate parameter`)
     .withOptions({ qs: { pageSize: 5, page: 1, orderBy: `createdDate asc` } })
     .withValidation(r => {
       date1 = new Date(r.body[0].createdDate).getTime();
       date2 = new Date(r.body[1].createdDate).getTime();
       expect(date1 <= date2).to.be.true;
+    })
+    .should.return200OnGet();
+
+  test.withApi(test.api)
+    .withName(`should allow GET for /search with use of the orderBy createdDate parameter`)
+    .withOptions({ qs: { pageSize: 5, page: 1, orderBy: `createdDate desc` } })
+    .withValidation(r => {
+      date1 = new Date(r.body[0].createdDate).getTime();
+      date2 = new Date(r.body[1].createdDate).getTime();
+      expect(date1 >= date2).to.be.true;
     })
     .should.return200OnGet();
 
