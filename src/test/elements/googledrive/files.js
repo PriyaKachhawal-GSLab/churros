@@ -6,6 +6,11 @@ const tools = require('core/tools');
 const payload = require('./assets/files');
 const expect = require('chakram').expect;
 const faker = require('faker');
+const folderPayload = require('./assets/folders');
+
+const randomInt = tools.randomInt();
+folderPayload.path += randomInt;
+folderPayload.name += randomInt;
 
 payload.path = `/${faker.random.number()}`;
 
@@ -23,7 +28,7 @@ const propertiesPayload = {
 suite.forElement('documents', 'files', { payload: payload }, (test) => {
   let jpgFileBody,revisionId,jpgFile = __dirname + '/assets/Penguins.jpg';
   let query = { path: `/Penguins-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` };
-  
+
   before(() => cloud.withOptions({ qs : query }).postFile(test.api, jpgFile)
   .then(r => jpgFileBody = r.body));
 
@@ -48,6 +53,19 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
       .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).patch(`${test.api}/metadata/properties`, propertiesPayload))
       .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).delete(`${test.api}`))
       .then(r => cloud.withOptions({ qs: { path: `${destPath}` } }).delete(`${test.api}`));
+  });
+
+  it('should allow POST /files by providing folder id', () => {
+    let folderId, fileId;
+    return cloud.post('/folders', folderPayload)
+      .then(r => folderId = r.body.id)
+      .then(r => cloud.withOptions({ qs: {
+          path: `/churros/brady-${faker.address.zipCode()}.jpg`,
+          folderId,
+          calculateFolderPath: false} }).postFile(test.api, `${__dirname}/../assets/brady.jpg`))
+      .then(r => fileId = r.body.id)
+      .then(() => cloud.delete(`${test.api}/${fileId}`))
+      .then(() => cloud.delete(`/folders/${folderId}`));
   });
 
   it('should allow CRD for hubs/documents/files and RU for hubs/documents/files/metadata by id', () => {
