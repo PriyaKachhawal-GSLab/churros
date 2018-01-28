@@ -4,22 +4,22 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
-suite.forElement('general', 'folders', (test) => {
+suite.forElement('analytics', 'folders', (test) => {
 
   let folderId, reportId;
 
-  test.withApi(`/hubs/general/rootFolder`)
-    .withName(`List all Root Folders /rootFolder`)
-    .withValidation(r => {
-      folderId = r.body[0].id;
-      expect(r.body.filter(obj => obj.id !== "")).to.not.be.empty;
-    })
-    .should.return200OnGet();
 
 
+  it('should allow GET /folders', () => {
+    return cloud.get(test.api)
+      .then(r => {
+        folderId = r.body[0].id;
+        expect(r.body.filter(obj => obj.id !== "")).to.not.be.empty;
+      });
+  });
 
-  it('should allow GET /folders/:id/contents', () => {
-    return cloud.get(`${test.api}/${folderId}/contents`)
+  it('should allow GET /folders/:id/workbooks', () => {
+    return cloud.get(`${test.api}/${folderId}/workbooks`)
       .then(r => {
         folderId = r.body[0].id;
         expect(r.body.filter(obj => obj.id !== "")).to.not.be.empty;
@@ -28,33 +28,33 @@ suite.forElement('general', 'folders', (test) => {
 
 
 
-  it('should allow GET /folders/:id/reports', () => {
-    return cloud.get(`${test.api}/${folderId}/reports`)
+  it('should allow GET /workbooks/:id/reports', () => {
+    return cloud.get(`/hubs/analytics/workbooks/${folderId}/reports`)
       .then(r => {
         reportId = r.body[0].id;
         expect(r.body.filter(obj => obj.id !== "")).to.not.be.empty;
       });
   });
 
-  test.withApi(`/hubs/general/reports/${reportId}`)
+  test.withApi(`/hubs/analytics/reports/${reportId}`)
     .withName(`Retrieve specific Report`)
     .withValidation(r => expect(r.body.id !== ""))
     .should.return200OnGet();
 
 
-  test.withApi(`/hubs/general/ping`)
+  test.withApi(`/hubs/analytics/ping`)
     .withName(`Check system health`)
     .withValidation(r => expect(r.body['launchbi-status'] !== ""))
     .should.return200OnGet();
 
 
-  test.withApi(`/hubs/general/system-info`)
+  test.withApi(`/hubs/analytics/info`)
     .withName(`Retrieve system-info`)
     .withValidation(r => expect(r.body.server !== ""))
     .should.return200OnGet();
 
 
-  test.withApi(`/hubs/general/native`)
+  test.withApi(`/hubs/analytics/native`)
     .withName(`List all native`)
     .withOptions({ qs: { 'resourceName': 'schedules' } })
     .withValidation(r => expect(r.body.filter(obj => obj.id !== "")).to.not.be.empty)
