@@ -40,6 +40,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.className('btn')).click();
       return browser.getCurrentUrl();
     case 'bullhorn--v1':
+    case 'bullhorn--v2masked':
     case 'bullhorn--v2':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('un')).sendKeys(username);
