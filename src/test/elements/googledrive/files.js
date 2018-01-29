@@ -160,13 +160,25 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
 
   it(`should allow CRUDS for ${test.api}/comments by path`, () => cloud.withOptions({ qs: { path: jpgFileBody.path } }).cruds(`${test.api}/comments`, commentPayload1));
 
-  //TODO change these to nextPage
   it(`should allow paginating for ${test.api}/:id/comments`, () => {
-    let commentId1, commentId2;
+    let commentId1, commentId2, nextPage;
     return cloud.post(`${test.api}/${jpgFileBody.id}/comments`, commentPayload1)
       .then(r => commentId1 = r.body.id)
       .then(r => cloud.post(`${test.api}/${jpgFileBody.id}/comments`, commentPayload2))
       .then(r => commentId2 = r.body.id)
+      .then(r => cloud.withOptions({ qs: { pageSize: 1 } }).get(`${test.api}/${jpgFileBody.id}/comments`))
+      .then(r => {
+        expect(r.body).to.have.lengthOf(1);
+        expect(r.body[0].id).to.equal(commentId2);
+        expect(r.response.headers['elements-next-page-token']).to.exist;
+        nextPage = r.response.headers['elements-next-page-token'];
+      })
+      .then(r => cloud.withOptions({ qs: { pageSize: 1, nextPage } }).get(`${test.api}/${jpgFileBody.id}/comments`))
+      .then(r => {
+        expect(r.body).to.have.lengthOf(1);
+        expect(r.body[0].id).to.equal(commentId1);
+        expect(r.response.headers['elements-next-page-token']).to.not.exist;
+      })
       .then(r => cloud.withOptions({ qs: { pageSize: 1, page: 1 } }).get(`${test.api}/${jpgFileBody.id}/comments`))
       .then(r => expect(r.body).to.have.lengthOf(1) && expect(r.body[0].id).to.equal(commentId2))
       .then(r => cloud.withOptions({ qs: { pageSize: 1, page: 2 } }).get(`${test.api}/${jpgFileBody.id}/comments`))
@@ -176,13 +188,26 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
       .then(r => cloud.delete(`${test.api}/${jpgFileBody.id}/comments/${commentId1}`))
       .then(r => cloud.delete(`${test.api}/${jpgFileBody.id}/comments/${commentId2}`));
   });
-  //TODO change these to nextPage
+
   it(`should allow paginating for ${test.api}/comments by path`, () => {
-    let commentId1, commentId2;
+    let commentId1, commentId2, nextPage;
     return cloud.withOptions({ qs: { path: jpgFileBody.path } }).post(`${test.api}/comments`, commentPayload1)
       .then(r => commentId1 = r.body.id)
       .then(r => cloud.withOptions({ qs: { path: jpgFileBody.path } }).post(`${test.api}/comments`, commentPayload2))
       .then(r => commentId2 = r.body.id)
+      .then(r => cloud.withOptions({ qs: { pageSize: 1, path: jpgFileBody.path } }).get(`${test.api}/comments`))
+      .then(r => {
+        expect(r.body).to.have.lengthOf(1);
+        expect(r.body[0].id).to.equal(commentId2);
+        expect(r.response.headers['elements-next-page-token']).to.exist;
+        nextPage = r.response.headers['elements-next-page-token'];
+      })
+      .then(r => cloud.withOptions({ qs: { pageSize: 1, nextPage, path: jpgFileBody.path } }).get(`${test.api}/comments`))
+      .then(r => {
+        expect(r.body).to.have.lengthOf(1);
+        expect(r.body[0].id).to.equal(commentId1);
+        expect(r.response.headers['elements-next-page-token']).to.not.exist;
+      })
       .then(r => cloud.withOptions({ qs: { pageSize: 1, page: 1, path: jpgFileBody.path } }).get(`${test.api}/comments`))
       .then(r => expect(r.body).to.have.lengthOf(1) && expect(r.body[0].id).to.equal(commentId2))
       .then(r => cloud.withOptions({ qs: { pageSize: 1, page: 2, path: jpgFileBody.path } }).get(`${test.api}/comments`))
