@@ -7,13 +7,13 @@ const expect = chakram.expect;
 const logger = require('winston');
 const fiSchema = require('./schemas/formula.instance.schema');
   
-const genCloseioEvent = (action, num) => {
-  const event = require('./events/raw-webhook');
+const genCloseioAccountEvent = (action, num) => {
+  const event = require('./events/raw-closeio-account-obj');
   const events = [];
   for (let i = 0; i < num; i++) {
     events.push(event);
   }
-  return { action: action, objects: events };
+  return { action: action, accounts: events, objectType: 'accounts'};
 };
 
 const genWebhookEvent = (action, num) => {
@@ -109,7 +109,7 @@ const createXInstances = (x, formulaId, formulaInstance) => {
 
 module.exports = {
   createXInstances,
-  genCloseioEvent,
+  genCloseioAccountEvent,
   genCaseWebhookEvent,
   genFacebookLAWebhookEvent,
   genWebhookEvent,

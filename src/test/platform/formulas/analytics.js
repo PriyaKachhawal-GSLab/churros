@@ -146,6 +146,16 @@ suite.forPlatform('formulas', { name: 'formula analytics' }, (test) => {
     return testIt('manual-trigger', {}, 3, 2, execValidator, null, 'success', 1);
   });
 
+  it('should return current status analytics of 3 executions', () => {
+    const execValidator = (executions, fId, fiId) => {
+      // Get the current execution statuses
+      return cloud.get(`/formulas/analytics/statuses/now`)
+      .then(r => expect(r.body).to.have.length(1) && r.body.map(s => expect(s).to.contain.all.keys(['success', 'failed', 'queued', 'cancelled', 'unknown', 'pending', 'accountId', 'retries']) && expect(s.success).to.equal(3)));
+    };
+
+    return testIt('manual-trigger', {}, 3, 2, execValidator, null, 'success', 1);
+  });
+
   it('should return an error for an invalid date range for execution status analytics', () => {
     const from = new Date();
     from.setHours(from.getHours() - 1);
