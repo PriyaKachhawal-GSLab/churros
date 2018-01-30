@@ -6,6 +6,12 @@ let config = {
   "oauth.callback.url":"https://auth.cloudelements.io/oauth"
 };
 
+const bullhornMaskedConfig = {
+  "oauth.api.key":"********",
+  "provisioning": "oauth2",
+  "oauth.callback.url": "https://auth.cloudelements.io/oauth"
+}
+
 suite.forPlatform('provisionv2', (test) => {
   let oauth2instanceId, oauth2instanceId2, oauth2instanceId3, oauth2instanceId4, oauth1instanceId, oauth1instanceId2;
 
@@ -31,11 +37,10 @@ suite.forPlatform('provisionv2', (test) => {
 
    it('should create an instance of Bullhorn in V1 and update with v2 when config is masked', () => {
      return provisioner.create('bullhorn--v1')
-     .then(r => {
-       oauth2instanceId = r.body.id;
-       return provisioner.updateWithDefault('bullhorn--v2masked', null, null, r.body.id);
-     })
-    .then(r => expect(r.body.id).to.equal(oauth2instanceId));
+     .then(r => oauth2instanceId = r.body.id)
+     .then(r => cloud.get('elements/bullhorn'))
+     .then(r => cloud.withOptions({qs:bullhornMaskedConfig}).get(`/elements/${r.body.id}/oauth/url/default`))
+    .then(r => expect(r.body.oauthUrl).to.not.include("client_id=********"));
    });
 
   it('should provision instance with non default api key/secret', () => {
