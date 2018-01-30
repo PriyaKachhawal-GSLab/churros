@@ -57,30 +57,30 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
     let email_id = -1;
     let campaign_id = 0;
     return cloud.get(`/hubs/marketing/campaigns`)
-      .then(function(r) {
+      .then((r) => {
         let data = r.body;
-        response = data.filter(function(obj) {
+        response = data.filter((obj) => {
           return obj.report_summary;
         });
         expect(r).to.have.statusCode(200);
         expect(r).to.not.be.null;
-        campaign_id = response[0].id
-        expect(campaign_id.length > 0)
+        campaign_id = response[0].id;
+        expect(campaign_id.length > 0);
       })
-      .then(function(r) {
-        return cloud.get(`/hubs/marketing/campaigns/${campaign_id}/email-activities`)
+      .then((r) => {
+        return cloud.get(`/hubs/marketing/campaigns/${campaign_id}/email-activities`);
       })
-      .then(function(r) {
+      .then((r) => {
         email_id = r.body.emails[0].email_id;
         expect(r).to.have.statusCode(200);
         expect(r).to.not.be.null;
       })
-      .then(function(r) {
-        return cloud.get(`/hubs/marketing/campaigns/${campaign_id}/email-activities/${email_id}`)
+      .then((r) => {
+        return cloud.get(`/hubs/marketing/campaigns/${campaign_id}/email-activities/${email_id}`);
       })
-      .then(function(r) {
+      .then((r) => {
         expect(r).to.have.statusCode(200);
         expect(r).to.not.be.null;
-      })
+      });
   });
 });  
