@@ -53,34 +53,21 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
 //This test assures that there is some campaign activity on the campaign we pull for
 //GET campaigns/id/emailActivity
   it('should allow R for campaigns/{id}/email-activities', () => {
-    let response = 0;
-    let email_id = -1;
-    let campaign_id = 0;
+    let response, email_id, campaign_id;
     return cloud.get(`/hubs/marketing/campaigns`)
       .then((r) => {
         let data = r.body;
+        expect(r.body).to.not.be.empty
         response = data.filter((obj) => {
           return obj.report_summary;
         });
-        expect(r).to.have.statusCode(200);
-        expect(r).to.not.be.null;
         campaign_id = response[0].id;
-        expect(campaign_id.length > 0);
       })
+      .then((r) => cloud.get(`/hubs/marketing/campaigns/${campaign_id}/email-activities`))
       .then((r) => {
-        return cloud.get(`/hubs/marketing/campaigns/${campaign_id}/email-activities`);
-      })
-      .then((r) => {
+        expect(r.body).to.not.be.empty
         email_id = r.body[0].email_id;
-        expect(r).to.have.statusCode(200);
-        expect(r).to.not.be.null;
       })
-      .then((r) => {
-        return cloud.get(`/hubs/marketing/campaigns/${campaign_id}/email-activities/${email_id}`);
-      })
-      .then((r) => {
-        expect(r).to.have.statusCode(200);
-        expect(r).to.not.be.null;
-      });
+      .then((r) => cloud.get(`/hubs/marketing/campaigns/${campaign_id}/email-activities/${email_id}`));
   });
 });  
