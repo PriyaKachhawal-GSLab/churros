@@ -2,7 +2,7 @@ const provisioner = require('core/provisioner');
 const suite = require('core/suite');
 const expect = require('chakram').expect;
 const cloud = require('core/cloud');
-let config = {
+const config = {
   "oauth.callback.url":"https://auth.cloudelements.io/oauth"
 };
 
@@ -27,11 +27,11 @@ suite.forPlatform('provisionv2', (test) => {
 
    it('should create an instance of Bullhorn in V1 and update with v2', () => {
      return provisioner.create('bullhorn--v1')
-     .then(r => {
-       oauth2instanceId = r.body.id;
-       return provisioner.updateWithDefault('bullhorn--v2', config, null, r.body.id);
-     })
-    .then(r => expect(r.body.id).to.equal(oauth2instanceId));
+      .then(r => {
+        oauth2instanceId = r.body.id;
+        return provisioner.updateWithDefault('bullhorn--v2', null, null, r.body.id);
+      })
+     .then(r => expect(r.body.id).to.equal(oauth2instanceId));
    });
 
 
