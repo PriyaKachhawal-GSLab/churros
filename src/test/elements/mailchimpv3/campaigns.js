@@ -3,6 +3,7 @@
 const suite = require('core/suite');
 const payload = require('core/tools').requirePayload(`${__dirname}/assets/campaigns.json`);
 const cloud = require('core/cloud');
+const expect = require('chakram').expect;
 
 const updatePayload = () => ({
   "recipients": {
@@ -49,14 +50,22 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
       .then(r => cloud.delete(`${test.api}/${campaignId}/comments/${commentId}`))
       .then(r => cloud.delete(`${test.api}/${campaignId}`));
   });
-/*Need to skip because the campaign/{id}/email-activities/{emailId} is read only
-Since there is no post to this endpoint, the values below are hardcoded for initial testing
-This test is just for reference to future-proof in case the endpoint breaks down the road */
-  it.skip('should allow R for campaigns/{id}/email-activities', () => {
-    let campaignId = '03747e516a';
-    let emailId = -1;
-    return cloud.get(`${test.api}/${campaignId}/email-activities`)
-      .then (r => emailId = r.body.emails[0].email_id)
-      .then(r => cloud.get(`${test.api}/${campaignId}/email-activities/${emailId}`));
+// There is not a way to see from campaigns which campaign id is associated with email activity
+// from the GET /campaigns call
+  it('should allow R for campaigns/{id}/email-activities', () => {
+    let campaignId = '73e5c1ca8d';
+    let email_id = -1;
+    return cloud.get(`/hubs/marketing/campaigns`)
+    .then(function(r) {
+      var data = r.body;
+      var response = data.forEach(function(obj) {
+        if (obj.report_summary) {
+          return obj;
+        }
+      })
+    })
+    .then(function(r) {
+      expect(r).to.not.be.null;
+    })
   });
 });
