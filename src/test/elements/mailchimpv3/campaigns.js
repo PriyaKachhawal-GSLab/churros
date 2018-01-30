@@ -50,22 +50,37 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
       .then(r => cloud.delete(`${test.api}/${campaignId}/comments/${commentId}`))
       .then(r => cloud.delete(`${test.api}/${campaignId}`));
   });
-// There is not a way to see from campaigns which campaign id is associated with email activity
-// from the GET /campaigns call
+//This test assures that there is some campaign activity on the campaign we pull for
+//GET campaigns/id/emailActivity
   it('should allow R for campaigns/{id}/email-activities', () => {
-    let campaignId = '73e5c1ca8d';
+    let response = 0;
     let email_id = -1;
+    let campaign_id = 0;
     return cloud.get(`/hubs/marketing/campaigns`)
-    .then(function(r) {
-      var data = r.body;
-      var response = data.forEach(function(obj) {
-        if (obj.report_summary) {
-          return obj;
-        }
+      .then(function(r) {
+        let data = r.body;
+        response = data.filter(function(obj) {
+          return obj.report_summary;
+        });
+        expect(r).to.have.statusCode(200);
+        expect(r).to.not.be.null;
+        campaign_id = response[0].id
+        expect(campaign_id.length > 0)
       })
-    })
-    .then(function(r) {
-      expect(r).to.not.be.null;
-    })
+      .then(function(r) {
+        return cloud.get(`/hubs/marketing/campaigns/${campaign_id}/email-activities`)
+      })
+      .then(function(r) {
+        email_id = r.body.emails[0].email_id;
+        expect(r).to.have.statusCode(200);
+        expect(r).to.not.be.null;
+      })
+      .then(function(r) {
+        return cloud.get(`/hubs/marketing/campaigns/${campaign_id}/email-activities/${email_id}`)
+      })
+      .then(function(r) {
+        expect(r).to.have.statusCode(200);
+        expect(r).to.not.be.null;
+      })
   });
-});
+});  
