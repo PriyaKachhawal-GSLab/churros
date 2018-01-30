@@ -7,6 +7,7 @@ const faker = require('faker');
 const tools = require('core/tools');
 const payload = tools.requirePayload(`${__dirname}/assets/customFields.json`);
 const temPayload = tools.requirePayload(`${__dirname}/assets/template.json`);
+const temPayload1 = tools.requirePayload(`${__dirname}/assets/template.json`);
 const commentPayload1 = tools.requirePayload(`${__dirname}/assets/comment.json`);
 const commentPayload2 = tools.requirePayload(`${__dirname}/assets/comment.json`);
 const lock = {
@@ -96,6 +97,25 @@ suite.forElement('documents', 'files', (test) => {
       .then(r => cloud.patch(`/hubs/documents/files/${id}/custom-fields/${tempKey}`, templateKeyPayload))
       .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).delete(`/hubs/documents/files/${id}/custom-fields/${tempKey}`));
   });
+
+  it('should allow RUD for /files/{id}/custom-fields-templates/{templateKeyId}/custom-fields', () => {
+    let tempKey;
+    let templateKeyPayload = {
+      "path": "/" + temPayload1.fields[0].key,
+      "value": "madhuri",
+      "scope": "enterprise"
+    };
+    return cloud.post('/hubs/documents/custom-fields/templates', temPayload1)
+      .then(r => {
+        tempKey = r.body.templateKey;
+        payload.template = r.body.templateKey;
+      })
+      .then(r => cloud.post(`/hubs/documents/files/${id}/custom-fields`, payload))
+      .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).get(`/hubs/documents/files/${id}/custom-fields-templates/${tempKey}/custom-fields`))
+      .then(r => cloud.patch(`/hubs/documents/files/${id}/custom-fields-templates/${tempKey}/custom-fields`, templateKeyPayload))
+      .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).delete(`/hubs/documents/files/${id}/custom-fields-templates/${tempKey}/custom-fields`));
+  });
+
 
   /**
    * /files/revisions endpoint doesn't return current revision.
