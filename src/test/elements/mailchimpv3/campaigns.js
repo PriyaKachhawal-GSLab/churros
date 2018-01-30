@@ -71,7 +71,7 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
         return cloud.get(`/hubs/marketing/campaigns/${campaign_id}/email-activities`);
       })
       .then((r) => {
-        email_id = r.body.emails[0].email_id;
+        email_id = r.body[0].email_id;
         expect(r).to.have.statusCode(200);
         expect(r).to.not.be.null;
       })
