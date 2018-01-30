@@ -10,7 +10,7 @@ const bullhornMaskedConfig = {
   "oauth.api.key":"********",
   "provisioning": "oauth2",
   "oauth.callback.url": "https://auth.cloudelements.io/oauth"
-}
+};
 
 suite.forPlatform('provisionv2', (test) => {
   let oauth2instanceId, oauth2instanceId2, oauth2instanceId3, oauth2instanceId4, oauth1instanceId, oauth1instanceId2;
@@ -29,7 +29,7 @@ suite.forPlatform('provisionv2', (test) => {
      return provisioner.create('bullhorn--v1')
       .then(r => {
         oauth2instanceId = r.body.id;
-        return provisioner.updateWithDefault('bullhorn--v2', null, null, r.body.id);
+        return provisioner.updateWithDefault('bullhorn--v2', config, null, r.body.id);
       })
      .then(r => expect(r.body.id).to.equal(oauth2instanceId));
    });
