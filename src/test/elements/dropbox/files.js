@@ -3,6 +3,8 @@
 const cloud = require('core/cloud');
 const suite = require('core/suite');
 const tools = require('core/tools');
+const temPayload = tools.requirePayload(`${__dirname}/assets/template.json`);
+const payload=tools.requirePayload(`${__dirname}/assets/customFields.json`);
 
 suite.forElement('documents','files',(test) => {
 
@@ -26,5 +28,29 @@ suite.forElement('documents','files',(test) => {
       .then(r => revisionId = r.body[0].id)
       .then(() => cloud.withOptions({ qs: query }).get(`${test.api}/revisions/${revisionId}`));
   });
+
+  it(' it should allow RS for /files/{id}/custom-fields-templates/{templateKeyId}/custom-fields', () => {
+    let tempKey;
+    let updatePayload = {
+      "add_or_update_fields": [
+                      {
+                          "name": "Security Policy",
+                          "value": "Confidential"
+                      }
+        ]
+    };
+    return cloud.post('/hubs/documents/custom-fields-templates', temPayload)
+        .then(r => {
+          tempKey = r.body.template_id;
+          updatePayload.add_or_update_fields[0].name = temPayload.fields[0].name;
+          payload.fields[0].name = temPayload.fields[0].name;
+        })
+        .then(r => cloud.post(`/files/${jpgFileBody.refId}/custom-fields-templates/${tempKey}/custom-fields`, payload))
+        .then(r => cloud.put(`/hubs/documents/files/${jpgFileBody.refId}/custom-fields-templates/${tempKey}/custom-fields`, updatePayload))
+        .then(r => cloud.delete(`/hubs/documents/files/${jpgFileBody.refId}/custom-fields-templates/${tempKey}/custom-fields`))
+        .then(r => cloud.delete(`/hubs/documents/custom-fields-templates/${tempKey}`));
+
+  });
+
 
 });
