@@ -174,4 +174,11 @@
         "vendorPath": "RECORDNO"
       }
     ]}
+},
+    "expense-reports": {
+    "vendorName": "expense-reports",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "expensereportid"
+    }]
   }
