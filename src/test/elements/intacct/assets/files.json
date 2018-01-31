@@ -1,4 +1,11 @@
 {
-  "supdocid":999999,
-  "description":"Test"
+  "attachments": [
+      {
+        "attachmentdata": "churrosData",
+        "attachmentname": "churrosName"
+      }
+  ],
+  "supdocid":"999999",
+  "description":"Test",
+  "supdocname": "testAtach"
 }

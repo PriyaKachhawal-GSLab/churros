@@ -10,6 +10,21 @@ const filesPayload = tools.requirePayload(`${__dirname}/assets/files.json`);
 
 
 suite.forElement('finance', 'folders', { payload: foldersPayload }, (test) => {
+
+  let folderName = "churrosFolder",
+    supdocId = 999999;
+  before(() => {
+    let beforeFoldersPayload = {
+      "folderName": "churrosFolder"
+    };
+    cloud.post(`${test.api}`, beforeFoldersPayload);
+  });
+
+  after(() => {
+    cloud.delete(`${test.api}/${folderName}/files/${supdocId}`);
+    cloud.delete(`${test.api}/${folderName}`);
+  });
+
   it(`should allow CRUDS for ${test.api}`, () => {
     let docid;
     return cloud.get(test.api)
@@ -28,19 +43,6 @@ suite.forElement('finance', 'folders', { payload: foldersPayload }, (test) => {
       expect(validValues.length).to.equal(r.body.length);
     })
     .should.return200OnGet();
-
-  let folderName = "churrosFolder",
-    supdocId = 999999;
-  before(() => {
-    let beforeFoldersPayload = {
-      "folderName": "churrosFolder"
-    };
-    cloud.post(`${test.api}`, beforeFoldersPayload);
-  });
-
-  after(() => {
-    cloud.delete(`${test.api}/${folderName}`);
-  });
 
   it(`should allow CRUDS for ${test.api}/{folderName}/files`, () => {
     let filesPatchPayload = {
