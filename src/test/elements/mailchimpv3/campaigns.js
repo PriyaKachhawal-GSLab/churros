@@ -3,6 +3,7 @@
 const suite = require('core/suite');
 const payload = require('core/tools').requirePayload(`${__dirname}/assets/campaigns.json`);
 const cloud = require('core/cloud');
+const expect = require('chakram').expect;
 
 const updatePayload = () => ({
   "recipients": {
@@ -45,8 +46,28 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
       .then(r => cloud.get(`${test.api}/${campaignId}/comments/${commentId}`))
       .then(r => cloud.patch(`${test.api}/${campaignId}/comments/${commentId}`, commentsUpdate()))
       .then(r => cloud.post(`${test.api}/${campaignId}/comments`, commentsPayload()))
-      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(`${test.api}/${campaignId}/comments`))
+      .then(r => cloud.withOptions({qs: { page: 1, pageSize: 1 } }).get(`${test.api}/${campaignId}/comments`))
       .then(r => cloud.delete(`${test.api}/${campaignId}/comments/${commentId}`))
       .then(r => cloud.delete(`${test.api}/${campaignId}`));
   });
-});
+//This test assures that there is some campaign activity on the campaign we pull for
+//GET campaigns/id/emailActivity
+  it('should allow R for campaigns/{id}/email-activities', () => {
+    let response, email_id, campaign_id;
+    return cloud.get(`/hubs/marketing/campaigns`)
+      .then((r) => {
+        let data = r.body;
+        expect(r.body).to.not.be.empty;
+        response = data.filter((obj) => {
+          return obj.report_summary;
+        });
+        campaign_id = response[0].id;
+      })
+      .then((r) => cloud.get(`/hubs/marketing/campaigns/${campaign_id}/email-activities`))
+      .then((r) => {
+        expect(r.body).to.not.be.empty;
+        email_id = r.body[0].email_id;
+      })
+      .then((r) => cloud.get(`/hubs/marketing/campaigns/${campaign_id}/email-activities/${email_id}`));
+  });
+});  
