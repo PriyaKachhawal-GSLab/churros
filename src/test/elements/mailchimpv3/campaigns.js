@@ -70,26 +70,26 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
       })
       .then((r) => cloud.get(`/hubs/marketing/campaigns/${campaign_id}/email-activities/${email_id}`));
   });
-  
+
   //This test filters for campaigns that have emails that have been opened
   //PageSize is set to 400 because there were no opened emails available on the first page of campaigns
   it('should allow R for campaigns/{id}/open-details', () => {
     let response = [];
-    let email_id, campaign_id;
+    let campaign_id;
     return cloud.withOptions({qs: { page: 1, pageSize: 400 } }).get(`${test.api}`)
       .then((r) => {
         let data = r.body;
         expect(r.body).to.not.be.empty;
         data.forEach((obj) => {
           if (obj.report_summary && obj.report_summary['opens']) {
-            response.push(obj)
+            response.push(obj);
           }
-        })
+        });
         campaign_id = response[0].id;
       })
       .then((r) => cloud.get(`/hubs/marketing/campaigns/${campaign_id}/open-details`))
       .then((r) => {
         expect(r.body).to.not.be.empty;
-      })
+      });
   }); 
 });
