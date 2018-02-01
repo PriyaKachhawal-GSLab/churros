@@ -66,7 +66,9 @@ suite.forElement('esignature', 'envelopes', (test) => {
     return cloud.withOptions(opts).postFile(test.api, path)
       .then(r => envelopeId = r.body.envelopeId)
       .then(r => cloud.post(`${test.api}/${envelopeId}/recipients`, recipient))
-      .then(r => cloud.post(`${test.api}/${envelopeId}/recipients/${recipient.agents[0].recipientId}/tabs`, tab));
+      .then(r => cloud.post(`${test.api}/${envelopeId}/recipients/${recipient.agents[0].recipientId}/tabs`, tab))
+      .then(r => cloud.get(`${test.api}/${envelopeId}/recipients`))
+      .then(r => cloud.withOptions({ qs: { where: 'include_tabs=\'true\'' } }).get(`${test.api}/${envelopeId}/recipients`));
   });
 
   test.withValidation(envelopesSchema)
