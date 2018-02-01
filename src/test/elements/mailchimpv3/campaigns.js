@@ -76,7 +76,7 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
   it('should allow R for campaigns/{id}/open-details', () => {
     let response = [];
     let campaign_id;
-    return cloud.withOptions({qs: { page: 1, pageSize: 400 } }).get(`${test.api}`)
+    return cloud.withOptions({ qs: { page: 1, pageSize: 400 } }).get(`${test.api}`)
       .then((r) => {
         let data = r.body;
         expect(r.body).to.not.be.empty;
