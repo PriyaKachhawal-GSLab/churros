@@ -159,5 +159,12 @@
       "path": "id",
       "vendorPath": "name"
     }]
+  },
+  "reporting-periods": {
+    "vendorName": "reporting-periods",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "name"
+    }]
   }
 }

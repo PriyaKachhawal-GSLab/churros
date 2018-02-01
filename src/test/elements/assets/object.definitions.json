@@ -1,4 +1,13 @@
 {
+  "reporting-periods": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    },{
+      "path": "id",
+      "type": "string"
+    }]
+  },
   "accounts": {
     "fields": [{
       "path": "idTransformed",
