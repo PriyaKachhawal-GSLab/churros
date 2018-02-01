@@ -186,7 +186,7 @@ exports.updateMetadata = (obj) => {
 * @param {object} obj CEQL object like `{qs: q:'select * from contacts limit 100 where id = 12'}
 **/
 exports.getLimit = (obj) => {
-  let limit = obj ? obj.qs ? obj.qs.q ? obj.qs.q.includes('limit') ? obj.qs.q.substring(obj.qs.q.indexOf('limit') + 6) : '' : '' : '' : '';
+  let limit = obj ? obj.qs ? obj.qs.q ? obj.qs.q.includes('limit ') ? obj.qs.q.substring(obj.qs.q.indexOf('limit ') + 6) : '' : '' : '' : '';
   if (limit && limit.includes('where')) {
     limit = limit.substring(0, limit.indexOf('where'));
   }

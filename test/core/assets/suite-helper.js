@@ -105,7 +105,7 @@ exports.mock = (baseUrl, headers, eventHeaders) => {
     .reply(200, () => new Array(10).fill({ id: '123' }))
     .get('/hubs/fakebulkhub/limitedEndpoint')
     .query({ q: 'select * from limitedEndpoint limit 5', where: '' })
-    .reply(200, () => new Array(5).fill({ id: '123' }))
+    .reply(200, () => new Array(10).fill({ id: '123' }))
     .get('/hubs/fakehub/bulk/123/status')
     .reply(200, (uri, requestBody) => {
       var out = {};
