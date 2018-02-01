@@ -81,7 +81,7 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
         let data = r.body;
         expect(r.body).to.not.be.empty;
         data.forEach((obj) => {
-          if (obj.report_summary && obj.report_summary['opens']) {
+          if (obj.report_summary && obj.report_summary.opens) {
             response.push(obj);
           }
         });
