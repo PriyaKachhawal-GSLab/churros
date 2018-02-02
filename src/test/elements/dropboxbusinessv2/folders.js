@@ -94,14 +94,19 @@ suite.forElement('documents', 'folders', (test) => {
          .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.directory === true || obj.directory === false).length));
      });
 
-   it('should allow GET /folders/contents with name', () => {
+   it.skip('should allow GET /folders/contents with name', () => {
      return cloud.withOptions({qs: { path: `/`, where: "name='dontdelete.jpg'" }, headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
        .then(r => expect(r.body[0].name).to.contain('dontdelete'));
    });
 
-   it('should allow GET /folders/contents with extension', () => {
+   it.skip('should allow GET /folders/contents with extension', () => {
      return cloud.withOptions({qs: { path: `/`, where: "extension='.csv'" }, headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
        .then(r => expect(r.body[0].name).to.contain('.csv'));
+   });
+
+   it('should return parentFolderId for GET /folders/content', ()=> {
+     return cloud.withOptions({qs: { path: `/` } , headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
+         .then(r => expect(r.body.parentFolderId).to.not.equal(null));
    });
 
    it('should allow GET /folders/contents with directory', () => {

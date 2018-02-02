@@ -1,0 +1,16 @@
+{
+  "addressbook-entries": {
+    "vendorName": "addressbook-entries",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "Key"
+    }]
+  },
+  "companies": {
+    "vendorName": "companies",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "Key"
+    }]
+  }
+}

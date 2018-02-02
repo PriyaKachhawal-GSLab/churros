@@ -3,7 +3,7 @@
 const cleaner = require('core/cleaner');
 const suite = require('core/suite');
 const common = require('./assets/common');
-const {createXInstances, genCloseioEvent, genWebhookEvent, pollAllExecutions, simulateTrigger} = require('./assets/load-common');
+const {createXInstances, genCloseioAccountEvent, genWebhookEvent, pollAllExecutions, simulateTrigger} = require('./assets/load-common');
 const cloud = require('core/cloud');
 const fSchema = require('./assets/schemas/formula.schema');
 const chakram = require('chakram');
@@ -12,7 +12,7 @@ const provisioner = require('core/provisioner');
 /**
  * Tests formula executions under heavy load (number of events, size of events, etc.)
  */
-suite.forPlatform('formulas', { name: 'formulas load', skip: false }, (test) => {
+suite.forPlatform('formulas', { name: 'formulas load', skip: true }, (test) => {
   let sfdcId, closeioId;
 
   const numFormulaInstances = process.env.NUM_FORMULA_INSTANCES ? process.env.NUM_FORMULA_INSTANCES : 1;
@@ -70,7 +70,7 @@ suite.forPlatform('formulas', { name: 'formulas load', skip: false }, (test) => 
       .then(r => formulaId = r.body.id)
       .then(() => createXInstances(numFormulaInstances, formulaId, formulaInstance))
       .then(ids => ids.map(id => formulaInstances.push(id)))
-      .then(r => simulateTrigger(numEvents, closeioId, genCloseioEvent('update', numInOneEvent), common.generateCloseioPollingEvent))
+      .then(r => simulateTrigger(numEvents, closeioId, genCloseioAccountEvent('update', numInOneEvent), common.generateCloseioPollingEvent))
       .then(r => pollAllExecutions(formulaId, formulaInstances, numInOneEvent * numEvents, 1))
       .then(r => formulaInstances.forEach(id => deletes.push(cloud.delete(`/formulas/${formulaId}/instances/${id}`))))
       .then(r => chakram.all(deletes))
@@ -95,7 +95,7 @@ suite.forPlatform('formulas', { name: 'formulas load', skip: false }, (test) => 
       .then(r => formulaId = r.body.id)
       .then(() => createXInstances(numFormulaInstances, formulaId, formulaInstance))
       .then(ids => ids.map(id => formulaInstances.push(id)))
-      .then(r => simulateTrigger(numEvents, closeioId, genCloseioEvent('update', numInOneEvent), common.generateCloseioPollingEvent))
+      .then(r => simulateTrigger(numEvents, closeioId, genCloseioAccountEvent('update', numInOneEvent), common.generateCloseioPollingEvent))
       .then(r => pollAllExecutions(formulaId, formulaInstances, numInOneEvent * numEvents, 1))
       .then(r => formulaInstances.forEach(id => deletes.push(cloud.delete(`/formulas/${formulaId}/instances/${id}`))))
       .then(r => chakram.all(deletes))
@@ -128,7 +128,7 @@ suite.forPlatform('formulas', { name: 'formulas load', skip: false }, (test) => 
       .then(r => formulaId2 = r.body.id)
       .then(() => createXInstances(numFormulaInstances, formulaId2, formulaInstance))
       .then(ids => ids.map(id => formulaInstances.push(id)))
-      .then(r => simulateTrigger(numEvents, closeioId, genCloseioEvent('update', numInOneEvent), common.generateCloseioPollingEvent))
+      .then(r => simulateTrigger(numEvents, closeioId, genCloseioAccountEvent('update', numInOneEvent), common.generateCloseioPollingEvent))
       .then(r => pollAllExecutions(formulaId, formulaInstances, numInOneEvent * numEvents, 1))
       .then(r => formulaInstances.forEach(id => deletes.push(cloud.delete(`/formulas/instances/${id}`))))
       .then(r => chakram.all(deletes))

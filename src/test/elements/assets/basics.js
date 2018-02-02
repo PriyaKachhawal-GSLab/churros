@@ -41,6 +41,10 @@
 
     it('metadata', () => cloud.get(`elements/${props.getForKey(element, 'elementId')}/metadata`).then(r => expect(r.body).to.not.be.empty && expect(r).to.have.statusCode(200)));
     it('transformations', function() {
+      if (props.get('hub') === 'documents') {
+        logger.debug('Skipping test as documents hub does not support transformations');
+        return Promise.resolve(null);
+      }
       argv.transform ? this.skip() : null; //no need to do this twice
       let isSync = argv.sync || ['netsuite', 'quickbooksonprem'].filter(e => element.includes(e)).length > 0;
       let error;

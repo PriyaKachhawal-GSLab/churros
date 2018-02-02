@@ -20,6 +20,12 @@ describe('chakram defaults', () => {
     defaults.token('token');
   });
 
+  it('should support changing chakram defaults after they have been initialized', () => {
+    defaults('url', 'user', 'org', 'unitTester');
+    defaults.withDefaults('user', 'org', 'unitTester');
+  });
+
+
   it('should throw error if setting chakram defaults improperly', () => {
     try {
       defaults();

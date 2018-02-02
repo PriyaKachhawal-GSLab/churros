@@ -1,0 +1,65 @@
+{
+  "employeeid": "1",
+  "datecreated": {
+    "year": "2016",
+    "month": "09",
+    "day": "09"
+  },
+  "dateposted": {
+    "year": "2016",
+    "month": "09",
+    "day": "09"
+  },
+  "state": "Submitted",
+  "description": "Travel to client",
+  "memo": "FFFF",
+  "itemid": "desk",
+  "basecurr": "USD",
+  "currency": "USD",
+  "updateexpenses": {
+    "expense": [{
+      "employeeid": "2",
+      "expensetype": "Telephone",
+      "currency": "USD",
+      "trx_amount": "12",
+      "exchratetype": "Test",
+      "form1099": "false",
+      "locationid": "100",
+      "memo": "Marriott",
+      "paidfor": "Hotel",
+      "amount": "50",
+      "exchratedate": {
+        "year": "2015",
+        "month": "09",
+        "day": "01"
+      },
+      "expensedate": {
+        "year": "2015",
+        "month": "09",
+        "day": "01"
+      },
+      "customfields": {
+        "customfield": [{
+            "customfieldname": "TESTDATer1",
+            "customfieldvalue": "12/10/2001"
+          },
+          {
+            "customfieldname": "TESTTEXTer1",
+            "customfieldvalue": "CustomFieldTexter1"
+          }
+        ]
+      }
+    }]
+  },
+  "customfields": {
+    "customfield": [{
+        "customfieldname": "TESTDATer1",
+        "customfieldvalue": "12/10/2001"
+      },
+      {
+        "customfieldname": "TESTTEXTer1",
+        "customfieldvalue": "CustomFieldTexter1"
+      }
+    ]
+  }
+}

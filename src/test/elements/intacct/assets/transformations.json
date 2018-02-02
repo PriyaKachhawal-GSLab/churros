@@ -165,6 +165,23 @@
     "fields": [{
       "path": "id",
       "vendorPath": "name"
+    }
+	]
+	},
+    "checking-accounts": {
+      "vendorName": "",
+      "fields": [
+        {
+          "path": "id",
+          "vendorPath": "RECORDNO"
+        }
+      ]
+    },
+    "expense-reports": {
+    "vendorName": "expense-reports",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "expensereportid"
     }]
   }
-}
+  }
