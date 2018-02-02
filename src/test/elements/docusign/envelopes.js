@@ -58,7 +58,7 @@ suite.forElement('esignature', 'envelopes', (test) => {
       .then(r => cloud.get(`${test.api}/${envelopeId}/documents/certificates`));
   });
 
-  it(`should support create on ${test.api}/:id/recipients and ${test.api}/:id/recipients/:id/tabs`, () => {
+  it(`should support CR on ${test.api}/:id/recipients and ${test.api}/:id/recipients/:id/tabs`, () => {
     let envelopeId = "-1";
     let path = __dirname + '/assets/MrRobotPdf.pdf';
     const opts = { formData: { envelope: JSON.stringify(createPayload) } };
