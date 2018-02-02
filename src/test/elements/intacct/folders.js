@@ -21,7 +21,7 @@ suite.forElement('finance', 'folders', { payload: foldersPayload }, (test) => {
   });
 
   after(() => {
-    cloud.delete(`${test.api}/${folderName}/files/${supdocId}`);
+    //cloud.delete(`${test.api}/${folderName}/files/${supdocId}`);
     cloud.delete(`${test.api}/${folderName}`);
   });
 
