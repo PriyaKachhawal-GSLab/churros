@@ -71,6 +71,16 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
       .then((r) => cloud.get(`/hubs/marketing/campaigns/${campaign_id}/email-activities/${email_id}`));
   });
 
+  it('should allow S for since date for campaigns/{id}/open-details', () => {
+    let date = new Date();
+    let campaign_id;
+    return cloud.get(`/hubs/marketing/campaigns`)
+      .then((r) => {
+      campaign_id = r.body[0].id;
+      })
+      .then((r) => cloud.withOptions({ qs: { where: `since = '${date}'` } }).get(`/hubs/marketing/campaigns/${campaign_id}/email-activities`))
+  })
+
   //This test filters for campaigns that have emails that have been opened
   //The first test path uses a hardcoded id set to a campaign with open activity
   //The second test path dynamically looks for a campaignId with open activity
@@ -86,20 +96,20 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
         if(r.body[0]) {
           expect(r.body[0].opens).to.not.be.empty;
         } else {
-          campaign_id;
-          return cloud.withOptions({ qs: { page: 1, pageSize: 400 } }).get(`${test.api}`)
-            .then((r) => {
-              let data = r.body;
-              data.forEach((obj) => {
-              if (obj.report_summary && obj.report_summary.opens) {
-              response.push(obj);
-              }
-            });
-            campaign_id = response[0].id;
-          })
-          .then((r) => cloud.get(`/hubs/marketing/campaigns/${campaign_id}/open-details`))
-          expect(r.body[0].opens).to.not.be.empty;
-        }
-      })
-    }) 
+        campaign_id;
+        return cloud.withOptions({ qs: { page: 1, pageSize: 400 } }).get(`${test.api}`)
+          .then((r) => {
+            let data = r.body;
+            data.forEach((obj) => {
+            if (obj.report_summary && obj.report_summary.opens) {
+            response.push(obj);
+            }
+          });
+          campaign_id = response[0].id;
+        })
+        .then((r) => cloud.get(`/hubs/marketing/campaigns/${campaign_id}/open-details`))
+        expect(r.body[0].opens).to.not.be.empty;
+      }
+    })
+  });
 });
