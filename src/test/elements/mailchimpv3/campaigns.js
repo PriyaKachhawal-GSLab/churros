@@ -72,24 +72,34 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
   });
 
   //This test filters for campaigns that have emails that have been opened
+  //The first test path uses a hardcoded id set to a campaign with open activity
+  //The second test path dynamically looks for a campaignId with open activity
   //PageSize is set to 400 because there were no opened emails available on the first page of campaigns
+  //campaignId with email activity = 73e5c1ca8d
+  //CampaignId with no email activity = 03747e516a
   it('should allow R for campaigns/{id}/open-details', () => {
     let response = [];
     let campaign_id;
-    return cloud.withOptions({ qs: { page: 1, pageSize: 400 } }).get(`${test.api}`)
+    let hardcoded_campaign_id = '73e5c1ca8d';
+    return cloud.get(`/hubs/marketing/campaigns/${hardcoded_campaign_id}/open-details`)
       .then((r) => {
-        let data = r.body;
-        expect(r.body).to.not.be.empty;
-        data.forEach((obj) => {
-          if (obj.report_summary && obj.report_summary.opens) {
-            response.push(obj);
-          }
-        });
-        campaign_id = response[0].id;
+        if(r.body[0]) {
+          expect(r.body[0].opens).to.not.be.empty;
+        } else {
+          campaign_id;
+          return cloud.withOptions({ qs: { page: 1, pageSize: 400 } }).get(`${test.api}`)
+            .then((r) => {
+              let data = r.body;
+              data.forEach((obj) => {
+              if (obj.report_summary && obj.report_summary.opens) {
+              response.push(obj);
+              }
+            });
+            campaign_id = response[0].id;
+          })
+          .then((r) => cloud.get(`/hubs/marketing/campaigns/${campaign_id}/open-details`))
+          expect(r.body[0].opens).to.not.be.empty;
+        }
       })
-      .then((r) => cloud.get(`/hubs/marketing/campaigns/${campaign_id}/open-details`))
-      .then((r) => {
-        expect(r.body).to.not.be.empty;
-      });
-  }); 
+    }) 
 });
