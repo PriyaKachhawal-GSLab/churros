@@ -78,8 +78,8 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
       .then((r) => {
       campaign_id = r.body[0].id;
       })
-      .then((r) => cloud.withOptions({ qs: { where: `since = '${date}'` } }).get(`/hubs/marketing/campaigns/${campaign_id}/email-activities`))
-  })
+      .then((r) => cloud.withOptions({ qs: { where: `since = '${date}'` } }).get(`/hubs/marketing/campaigns/${campaign_id}/email-activities`));
+  });
 
   //This test filters for campaigns that have emails that have been opened
   //The first test path uses a hardcoded id set to a campaign with open activity
@@ -111,7 +111,7 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
         .then((r) => {
           expect(r.body[0].opens).to.not.be.empty;
         });
-      };
+      }
     });
   });
 });
