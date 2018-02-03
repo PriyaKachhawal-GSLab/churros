@@ -108,8 +108,10 @@ suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
           campaign_id = response[0].id;
         })
         .then((r) => cloud.get(`/hubs/marketing/campaigns/${campaign_id}/open-details`))
-        expect(r.body[0].opens).to.not.be.empty;
+        .then((r) => {
+          expect(r.body[0].opens).to.not.be.empty;
+        })
       }
-    })
+    });
   });
 });
