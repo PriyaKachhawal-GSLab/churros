@@ -88,4 +88,6 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
     return cloud.withOptions({ qs: { path: `/${directoryPath}`, where: "mimeType='text/plain'" } }).get(`${test.api}/contents`)
       .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.properties.mimeType === 'text/plain').length));
   });
+
+  test.withOptions({ qs: { path: '/' } }).withApi('/folders/contents').should.supportPagination('id');
 });
