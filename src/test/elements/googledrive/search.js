@@ -28,8 +28,8 @@ suite.forElement('documents', 'search', null, (test) => {
   });
 
   test.withApi(test.api)
-    .withName(`should allow GET for /search with use of the orderBy createdDate parameter`)
-    .withOptions({ qs: { pageSize: 5, page: 1, orderBy: `createdDate asc` } })
+    .withName(`should allow GET for /search  with orderBy createdDate asc`)
+    .withOptions({ qs: { pageSize: 5, page: 1, orderBy: `createdDate asc`, calculateFolderPath: false } })
     .withValidation(r => {
       date1 = new Date(r.body[0].createdDate).getTime();
       date2 = new Date(r.body[1].createdDate).getTime();
@@ -38,8 +38,8 @@ suite.forElement('documents', 'search', null, (test) => {
     .should.return200OnGet();
 
   test.withApi(test.api)
-    .withName(`should allow GET for /search with use of the orderBy createdDate parameter`)
-    .withOptions({ qs: { pageSize: 5, page: 1, orderBy: `createdDate desc` } })
+    .withName(`should allow GET for /search  with orderBy createdDate desc`)
+    .withOptions({ qs: { pageSize: 5, page: 1, orderBy: `createdDate desc`, calculateFolderPath: false } })
     .withValidation(r => {
       date1 = new Date(r.body[0].createdDate).getTime();
       date2 = new Date(r.body[1].createdDate).getTime();

@@ -90,8 +90,8 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
   });
 
   test.withApi(`/folders/contents`)
-    .withName(`should allow GET for /folders/contents with use of the orderBy modifiedDate parameter`)
-    .withOptions({ qs: { path: `/`, pageSize: 5, page: 1, orderBy: `modifiedDate asc` } })
+    .withName(`should allow GET for /folders/contents with orderBy modifiedDate asc`)
+    .withOptions({ qs: { path: `/`, pageSize: 5, page: 1, orderBy: `modifiedDate asc`, calculateFolderPath: false } })
     .withValidation(r => {
       date1 = new Date(r.body[0].createdDate).getTime();
       date2 = new Date(r.body[1].createdDate).getTime();
@@ -100,31 +100,14 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
     .should.return200OnGet();
 
     test.withApi(`${test.api}/root/contents`)
-        .withName(`should allow GET for /folders/:id/contents with use of the orderBy createdDate parameter`)
-        .withOptions({ qs: {  pageSize: 5, page: 1, orderBy: `createdDate desc` } })
+        .withName(`should allow GET for /folders/contents with orderBy createdDate desc`)
+        .withOptions({ qs: {  pageSize: 5, page: 1, orderBy: `createdDate desc`, calculateFolderPath: false } })
         .withValidation(r => {
           date1 = new Date(r.body[0].createdDate).getTime();
           date2 = new Date(r.body[1].createdDate).getTime();
           expect(date1 >= date2).to.be.true;
         })
         .should.return200OnGet();
-
-  //Skipping as soba PR is on hold
-  it.skip('should not return the path for GET /folders/contents?includePath=false', () => {
-    return cloud.withOptions({ qs: { includePath: false, path: `/${directoryPath}` } }).get(`${test.api}/contents`)
-      .then(r => {
-        expect(r.body[0].name).to.exist;
-        expect(r.body[0].path).to.be.undefined;
-      });
-  });
-
-  //Skipping as soba PR is on hold
-  it.skip('should not return the path for GET /folders/:id/contents?includePath=false', () => {
-    return cloud.withOptions({ qs: { includePath: false } }).get(`${test.api}/${directoryId}/contents`)
-      .then(r => {
-        expect(r.body[0].name).to.exist;
-        expect(r.body[0].path).to.be.undefined;
-      });
   });
 
 });
