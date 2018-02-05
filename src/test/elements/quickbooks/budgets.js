@@ -1,7 +1,6 @@
 'use strict';
 
 const suite = require('core/suite');
-const tools = require('core/tools');
 
 suite.forElement('finance', 'budgets', (test) => {
   test.should.supportSr();
