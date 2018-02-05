@@ -20,12 +20,7 @@ suite.forElement('finance', 'folders', { payload: foldersPayload }, (test) => {
     cloud.post(`${test.api}`, beforeFoldersPayload);
   });
 
-  after(() => {
-    //cloud.delete(`${test.api}/${folderName}/files/${supdocId}`);
-    cloud.delete(`${test.api}/${folderName}`);
-  });
-
-  it(`should allow CRUDS for ${test.api}`, () => {
+  (`should allow CRUDS for ${test.api}`, () => {
     let docid;
     return cloud.get(test.api)
       .then(r => docid = r.body[0].id)
@@ -44,19 +39,23 @@ suite.forElement('finance', 'folders', { payload: foldersPayload }, (test) => {
     })
     .should.return200OnGet();
 
+  let beforeFoldersPayload1 = {
+    "folderName": tools.randomStr()
+  };
+  let fileFolderName = beforeFoldersPayload1.folderName;
   it(`should allow CRUDS for ${test.api}/{folderName}/files`, () => {
     let filesPatchPayload = {
       "description": "Churros update"
     };
-
-    return cloud.post(`${test.api}/${folderName}/files`, filesPayload)
-      .then(r => cloud.get(`${test.api}/${folderName}/files`))
+    cloud.post(`${test.api}`, beforeFoldersPayload1);
+    return cloud.post(`${test.api}/${fileFolderName}/files`, filesPayload)
+      .then(r => cloud.get(`${test.api}/${fileFolderName}/files`))
       .then(r => supdocId = r.body[0].supdocid)
-      .then(r => cloud.patch(`${test.api}/${folderName}/files/${supdocId}`, filesPatchPayload))
-      .then(r => cloud.delete(`${test.api}/${folderName}/files/${supdocId}`));
+      .then(r => cloud.patch(`${test.api}/${fileFolderName}/files/${supdocId}`, filesPatchPayload))
+      .then(r => cloud.delete(`${test.api}/${fileFolderName}/files/${supdocId}`));
   });
-  test.withApi(`${test.api}/${folderName}/files`).should.supportPagination();
-  test.withApi(`${test.api}/${folderName}/files`).withName('should support  description = {string} Ceql search')
+  test.withApi(`${test.api}/${fileFolderName}/files`).should.supportPagination();
+  test.withApi(`${test.api}/${fileFolderName}/files`).withName('should support  description = {string} Ceql search')
     .withOptions({ qs: { where: 'description=\'Test\'' } })
     .withValidation(r => {
       expect(r).to.statusCode(200);
@@ -64,4 +63,10 @@ suite.forElement('finance', 'folders', { payload: foldersPayload }, (test) => {
       expect(validValues.length).to.equal(r.body.length);
     })
     .should.return200OnGet();
+
+  after(() => {
+    cloud.delete(`${test.api}/${folderName}`);
+    cloud.delete(`${test.api}/${fileFolderName}`);
+  });
+
 });
