@@ -9,7 +9,7 @@ suite.forElement('employee', 'locations', (test) => {
   let locId, paymentId, business, businessName = 'Cloud Elements';
   before(() => cloud.get(test.api)
     .then(r => {
-      business = r.body.filter(obj => obj['business_name'] && obj['business_name'] === businessName);
+      business = r.body.filter(obj => obj.business_name && obj.business_name === businessName);
       expect(business).to.not.be.empty;
       locId = business[0].id;
     }));
