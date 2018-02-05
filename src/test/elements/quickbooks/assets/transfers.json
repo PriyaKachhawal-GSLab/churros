@@ -1,0 +1,11 @@
+{
+  "amount": "<<random.number>>",
+  "toAccountRef": {
+    "name": "<<random.word>>",
+    "value": "58"
+  },
+  "fromAccountRef": {
+    "name": "<<random.word>>",
+    "value": "59"
+  }
+}
