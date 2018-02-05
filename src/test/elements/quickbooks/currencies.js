@@ -1,6 +1,7 @@
 'use strict';
 
 const suite = require('core/suite');
+const tools = require('core/tools');
 const payload = tools.requirePayload(`${__dirname}/assets/currencies.json`);
 
 suite.forElement('finance', 'currencies', { payload: payload }, (test) => {
