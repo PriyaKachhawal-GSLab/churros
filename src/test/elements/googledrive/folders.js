@@ -108,6 +108,4 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
           expect(date1 >= date2).to.be.true;
         })
         .should.return200OnGet();
-  });
-
 });
