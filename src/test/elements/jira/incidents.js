@@ -80,7 +80,7 @@ suite.forElement('helpdesk', 'incidents', { payload: payload }, (test) => {
     }));
 
 
-  it(`should allow GET /incidents with option defultfields LIKE`, () => {
+  it(`should allow GET /incidents with option defaultFields LIKE`, () => {
     return cloud.withOptions({ qs: { where: `summary LIKE '${summary}'` } }).get(test.api)
       .then(r => expect(r.body[0].fields.summary).to.contains(`${summary}`));
   });
