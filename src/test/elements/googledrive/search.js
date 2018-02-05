@@ -8,7 +8,14 @@ const folderPayload = { path: '/entirely-new-folder' };
 
 suite.forElement('documents', 'search', null, (test) => {
 
+
   let date1, date2;
+
+  before(done => {
+    // GDrive needs some time to process deleting files in a previous test :[
+    setTimeout(done, 2000);
+  });
+
 
   test.withOptions({ qs: { text: tools.random() } }).should.return200OnGet();
 
@@ -22,8 +29,10 @@ suite.forElement('documents', 'search', null, (test) => {
     let folder;
     return cloud.post('/folders', folderPayload)
       .then(r => folder = r.body)
-      .then(r => cloud.withOptions({ qs: { calculateFolderPath: false, path: folderPayload.path } }).get(test.api))
+      .then(r => cloud.withOptions({ qs: { calculateFolderPath: true, path: folderPayload.path } }).get(test.api))
       .then(r => expect(r.body).to.have.lengthOf(1) && expect(r.body[0].path).to.equal(folder.path))
+      .then(r => cloud.withOptions({ qs: { calculateFolderPath: false, path: folderPayload.path, text: 'test' } }).get(test.api))
+      .then(r => expect(r.body).to.not.be.empty && expect(r.body.filter(obj => obj.path)).to.be.empty && expect(r.body.filter(obj => obj.name.toLowerCase().includes('test'))).to.have.lengthOf(r.body.length))
       .then(r => cloud.delete(`/folders/${folder.id}`));
   });
 
@@ -48,5 +57,6 @@ suite.forElement('documents', 'search', null, (test) => {
     .should.return200OnGet();
 
   // GDrive needs some time to process deleting files in a previous test :[
+
   test.should.supportPagination('id');
 });

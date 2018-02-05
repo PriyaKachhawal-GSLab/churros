@@ -97,6 +97,7 @@ const itPagination = (name, api, options, validationCb, unique) => {
   const pageSize = options ? options.qs ? options.qs.pageSize ? options.qs.pageSize : 2 : 2 : 2;
   const page = options ? options.qs ? options.qs.page ? options.qs.page : 1 : 1 : 1;
   const where = options ? options.qs ? options.qs.where ? options.qs.where : null : null: null;
+  const path = options ? options.qs ? options.qs.path ? options.qs.path : null : null: null;
   const options1 = Object.assign({}, options, { qs: { page: page, pageSize: pageSize } });
   const options2 = Object.assign({}, options, { qs: { page: page + 1, pageSize: pageSize } });
   const options3 = Object.assign({}, options, { qs: { page: page, pageSize: (pageSize * 2) } });
@@ -104,6 +105,7 @@ const itPagination = (name, api, options, validationCb, unique) => {
   const getWithOptions = (option, result) => {
     // Adding the 'where' clause if it exists
     if (where) option.qs.where = where;
+    if (path) option.qs.path = path;
     return cloud.withOptions(option).get(api)
       .then((r) => {
         if (r.body && r.body.length > 0) {

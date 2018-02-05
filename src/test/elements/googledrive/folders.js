@@ -89,6 +89,7 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
       .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.properties.mimeType === 'text/plain').length));
   });
 
+
   test.withApi(`/folders/contents`)
     .withName(`should allow GET for /folders/contents with orderBy modifiedDate asc`)
     .withOptions({ qs: { path: `/`, pageSize: 5, page: 1, orderBy: `modifiedDate asc`, calculateFolderPath: false } })
@@ -108,4 +109,7 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
           expect(date1 >= date2).to.be.true;
         })
         .should.return200OnGet();
+
+  test.withOptions({ qs: { path: '/' } }).withApi('/folders/contents').should.supportPagination('id');
+
 });
