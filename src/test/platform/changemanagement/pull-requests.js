@@ -18,17 +18,17 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)
 
   test.withOptions({churros: {updatePayload: {status: 'changesRequested'}}}).should.supportCrud();
 
+  // NOTE: you must run this test as a user with the superModelAdmin privilege
   it('should support searching by a status as a super user', () => {
     const validator = (r, num) => {
         expect(r).to.have.statusCode(200);
         expect(r.body.length).to.equal(num);
-      };
+    };
   
-      let prs = [];
-      let deletes = [];
-      let startDate, endDate;
+    let prs = [];
+    let deletes = [];
   
-      return cloud.post('/change-management/pull-requests', genPr('model', 2, 'first'))
+    return cloud.post('/change-management/pull-requests', genPr('model', 2, 'first'))
         .then(r => cloud.patch(`/change-management/pull-requests/${r.body.id}`, {status: 'changesRequested'}))
         .then(r => prs.push(r.body))
         .then(() => cloud.post('/change-management/pull-requests', genPr('model', 2, 'second')))
@@ -44,17 +44,4 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)
         .then(() => prs.forEach(p => deletes.push(cloud.delete(`/change-management/pull-requests/${p.id}`))))
         .then(() => chakram.all(deletes));
   });
-
-  it('should support updating the status as a super user', () => {
-    const validator = (r, num) => {
-        expect(r).to.have.statusCode(200);
-        expect(r.body.length).to.equal(num);
-      };
-  
-      let prs = [];
-      let deletes = [];
-  
-      return ;
-    });
-
 });
