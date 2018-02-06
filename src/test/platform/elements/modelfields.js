@@ -4,7 +4,6 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const schema = require('./assets/element.elementmodel.schema.json');
 const modelpayload = require('core/tools').requirePayload(`${__dirname}/assets/element.elementmodel.payload.json`);
-const fieldSchema = require('./assets/element.elementmodel.schema.json');
 const fieldPayload = require('core/tools').requirePayload(`${__dirname}/assets/element.elementmodelfield.payload.json`);
 
 const opts = { payload: fieldPayload, schema: schema };
@@ -38,13 +37,13 @@ suite.forPlatform('elements/modelfields', opts, (test) => {
     })
     .then(r => cloud.post(`elements/${element.id}/models`, modelpayload))
     .then(r => {
-        newModelId = r.body.id
+        newModelId = r.body.id;
       })
     );
   
   after(() => {
-    cloud.delete(idUrlWithModel)
-    cloud.delete(`elements/${element.id}/models/${newModelId}`)
+    return cloud.delete(idUrlWithModel)
+    .then(r => cloud.delete(`elements/${element.id}/models/${newModelId}`));
   });
 
   it('should support CRUD by id for fields', () => crudsObject(idUrlWithModel + '/fields', schema, genObject({relationships:[newModelId]}), genObject({ createdDateName: "created_date", relationships:[newModelId] })));

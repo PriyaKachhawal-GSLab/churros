@@ -4,8 +4,6 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const schema = require('./assets/element.elementmodel.schema.json');
 const payload = require('core/tools').requirePayload(`${__dirname}/assets/element.elementmodelfield.payload.json`);
-const fieldSchema = require('./assets/element.elementmodel.schema.json');
-const fieldPayload = require('core/tools').requirePayload(`${__dirname}/assets/element.elementmodelfield.payload.json`);
 
 const opts = { payload: payload, schema: schema };
 
