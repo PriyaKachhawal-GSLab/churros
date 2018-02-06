@@ -25,7 +25,7 @@ const genObject = (opts) => {
   return newPayload;
 };
 
-suite.forPlatform('elements/models', opts, (test) => {
+suite.forPlatform('elements/modelfields', opts, (test) => {
   let element, keyUrl, idUrl, modelId, idUrlWithModel, newModelId;
   before(() => cloud.get(`elements/closeio`)
     .then(r => element = r.body)

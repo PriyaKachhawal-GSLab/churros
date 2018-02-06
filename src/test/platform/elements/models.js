@@ -31,6 +31,5 @@ suite.forPlatform('elements/models', opts, (test) => {
     .then(r => keyUrl = `<eleme></eleme>nts/${element.key}/models`)
     .then(r => idUrl = `elements/${element.id}/models`));
 
-  //it('should support CRUD by key', () => crudsObject(keyUrl, schema, genObject({}), genObject({ createdDateName: "created_date" })));
-  it('should support CRUD by id', () => crudsObject(idUrl, schema, genObject({}), genObject({ createdDateName: "created_date" })));
+  it('should support CRUD for models', () => crudsObject(idUrl, schema, genObject({}), genObject({ createdDateName: "created_date" })));
 });
