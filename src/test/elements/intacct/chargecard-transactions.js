@@ -3,7 +3,7 @@
 const suite = require('core/suite');
 const expect = require('chakram').expect;
 
-suite.forElement('finance', 'cc-transactions', (test) => {
+suite.forElement('finance', 'chargecard-transactions', (test) => {
   test.should.supportSr();
   test.should.supportNextPagePagination(2, false);
   test

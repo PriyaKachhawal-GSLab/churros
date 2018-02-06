@@ -139,8 +139,8 @@
       "vendorPath": "gltransactionid"
     }]
   },
-  "cc-transactions": {
-    "vendorName": "cc-transactions",
+  "chargecard-transactions": {
+    "vendorName": "chargecard-transactions",
     "fields": [{
       "path": "id",
       "vendorPath": "RECORDNO"
@@ -172,9 +172,8 @@
     "fields": [{
         "path": "id",
         "vendorPath": "RECORDNO"
-      }
-    ]}
-},
+      }]
+  },
     "expense-reports": {
     "vendorName": "expense-reports",
     "fields": [{
@@ -182,3 +181,4 @@
       "vendorPath": "expensereportid"
     }]
   }
+}

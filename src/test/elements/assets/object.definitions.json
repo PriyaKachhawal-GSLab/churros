@@ -1825,7 +1825,7 @@
       "type": "string"
     }]
   },
-  "cc-transactions": {
+  "chargecard-transactions": {
     "fields": [{
       "path": "idTransformed",
       "type": "string"
