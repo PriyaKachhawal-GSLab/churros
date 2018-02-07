@@ -11,7 +11,7 @@ before(() => cloud.get('/invoices')
   .then(r => {
     expect(r.body).to.not.be.empty;
     payload.invoiceid = r.body[0].id;
-    payload.date = new Date().toISOString().substring(0, 10);;
+    payload.date = new Date().toISOString().substring(0, 10);
   }));
 suite.forElement('finance', 'payments', { payload: payload }, (test) => {
 

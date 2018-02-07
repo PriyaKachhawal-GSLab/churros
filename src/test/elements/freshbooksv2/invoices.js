@@ -11,7 +11,7 @@ before(() => cloud.get('/customers')
   .then(r => {
     expect(r.body).to.not.be.empty;
     payload.customerid = r.body[0].id;
-    payload.create_date = new Date().toISOString().substring(0, 10);;
+    payload.create_date = new Date().toISOString().substring(0, 10);
   }));
 suite.forElement('finance', 'invoices', { payload: payload }, (test) => {
   test.should.supportCruds();
