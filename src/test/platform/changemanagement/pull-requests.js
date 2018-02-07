@@ -20,9 +20,23 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)
 
   // NOTE: you must run this test as a user with the superModelAdmin privilege
   it('should support searching by a status as a super user', () => {
-    const validator = (r, num) => {
+    const validatorAll = (r, num) => {
         expect(r).to.have.statusCode(200);
-        expect(r.body.length).to.equal(num);
+        expect(r.body.length >= num).to.equal(true);
+    };
+
+    const validator = (r, status) => {
+        expect(r).to.have.statusCode(200);
+        r.body.forEach(pr => {
+            expect(pr.status).to.equal(status);
+        }) 
+    };
+
+    const validatorOr = (r, status1, status2) => {
+        expect(r).to.have.statusCode(200);
+        r.body.forEach(pr => {
+            expect(pr.status === status1 || pr.status === status2).to.equal(true);
+        }) 
     };
   
     let prs = [];
@@ -38,9 +52,9 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)
         .then(r => prs.push(r.body))
         .then(() => cloud.post('/change-management/pull-requests', genPr('model', 2, 'fourth')))
         .then(r => prs.push(r.body))
-        .then(() => cloud.get(`/change-management/pull-requests?statuses%5B%5D=created`, r => validator(r, 2)))
-        .then(() => cloud.get(`/change-management/pull-requests?statuses%5B%5D=changesRequested%2C%20declined`, r => validator(r, 2)))
-        .then(() => cloud.get(`/change-management/pull-requests`, r => validator(r, 4)))
+        .then(() => cloud.get(`/change-management/pull-requests?statuses%5B%5D=created`, r => validator(r, 'created')))
+        .then(() => cloud.get(`/change-management/pull-requests?statuses%5B%5D=changesRequested%2C%20declined`, r => validatorOr(r, 'changesRequested', 'declined')))
+        .then(() => cloud.get(`/change-management/pull-requests`, r => validatorAll(r, 4)))
         .then(() => prs.forEach(p => deletes.push(cloud.delete(`/change-management/pull-requests/${p.id}`))))
         .then(() => chakram.all(deletes));
   });
