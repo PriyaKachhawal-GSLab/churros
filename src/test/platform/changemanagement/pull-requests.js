@@ -29,14 +29,14 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)
         expect(r).to.have.statusCode(200);
         r.body.forEach(pr => {
             expect(pr.status).to.equal(status);
-        }) 
+        });
     };
 
     const validatorOr = (r, status1, status2) => {
         expect(r).to.have.statusCode(200);
         r.body.forEach(pr => {
             expect(pr.status === status1 || pr.status === status2).to.equal(true);
-        }) 
+        }); 
     };
   
     let prs = [];
