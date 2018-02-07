@@ -250,6 +250,13 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('pass')).sendKeys(password);
       browser.findElement(webdriver.By.name('submit')).click();
       return browser.getCurrentUrl();
+      case 'freshbooksv2':
+      browser.get(r.body.oauthUrl);
+      browser.findElement(webdriver.By.id('identity_email')).sendKeys(username);
+      browser.findElement(webdriver.By.id('identity_password')).sendKeys(password);
+      browser.findElement(webdriver.By.name('commit')).click();
+      browser.sleep(2000);
+      return browser.getCurrentUrl();
     case 'googlesuite':
     case 'googlesheets':
     case 'googledrive':
