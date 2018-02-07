@@ -1,7 +1,6 @@
 'use strict';
 
 const suite = require('core/suite');
-const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
 suite.forElement('finance', 'transactions', (test) => {
@@ -24,5 +23,5 @@ suite.forElement('finance', 'transactions', (test) => {
     qs: {
       q: 'select * from transactions limit 200'
     }
-  }, opts, 'transactions')
+  }, opts, 'transactions');
 });
