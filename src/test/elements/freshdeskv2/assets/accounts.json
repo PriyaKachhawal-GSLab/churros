@@ -1,4 +1,6 @@
 {
-  "name": "<<name.firstName>><<name.lastName>>",
-  "description": "<<random.words>>"
+  "customer": {
+      "name": "<<name.firstName>>",
+      "description": "<<random.words>>"
+    }
 }

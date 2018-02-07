@@ -1843,7 +1843,6 @@
      "path": "id",
      "type": "string"
    }]
- }
  },"checking-accounts": {
     "fields": [{
       "path": "idTransformed",
