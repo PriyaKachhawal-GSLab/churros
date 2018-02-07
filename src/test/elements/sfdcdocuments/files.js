@@ -45,7 +45,7 @@ suite.forElement('documents', 'files', null, (test) => {
       .then(r => cloud.delete(`${test.api}/${fileId}`));
   });
   
-   it('should allow CRDS for ${test.api}/:id/comments', () => {
+   it('should allow CRDS for hubs/documents/files/:id/comments', () => {
     let commentId, fileId, UploadFile = __dirname + '/assets/test.txt';
     return cloud.withOptions({ qs: { path: `/${tools.random()}` } }).postFile(test.api, UploadFile)
       .then(r => fileId = r.body.feedId)
