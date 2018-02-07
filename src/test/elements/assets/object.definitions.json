@@ -1816,6 +1816,34 @@
      "path": "id",
      "type": "string"
    }]
+ },
+ "exchange-rates": {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ },
+ "exchange-rate-entries": {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ },
+ "exchange-rate-types": {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ }
  },"checking-accounts": {
     "fields": [{
       "path": "idTransformed",
