@@ -10,7 +10,7 @@ const folderPayload = build({ name: `churros-${tools.random()}`, path: `/${tools
 const expect = require('chakram').expect;
 
 suite.forElement('documents', 'folders', (test) => {
-let folderId;
+//let folderId;
   const folderWrap = (cb) => {
     let folder;
     let random = `${tools.random()}`;
@@ -64,7 +64,7 @@ let folderId;
     return folderWrap(cb);
   });
 
-  it(`should allow CD ${test.api} for special characters`, () => {
+  it.skip(`should allow CD ${test.api} for special characters`, () => {
     let id;
     let nestedFolder = {
       'path': `${specialFolderPayload.path}/œ-stuff`,
@@ -95,7 +95,7 @@ let folderId;
       });
   });
 
-  before(() => cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
+  /*before(() => cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
       .then(r => folderId = r.body.filter(obj => obj.name === "dontdelete_folder_churros")[0].id));
 
   it('should allow GET /folders/contents with name', () => {
@@ -116,6 +116,6 @@ let folderId;
   it('should allow GET /folders/:id/contents with extension', () => {
     return cloud.withOptions({ qs: { where: "extension='.txt'" } }).get(`${test.api}/${folderId}/contents`)
       .then(r => expect(r.body[0].name).to.contain('.txt'));
-  });
+  });*/
 
 });

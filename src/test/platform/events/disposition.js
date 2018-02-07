@@ -17,6 +17,7 @@ const signatureKey = '1234efgh5678dcba';
 suite.forPlatform('events', { name: 'event disposition' }, (test) => {
   let instanceId, formulaId, formulaInstanceId;
   const element = props.getForKey('events', 'element');
+  formula.engine = process.env.CHURROS_FORMULAS_ENGINE;
 
   before(() => {
     return provisioner.create(element, common.gen({}, props.getForKey('events', 'url'), signatureKey))

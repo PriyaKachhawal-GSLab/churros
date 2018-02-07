@@ -9,6 +9,12 @@ const payload = tools.requirePayload(`${__dirname}/assets/customFields.json`);
 const temPayload = tools.requirePayload(`${__dirname}/assets/template.json`);
 const commentPayload1 = tools.requirePayload(`${__dirname}/assets/comment.json`);
 const commentPayload2 = tools.requirePayload(`${__dirname}/assets/comment.json`);
+const folderPayload = require('./assets/folders');
+
+const randomInt = tools.randomInt();
+folderPayload.path += randomInt;
+folderPayload.name += randomInt;
+
 const lock = {
   "is_download_prevented": false,
   "expires_at": "2030-12-12T10:55:30-08:00"
@@ -28,6 +34,19 @@ suite.forElement('documents', 'files', (test) => {
   afterEach(done => {
     //We were getting a 429 before this
     setTimeout(done, 2500);
+  });
+
+  it('should allow POST /files by providing folder id', () => {
+    let folderId, fileId;
+    return cloud.post('/folders', folderPayload)
+      .then(r => folderId = r.body.id)
+      .then(r => cloud.withOptions({ qs: {
+          path: `/churros/brady-${faker.address.zipCode()}.jpg`,
+          folderId,
+          calculateFolderPath: false} }).postFile(test.api, `${__dirname}/../assets/brady.jpg`))
+      .then(r => fileId = r.body.id)
+      .then(() => cloud.delete(`${test.api}/${fileId}`))
+      .then(() => cloud.delete(`/folders/${folderId}`));
   });
 
   it('should allow PUT /files/:id/lock and DELETE /files/:id/lock', () => {
