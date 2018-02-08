@@ -152,7 +152,7 @@ exports.postFile = postFile;
 /**
  * HTTP POST a file
  * @param  {string} api        The API to call
- * @param  {string} filePath   The local file system path to the file to upload
+ * @param  {string} files      The map of local file system paths to the files to upload
  * @param  {Object} options    The HTTP request options
  * @return {Promise}           A Promise that resolves to the HTTP response
  */
