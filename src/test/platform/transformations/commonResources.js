@@ -14,9 +14,14 @@ const orgCommonResource = {
   }]
 };
 
+const noFields = {
+  name: 'hello',
+  fields: []
+}
+
 suite.forPlatform('common-resources', {}, () => {
   const orgUrl = `/organizations/objects/${orgCommonResource.name}/definitions`;
-
+  const api = '/common-resources';
   before(() => cloud.post(orgUrl, orgCommonResource));
 
   it('should support returning all common resources that exist', () => {
@@ -30,7 +35,14 @@ suite.forPlatform('common-resources', {}, () => {
       expect(newCr.fields.filter(field => field.associatedLevel === 'organization')).to.have.length(2);
     };
 
-    return cloud.get('/common-resources', v);
+    return cloud.get(api, v);
+  });
+
+  it('should support PUT, GET, DELETE common resources with no fields', () => {
+    let resourceId;
+    return cloud.put(api, noFields)
+      .then(r => cloud.get(`${api}/${noFields.name}`))
+      .then(r => cloud.delete(`${api}/${noFields.name}`))
   });
 
   after(() => cloud.delete(orgUrl));
