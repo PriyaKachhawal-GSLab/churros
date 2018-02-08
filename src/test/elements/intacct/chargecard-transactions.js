@@ -11,7 +11,7 @@ suite.forElement('finance', 'chargecard-transactions', (test) => {
     .withName('should support Ceql WHENMODIFIED search')
     .withValidation(r => {
       expect(r).to.statusCode(200);
-      const validValues = r.body.filter(obj => obj.WHENMODIFIED = '01/22/2018 08:03:44');
+      const validValues = r.body.filter(obj => obj.WHENMODIFIED > '01/22/2018 08:03:44');
       expect(validValues.length).to.equal(r.body.length);
     })
     .should.return200OnGet();
