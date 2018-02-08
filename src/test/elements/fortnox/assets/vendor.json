@@ -1,4 +1,3 @@
 {
-    "FirstName": "Amazon",
-    "Name": "<<name.findName>>"
-}
+    "Name": "<<random.word>>"
+  }

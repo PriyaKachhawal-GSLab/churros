@@ -26,12 +26,30 @@
       }
     ]
   },
+  "vouchers": {
+    "vendorName": "vouchers",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "VoucherNumber"
+      }
+    ]
+  },
   "invoices": {
     "vendorName": "invoices",
     "fields": [
       {
         "path": "id",
         "vendorPath": "DocumentNumber"
+      }
+    ]
+  },
+  "vendor-invoices": {
+    "vendorName": "vendor-invoices",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "GivenNumber"
       }
     ]
   },
@@ -50,6 +68,24 @@
       {
         "path": "id",
         "vendorPath": "Code"
+      }
+    ]
+  },
+  "vendors": {
+    "vendorName": "vendors",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "SupplierNumber"
+      }
+    ]
+  },
+  "projects": {
+    "vendorName": "projects",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "ProjectNumber"
       }
     ]
   },

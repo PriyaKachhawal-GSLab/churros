@@ -418,6 +418,15 @@
       "type": "string"
     }]
   },
+  "vendor-invoices": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    },{
+      "path": "id",
+      "type": "string"
+    }]
+  },
   "leads": {
     "fields": [{
       "path": "idTransformed",
