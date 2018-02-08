@@ -8,6 +8,7 @@ const provisioner = require('core/provisioner');
 const defaults = require('core/defaults');
 const schema = require('./assets/transformation.schema');
 const objDefSchema = require('./assets/objectDefinition.schema');
+const noFields = tools.requirePayload(`${__dirname}/assets/nofield-definition.json`);
 
 const getConfig = (type, from, to) => ({
   type: type,
@@ -326,25 +327,20 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       });
   });
   it('should support creating JS only transformation in v2', () => {
-    const noFields = {
-      name: 'churros-nofield-trans',
-      fields: []
-    }
     const noFieldV2Payload = {
       "level":"instance",
       "fields":[],
-      "configuration":[{"type":"passThrough","properties":{"fromVendor":false,"toVendor":false}},{"type":"inherit"}],
+      "configuration":[],
       "script":{"body":"console.log('Hey there')"},
-      "objectName":"churros-nofield-trans",
+      "objectName": noFields.name,
       "vendorName":"Lead",
-      "startDate":"2018-02-07 12:52:03.252724",
       "elementInstanceId": sfdcId
-    }
-
-    let resourceId;
+    };
+    console.log('pay', JSON.stringify(noFieldV2Payload));
     return cloud.put('/common-resources', noFields)
+      .then(r => cloud.post(`/instances/${sfdcId}/transformations/${noFields.name}`, {vendorName: "Lead"}))
       .then(r => cloud.put('/transformations', noFieldV2Payload))
       .then(r => cloud.delete(`/instances/${sfdcId}/transformations/${noFields.name}`))
-      .then(r => cloud.delete(`/common-resources/${noFields.name}`).catch(r => {}))
+      .then(r => cloud.delete(`/common-resources/${noFields.name}`).catch(r => {}));
   });
 });

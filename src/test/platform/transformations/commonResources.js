@@ -1,5 +1,6 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
+const noFields = require('core/tools').requirePayload(`${__dirname}/assets/nofield-definition.json`);
 const expect = require('chai').expect;
 const R = require('ramda');
 
@@ -13,11 +14,6 @@ const orgCommonResource = {
     type: 'string'
   }]
 };
-
-const noFields = {
-  name: 'hello',
-  fields: []
-}
 
 suite.forPlatform('common-resources', {}, () => {
   const orgUrl = `/organizations/objects/${orgCommonResource.name}/definitions`;
@@ -39,10 +35,9 @@ suite.forPlatform('common-resources', {}, () => {
   });
 
   it('should support PUT, GET, DELETE common resources with no fields', () => {
-    let resourceId;
     return cloud.put(api, noFields)
       .then(r => cloud.get(`${api}/${noFields.name}`))
-      .then(r => cloud.delete(`${api}/${noFields.name}`))
+      .then(r => cloud.delete(`${api}/${noFields.name}`));
   });
 
   after(() => cloud.delete(orgUrl));
