@@ -19,7 +19,7 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)
   test.withOptions({churros: {updatePayload: {status: 'changesRequested'}}}).should.supportCrud();
 
   // NOTE: you must run this test as a user with the superModelAdmin privilege
-  it('should support searching by a status as a super user', () => {
+  it.skip('should support searching by a status as a super user', () => {
     const validatorAll = (r, num) => {
         expect(r).to.have.statusCode(200);
         expect(r.body.length >= num).to.equal(true);
