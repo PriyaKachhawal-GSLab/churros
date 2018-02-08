@@ -15,21 +15,13 @@ suite.forElement('analytics', 'folders', (test) => {
       .then(r => {
         folderId = r.body[0].id;
         expect(r.body.filter(obj => obj.id !== "")).to.not.be.empty;
-      });
+      })
+      .then(() => cloud.withOptions({ qs: { id: folderId } }).get(test.api))
+      .then(r => folderId = r.body[0].id);
   });
 
-  it('should allow GET /folders/:id/workbooks', () => {
-    return cloud.get(`${test.api}/${folderId}/workbooks`)
-      .then(r => {
-        folderId = r.body[0].id;
-        expect(r.body.filter(obj => obj.id !== "")).to.not.be.empty;
-      });
-  });
-
-
-
-  it('should allow GET /workbooks/:id/reports', () => {
-    return cloud.get(`/hubs/analytics/workbooks/${folderId}/reports`)
+  it('should allow GET /folders/:id/reports', () => {
+    return cloud.get(`/hubs/analytics/folders/${folderId}/reports`)
       .then(r => {
         reportId = r.body[0].id;
         expect(r.body.filter(obj => obj.id !== "")).to.not.be.empty;
@@ -57,7 +49,7 @@ suite.forElement('analytics', 'folders', (test) => {
   test.withApi(`/hubs/analytics/native`)
     .withName(`List all native`)
     .withOptions({ qs: { 'resourceName': 'schedules' } })
-    .withValidation(r => expect(r.body.filter(obj => obj.id !== "")).to.not.be.empty)
+    .withValidation(r => expect(r.body[0].id !== ""))
     .should.return200OnGet();
 
 });
