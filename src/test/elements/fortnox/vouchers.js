@@ -7,7 +7,6 @@ const payload = tools.requirePayload(`${__dirname}/assets/voucher.json`);
 
 suite.forElement('finance', 'vouchers', { payload: payload }, (test) => {
   let id;
-  let series = 'A';
   it(`should allow CRS operations for Vouchers`, () => {
     return cloud.get(`${test.api}`)
       .then(r => id = r.body[0].id)
