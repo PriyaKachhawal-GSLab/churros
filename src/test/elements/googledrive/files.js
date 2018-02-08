@@ -274,10 +274,8 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
             expect(r.body.thumbnailLink).to.not.equal(null);
           })
           .then(() => cloud.withOptions({ qs: { path: textFileBody.path } }).postFileMultiple(`${test.api}/thumbnails`, thumbnailFile))
-          .then(r => {
-            expect(r.body.thumbnailLink).to.not.equal(null);
-          })
-           .then(() => cloud.delete(`${test.api}/${textFileBody.id}`))
-           .then(() => cloud.delete(`${test.api}/${textFileBody2.id}`));
+          .then(r => expect(r.body.thumbnailLink).to.not.equal(null))
+          .then(() => cloud.delete(`${test.api}/${textFileBody.id}`))
+          .then(() => cloud.delete(`${test.api}/${textFileBody2.id}`));
     });
 });
