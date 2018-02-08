@@ -756,6 +756,30 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
     return manualTriggerTest('documents-stream', configuration, { foo: 'bar' }, 4, validator);
   });
 
+
+  it('should support making a form request in a formula using the v3 engine', () => {
+    if (!isBodenstein) {
+      logger.warn('This formula is only supported using the v3 engine. Skipping.');
+      return;
+    }
+    const configuration = { 'targetInstance': onedriveId };
+
+    const validator = (executions) => {
+      executions.map(e => {
+        expect(e.status).to.equal('success');
+
+        const postCSV = executions[0].stepExecutions.filter(se => se.stepName === 'postCSV');
+        const postCSVValues = postCSV[0].stepExecutionValues;
+
+        postCSVValues.filter(sevs => sevs.key === 'postCSV.request.form').map(sev => {
+          expect(JSON.parse(sev.value).file.options.contentType).to.equal('text/plain');
+        });
+      });
+    };
+    //(fName, configuration, trigger, numSevs, validator, executionStatus, optionalNumSes, settings)
+    return manualTriggerTest('form-request', configuration, {}, 5, validator);
+  });
+
   it('should cancel a running formula instance execution and not attempt to cancel an already cancelled/finished execution', () => {
     // cancelling is not supported with bodenstein
     if (isSkippedForBode()) { return; }
