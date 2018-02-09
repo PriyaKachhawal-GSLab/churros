@@ -15,9 +15,20 @@ suite.forElement('finance', 'folders', { payload: foldersPayload }, (test) => {
     "folderName": tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)
   };
   let folderName = beforeFoldersPayload.folderName;
+  let beforeFoldersPayload1 = {
+    "folderName":  tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)
+  };
+  let fileFolderName = beforeFoldersPayload1.folderName;
   before(() => {
     cloud.post(`${test.api}`, beforeFoldersPayload);
+    cloud.post(`${test.api}`, beforeFoldersPayload1);
   });
+
+    after(() => {
+      cloud.delete(`${test.api}/${folderName}`);
+      cloud.delete(`${test.api}/${fileFolderName}`);
+    });
+
 
   (`should allow CRUDS for ${test.api}`, () => {
     return cloud.get(test.api)
@@ -36,16 +47,12 @@ suite.forElement('finance', 'folders', { payload: foldersPayload }, (test) => {
     })
     .should.return200OnGet();
 
-  let beforeFoldersPayload1 = {
-    "folderName":  tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)
-  };
-  let fileFolderName = beforeFoldersPayload1.folderName;
   it(`should allow CRUDS for ${test.api}/${folderName}/files`, () => {
     let supdocId = 999999;
     let filesPatchPayload = {
       "description": "Churros update"
     };
-    cloud.post(`${test.api}`, beforeFoldersPayload1);
+
     return cloud.post(`${test.api}/${fileFolderName}/files`, filesPayload)
       .then(r => cloud.get(`${test.api}/${fileFolderName}/files`))
       .then(r => supdocId = r.body[0].supdocid)
@@ -61,10 +68,4 @@ suite.forElement('finance', 'folders', { payload: foldersPayload }, (test) => {
       expect(validValues.length).to.equal(r.body.length);
     })
     .should.return200OnGet();
-
-  after(() => {
-    cloud.delete(`${test.api}/${folderName}`);
-    cloud.delete(`${test.api}/${fileFolderName}`);
-  });
-
 });
