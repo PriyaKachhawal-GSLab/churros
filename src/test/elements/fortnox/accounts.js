@@ -7,7 +7,7 @@ const expect = require('chakram').expect;
 let payload = tools.requirePayload(`${__dirname}/assets/account.json`);
 payload.Number = Math.floor(1000 + Math.random() * 9000);
 
-suite.forElement('finance', 'accounts', { payload: payload }, (test) => {
+suite.forElement('erp', 'accounts', { payload: payload }, (test) => {
   test.should.supportCrus();
   test
     .withOptions({ qs: { where: 'sru = 7201' } })

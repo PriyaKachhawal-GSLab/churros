@@ -6,8 +6,7 @@ const expect = require('chakram').expect;
 
 const payload = tools.requirePayload(`${__dirname}/assets/vendor-invoice.json`);
 
-suite.forElement('finance', 'vendor-invoices', { payload: payload }, (test) => {
-  test.should.supportCruds();
+suite.forElement('erp', 'vendor-invoices', { payload: payload }, (test) => {
   test
     .withOptions({ qs: { where: 'suppliernumber = \'2\'' } })
     .withName('should support search by SupplierNumber')
@@ -18,4 +17,5 @@ suite.forElement('finance', 'vendor-invoices', { payload: payload }, (test) => {
     })
     .should.return200OnGet();
   test.should.supportPagination();
+  test.should.supportCruds();
 });

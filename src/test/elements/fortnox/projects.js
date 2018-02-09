@@ -5,7 +5,7 @@ const tools = require('core/tools');
 
 const payload = tools.requirePayload(`${__dirname}/assets/project.json`);
 
-suite.forElement('finance', 'projects', { payload: payload }, (test) => {
-  test.should.supportCruds();
+suite.forElement('erp', 'projects', { payload: payload }, (test) => {
   test.should.supportPagination();
+  test.should.supportCruds();
 });

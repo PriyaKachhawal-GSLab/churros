@@ -6,7 +6,7 @@ const expect = require('chakram').expect;
 
 const payload = tools.requirePayload(`${__dirname}/assets/order.json`);
 
-suite.forElement('finance', 'orders', { payload: payload }, (test) => {
+suite.forElement('erp', 'orders', { payload: payload }, (test) => {
   test.should.supportCruds();
   test
     .withOptions({ qs: { where: 'customernumber = \'10\'' } })

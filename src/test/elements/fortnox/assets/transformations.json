@@ -9,7 +9,7 @@
     ]
   },
   "products": {
-    "vendorName": "units",
+    "vendorName": "products",
     "fields": [
       {
         "path": "id",

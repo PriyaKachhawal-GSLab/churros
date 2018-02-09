@@ -6,7 +6,7 @@ const expect = require('chakram').expect;
 
 const payload = tools.requirePayload(`${__dirname}/assets/vendor.json`);
 
-suite.forElement('finance', 'vendors', { payload: payload }, (test) => {
+suite.forElement('erp', 'vendors', { payload: payload }, (test) => {
   test.should.supportCrus();
   test
     .withOptions({ qs: { where: 'suppliernumber = \'10\'' } })

@@ -5,7 +5,7 @@ const tools = require('core/tools');
 const cloud = require('core/cloud');
 const payload = tools.requirePayload(`${__dirname}/assets/voucher.json`);
 
-suite.forElement('finance', 'vouchers', { payload: payload }, (test) => {
+suite.forElement('erp', 'vouchers', { payload: payload }, (test) => {
   let id;
   it(`should allow CRS operations for Vouchers`, () => {
     return cloud.get(`${test.api}`)
