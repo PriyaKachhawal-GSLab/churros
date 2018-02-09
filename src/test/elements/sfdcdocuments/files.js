@@ -55,4 +55,22 @@ suite.forElement('documents', 'files', null, (test) => {
       .then(r => cloud.get(`hubs/documents/files/${fileId}/comments/${commentId}`))
       .then(r => cloud.delete(`hubs/documents/files/${fileId}/comments/${commentId}`));
   });
+  
+  it('should allow CS for hubs/documents/files/comments', () => {
+    let srcPath, UploadFile = __dirname + '/assets/test.txt';
+    return cloud.withOptions({ qs: { path: `/${tools.random()}` } }).postFile(test.api, UploadFile)
+      .then(r => srcPath = r.body.path)
+      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).post(`hubs/documents/files/comments`,commentPayload))
+	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).get(`hubs/documents/files/comments`));
+  });
+  
+   it('should allow SD for hubs/documents/files/comments/:commentId', () => {
+    let commentId, srcPath, UploadFile = __dirname + '/assets/test.txt';
+    return cloud.withOptions({ qs: { path: `/${tools.random()}` } }).postFile(test.api, UploadFile)
+      .then(r => srcPath = r.body.path)
+      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).post(`hubs/documents/files/comments`,commentPayload))
+	  .then(r => commentId = r.body.id)
+	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).get(`hubs/documents/files/comments/${commentId}`))
+	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).delete(`hubs/documents/files/comments/${commentId}`));
+  });
 });
