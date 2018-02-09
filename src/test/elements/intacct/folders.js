@@ -11,23 +11,20 @@ const filesPayload = tools.requirePayload(`${__dirname}/assets/files.json`);
 
 suite.forElement('finance', 'folders', { payload: foldersPayload }, (test) => {
 
-  let folderName = "churrosFolder",
-    supdocId = 999999;
+  let beforeFoldersPayload = {
+    "folderName": tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)
+  };
+  let folderName = beforeFoldersPayload.folderName;
   before(() => {
-    let beforeFoldersPayload = {
-      "folderName": "churrosFolder"
-    };
     cloud.post(`${test.api}`, beforeFoldersPayload);
   });
 
   (`should allow CRUDS for ${test.api}`, () => {
-    let docid;
     return cloud.get(test.api)
-      .then(r => docid = r.body[0].id)
       .then(r => cloud.post(`${test.api}`, foldersPayload))
-      .then(r => cloud.get(`${test.api}/${docid}`))
-      .then(r => cloud.patch(`${test.api}/${docid}`, foldersPatchPayload))
-      .then(r => cloud.delete(`${test.api}/${docid}`));
+      .then(r => cloud.get(`${test.api}/${folderName}`))
+      .then(r => cloud.patch(`${test.api}/${folderName}`, foldersPatchPayload))
+      .then(r => cloud.delete(`${test.api}/${folderName}`));
   });
   test.should.supportPagination();
   test.withName('should support description = {string} Ceql search')
@@ -40,10 +37,11 @@ suite.forElement('finance', 'folders', { payload: foldersPayload }, (test) => {
     .should.return200OnGet();
 
   let beforeFoldersPayload1 = {
-    "folderName": tools.randomStr()
+    "folderName":  tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)
   };
   let fileFolderName = beforeFoldersPayload1.folderName;
-  it(`should allow CRUDS for ${test.api}/{folderName}/files`, () => {
+  it(`should allow CRUDS for ${test.api}/${folderName}/files`, () => {
+    let supdocId = 999999;
     let filesPatchPayload = {
       "description": "Churros update"
     };
