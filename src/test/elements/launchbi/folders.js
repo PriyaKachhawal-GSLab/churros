@@ -5,9 +5,8 @@ const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
 suite.forElement('analytics', 'folders', (test) => {
-
   let folderId, reportId;
-
+  
   it('should allow GET /folders', () => {
     return cloud.get(test.api)
       .then(r => {
