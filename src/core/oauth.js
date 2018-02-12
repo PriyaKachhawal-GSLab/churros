@@ -571,8 +571,6 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.sleep(700);
       browser.wait(() => browser.findElement(webdriver.By.id('aadTile')).click(), 1000)
         .thenCatch(r => true);
-      // browser.wait(() => browser.findElement(webdriver.By.id('cloudelements6@cloudelements6.onmicrosoft.com')).click(), 1000)
-      //   .thenCatch(r => true);
       browser.wait(() => browser.isElementPresent(webdriver.By.id('i0118')), 3000)
         .thenCatch(r => true);
       browser.findElement(webdriver.By.id('i0118')).sendKeys(password);

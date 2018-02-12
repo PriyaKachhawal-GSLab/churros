@@ -3,7 +3,7 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const payload = tools.requirePayload(`${__dirname}/assets/calendars.json`);
-const cloud = require('core/cloud');
+const expect = require('chakram').expect;
 
 suite.forElement('general', 'calendars', { payload: payload }, (test) => {
   test.should.supportCrud();
@@ -14,7 +14,7 @@ suite.forElement('general', 'calendars', { payload: payload }, (test) => {
     .withOptions({ qs: { where: `name ='sample for display7'` } })
     .withValidation((r) => {
       expect(r).to.have.statusCode(200);
-      const validValues = r.body.filter(obj => obj.name == 'sample for display7');
+      const validValues = r.body.filter(obj => obj.name === 'sample for display7');
       expect(validValues.length).to.equal(r.body.length);
     }).should.return200OnGet();
   });
