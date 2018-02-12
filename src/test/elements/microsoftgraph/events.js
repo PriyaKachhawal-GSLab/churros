@@ -7,12 +7,11 @@ const payload = tools.requirePayload(`${__dirname}/assets/events.json`);
 const calendarsPayload = tools.requirePayload(`${__dirname}/assets/calendars.json`);
 suite.forElement('general', 'events', { payload: payload }, (test) => {
   let calendarId;
-  test.api = "/hubs/general/calendars";
-  before(() => cloud.post(test.api, calendarsPayload)
+  before(() => cloud.post('/calendars', calendarsPayload)
     .then(r => calendarId = r.body.id));
+  after(() => cloud.delete(`/calendars/${calendarId}`));
 
   it('should test CRUDS of events', () => {
-    return cloud.cruds(`${test.api}/${calendarId}/events`, payload);
+    return cloud.cruds(`/calendars/${calendarId}/events`, payload);
   });
-
 });
