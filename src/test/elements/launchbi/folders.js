@@ -6,7 +6,7 @@ const expect = require('chakram').expect;
 
 suite.forElement('analytics', 'folders', (test) => {
   let folderId, reportId;
-  
+
   it('should allow GET /folders', () => {
     return cloud.get(test.api)
       .then(r => {
@@ -26,27 +26,33 @@ suite.forElement('analytics', 'folders', (test) => {
   });
 
   test.withApi(`/hubs/analytics/reports/${reportId}`)
-    .withName(`Retrieve specific Report`)
+    .withName(`should allow retrieve for specific report`)
     .withValidation(r => expect(r.body).to.not.be.empty)
     .should.return200OnGet();
 
 
   test.withApi(`/hubs/analytics/ping`)
-    .withName(`Check system health`)
-    .withValidation(r => expect(r.body).to.not.be.empty)
+    .withName(`should allow GET /ping for system health`)
+    .withValidation(r => {
+      expect(r.body).to.not.be.empty;
+      expect(r.body.endpoint).to.equal('launchbi');
+    })
     .should.return200OnGet();
 
 
   test.withApi(`/hubs/analytics/info`)
-    .withName(`Retrieve system-info`)
+    .withName(`should allow GET /info for system info`)
     .withValidation(r => expect(r.body).to.not.be.empty)
     .should.return200OnGet();
 
 
   test.withApi(`/hubs/analytics/native`)
-    .withName(`List all native`)
+    .withName(`should allow GET /native`)
     .withOptions({ qs: { 'resourceName': 'schedules' } })
-    .withValidation(r => expect(r.body[0]).to.not.be.empty)
+    .withValidation(r => {
+      expect(r.body[0]).to.not.be.empty;
+      expect(r.body[0].state).to.equal('Active');
+    })
     .should.return200OnGet();
 
 });
