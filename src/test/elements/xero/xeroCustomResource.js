@@ -4,11 +4,10 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
-const fs = require('fs');
 const random = require('faker').random;
 
 let payload = tools.requirePayload(`${__dirname}/assets/contact.json`);
-let attachmentMetadata = tools.requirePayload(`${__dirname}/assets/attachmentMetadata.json`)
+let attachmentMetadata = tools.requirePayload(`${__dirname}/assets/attachmentMetadata.json`);
 
 
 suite.forElement('finance', 'xeroCustomResource', {payload}, (test) => {
@@ -39,6 +38,6 @@ suite.forElement('finance', 'xeroCustomResource', {payload}, (test) => {
     .then(r => expect(r.body.FileName).to.equal(fileName))
     .then(() => cloud.get(`${test.api}/${myResourceId}/xeroCustomChildResource`))
     .then(r => expect(r.body[0].FileName).to.exist)
-    .then(() => cloud.get(`${test.api}/${myResourceId}/xeroCustomChildResource/${fileName}`))
+    .then(() => cloud.get(`${test.api}/${myResourceId}/xeroCustomChildResource/${fileName}`));
   });
 });
