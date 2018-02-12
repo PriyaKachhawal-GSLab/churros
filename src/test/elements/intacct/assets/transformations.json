@@ -158,7 +158,8 @@
     "fields": [{
       "path": "id",
       "vendorPath": "RECORDNO"
-    }]},
+    }]
+  },
     "checking-accounts": {
       "vendorName": "",
       "fields": [
