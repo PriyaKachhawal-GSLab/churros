@@ -37,8 +37,6 @@ config.events.element = (argv.loadElement || config.events.element);
 
 before(() => {
   const url = props.get('url');
-  const secUrl = url + '/elements/j_spring_security_check';
-  const options = { jar: true, form: { j_username: props.get('user'), j_password: props.get('password') } };
 
   /**
    * Sets up our publicly available HTTP listener and whatever URL we're given, we set that
@@ -46,14 +44,14 @@ before(() => {
    * @return {Promise} A promise that, when resolved, contains the tunnel that was started
    */
   const setupEventsTunnel = () => {
-    const url = props.getOptionalForKey('events', 'url');
-    if (url) {
-      logger.debug("Using events URL %s", url);
-      return Promise.resolve(url);
+    const eventsUrl = props.getOptionalForKey('events', 'url');
+    if (eventsUrl) {
+      logger.debug("Using events URL %s", eventsUrl);
+      return Promise.resolve(eventsUrl);
     }
     const port = props.getForKey('events', 'port');
     return tunnel.start(port)
-      .then(url => props.setForKey('events', 'url', url));
+      .then(tmpUrl => props.setForKey('events', 'url', tmpUrl));
   };
 
   /**
@@ -62,14 +60,17 @@ before(() => {
    */
   const setupServer = () => server.start(props.getForKey('events', 'port'));
 
-  return chakram.post(secUrl, null, options)
+  const payload = { username: props.get('user'), password: props.get('password') };
+  return chakram.post(`${url}/elements/api-v2/authentication`, payload)
     .then(r => {
       expect(r).to.have.statusCode(200);
-      return chakram.get(`${url}/elements/api-v1/ui/getSecrets`, { jar: true });
+      // swap the bearer token for user/org secrets to use on all subsequent API calls
+      const options = {headers: {Authorization: `Bearer ${r.response.body.token}`}};
+      return chakram.get(`${url}/elements/api-v2/authentication/secrets`, options);
     })
     .then(r => {
       expect(r).to.have.statusCode(200);
-      defaults(`${url}/elements/api-v2`, r.body.user, r.body.company, props.get('user'));
+      defaults(`${url}/elements/api-v2`, r.response.body.userSecret, r.response.body.organizationSecret, props.get('user'));
     })
     .then(r => setupEventsTunnel())
     .then(r => setupServer())
