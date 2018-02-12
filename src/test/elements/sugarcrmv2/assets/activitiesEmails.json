@@ -1,5 +1,4 @@
 {
-  "description": "Test",
   "duration_hours": 0,
   "direction": "Inbound",
   "reminder_time": "-1",
@@ -10,6 +9,5 @@
   "_module": "Emails",
   "duration_minutes": 30,
   "parent_id": "d58d4996-e0d1-d59b-258e-5693de8d95da",
-  "name": "Get more information on the proposed deal",
   "status": "Planned"
 }

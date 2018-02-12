@@ -150,6 +150,25 @@ const postFile = (api, filePath, validationCb, options) => {
 exports.postFile = postFile;
 
 /**
+ * HTTP POST a file
+ * @param  {string} api        The API to call
+ * @param  {string} files      The map of local file system paths to the files to upload
+ * @param  {Object} options    The HTTP request options
+ * @return {Promise}           A Promise that resolves to the HTTP response
+ */
+const postFileMultiple = (api, files, validationCb, options) => {
+  options = (options || {});
+  options.formData = (options.formData || {});
+  for (var fileKey in files) {
+    options.formData[fileKey] = fs.createReadStream(files[fileKey]);
+  }
+  return chakram.post(api, validationCb, options)
+    .then(r => validator(validationCb, api)(r))
+    .catch(r => tools.logAndThrow('Failed to upload file to %s', r, api));
+};
+exports.postFileMultiple = postFileMultiple;
+
+/**
  * HTTP PATCH a file
  * @param  {string} api        The API to call
  * @param  {string} filePath   The local file system path to the file to upload
@@ -283,6 +302,7 @@ const withOptions = (options) => {
   return {
     post: (api, payload, validationCb) => post(api, payload, validationCb, options),
     postFile: (api, filePath, validationCb) => postFile(api, filePath, validationCb, options),
+    postFileMultiple: (api, filePath, validationCb) => postFileMultiple(api, filePath, validationCb, options),
     patchFile: (api, filePath) => patchFile(api, filePath, options),
     putFile: (api, filePath) => putFile(api, filePath, options),
     put: (api, payload, validationCb) => put(api, payload, validationCb, options),

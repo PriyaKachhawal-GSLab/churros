@@ -37,9 +37,7 @@ suite.forElement('employee', 'employees', (test) => {
 
   let empId, roleId;
   before(() => cloud.get(`hubs/employee/roles`)
-    .then(r => roleId = r.body[0].id)
-    .then(r => employeePayload.role_ids = roleId)
-    .then(r => employeeUpdatePayload.role_ids = roleId));
+    .then(r => roleId = r.body[0].id));
 
   it('should allow CRU for /employees', () => {
     return cloud.post(test.api, employeePayload)

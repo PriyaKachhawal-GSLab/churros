@@ -39,7 +39,7 @@ suite.forElement('employee', 'timesheets', (test) => {
 
   test.withApi(test.api)
     .withOptions({ qs: { where: "end_updated_at='2017-10-04T17:49:02Z'" } })
-    .withValidation(r => expect(r.body.filter(obj => obj.updated_at <= '2017-10-01T17:49:02Z')).to.not.be.empty)
+    .withValidation(r => expect(r.body.filter(obj => obj.updated_at <= '2017-10-04T17:49:02Z')).to.not.be.empty)
     .withName('should allow GET with option end_updated_at')
     .should.return200OnGet();
 
