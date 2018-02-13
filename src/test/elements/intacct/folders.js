@@ -30,7 +30,7 @@ suite.forElement('finance', 'folders', { payload: foldersPayload }, (test) => {
     });
 
 
-  (`should allow CRUDS for ${test.api}`, () => {
+  it(`should allow CRUDS for ${test.api}`, () => {
     return cloud.get(test.api)
       .then(r => cloud.post(`${test.api}`, foldersPayload))
       .then(r => cloud.get(`${test.api}/${folderName}`))
