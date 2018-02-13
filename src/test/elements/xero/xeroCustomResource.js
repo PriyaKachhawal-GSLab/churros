@@ -40,4 +40,9 @@ suite.forElement('finance', 'xeroCustomResource', {payload}, (test) => {
     .then(r => expect(r.body[0].FileName).to.exist)
     .then(() => cloud.get(`${test.api}/${myResourceId}/xeroCustomChildResource/${fileName}`));
   });
+
+  it(`should return 400 for POST /:objectName/:objectId/attachments when file size is greater than 2MB`, () => {
+    let path = __dirname + '/assets/imageTooLarge.jpg';
+    return cloud.postFile(`${test.api}/${myResourceId}/xeroCustomChildResource`, path, r => expect(r).to.have.statusCode(400));
+  });
 });
