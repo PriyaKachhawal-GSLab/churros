@@ -4,11 +4,12 @@
 const webdriver = require('selenium-webdriver');
 const logger = require('winston');
 const props = require('core/props');
+const firefox = require('selenium-webdriver/firefox');
 
 /* jshint unused:false */
 const wait = (browser, ms) => browser.wait(() => false, ms);
 
-const manipulateDom = (element, browser, r, username, password, config) => {
+const manipulateDom = (element, browser, r, username, password, config, b) => {
   let waitForElement = function(locator, timeout) {
     timeout = timeout || 3000;
     let brow = this;
@@ -520,7 +521,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then((element) => element.click(), (err) => {}); // ignore this
       return browser.getCurrentUrl();
     case 'sageoneuk':
-      browser.get(r.body.oauthUrl);
+      browser.get(r.body.oauthUrl);``
       browser.wait(() => browser.isElementPresent(webdriver.By.id('uk')), 5000)
         .thenCatch(r => true); // ignore
       browser.findElement(webdriver.By.id('uk'))
@@ -650,6 +651,24 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('action'))
         .then((element) => element.click(), (err) => {}); // ignore this
       return browser.getCurrentUrl();
+    case 'docushareflex':
+      /* Docushare renders a popup that selenium can't handle with firefox - eg browser.switchTo().alert()  
+      * There is also a firefox issue with sending the Basic credentials in the URL if you're targeting a sub-resource on a domain.
+      * To workaround we first hit the main domain with the creds in the URL then call the sub-resource (our OG auth url);
+      **/
+      let docushareOauthUrl = r.body.oauthUrl;
+      let domainExtension = '.com';
+      let baseUrl = docushareOauthUrl.substring(0, docushareOauthUrl.indexOf(domainExtension) + domainExtension.length);
+      let baseUrlWithCreds = baseUrl.replace("https://", `https://${username}:${password}@`);
+      browser.get(baseUrlWithCreds)
+      //browser.sleep(2000);
+      browser.get(docushareOauthUrl);
+       //browser.sleep(200000);
+      let xPath = '//*[@id="content_wrap"]/div/div[2]/span[1]/span[1]/button';
+      browser.wait(webdriver.until.elementLocated(webdriver.By.xpath(xPath)), 7000);
+      browser.findElement(webdriver.By.xpath(xPath)).click();
+      browser.sleep(2000);
+      return browser.getCurrentUrl();
     default:
       throw 'No OAuth function found for element ' + element + '.  Please implement function in core/oauth so ' + element + ' can be provisioned';
   }
@@ -660,7 +679,7 @@ const attemptOAuthExchange = (attempt, manipulateDom, element, b, r, username, p
     .forBrowser(b)
     .build();
 
-  return browser.call(() => manipulateDom(element, browser, r, username, password, config))
+  return browser.call(() => manipulateDom(element, browser, r, username, password, config, manipulateDom, b))
     .then(url => {
       browser.close();
       return url;
