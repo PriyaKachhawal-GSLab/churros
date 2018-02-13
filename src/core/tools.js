@@ -204,7 +204,7 @@ exports.getLimit = (obj) => {
 **/
 exports.getFieldsFromTransformation = (element, objectName) => {
   const transformationsFile = `${__dirname}/../test/elements/${element}/assets/transformations.json`;
-  // if there is already a transformation file here
+  // is there is a transformation file here
   if (fs.existsSync(transformationsFile)) {
     const transformations = require(transformationsFile);
     if (transformations[objectName] && transformations[objectName].fields) {
@@ -217,13 +217,21 @@ exports.getFieldsFromTransformation = (element, objectName) => {
 
 /**
 * Gets reduced response for particular fields
-* @param {array} arrResp [{ "key": "value"}, { "key", "value"}]
+* @param {array} arrayResponse [{ "key": "value"}, { "key", "value"}]
 * @param {array} fields ['id', 'createdDate']
 **/
-exports.getFieldsMap = (arrResp, fields) => arrResp.filter(obj => !(R.isEmpty(obj) || R.isNil(obj))).map(obj => (Object.keys(obj).filter(k => fields.includes(k)).sort().reduce((acc, k) => {
-    acc[k] = obj[k];
-    return acc;
-}, {})));
+exports.getFieldsMap = (arrayResponse, fields) => (
+  arrayResponse
+  .filter(obj => !(R.isEmpty(obj) || R.isNil(obj)))
+  .map(obj => (
+    Object.keys(obj)
+    .filter(k => fields.includes(k)).sort()
+    .reduce((acc, k) => {
+      acc[k] = obj[k];
+      return acc;
+    }, {})
+  ))
+);
 
 exports.csvParse = (str) => {
   let uploadArr = str.split('\n').map(line => line.split(','));
