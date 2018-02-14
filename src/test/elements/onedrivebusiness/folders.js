@@ -4,12 +4,10 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const payload = require('./assets/folders');
-const expect = require('chakram').expect;
 const build = (overrides) => Object.assign({}, payload, overrides);
 const folderPayload = build({ name: `churros-${tools.random()}`, path: `/${tools.random()}` });
 const folderPayload1 = build({ name: `churros-${tools.random()}`, path: `/${tools.random()}/${tools.random()}` });
 suite.forElement('documents', 'folders', (test) => {
-let folderId;
   const folderWrap = (cb) => {
     let folder;
     let random = `${tools.random()}`;
