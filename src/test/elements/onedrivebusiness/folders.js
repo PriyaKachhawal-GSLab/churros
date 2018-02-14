@@ -86,7 +86,7 @@ let folderId;
     return folderWrap(cb);
   });
 
-  before(() => cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
+/*  before(() => cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
       .then(r => folderId = r.body.filter(obj => obj.name === "dontdelete_folder_churros")[0].id));
 
   it('should allow GET /folders/contents with name', () => {
@@ -107,6 +107,6 @@ let folderId;
   it('should allow GET /folders/:id/contents with extension', () => {
     return cloud.withOptions({ qs: { where: "extension='.txt'" } }).get(`${test.api}/${folderId}/contents`)
       .then(r => expect(r.body[0].name).to.contain('.txt'));
-  });
+  });*/
 
 });
