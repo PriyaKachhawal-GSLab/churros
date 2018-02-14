@@ -9,8 +9,8 @@ suite.forElement('finance', 'items', { payload: payload }, (test) => {
   test.should.supportCruds();
   test.should.supportPagination();
   test.withApi(test.api)
-    .withOptions({ qs: { where: "unit_cost_max=4" } })
-    .withValidation(r => expect(r.body.filter(obj => obj.unit_cost.amount <= 4)).to.not.be.empty)
+    .withOptions({ qs: { where: "unit_cost_min=4" } })
+    .withValidation(r => expect(r.body.filter(obj => obj.unit_cost.amount >= 4)).to.not.be.empty)
     .withName('should allow GET with option unit_cost_max')
     .should.return200OnGet();
 });

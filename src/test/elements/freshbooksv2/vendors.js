@@ -17,7 +17,7 @@ suite.forElement('finance', 'vendors', { payload: payload }, (test) => {
   test.should.supportPagination();
   test.withApi(test.api)
     .withOptions({ qs: { where: "updated_min='2018-02-01'" } })
-    .withValidation(r => expect(r.body.filter(obj => obj.id !== "")).to.not.be.empty)
+    .withValidation(r => expect(r.body.filter(obj => obj.updated >= "2018-02-01")).to.not.be.empty)
     .withName('should allow GET with option updated_min')
     .should.return200OnGet();
 });
