@@ -126,7 +126,7 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)
   });
 
     // NOTE: can only be run as a superModelAdmin
-    it('should support merging a PR', () => {   
+    it.skip('should support merging a PR', () => {   
         const mergeValidator = r => {
             expect(r).to.have.statusCode(200);
             expect(r.body.status).to.equal('merged');
