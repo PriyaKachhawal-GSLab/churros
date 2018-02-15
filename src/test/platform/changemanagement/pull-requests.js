@@ -5,20 +5,31 @@ const cloud = require('core/cloud');
 const defaults = require('core/defaults');
 const tools = require('core/tools');
 const chakram = require('chakram');
+const modelPayload = require('core/tools').requirePayload(`${__dirname}/assets/elementmodel.json`);
+
 const expect = chakram.expect;
 const R = require('ramda');
+
+const crudsObject = (url, payload, updatePayload) => {
+  let object;
+  return cloud.post(url, payload)
+    .then(r => object = r.body)
+    .then(r => cloud.get(url + '/' + object.id))
+    .then(r => cloud.patch(url + '/' + object.id, updatePayload))
+    .then(r => cloud.delete(url + '/' + object.id));
+};
 
 const genPr = (type, id, status) => {
     return {
         entityType: type,
         entityId: id,
         message: 'message',
-        diffReference: '/path/to/diff',
+        diffReference: '/path/to/diff'
     };
 };
 
 suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)}, test => {
-    let newUser;
+    let newUser, elementId, modelId;
     before(() => {
       const opts = { qs: { where: 'defaultAccount=true' } };
       return cloud.withOptions(opts).get('/accounts')
@@ -29,15 +40,25 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)
         })
         .then(r => {
           newUser = r.body;
+        })
+        .then(() => cloud.get(`elements/closeio`))
+        .then(r => elementId = r.body.id)
+        .then(r => cloud.post(`elements/${elementId}/models`, modelPayload))
+        .then(r => {
+          modelId = r.body.id;
         });
     });
   
     after(() => {
-      return cloud.delete(`/users/${newUser.id}`, R.always(true));
+      return cloud.delete(`/users/${newUser.id}`, R.always(true))
+      .then(() => cloud.delete(`elements/${elementId}/models/${modelId}`));
     });
 
     
-  test.withOptions({churros: {updatePayload: {status: 'cancelled'}}}).should.supportCrud();
+//   test.withOptions({churros: {updatePayload: {status: 'cancelled'}}}).should.supportCrud();
+
+  it('should support CRUD for pull requests', () => crudsObject('change-management/pull-requests', genPr('model', modelId), {status: 'cancelled'}));
+
 
   it('should support searching by a status', () => {
     const validatorAll = (r, num) => {
@@ -56,21 +77,22 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)
         expect(r).to.have.statusCode(200);
         r.body.forEach(pr => {
             expect(pr.status === status1 || pr.status === status2).to.equal(true);
-        }); 
+        });
     };
-  
+
     let prs = [];
     let deletes = [];
-  
-    return cloud.post('/change-management/pull-requests', genPr('model', 2, 'first'))
+
+
+    return cloud.post('/change-management/pull-requests', genPr('model', modelId, 'first'))
         .then(r => cloud.patch(`/change-management/pull-requests/${r.body.id}`, {status: 'readyForReview'}))
         .then(r => prs.push(r.body))
-        .then(() => cloud.post('/change-management/pull-requests', genPr('model', 2, 'second')))
+        .then(() => cloud.post('/change-management/pull-requests', genPr('model', modelId, 'second')))
         .then(r => cloud.patch(`/change-management/pull-requests/${r.body.id}`, {status: 'cancelled'}))
         .then(r => prs.push(r.body))
-        .then(() => cloud.post('/change-management/pull-requests', genPr('model', 2, 'third')))
+        .then(() => cloud.post('/change-management/pull-requests', genPr('model', modelId, 'third')))
         .then(r => prs.push(r.body))
-        .then(() => cloud.post('/change-management/pull-requests', genPr('model', 2, 'fourth')))
+        .then(() => cloud.post('/change-management/pull-requests', genPr('model', modelId, 'fourth')))
         .then(r => prs.push(r.body))
         .then(() => cloud.get(`/change-management/pull-requests?statuses%5B%5D=created`, r => validator(r, 'created')))
         .then(() => cloud.get(`/change-management/pull-requests?statuses%5B%5D=readyForReview%2C%20cancelled`, r => validatorOr(r, 'readyForReview', 'cancelled')))

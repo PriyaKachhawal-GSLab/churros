@@ -28,7 +28,7 @@ suite.forPlatform('elements/models', opts, (test) => {
   let element, keyUrl, idUrl;
   before(() => cloud.get(`elements/closeio`)
     .then(r => element = r.body)
-    .then(r => keyUrl = `<eleme></eleme>nts/${element.key}/models`)
+    .then(r => keyUrl = `elements/${element.key}/models`)
     .then(r => idUrl = `elements/${element.id}/models`));
 
   it('should support CRUD for models', () => crudsObject(idUrl, schema, genObject({}), genObject({ createdDateName: "created_date" })));
