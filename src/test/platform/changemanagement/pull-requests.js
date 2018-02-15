@@ -29,7 +29,7 @@ const genPr = (type, id, status) => {
 };
 
 suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)}, test => {
-    let newUser, elementId, modelId;;
+    let newUser, elementId, modelId;
     before(() => {
       const opts = { qs: { where: 'defaultAccount=true' } };
       return cloud.withOptions(opts).get('/accounts')
