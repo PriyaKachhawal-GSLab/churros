@@ -27,7 +27,7 @@ const genPr = (type, id, status) => {
 
 
 suite.forPlatform('change-management/pull-requests', {}, test => {
-  let elementId, modelId, payload;
+  let elementId, modelId;
 
   before(() => cloud.get(`elements/closeio`)
     .then(r => elementId = r.body.id)
