@@ -345,10 +345,10 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
         const consolidated = consolidateStepExecutionValues(ses);
         expect(consolidated['simple-script.formulaName']).to.equal('returns-info');
         expect(consolidated['simple-script.formulaInstanceName']).to.equal('formula-instance');
-        expect(consolidated['simple-script.formulaStartTime'] > 0).to.be.true;;
-        expect(consolidated['simple-script.formulaId'] > 0).to.be.true;;
-        expect(consolidated['simple-script.formulaExecutionId'] > 0).to.be.true;;
-        expect(consolidated['simple-script.formulaInstanceId'] > 0).to.be.true;;
+        expect(consolidated['simple-script.formulaStartTime'] > 0).to.be.true;
+        expect(consolidated['simple-script.formulaId'] > 0).to.be.true;
+        expect(consolidated['simple-script.formulaExecutionId'] > 0).to.be.true;
+        expect(consolidated['simple-script.formulaInstanceId'] > 0).to.be.true;
       });
     };
     return eventTriggerTest('returns-info', 1, 2, validator);
