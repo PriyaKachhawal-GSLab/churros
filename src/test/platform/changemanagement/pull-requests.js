@@ -2,10 +2,13 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
+const defaults = require('core/defaults');
+const tools = require('core/tools');
 const chakram = require('chakram');
 const modelPayload = require('core/tools').requirePayload(`${__dirname}/assets/elementmodel.json`);
 
 const expect = chakram.expect;
+const R = require('ramda');
 
 const crudsObject = (url, payload, updatePayload) => {
   let object;
@@ -25,26 +28,39 @@ const genPr = (type, id, status) => {
     };
 };
 
+suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)}, test => {
+    let newUser, elementId, modelId;;
+    before(() => {
+      const opts = { qs: { where: 'defaultAccount=true' } };
+      return cloud.withOptions(opts).get('/accounts')
+        .then(r => {
+          expect(r.body.length).to.equal(1);
+          const user = { email: `churros+rbac${tools.random()}@churros.com`, firstName: 'frank', lastName: 'ricard', password: 'Bingobango1!' };
+          return cloud.post(`/accounts/${r.body[0].id}/users`, user);
+        })
+        .then(r => {
+          newUser = r.body;
+        })
+        .then(() => cloud.get(`elements/closeio`))
+        .then(r => elementId = r.body.id)
+        .then(r => cloud.post(`elements/${elementId}/models`, modelPayload))
+        .then(r => {
+          modelId = r.body.id;
+        });
+    });
+  
+    after(() => {
+      return cloud.delete(`/users/${newUser.id}`, R.always(true))
+      .then(() => cloud.delete(`elements/${elementId}/models/${modelId}`));
+    });
 
-suite.forPlatform('change-management/pull-requests', {}, test => {
-  let elementId, modelId;
+    
+//   test.withOptions({churros: {updatePayload: {status: 'cancelled'}}}).should.supportCrud();
 
-  before(() => cloud.get(`elements/closeio`)
-    .then(r => elementId = r.body.id)
-    .then(r => cloud.post(`elements/${elementId}/models`, modelPayload))
-    .then(r => {
-      modelId = r.body.id;
-    })
-  );
+  it('should support CRUD for pull requests', () => crudsObject('change-management/pull-requests', genPr('model', modelId), {status: 'cancelled'}));
 
-  after(() => cloud.delete(`elements/${elementId}/models/${modelId}`));
 
-  //test.withOptions({churros: {updatePayload: {status: 'changesRequested'}}}).should.supportCrud();
-
-  it('should support CRUD for pull requests', () => crudsObject('change-management/pull-requests', genPr('model', modelId), {status: 'changesRequested'}));
-
-  // NOTE: you must run this test as a user with the superModelAdmin privilege
-  it.skip('should support searching by a status as a super user', () => {
+  it('should support searching by a status', () => {
     const validatorAll = (r, num) => {
         expect(r).to.have.statusCode(200);
         expect(r.body.length >= num).to.equal(true);
@@ -69,19 +85,38 @@ suite.forPlatform('change-management/pull-requests', {}, test => {
 
 
     return cloud.post('/change-management/pull-requests', genPr('model', modelId, 'first'))
-        .then(r => cloud.patch(`/change-management/pull-requests/${r.body.id}`, {status: 'changesRequested'}))
+        .then(r => cloud.patch(`/change-management/pull-requests/${r.body.id}`, {status: 'readyForReview'}))
         .then(r => prs.push(r.body))
         .then(() => cloud.post('/change-management/pull-requests', genPr('model', modelId, 'second')))
-        .then(r => cloud.patch(`/change-management/pull-requests/${r.body.id}`, {status: 'declined'}))
+        .then(r => cloud.patch(`/change-management/pull-requests/${r.body.id}`, {status: 'cancelled'}))
         .then(r => prs.push(r.body))
         .then(() => cloud.post('/change-management/pull-requests', genPr('model', modelId, 'third')))
         .then(r => prs.push(r.body))
         .then(() => cloud.post('/change-management/pull-requests', genPr('model', modelId, 'fourth')))
         .then(r => prs.push(r.body))
         .then(() => cloud.get(`/change-management/pull-requests?statuses%5B%5D=created`, r => validator(r, 'created')))
-        .then(() => cloud.get(`/change-management/pull-requests?statuses%5B%5D=changesRequested%2C%20declined`, r => validatorOr(r, 'changesRequested', 'declined')))
+        .then(() => cloud.get(`/change-management/pull-requests?statuses%5B%5D=readyForReview%2C%20cancelled`, r => validatorOr(r, 'readyForReview', 'cancelled')))
         .then(() => cloud.get(`/change-management/pull-requests`, r => validatorAll(r, 4)))
         .then(() => prs.forEach(p => deletes.push(cloud.delete(`/change-management/pull-requests/${p.id}`))))
         .then(() => chakram.all(deletes));
+  });
+
+  // NOTE: can only be run as a superModelAdmin
+  it.skip('should support approving a PR made by another user and searching for other users PRs as a super model admin', () => {   
+    const validator = (r, status) => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body.length > 0).to.equal(true);
+        r.body.forEach(pr => {
+            expect(pr.status).to.equal(status);
+        });
+    };
+  
+    let prId;
+  
+    return cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post('/change-management/pull-requests', genPr('model', 2, 'first'))
+        .then(r => cloud.patch(`/change-management/pull-requests/${r.body.id}`, {status: 'approved'}))
+        .then(r => prId = r.body.id)
+        .then(() => cloud.get(`/change-management/pull-requests?statuses%5B%5D=approved`, r => validator(r, 'approved')))
+        .then(() => cloud.delete(`/change-management/pull-requests/${prId}`));
   });
 });
