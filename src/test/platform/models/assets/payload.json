@@ -27,6 +27,7 @@
         "value": "account"
       }
     },
+    "someLiteralArray": [1, 2, 3],
     "timeDiscPrint": false,
     "timeDiscRate": "3%",
     "timeDiscTax1Amt": 10020,

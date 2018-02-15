@@ -1,0 +1,99 @@
+[{
+  "timeTaxCode": {
+    "internalId": "-7",
+    "name": "-Not Taxable-",
+    "externalId": "asdsadas",
+    "type": {
+      "value": "invoice"
+    }
+  },
+  "timeTaxRate2": 3,
+  "toBeEmailed": false,
+  "toBeFaxed": false,
+  "toBePrinted": false,
+  "trackingNumbers": "2324324",
+  "tranDate": "2016-6-30T05:28:05.007Z",
+  "tranId": "2132235324",
+  "tranIsVsoeBundle": false,
+  "vatRegNum": "123112321",
+  "vsoeAutoCalc": false,
+  "taxRate": 2,
+  "taxTotal": 4100,
+  "terms": {
+    "internalId": "2",
+    "name": "Net 30",
+    "externalId": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "someLiteralArray": [1, 2, 3],
+  "timeDiscPrint": false,
+  "timeDiscRate": "3%",
+  "timeDiscTax1Amt": 10020,
+  "timeDiscTaxable": false,
+  "shippingCost": 10140,
+  "shippingTax2Rate": "5%",
+  "status": "Open",
+  "syncPartnerTeams": false,
+  "syncSalesTeams": false,
+  "tax2Total": 4200,
+  "taxItem": {
+    "internalId": "-153",
+    "name": "CA-SAN FRANCISCO",
+    "externalId": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "shipIsResidential": false,
+  "shipMethod": {
+    "internalId": "3",
+    "name": "Truck",
+    "externalId": "asdasdadasd",
+    "type": {
+      "value": "account"
+    }
+  },
+  "handlingTax2Rate": "3.00%",
+  "isTaxable": false,
+  "itemCostDiscPrint": false,
+  "itemCostDiscRate": "4.00%",
+  "itemCostDiscTax1Amt": 650,
+  "itemCostDiscTaxable": false,
+  "expCostTaxCode": {
+    "internalId": "1",
+    "name": "asdasdasd123",
+    "externalId": "asdasdasd123",
+    "type": {
+      "value": "account"
+    }
+  },
+  "expCostTaxRate1": 1,
+  "expCostTaxRate2": 2,
+  "externalId": "dsfsfdsf",
+  "fax": "(415) 6543-1001",
+  "giftCertApplied": 41,
+  "accountingBookDetailList": {
+    "replaceAll": true,
+    "accountingBookDetail": [{
+      "exchangeRate": 89,
+      "accountingBook": {
+        "internalId": "1",
+        "name": "appconfxwr99usbjxn3wb7hw7b9",
+        "externalId": "appconeoftizzu80ewxlnfdpldi",
+        "type": {
+          "value": "subsidiary"
+        }
+      },
+      "currency": {
+        "internalId": "1",
+        "name": "appconfxwr99usbjxn3wb7hw7b9",
+        "externalId": "appconeoftizzu80ewxlnfdpldi",
+        "type": {
+          "value": "subsidiary"
+        }
+      }
+    }]
+  }
+}]
