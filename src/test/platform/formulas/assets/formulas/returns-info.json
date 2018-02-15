@@ -1,0 +1,36 @@
+{
+    "name": "returns-info",
+    "steps": [
+        {
+            "onSuccess": [],
+            "onFailure": [],
+            "name": "simple-script",
+            "type": "script",
+            "properties": {
+                "mimeType": "application/javascript",
+                "body": "done(info);"
+            }
+        }
+    ],
+    "triggers": [
+        {
+            "type": "event",
+            "async": true,
+            "onSuccess": ["simple-script"],
+            "onFailure": [],
+            "properties": {
+                "elementInstanceId": "${trigger_instance}"
+            }
+        }
+    ],
+    "active": true,
+    "singleThreaded": false,
+    "configuration": [
+        {
+            "key": "trigger_instance",
+            "name": "trigger_instance",
+            "type": "elementInstance",
+            "required": true
+        }
+    ]
+}
