@@ -12,6 +12,6 @@ suite.forElement('marketing', 'visits', {}, (test) => {
     .then(() => cloud.withOptions({qs:{where: `visitor_ids='${visitorId}'`}}).get(test.api))
     .then(r => visitId = r.body[0].id)
     .then(() => cloud.withOptions().get(`${test.api}/${visitId}`));
-  })
+  });
   test.withOptions({qs:{where:`visitor_ids='${visitorId}'`}}).should.supportPagination();
 });
