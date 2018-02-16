@@ -6,7 +6,7 @@ const cloud = require('core/cloud');
 suite.forElement('marketing', 'visits', {}, (test) => {
   let visitorId, visitId;
   
-  it(`should support SR for ${test.api}`, () => {
+  it(`should allow SR for ${test.api}`, () => {
     return cloud.get('/visitors')
     .then(r => visitorId = r.body[0].id )
     .then(() => cloud.withOptions({qs:{where: `visitor_ids='${visitorId}'`}}).get(test.api))
