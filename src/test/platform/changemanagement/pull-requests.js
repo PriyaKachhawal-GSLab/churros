@@ -43,15 +43,20 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)
         })
         .then(() => cloud.get(`elements/closeio`))
         .then(r => elementId = r.body.id)
-        .then(r => cloud.post(`elements/${elementId}/models`, modelPayload))
+        .then(r => cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post(`elements/${elementId}/models`, modelPayload))
         .then(r => {
           modelId = r.body.id;
         });
     });
   
     after(() => {
-      return cloud.delete(`/users/${newUser.id}`, R.always(true))
-      .then(() => cloud.delete(`elements/${elementId}/models/${modelId}`));
+        try {
+            if (newUser) cloud.delete(`/users/${newUser.id}`, R.always(true));
+            if (modelId) cloud.delete(`elements/${elementId}/models/${modelId}`);
+        } catch (e) {
+            // ignore as if we already merged the PR the model was deleted
+            return;
+        }
     });
 
     
@@ -119,4 +124,34 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)
         .then(() => cloud.get(`/change-management/pull-requests?statuses%5B%5D=approved`, r => validator(r, 'approved')))
         .then(() => cloud.delete(`/change-management/pull-requests/${prId}`));
   });
+
+    // NOTE: can only be run as a superModelAdmin
+    it.skip('should support merging a PR', () => {   
+        const mergeValidator = r => {
+            expect(r).to.have.statusCode(200);
+            expect(r.body.status).to.equal('merged');
+        };
+
+        const mergeValidator2 = r => {
+            expect(r).to.have.statusCode(200);
+            expect(r.body.status).to.equal('merged');
+            expect(R.contains('element-closeio-account-system-model', r.body.systemDiffReference)).to.be.true;
+        };
+      
+        let prId, prId2, modelId2;
+      
+        return cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post('/change-management/pull-requests', genPr('model', modelId, 'first'))
+            .then(r => cloud.put(`/change-management/pull-requests/${r.body.id}/merge`, null, mergeValidator))
+            .then(r => prId = r.body.id)
+            .then(r => cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).get(`elements/${elementId}/models/${modelId}`, r => expect(r).to.have.statusCode(404)))
+            .then(r => cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post(`elements/${elementId}/models`, modelPayload))
+            .then(r => {
+              modelId2 = r.body.id;
+            })
+            .then(r => cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post('/change-management/pull-requests', genPr('model', modelId2, 'second')))
+            .then(r => cloud.put(`/change-management/pull-requests/${r.body.id}/merge`, null, mergeValidator2))
+            .then(r => prId2 = r.body.id)
+            .then(() => cloud.delete(`/change-management/pull-requests/${prId}`))
+            .then(() => cloud.delete(`/change-management/pull-requests/${prId2}`));
+      });
 });
