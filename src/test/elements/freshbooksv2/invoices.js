@@ -21,5 +21,4 @@ suite.forElement('finance', 'invoices', { payload: payload }, (test) => {
     .withValidation(r => expect(r.body.filter(obj => obj.currency_code === "USD")).to.not.be.empty)
     .withName('should allow GET with option currency_code')
     .should.return200OnGet();
-
 });
