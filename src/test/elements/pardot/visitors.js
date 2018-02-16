@@ -6,7 +6,7 @@ const cloud = require('core/cloud');
 suite.forElement('marketing', 'visitors', {}, (test) => {
   test.should.supportS();
   test.should.supportPagination();
-  it(`should support SR for ${test.api}/:id/visits`, () => {
+  it(`should allow SR for ${test.api}/:id/visits`, () => {
     let visitorId, visitId;
     return cloud.get(test.api)
     .then(r => visitorId = r.body[0].id)
