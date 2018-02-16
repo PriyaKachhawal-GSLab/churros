@@ -14,7 +14,7 @@ documents.override('folders', () => {
   suite.forElement('documents', 'folders', (test) => {
     afterEach(done => {
       //We were getting a 429 before this
-      setTimeout(done, 3000);
+      setTimeout(done, 4000);
     });
 
     let folder;

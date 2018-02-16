@@ -5,7 +5,7 @@ const cloud = require('core/cloud');
 const payload = require('./assets/attachment');
 const schema = require('./assets/objects.attachments.json');
 
-suite.forElement('finance', 'attachments', { payload: payload }, (test) => {
+suite.forElement('finance', 'attachments', { payload: payload, skip:true }, (test) => {
   it(`should allow CRUDS for ${test.api}`, () => {
     let docid;
     return cloud.get(test.api)

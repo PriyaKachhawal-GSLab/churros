@@ -158,7 +158,8 @@
     "fields": [{
       "path": "id",
       "vendorPath": "RECORDNO"
-    }]},
+    }]
+  },
     "checking-accounts": {
       "vendorName": "",
       "fields": [
@@ -174,5 +175,26 @@
       "path": "id",
       "vendorPath": "expensereportid"
     }]
+  },
+  "exchange-rates": {
+    "vendorName": "exchange-rates",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "exchange-rate-entries": {
+    "vendorName": "exchange-rate-entries",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+    "exchange-rate-types": {
+      "vendorName": "exchange-rate-types",
+      "fields": [{
+        "path": "id",
+        "vendorPath": "ID"
+      }]
   }
   }

@@ -89,22 +89,5 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
       .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.properties.mimeType === 'text/plain').length));
   });
 
-  //Skipping as soba PR is on hold
-  it.skip('should not return the path for GET /folders/contents?includePath=false', () => {
-    return cloud.withOptions({ qs: { includePath: false, path: `/${directoryPath}` } }).get(`${test.api}/contents`)
-      .then(r => {
-        expect(r.body[0].name).to.exist;
-        expect(r.body[0].path).to.be.undefined;
-      });
-  });
-
-  //Skipping as soba PR is on hold
-  it.skip('should not return the path for GET /folders/:id/contents?includePath=false', () => {
-    return cloud.withOptions({ qs: { includePath: false } }).get(`${test.api}/${directoryId}/contents`)
-      .then(r => {
-        expect(r.body[0].name).to.exist;
-        expect(r.body[0].path).to.be.undefined;
-      });
-  });
-
+  test.withOptions({ qs: { path: '/' } }).withApi('/folders/contents').should.supportPagination('id');
 });
