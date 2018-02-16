@@ -8,6 +8,24 @@
       }
     ]
   },
+  "custom-record-types": {
+    "vendorName": "CustomRecordType",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "internalId"
+      }
+    ]
+  },
+  "billing-accounts": {
+    "vendorName": "BillingAccount",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "internalId"
+      }
+    ]
+  },
   "inventory-adjustment": {
     "vendorName": "InventoryAdjustment",
     "fields": [
