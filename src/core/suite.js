@@ -327,11 +327,11 @@ const itBulkDownload = (name, hub, metadata, options, opts, endpoint) => {
   const getCsv = opts ? opts.csv : false;
   csvMeta = JSON.parse(JSON.stringify(metadata));
   metadata ? metadata.headers ? csvMeta.headers.accept = "text/csv" : csvMeta.headers = { accept: "text/csv" } : csvMeta = { headers: { accept: "text/csv" } };
-
+  const element = opts ? opts.element : null;
   metadata = tools.updateMetadata(metadata);
   // gets integer limit from ceql query
   const limit = tools.getLimit(metadata);
-  const fields = tools.getFieldsFromTransformation(opts.element || argv.element, endpoint);
+  const fields = tools.getFieldsFromTransformation(element || argv.element, endpoint);
   boomGoesTheDynamite(n, () => {
     // gets regular call to later check the validity of the bulk job
     return cloud.withOptions(metadata).get(`/hubs/${hub}/${endpoint}`)
