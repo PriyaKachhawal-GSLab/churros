@@ -255,7 +255,11 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('smux_identity_email')).sendKeys(username);
       browser.findElement(webdriver.By.id('smux_identity_password')).sendKeys(password);
       browser.findElement(webdriver.By.name('commit')).click();
-      browser.sleep(5000);
+      browser.wait(() => {
+        return browser.isElementPresent(webdriver.By.name('commit'));
+      }, 2000);
+      browser.findElement(webdriver.By.name('commit')).click();
+      browser.sleep(2000);
       return browser.getCurrentUrl();
     case 'googlesuite':
     case 'googlesheets':
