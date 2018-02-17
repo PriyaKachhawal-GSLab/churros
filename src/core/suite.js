@@ -331,7 +331,7 @@ const itBulkDownload = (name, hub, metadata, options, opts, endpoint) => {
   metadata = tools.updateMetadata(metadata);
   // gets integer limit from ceql query
   const limit = tools.getLimit(metadata);
-  const fields = tools.getFieldsFromTransformation(argv.element, endpoint);
+  const fields = tools.getFieldsFromTransformation(opts.element || argv.element, endpoint);
   boomGoesTheDynamite(n, () => {
     // gets regular call to later check the validity of the bulk job
     return cloud.withOptions(metadata).get(`/hubs/${hub}/${endpoint}`)

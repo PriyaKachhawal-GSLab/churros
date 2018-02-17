@@ -52,7 +52,10 @@ describe('suite', () => {
   });
 
   suite.forElement('fakebulkhub', 'resource', (test) => {
+    //test for limit
     test.should.supportBulkDownload({ qs: { q: 'select * from limitedEndpoint limit 5' } }, { json: true, csv: true, timeout: 60000 }, 'limitedEndpoint');
+    //test for transformations
+    test.should.supportBulkDownload({ qs: { q: 'select * from fakeEndpoint limit 5' } }, { json: true, csv: true, element: 'fake-element' }, 'fakeEndpoint');
   });
 
   /* Not passing in any suite options */

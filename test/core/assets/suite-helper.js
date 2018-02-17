@@ -68,6 +68,14 @@ exports.mock = (baseUrl, headers, eventHeaders) => {
       out.status = 'CREATED';
       out.id = 123;
       return out;
+    })
+    .post('/hubs/fakebulkhub/bulk/query')
+    .query({ q: 'select * from fakeEndpoint limit 5', where: '' })
+    .reply(200, (uri, requestBody) => {
+      var out = {};
+      out.status = 'CREATED';
+      out.id = 123;
+      return out;
     });
 
   nock(baseUrl, eventHeaders())
@@ -106,6 +114,9 @@ exports.mock = (baseUrl, headers, eventHeaders) => {
     .get('/hubs/fakebulkhub/limitedEndpoint')
     .query({ q: 'select * from limitedEndpoint limit 5', where: '' })
     .reply(200, () => new Array(10).fill({ id: '123' }))
+    .get('/hubs/fakebulkhub/fakeEndpoint')
+    .query({ q: 'select * from fakeEndpoint limit 5', where: '' })
+    .reply(200, () => new Array(10).fill({ 'bulk-id': '123', 'bulk-field1': 'val1' }))
     .get('/hubs/fakehub/bulk/123/status')
     .reply(200, (uri, requestBody) => {
       var out = {};
@@ -139,13 +150,19 @@ exports.mock = (baseUrl, headers, eventHeaders) => {
     .reply(200, () => new Array(10).fill(JSON.stringify({ "id": '123' })).join('\n'))
     .get('/hubs/fakebulkhub/bulk/123/limitedEndpoint')
     .query({ q: 'select * from limitedEndpoint limit 5' })
-    .reply(200, () => new Array(5).fill(JSON.stringify({ "id": '123' })).join('\n'));
+    .reply(200, () => new Array(5).fill(JSON.stringify({ "id": '123' })).join('\n'))
+    .get('/hubs/fakebulkhub/bulk/123/fakeEndpoint')
+    .query({ q: 'select * from fakeEndpoint limit 5' })
+    .reply(200, () => new Array(5).fill(JSON.stringify({ 'bulk-id': '123', 'bulk-field1': 'val1' })).join('\n'));
   nock(baseUrl, { reqheaders: { accept: "text/csv" } })
     .get('/hubs/fakehub/bulk/123/endpoint')
     .reply(200, () => ["id"].concat(new Array(10).fill('123')).join('\n').concat('\n'))
     .get('/hubs/fakebulkhub/bulk/123/limitedEndpoint')
     .query({ q: 'select * from limitedEndpoint limit 5' })
-    .reply(200, () => ["id"].concat(new Array(5).fill('123')).join('\n').concat('\n'));
+    .reply(200, () => ["id"].concat(new Array(5).fill('123')).join('\n').concat('\n'))
+    .get('/hubs/fakebulkhub/bulk/123/fakeEndpoint')
+    .query({ q: 'select * from fakeEndpoint limit 5' })
+    .reply(200, () => ["bulk-id,bulk-field1"].concat(new Array(5).fill('123,val1')).join('\n').concat('\n'));
 
   /** PATCH && PUT **/
   nock(baseUrl, headers())
