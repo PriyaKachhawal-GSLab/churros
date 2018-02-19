@@ -1,8 +1,8 @@
 'use strict';
 
 const suite = require('core/suite');
-const cloud = require('core/cloud');
 const expect = require('chakram').expect;
+const cloud = require('core/cloud');
 
 suite.forElement('erp', 'budgets', {skip: true}, (test) => {
 
