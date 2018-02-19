@@ -17,7 +17,7 @@ suite.forElement('erp', 'budgets', {skip: true}, (test) => {
       expect(r.body.length).to.be.equal(1);
     })
       .then(r => cloud.get(`${test.api}/${budgetId}`))
-      .then(r => cloud.patch(`${test.api}/${budgetId}`, payload));
+      .then(r => cloud.patch(`${test.api}/${budgetId}`, payload))
       .then(r => cloud.delete(`${test.api}/${budgetId}`));
   });
   test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();

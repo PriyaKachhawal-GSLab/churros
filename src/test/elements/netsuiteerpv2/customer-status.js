@@ -10,7 +10,6 @@ suite.forElement('erp', 'customer-status', { payload: payload }, (test) => {
   test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
   it('should CEQL search', () => {
     let statusId;
-	let payload = {};
     return cloud.get(`${test.api}`)
       .then(r => statusId = r.body[0].id)
       .then(r => cloud.withOptions({ qs: { where: `id=${statusId}` } }).get(`${test.api}`))
