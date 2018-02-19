@@ -5,7 +5,8 @@ const payload = require('./assets/projects');
 const reportDefinitionPayload = require('./assets/reports');
 const cloud = require('core/cloud');
 
-suite.forElement('db', 'projects', { payload: payload }, (test) => {
+//Need to skip as admin rights are needed for operations on projects resource
+suite.forElement('db', 'projects', { payload: payload, skip: true }, (test) => {
   test.withOptions({skip:true}).should.supportCrds();
   // get projects for authenticated user
   test.should.return200OnGet();
