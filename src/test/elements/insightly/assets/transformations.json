@@ -1,0 +1,51 @@
+{
+  "accounts": {
+    "vendorName": "accounts",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ORGANISATION_ID"
+    }]
+  },
+  "activities": {
+    "vendorName": "activities",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ACTIVITYSET_ID"
+    }]
+  },
+  "contacts": {
+    "vendorName": "contacts",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "CONTACT_ID"
+    }]
+  },
+  "leads": {
+    "vendorName": "leads",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "LEAD_ID"
+    }]
+  },
+  "opportunities": {
+    "vendorName": "opportunities",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "OPPORTUNITY_ID"
+    }]
+  },
+  "users": {
+    "vendorName": "users",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "USER_ID"
+    }]
+  },
+  "addresses": {
+    "vendorName": "addresses",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ADDRESS_ID"
+    }]
+  }
+}
