@@ -652,23 +652,35 @@ const manipulateDom = (element, browser, r, username, password, config, b) => {
         .then((element) => element.click(), (err) => {}); // ignore this
       return browser.getCurrentUrl();
     case 'docushareflex':
-      /* Docushare renders a popup that selenium can't handle with firefox - eg browser.switchTo().alert()  
-      * There is also a firefox issue with sending the Basic credentials in the URL if you're targeting a sub-resource on a domain.
-      * To workaround we first hit the main domain with the creds in the URL then call the sub-resource (our OG auth url);
-      **/
-      let docushareOauthUrl = r.body.oauthUrl;
-      let domainExtension = '.com';
-      let baseUrl = docushareOauthUrl.substring(0, docushareOauthUrl.indexOf(domainExtension) + domainExtension.length);
-      let baseUrlWithCreds = baseUrl.replace("https://", `https://${username}:${password}@`);
-      browser.get(baseUrlWithCreds)
-      //browser.sleep(2000);
-      browser.get(docushareOauthUrl);
-       //browser.sleep(200000);
-      let xPath = '//*[@id="content_wrap"]/div/div[2]/span[1]/span[1]/button';
-      browser.wait(webdriver.until.elementLocated(webdriver.By.xpath(xPath)), 7000);
-      browser.findElement(webdriver.By.xpath(xPath)).click();
-      browser.sleep(2000);
-      return browser.getCurrentUrl();
+      if(config['provider.version'] === '1') {
+        /* For version 1 Docushare renders a popup that selenium can't handle with firefox - eg browser.switchTo().alert()  
+        * There is also a firefox issue with sending the Basic credentials in the URL if you're targeting a sub-resource on a domain.
+        * To workaround we first hit the main domain with the creds in the URL then call the sub-resource (our OG auth url);
+        **/
+        let docushareOauthUrl = r.body.oauthUrl;
+        let domainExtension = '.com';
+        let baseUrl = docushareOauthUrl.substring(0, docushareOauthUrl.indexOf(domainExtension) + domainExtension.length);
+        let baseUrlWithCreds = baseUrl.replace("https://", `https://${username}:${password}@`);
+        browser.get(baseUrlWithCreds)
+        browser.get(docushareOauthUrl);
+        let xPath = '//*[@id="content_wrap"]/div/div[2]/span[1]/span[1]/button';
+        browser.wait(webdriver.until.elementLocated(webdriver.By.xpath(xPath)), 7000);
+        browser.findElement(webdriver.By.xpath(xPath)).click();
+        browser.sleep(2000);
+        return browser.getCurrentUrl();
+      } else {
+        browser.get(r.body.oauthUrl);
+        return browser.wait(() => browser.isElementPresent(webdriver.By.id('xsltforms-mainform-input-username')), 5000)
+        .then(() => browser.findElement(webdriver.By.xpath('//*[@id="xsltforms-mainform-input-username"]')).sendKeys(username))
+        .then(() => browser.findElement(webdriver.By.xpath('//*[@id="password"]/span[2]/input')).sendKeys(password))
+        .then(() => browser.findElement(webdriver.By.xpath('//*[@id="xsltforms-mainform-submit-2_3_3_2_1_2_4_"]/span[1]/button')))
+        .then(r => r.click())
+        .then(() => browser.wait(() => browser.isElementPresent(webdriver.By.id('xsltforms-mainform-trigger-1_3_1_2_4_')), 5000))
+        .then(() => browser.findElement(webdriver.By.xpath('//*[@id="xsltforms-mainform-trigger-1_3_1_2_4_"]/span[1]/button')))
+        .then(r => r.click())
+        .then(() => browser.sleep(2000))
+        .then(() => browser.getCurrentUrl());
+      }
     default:
       throw 'No OAuth function found for element ' + element + '.  Please implement function in core/oauth so ' + element + ' can be provisioned';
   }
