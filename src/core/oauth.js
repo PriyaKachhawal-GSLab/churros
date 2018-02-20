@@ -660,7 +660,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         let domainExtension = '.com';
         let baseUrl = docushareOauthUrl.substring(0, docushareOauthUrl.indexOf(domainExtension) + domainExtension.length);
         let baseUrlWithCreds = baseUrl.replace("https://", `https://${username}:${password}@`);
-        browser.get(baseUrlWithCreds)
+        browser.get(baseUrlWithCreds);
         browser.get(docushareOauthUrl);
         let xPath = '//*[@id="content_wrap"]/div/div[2]/span[1]/span[1]/button';
         browser.wait(webdriver.until.elementLocated(webdriver.By.xpath(xPath)), 7000);
@@ -680,6 +680,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then(() => browser.sleep(2000))
         .then(() => browser.getCurrentUrl());
       }
+      break;
     default:
       throw 'No OAuth function found for element ' + element + '.  Please implement function in core/oauth so ' + element + ' can be provisioned';
   }
