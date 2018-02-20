@@ -42,7 +42,7 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
           "STATE": "MH",
           "POSTCODE": "411245",
           "COUNTRY": "India"
-        }
+        };
       })
       .then(r => cloud.put(`${test.api}/${contactId}/addresses/${addressId}`, addrPayload))
       .then(r => cloud.delete(`${test.api}/${contactId}/addresses/${addressId}`));
