@@ -19,17 +19,17 @@ const crudsObject = (url, payload, updatePayload) => {
     .then(r => cloud.delete(url + '/' + object.id));
 };
 
-const genPr = (type, id, status) => {
+const genPr = (type, id, status, isDelete) => {
     return {
         entityType: type,
         entityId: id,
         message: 'message',
-        diffReference: '/path/to/diff'
+        deletionRequest: isDelete === null ? false : true
     };
 };
 
 suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)}, test => {
-    let newUser, elementId, modelId;
+    let newUser, elementId, modelId, modelName;
     before(() => {
       const opts = { qs: { where: 'defaultAccount=true' } };
       return cloud.withOptions(opts).get('/accounts')
@@ -46,6 +46,7 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)
         .then(r => cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post(`elements/${elementId}/models`, modelPayload))
         .then(r => {
           modelId = r.body.id;
+          modelName = r.body.name;
         });
     });
   
@@ -126,7 +127,7 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)
   });
 
     // NOTE: can only be run as a superModelAdmin
-    it.skip('should support merging a PR', () => {   
+    it.skip('should support merging PRs for creating, updating and deleting models from the catalog', () => {   
         const mergeValidator = r => {
             expect(r).to.have.statusCode(200);
             expect(r.body.status).to.equal('merged');
@@ -135,10 +136,10 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)
         const mergeValidator2 = r => {
             expect(r).to.have.statusCode(200);
             expect(r.body.status).to.equal('merged');
-            expect(R.contains('element-closeio-account-system-model', r.body.systemDiffReference)).to.be.true;
+            expect(R.contains('element-closeio-account-system-model', r.body.systemEntityReference)).to.be.true;
         };
       
-        let prId, prId2, modelId2;
+        let prId, prId2, modelId2, sysModel;
       
         return cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post('/change-management/pull-requests', genPr('model', modelId, 'first'))
             .then(r => cloud.put(`/change-management/pull-requests/${r.body.id}/merge`, null, mergeValidator))
@@ -151,6 +152,14 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1)
             .then(r => cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post('/change-management/pull-requests', genPr('model', modelId2, 'second')))
             .then(r => cloud.put(`/change-management/pull-requests/${r.body.id}/merge`, null, mergeValidator2))
             .then(r => prId2 = r.body.id)
+            .then(r => cloud.get(`elements/${elementId}/models`))
+            .then(r => {
+                sysModel = R.head(R.filter(R.propEq('name', modelName), r.body));
+            })
+            // Note that this deletion request needs to be made by an admin
+            .then(r => cloud.post('/change-management/pull-requests', genPr('model', sysModel.id, 'delete req', true)))
+            .then(r => cloud.put(`/change-management/pull-requests/${r.body.id}/merge`, null, mergeValidator2))
+            .then(r => cloud.get(`elements/${elementId}/models/${sysModel.id}`, r => expect(r).to.have.statusCode(404)))
             .then(() => cloud.delete(`/change-management/pull-requests/${prId}`))
             .then(() => cloud.delete(`/change-management/pull-requests/${prId2}`));
       });
