@@ -8,5 +8,17 @@
   "primaryKey": false,
   "hidden": false,
   "readOnly": false,
-  "nullable": false
-    }
+  "nullable": false,
+  "fields": [
+    {
+      "name": "churrosContact<<random.alphaNumeric##4>>",
+      "vendorName": "churrosVendorContact<<random.alphaNumeric##4>>",
+      "type":"string",
+      "searchableJoins" :"and",
+      "customFields": false,
+      "ownerAccountId": 1,
+      "customFieldDiscovery": false,
+      "nullsRequired": false
+    }    
+  ]
+}
