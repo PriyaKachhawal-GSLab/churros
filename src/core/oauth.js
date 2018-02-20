@@ -564,6 +564,28 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       }, 10000);
       browser.findElement(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow')).click();
       return browser.getCurrentUrl();
+    case 'microsoftgraph':
+      browser.get(r.body.oauthUrl);
+      browser.findElement(webdriver.By.id('i0116')).sendKeys(username);
+      browser.findElement(webdriver.By.id('idSIButton9')).click();
+      browser.sleep(700);
+      browser.wait(() => browser.findElement(webdriver.By.id('aadTile')).click(), 1000)
+        .thenCatch(r => true);
+      browser.wait(() => browser.isElementPresent(webdriver.By.id('i0118')), 3000)
+        .thenCatch(r => true);
+      browser.findElement(webdriver.By.id('i0118')).sendKeys(password);
+      browser.findElement(webdriver.By.id('idSIButton9')).click();
+      browser.wait(() => {
+          browser.findElement(webdriver.By.id('idSIButton9')).click()
+            .thenCatch(r => true);
+          return browser.isElementPresent(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow'));
+        }, 10000)
+        .thenCatch(r => true);
+
+      browser.findElement(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow')).click()
+        .thenCatch(r => true);
+
+      return browser.getCurrentUrl();
 
     case 'wrike':
       browser.get(r.body.oauthUrl);

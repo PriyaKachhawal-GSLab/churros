@@ -1052,6 +1052,15 @@
       "type": "string"
     }]
   },
+  "project-codes": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    },{
+      "path": "id",
+      "type": "string"
+    }]
+  },
   "purchase-orders": {
     "fields": [{
       "path": "idTransformed",
