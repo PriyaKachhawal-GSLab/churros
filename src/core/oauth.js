@@ -646,8 +646,6 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.name('password')).sendKeys(password);
 	  browser.findElement(webdriver.By.xpath('/html/body/div/div/div/main/section/div[1]/div/form/div[4]/button/div/span')).click();
 	  
-      // browser.manage().window().maximize(); //for maximizing the window size.
-      //browser.wait(webdriver.until.elementLocated(webdriver.By.xpath('.//*[@id="auth0-lock-container-1"]/div/div[2]/form/div/div/  button'), 5000));      
       return browser.getCurrentUrl();
     case 'linkedin':
       browser.get(r.body.oauthUrl);
