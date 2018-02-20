@@ -4,12 +4,11 @@
 const webdriver = require('selenium-webdriver');
 const logger = require('winston');
 const props = require('core/props');
-const firefox = require('selenium-webdriver/firefox');
 
 /* jshint unused:false */
 const wait = (browser, ms) => browser.wait(() => false, ms);
 
-const manipulateDom = (element, browser, r, username, password, config, b) => {
+const manipulateDom = (element, browser, r, username, password, config) => {
   let waitForElement = function(locator, timeout) {
     timeout = timeout || 3000;
     let brow = this;
@@ -521,7 +520,7 @@ const manipulateDom = (element, browser, r, username, password, config, b) => {
         .then((element) => element.click(), (err) => {}); // ignore this
       return browser.getCurrentUrl();
     case 'sageoneuk':
-      browser.get(r.body.oauthUrl);``
+      browser.get(r.body.oauthUrl);
       browser.wait(() => browser.isElementPresent(webdriver.By.id('uk')), 5000)
         .thenCatch(r => true); // ignore
       browser.findElement(webdriver.By.id('uk'))
@@ -691,7 +690,7 @@ const attemptOAuthExchange = (attempt, manipulateDom, element, b, r, username, p
     .forBrowser(b)
     .build();
 
-  return browser.call(() => manipulateDom(element, browser, r, username, password, config, manipulateDom, b))
+  return browser.call(() => manipulateDom(element, browser, r, username, password, config))
     .then(url => {
       browser.close();
       return url;
