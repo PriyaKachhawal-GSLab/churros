@@ -67,6 +67,18 @@
       }
     ]
   },
+  "item-receipts": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
   "customer-status": {
     "fields": [
       {

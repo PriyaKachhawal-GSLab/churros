@@ -17,6 +17,15 @@
       }
     ]
   },
+  "item-receipts": {
+    "vendorName": "ItemReceipt",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "internalId"
+      }
+    ]
+  },
   "billing-accounts": {
     "vendorName": "BillingAccount",
     "fields": [
