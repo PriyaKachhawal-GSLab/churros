@@ -1,12 +1,13 @@
 'use strict';
 
 const suite = require('core/suite');
+const suite = require('core/cloud');
 const payload = require('./assets/item-receipts');
 const purchaseOrder = require('./assets/purchase-orders');
 const expect = require('chakram').expect;
 
 suite.forElement('erp', 'item-receipts', { payload: payload }, (test) => {
-  it.skip('should allow CUD for hubs/erp/item-receipts', () => {
+  it('should allow CUD for hubs/erp/item-receipts', () => {
     let purchaseOrderId;
 	let itemReceiptId;
     return cloud.post('hubs/erp/purchase-orders', purchaseOrder)
