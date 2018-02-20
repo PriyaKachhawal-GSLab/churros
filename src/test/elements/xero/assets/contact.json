@@ -9,9 +9,9 @@
         "Overdue": 0
       }
     },
-    "FirstName": "Test",
+    "FirstName": "<<name.firstName>>",
     "IsCustomer": true,
     "IsSupplier": true,
-    "LastName": "Account",
+    "LastName": "<<name.lastName>>",
     "Name":"<<name.findName>>"
 }
