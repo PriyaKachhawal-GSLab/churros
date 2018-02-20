@@ -336,7 +336,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       "vendorName":"Lead",
       "elementInstanceId": sfdcId
     };
-    console.log('pay', JSON.stringify(noFieldV2Payload));
+
     return cloud.put('/common-resources', noFields)
       .then(r => cloud.post(`/instances/${sfdcId}/transformations/${noFields.name}`, {vendorName: "Lead"}))
       .then(r => cloud.put('/transformations', noFieldV2Payload))
