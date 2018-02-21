@@ -200,13 +200,13 @@ suite.forElement('documents', 'files', (test) => {
         expect(r).to.have.statusCode(200);
         expect(r.body.tags[0]).to.equal(`${fileTagPayload.tags[0]}`);
         fileUpdateTagPayload = r.body;
-        fileUpdateTagPayload.tags = ["fileTag1Updated", "fileTag2Updated"]
+        fileUpdateTagPayload.tags = ["fileTag1Updated", "fileTag2Updated"];
       })
       .then(() => cloud.withOptions({ qs: { path: fileTagPayload.path } }).get(`${test.api}/metadata`))
       .then(r => {
         expect(r).to.have.statusCode(200);
         expect(r.body.tags[0]).to.equal(`${fileTagPayload.tags[0]}`);
-      })
+      });
   });
 
   it('should allow UR tags /folders/:id/metadata', () => {
@@ -219,6 +219,6 @@ suite.forElement('documents', 'files', (test) => {
       .then(r => {
         expect(r).to.have.statusCode(200);
         expect(r.body.tags[0]).to.equal(`${fileUpdateTagPayload.tags[0]}`);
-      })
+      });
   });
 });

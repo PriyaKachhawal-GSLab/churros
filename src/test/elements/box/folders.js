@@ -51,13 +51,13 @@ suite.forElement('documents', 'folders', {}, (test) => {
       expect(r).to.have.statusCode(200);
       expect(r.body.tags[0]).to.equal(`${folderTagPayload.tags[0]}`);
       folderUpdateTagPayload = r.body;
-      folderUpdateTagPayload.tags = ["folderTag1Updated","folderTag2Updated"]
+      folderUpdateTagPayload.tags = ["folderTag1Updated","folderTag2Updated"];
     })
     .then(() => cloud.withOptions({ qs: { path: folderTagPayload.path } }).get(`${test.api}/metadata`))
     .then(r => {
       expect(r).to.have.statusCode(200);
       expect(r.body.tags[0]).to.equal(`${folderTagPayload.tags[0]}`);
-    })
+    });
   });
 
   it('should allow UR tags PATCH /folders/:id/metadata', () => {
@@ -70,7 +70,7 @@ suite.forElement('documents', 'folders', {}, (test) => {
     .then(r => {
       expect(r).to.have.statusCode(200);
       expect(r.body.tags[0]).to.equal(`${folderUpdateTagPayload.tags[0]}`);
-    })
+    });
   });
 
 });
