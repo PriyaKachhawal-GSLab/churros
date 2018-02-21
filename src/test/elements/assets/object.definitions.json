@@ -2164,5 +2164,14 @@
         "type": "string"
       }
     ]
+  },
+  "chargecard-transactions": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
   }
 }
