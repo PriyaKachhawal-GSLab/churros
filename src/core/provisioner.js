@@ -305,7 +305,7 @@ exports.create = (element, args, baseApi, polling) => {
 
     return createOrUpdateInstance(element, config, r, baseApi, undefined, typeof polling === 'undefined' ? argv.polling : polling);
   };
-  return orchestrateCreate(element, args, baseApi, cb, polling, typeof polling === 'undefined' ? argv.polling : polling);
+  return orchestrateCreate(element, args, baseApi, cb, typeof polling === 'undefined' ? argv.polling : polling);
 };
 /**
  * Provision an existing element instance
