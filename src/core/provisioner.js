@@ -354,13 +354,7 @@ exports.updateWithDefault = (element, args, baseApi, instanceId) => {
   const elementKey = tools.getBaseElement(element);
   return cloud.get(`elements/${elementKey}`)
   .then(r => r.body.id)
-  .then(r => orchestrateCreate(element, args, baseApi, cb, r));
-=======
-    return createInstance(element, config, r, baseApi, typeof polling === 'undefined' ? argv.polling : polling);
-  };
-
-  return orchestrateCreate(element, args, baseApi, cb, typeof polling === 'undefined' ? argv.polling : polling);
->>>>>>> Better undefined check
+  .then(r => orchestrateCreate(element, args, baseApi, cb, r, typeof polling === 'undefined' ? argv.polling : polling));
 };
 
 
