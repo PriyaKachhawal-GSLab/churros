@@ -1,8 +1,9 @@
 'use strict';
 const cloud = require('core/cloud');
 const suite = require('core/suite');
-const dataExtensionsRowsPayload = require('core/tools').requirePayload(`${__dirname}/assets/dataExtensionsRowCreate.json`);
-const payload = require('./assets/dataExtension');
+const tools = require('core/tools');
+const dataExtensionsRowsPayload = tools.requirePayload(`${__dirname}/assets/dataExtensionsRowCreate.json`);
+const payload = tools.requirePayload(`${__dirname}/assets/dataExtension.json`);
 
 const putPayload = {
   "keys": dataExtensionsRowsPayload.keys,
