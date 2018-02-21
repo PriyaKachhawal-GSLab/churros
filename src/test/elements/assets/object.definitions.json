@@ -1,9 +1,19 @@
 {
-  "accounts": {
+  "reporting-periods": {
     "fields": [{
       "path": "idTransformed",
       "type": "string"
     },{
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "accounts": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -19,18 +29,21 @@
   },
   "agents": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "activities": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -50,90 +63,109 @@
   },
   "assets": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "custom-fields": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "locations": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "jobs": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "attachments": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "bank-accounts": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "campaigns": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "purchases": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "cases": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "comments": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -145,9 +177,10 @@
   },
   "contacts": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -199,18 +232,21 @@
   },
   "contact-types": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "customers": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -230,54 +266,65 @@
   },
   "credit-memos": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "credit-terms": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "dimensions": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "discounts": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "stores": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "shipments": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -289,9 +336,10 @@
   },
   "addresses": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -303,9 +351,10 @@
   },
   "eloquaCustomObject": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -321,9 +370,10 @@
   },
   "employees": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -335,94 +385,102 @@
   },
   "estimates": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "classifications": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "departments": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
-  },
-  "locations": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "expenses": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "expense-group-configurations": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "incidents": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    },
-    {
-      "path": "junk",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      },
+      {
+        "path": "junk",
+        "type": "string"
+      }
+    ]
   },
   "incident-types": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "invoices": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "leads": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -442,9 +500,10 @@
   },
   "lists": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -460,27 +519,32 @@
   },
   "fields": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "notes": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "opportunities": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -524,27 +588,32 @@
   },
   "orders": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "organizations": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "owners": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -556,27 +625,32 @@
   },
   "payments": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "posting-rules": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "products": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -592,9 +666,10 @@
   },
   "tasks": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -610,54 +685,65 @@
   },
   "templates": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "triggers": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "users": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "items": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "taxes": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "vendors": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -669,218 +755,263 @@
   },
   "vendor-payments": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "subsidiaries": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "groups": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "widgets": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "segments": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-  },
+        "path": "idTransformed",
+        "type": "string"
+      },
       {
         "path": "id",
-        "type":"string"
+        "type": "string"
       }
     ]
   },
   "transient-documents": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "sales-invoices": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "library-documents": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "documents": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "workflows": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "payment-methods": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "transactions": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "subscriptions": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "product-families": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "forms": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "reports": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "plans": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "refunds": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "tax-rates": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "tokens": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "charges": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "transfers": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "shops": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "authors": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -892,399 +1023,485 @@
   },
   "members": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "mobi-events": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "coupons": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "sales-rules": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "products-attributes": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "products-attribute-sets": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "folders": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "files": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "colors": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "dependencies": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
-  },
-  "departments": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "journals": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "journal-entries": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "classes": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "bills": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "bills-payments": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "projects": {
     "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "project-codes": {
+    "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
   },
   "purchase-orders": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "sales-orders": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "terms": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "vouchers": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "warehouses": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "ledger-accounts": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "tax-codes": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "expense-reports": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "time-activities": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "customer-refunds": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "return-authorizations": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "non-inventory-resale-items": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "service-resale-items": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "smart-collections": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "lot-numbered-assembly-items": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "lot-numbered-inventory-items": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "listsActivities": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }, {
-      "path": "emails_sent",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      },
+      {
+        "path": "emails_sent",
+        "type": "string"
+      }
+    ]
   },
   "serialized-inventory-items": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "serialized-assembly-items": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "friendships": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "exception-reasons": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "brands": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "manufacturers": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "product-tax-classes": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "variants": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "fullfillment-methods": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "statuses": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -1296,72 +1513,87 @@
   },
   "blocks-id": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "blocks-list": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "places": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "interactions": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "carts": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "companies": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "meetings": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "activity-calls": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -1377,18 +1609,21 @@
   },
   "payroll-items": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "activity-events": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
         "path": "id",
         "type": "string"
       },
@@ -1400,423 +1635,214 @@
   },
   "contactS": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "Fairsail": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "bulky": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "company": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "invoiceitem": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "planview": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "channels": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "pages": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "messages": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "installedProducts": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "orderParts": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "workOrders": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "serviceContracts": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "custom-records": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "prospects": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "stacks": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "policies": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "ServiceRequestAttachmentFolder": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "ServiceRequestDescription": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "ServiceRequestCollection": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
-  },
- "price-rules": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
- },
- "products-attribute-sets-groups": {
- "fields": [{
-   "path": "idTransformed",
-   "type": "string"
-  },{
-   "path": "id",
-   "type": "string"
- }]
-},
- "location": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "sampleBulkCustomObject_c" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
-   "spreadsheets": {
-     "fields": [{
-       "path": "idTransformed",
-       "type": "string"
-      },{
-       "path": "id",
-       "type": "string"
-     }]
-   },
- "productsCategories": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "vendor-credits": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "changes": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   },
-   {
-     "path": "junk",
-     "type": "string"
-   }]
- },
- "drafts" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "problems": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   },
-   {
-     "path": "junk",
-     "type": "string"
-   }]
- },
- "checks" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "employee-schedules" : {
-   "fields": [{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "posting-periods" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "inventory-sites": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "inventory-adjustments": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "bill-payment-checks": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "equipment-cards": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "bill-payment-cards": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "addressbook-entries": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "employee-schedules" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "roles" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "timesheets" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "tips" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "creditcard-charges": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "creditcard-credits": {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },
- "data-extensions" : {
-   "fields": [{
-     "path": "idTransformed",
-     "type": "string"
-    },{
-     "path": "id",
-     "type": "string"
-   }]
- },"checking-accounts": {
     "fields": [{
       "path": "idTransformed",
       "type": "string"
@@ -1825,7 +1851,297 @@
       "type": "string"
     }]
   },
-  "expense-reports": {
+  "price-rules": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "products-attribute-sets-groups": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "location": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "sampleBulkCustomObject_c": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "spreadsheets": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "productsCategories": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "vendor-credits": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "changes": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
+        "path": "id",
+        "type": "string"
+      },
+      {
+        "path": "junk",
+        "type": "string"
+      }
+    ]
+  },
+  "drafts": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "problems": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      }, {
+        "path": "id",
+        "type": "string"
+      },
+      {
+        "path": "junk",
+        "type": "string"
+      }
+    ]
+  },
+  "checks": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "posting-periods": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "inventory-sites": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "inventory-adjustments": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "bill-payment-checks": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "equipment-cards": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "bill-payment-cards": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "addressbook-entries": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "employee-schedules": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "roles": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "timesheets": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "tips": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "creditcard-charges": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "creditcard-credits": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "data-extensions": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "exchange-rates": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "exchange-rate-entries": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "exchange-rate-types": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "checking-accounts": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "bulkCustomerNfv2": {
+    "fields": [{
+        "path": "id",
+        "type": "string"
+      },
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "bulk-dateCreated",
+        "type": "string"
+      },
+      {
+        "path": "bulk-lastModifiedDate",
+        "type": "string"
+      }
+    ]
+  },
+  "xeroCustomResource": {
     "fields": [
       {
         "path": "idTransformed",
@@ -1836,8 +2152,28 @@
         "type": "string"
       }
     ]
-  } 
-},
+  },
+  "xeroCustomChildResource": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "chargecard-transactions": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
  "institutions" : {
    "fields": [{
      "path": "idTransformed",
@@ -1847,4 +2183,5 @@
      "type": "string"
    }]
  }
+
 }
