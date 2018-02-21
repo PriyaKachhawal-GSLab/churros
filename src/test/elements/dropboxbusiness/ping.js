@@ -8,7 +8,7 @@ suite.forElement('documents', 'ping', (test) => {
     .withName(`should allow GET /ping for system health`)
     .withValidation(r => {
       expect(r).to.have.statusCode(200);
-      expect(r.body.endpoint).to.equal('dropbox');
+      expect(r.body.endpoint).to.equal('dropboxbusiness');
       expect(r.body.valid).to.equal(true);
     })
     .should.return200OnGet();
