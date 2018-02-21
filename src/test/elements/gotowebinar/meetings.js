@@ -47,8 +47,8 @@ suite.forElement('conferencing', 'meetings', { payload: payload }, (test) => {
       .then(r => cloud.get(test.api))
       .then(r => cloud.get(`${test.api}/${webinarKey}/times`))
       .then(r => cloud.get(`${test.api}/upcoming`))
-      .then(r => cloud.withOptions({ qs: { where: 'fromTime=\'2000-11-03T14:00:00Z\' AND toTime=\'2020-11-03T14:00:00Z\'' } }).get(`${test.api}/history`))
-      .then(r => cloud.withOptions({ qs: { where: 'fromTime=\'2000-11-03T14:00:00Z\' AND toTime=\'2020-11-03T14:00:00Z\'' } }).get(test.api))
+      .then(r => cloud.withOptions({ qs: { where: 'fromTime=\'2015-11-03T14:00:00Z\' AND toTime=\'2020-11-03T14:00:00Z\'' } }).get(`${test.api}/history`))
+      .then(r => cloud.withOptions({ qs: { where: 'fromTime=\'2015-11-03T14:00:00Z\' AND toTime=\'2020-11-03T14:00:00Z\'' } }).get(test.api))
       .then(r => cloud.delete(`${test.api}/${webinarKey}`));
   });
 
@@ -59,7 +59,7 @@ suite.forElement('conferencing', 'meetings', { payload: payload }, (test) => {
       .then(r => webinarKey = r.body[0].webinarKey)
       .then(r => cloud.get(`${test.api}/${webinarKey}/sessions`))
       .then(r => sessionKey = r.body[0].sessionKey)
-      .then(r => cloud.get(`${test.api}/${webinarKey}/session/${sessionKey}`))
+      .then(r => cloud.get(`${test.api}/${webinarKey}/sessions/${sessionKey}`))
       .then(r => cloud.get(`${test.api}/${webinarKey}/session/${sessionKey}/attendees`)); //commenting as there isn't antendees for a newly created meeting
       // .then(r => attendeeKey = r.body[0].registrantKey)
       // .then(r => cloud.get(`${test.api}/${webinarKey}/session/${sessionKey}/attendees/${attendeeKey}`));
