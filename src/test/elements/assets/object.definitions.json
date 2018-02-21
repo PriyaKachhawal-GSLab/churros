@@ -2153,7 +2153,7 @@
       }
     ]
   },
-    "xeroCustomChildResource": {
+  "xeroCustomChildResource": {
     "fields": [
       {
         "path": "idTransformed",
