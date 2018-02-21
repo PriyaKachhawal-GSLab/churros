@@ -27,6 +27,13 @@
       "vendorPath": "EquipmentCardNum"
     }]
   },
+  "project-codes": {
+    "vendorName": "projectcodes",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "Code"
+    }]
+  },
   "products": {
     "vendorName": "items",
     "fields": [{

@@ -125,13 +125,6 @@
       "vendorPath": "glaccountid"
     }]
   },
-  "terms": {
-    "vendorName": "terms",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "name"
-    }]
-  },
   "transactions": {
     "vendorName": "transactions",
     "fields": [{
@@ -170,15 +163,36 @@
   "checking-accounts": {
     "vendorName": "checking-accounts",
     "fields": [{
-        "path": "id",
-        "vendorPath": "RECORDNO"
-      }]
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
   },
-    "expense-reports": {
+  "expense-reports": {
     "vendorName": "expense-reports",
     "fields": [{
       "path": "id",
       "vendorPath": "expensereportid"
+    }]
+  },
+  "exchange-rates": {
+    "vendorName": "exchange-rates",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "exchange-rate-entries": {
+    "vendorName": "exchange-rate-entries",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "exchange-rate-types": {
+    "vendorName": "exchange-rate-types",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ID"
     }]
   }
 }
