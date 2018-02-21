@@ -69,8 +69,8 @@ const parseProps = (element, useDefaultUrl) => {
   return new Promise((res, rej) => res(args));
 };
 
-const getPollerConfig = (element, instance) => {
-  if (!argv.polling) return Promise.resolve(instance);
+const getPollerConfig = (element, instance, polling) => {
+  if (!polling) return Promise.resolve(instance);
   let elementObj;
   return cloud.get('/elements/' + element)
   .then(r => elementObj = r.body)
@@ -122,17 +122,26 @@ const addDebugToParams = (args, params) => {
   return params;
 };
 
+<<<<<<< 62b086b7c27217781396aa3b754a61175800600f
 const getInstanceUrl = instanceId => instanceId ? `/instances/${instanceId}` : '/instances';
 
 const createOrUpdateInstance = (element, config, providerData, baseApi, instanceId) => {
+=======
+const createInstance = (element, config, providerData, baseApi, polling) => {
+>>>>>>> New tests for job disablement
   config.element = tools.getBaseElement(element);
   const instance = genInstance(config);
   const isUpdate = !!instanceId;
   const performCreateOrUpdate = isUpdate ? cloud.put : cloud.post;
   baseApi = (baseApi) ? baseApi : getInstanceUrl(instanceId);
   if (providerData) instance.providerData = providerData;
+<<<<<<< 62b086b7c27217781396aa3b754a61175800600f
   return getPollerConfig(tools.getBaseElement(element), instance)
     .then(r => performCreateOrUpdate(baseApi, addParams(r, element)))
+=======
+  return getPollerConfig(tools.getBaseElement(element), instance, polling)
+    .then(r => cloud.post(baseApi, addParams(r, element)))
+>>>>>>> New tests for job disablement
     .then(r => {
       expect(r).to.have.statusCode(200);
       logger.debug('Created %s element instance with ID: %s', element, r.body.id);
@@ -245,6 +254,7 @@ const oauth1 = (element, args) => {
 /**
  * Handles orchestrating this create, which can flow different ways depending on what type of
  * provisioning this element support
+<<<<<<< 62b086b7c27217781396aa3b754a61175800600f
  * @param  {string} element   The element key
  * @param  {object} args      The args to pass on the create instance call
  * @param  {string} baseApi   The base API
@@ -253,6 +263,15 @@ const oauth1 = (element, args) => {
  */
 const orchestrateCreate = (element, args, baseApi, cb, elementId) => {
   const useDefaultUrl = !!elementId;
+=======
+ * @param  {string} element  The element key
+ * @param  {object} args     The args to pass on the create instance call
+ * @param  {string} baseApi  The base API
+ * @param  {boolean} polling Whether to enable polling or not
+ * @return {Promise}         JS promise that resolves to the instance created
+ */
+const orchestrateCreate = (element, args, baseApi, cb, polling) => {
+>>>>>>> New tests for job disablement
   const type = props.getOptionalForKey(element, 'provisioning');
   const config = genConfig(props.all(element), args);
   config.element = element;
@@ -273,7 +292,11 @@ const orchestrateCreate = (element, args, baseApi, cb, elementId) => {
       const cp = `${__dirname}/../test/elements/${element}/provisioner`;
       return require(cp).create(config);
     default:
+<<<<<<< 62b086b7c27217781396aa3b754a61175800600f
       return createOrUpdateInstance(element, config, undefined, baseApi);
+=======
+      return createInstance(element, config, undefined, baseApi, polling);
+>>>>>>> New tests for job disablement
   }
 };
 
@@ -282,27 +305,36 @@ const orchestrateCreate = (element, args, baseApi, cb, elementId) => {
  * @param {string} element The element key
  * @param {Object} args Any other args to pass when provisioning the element
  * @param {string} baseApi The base API
+ * @param {boolean} polling Whether to enable polling or not
  * @return {Promise}  A promise that will resolve to the response after the partial OAuth flow is complete
  */
-exports.partialOauth = (element, args, baseApi) => orchestrateCreate(element, args, baseApi, (type, config, r) => r.code);
+exports.partialOauth = (element, args, baseApi, polling) => orchestrateCreate(element, args, baseApi, (type, config, r) => r.code, polling == null ? argv.polling : polling);
 
 /**
  * Provision an element instance
  * @param {string} element The element key
  * @param {Object} args All properties that are available in churros props for this element
  * @param {string} baseApi The base API
+ * @param {boolean} polling Whether to enable polling or not
  * @return {Promise}  A promise that resolves to the HTTP response after attempting to create the element instance
  */
-exports.create = (element, args, baseApi) => {
+exports.create = (element, args, baseApi, polling) => {
   const cb = (type, config, r) => {
     const external = props.getOptionalForKey(element, 'external');
 
     if (external && type === 'oauth2') return createExternalInstance(element, config.ec, r);
     if (external && type === 'oauth1') throw Error('External Authentication via churros is not yet implemented for OAuth1');
 
+<<<<<<< 62b086b7c27217781396aa3b754a61175800600f
     return createOrUpdateInstance(element, config, r, baseApi);
   };
   return orchestrateCreate(element, args, baseApi, cb);
+=======
+    return createInstance(element, config, r, baseApi, polling == null ? argv.polling : polling);
+  };
+
+  return orchestrateCreate(element, args, baseApi, cb, polling == null ? argv.polling : polling);
+>>>>>>> New tests for job disablement
 };
 /**
  * Provision an existing element instance
