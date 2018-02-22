@@ -1,0 +1,51 @@
+{
+        "accountingYear": {
+            "year": "2017"
+        },
+        "journal": {
+            "journalNumber": 1,
+            "self": "https://restapi.e-conomic.com/journals-experimental/1"
+        },
+        "entries": {
+            "supplierInvoices": [{
+
+                "amount": 100,
+                "account": {
+                    "accountNumber": 1010,
+                    "self": "https://restapi.e-conomic.com/accounts/1010"
+                },
+                "contraAccount": {
+                    "accountNumber": 5820,
+                    "self": "https://restapi.e-conomic.com/accounts/5820"
+                },
+                "currency": {
+                    "code": "DKK",
+                    "self": "https://restapi.e-conomic.com/currencies/DKK"
+                },
+                "date": "2017-05-03",
+                "type": "supplierInvoice",
+                "self": "https://restapi.e-conomic.com/journals-experimental/1/entries/373"
+            }],
+            "customerPayments": [{
+
+                "text": "Test this invoice",
+                "amount": 100,
+                "account": {
+                    "accountNumber": 1010,
+                    "self": "https://restapi.e-conomic.com/accounts/1010"
+                },
+                "contraAccount": {
+                    "accountNumber": 5820,
+                    "self": "https://restapi.e-conomic.com/accounts/5820"
+                },
+                "currency": {
+                    "code": "DKK",
+                    "self": "https://restapi.e-conomic.com/currencies/DKK"
+                },
+                "date": "2017-05-03",
+                "type": "customerPayment",
+                "self": "https://restapi.e-conomic.com/journals-experimental/1/entries/373"
+            }]
+
+        }
+        }

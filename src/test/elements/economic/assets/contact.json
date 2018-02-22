@@ -1,0 +1,8 @@
+{
+  "name":"<<random.word>>",
+    "email":"<<random.word>>",
+      "phone":"96782219205",
+        "notes":"sss",
+          "emailNotifications":["reminders"]
+
+}

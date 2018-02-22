@@ -1,0 +1,146 @@
+{
+  "customer-groups": {
+    "vendorName": "customer-groups",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "customerGroupNumber"
+    }]
+  },
+  "customers": {
+    "vendorName": "customers",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "customerNumber"
+    }]
+  },
+  "departments": {
+    "vendorName": "departments",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "departmentNumber"
+    }]
+  },"employees": {
+    "vendorName": "employees",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "employeeNumber"
+    }]
+  },
+"entry-subtypes":{
+  "vendorName": "entry-subtypes",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "entrySubtypeNumber"
+  }]
+},"currencies":{
+  "vendorName": "currencies",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "code"
+  }]
+},
+"modules-agreement":{
+  "vendorName": "modules-agreement",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "moduleNumber"
+  }]
+},
+"payment-types":{
+  "vendorName": "payment-types",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "paymentTypeNumber"
+  }]
+},
+"product-groups":{
+  "vendorName": "product-groups",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "productGroupNumber"
+  }]
+},
+"products":{
+  "vendorName": "products",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "productNumber"
+  }]
+},
+"vendor-groups":{
+  "vendorName": "vendor-groups",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "supplierGroupNumber"
+  }]
+},
+"vendors":{
+  "vendorName": "vendors",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "supplierNumber"
+  }]
+},
+"vat-accounts":{
+  "vendorName": "vat-accounts",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "vatCode"
+  }]
+},
+"vat-types":{
+  "vendorName": "vat-types",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "vatTypeNumber"
+  }]
+},"vat-zones":{
+  "vendorName": "vat-zones",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "vatZoneNumber"
+  }]
+},
+"payment-terms":{
+  "vendorName": "payment-terms",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "paymentTermsNumber"
+  }]
+},
+"accounting-years":{
+  "vendorName": "accounting-years",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "year"
+  }]
+},
+"journals":{
+  "vendorName": "journals",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "journalNumber"
+  }]
+},
+"invoice-drafts":{
+  "vendorName": "invoice-drafts",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "draftInvoiceNumber"
+  }]
+},
+"accounts":{
+  "vendorName": "accounts",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "accountNumber"
+  }]
+},
+"invoices":{
+  "vendorName": "invoices",
+  "fields": [{
+    "path": "id",
+    "vendorPath": "bookedInvoiceNumber"
+  }]
+}
+}
