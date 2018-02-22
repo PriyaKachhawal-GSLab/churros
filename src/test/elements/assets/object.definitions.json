@@ -2173,5 +2173,15 @@
       "path": "id",
       "type": "string"
     }]
-  }
+  },
+ "institutions" : {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ }
+
 }

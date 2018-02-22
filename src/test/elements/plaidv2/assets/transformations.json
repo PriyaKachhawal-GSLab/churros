@@ -1,0 +1,20 @@
+{
+  "transactions": {
+    "fields": [{
+      "path": "id",
+      "vendorPath":"transaction_id"
+      }]
+  },
+  "institutions": {
+    "fields": [{
+      "path": "id",
+      "vendorPath":"institution_id"
+      }]
+  },
+  "accounts": {
+    "fields": [{
+      "path": "id",
+      "vendorPath":"account_id"
+      }]
+  }
+}
