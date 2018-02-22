@@ -16,11 +16,11 @@ suite.forElement('crm', 'leads', { payload: payload }, (test) => {
   };
   test.withOptions(options).should.supportCruds(chakram.put);
   test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.return200OnGet();
-  test.withName(`should support searching ${test.api} by Last Name`)
-    .withOptions({ qs: { where: `last_name ='MAC'` } })
+  test.withName(`should support searching ${test.api} by DATE_UPDATED_UTC`)
+    .withOptions({ qs: { where: `updated_after_utc ='2018-02-21 07:31:45'` } })
     .withValidation((r) => {
       expect(r).to.have.statusCode(200);
-      const validValues = r.body.filter(obj => obj.LAST_NAME = 'MAC');
+      const validValues = r.body.filter(obj => obj.DATE_UPDATED_UTC = '2018-02-21 07:31:45');
       expect(validValues.length).to.equal(r.body.length);
     }).should.return200OnGet();
 

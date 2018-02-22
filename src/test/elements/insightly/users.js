@@ -10,7 +10,7 @@ suite.forElement('crm', 'users', (test) => {
       .then(r => {
         userId = r.body[0].id;
       })
-      .then(r => cloud.withOptions({ qs: { where: 'FIRST_NAME=\'Developer\'' } }))
+      .then(r => cloud.withOptions({ qs: { where: 'updated_after_utc=\'2018-02-05 17:20:45\'' } }))
       .then(r => cloud.get(`${test.api}/${userId}`));
   });
 

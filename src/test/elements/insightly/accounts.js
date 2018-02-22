@@ -17,11 +17,11 @@ suite.forElement('crm', 'accounts', { payload: payload }, (test) => {
   };
   test.withOptions(options).should.supportCruds(chakram.put);
   test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.return200OnGet();
-  test.withName(`should support searching ${test.api} by Name`)
-    .withOptions({ qs: { where: `organisation_name ='ChurrosTest1'` } })
+  test.withName(`should support searching ${test.api} by DATE_UPDATED_UTC`)
+    .withOptions({ qs: { where: `updated_after_utc ='2018-02-21 07:31:45'` } })
     .withValidation((r) => {
       expect(r).to.have.statusCode(200);
-      const validValues = r.body.filter(obj => obj.ORGANISATION_NAME = 'ChurrosTest1');
+      const validValues = r.body.filter(obj => obj.DATE_UPDATED_UTC = '2018-02-21 07:31:45');
       expect(validValues.length).to.equal(r.body.length);
     }).should.return200OnGet();
 
