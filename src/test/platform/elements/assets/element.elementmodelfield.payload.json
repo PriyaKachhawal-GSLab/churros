@@ -1,7 +1,7 @@
 {
   "name": "churrosContact<<random.alphaNumeric##4>>",
   "vendorName": "churrosVendorContact<<random.alphaNumeric##4>>",
-  "type":"string",
+  "dataType":{"jsonType":"string"},
   "searchableJoins" :"and",
   "customFields": false,
   "ownerAccountId": 1,
