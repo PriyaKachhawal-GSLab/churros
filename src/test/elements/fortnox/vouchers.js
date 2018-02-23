@@ -11,7 +11,6 @@ suite.forElement('erp', 'vouchers', { payload: payload }, (test) => {
     return cloud.get(`${test.api}`)
       .then(r => id = r.body[0].id)
       .then(r => cloud.post(`${test.api}`, payload))
-      //.then(r => cloud.get(`${test.api}/${id}`));
       .then(r => cloud.withOptions({ qs: { series: 'A' } }).get(`${test.api}/${id}`));
   });
   test.should.supportPagination();
