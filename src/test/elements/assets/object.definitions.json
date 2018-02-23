@@ -2174,6 +2174,15 @@
       "type": "string"
     }]
   },
+ "institutions" : {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ },
   "customer-groups":{
   "fields": [{
     "path": "idTransformed",
@@ -2287,4 +2296,5 @@
          "type": "string"
        }]
      }
+
 }
