@@ -660,6 +660,17 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('action'))
         .then((element) => element.click(), (err) => {}); // ignore this
       return browser.getCurrentUrl();
+      case 'ecwid':
+        browser.get(r.body.oauthUrl);
+        browser.findElement(webdriver.By.name('email')).sendKeys(username);
+        browser.findElement(webdriver.By.name('password')).sendKeys(password);
+        browser.findElement(webdriver.By.xpath('/html/body/div[7]/div/div[2]/div[2]/div/div[1]/div/div[1]/form/div/button')).click();
+        return browser.wait(() => browser.isElementPresent(webdriver.By.id('menu-toggler')), 5000)
+          .then(r => browser.findElement(webdriver.By.xpath('/html/body/div/p[1]/button[2]')))
+          .then(r => r.click())
+          .then(r => browser.getCurrentUrl())
+          .catch(r => browser.getCurrentUrl());
+
     default:
       throw 'No OAuth function found for element ' + element + '.  Please implement function in core/oauth so ' + element + ' can be provisioned';
   }
