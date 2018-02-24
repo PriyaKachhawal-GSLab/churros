@@ -262,7 +262,7 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
           .then(r => {
             textFileBody = r.body;
           // Since we provided unknown extension, Google Drive not able to generate thumnail. It's time to rock
-            expect(r.body.properties.thumbnailLink).to.be.null;
+            expect(r.body.properties.thumbnailLink).to.be.undefined;
           })
           .then(() => cloud.withOptions({ qs: { path: `/testType2-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.gliffy` } }).postFileMultiple(test.api, files))
           .then(r => {

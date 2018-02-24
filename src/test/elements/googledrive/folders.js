@@ -33,7 +33,10 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
   it('should allow CRD for hubs/documents/folders and RU for hubs/documents/folders/metadata by path', () => {
     let srcPath, destPath;
     return cloud.post(`${test.api}`, payload)
-      .then(r => srcPath = r.body.path)
+      .then(r => {
+            srcPath = r.body.path;
+            expect(r.body.properties.thumbnailLink).to.be.undefined;
+            expect(r.body.properties.mimeType).to.be.undefined;})
       .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).get(`${test.api}/contents`))
       .then(r => cloud.withOptions({ qs: { path: `${srcPath}`, page: 1, pageSize: 1 } }).get(`${test.api}/contents`))
       .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).post(`${test.api}/copy`, updatePayload))
