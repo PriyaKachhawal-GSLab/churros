@@ -16,7 +16,10 @@ let folderId;
     folderPayload.path += `/${random}`;
     folderPayload.name += `-${random}`;
     return cloud.post('/hubs/documents/folders', folderPayload)
-      .then(r => folder = r.body)
+      .then(r => {
+        folder = r.body;
+        expect(r.body.parentFolderId).to.not.be.null;
+      })
       .then(r => cb(folder))
       .then(r => cloud.withOptions({ qs: { path: folder.path } }).delete('/hubs/documents/folders'));
   };
@@ -86,27 +89,27 @@ let folderId;
     return folderWrap(cb);
   });
 
-  before(() => cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
-      .then(r => folderId = r.body.filter(obj => obj.name === "dontdelete_folder_churros")[0].id));
-
-  it('should allow GET /folders/contents with name', () => {
-    return cloud.withOptions({ qs: { path: `/dontdelete_folder_churros`, where: "name='dontdelete_text_churros'" } }).get(`${test.api}/contents`)
-      .then(r => expect(r.body[0].name).to.contain('dontdelete_text_churros'));
-  });
-
-  it('should allow GET /folders/contents with extension', () => {
-    return cloud.withOptions({ qs: { path: `/dontdelete_folder_churros`, where: "extension='.txt'" } }).get(`${test.api}/contents`)
-      .then(r => expect(r.body[0].name).to.contain('.txt'));
-  });
-
-  it('should allow GET /folders/:id/contents with name', () => {
-    return cloud.withOptions({ qs: { where: "name='dontdelete_text_churros'" } }).get(`${test.api}/${folderId}/contents`)
-      .then(r => expect(r.body[0].name).to.contain('dontdelete_text_churros'));
-  });
-
-  it('should allow GET /folders/:id/contents with extension', () => {
-    return cloud.withOptions({ qs: { where: "extension='.txt'" } }).get(`${test.api}/${folderId}/contents`)
-      .then(r => expect(r.body[0].name).to.contain('.txt'));
-  });
+  // before(() => cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
+  //     .then(r => folderId = r.body.filter(obj => obj.name === "dontdelete_folder_churros")[0].id));
+  //
+  // it('should allow GET /folders/contents with name', () => {
+  //   return cloud.withOptions({ qs: { path: `/dontdelete_folder_churros`, where: "name='dontdelete_text_churros'" } }).get(`${test.api}/contents`)
+  //     .then(r => expect(r.body[0].name).to.contain('dontdelete_text_churros'));
+  // });
+  //
+  // it('should allow GET /folders/contents with extension', () => {
+  //   return cloud.withOptions({ qs: { path: `/dontdelete_folder_churros`, where: "extension='.txt'" } }).get(`${test.api}/contents`)
+  //     .then(r => expect(r.body[0].name).to.contain('.txt'));
+  // });
+  //
+  // it('should allow GET /folders/:id/contents with name', () => {
+  //   return cloud.withOptions({ qs: { where: "name='dontdelete_text_churros'" } }).get(`${test.api}/${folderId}/contents`)
+  //     .then(r => expect(r.body[0].name).to.contain('dontdelete_text_churros'));
+  // });
+  //
+  // it('should allow GET /folders/:id/contents with extension', () => {
+  //   return cloud.withOptions({ qs: { where: "extension='.txt'" } }).get(`${test.api}/${folderId}/contents`)
+  //     .then(r => expect(r.body[0].name).to.contain('.txt'));
+  // });
 
 });

@@ -17,7 +17,10 @@ suite.forElement('documents', 'folders', (test) => {
     folderPayload.path += `-${random}`;
     folderPayload.name += `-${random}`;
     return cloud.post('/hubs/documents/folders', folderPayload)
-      .then(r => folder = r.body)
+      .then(r => {
+        folder = r.body;
+        expect(r.body.parentFolderId).to.not.be.null;
+      })
       .then(r => cb(folder))
       .then(r => cloud.withOptions({ qs: { path: folder.path } }).delete('/hubs/documents/folders'));
   };
