@@ -194,17 +194,15 @@ suite.forElement('documents', 'files', (test) => {
       .then(r => cloud.delete(`${test.api}/${id}/comments/${commentId}`));
   });
 
-  it('should allow UR tags /files/metadata', () => {
+  it('should allow UR tags /files/metadata by path', () => {
     return cloud.withOptions({ qs: { path: fileTagPayload.path } }).patch(`${test.api}/metadata`, fileTagPayload)
       .then(r => {
-        expect(r).to.have.statusCode(200);
         expect(r.body.tags[0]).to.equal(`${fileTagPayload.tags[0]}`);
         fileUpdateTagPayload = r.body;
         fileUpdateTagPayload.tags = ["fileTag1Updated", "fileTag2Updated"];
       })
       .then(() => cloud.withOptions({ qs: { path: fileTagPayload.path } }).get(`${test.api}/metadata`))
       .then(r => {
-        expect(r).to.have.statusCode(200);
         expect(r.body.tags[0]).to.equal(`${fileTagPayload.tags[0]}`);
       });
   });
@@ -212,12 +210,10 @@ suite.forElement('documents', 'files', (test) => {
   it('should allow UR tags /folders/:id/metadata', () => {
     return cloud.patch(`${test.api}/${fileUpdateTagPayload.id}/metadata`, fileUpdateTagPayload)
       .then(r => {
-        expect(r).to.have.statusCode(200);
         expect(r.body.tags[0]).to.equal(`${fileUpdateTagPayload.tags[0]}`);
       })
       .then(() => cloud.get(`${test.api}/${fileUpdateTagPayload.id}/metadata`))
       .then(r => {
-        expect(r).to.have.statusCode(200);
         expect(r.body.tags[0]).to.equal(`${fileUpdateTagPayload.tags[0]}`);
       });
   });
