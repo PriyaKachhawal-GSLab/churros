@@ -1,0 +1,12 @@
+{
+  "fakeEndpoint": {
+    "vendorName": "you-faker",
+    "fields": [{
+      "path": "bulk-id",
+      "vendorPath": "id"
+    }, {
+      "path": "bulk-field1",
+      "vendorPath": "field1"
+    }]
+  }
+}

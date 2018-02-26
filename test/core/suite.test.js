@@ -51,6 +51,13 @@ describe('suite', () => {
     test.should.supportBulkDownload(null, {json: true, csv: true}, 'endpoint');
   });
 
+  suite.forElement('fakebulkhub', 'resource', (test) => {
+    //test for limit
+    test.should.supportBulkDownload({ qs: { q: 'select * from limitedEndpoint limit 5' } }, { json: true, csv: true, timeout: 60000 }, 'limitedEndpoint');
+    //test for transformations
+    test.should.supportBulkDownload({ qs: { q: 'select * from fakeEndpoint limit 5' } }, { json: true, csv: true, element: 'fake-element' }, 'fakeEndpoint');
+  });
+
   /* Not passing in any suite options */
   suite.forPlatform('platformresource', (test) => {
     it('should support suite for platform', () => expect(test.api).to.equal('/platformresource'));

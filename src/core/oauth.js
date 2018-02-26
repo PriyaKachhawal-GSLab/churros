@@ -403,23 +403,24 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('idBtn_Accept'))
         .then((element) => element.click(), (err) => {}); // ignore this
       return browser.getCurrentUrl();
+    case 'sharepoint':
     case 'onedrivebusiness':
       browser.get(r.body.oauthUrl);
-      browser.findElement(webdriver.By.id('cred_userid_inputtext')).sendKeys(username);
-      browser.findElement(webdriver.By.id('cred_password_inputtext')).sendKeys(password);
-      // well, not proud of this one...i thought i could use the same as sharepoint but i couldn't.  this keeps clicking the sign-in button until the title goes blank, indicating we
-      // have hit our redirect URL...i think (it works :/)
-      browser.wait(() => {
-        browser.findElement(webdriver.By.id('cred_sign_in_button'))
-          .then((element) => element.click(),
-            (err) => {
-              if (err.state && err.state === 'no such element') { // ignore this
-              } else {
-                webdriver.promise.rejected(err);
-              }
-            });
-        return browser.getTitle().then((title) => !title);
-      }, 10000);
+      waitForElement(webdriver.By.id('i0116'), 5000);
+      browser.findElement(webdriver.By.id('i0116')).sendKeys(username);
+      waitForElement(webdriver.By.id('idSIButton9'));
+      browser.findElement(webdriver.By.id('idSIButton9')).click();
+      waitForElement(webdriver.By.id('i0118'));
+      browser.findElement(webdriver.By.id('i0118')).sendKeys(password);
+      waitForElement(webdriver.By.xpath('.//*[@value= "Sign in" and @type= "submit"]'));
+      browser.findElement(webdriver.By.xpath('.//*[@value= "Sign in" and @type= "submit"]')).click();
+      waitForElement(webdriver.By.id('idSIButton9')).thenCatch(r => true);  //Stay signed in screen
+      browser.findElement(webdriver.By.id('idSIButton9'))
+        .then((element) => element.click(), (err) => {}); // ignore this
+      waitForElement(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow')).thenCatch(r => true); // ignore
+      browser.findElement(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow'))
+        .then((element) => element.click(), (err) => {}); // ignore this
+      browser.sleep(2000);  //plz wait for the code to show up in httpbin
       return browser.getCurrentUrl();
     case 'paypalv2--sandbox':
       //Sandbox version has slightly different url. Will fall into regular flow after changing url
@@ -554,16 +555,6 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.className('primary'))
         .then((element) => element.click(), (err) => {});
       return browser.getCurrentUrl();
-    case 'sharepoint':
-      browser.get(r.body.oauthUrl);
-      browser.findElement(webdriver.By.id('cred_userid_inputtext')).sendKeys(username);
-      browser.findElement(webdriver.By.id('cred_password_inputtext')).sendKeys(password);
-      browser.wait(() => {
-        browser.findElement(webdriver.By.id('cred_sign_in_button')).click(); // ... i'm serious, you have to just keep clicking.  wtf microsoft.
-        return browser.isElementPresent(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow'));
-      }, 10000);
-      browser.findElement(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow')).click();
-      return browser.getCurrentUrl();
     case 'microsoftgraph':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('i0116')).sendKeys(username);
@@ -581,12 +572,9 @@ const manipulateDom = (element, browser, r, username, password, config) => {
           return browser.isElementPresent(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow'));
         }, 10000)
         .thenCatch(r => true);
-
       browser.findElement(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow')).click()
         .thenCatch(r => true);
-
       return browser.getCurrentUrl();
-
     case 'wrike':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('emailField')).sendKeys(username);
@@ -672,6 +660,17 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('action'))
         .then((element) => element.click(), (err) => {}); // ignore this
       return browser.getCurrentUrl();
+      case 'ecwid':
+        browser.get(r.body.oauthUrl);
+        browser.findElement(webdriver.By.name('email')).sendKeys(username);
+        browser.findElement(webdriver.By.name('password')).sendKeys(password);
+        browser.findElement(webdriver.By.xpath('/html/body/div[7]/div/div[2]/div[2]/div/div[1]/div/div[1]/form/div/button')).click();
+        return browser.wait(() => browser.isElementPresent(webdriver.By.id('menu-toggler')), 5000)
+          .then(r => browser.findElement(webdriver.By.xpath('/html/body/div/p[1]/button[2]')))
+          .then(r => r.click())
+          .then(r => browser.getCurrentUrl())
+          .catch(r => browser.getCurrentUrl());
+
     default:
       throw 'No OAuth function found for element ' + element + '.  Please implement function in core/oauth so ' + element + ' can be provisioned';
   }
