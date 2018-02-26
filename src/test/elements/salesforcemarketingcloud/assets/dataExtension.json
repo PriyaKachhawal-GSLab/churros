@@ -1,7 +1,7 @@
 {
-  "Name": "churro",
+  "Name": "<<random.word>>",
   "Description": "this is a test data extension generated from the churros",
-  "CustomerKey": "tys-bug",
+  "CustomerKey": "<<random.word>>",
   "Fields": [
     {
       "Name": "email",

@@ -1,0 +1,8 @@
+{
+    "CustomerNumber": "9",
+    "InvoiceRows": [
+      {
+        "DeliveredQuantity": "10.00"
+      }
+    ]
+}

@@ -147,6 +147,34 @@ suite.forPlatform('users', { schema: schema, payload: payload }, (test) => {
     .then(() => cloud.get(`/instances`, r => expect(r).to.have.status(404)));
   });
 
+  it('should delete jobs for non-permanent user deactivation', () => {
+    let userSecret;
+    let userId;
+    return cloud.post(`/accounts/${accountId}/users`, payload2)
+    .then(r => { userSecret = r.body.secret; userId = r.body.id; })
+    // Create a pipedrive instance with the new user's credentials
+    .then(() => defaults.withDefaults(userSecret, orgSecret, payload2.email))
+    .then(() => provisioner.create('sfdc', null, null, true))
+    // Validate that the instance and job is there for the new user
+    .then(() => defaults.withDefaults(userSecret, orgSecret, payload2.email))
+    .then(() => cloud.get(`/instances`))
+    .then(r => expect(r.body.length).to.equal(1))
+    .then(() => cloud.get(`/jobs`))
+    .then(r => expect(r.body.length).to.equal(1))
+    // Deactivate the user "non-permanently"
+    .then(() => defaults.reset())
+    .then(() => cloud.patch(`/users/${userId}`, { active: false }))
+    .then(r => expect(r.body.active).to.be.false)
+    // Reactivate the user
+    .then(() => cloud.patch(`/users/${userId}`, { active: true }))
+    .then(r => expect(r.body.active).to.be.true)
+    // Validate that the job no longer exists for that user
+    .then(() => defaults.withDefaults(userSecret, orgSecret, payload.email))
+    .then(() => cloud.get(`/jobs`))
+    .then(r => expect(r.body.length).to.equal(0));
+  });
+
+
   it('should support user deletion', () => {
     let userSecret;
     let userId;

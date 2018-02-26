@@ -336,6 +336,24 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
     return eventTriggerTest('simple-no-return-console-formula', 1, 2, validator);
   });
 
+  it('should have a context that contains the full info object', () => {
+    const validator = (executions) => {
+      executions.map(e => {
+        const ses = e.stepExecutions;
+        ses.filter(se => se.stepName !== 'simple-script').map(validateSuccessfulStepExecution);
+
+        const consolidated = consolidateStepExecutionValues(ses);
+        expect(consolidated['simple-script.formulaName']).to.equal('returns-info');
+        expect(consolidated['simple-script.formulaInstanceName']).to.equal('formula-instance');
+        expect(consolidated['simple-script.formulaStartTime'] > 0).to.be.true;
+        expect(consolidated['simple-script.formulaId'] > 0).to.be.true;
+        expect(consolidated['simple-script.formulaExecutionId'] > 0).to.be.true;
+        expect(consolidated['simple-script.formulaInstanceId'] > 0).to.be.true;
+      });
+    };
+    return eventTriggerTest('returns-info', 1, 2, validator);
+  });
+
   it('should properly handle a formula with a step that uses notify.email', () => {
     const validator = (executions) => {
       executions.map(e => {
