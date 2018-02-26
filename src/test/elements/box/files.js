@@ -6,25 +6,32 @@ const cloud = require('core/cloud');
 const faker = require('faker');
 const tools = require('core/tools');
 const payload = tools.requirePayload(`${__dirname}/assets/customFields.json`);
-const temPayload = tools.requirePayload(`${__dirname}/assets/template.json`);
-const temPayload1 = tools.requirePayload(`${__dirname}/assets/template.json`);
+const templateKeyPayload = tools.requirePayload(`${__dirname}/assets/UpdateCustomFields.json`);
 const commentPayload1 = tools.requirePayload(`${__dirname}/assets/comment.json`);
 const commentPayload2 = tools.requirePayload(`${__dirname}/assets/comment.json`);
 const lock = {
   "is_download_prevented": false,
   "expires_at": "2030-12-12T10:55:30-08:00"
 };
-
+const updatePayload =tools.requirePayload(`${__dirname}/assets/PutCustomFields.json`);
 suite.forElement('documents', 'files', (test) => {
-  let id, path;
+  let id, path, templateKey;
   before(done => {
     return cloud.withOptions({ qs: { path: `/brady-${faker.address.zipCode()}.jpg` } }).postFile(test.api, `${__dirname}/../assets/brady.jpg`)
       .then(r => {
         id = r.body.id;
         path = r.body.path;
       })
-      .then(r => done());
-  });
+      .then(r => done())
+      .then(r =>  cloud.get('/hubs/documents/custom-fields/templates'))
+          .then(r => {
+            templateKey = r.body[0].templateKey;
+            payload.template = r.body[0].templateKey;
+            updatePayload.template= r.body[0].templateKey;
+            templateKeyPayload.path="/"+r.body[0].fields[0].key;
+          });
+  }
+);
   after(() => cloud.delete(`${test.api}/${id}`));
   afterEach(done => {
     //We were getting a 429 before this
@@ -71,49 +78,22 @@ suite.forElement('documents', 'files', (test) => {
 
 
   it('should allow CRUDS for /files/:id/custom-fields', () => {
-    let tempKey;
-    let updatePayload = {
-      "template": "customer",
-      "path": "/" + temPayload.fields[0].key,
-      "value": "madhuri",
-      "scope": "enterprise"
-    };
-    let templateKeyPayload = {
-      "path": "/" + temPayload.fields[0].key,
-      "value": "madhuri",
-      "scope": "enterprise"
-    };
-    return cloud.post('/hubs/documents/custom-fields/templates', temPayload)
-      .then(r => {
-        tempKey = r.body.templateKey;
-        updatePayload.template = r.body.templateKey;
-        payload.template = r.body.templateKey;
-      })
-      .then(r => cloud.get(`/hubs/documents/files/${id}/custom-fields`))
+
+       cloud.get(`/hubs/documents/files/${id}/custom-fields`)
       .then(r => cloud.post(`/hubs/documents/files/${id}/custom-fields`, payload))
       .then(r => cloud.put(`/hubs/documents/files/${id}/custom-fields`, updatePayload))
       .then(r => cloud.patch(`/hubs/documents/files/${id}/custom-fields`, updatePayload))
-      .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).get(`/hubs/documents/files/${id}/custom-fields/${tempKey}`))
-      .then(r => cloud.patch(`/hubs/documents/files/${id}/custom-fields/${tempKey}`, templateKeyPayload))
-      .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).delete(`/hubs/documents/files/${id}/custom-fields/${tempKey}`));
+      .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).get(`/hubs/documents/files/${id}/custom-fields/${templateKey}`))
+      .then(r => cloud.patch(`/hubs/documents/files/${id}/custom-fields/${templateKey}`, templateKeyPayload))
+      .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).delete(`/hubs/documents/files/${id}/custom-fields/${templateKey}`));
   });
 
   it('should allow RUD for /files/{id}/custom-fields-templates/{templateKeyId}/custom-fields', () => {
-    let tempKey;
-    let templateKeyPayload = {
-      "path": "/" + temPayload1.fields[0].key,
-      "value": "madhuri",
-      "scope": "enterprise"
-    };
-    return cloud.post('/hubs/documents/custom-fields/templates', temPayload1)
-      .then(r => {
-        tempKey = r.body.templateKey;
-        payload.template = r.body.templateKey;
-      })
-      .then(r => cloud.post(`/hubs/documents/files/${id}/custom-fields`, payload))
-      .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).get(`/hubs/documents/files/${id}/custom-fields-templates/${tempKey}/custom-fields`))
-      .then(r => cloud.patch(`/hubs/documents/files/${id}/custom-fields-templates/${tempKey}/custom-fields`, templateKeyPayload))
-      .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).delete(`/hubs/documents/files/${id}/custom-fields-templates/${tempKey}/custom-fields`));
+
+      cloud.post(`/hubs/documents/files/${id}/custom-fields`, payload)
+      .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).get(`/hubs/documents/files/${id}/custom-fields-templates/${templateKey}/custom-fields`))
+      .then(r => cloud.patch(`/hubs/documents/files/${id}/custom-fields-templates/${templateKey}/custom-fields`, templateKeyPayload))
+      .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).delete(`/hubs/documents/files/${id}/custom-fields-templates/${templateKey}/custom-fields`));
   });
 
 
