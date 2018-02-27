@@ -700,6 +700,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then(() => browser.sleep(2000))
         .then(() => browser.getCurrentUrl());
       }
+      break;
     default:
       throw 'No OAuth function found for element ' + element + '.  Please implement function in core/oauth so ' + element + ' can be provisioned';
   }
