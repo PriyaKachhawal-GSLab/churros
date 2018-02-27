@@ -14,7 +14,7 @@ suite.forElement('marketing', 'accounts', { payload: payload }, (test) => {
     }
   };
   test.withOptions(opts).should.supportCruds();
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.return200OnGet();
+  test.should.supportPagination();
   test.withName(`should support searching ${test.api} by Country`)
     .withOptions({ qs: { where: `country='India'` } })
     .withValidation((r) => {
