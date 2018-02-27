@@ -8,7 +8,7 @@ const transactionPayload = tools.requirePayload(`${__dirname}/assets/transaction
 const transactionPayloadCapture = tools.requirePayload(`${__dirname}/assets/transactionsCapture.json`);
 
 
-suite.forElement('employee', 'locations', (test) => {
+suite.forElement('employee', 'locations', {skip:true}, (test) => {
   test.should.supportPagination();
   it(`should allow CRDS for /locations/:id/transactions`, () => {
     let transactionId, locId = slocPayload.lid;
