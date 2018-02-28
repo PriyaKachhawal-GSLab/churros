@@ -7,6 +7,8 @@ const payload = require('./assets/folders');
 const build = (overrides) => Object.assign({}, payload, overrides);
 const folderPayload = build({ name: `churros-${tools.random()}`, path: `/${tools.random()}` });
 const folderPayload1 = build({ name: `churros-${tools.random()}`, path: `/${tools.random()}/${tools.random()}` });
+const expect = require('chakram').expect;
+
 suite.forElement('documents', 'folders', (test) => {
   const folderWrap = (cb) => {
     let folder;
@@ -87,7 +89,7 @@ suite.forElement('documents', 'folders', (test) => {
     return folderWrap(cb);
   });
 
-/*  before(() => cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
+/* before(() => cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
       .then(r => folderId = r.body.filter(obj => obj.name === "dontdelete_folder_churros")[0].id));
 
   it('should allow GET /folders/contents with name', () => {
@@ -108,7 +110,6 @@ suite.forElement('documents', 'folders', (test) => {
   it('should allow GET /folders/:id/contents with extension', () => {
     return cloud.withOptions({ qs: { where: "extension='.txt'" } }).get(`${test.api}/${folderId}/contents`)
       .then(r => expect(r.body[0].name).to.contain('.txt'));
-  });
-*/
+  });*/
 
 });
