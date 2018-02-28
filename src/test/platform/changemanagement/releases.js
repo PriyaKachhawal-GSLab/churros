@@ -74,7 +74,7 @@ suite.forPlatform('change-management/releases', {payload: genPr('model', 1)}, te
     });
 
   // NOTE: can only be run as a superModelAdmin
-  it.skip('should support creating an open release when a pr is merged and pushing that release to the next environment', () => {   
+  it('should support creating an open release when a pr is merged and pushing that release to the next environment', () => {   
     const validator = (r, sysModel) => {
         expect(r).to.have.statusCode(200);
         expect(r.body.length > 0).to.be.true;
@@ -83,7 +83,7 @@ suite.forPlatform('change-management/releases', {payload: genPr('model', 1)}, te
 
     };
     
-    let prId, sysModel, release1, release2;
+    let prId, prId2, sysModel, release1, release2;
     
     return cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post('/change-management/commits',  genCommit('model', modelId, 'commit msg'))
         .then(() => cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post('/change-management/pull-requests', genPr('model', modelId, 'first')))
@@ -107,7 +107,13 @@ suite.forPlatform('change-management/releases', {payload: genPr('model', 1)}, te
         })
         .then(() => cloud.delete(`/change-management/releases/${release2.id}`))
 
+        // clean up that model we just published to the system catalog
+        .then(r => cloud.post('/change-management/pull-requests', genPr('model', sysModel.id, 'delete req', true)))
+        .then(r => prId2 = r.body.id)
+        .then(r => cloud.put(`/change-management/pull-requests/${prId2}/merge`))
+
         .then(() => cloud.delete(`/change-management/pull-requests/${prId}`))
+        .then(() => cloud.delete(`/change-management/pull-requests/${prId2}`))
         .then(() => cloud.delete(`/change-management/releases/${release1.id}`));
     });
 });
