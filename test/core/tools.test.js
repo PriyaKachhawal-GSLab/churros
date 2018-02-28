@@ -184,6 +184,36 @@ describe('tools', () => {
     const OGmetadata2 = { qs: {} };
     expect(tools.getLimit(OGmetadata2)).to.deep.equal(-1);
   });
+  it('should pass isJsonL', () => {
+    const jsonL = `{ "key1": "value" }\n{ "key2": "value" }`;
+    expect(tools.isJsonL(jsonL)).to.be.true;
+  });
+  it('should fail isJsonL', () => {
+    const json = `{ "key": "value" }`;
+    expect(tools.isJsonL(JSON.parse(json))).to.be.false;
+
+    const jsonArray = `[{ "key1": "value" },{ "key2": "value" }]`;
+    expect(tools.isJsonL(JSON.parse(jsonArray))).to.be.false;
+  });
+  it('should get proper json from getJsonL', () => {
+    const expectedJson = `[{ "key1": "value" },{ "key2": "value" }]`;
+    const jsonL = `{ "key1": "value" }\n{ "key2": "value" }`;
+    expect(tools.getJsonL(jsonL)).to.deep.equal(JSON.parse(expectedJson));
+  });
+  it('should pass getJson', () => {
+    const jsonArray = `[{ "key1": "value" },{ "key2": "value" }]`;
+    const jsonL = `{ "key1": "value" }\n{ "key2": "value" }`;
+    const expectedJson = JSON.parse(jsonArray);
+    expect(tools.getJson(jsonArray)).to.deep.equal(expectedJson);
+    expect(tools.getJson(jsonL)).to.deep.equal(expectedJson);
+    expect(tools.getJson(expectedJson)).to.deep.equal(expectedJson);
+  });
+  it('should fail getJson', () => {
+    expect(tools.getJson(1231)).to.be.null;
+    expect(tools.getJson(null)).to.be.null;
+    expect(tools.getJson(undefined)).to.be.null;
+  });
+
   it('should get fields from transformations file', () => {
     const element = 'netsuitefinancev2';
     const objectName = 'bulkCustomerNfv2';

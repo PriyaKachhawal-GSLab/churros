@@ -355,10 +355,10 @@ const itBulkDownload = (name, hub, metadata, options, opts, endpoint) => {
       .then(r => getJson ? cloud.withOptions(jsonMeta)
         .get(`/hubs/${hub}/bulk/${bulkId}/${endpoint}`, r => {
           if (fields !== null) {
-            let bulkDownloadResults = tools.getFieldsMap(r.body.split('\n').map(obj => { try { return JSON.parse(obj); } catch (e) { return ''; } }), fields);
+            let bulkDownloadResults = tools.getFieldsMap(tools.getJson(r.body), fields);
             expect(bulkDownloadResults).to.deep.equal(tools.getFieldsMap(bulkResults, fields));
           } else {
-            let bulkDownloadResults = tools.getKey(r.body.split('\n').map(obj => { try { return JSON.parse(obj); } catch (e) { return ''; } }), 'id');
+            let bulkDownloadResults = tools.getKey(tools.getJson(r.body), 'id');
             expect(bulkDownloadResults).to.deep.equal(tools.getKey(bulkResults, 'id'));
           }
         }) : Promise.resolve(null))

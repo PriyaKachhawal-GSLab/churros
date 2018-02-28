@@ -199,6 +199,46 @@ exports.getLimit = (obj) => {
 };
 
 /**
+* Gets an array from a JSON-L string
+* @param {string} body
+**/
+const getJsonL = exports.getJsonL = body => (
+  body.split('\n').map(obj => {
+    try {
+      return JSON.parse(obj);
+    } catch (e) { return ''; }
+  })
+);
+
+/**
+ * Checks whether we are able to split an object by newline characters
+ * @param {object} obj
+ **/
+const isJsonL = exports.isJsonL = obj => {
+  try {
+    return obj.split('\n').length > 1;
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+* Get JSON body from an object, with handling for converting JSON-L, parsing JSON and detecting native objects.
+* @param {Object} obj
+**/
+exports.getJson = obj => {
+  if (typeof(obj) === 'string') {
+    return isJsonL(obj) ? getJsonL(obj) : JSON.parse(obj);
+  } else if (obj === Object(obj)) {
+    return obj;
+  } else {
+    return null;
+  }
+};
+
+/**
 * Gets an array of transformations fields for a particular element object
 * @param {array} fields ['id', 'createdDate']
 **/
