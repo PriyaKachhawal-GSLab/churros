@@ -220,8 +220,6 @@ const isJsonL = exports.isJsonL = obj => {
   } catch (e) {
     return false;
   }
-
-  return true;
 };
 
 /**

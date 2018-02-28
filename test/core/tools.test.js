@@ -200,6 +200,11 @@ describe('tools', () => {
     const jsonL = `{ "key1": "value" }\n{ "key2": "value" }`;
     expect(tools.getJsonL(jsonL)).to.deep.equal(JSON.parse(expectedJson));
   });
+  it('should handle err from getJsonL', () => {
+    const expected = ['', ''];
+    const jsonL = `{1}\n{2}`;
+    expect(tools.getJsonL(jsonL)).to.deep.equal(expected);
+  });
   it('should pass getJson', () => {
     const jsonArray = `[{ "key1": "value" },{ "key2": "value" }]`;
     const jsonL = `{ "key1": "value" }\n{ "key2": "value" }`;
