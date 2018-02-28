@@ -52,4 +52,18 @@ suite.forPlatform('element import', {}, (test) => {
       .then(r => crudElement('key', suElement, suElement, schema));
   });
 
+  it('should support converting and creating a element From Odata', () => {
+    let odElement;
+    // Call elements/convert to convert wsdl to element
+    return cloud.postFile('/elements/convert?type=odata', __dirname + `/assets/import/odata_northwind.xml`)
+      .then(r => {
+        expect(r.body).to.not.be.empty;
+        expect(r.body.name).to.equal('TrippinInMemory');
+        odElement = r.body;
+        odElement.key = 'churrosodata';
+      })
+      // Create the element
+      .then(r => crudElement('key', odElement, odElement, schema));
+  });
+
 });
