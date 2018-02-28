@@ -46,6 +46,16 @@ suite.forPlatform('organizations/branding', test => {
     tableHeaderForeground: '#ffffff',
     tableBodyBackground: '#ffffff',
     tableBodyForeground: '#ffffff',
+    pendoEnabled: true,
+    documentationUrl: 'https://developers.cloud-elements.com/docs/home',
+    elementsEnabled: true,
+    instanceEnabled: true,
+    formulasEnabled: true,
+    virtualDataEnabled: true,
+    reportsEnabled: true,
+    navigationIconPosition: 'top',
+    navigationIconSize: '20px',
+    navigationLabelSize: '9px',
   };
 
   it('should support upserting, retrieving and deleting branding for a company', () => {

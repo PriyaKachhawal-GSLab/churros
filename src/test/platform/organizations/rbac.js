@@ -487,6 +487,17 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
       tableHeaderForeground: '#ffffff',
       tableBodyBackground: '#ffffff',
       tableBodyForeground: '#ffffff',
+      intercomEnabled: true,
+      pendoEnabled: true,
+      documentationUrl: 'https://developers.cloud-elements.com/docs/home',
+      elementsEnabled: true,
+      instanceEnabled: true,
+      formulasEnabled: true,
+      virtualDataEnabled: true,
+      reportsEnabled: true,
+      navigationIconPosition: 'top',
+      navigationIconSize: '20px',
+      navigationLabelSize: '9px',
     };
 
     it('should restrict access to updating the organization branding information but not retrieving it with the proper privilege', () => {
