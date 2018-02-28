@@ -18,7 +18,7 @@ suite.forElement('collaboration', 'files', (test) => {
 
   //Test for get files
   test.withOptions({ qs: { 'where': 'types = \'images\'' } }).should.return200OnGet();
-  test.should.supportPagination();
+  test.should.supportPagination('id');
 
   //test for CRD operations on files
   it(`should allow SR ${test.api}`, () => {
