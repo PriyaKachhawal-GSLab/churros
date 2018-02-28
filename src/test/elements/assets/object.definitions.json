@@ -86,7 +86,7 @@
       }
     ]
   },
-  "customer-status": {
+  "customer-statuses": {
     "fields": [
       {
         "path": "idTransformed",
@@ -158,7 +158,7 @@
       }
     ]
   },
-  "inventory-adjustment": {
+  "inventory-adjustments": {
     "fields": [
       {
         "path": "idTransformed",
@@ -170,7 +170,7 @@
       }
     ]
   },
-  "inventory-transfer": {
+  "inventory-transfers": {
     "fields": [
       {
         "path": "idTransformed",

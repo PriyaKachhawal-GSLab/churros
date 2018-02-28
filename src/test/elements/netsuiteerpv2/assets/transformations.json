@@ -35,7 +35,7 @@
       }
     ]
   },
-  "inventory-adjustment": {
+  "inventory-adjustments": {
     "vendorName": "InventoryAdjustment",
     "fields": [
       {
@@ -44,7 +44,7 @@
       }
     ]
   },
-  "inventory-transfer": {
+  "inventory-transfers": {
     "vendorName": "InventoryTransfer",
     "fields": [
       {
@@ -71,7 +71,7 @@
       }
     ]
   },
-  "customer-status": {
+  "customer-statuses": {
     "vendorName": "CustomerStatus",
     "fields": [
       {
