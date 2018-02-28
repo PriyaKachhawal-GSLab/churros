@@ -8,7 +8,7 @@ suite.forElement('db', 'ping', null, (test) => {
     .withName(`should allow GET /ping for system health`)
     .withValidation(r => {
       expect(r).to.have.statusCode(200);
-      expect(r.body.endpoint).to.equal('postgresql');
+      expect(r.body.endpoint).to.equal('mysql');
       expect(r.body.valid).to.equal(true);
     })
     .should.return200OnGet();
