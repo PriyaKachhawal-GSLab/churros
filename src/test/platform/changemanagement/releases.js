@@ -74,7 +74,7 @@ suite.forPlatform('change-management/releases', {payload: genPr('model', 1)}, te
     });
 
   // NOTE: can only be run as a superModelAdmin
-  it('should support creating an open release when a pr is merged and pushing that release to the next environment', () => {   
+  it.skip('should support creating an open release when a pr is merged and pushing that release to the next environment', () => {   
     const validator = (r, sysModel) => {
         expect(r).to.have.statusCode(200);
         expect(r.body.length > 0).to.be.true;
