@@ -1,11 +1,11 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/customer-status');
+const payload = require('./assets/customer-statuses');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
-suite.forElement('erp', 'customer-status', { payload: payload }, (test) => {
+suite.forElement('erp', 'customer-statuses', { payload: payload }, (test) => {
   test.should.supportCruds();
   test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
   it('should CEQL search', () => {

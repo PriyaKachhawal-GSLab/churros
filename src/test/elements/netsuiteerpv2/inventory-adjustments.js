@@ -1,10 +1,10 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/inventory-transfer');
+const payload = require('./assets/inventory-adjustments');
 const expect = require('chakram').expect;
 
-suite.forElement('erp', 'inventory-transfer', { payload: payload }, (test) => {
+suite.forElement('erp', 'inventory-adjustments', { payload: payload }, (test) => {
   test.should.supportCruds();
   test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
   test
