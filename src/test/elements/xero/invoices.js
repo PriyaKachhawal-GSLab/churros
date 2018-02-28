@@ -30,6 +30,22 @@ suite.forElement('finance', 'invoices', (test) => {
       .then(() => cloud.delete(`${test.api}/${invoiceId}`));
   });
 
+  it('should support CU for /invoices with XML escapable characters', () => {
+    let xmlChars = "<>&'\"";
+    invoice.LineItems[0].Description += xmlChars;
+    let invoiceId;
+    const invoiceUpdate = { Reference: 'churros-' + commerce.product() + xmlChars };
+    return cloud.withOptions({ qs: { where: `Name='Sales'` } }).get('/ledger-accounts')
+      .then(r => invoice.LineItems[0].AccountCode = r.body[0].Code)
+      .then(() => cloud.post(test.api, invoice))
+      .then(r => {
+        expect(r.body.Reference).to.be.empty;
+        invoiceId = r.body.id;
+      })
+      .then(() => cloud.patch(`${test.api}/${invoiceId}`, invoiceUpdate))
+      .then(r => expect(r.body.Reference).to.equal(invoiceUpdate.Reference))
+      .then(() => cloud.delete(`${test.api}/${invoiceId}`));
+  });
 
   it('should allow pdf download for /invoices', () => {
     let invoiceId;
