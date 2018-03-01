@@ -97,7 +97,7 @@ suite.forPlatform('change-management/releases', {payload: genPr('model', 1)}, te
         .then(r => {
             release1 = R.head(R.filter(R.propEq('entityId', sysModel.id), r.body));
         })
-        .then(() => cloud.post(`/change-management/releases`, genRelease(release1.id)))
+        .then(() => cloud.post(`/change-management/releases/publish`, genRelease(release1.id)))
         .then(() => cloud.get(`/change-management/releases/${release1.id}`, r => expect(r.body.isReleasedToNextEnvironment).to.be.true))
 
         // doing the above release created another one, but since we're releasing to the same env for testing lets clean that up
