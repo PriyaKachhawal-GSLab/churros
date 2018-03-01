@@ -1,58 +1,57 @@
 {
-    "date": "2014-08-08",
-    "currency": "DKK",
-    "customer": {
-        "customerNumber": 514215751
-    },
-     "delivery": {
-        "address": "Hovedvejen 1",
-        "zip": "2300",
-        "city": "Kbh S",
-        "country": "Denmark",
-        "deliveryDate": "2014-09-14"
-    },
-     "paymentTerms": {
-        "paymentTermsNumber": 1,
-        "daysOfCredit": 14,
-        "name": "Lobende maned 14 dage",
-        "paymentTermsType": "invoiceMonth"
-    },
-        "layout": {
-        "layoutNumber": 19
-    },
+  "date": "2014-08-08",
+  "currency": "DKK",
+  "customer": {
+    "customerNumber": 514215751
+  },
+  "delivery": {
+    "address": "Hovedvejen 1",
+    "zip": "2300",
+    "city": "Kbh S",
+    "country": "Denmark",
+    "deliveryDate": "2014-09-14"
+  },
+  "paymentTerms": {
+    "paymentTermsNumber": 1,
+    "daysOfCredit": 14,
+    "name": "Lobende maned 14 dage",
+    "paymentTermsType": "invoiceMonth"
+  },
+  "layout": {
+    "layoutNumber": 19
+  },
 
-    "recipient": {
-        "name": "Toj & Co Grossisten",
-        "address": "Vejlevej 21",
-        "zip": "7000",
-        "city": "Fredericia",
-        "vatZone": {
-            "name": "Domestic",
-            "vatZoneNumber": 1,
-            "enabledForCustomer": true,
-            "enabledForSupplier": true
-        }
-    },
-    "lines": [
-        {
-            "lineNumber": 1,
-            "sortKey": 1,
-            "unit": {
-                "unitNumber": 2,
-                "name": "Tim"
-            },
-            "product": {
-                "productNumber": "06BAFDF7-61AF-4"
-            },
-            "quantity": 1.00,
-            "unitNetPrice": 10.00,
-            "discountPercentage": 0.00,
-            "unitCostPrice": 46.93,
-            "totalNetAmount": 10.00,
-            "marginInBaseCurrency": -46.93,
-            "marginPercentage": 0.0
-        }],
-    "references": {
-        "other": "aaaa"
+  "recipient": {
+    "name": "Toj & Co Grossisten",
+    "address": "Vejlevej 21",
+    "zip": "7000",
+    "city": "Fredericia",
+    "vatZone": {
+      "name": "Domestic",
+      "vatZoneNumber": 1,
+      "enabledForCustomer": true,
+      "enabledForSupplier": true
     }
+  },
+  "lines": [{
+    "lineNumber": 1,
+    "sortKey": 1,
+    "unit": {
+      "unitNumber": 2,
+      "name": "Tim"
+    },
+    "product": {
+      "productNumber": "06BAFDF7-61AF-4"
+    },
+    "quantity": 1.00,
+    "unitNetPrice": 10.00,
+    "discountPercentage": 0.00,
+    "unitCostPrice": 46.93,
+    "totalNetAmount": 10.00,
+    "marginInBaseCurrency": -46.93,
+    "marginPercentage": 0.0
+  }],
+  "references": {
+    "other": "aaaa"
+  }
 }

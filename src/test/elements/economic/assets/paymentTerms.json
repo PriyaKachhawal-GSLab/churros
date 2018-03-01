@@ -1,5 +1,4 @@
 {
-  "name":"<<random.word>>",
- "paymentTermsType":"prepaid"
-
+  "name": "<<random.word>>",
+  "paymentTermsType": "prepaid"
 }

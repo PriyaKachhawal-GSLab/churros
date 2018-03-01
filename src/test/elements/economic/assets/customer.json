@@ -5,7 +5,7 @@
   "customerGroup": {
     "customerGroupNumber": 1
   },
-  "barred":false,
+  "barred": false,
   "name": "<<random.word>>",
   "currency": "DKK",
   "vatZone": {

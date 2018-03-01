@@ -1,9 +1,9 @@
   {
-  "name":"<<random.word>>",
-    "productNumber":"<<random.word>>",
-      "productGroup": {
-            "productGroupNumber": 1
-      },
-        "barred":false,
-          "costPrice":50
-}
+    "name": "<<random.word>>",
+    "productNumber": "<<random.word>>",
+    "productGroup": {
+      "productGroupNumber": 1
+    },
+    "barred": false,
+    "costPrice": 50
+  }
