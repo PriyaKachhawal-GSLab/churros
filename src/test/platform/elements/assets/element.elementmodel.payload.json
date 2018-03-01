@@ -1,14 +1,12 @@
 {
   "name": "churrosModel<<random.alphaNumeric##4>>",
+  "elementId": 1,
   "vendorName":"churrosModel<<random.alphaNumeric##4>>",
-  "type": "string",
-  "displayName": "toasty",
-  "sampleValue": "ciabatta",
+  "customFields": false,
   "description": "what kind of toast",
-  "primaryKey": false,
-  "hidden": false,
-  "readOnly": false,
-  "nullable": false,
+  "nullsRequired": false,
+  "searchableJoins": "and, or",
+  "vendorDocumentationUrl": "http://cloud-elements.com/developers",
   "fields": [
     {
       "vendorName": "churrosVendorContact<<random.alphaNumeric##4>>",
@@ -18,5 +16,6 @@
       "customFieldDiscovery": false,
       "nullsRequired": false
     }    
-  ]
+  ],
+  "resources": []
 }

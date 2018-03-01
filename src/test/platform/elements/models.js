@@ -3,7 +3,7 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const schema = require('./assets/element.elementmodel.schema.json');
-const payload = require('core/tools').requirePayload(`${__dirname}/assets/element.elementmodelfield.payload.json`);
+const payload = require('core/tools').requirePayload(`${__dirname}/assets/element.elementmodel.payload.json`);
 const chakram = require('chakram');
 const expect = chakram.expect;
 
