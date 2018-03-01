@@ -20,11 +20,11 @@ suite.forElement('finance', 'expense-reports', { payload: payload }, (test) => {
   });
   test.should.supportPagination();
   test
-     .withOptions({ qs: { where: `status='Draft'` } })
-     .withName('should support Ceql status search')
+     .withOptions({ qs: { where: `batchkey = 187 ` } })
+     .withName('should support Ceql batchKey search')
      .withValidation(r => {
        expect(r).to.statusCode(200);
-       const validValues = r.body.filter(obj => obj.status = 'Draft');
+       const validValues = r.body.filter(obj => obj.batchkey === 187 );
        expect(validValues.length).to.equal(r.body.length);
      })
      .should.return200OnGet();
