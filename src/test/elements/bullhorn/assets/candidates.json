@@ -3,5 +3,11 @@
   "lastName": "test1",
   "name": "TestFirst TestLast",
   "username": "TestCandidateChurros",
-  "status": "active"
+  "status": "active",
+  "address": {
+    "countryCode": "US"
+  },
+  "secondaryAddress": {
+    "countryCode": "US"
+  }
 }

@@ -31,6 +31,21 @@ suite.forPlatform('organizations/branding', test => {
     topBarBackgroundColor: '#aedce7',
     navigationBackgroundColor: '#aedce7',
     contextBackgroundColor: '#aedce7',
+    cardHeaderColor: '#ffffff',
+    cardBackground: '#ffffff',
+    cardMenuBackground: '#ffffff',
+    cardMenuLinkColor: '#ffffff',
+    navigationLinkBackground: '#ffffff',
+    navigationLinkForeground: '#ffffff',
+    navigationLinkBackgroundHover: '#ffffff',
+    navigationLinkForegroundHover: '#ffffff',
+    navigationLinkBackgroundActive: '#ffffff',
+    navigationLinkForegroundActive: '#ffffff',
+    topBarNavigationColor: '#ffffff',
+    tableHeaderBackground: '#ffffff',
+    tableHeaderForeground: '#ffffff',
+    tableBodyBackground: '#ffffff',
+    tableBodyForeground: '#ffffff',
   };
 
   it('should support upserting, retrieving and deleting branding for a company', () => {

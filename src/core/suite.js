@@ -97,6 +97,7 @@ const itPagination = (name, api, options, validationCb, unique) => {
   const pageSize = options ? options.qs ? options.qs.pageSize ? options.qs.pageSize : 2 : 2 : 2;
   const page = options ? options.qs ? options.qs.page ? options.qs.page : 1 : 1 : 1;
   const where = options ? options.qs ? options.qs.where ? options.qs.where : null : null: null;
+  const path = options ? options.qs ? options.qs.path ? options.qs.path : null : null: null;
   const options1 = Object.assign({}, options, { qs: { page: page, pageSize: pageSize } });
   const options2 = Object.assign({}, options, { qs: { page: page + 1, pageSize: pageSize } });
   const options3 = Object.assign({}, options, { qs: { page: page, pageSize: (pageSize * 2) } });
@@ -104,6 +105,7 @@ const itPagination = (name, api, options, validationCb, unique) => {
   const getWithOptions = (option, result) => {
     // Adding the 'where' clause if it exists
     if (where) option.qs.where = where;
+    if (path) option.qs.path = path;
     return cloud.withOptions(option).get(api)
       .then((r) => {
         if (r.body && r.body.length > 0) {
@@ -325,22 +327,23 @@ const itBulkDownload = (name, hub, metadata, options, opts, endpoint) => {
   const getCsv = opts ? opts.csv : false;
   csvMeta = JSON.parse(JSON.stringify(metadata));
   metadata ? metadata.headers ? csvMeta.headers.accept = "text/csv" : csvMeta.headers = { accept: "text/csv" } : csvMeta = { headers: { accept: "text/csv" } };
-
+  const element = opts ? opts.element : null;
   metadata = tools.updateMetadata(metadata);
+  // gets integer limit from ceql query
+  const limit = tools.getLimit(metadata);
+  const fields = tools.getFieldsFromTransformation(element || argv.element, endpoint);
   boomGoesTheDynamite(n, () => {
-    // start bulk download
-    return cloud.withOptions(metadata).post(`/hubs/${hub}/bulk/query`)
+    // gets regular call to later check the validity of the bulk job
+    return cloud.withOptions(metadata).get(`/hubs/${hub}/${endpoint}`)
+      .then(r => bulkResults = limit > -1 ? r.body.slice(0, limit) : r.body)
+      // start bulk download
+      .then(r => cloud.withOptions(metadata).post(`/hubs/${hub}/bulk/query`))
       .then(r => {
         expect(r.body.status).to.equal('CREATED');
         bulkId = r.body.id;
       })
-      // gets regular call to later check the validity of the bulk job
-      .then(r => cloud.withOptions(metadata)
-        .get(`/hubs/${hub}/${endpoint}`, r => {
-          bulkResults = r.body;
-        }))
       // get bulk download status
-      .then(r => tools.wait.upTo(30000).for(() => cloud.get(`/hubs/${hub}/bulk/${bulkId}/status`, r => {
+      .then(r => tools.wait.upTo(opts.timeout ? opts.timeout : 60000).for(() => cloud.get(`/hubs/${hub}/bulk/${bulkId}/status`, r => {
         expect(r.body.status).to.equal('COMPLETED');
         return r;
       })))
@@ -351,15 +354,25 @@ const itBulkDownload = (name, hub, metadata, options, opts, endpoint) => {
       // get bulk query results in JSON
       .then(r => getJson ? cloud.withOptions(jsonMeta)
         .get(`/hubs/${hub}/bulk/${bulkId}/${endpoint}`, r => {
-          let bulkDownloadResults = tools.getKey(r.body.split('\n').map(obj => { try { return JSON.parse(obj); } catch(e) { return ''; } }), 'id');
-          expect(bulkDownloadResults).to.deep.equal(tools.getKey(bulkResults, 'id'));
+          if (fields !== null) {
+            let bulkDownloadResults = tools.getFieldsMap(r.body.split('\n').map(obj => { try { return JSON.parse(obj); } catch (e) { return ''; } }), fields);
+            expect(bulkDownloadResults).to.deep.equal(tools.getFieldsMap(bulkResults, fields));
+          } else {
+            let bulkDownloadResults = tools.getKey(r.body.split('\n').map(obj => { try { return JSON.parse(obj); } catch (e) { return ''; } }), 'id');
+            expect(bulkDownloadResults).to.deep.equal(tools.getKey(bulkResults, 'id'));
+          }
         }) : Promise.resolve(null))
       // get bulk query results in CSV
       .then(r => getCsv ? cloud.withOptions(csvMeta)
         .get(`/hubs/${hub}/bulk/${bulkId}/${endpoint}`, r => {
           if (typeof r.body === 'string') {
-            let bulkDownloadResults = tools.getKey(tools.csvParse(r.body), 'id');
-            expect(bulkDownloadResults).to.deep.equal(tools.getKey(bulkResults, 'id'));
+            if (fields !== null) {
+              let bulkDownloadResults = tools.getFieldsMap(tools.csvParse(r.body), fields);
+              expect(bulkDownloadResults).to.deep.equal(tools.getFieldsMap(bulkResults, fields));
+            } else {
+              let bulkDownloadResults = tools.getKey(tools.csvParse(r.body), 'id');
+              expect(bulkDownloadResults).to.deep.equal(tools.getKey(bulkResults, 'id'));
+            }
           }
         }) : Promise.resolve(null));
   }, options ? options.skip : false);

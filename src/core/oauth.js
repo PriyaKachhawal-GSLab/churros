@@ -205,6 +205,16 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('pass')).sendKeys(password);
       browser.findElement(webdriver.By.id('loginbutton')).click();
       return browser.getCurrentUrl();
+    case 'ecwid':
+      browser.get(r.body.oauthUrl);
+      browser.findElement(webdriver.By.name('email')).sendKeys(username);
+      browser.findElement(webdriver.By.name('password')).sendKeys(password);
+      browser.findElement(webdriver.By.xpath('/html/body/div[7]/div/div[2]/div[2]/div/div[1]/div/div[1]/form/div/button')).click();
+      return browser.wait(() => browser.isElementPresent(webdriver.By.id('menu-toggler')), 5000)
+        .then(r => browser.findElement(webdriver.By.xpath('/html/body/div/p[1]/button[2]')))
+        .then(r => r.click())
+        .then(r => browser.getCurrentUrl())
+        .catch(r => browser.getCurrentUrl());      
     case 'eloqua':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.xpath('//*[@id="login-button"]')).click();
@@ -249,6 +259,17 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('user')).sendKeys(username);
       browser.findElement(webdriver.By.id('pass')).sendKeys(password);
       browser.findElement(webdriver.By.name('submit')).click();
+      return browser.getCurrentUrl();
+    case 'freshbooksv2':
+      browser.get(r.body.oauthUrl);
+      browser.findElement(webdriver.By.id('smux_identity_email')).sendKeys(username);
+      browser.findElement(webdriver.By.id('smux_identity_password')).sendKeys(password);
+      browser.findElement(webdriver.By.name('commit')).click();
+      browser.wait(() => {
+        return browser.isElementPresent(webdriver.By.name('commit'));
+      }, 2000);
+      browser.findElement(webdriver.By.name('commit')).click();
+      browser.sleep(2000);
       return browser.getCurrentUrl();
     case 'googlesuite':
     case 'googlesheets':
@@ -403,23 +424,24 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('idBtn_Accept'))
         .then((element) => element.click(), (err) => {}); // ignore this
       return browser.getCurrentUrl();
+    case 'sharepoint':
     case 'onedrivebusiness':
       browser.get(r.body.oauthUrl);
-      browser.findElement(webdriver.By.id('cred_userid_inputtext')).sendKeys(username);
-      browser.findElement(webdriver.By.id('cred_password_inputtext')).sendKeys(password);
-      // well, not proud of this one...i thought i could use the same as sharepoint but i couldn't.  this keeps clicking the sign-in button until the title goes blank, indicating we
-      // have hit our redirect URL...i think (it works :/)
-      browser.wait(() => {
-        browser.findElement(webdriver.By.id('cred_sign_in_button'))
-          .then((element) => element.click(),
-            (err) => {
-              if (err.state && err.state === 'no such element') { // ignore this
-              } else {
-                webdriver.promise.rejected(err);
-              }
-            });
-        return browser.getTitle().then((title) => !title);
-      }, 10000);
+      waitForElement(webdriver.By.id('i0116'), 5000);
+      browser.findElement(webdriver.By.id('i0116')).sendKeys(username);
+      waitForElement(webdriver.By.id('idSIButton9'));
+      browser.findElement(webdriver.By.id('idSIButton9')).click();
+      waitForElement(webdriver.By.id('i0118'));
+      browser.findElement(webdriver.By.id('i0118')).sendKeys(password);
+      waitForElement(webdriver.By.xpath('.//*[@value= "Sign in" and @type= "submit"]'));
+      browser.findElement(webdriver.By.xpath('.//*[@value= "Sign in" and @type= "submit"]')).click();
+      waitForElement(webdriver.By.id('idSIButton9')).thenCatch(r => true);  //Stay signed in screen
+      browser.findElement(webdriver.By.id('idSIButton9'))
+        .then((element) => element.click(), (err) => {}); // ignore this
+      waitForElement(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow')).thenCatch(r => true); // ignore
+      browser.findElement(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow'))
+        .then((element) => element.click(), (err) => {}); // ignore this
+      browser.sleep(2000);  //plz wait for the code to show up in httpbin
       return browser.getCurrentUrl();
     case 'paypalv2--sandbox':
       //Sandbox version has slightly different url. Will fall into regular flow after changing url
@@ -554,17 +576,26 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.className('primary'))
         .then((element) => element.click(), (err) => {});
       return browser.getCurrentUrl();
-    case 'sharepoint':
+    case 'microsoftgraph':
       browser.get(r.body.oauthUrl);
-      browser.findElement(webdriver.By.id('cred_userid_inputtext')).sendKeys(username);
-      browser.findElement(webdriver.By.id('cred_password_inputtext')).sendKeys(password);
+      browser.findElement(webdriver.By.id('i0116')).sendKeys(username);
+      browser.findElement(webdriver.By.id('idSIButton9')).click();
+      browser.sleep(700);
+      browser.wait(() => browser.findElement(webdriver.By.id('aadTile')).click(), 1000)
+        .thenCatch(r => true);
+      browser.wait(() => browser.isElementPresent(webdriver.By.id('i0118')), 3000)
+        .thenCatch(r => true);
+      browser.findElement(webdriver.By.id('i0118')).sendKeys(password);
+      browser.findElement(webdriver.By.id('idSIButton9')).click();
       browser.wait(() => {
-        browser.findElement(webdriver.By.id('cred_sign_in_button')).click(); // ... i'm serious, you have to just keep clicking.  wtf microsoft.
-        return browser.isElementPresent(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow'));
-      }, 10000);
-      browser.findElement(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow')).click();
+          browser.findElement(webdriver.By.id('idSIButton9')).click()
+            .thenCatch(r => true);
+          return browser.isElementPresent(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow'));
+        }, 10000)
+        .thenCatch(r => true);
+      browser.findElement(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow')).click()
+        .thenCatch(r => true);
       return browser.getCurrentUrl();
-
     case 'wrike':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('emailField')).sendKeys(username);
@@ -637,6 +668,14 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.xpath('.//*[@id="auth0-lock-container-1"]/div/div[2]/form/div/div/button')).click();
       browser.sleep(5000);
       return browser.getCurrentUrl();
+   case 'docusign':
+      browser.get(r.body.oauthUrl);
+      browser.wait(webdriver.until.elementLocated(webdriver.By.name('email'), 5000));
+      browser.findElement(webdriver.By.name('email')).sendKeys(username);
+      browser.findElement(webdriver.By.xpath('/html/body/div/div/div/main/section/div[1]/div/form/div[3]/button/span')).click();  
+      browser.findElement(webdriver.By.name('password')).sendKeys(password);
+      browser.findElement(webdriver.By.xpath('/html/body/div/div/div/main/section/div[1]/div/form/div[4]/button/div/span')).click();
+      return browser.getCurrentUrl();
     case 'linkedin':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.name('session_key')).sendKeys(username);
@@ -650,6 +689,37 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('action'))
         .then((element) => element.click(), (err) => {}); // ignore this
       return browser.getCurrentUrl();
+    case 'docushareflex':
+      if (config['provider.version'] === '1') {
+        /* For version 1 Docushare renders a popup that selenium can't handle with firefox - eg browser.switchTo().alert()  
+        * There is also a firefox issue with sending the Basic credentials in the URL if you're targeting a sub-resource on a domain.
+        * To workaround we first hit the main domain with the creds in the URL then call the sub-resource (our OG auth url);
+        **/
+        let docushareOauthUrl = r.body.oauthUrl;
+        let domainExtension = '.com';
+        let baseUrl = docushareOauthUrl.substring(0, docushareOauthUrl.indexOf(domainExtension) + domainExtension.length);
+        let baseUrlWithCreds = baseUrl.replace("https://", `https://${username}:${password}@`);
+        browser.get(baseUrlWithCreds);
+        browser.get(docushareOauthUrl);
+        let xPath = '//*[@id="content_wrap"]/div/div[2]/span[1]/span[1]/button';
+        browser.wait(webdriver.until.elementLocated(webdriver.By.xpath(xPath)), 7000);
+        browser.findElement(webdriver.By.xpath(xPath)).click();
+        browser.sleep(2000);
+        return browser.getCurrentUrl();
+      } else {
+        browser.get(r.body.oauthUrl);
+        return browser.wait(() => browser.isElementPresent(webdriver.By.id('xsltforms-mainform-input-username')), 5000)
+        .then(() => browser.findElement(webdriver.By.xpath('//*[@id="xsltforms-mainform-input-username"]')).sendKeys(username))
+        .then(() => browser.findElement(webdriver.By.xpath('//*[@id="password"]/span[2]/input')).sendKeys(password))
+        .then(() => browser.findElement(webdriver.By.xpath('//*[@id="xsltforms-mainform-submit-2_3_3_2_1_2_4_"]/span[1]/button')))
+        .then(r => r.click())
+        .then(() => browser.wait(() => browser.isElementPresent(webdriver.By.id('xsltforms-mainform-trigger-1_3_1_2_4_')), 5000))
+        .then(() => browser.findElement(webdriver.By.xpath('//*[@id="xsltforms-mainform-trigger-1_3_1_2_4_"]/span[1]/button')))
+        .then(r => r.click())
+        .then(() => browser.sleep(2000))
+        .then(() => browser.getCurrentUrl());
+      }
+      break;
     default:
       throw 'No OAuth function found for element ' + element + '.  Please implement function in core/oauth so ' + element + ' can be provisioned';
   }

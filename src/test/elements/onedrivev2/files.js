@@ -3,6 +3,7 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
+const expect = require('chakram').expect;
 
 suite.forElement('documents', 'files', (test) => {
   let path = __dirname + '/assets/brady.jpg';
@@ -13,7 +14,11 @@ suite.forElement('documents', 'files', (test) => {
     let file;
 
     return cloud.withOptions({ qs: query }).postFile('/hubs/documents/files', path)
-      .then(r => file = r.body)
+      .then(r => {
+        file = r.body;
+        expect(r.body.parentFolderId).to.not.be.null;
+        expect(r.body.properties.mimeType).to.be.equal('image/jpeg');
+      })
       .then(r => cb(file))
       .then(r => cloud.delete(`/hubs/documents/files/${file.id}`));
   };

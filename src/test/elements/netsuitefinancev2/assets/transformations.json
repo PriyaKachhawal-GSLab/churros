@@ -245,29 +245,29 @@
     }]
   },
   "subsidiaries": {
-      "vendorName": "Subsidiary",
-      "fields": [{
+    "vendorName": "Subsidiary",
+    "fields": [{
       "path": "id",
       "vendorPath": "internalId"
     }]
   },
   "posting-periods": {
-      "vendorName": "AccountingPeriod",
-      "fields": [{
+    "vendorName": "AccountingPeriod",
+    "fields": [{
       "path": "id",
       "vendorPath": "internalId"
     }]
   },
   "checks": {
-      "vendorName": "Check",
-      "fields": [{
+    "vendorName": "Check",
+    "fields": [{
       "path": "id",
       "vendorPath": "internalId"
     }]
   },
   "vendor-credits": {
-      "vendorName": "VendorCredit",
-      "fields": [{
+    "vendorName": "VendorCredit",
+    "fields": [{
       "path": "id",
       "vendorPath": "internalId"
     }]
@@ -284,6 +284,19 @@
     "fields": [{
       "path": "id",
       "vendorPath": "internalId"
+    }]
+  },
+  "bulkCustomerNfv2": {
+    "vendorName": "Customer",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }, {
+      "path": "bulk-lastModifiedDate",
+      "vendorPath": "lastModifiedDate"
+    }, {
+      "path": "bulk-dateCreated",
+      "vendorPath": "dateCreated"
     }]
   }
 }

@@ -35,6 +35,7 @@ suite.forPlatform('formulas', { name: 'formula errors' }, (test) => {
    */
   const testIt = (fName, configuration, numEs, numSevs, execValidator, instanceValidator, executionStatus, numInstances, triggerCb) => {
     const f = require(`./assets/formulas/${fName}`);
+    f.engine = process.env.CHURROS_FORMULAS_ENGINE;
     let fi = { name: 'churros-manual-formula-instance' };
 
     if (configuration) {

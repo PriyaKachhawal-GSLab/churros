@@ -3,7 +3,7 @@
     "vendorName": "accounts",
     "fields": [{
       "path": "id",
-      "vendorPath": "id"
+      "vendorPath": "customer.id"
     }]
   },
   "incidents": {

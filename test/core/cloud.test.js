@@ -273,6 +273,21 @@ describe('cloud', () => {
       .then(r => fs.unlink(filePath));
   });
 
+  it('should support post multiple files', () => {
+    // should really NOT depend on the file system here :/
+    const filePath1 = '.tmp';
+    const filePath2 = '.tmp';
+    const files = {
+      filePath1,
+      filePath2
+    };
+    fs.closeSync(fs.openSync(filePath1, 'w'));
+    fs.closeSync(fs.openSync(filePath2, 'w'));
+    return cloud.postFileMultiple('/foo/file', files)
+      .then(r => fs.unlink(filePath1))
+      .then(r => fs.unlink(filePath2));
+  });
+
   it('should support post file with options', () => {
     // should really NOT depend on the file system here :/
     const filePath = '.post1.tmp';
@@ -281,12 +296,42 @@ describe('cloud', () => {
       .then(r => fs.unlink(filePath));
   });
 
+  it('should support post multiple files with options', () => {
+    // should really NOT depend on the file system here :/
+    const filePath1 = '.tmp';
+    const filePath2 = '.tmp';
+    const files = {
+      filePath1,
+      filePath2
+    };
+    fs.closeSync(fs.openSync(filePath1, 'w'));
+    fs.closeSync(fs.openSync(filePath2, 'w'));
+    return cloud.withOptions({ json: false }).postFileMultiple('/foo/file', files)
+    .then(r => fs.unlink(filePath1))
+    .then(r => fs.unlink(filePath2));
+  });
+
   it('should support post file with form data options', () => {
     const options = { formData: { field: '{\"foo\":\"bar\"}' } };
     const filePath = '.post1.tmp';
     fs.closeSync(fs.openSync(filePath, 'w'));
     return cloud.withOptions(options).postFile('/foo/file/with/multipart', filePath)
       .then(r => fs.unlink(filePath));
+  });
+
+  it('should support post multiple files with form data options', () => {
+    const options = { formData: { field: '{\"foo\":\"bar\"}' } };
+    const filePath1 = '.post1.tmp';
+    const filePath2 = '.post1.tmp';
+    const files = {
+      filePath1,
+      filePath2
+    };
+    fs.closeSync(fs.openSync(filePath1, 'w'));
+    fs.closeSync(fs.openSync(filePath2, 'w'));
+    return cloud.withOptions(options).postFileMultiple('/foo/file/with/multipart', files)
+    .then(r => fs.unlink(filePath1))
+    .then(r => fs.unlink(filePath2));
   });
 
   it('should throw an error if post file validation fails', () => {
@@ -298,6 +343,26 @@ describe('cloud', () => {
       })
       .catch(r => {
         fs.unlink(filePath);
+        return true;
+      });
+  });
+
+  it('should throw an error if post multiple files validation fails', () => {
+    const filePath1 = '.post1.tmp';
+    const filePath2 = '.post1.tmp';
+    const files = {
+      filePath1,
+      filePath2
+    };
+    fs.closeSync(fs.openSync(filePath1, 'w'));
+    fs.closeSync(fs.openSync(filePath2, 'w'));
+    return cloud.postFileMultiple('/foo/bad/file', files)
+      .then(r => {
+        throw Error('Where my error at?');
+      })
+      .catch(r => {
+        fs.unlink(filePath1);
+        fs.unlink(filePath2);
         return true;
       });
   });
