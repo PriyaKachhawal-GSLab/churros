@@ -15,7 +15,7 @@ suite.forElement('crm', 'opportunities', { payload: payload }, (test) => {
     }
   };
   test.withOptions(options).should.supportCruds(chakram.put);
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.return200OnGet();
+  test.should.supportPagination();
   test.withName(`should support searching ${test.api} by DATE_UPDATED_UTC`)
     .withOptions({ qs: { where: `updated_after_utc ='2018-02-21 07:31:45'` } })
     .withValidation((r) => {
