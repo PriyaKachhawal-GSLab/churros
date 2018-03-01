@@ -14,7 +14,7 @@ suite.forElement('crm', 'users', (test) => {
       })
       .then(r => cloud.withOptions({ qs: { where: 'updated_after_utc=\'2018-02-05 17:20:45\'' } }))
       .then(r => cloud.get(`${test.api}/${userId}`))
-      .then(r => expect(r.body).to.not.be.empty);;
+      .then(r => expect(r.body).to.not.be.empty);
   });
 
   it('should allow S for /me', () => {
