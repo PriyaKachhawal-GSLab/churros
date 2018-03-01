@@ -7,28 +7,30 @@ const tools = require('core/tools');
 const message = tools.requirePayload(`${__dirname}/assets/messages.json`);
 
 suite.forElement('general', 'threads', null, (test) => {
-  let threadId;
+	  let messageId;
+    let path = __dirname + '/assets/MrRobotPdf.pdf';
+    const opts = { formData: { body: JSON.stringify(message) } };
+  before(() => cloud.withOptions(opts).postFile('/hubs/general/messages', path)
+	.then(r => messageId = r.body.id));
+
+  it(`should test CEQL search for ${test.api}`, () => {
+	  let subject = message.subject;
+      return cloud.withOptions({ qs: { where:`q=\'subject:${subject}\'`  } }).get(`${test.api}`)
+	  .then(r => {
+			expect(r).to.statusCode(200);
+			expect(r.body.length).to.be.equal(1);
+	   });
+  });
+
   it('should test SRD /threads', () => {
+  let threadId;
     return cloud.get(test.api)
       .then(r => threadId = r.body[0].id)
       .then(r => cloud.get(`${test.api}/${threadId}`))
       .then(r => cloud.delete(`${test.api}/${threadId}`));
   });
-  
-  it(`should test CEQL search for ${test.api}`, () => {
-	  let subject = message.subject;
-	  let messageId;
-      let path = __dirname + '/assets/MrRobotPdf.pdf';
-      const opts = { formData: { body: JSON.stringify(message) } };
-      return cloud.withOptions(opts).postFile('/hubs/general/messages', path)
-      .then(r => messageId = r.body.id)
-      .then(r => cloud.withOptions({ qs: { where:`q=\'subject:${subject}\'`  } }).get(`${test.api}`))
-	  .then(r => {
-			expect(r).to.statusCode(200);
-			expect(r.body.length).to.be.equal(1);
-	   })
-      .then(r => cloud.delete(`/hubs/general/messages/${messageId}`));
-  });
+
   test.withApi(test.api).should.supportNextPagePagination(1);
 
+  after(() =>cloud.delete(`/hubs/general/messages/${messageId}`));
 });
