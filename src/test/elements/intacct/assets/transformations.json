@@ -94,7 +94,7 @@
     "vendorName": "terms",
     "fields": [{
       "path": "id",
-      "vendorPath": "termid"
+      "vendorPath": "name"
     }]
   },
   "vendors": {
