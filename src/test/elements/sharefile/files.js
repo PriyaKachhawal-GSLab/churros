@@ -24,7 +24,7 @@ suite.forElement('documents', 'files', (test) => {
 
   it('should get file metadata by id/path', () => {
     let path = __dirname + '/assets/file.txt';
-    return cloud.postFile('/hubs/documents/files', path, { qs: query })
+    return cloud.withOptions({ qs: query }).postFile(test.api, path)
       .then(r => { fileId = r.body.id, filePath = r.body.path; })
       .then(r => cloud.get('/hubs/documents/files/' + fileId))
       .then(r => cloud.get('/hubs/documents/files/' + fileId + '/metadata'))
@@ -35,7 +35,7 @@ suite.forElement('documents', 'files', (test) => {
 
   it('should delete file by path', () => {
     let path = __dirname + '/assets/file.txt';
-    return cloud.postFile('/hubs/documents/files', path, { qs: query })
+    return cloud.withOptions({ qs: query }).postFile(test.api, path)
       .then(r => { fileId = r.body.id, filePath = r.body.path; })
       .then(r => cloud.withOptions({ qs: query }).delete('/hubs/documents/files'));
   });
@@ -56,7 +56,7 @@ suite.forElement('documents', 'files', (test) => {
 
   it('should copy file by id/path', () => {
     let path = __dirname + '/assets/file.txt';
-    return cloud.postFile('/hubs/documents/files', path, { qs: query })
+    return cloud.withOptions({ qs: query }).postFile(test.api, path)
       .then(r => { fileId = r.body.id, filePath = r.body.path; })
       .then(r => cloud.get('/hubs/documents/files' + '/' + fileId + '/metadata'))
       .then(r => cloud.withOptions({ qs: { path: filePath } }).post('/hubs/documents/files/copy', copyPath))

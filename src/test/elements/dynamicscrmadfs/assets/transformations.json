@@ -81,6 +81,20 @@
       "path": "subject",
       "vendorPath": "attributes.subject"
     }]
+  },
+  "cases": {
+    "vendorName": "incident",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "attributes.incidentid"
+    }]
+  },
+  "knowledge-articles": {
+    "vendorName": "knowledgearticle",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "attributes.knowledgearticleid"
+    }]
   }
 
 }
