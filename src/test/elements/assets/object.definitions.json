@@ -3,7 +3,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    }, {
+    },{
       "path": "id",
       "type": "string"
     }]
@@ -490,7 +490,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    }, {
+    },{
       "path": "id",
       "type": "string"
     }]
@@ -2162,7 +2162,8 @@
     ]
   },
   "xeroCustomResource": {
-    "fields": [{
+    "fields": [
+      {
         "path": "idTransformed",
         "type": "string"
       },
@@ -2173,7 +2174,8 @@
     ]
   },
   "xeroCustomChildResource": {
-    "fields": [{
+    "fields": [
+      {
         "path": "idTransformed",
         "type": "string"
       },
@@ -2192,130 +2194,126 @@
       "type": "string"
     }]
   },
-  "institutions": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-  },
-  "customer-groups": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-  },
-  "entry-subtypes": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-  },
-  "currencies": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-  },
-  "modules-agreement": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-  },
-  "payment-types": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-  },
-  "product-groups": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-  },
-  "vendor-groups": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-  },
-  "vat-accounts": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-  },
-  "vat-types": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-  },
-  "vat-zones": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-  },
-  "payment-terms": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-  },
-  "accounting-years": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-  },
-  "invoice-drafts": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-  }
+ "institutions" : {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ }
+, "customer-groups": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+},
+"entry-subtypes": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+},
+"currencies": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+},
+"modules-agreement": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+}, "payment-types": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+}, "product-groups": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+}, "vendor-groups": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+},
+"vat-accounts": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+},
+"vat-types": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+}, "vat-zones": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+},
+"payment-terms": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+},
+"accounting-years": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+},
+"invoice-drafts": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+}
 }
