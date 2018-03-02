@@ -43,7 +43,7 @@ suite.forPlatform('models', {}, (test) => {
         expect(bodyHeaders).to.include.members(defaultCsvHeaders);
         expect(r.body).to.equal(csvBody);
       });
-  })
+  });
 
   it('should generate model schema from csv payload', () => {
     return cloud.postFile('/models/invoices/schema/csv', `${__dirname}/assets/csvPayload.csv`)
