@@ -1,4 +1,13 @@
 {
+  "reporting-periods": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    },{
+      "path": "id",
+      "type": "string"
+    }]
+  },
   "accounts": {
     "fields": [{
         "path": "idTransformed",
@@ -141,6 +150,17 @@
     ]
   },
   "cases": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "knowledge-articles": {
     "fields": [{
         "path": "idTransformed",
         "type": "string"
@@ -465,6 +485,15 @@
         "type": "string"
       }
     ]
+  },
+  "vendor-invoices": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    },{
+      "path": "id",
+      "type": "string"
+    }]
   },
   "leads": {
     "fields": [{
@@ -2131,5 +2160,48 @@
         "type": "string"
       }
     ]
-  }
+  },
+  "xeroCustomResource": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "xeroCustomChildResource": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "chargecard-transactions": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+ "institutions" : {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ }
+
 }

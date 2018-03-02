@@ -21,12 +21,14 @@ const lock = {
 };
 
 suite.forElement('documents', 'files', (test) => {
-  let id, path;
+  let id, path, fileTagPayload, fileUpdateTagPayload;
   before(done => {
     return cloud.withOptions({ qs: { path: `/brady-${faker.address.zipCode()}.jpg` } }).postFile(test.api, `${__dirname}/../assets/brady.jpg`)
       .then(r => {
         id = r.body.id;
         path = r.body.path;
+        fileTagPayload = r.body;
+        fileTagPayload.tags = ["fileTag1", "fileTag2"];
       })
       .then(r => done());
   });
@@ -40,10 +42,13 @@ suite.forElement('documents', 'files', (test) => {
     let folderId, fileId;
     return cloud.post('/folders', folderPayload)
       .then(r => folderId = r.body.id)
-      .then(r => cloud.withOptions({ qs: {
+      .then(r => cloud.withOptions({
+        qs: {
           path: `/churros/brady-${faker.address.zipCode()}.jpg`,
           folderId,
-          calculateFolderPath: false} }).postFile(test.api, `${__dirname}/../assets/brady.jpg`))
+          calculateFolderPath: false
+        }
+      }).postFile(test.api, `${__dirname}/../assets/brady.jpg`))
       .then(r => fileId = r.body.id)
       .then(() => cloud.delete(`${test.api}/${fileId}`))
       .then(() => cloud.delete(`/folders/${folderId}`));
@@ -182,10 +187,34 @@ suite.forElement('documents', 'files', (test) => {
     let commentId;
     return cloud.post(`${test.api}/${id}/comments`, commentPayload1)
       .then(r => commentId = r.body.id)
-      .then(r => cloud.withOptions({ qs: { raw: true }}).get(`${test.api}/${id}/comments`))
+      .then(r => cloud.withOptions({ qs: { raw: true } }).get(`${test.api}/${id}/comments`))
       .then(r => expect(r.body.filter(obj => obj.raw)).to.not.be.empty)
       .then(r => cloud.get(`${test.api}/${id}/comments`))
       .then(r => expect(r.body.filter(obj => obj.raw)).to.be.empty)
       .then(r => cloud.delete(`${test.api}/${id}/comments/${commentId}`));
+  });
+
+  it('should allow UR tags /files/metadata by path', () => {
+    return cloud.withOptions({ qs: { path: fileTagPayload.path } }).patch(`${test.api}/metadata`, fileTagPayload)
+      .then(r => {
+        expect(r.body.tags[0]).to.equal(`${fileTagPayload.tags[0]}`);
+        fileUpdateTagPayload = r.body;
+        fileUpdateTagPayload.tags = ["fileTag1Updated", "fileTag2Updated"];
+      })
+      .then(() => cloud.withOptions({ qs: { path: fileTagPayload.path } }).get(`${test.api}/metadata`))
+      .then(r => {
+        expect(r.body.tags[0]).to.equal(`${fileTagPayload.tags[0]}`);
+      });
+  });
+
+  it('should allow UR tags /folders/:id/metadata', () => {
+    return cloud.patch(`${test.api}/${fileUpdateTagPayload.id}/metadata`, fileUpdateTagPayload)
+      .then(r => {
+        expect(r.body.tags[0]).to.equal(`${fileUpdateTagPayload.tags[0]}`);
+      })
+      .then(() => cloud.get(`${test.api}/${fileUpdateTagPayload.id}/metadata`))
+      .then(r => {
+        expect(r.body.tags[0]).to.equal(`${fileUpdateTagPayload.tags[0]}`);
+      });
   });
 });

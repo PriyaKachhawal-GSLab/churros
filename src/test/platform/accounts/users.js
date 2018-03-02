@@ -57,7 +57,7 @@ describe('account users', () => {
     .then(r => expect(r.body.active).to.be.true);
   });
 
-  it('should keep instances for non-permanent account deletion', () => {
+  it('should delete jobs for account deactivation', () => {
     let acctId;
     let userId;
     let userSecret;
@@ -68,35 +68,35 @@ describe('account users', () => {
     .then(r => { userSecret = r.body.secret; userId = r.body.id; })
     // Create a pipedrive instance with the new user's credentials
     .then(() => defaults.withDefaults(userSecret, orgSecret, user.email))
-    .then(() => provisioner.create('pipedrive'))
-    // Validate that the instance is there for the new user
+    .then(() => provisioner.create('sfdc', null, null, true))
+    // Validate that the instance and job is there for the new user
     .then(() => defaults.withDefaults(userSecret, orgSecret, user.email))
     .then(() => cloud.get(`/instances`))
     .then(r => expect(r.body.length).to.equal(1))
-    // Delete the account "non-permanently"
+    .then(() => defaults.withDefaults(userSecret, orgSecret, user.email))
+    .then(() => cloud.get(`/jobs`))
+    .then(r => expect(r.body.length).to.equal(1))
+    // Disable the account "non-permanently"
     .then(() => defaults.reset())
-    .then(() => cloud.delete(`/accounts/${acctId}`))
-    // Validate that the account is deleted
-    .then(() => cloud.get(`/accounts`))
-    .then(r => expect(r.body.filter(a => a.externalId === account2.externalId).length).to.equal(0))
+    .then(() => cloud.patch(`/accounts/${acctId}`, { active: false }))
+    // Validate that the account is inactive
+    .then(r => expect(r.body.active).to.equal(false))
     // Reactivate the account
     .then(() => cloud.patch(`/accounts/${acctId}`, { active: true }))
     .then(() => cloud.get(`/accounts`))
     .then(r => expect(r.body.filter(a => a.externalId === account2.externalId).length).to.equal(1))
     // Reactivate the user
     .then(() => cloud.patch(`/accounts/${acctId}/users/${userId}`, { active: true }))
-    // Validate that the instance has not been deleted
+    // Validate that the job been deleted
     .then(() => defaults.withDefaults(userSecret, orgSecret, user.email))
-    .then(() => cloud.get(`/instances`))
-    .then(r => expect(r.body.length).to.equal(1))
+    .then(() => cloud.get(`/jobs`))
+    .then(r => { console.log(r.body); expect(r.body.length).to.equal(0); })
     // Clean up after ourselves
     .then(() => defaults.reset())
-    .then(() => cloud.delete(`/accounts/${acctId}`))
-    .then(() => cloud.get(`/accounts/${acctId}/users/${user.email}`))
-    .then(r => cloud.delete(`/accounts/${acctId}/users/${r.body.id}`));
+    .then(() => cloud.delete(`/accounts/${acctId}`));
   });
 
-  it('should delete instances for permanent account deletion', () => {
+  it('should delete instances and users for account deletion', () => {
     let acctId;
     let userId;
     let userSecret;
@@ -114,7 +114,7 @@ describe('account users', () => {
     .then(r => expect(r.body.length).to.equal(1))
     // Delete the account "permanently"
     .then(() => defaults.reset())
-    .then(() => cloud.delete(`/accounts/${acctId}?permanent=true`))
+    .then(() => cloud.delete(`/accounts/${acctId}`))
     // Validate that the account is deleted
     .then(() => cloud.get(`/accounts`))
     .then(r => expect(r.body.filter(a => a.externalId === account2.externalId).length).to.equal(0))
@@ -122,16 +122,11 @@ describe('account users', () => {
     .then(() => cloud.patch(`/accounts/${acctId}`, { active: true }))
     .then(() => cloud.get(`/accounts`))
     .then(r => expect(r.body.filter(a => a.externalId === account2.externalId).length).to.equal(1))
-    // Reactivate the user
-    .then(() => cloud.patch(`/accounts/${acctId}/users/${userId}`, { active: true }))
-    // Validate that the instance has been deleted
-    .then(() => defaults.withDefaults(userSecret, orgSecret, user.email))
+    // Validate the the user was deleted
+    .then(() => cloud.get(`/accounts/${acctId}/users/${userId}`, r => expect(r).to.have.status(404)))
     .then(() => cloud.get(`/instances`, r => expect(r).to.have.status(404)))
     // Clean up after ourselves
-    .then(() => defaults.reset())
-    .then(() => cloud.delete(`/accounts/${acctId}`))
-    .then(() => cloud.get(`/accounts/${acctId}/users/${user.email}`))
-    .then(r => cloud.delete(`/accounts/${acctId}/users/${r.body.id}`));
+    .then(() => cloud.delete(`/accounts/${acctId}`));
   });
 
   it('should keep instances for non-permanent user deactivation', () => {
@@ -208,7 +203,7 @@ describe('account users', () => {
     .then(r => expect(r.body.length).to.equal(1));
   });
 
-  it('should delete instances for permanent account deactivation', () => {
+  it('should delete instances and users for permanent account deactivation', () => {
     let userSecret;
     let userId;
     return cloud.post(`/accounts/${accountId}/users`, user)
@@ -227,9 +222,8 @@ describe('account users', () => {
     // Reactivate the account
     .then(() => cloud.patch(`/accounts/${accountId}`, { active: true }))
     .then(r => expect(r.body.active).to.be.true)
-    // Validate that the instance no longer exists for that user
-    .then(() => defaults.withDefaults(userSecret, orgSecret, user.email))
-    .then(() => cloud.get(`/instances`, r => expect(r).to.have.status(404)));
+    // Validate that the user no longer exists
+    .then(() => cloud.get(`/accounts/${accountId}/users/${userId}`, r => expect(r).to.have.status(404)));
   });
 
   afterEach(() => {

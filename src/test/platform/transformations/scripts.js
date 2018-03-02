@@ -40,6 +40,7 @@ suite.forPlatform('transformation scripts', (test) => {
 
     return cloud.delete(`/instances/${closeioId}/objects/contacts/definitions`).catch(() => {})
       .then(r => cloud.post(`/instances/${closeioId}/objects/contacts/definitions`, definitions))
+      .then(r => cloud.get(`/instances/${closeioId}/objects/contacts/definitions`))
       .then(r => cloud.delete(`/instances/${closeioId}/transformations/contacts`).catch(() => {}))
       .then(r => cloud.post(`/instances/${closeioId}/transformations/contacts`, transformation, (r) => transformationCreatedValidator(r, transformation.isLegacy ? transformation.isLegacy : false)))
       .then(r => cloud.get(`/hubs/crm/contacts/${contactId}`, validatorWrapper))

@@ -94,7 +94,7 @@
     "vendorName": "terms",
     "fields": [{
       "path": "id",
-      "vendorPath": "termid"
+      "vendorPath": "name"
     }]
   },
   "vendors": {
@@ -125,18 +125,18 @@
       "vendorPath": "glaccountid"
     }]
   },
-  "terms": {
-    "vendorName": "terms",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "name"
-    }]
-  },
   "transactions": {
     "vendorName": "transactions",
     "fields": [{
       "path": "id",
       "vendorPath": "gltransactionid"
+    }]
+  },
+  "chargecard-transactions": {
+    "vendorName": "chargecard-transactions",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
     }]
   },
   "items": {
@@ -160,16 +160,14 @@
       "vendorPath": "RECORDNO"
     }]
   },
-    "checking-accounts": {
-      "vendorName": "",
-      "fields": [
-        {
-          "path": "id",
-          "vendorPath": "RECORDNO"
-        }
-      ]
-    },
-    "expense-reports": {
+  "checking-accounts": {
+    "vendorName": "checking-accounts",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "expense-reports": {
     "vendorName": "expense-reports",
     "fields": [{
       "path": "id",
@@ -190,11 +188,11 @@
       "vendorPath": "RECORDNO"
     }]
   },
-    "exchange-rate-types": {
-      "vendorName": "exchange-rate-types",
-      "fields": [{
-        "path": "id",
-        "vendorPath": "ID"
-      }]
+  "exchange-rate-types": {
+    "vendorName": "exchange-rate-types",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ID"
+    }]
   }
-  }
+}

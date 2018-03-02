@@ -1,0 +1,11 @@
+{
+    "CustomerNumber": "1",
+    "OrderRows": [
+      {
+        "DeliveredQuantity": "10",
+        "Description": "Trycksak: 4 sid A4",
+        "OrderedQuantity": "10",
+        "Unit": "st"
+      }
+    ]
+  }
