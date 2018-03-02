@@ -3,33 +3,38 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const schema = require('./assets/element.elementmodel.schema.json');
-const payload = require('core/tools').requirePayload(`${__dirname}/assets/element.elementmodelfield.payload.json`);
+const payload = require('core/tools').requirePayload(`${__dirname}/assets/element.elementmodel.payload.json`);
 const chakram = require('chakram');
 const expect = chakram.expect;
 
 const opts = { payload: payload, schema: schema };
 
-const crudsObject = (url, schema, payload, updatePayload) => {
+const crudsObject = (url, schema, createPayload, updatePayload) => {
   let object;
-  return cloud.post(url, payload, schema)
+  return cloud.post(url, createPayload, schema)
     .then(r => object = r.body)
     .then(r => cloud.get(url + '/' + object.id))
     .then(r => cloud.put(url + '/' + object.id, updatePayload, schema))
     .then(r => cloud.delete(url + '/' + object.id));
 };
 
-const genObject = (opts) => {
-  const newPayload = payload || {};
-  newPayload.createdDateName = (opts.createdDateName || 'created_dt');
+const genObject = (options) => {
+  let newPayload = payload || {};
+  newPayload.createdDateName = (options.createdDateName || 'created_dt');
+  newPayload.resources = (options.resources || []);
   return newPayload;
 };
 
 suite.forPlatform('elements/models', opts, (test) => {
-  let element, keyUrl, idUrl;
+  let element, keyUrl, idUrl, resourceIds, globalModelId;
   before(() => cloud.get(`elements/closeio`)
     .then(r => element = r.body)
     .then(r => keyUrl = `elements/${element.key}/models`)
-    .then(r => idUrl = `elements/${element.id}/models`));
+    .then(r => idUrl = `elements/${element.id}/models`)
+    .then(r => cloud.get(`elements/${element.id}/resources`))
+    .then(r => resourceIds = r.body.map(resource => resource.id)));
+
+  after(() => cloud.delete(`elements/${element.id}/models/${globalModelId}`));
 
   it('should support CRUD for models', () => crudsObject(idUrl, schema, genObject({}), genObject({ createdDateName: "created_date" })));
 
@@ -48,4 +53,21 @@ suite.forPlatform('elements/models', opts, (test) => {
         })
         .then(() => cloud.delete(`/elements/${element.key}/models/${modelId}`));
   });
+
+  it('should support CRUD for models with an associated resource', () => {
+    return cloud.post(`/elements/${element.key}/models`, genObject({resources:[{id:resourceIds[0]}]}))
+    .then(r => {
+      globalModelId = r.body.id;
+      return r;
+    })
+    .then(r => cloud.put(`/elements/${element.key}/models/${r.body.id}`, genObject({resources:[{id:resourceIds[0]}, {id:resourceIds[1]}]})))
+    .then(r =>  {
+          expect(r.body.resources).to.have.length(2);
+          return r;
+      })
+    .then(r => cloud.put(`/elements/${element.key}/models/${r.body.id}`, genObject({resources:[{id:resourceIds[1]}]})))
+    .then(r => expect(r.body.resources).to.have.length(1));
+
+  });
+
 });

@@ -13,10 +13,11 @@
     {
       "vendorName": "churrosVendorContact<<random.alphaNumeric##4>>",
       "type":"string",
+      "dataType":{"jsonType":"string"},
       "searchableJoins" :"and",
       "customFields": false,
       "customFieldDiscovery": false,
       "nullsRequired": false
-    }    
+    }
   ]
 }
