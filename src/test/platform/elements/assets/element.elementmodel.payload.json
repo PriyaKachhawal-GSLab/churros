@@ -5,18 +5,16 @@
   "displayName": "toasty",
   "sampleValue": "ciabatta",
   "description": "what kind of toast",
-  "primaryKey": false,
-  "hidden": false,
-  "readOnly": false,
-  "nullable": false,
   "fields": [
     {
+      "name": "churrosContact<<random.alphaNumeric##4>>",
       "vendorName": "churrosVendorContact<<random.alphaNumeric##4>>",
-      "type":"string",
-      "searchableJoins" :"and",
+      "jsonType": "string",
+      "format": "string",
       "customFields": false,
       "customFieldDiscovery": false,
       "nullsRequired": false
     }    
-  ]
+  ],
+  "commitMessage": "Testing some churros"
 }

@@ -1,10 +1,16 @@
 {
-  "name": "churrosContact<<random.alphaNumeric##4>>",
-  "vendorName": "churrosVendorContact<<random.alphaNumeric##4>>",
-  "type":"string",
-  "searchableJoins" :"and",
-  "customFields": false,
-  "ownerAccountId": 1,
-  "customFieldDiscovery": false,
-  "nullsRequired": false
+  "data": [
+    {
+      "customFieldDiscovery": false,
+      "customFields": false,
+      "name": "churrosContact<<random.alphaNumeric##4>>",
+      "nullsRequired": false,
+      "ownerAccountId": 1,
+      "searchableJoins": "and",
+      "jsonType": "string",
+      "format": "string",
+      "vendorName": "churrosVendorContact<<random.alphaNumeric##4>>"
+    }
+  ],
+  "commitMessage": "Added a churros field"
 }
