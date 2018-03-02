@@ -1,23 +1,75 @@
 {
-  "name": "churrosModel<<random.alphaNumeric##4>>",
-  "vendorName":"churrosModel<<random.alphaNumeric##4>>",
-  "type": "string",
-  "displayName": "toasty",
-  "sampleValue": "ciabatta",
-  "description": "what kind of toast",
-  "primaryKey": false,
-  "hidden": false,
-  "readOnly": false,
-  "nullable": false,
-  "fields": [
+  "name": "churrosLunch<<random.alphaNumeric##4>>",
+  "elementId": 1,
+  "vendorName":"churrosVendorLunch<<random.alphaNumeric##4>>",
+  "customFields": false,
+  "description": "a healthy lunch",
+  "nullsRequired": false,
+  "searchableJoins": "and, or",
+  "vendorDocumentationUrl": "http://cloud-elements.com/developers",
+  "modelFields": [
     {
-      "vendorName": "churrosVendorContact<<random.alphaNumeric##4>>",
-      "type":"string",
-      "dataType":{"jsonType":"string"},
-      "searchableJoins" :"and",
-      "customFields": false,
-      "customFieldDiscovery": false,
-      "nullsRequired": false
-    }
-  ]
+      "name": "churrosDrink<<random.alphaNumeric##4>>",
+      "vendorName": "churrosVendorDrink<<random.alphaNumeric##4>>",
+      "dataType": {
+        "jsonType":"string",
+        "format": "string"
+      },
+      "displayName": "drinky",
+      "sampleValue": "juice box",
+      "description": "what kind of drink",
+      "mask": "drink mask",
+      "primaryKey": false,
+      "foreignKey": false,
+      "maxLength": "32",
+      "minLength": "0",
+      "defaultValue": "water",
+      "precision": "",
+      "commonField": {},
+      "subFormat": {},
+      "nullable": false,
+      "searchOperators": "and, or",
+      "searchNames": "drink",
+      "enumValues": "water, juice box, capri sun",
+      "conditionallyRequiredDescription": "",
+      "fieldMethods": [{
+        "method": "GET",
+        "direction": "RESPONSE",
+        "populated": "SOMETIMES"
+      }],
+      "relatedModelId": 1
+    },
+    {
+      "name": "churrosFruit<<random.alphaNumeric##4>>",
+      "vendorName": "churrosVendorFruit<<random.alphaNumeric##4>>",
+      "dataType": {
+        "jsonType":"string",
+        "format": "string"
+      },
+      "displayName": "you may have 2 fruits",
+      "sampleValue": "apple",
+      "description": "what kind of fruit",
+      "mask": "fruit mask",
+      "primaryKey": false,
+      "foreignKey": false,
+      "maxLength": "32",
+      "minLength": "0",
+      "defaultValue": "banana",
+      "precision": "",
+      "commonField": {},
+      "subFormat": {},
+      "nullable": false,
+      "searchOperators": "and, or",
+      "searchNames": "fruit",
+      "enumValues": "apple, banana, orange",
+      "conditionallyRequiredDescription": "",
+      "fieldMethods": [{
+        "method": "GET",
+        "direction": "RESPONSE",
+        "populated": "SOMETIMES"
+      }],
+      "relatedModelId": 1
+    }   
+  ],
+  "resources": []
 }
