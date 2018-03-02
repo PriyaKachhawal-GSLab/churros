@@ -30,8 +30,7 @@
           "direction": "RESPONSE",
           "populated": "SOMETIMES"
         }
-      ],
-      "relatedModelId": 1
+      ]
     }
   ],
   "commitMessage": "Toasted churros. Say what?!?"

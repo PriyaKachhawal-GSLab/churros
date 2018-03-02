@@ -2,16 +2,15 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const schema = require('./assets/element.elementmodel.schema.json');
+const modelSchema = require('./assets/element.elementmodel.schema.json');
+const fieldSchema = require('./assets/element.elementmodelfield.schema.json');
 const modelpayload = require('core/tools').requirePayload(`${__dirname}/assets/element.elementmodel.payload.json`);
 const fieldPayload = require('core/tools').requirePayload(`${__dirname}/assets/element.elementmodelfield.payload.json`);
 
-const opts = {payload: fieldPayload, schema: schema};
-
-const putReadObject = (url, schema, fieldPayload, updatePayload) => {
+const putReadObject = (url, payload) => {
   let object;
   return cloud
-    .put(url, fieldPayload, schema)
+    .put(url, payload, fieldSchema)
     .then(r => (object = r.body))
     .then(r => cloud.get(url + '/' + object.id))
     .then(r =>
@@ -21,19 +20,20 @@ const putReadObject = (url, schema, fieldPayload, updatePayload) => {
           data: [],
           commitMessage: 'deleted things'
         },
-        schema
+        fieldSchema
       )
     );
 };
 
 const genObject = opts => {
-  let newPayload = fieldPayload || {};
-  newPayload.createdDateName = opts.createdDateName || 'created_dt';
-  newPayload.relationships = opts.relationships || [];
+  let newPayload = fieldPayload;
+  if( opts.relatedModelId) {
+    newPayload.data[0].relatedModelId = opts.relatedModelId ;
+  }
   return newPayload;
 };
 
-suite.forPlatform('elements/modelfields', opts, test => {
+suite.forPlatform('elements/modelfields', {payload: fieldPayload, schema: fieldSchema}, test => {
   let element, keyUrl, idUrl, modelId, idUrlWithModel, newModelId, keyUrlWithModel;
   before(() =>
     cloud
@@ -43,7 +43,7 @@ suite.forPlatform('elements/modelfields', opts, test => {
         keyUrl = `elements/${element.key}/models`;
         idUrl = `elements/${element.id}/models`;
       })
-      .then(r => cloud.post(idUrl, modelpayload))
+      .then(r => cloud.post(idUrl, Object.assign({}, modelpayload, {name: modelpayload.name + '2'})))
       .then(r => {
         modelId = r.body.id;
         idUrlWithModel = `${idUrl}/${modelId}`;
@@ -55,16 +55,19 @@ suite.forPlatform('elements/modelfields', opts, test => {
       })
   );
 
-  after(() => {
-    return cloud.delete(idUrlWithModel).then(r => cloud.delete(`elements/${element.id}/models/${newModelId}`));
-  });
+  after(() => cloud.delete(idUrlWithModel).then(r => cloud.delete(keyUrlWithModel)));
 
   it('should support RU for fields', () => {
-    putReadObject(
+    console.log(JSON.stringify( genObject({relatedModelId: modelId}), null, 2));
+
+    return putReadObject(
       idUrlWithModel + '/fields',
-      schema,
-      genObject({relationships: [newModelId]}),
-      genObject({createdDateName: 'created_date', relationships: [newModelId]})
-    );
+      genObject({relatedModelId: newModelId}),
+    ).then(r =>
+      putReadObject(
+        keyUrlWithModel + '/fields',
+        genObject({relatedModelId: modelId}),
+      )
+    )
   });
 });
