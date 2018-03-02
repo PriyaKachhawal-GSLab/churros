@@ -11,7 +11,7 @@ const putReadObject = (url, payload) => {
   let object;
   return cloud
     .put(url, payload, fieldSchema)
-    .then(r => (object = r.body))
+    .then(r => (object = r.body[0]))
     .then(r => cloud.get(url + '/' + object.id))
     .then(r =>
       cloud.put(
@@ -58,9 +58,7 @@ suite.forPlatform('elements/modelfields', {payload: fieldPayload, schema: fieldS
   after(() => cloud.delete(idUrlWithModel).then(r => cloud.delete(keyUrlWithModel)));
 
   it('should support RU for fields', () => {
-    console.log(JSON.stringify( genObject({relatedModelId: modelId}), null, 2));
-
-    return putReadObject(
+      return putReadObject(
       idUrlWithModel + '/fields',
       genObject({relatedModelId: newModelId}),
     ).then(r =>
