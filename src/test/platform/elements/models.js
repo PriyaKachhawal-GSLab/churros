@@ -26,13 +26,15 @@ const genObject = (options) => {
 };
 
 suite.forPlatform('elements/models', opts, (test) => {
-  let element, keyUrl, idUrl, resourceId;
+  let element, keyUrl, idUrl, resourceIds, globalModelId;
   before(() => cloud.get(`elements/closeio`)
     .then(r => element = r.body)
     .then(r => keyUrl = `elements/${element.key}/models`)
     .then(r => idUrl = `elements/${element.id}/models`)
     .then(r => cloud.get(`elements/${element.id}/resources`))
-    .then(r => resourceId = r.body[0].id));
+    .then(r => resourceIds = r.body.map(resource => resource.id)));
+
+  after(() => cloud.delete(`elements/${element.id}/models/${globalModelId}`));
 
   it('should support CRUD for models', () => crudsObject(idUrl, schema, genObject({}), genObject({ createdDateName: "created_date" })));
 
@@ -52,6 +54,20 @@ suite.forPlatform('elements/models', opts, (test) => {
         .then(() => cloud.delete(`/elements/${element.key}/models/${modelId}`));
   });
 
-  it('should support CRUD for models with an associated resource', () => crudsObject(idUrl, schema, genObject({resources:[{id:resourceId}]}), genObject({ createdDateName: "created_date", resources:[{id:resourceId}]})));
+  it('should support CRUD for models with an associated resource', () => {
+    return cloud.post(`/elements/${element.key}/models`, genObject({resources:[{id:resourceIds[0]}]}))
+    .then(r => {
+      globalModelId = r.body.id;
+      return r;
+    })
+    .then(r => cloud.put(`/elements/${element.key}/models/${r.body.id}`, genObject({resources:[{id:resourceIds[0]}, {id:resourceIds[1]}]})))
+    .then(r =>  {
+          expect(r.body.resources).to.have.length(2);
+          return r;
+      })
+    .then(r => cloud.put(`/elements/${element.key}/models/${r.body.id}`, genObject({resources:[{id:resourceIds[1]}]})))
+    .then(r => expect(r.body.resources).to.have.length(1));
+
+  });
 
 });
