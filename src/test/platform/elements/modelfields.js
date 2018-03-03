@@ -2,7 +2,6 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const modelSchema = require('./assets/element.elementmodel.schema.json');
 const fieldSchema = require('./assets/element.elementmodelfield.schema.json');
 const modelpayload = require('core/tools').requirePayload(`${__dirname}/assets/element.elementmodel.payload.json`);
 const fieldPayload = require('core/tools').requirePayload(`${__dirname}/assets/element.elementmodelfield.payload.json`);
@@ -27,16 +26,16 @@ const putReadObject = (url, payload) => {
 
 const genObject = opts => {
   let newPayload = fieldPayload;
-  if( opts.relatedModelId) {
-    newPayload.data[0].relatedModelId = opts.relatedModelId ;
+  if (opts.relatedModelId) {
+    newPayload.data[0].relatedModelId = opts.relatedModelId;
   }
   return newPayload;
 };
 
-suite.forPlatform('elements/modelfields', {payload: fieldPayload, schema: fieldSchema}, test => {
+suite.forPlatform('elements/modelfields', {payload: fieldPayload, schema: fieldSchema}, function(test) {
   let element, keyUrl, idUrl, modelId, idUrlWithModel, newModelId, keyUrlWithModel;
-  before(() =>
-    cloud
+  before(function() {
+    return cloud
       .get(`elements/closeio`)
       .then(r => {
         element = r.body;
@@ -52,20 +51,16 @@ suite.forPlatform('elements/modelfields', {payload: fieldPayload, schema: fieldS
       .then(r => {
         newModelId = r.body.id;
         keyUrlWithModel = `${keyUrl}/${newModelId}`;
-      })
-  );
+      });
+  });
 
-  after(() => cloud.delete(idUrlWithModel).then(r => cloud.delete(keyUrlWithModel)));
+  after(function() {
+    return cloud.delete(idUrlWithModel).then(r => cloud.delete(keyUrlWithModel));
+  });
 
-  it('should support RU for fields', () => {
-      return putReadObject(
-      idUrlWithModel + '/fields',
-      genObject({relatedModelId: newModelId}),
-    ).then(r =>
-      putReadObject(
-        keyUrlWithModel + '/fields',
-        genObject({relatedModelId: modelId}),
-      )
-    )
+  it('should support RU for fields', function() {
+    return putReadObject(idUrlWithModel + '/fields', genObject({relatedModelId: newModelId})).then(function() {
+      return putReadObject(keyUrlWithModel + '/fields', genObject({relatedModelId: modelId}));
+    });
   });
 });
