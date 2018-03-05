@@ -7,8 +7,8 @@ const temPayload = tools.requirePayload(`${__dirname}/assets/template.json`);
 const updateTemPayload = tools.requirePayload(`${__dirname}/assets/UpdateTemplate.json`);
 
 suite.forElement('documents', 'custom-fields-templates', (test) => {
- let tempKey;
   it('should support CRUS for /custom-fields-templates/templates', () => {
+    let tempKey;
     return cloud.post(`${test.api}`, temPayload)
       .then(r => tempKey = r.body.template_id)
       .then(r => cloud.put(`${test.api}/${tempKey}`, updateTemPayload))
