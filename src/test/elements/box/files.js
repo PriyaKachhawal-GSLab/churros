@@ -22,14 +22,14 @@ suite.forElement('documents', 'files', (test) => {
         id = r.body.id;
         path = r.body.path;
       })
-      .then(r => done())
-      .then(r =>  cloud.get('/hubs/documents/custom-fields/templates'))
+      .then(r =>  cloud.withOptions({ qs: { scope: "enterprise" } }).get('/hubs/documents/custom-fields/templates'))
           .then(r => {
             templateKey = r.body[0].templateKey;
             payload.template = r.body[0].templateKey;
             updatePayload.template= r.body[0].templateKey;
             templateKeyPayload.path="/"+r.body[0].fields[0].key;
-          });
+          })
+          .then(r => done());
   }
 );
   after(() => cloud.delete(`${test.api}/${id}`));
@@ -79,7 +79,7 @@ suite.forElement('documents', 'files', (test) => {
 
   it('should allow CRUDS for /files/:id/custom-fields', () => {
 
-       cloud.get(`/hubs/documents/files/${id}/custom-fields`)
+      return cloud.get(`/hubs/documents/files/${id}/custom-fields`)
       .then(r => cloud.post(`/hubs/documents/files/${id}/custom-fields`, payload))
       .then(r => cloud.put(`/hubs/documents/files/${id}/custom-fields`, updatePayload))
       .then(r => cloud.patch(`/hubs/documents/files/${id}/custom-fields`, updatePayload))
@@ -90,7 +90,7 @@ suite.forElement('documents', 'files', (test) => {
 
   it('should allow RUD for /files/{id}/custom-fields-templates/{templateKeyId}/custom-fields', () => {
 
-      cloud.post(`/hubs/documents/files/${id}/custom-fields`, payload)
+      return cloud.post(`/hubs/documents/files/${id}/custom-fields`, payload)
       .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).get(`/hubs/documents/files/${id}/custom-fields-templates/${templateKey}/custom-fields`))
       .then(r => cloud.patch(`/hubs/documents/files/${id}/custom-fields-templates/${templateKey}/custom-fields`, templateKeyPayload))
       .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).delete(`/hubs/documents/files/${id}/custom-fields-templates/${templateKey}/custom-fields`));
