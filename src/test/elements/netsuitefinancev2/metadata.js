@@ -7,6 +7,7 @@ const resources = require('./assets/objects');
 
 suite.forElement('finance', 'metadata', (test) => {
   const validEmail = (r) => {
+    expect(r).to.have.statusCode(200);
     expect(r.body.fields).to.not.be.null;
     expect(r.body.fields).to.be.an('array');
     let email = r.body.fields.find((obj) => { return obj.vendorPath === 'email'; });
@@ -18,7 +19,7 @@ suite.forElement('finance', 'metadata', (test) => {
   };
 
   test.withApi('/objects')
-    .withValidation(r => expect(r.body).to.include('Customer'))
+    .withValidation(r => { (expect(r).to.have.statusCode(200) && expect(r.body).to.include('Customer')); })
     .withName('should test objects api')
     .should.return200OnGet();
 

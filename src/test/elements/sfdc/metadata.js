@@ -13,6 +13,7 @@ suite.forElement('crm', 'metadata', (test) => {
 
   const metaValid = r => {
     let metadata = r.body.fields[0];
+    expect(r).to.have.statusCode(200);
     expect(metadata.filterable).to.exist;
     expect(metadata.createable).to.exist;
     expect(metadata.updateable).to.exist;
