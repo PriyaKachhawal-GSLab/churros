@@ -160,6 +160,17 @@
       }
     ]
   },
+  "knowledge-articles": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
   "comments": {
     "fields": [{
         "path": "idTransformed",
