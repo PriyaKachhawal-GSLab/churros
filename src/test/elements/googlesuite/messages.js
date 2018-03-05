@@ -8,7 +8,10 @@ const payload = tools.requirePayload(`${__dirname}/assets/messages.json`);
 suite.forElement('general', 'messages', { payload: payload }, (test) => {
   let messageId;
   it('should test CSRD /messages', () => {
-    return cloud.post(test.api, payload)
+
+      let path = __dirname + '/assets/MrRobotPdf.pdf';
+      const opts = { formData: { body: JSON.stringify(payload) } };
+      return cloud.withOptions(opts).postFile(test.api, path)
       .then(r => messageId = r.body.id)
       .then(r => cloud.get(test.api))
       .then(r => cloud.get(`${test.api}/${messageId}`))

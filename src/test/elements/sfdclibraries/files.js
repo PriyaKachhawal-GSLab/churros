@@ -19,7 +19,7 @@ suite.forElement('documents', 'files', (test) => {
     let fileId = -1;
     return cloud.withOptions({ qs: query }).postFile(test.api, path)
       .then(r => fileId = r.body.id)
-      .then(r => cloud.get(test.api + '/' + fileId, (r) => expect(r).to.have.statusCode(200)))
+      .then(r => cloud.get(`${test.api}/${fileId}`, (r) => expect(r).to.have.statusCode(200) && expect(r.response.headers['content-type']).to.equal('image/png')))
       .then(r => cloud.get(`${test.api}/${fileId}/links`))
       .then(r => cloud.get(`${test.api}/${fileId}/metadata`))
       .then(r => cloud.patch(`${test.api}/${fileId}/metadata`, pathUpdate()))
@@ -32,7 +32,7 @@ suite.forElement('documents', 'files', (test) => {
       .then(r => fileId = r.body.id)
       .then(r => cloud.withOptions({ qs: query }).get(`${test.api}/links`))
       .then(r => cloud.withOptions({ qs: query }).get(`${test.api}/metadata`))
-      .then(r => cloud.withOptions({ qs: query }).get(test.api, (r) => expect(r).to.have.statusCode(200)))
+      .then(r => cloud.withOptions({ qs: query }).get(test.api, (r) => expect(r).to.have.statusCode(200) && expect(r.response.headers['content-type']).to.equal('image/png')))
       .then(r => cloud.withOptions({ qs: query }).patch(`${test.api}/metadata`, pathUpdate()))
       .then(r => cloud.withOptions({ qs: { path: `/churros${pathUpdateString}` } }).delete(test.api));
   });

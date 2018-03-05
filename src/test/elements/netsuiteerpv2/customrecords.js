@@ -11,7 +11,7 @@ suite.forElement('erp', 'custom-record-types', (test) => {
       let customRecordTypeId = 478;
       let customRecordId;
       return cloud.post(`${test.api}/${customRecordTypeId}/custom-records`, customRecordsPayload)
-      .then(r => customRecordId = r.body.internalId)
+      .then(r => customRecordId = r.body.id)
       .then(r => cloud.get(`${test.api}/${customRecordTypeId}/custom-records`))
       .then(r => cloud.get(`${test.api}/${customRecordTypeId}/custom-records/${customRecordId}`))
       .then(r => cloud.patch(`${test.api}/${customRecordTypeId}/custom-records/${customRecordId}`,customRecordsPayload))

@@ -4,19 +4,22 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const payload = require('./assets/folders');
-const expect = require('chakram').expect;
 const build = (overrides) => Object.assign({}, payload, overrides);
 const folderPayload = build({ name: `churros-${tools.random()}`, path: `/${tools.random()}` });
 const folderPayload1 = build({ name: `churros-${tools.random()}`, path: `/${tools.random()}/${tools.random()}` });
+const expect = require('chakram').expect;
+
 suite.forElement('documents', 'folders', (test) => {
-let folderId;
   const folderWrap = (cb) => {
     let folder;
     let random = `${tools.random()}`;
     folderPayload.path += `/${random}`;
     folderPayload.name += `-${random}`;
     return cloud.post('/hubs/documents/folders', folderPayload)
-      .then(r => folder = r.body)
+      .then(r => {
+        folder = r.body;
+        expect(r.body.parentFolderId).to.not.be.null;
+      })
       .then(r => cb(folder))
       .then(r => cloud.withOptions({ qs: { path: folder.path } }).delete('/hubs/documents/folders'));
   };
@@ -86,7 +89,7 @@ let folderId;
     return folderWrap(cb);
   });
 
-  before(() => cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
+/* before(() => cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
       .then(r => folderId = r.body.filter(obj => obj.name === "dontdelete_folder_churros")[0].id));
 
   it('should allow GET /folders/contents with name', () => {
@@ -107,6 +110,6 @@ let folderId;
   it('should allow GET /folders/:id/contents with extension', () => {
     return cloud.withOptions({ qs: { where: "extension='.txt'" } }).get(`${test.api}/${folderId}/contents`)
       .then(r => expect(r.body[0].name).to.contain('.txt'));
-  });
+  });*/
 
 });

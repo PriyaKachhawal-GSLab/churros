@@ -1,3 +1,6 @@
 {
-		  "name": "<<random.word>>"
+  "name": "<<random.word>>",
+  "department": {
+    "name": "comp"
+  }
 }

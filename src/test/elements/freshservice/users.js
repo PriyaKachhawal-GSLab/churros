@@ -18,7 +18,7 @@ suite.forElement('helpdesk', 'users', { payload: payload }, (test) => {
           .then(r => {
               id = r.body.id;
               value = r.body.email;
-              const myOptions = {qs: {where: `query='email is ${email}'`}};
+              const myOptions = {qs: {where: `email='${email}' and state='all'`}};
               return cloud.withOptions(myOptions).get(test.api, (r) => {
                   expect(r).to.have.statusCode(200);
                   expect(r.body).to.have.lengthOf(1);

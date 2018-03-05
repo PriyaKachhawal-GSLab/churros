@@ -9,18 +9,27 @@ const payload = tools.requirePayload(`${__dirname}/assets/customFields.json`);
 const templateKeyPayload = tools.requirePayload(`${__dirname}/assets/UpdateCustomFields.json`);
 const commentPayload1 = tools.requirePayload(`${__dirname}/assets/comment.json`);
 const commentPayload2 = tools.requirePayload(`${__dirname}/assets/comment.json`);
+const folderPayload = require('./assets/folders');
+
+const randomInt = tools.randomInt();
+folderPayload.path += randomInt;
+folderPayload.name += randomInt;
+
 const lock = {
   "is_download_prevented": false,
   "expires_at": "2030-12-12T10:55:30-08:00"
 };
 const updatePayload =tools.requirePayload(`${__dirname}/assets/PutCustomFields.json`);
 suite.forElement('documents', 'files', (test) => {
-  let id, path, templateKey;
+  let id, path, fileTagPayload, fileUpdateTagPayload, templateKey;
+
   before(done => {
     return cloud.withOptions({ qs: { path: `/brady-${faker.address.zipCode()}.jpg` } }).postFile(test.api, `${__dirname}/../assets/brady.jpg`)
       .then(r => {
         id = r.body.id;
         path = r.body.path;
+        fileTagPayload = r.body;
+        fileTagPayload.tags = ["fileTag1", "fileTag2"];
       })
       .then(r =>  cloud.withOptions({ qs: { scope: "enterprise" } }).get('/hubs/documents/custom-fields/templates'))
           .then(r => {
@@ -36,6 +45,22 @@ suite.forElement('documents', 'files', (test) => {
   afterEach(done => {
     //We were getting a 429 before this
     setTimeout(done, 2500);
+  });
+
+  it('should allow POST /files by providing folder id', () => {
+    let folderId, fileId;
+    return cloud.post('/folders', folderPayload)
+      .then(r => folderId = r.body.id)
+      .then(r => cloud.withOptions({
+        qs: {
+          path: `/churros/brady-${faker.address.zipCode()}.jpg`,
+          folderId,
+          calculateFolderPath: false
+        }
+      }).postFile(test.api, `${__dirname}/../assets/brady.jpg`))
+      .then(r => fileId = r.body.id)
+      .then(() => cloud.delete(`${test.api}/${fileId}`))
+      .then(() => cloud.delete(`/folders/${folderId}`));
   });
 
   it('should allow PUT /files/:id/lock and DELETE /files/:id/lock', () => {
@@ -163,10 +188,34 @@ suite.forElement('documents', 'files', (test) => {
     let commentId;
     return cloud.post(`${test.api}/${id}/comments`, commentPayload1)
       .then(r => commentId = r.body.id)
-      .then(r => cloud.withOptions({ qs: { raw: true }}).get(`${test.api}/${id}/comments`))
+      .then(r => cloud.withOptions({ qs: { raw: true } }).get(`${test.api}/${id}/comments`))
       .then(r => expect(r.body.filter(obj => obj.raw)).to.not.be.empty)
       .then(r => cloud.get(`${test.api}/${id}/comments`))
       .then(r => expect(r.body.filter(obj => obj.raw)).to.be.empty)
       .then(r => cloud.delete(`${test.api}/${id}/comments/${commentId}`));
+  });
+
+  it('should allow UR tags /files/metadata by path', () => {
+    return cloud.withOptions({ qs: { path: fileTagPayload.path } }).patch(`${test.api}/metadata`, fileTagPayload)
+      .then(r => {
+        expect(r.body.tags[0]).to.equal(`${fileTagPayload.tags[0]}`);
+        fileUpdateTagPayload = r.body;
+        fileUpdateTagPayload.tags = ["fileTag1Updated", "fileTag2Updated"];
+      })
+      .then(() => cloud.withOptions({ qs: { path: fileTagPayload.path } }).get(`${test.api}/metadata`))
+      .then(r => {
+        expect(r.body.tags[0]).to.equal(`${fileTagPayload.tags[0]}`);
+      });
+  });
+
+  it('should allow UR tags /folders/:id/metadata', () => {
+    return cloud.patch(`${test.api}/${fileUpdateTagPayload.id}/metadata`, fileUpdateTagPayload)
+      .then(r => {
+        expect(r.body.tags[0]).to.equal(`${fileUpdateTagPayload.tags[0]}`);
+      })
+      .then(() => cloud.get(`${test.api}/${fileUpdateTagPayload.id}/metadata`))
+      .then(r => {
+        expect(r.body.tags[0]).to.equal(`${fileUpdateTagPayload.tags[0]}`);
+      });
   });
 });
