@@ -1,10 +1,31 @@
 {
-  "name": "churrosContact<<random.alphaNumeric##4>>",
-  "vendorName": "churrosVendorContact<<random.alphaNumeric##4>>",
-  "type":"string",
-  "searchableJoins" :"and",
-  "customFields": false,
-  "ownerAccountId": 1,
-  "customFieldDiscovery": false,
-  "nullsRequired": false
+  "name": "churrosToast<<random.alphaNumeric##4>>",
+  "vendorName": "churrosVendorToast<<random.alphaNumeric##4>>",
+  "dataType": {
+    "jsonType":"string",
+    "format": "string"
+  },
+  "displayName": "toasty",
+  "sampleValue": "ciabatta",
+  "description": "what kind of toast",
+  "mask": "toasty mask",
+  "primaryKey": false,
+  "foreignKey": false,
+  "maxLength": "32",
+  "minLength": "0",
+  "defaultValue": "wheat",
+  "precision": "",
+  "commonField": {},
+  "subFormat": {},
+  "nullable": false,
+  "searchOperators": "and, or",
+  "searchNames": "toast",
+  "enumValues": "wheat, ciabatta, sourdough",
+  "conditionallyRequiredDescription": "",
+  "fieldMethods": [{
+    "method": "GET",
+    "direction": "RESPONSE",
+    "populated": "SOMETIMES"
+  }],
+  "relatedModelId": 1
 }

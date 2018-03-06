@@ -2330,13 +2330,59 @@
       "type": "string"
     }]
   },
-  "institutions": {
-    "fields": [{
+ "institutions" : {
+   "fields": [{
+     "path": "idTransformed",
+     "type": "string"
+    },{
+     "path": "id",
+     "type": "string"
+   }]
+ },
+ "deals": {
+   "fields": [{
       "path": "idTransformed",
       "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
+     },
+     {
+       "path": "id",
+       "type": "string"
+     },
+     {
+       "path": "name",
+       "type": "string"
+     },
+     {
+       "path": "accountId",
+       "type": "string"
+     },
+     {
+       "path": "type",
+       "type": "string"
+     },
+     {
+       "path": "source",
+       "type": "string"
+     },
+     {
+       "path": "description",
+       "type": "string"
+     },
+     {
+       "path": "amount",
+       "type": "string"
+     },
+     {
+       "path": "closeDate",
+       "type": "string"
+     },
+     {
+       "path": "stage",
+       "type": "string"
+     },
+     {
+       "path": "probability",
+       "type": "string"
+     }]
   }
 }

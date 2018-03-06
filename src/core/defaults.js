@@ -70,6 +70,8 @@ exports.token = (token) => {
 
 exports.getToken = () => elementToken;
 
+exports.getBaseUrl = () => baseUrl;
+
 exports.secrets = () => ({userSecret, orgSecret});
 
 exports.withDefaults = (u, o, un) => {

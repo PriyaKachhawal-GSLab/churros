@@ -89,26 +89,27 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
       .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.properties.mimeType === 'text/plain').length));
   });
 
-
   test.withApi(`/folders/contents`)
     .withName(`should allow GET for /folders/contents with orderBy modifiedDate asc`)
     .withOptions({ qs: { path: `/`, pageSize: 5, page: 1, orderBy: `modifiedDate asc`, calculateFolderPath: false } })
     .withValidation(r => {
-      date1 = new Date(r.body[0].createdDate).getTime();
-      date2 = new Date(r.body[1].createdDate).getTime();
+      expect(r).to.have.statusCode(200);
+      date1 = new Date(r.body[0].modifiedDate).getTime();
+      date2 = new Date(r.body[1].modifiedDate).getTime();
       expect(date1 <= date2).to.be.true;
     })
     .should.return200OnGet();
 
-    test.withApi(`${test.api}/root/contents`)
-        .withName(`should allow GET for /folders/contents with orderBy createdDate desc`)
-        .withOptions({ qs: {  pageSize: 5, page: 1, orderBy: `createdDate desc`, calculateFolderPath: false } })
-        .withValidation(r => {
-          date1 = new Date(r.body[0].createdDate).getTime();
-          date2 = new Date(r.body[1].createdDate).getTime();
-          expect(date1 >= date2).to.be.true;
-        })
-        .should.return200OnGet();
+  test.withApi(`${test.api}/root/contents`)
+      .withName(`should allow GET for /folders/contents with orderBy createdDate desc`)
+      .withOptions({ qs: {  pageSize: 5, page: 1, orderBy: `createdDate desc`, calculateFolderPath: false } })
+      .withValidation(r => {
+        expect(r).to.have.statusCode(200);
+        date1 = new Date(r.body[0].createdDate).getTime();
+        date2 = new Date(r.body[1].createdDate).getTime();
+        expect(date1 >= date2).to.be.true;
+      })
+      .should.return200OnGet();
 
   test.withOptions({ qs: { path: '/' } }).withApi('/folders/contents').should.supportPagination('id');
 
