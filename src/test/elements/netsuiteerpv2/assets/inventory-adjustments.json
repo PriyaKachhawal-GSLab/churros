@@ -1,0 +1,27 @@
+{
+  "inventoryList": {
+    "inventory": [
+      {
+        "item": {
+          "internalId": "387"
+        },
+        "unitCost": 0,
+        "description": "400 Watt Power Supply",
+        "location": {
+          "internalId": "6",
+          "name": "Denver"
+        },
+        "adjustQtyBy": 1
+      }
+    ],
+    "replaceAll": false
+  },
+  "subsidiary": {
+    "internalId": "3",
+    "name": "Honeycomb Holdings Inc."
+  },
+  "account": {
+    "internalId": "115",
+    "name": "Refunds Payable"
+  }
+}

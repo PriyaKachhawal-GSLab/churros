@@ -1,0 +1,14 @@
+{
+  "cashBackList": {
+    "depositCashBack": [
+      {
+        "amount": 1,
+        "account": {
+          "internalId": "119",
+          "name": "Advances Paid"
+        }
+      }
+    ],
+    "replaceAll": false
+  }
+}

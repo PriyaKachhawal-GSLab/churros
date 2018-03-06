@@ -3,7 +3,7 @@
     "fields": [{
       "path": "idTransformed",
       "type": "string"
-    },{
+    }, {
       "path": "id",
       "type": "string"
     }]
@@ -12,8 +12,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -23,6 +22,160 @@
       },
       {
         "path": "description",
+        "type": "string"
+      }
+    ]
+  },
+  "custom-record-types": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "billing-accounts": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "transfer-orders": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "work-orders": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "item-receipts": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "customer-statuses": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "deposits": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "budgets": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "campaigns": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "currency-rates": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "states": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "inventory-adjustments": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "inventory-transfers": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "currencies": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
         "type": "string"
       }
     ]
@@ -42,8 +195,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -160,23 +312,11 @@
       }
     ]
   },
-  "knowledge-articles": {
-    "fields": [{
-        "path": "idTransformed",
-        "type": "string"
-      },
-      {
-        "path": "id",
-        "type": "string"
-      }
-    ]
-  },
   "comments": {
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -190,8 +330,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -256,8 +395,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -334,8 +472,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -349,8 +486,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -364,8 +500,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -383,8 +518,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -488,19 +622,20 @@
   },
   "vendor-invoices": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    },{
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "leads": {
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -522,8 +657,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -563,8 +697,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -632,8 +765,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -669,8 +801,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -688,8 +819,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -762,8 +892,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -1030,8 +1159,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -1207,6 +1335,17 @@
     ]
   },
   "projects": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "project-codes": {
     "fields": [{
         "path": "idTransformed",
         "type": "string"
@@ -1520,8 +1659,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -1612,8 +1750,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -1642,8 +1779,7 @@
     "fields": [{
         "path": "idTransformed",
         "type": "string"
-      },
-      {
+      }, {
         "path": "id",
         "type": "string"
       },
@@ -1864,12 +2000,14 @@
   },
   "ServiceRequestCollection": {
     "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "price-rules": {
     "fields": [{
@@ -2162,8 +2300,7 @@
     ]
   },
   "xeroCustomResource": {
-    "fields": [
-      {
+    "fields": [{
         "path": "idTransformed",
         "type": "string"
       },
@@ -2174,8 +2311,7 @@
     ]
   },
   "xeroCustomChildResource": {
-    "fields": [
-      {
+    "fields": [{
         "path": "idTransformed",
         "type": "string"
       },
@@ -2249,5 +2385,4 @@
        "type": "string"
      }]
   }
-
 }
