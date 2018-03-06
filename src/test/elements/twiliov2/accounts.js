@@ -1,7 +1,6 @@
 'use strict';
 
 const suite = require('core/suite');
-const cloud = require('core/cloud');
 const payload = require('./assets/addresses');
 var chakram = require('chakram'),
     expect = chakram.expect;
