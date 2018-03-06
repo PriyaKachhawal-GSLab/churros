@@ -68,7 +68,12 @@ suite.forElement('esignature', 'envelopes', (test) => {
       .then(r => cloud.post(`${test.api}/${envelopeId}/recipients`, recipient))
       .then(r => cloud.post(`${test.api}/${envelopeId}/recipients/${recipient.agents[0].recipientId}/tabs`, tab))
       .then(r => cloud.get(`${test.api}/${envelopeId}/recipients`))
-      .then(r => cloud.withOptions({ qs: { where: 'include_tabs=\'true\'' } }).get(`${test.api}/${envelopeId}/recipients`));
+      .then(r => cloud.withOptions({ qs: { where: 'include_tabs=\'true\'' } }).get(`${test.api}/${envelopeId}/recipients`))
+	  .then(r => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body).to.not.be.undefined;
+        expect(r.body.tabs).to.not.be.null;
+      });
   });
 
   test.withValidation(envelopesSchema)
