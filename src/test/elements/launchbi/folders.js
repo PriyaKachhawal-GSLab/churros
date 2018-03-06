@@ -53,15 +53,4 @@ suite.forElement('analytics', 'folders', (test) => {
     })
     .should.return200OnGet();
 
-
-  test.withApi(`/hubs/analytics/native`)
-    .withName(`should allow GET /native`)
-    .withOptions({ qs: { 'resourceName': 'schedules' } })
-    .withValidation(r => {
-      expect(r).to.have.statusCode(200);
-      expect(r.body[0]).to.not.be.empty;
-      expect(r.body[0].state).to.equal('Active');
-    })
-    .should.return200OnGet();
-
 });
