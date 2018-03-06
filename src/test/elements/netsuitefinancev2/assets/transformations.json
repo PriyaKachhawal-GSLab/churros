@@ -122,6 +122,9 @@
     "fields": [{
       "path": "id",
       "vendorPath": "internalId"
+    }, {
+      "path": "email",
+      "vendorPath": "email"
     }]
   },
   "credit-terms": {

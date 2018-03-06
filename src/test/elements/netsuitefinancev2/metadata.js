@@ -28,6 +28,16 @@ suite.forElement('finance', 'metadata', (test) => {
     .withName('should have email property with filterable, createable, and updateable metadata')
     .should.return200OnGet();
 
+  test.withApi('/objects/credit-memos/metadata')
+    .withValidation(validEmail)
+    .withName('should have filterable, createable and updateable metadata for email for dashed resource')
+    .should.return200OnGet();
+
+  test.withApi('/objects/creditMemos/metadata')
+    .withValidation(validEmail)
+    .withName('should have filterable, createable and updateable metadata for email for camel case resource')
+    .should.return200OnGet();
+
   it('should have email property with filterable, createable, and updateable metadata for VDR', () => {
     return cloud.post('/organizations/objects/churrosTestObject/definitions', resources.churrosTestObject, () => {})
       .then(r => cloud.post('/organizations/elements/netsuitefinancev2/transformations/churrosTestObject', resources.churrosTestObjectXform, () => {}))
