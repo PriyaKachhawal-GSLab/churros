@@ -56,21 +56,26 @@ suite.forElement('documents', 'files', null, (test) => {
       .then(r => cloud.delete(`hubs/documents/files/${fileId}/comments/${commentId}`));
   });
   
-  it('should allow CS for hubs/documents/files/comments', () => {
-    let srcPath, UploadFile = __dirname + '/assets/test.txt';
-    return cloud.withOptions({ qs: { path: `/${tools.random()}` } }).postFile(test.api, UploadFile)
-      .then(r => srcPath = r.body.path)
-      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).post(`hubs/documents/files/comments`,commentPayload))
-	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).get(`hubs/documents/files/comments`));
-  });
-  
-   it('should allow SD for hubs/documents/files/comments/:commentId', () => {
-    let commentId, srcPath, UploadFile = __dirname + '/assets/test.txt';
+  it('should allow CRDS for hubs/documents/files/comments', () => {
+    let srcPath, commentId, UploadFile = __dirname + '/assets/test.txt';
     return cloud.withOptions({ qs: { path: `/${tools.random()}` } }).postFile(test.api, UploadFile)
       .then(r => srcPath = r.body.path)
       .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).post(`hubs/documents/files/comments`,commentPayload))
 	  .then(r => commentId = r.body.id)
+	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).get(`hubs/documents/files/comments`))
 	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).get(`hubs/documents/files/comments/${commentId}`))
 	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).delete(`hubs/documents/files/comments/${commentId}`));
   });
+  
+  it('should support pagination for hubs/documents/files/comments', () => {
+    let srcPath, nextPageToken, UploadFile = __dirname + '/assets/test.txt';
+    return cloud.withOptions({ qs: { path: `/${tools.random()}` } }).postFile(test.api, UploadFile)
+      .then(r => srcPath = r.body.path)
+      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).post(`hubs/documents/files/comments`,commentPayload))
+	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).post(`hubs/documents/files/comments`,commentPayload))
+ 	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}`, pageSize: 1 } }).get(`hubs/documents/files/comments`))
+	  .then(r => nextPageToken = r.response.headers['elements-next-page-token'])
+	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}`, pageSize: 1, nextPage:`${nextPageToken}` } }).get(`hubs/documents/files/comments`));
+
+  });  
 });
