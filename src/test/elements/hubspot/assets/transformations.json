@@ -6,6 +6,23 @@
       "vendorPath": "listId"
     }]
   },
+  "deals":{
+    "vendorName": "deals",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "dealId"
+      },
+      {
+        "path": "name",
+        "vendorPath": "properties.dealname"
+      },
+      {
+        "path": "amount",
+        "vendorPath": "properties.amount"
+      }
+    ]
+  },
   "contacts": {
     "vendorName": "contacts",
     "fields": [{
