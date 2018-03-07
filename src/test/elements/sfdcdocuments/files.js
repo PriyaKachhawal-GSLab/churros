@@ -3,12 +3,22 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
+const expect = require('chakram').expect;
 const upload = require('./assets/metadata');
 const commentPayload = tools.requirePayload(`${__dirname}/assets/comment.json`);
 
 
 
 suite.forElement('documents', 'files', null, (test) => {
+	 let jpgFileBody, textFileBody, textFileBody2, revisionId,
+    jpgFile = __dirname + '/assets/Penguins.jpg',
+    textFile = __dirname + '/assets/textFile.txt';
+  let query = { path: `/Penguins-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` };
+
+  before(() => cloud.withOptions({ qs: query }).postFile(test.api, jpgFile)
+    .then(r => jpgFileBody = r.body));
+
+  after(() => cloud.delete(`${test.api}/${jpgFileBody.id}`));
   it('should allow ping for sfdcdocuments', () => {
     return cloud.get(`/hubs/documents/ping`);
   });
@@ -45,37 +55,75 @@ suite.forElement('documents', 'files', null, (test) => {
       .then(r => cloud.delete(`${test.api}/${fileId}`));
   });
   
-   it('should allow CRDS for hubs/documents/files/:id/comments', () => {
-    let commentId, fileId, UploadFile = __dirname + '/assets/test.txt';
-    return cloud.withOptions({ qs: { path: `/${tools.random()}` } }).postFile(test.api, UploadFile)
-      .then(r => fileId = r.body.feedId)
-	  .then(r => cloud.post(`hubs/documents/files/${fileId}/comments`, commentPayload))
-      .then(r => commentId = r.body.id)
-	  .then(r => cloud.get(`hubs/documents/files/${fileId}/comments`))
-      .then(r => cloud.get(`hubs/documents/files/${fileId}/comments/${commentId}`))
-      .then(r => cloud.delete(`hubs/documents/files/${fileId}/comments/${commentId}`));
-  });
   
-  it('should allow CRDS for hubs/documents/files/comments', () => {
-    let srcPath, commentId, UploadFile = __dirname + '/assets/test.txt';
-    return cloud.withOptions({ qs: { path: `/${tools.random()}` } }).postFile(test.api, UploadFile)
-      .then(r => srcPath = r.body.path)
-      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).post(`hubs/documents/files/comments`,commentPayload))
-	  .then(r => commentId = r.body.id)
-	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).get(`hubs/documents/files/comments`))
-	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).get(`hubs/documents/files/comments/${commentId}`))
-	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).delete(`hubs/documents/files/comments/${commentId}`));
-  });
   
-  it('should support pagination for hubs/documents/files/comments', () => {
-    let srcPath, nextPageToken, UploadFile = __dirname + '/assets/test.txt';
-    return cloud.withOptions({ qs: { path: `/${tools.random()}` } }).postFile(test.api, UploadFile)
-      .then(r => srcPath = r.body.path)
-      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).post(`hubs/documents/files/comments`,commentPayload))
-	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).post(`hubs/documents/files/comments`,commentPayload))
- 	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}`, pageSize: 1 } }).get(`hubs/documents/files/comments`))
-	  .then(r => nextPageToken = r.response.headers['elements-next-page-token'])
-	  .then(r => cloud.withOptions({ qs: { path: `${srcPath}`, pageSize: 1, nextPage:`${nextPageToken}` } }).get(`hubs/documents/files/comments`));
+  it(`should allow CRDS for ${test.api}/:id/comments`, () => cloud.crds(`${test.api}/${jpgFileBody.feedId}/comments`, commentPayload));
+  
+  
+  it(`should allow paginating for ${test.api}/:id/comments`, () => {
+    let commentId1, commentId2, nextPage;
+    return cloud.post(`${test.api}/${jpgFileBody.feedId}/comments`, commentPayload)
+      .then(r => commentId1 = r.body.id)
+      .then(r => cloud.post(`${test.api}/${jpgFileBody.feedId}/comments`, commentPayload))
+      .then(r => commentId2 = r.body.id)
+      .then(r => cloud.withOptions({ qs: { pageSize: 1 } }).get(`${test.api}/${jpgFileBody.feedId}/comments`))
+      .then(r => {
+        expect(r.body).to.have.lengthOf(1);
+        expect(r.body[0].id).to.equal(commentId2);
+        expect(r.response.headers['elements-next-page-token']).to.exist;
+        nextPage = r.response.headers['elements-next-page-token'];
+      })
+      .then(r => cloud.withOptions({ qs: { pageSize: 1, nextPage } }).get(`${test.api}/${jpgFileBody.feedId}/comments`))
+      .then(r => {
+        expect(r.body).to.have.lengthOf(1);
+        expect(r.body[0].id).to.equal(commentId1);
+        expect(r.response.headers['elements-next-page-token']).to.not.exist;
+      })
+      .then(r => cloud.withOptions({ qs: { pageSize: 1 } }).get(`${test.api}/${jpgFileBody.feedId}/comments`))
+      .then(r => expect(r.body).to.have.lengthOf(1) && expect(r.body[0].id).to.equal(commentId2))
+      .then(r => cloud.withOptions({ qs: { pageSize: 2 } }).get(`${test.api}/${jpgFileBody.feedId}/comments`))
+      .then(r => expect(r.body).to.have.lengthOf(2) && expect(r.body[0].id).to.equal(commentId1))
+      .then(r => cloud.delete(`${test.api}/${jpgFileBody.feedId}/comments/${commentId1}`))
+      .then(r => cloud.delete(`${test.api}/${jpgFileBody.feedId}/comments/${commentId2}`));
+  });
+  it(`should allow paginating for ${test.api}/comments by path`, () => {
+    let commentId1, commentId2, nextPage;
+    return cloud.withOptions({ qs: { path: jpgFileBody.path } }).post(`${test.api}/comments`, commentPayload)
+      .then(r => commentId1 = r.body.id)
+      .then(r => cloud.withOptions({ qs: { path: jpgFileBody.path } }).post(`${test.api}/comments`, commentPayload))
+      .then(r => commentId2 = r.body.id)
+      .then(r => cloud.withOptions({ qs: { pageSize: 1, path: jpgFileBody.path } }).get(`${test.api}/comments`))
+      .then(r => {
+        expect(r.body).to.have.lengthOf(1);
+        expect(r.body[0].id).to.equal(commentId2);
+        expect(r.response.headers['elements-next-page-token']).to.exist;
+        nextPage = r.response.headers['elements-next-page-token'];
+      })
+      .then(r => cloud.withOptions({ qs: { pageSize: 1, nextPage, path: jpgFileBody.path } }).get(`${test.api}/comments`))
+      .then(r => {
+        expect(r.body).to.have.lengthOf(1);
+        expect(r.body[0].id).to.equal(commentId1);
+        expect(r.response.headers['elements-next-page-token']).to.not.exist;
+      })
+      .then(r => cloud.withOptions({ qs: { pageSize: 1, page: 1, path: jpgFileBody.path } }).get(`${test.api}/comments`))
+      .then(r => expect(r.body).to.have.lengthOf(1) && expect(r.body[0].id).to.equal(commentId2))
+      .then(r => cloud.withOptions({ qs: { pageSize: 2 , path: jpgFileBody.path } }).get(`${test.api}/comments`))
+      .then(r => expect(r.body).to.have.lengthOf(2) && expect(r.body[0].id).to.equal(commentId1))
+      .then(r => cloud.withOptions({ qs: { path: jpgFileBody.path } }).delete(`${test.api}/comments/${commentId1}`))
+      .then(r => cloud.withOptions({ qs: { path: jpgFileBody.path } }).delete(`${test.api}/comments/${commentId2}`));
+  });
 
-  });  
+  it(`should allow CS for ${test.api}/comments by path`, () => cloud.withOptions({ qs: { path: jpgFileBody.path } }).cs	(`${test.api}/comments`,commentPayload));
+  
+
+  it(`should handle raw parameter for ${test.api}/comments`, () => {
+    let commentId;
+    return cloud.post(`${test.api}/${jpgFileBody.feedId}/comments`, commentPayload)
+      .then(r => commentId = r.body.id)
+      .then(r => cloud.withOptions({ qs: { raw: true }}).get(`${test.api}/${jpgFileBody.feedId}/comments`))
+      .then(r => expect(r.body.filter(obj => obj.raw)).to.not.be.empty)
+      .then(r => cloud.get(`${test.api}/${jpgFileBody.feedId}/comments`))
+      .then(r => expect(r.body.filter(obj => obj.raw)).to.be.empty)
+      .then(r => cloud.delete(`${test.api}/${jpgFileBody.feedId}/comments/${commentId}`));
+  });
 });
