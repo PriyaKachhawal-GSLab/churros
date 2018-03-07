@@ -13,5 +13,6 @@ suite.forElement('marketing', 'channels', (test) => {
   });
 
   test.withApi(test.api)
-  .withOptions({ qs: { where: `name='${channelName}'` } })
+    .withOptions({ qs: { where: `name='${channelName}'` } 
+  });
 });

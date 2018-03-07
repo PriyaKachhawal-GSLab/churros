@@ -27,5 +27,6 @@ suite.forElement('marketing', 'programs', { payload: payload }, (test) => {
   });
 
   test.withApi(test.api)
-      .withOptions({ qs: { where: `name='${payload.name}'` } })
+    .withOptions({ qs: { where: `name='${payload.name}'` } 
+  });
 });
