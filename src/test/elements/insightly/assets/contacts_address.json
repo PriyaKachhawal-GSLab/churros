@@ -1,7 +1,7 @@
 {
   "ADDRESS_TYPE": "WORK",
-  "STREET": "XYZ",
-  "CITY": "ABC",
+  "STREET": "<<random.word>>",
+  "CITY": "<<random.word>>",
   "STATE": "MH",
   "POSTCODE": "411245",
   "COUNTRY": "India"

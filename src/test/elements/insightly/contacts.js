@@ -1,9 +1,10 @@
 'use strict';
 
 const suite = require('core/suite');
+const tools = require('core/tools');
 const payload = require('./assets/contacts');
-const payloadAddress = require('./assets/contacts_address');
-const payloadAddressUpdate = require('./assets/contacts_addressUpdate');
+const payloadAddress = tools.requirePayload(`${__dirname}/assets/contacts_address.json`);
+const payloadAddressUpdate = tools.requirePayload(`${__dirname}/assets/contacts_address.json`);
 const chakram = require('chakram');
 const expect = chakram.expect;
 const cloud = require('core/cloud');
@@ -11,7 +12,7 @@ const cloud = require('core/cloud');
 const options = {
     churros: {
       updatePayload: {
-        "last_name": "Mac_updated"
+        "last_name": "Mac_updated" 
       }
     }
   };

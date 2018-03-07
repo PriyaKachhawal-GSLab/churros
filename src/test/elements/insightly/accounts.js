@@ -1,9 +1,10 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/accounts');
-const payloadAddress = require('./assets/accounts_address');
-const payloadAddressUpdate = require('./assets/accounts_addressUpdate');
+const tools = require('core/tools');
+const payload = tools.requirePayload(`${__dirname}/assets/accounts.json`);
+const payloadAddress = tools.requirePayload(`${__dirname}/assets/accounts_address.json`);
+const payloadAddressUpdate = tools.requirePayload(`${__dirname}/assets/accounts_address.json`);
 const chakram = require('chakram');
 const expect = chakram.expect;
 const cloud = require('core/cloud');
@@ -12,7 +13,7 @@ suite.forElement('crm', 'accounts', { payload: payload }, (test) => {
   const options = {
     churros: {
       updatePayload: {
-		    "ORGANISATION_NAME" : "ChurrosTest1"
+		    "ORGANISATION_NAME" : "ChurrosTest1" 
       }
     }
   };
