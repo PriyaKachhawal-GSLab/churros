@@ -1,4 +1,11 @@
 {
+  "currencies": {
+    "vendorName": "Currency",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
   "customers": {
     "vendorName": "Customer",
     "fields": [{
