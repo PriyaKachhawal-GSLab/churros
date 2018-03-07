@@ -10,9 +10,8 @@ const commentPayload = tools.requirePayload(`${__dirname}/assets/comment.json`);
 
 
 suite.forElement('documents', 'files', null, (test) => {
-	 let jpgFileBody, textFileBody, textFileBody2, revisionId,
-    jpgFile = __dirname + '/assets/Penguins.jpg',
-    textFile = __dirname + '/assets/textFile.txt';
+  let jpgFileBody,
+  jpgFile = __dirname + '/assets/Penguins.jpg';
   let query = { path: `/Penguins-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` };
 
   before(() => cloud.withOptions({ qs: query }).postFile(test.api, jpgFile)
