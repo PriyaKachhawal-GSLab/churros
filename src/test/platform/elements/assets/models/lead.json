@@ -1,0 +1,15 @@
+{
+    "name": "churrosLeadModel",
+    "vendorName":"churrosLeadModel",
+	"fields": [
+		{
+			"vendorName": "churrosLeadContact",
+			"dataType": {
+				"jsonType": "object",
+				"format": "object"
+			},
+			"sampleValue": "$churrosContact",
+			"relatedModelId": "<replace-me>"
+        }
+	]
+}

@@ -1,5 +1,6 @@
 {
-	"name": "churrosContactModel<<random.alphaNumeric##4>>",
+    "name": "churrosContact",
+    "vendorName":"churrosContact",
 	"fields": [{
 			"vendorName": "churrosVendorStatusId",
 			"dataType": {
@@ -28,6 +29,6 @@
 			},
 			"sampleValue": "$churrosContactAddress",
 			"relatedModelId": "<replace-me>"
-		}
+        }
 	]
 }
