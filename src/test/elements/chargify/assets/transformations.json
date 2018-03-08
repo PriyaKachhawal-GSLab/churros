@@ -43,5 +43,14 @@
         "vendorPath": "subscription.id"
       }
     ]
+  },
+  "invoices": {
+    "vendorName": "invoices",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "invoice.id"
+      }
+    ]
   }
 }
