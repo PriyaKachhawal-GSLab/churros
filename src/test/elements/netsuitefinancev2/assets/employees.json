@@ -1,5 +1,5 @@
 {
-  "lastName":"<<name.lastName>>",
+  "lastName":"ChurrosLast",
   "title":"ChurrosTitle",
   "employeeStatus":{
     "internalId":"3",
@@ -24,7 +24,7 @@
     "internalId":"1",
     "name":"Honeycomb Mfg."
   },
-  "firstName":"<<name.firstName>>",
+  "firstName":"ChurrosFirst",
   "employeeType":{
     "internalId":"1",
     "name":"Officer"

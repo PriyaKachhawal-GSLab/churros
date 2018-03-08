@@ -1,0 +1,53 @@
+{
+  "owner": {
+    "internalId": "7251",
+    "name": "Atul T Yahoo"
+  },
+  "accessLevel": false,
+  "endDate": "2018-03-06T19:00:00Z",
+  "reminderMinutes": {
+    "value": "_30minutes"
+  },
+  "reminderType": {
+    "value": "_popupWindow"
+  },
+  "title": "Sample Phone Call",
+  "contactList": {
+    "contact": [
+      {
+        "contact": {
+          "internalId": "1559",
+          "name": "James Smith"
+        },
+        "company": {
+          "internalId": "1397",
+          "name": "3M"
+        },
+        "email": "3m@3m.com"
+      }
+    ],
+    "replaceAll": false
+  },
+  "timedEvent": true,
+  "phone": "526 8426 1095",
+  "contact": {
+    "internalId": "1559",
+    "name": "3M : James Smith"
+  },
+  "company": {
+    "internalId": "1397",
+    "name": "3M"
+  },
+  "assigned": {
+    "internalId": "7251",
+    "name": "Atul T Yahoo"
+  },
+  "transaction": {
+    "internalId": "41233",
+    "name": "Credit Memo #MEM00000113"
+  },
+  "startDate": "2018-03-06T18:00:00Z",
+  "status": {
+    "value": "_scheduled"
+  }
+}

@@ -265,6 +265,13 @@
       "vendorPath": "internalId"
     }]
   },
+  "expense-categories": {
+    "vendorName": "ExpenseCategory",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
   "credit-terms": {
     "vendorName": "Credit-Term",
     "fields": [{
@@ -302,6 +309,13 @@
   },
   "posting-periods": {
       "vendorName": "AccountingPeriod",
+      "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
+  "phone-calls": {
+      "vendorName": "PhoneCall",
       "fields": [{
       "path": "id",
       "vendorPath": "internalId"

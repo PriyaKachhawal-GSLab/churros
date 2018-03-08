@@ -55,6 +55,13 @@
       "vendorPath": "internalId"
     }]
   },
+  "phone-calls": {
+    "vendorName": "PhoneCall",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
   "files": {
     "vendorName": "File",
     "fields": [{

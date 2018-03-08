@@ -1,0 +1,20 @@
+{
+    "isInactive": false,
+    "name": "Sample Category",
+    "description": "Sample Expense Category",
+    "rateRequired": true,
+    "expenseAcct": {
+        "name": "6010 Advertising"
+    },
+    "translationsList": {
+        "translation": [
+            {
+                "language": "French (France)",
+                "locale": {
+                    "value": "_frenchFrance"
+                }
+            }
+        ],
+        "replaceAll": false
+    }
+}

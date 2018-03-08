@@ -1314,6 +1314,17 @@
       }
     ]
   },
+  "expense-categories": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
   "time-activities": {
     "fields": [{
         "path": "idTransformed",
@@ -2186,6 +2197,15 @@
     ]
   },
   "chargecard-transactions": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "phone-calls": {
     "fields": [{
       "path": "idTransformed",
       "type": "string"
