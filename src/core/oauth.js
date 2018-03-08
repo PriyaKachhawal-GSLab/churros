@@ -235,8 +235,10 @@ const manipulateDom = (element, browser, r, username, password, config) => {
     case 'evernote':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('username')).sendKeys(username);
+      browser.findElement(webdriver.By.id('loginButton')).click();
+      browser.sleep(2000);
       browser.findElement(webdriver.By.id('password')).sendKeys(password);
-      browser.findElement(webdriver.By.id('login')).click();
+      browser.findElement(webdriver.By.id('loginButton')).click();
       try {
         browser.findElement(webdriver.By.name('reauthorize')).click();
       } catch (e) {
@@ -265,10 +267,10 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('smux_identity_email')).sendKeys(username);
       browser.findElement(webdriver.By.id('smux_identity_password')).sendKeys(password);
       browser.findElement(webdriver.By.name('commit')).click();
-      browser.wait(() => {
-        return browser.isElementPresent(webdriver.By.name('commit'));
-      }, 2000);
-      browser.findElement(webdriver.By.name('commit')).click();
+      browser.wait(() => browser.isElementPresent(webdriver.By.id('commit')), 5000)
+        .thenCatch(r => true); // ignore
+      browser.findElement(webdriver.By.name('commit'))
+        .then((element) => element.click(), (err) => {}); // ignore this
       browser.sleep(2000);
       return browser.getCurrentUrl();
     case 'googlesuite':

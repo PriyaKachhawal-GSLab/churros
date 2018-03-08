@@ -36,8 +36,7 @@
         "method": "GET",
         "direction": "RESPONSE",
         "populated": "SOMETIMES"
-      }],
-      "relatedModelId": 1
+      }]
     },
     {
       "name": "churrosFruit<<random.alphaNumeric##4>>",
@@ -67,9 +66,10 @@
         "method": "GET",
         "direction": "RESPONSE",
         "populated": "SOMETIMES"
-      }],
-      "relatedModelId": 1
+      }]
     }   
   ],
-  "resources": []
+
+  "resources": [],
+  "commitMessage": "Churros. For. Lunch"
 }

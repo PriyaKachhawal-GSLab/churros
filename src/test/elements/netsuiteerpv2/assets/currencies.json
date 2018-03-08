@@ -1,0 +1,8 @@
+{
+ "symbol": "INR",
+ "exchangeRate": 0.481683,
+ "name":"<<address.country>>",
+ "locale": {
+    "value": "_indiaMarathi"
+  }
+}

@@ -7,5 +7,23 @@
         "vendorPath": "sid"
       }
     ]
+  },
+  "addresses": {
+    "vendorName": "addresses",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "sid"
+      }
+    ]
+  },
+  "accounts": {
+    "vendorName": "accounts",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "sid"
+      }
+    ]
   }
 }
