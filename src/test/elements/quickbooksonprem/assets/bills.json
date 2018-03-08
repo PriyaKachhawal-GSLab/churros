@@ -12,57 +12,25 @@
       "Amount": "7500.00",
       "Quantity": "5",
       "ItemRef": {
-        "FullName": "PmntDiscount_Less Discounts giv"
+        "FullName": "Crayons"
       },
       "CustomerRef": {
-        "FullName": "Luke, Noelani:Remodel Bathroom"
+        "FullName": "Ben` Test"
       },
       "Cost": "1500.00"
-    },
-    {
-      "Desc": "Doorknobs Part # DK 3704",
-      "ClassRef": {
-        "FullName": "New Construction"
-      },
-      "BillableStatus": "NotBillable",
-      "Amount": "2700.00",
-      "Quantity": "100",
-      "ItemRef": {
-        "FullName": "Hardware:Doorknobs Std"
-      },
-      "CustomerRef": {
-        "FullName": "Burch, Jason:Room Addition"
-      },
-      "Cost": "27.00"
-    },
-    {
-      "Desc": "Locking interior doorknobs  Part # DK415",
-      "ClassRef": {
-        "FullName": "New Construction"
-      },
-      "BillableStatus": "Billable",
-      "Amount": "3495.00",
-      "Quantity": "100",
-      "ItemRef": {
-        "FullName": "Hardware:Lk Doorknobs"
-      },
-      "CustomerRef": {
-        "FullName": "Burch, Jason:Room Addition"
-      },
-      "Cost": "34.95"
     }
   ],
   "VendorRef": {
-    "FullName": "Patton Hardware Supplies"
+    "FullName": "9-18 QuickBooks"
   },
   "DueDate": "2019-01-01",
   "VendorAddress": {
-    "Addr1": "Patton Hardware Supplies",
-    "Addr2": "4872 County Rd",
-    "State": "CA",
-    "PostalCode": "94326",
-    "City": "Bayshore"
-  },
+      "State": "CO",
+      "Country": "USA",
+      "PostalCode": "80524",
+      "City": "Fort Collins"
+    },
   "TxnNumber": "613",
   "OpenAmount": "4479.20"
 }
+

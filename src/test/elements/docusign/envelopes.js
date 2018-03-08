@@ -58,7 +58,7 @@ suite.forElement('esignature', 'envelopes', (test) => {
       .then(r => cloud.get(`${test.api}/${envelopeId}/documents/certificates`));
   });
 
-  it(`should support create on ${test.api}/:id/recipients and ${test.api}/:id/recipients/:id/tabs`, () => {
+  it(`should support CR on ${test.api}/:id/recipients and ${test.api}/:id/recipients/:id/tabs`, () => {
     let envelopeId = "-1";
     let path = __dirname + '/assets/MrRobotPdf.pdf';
     const opts = { formData: { envelope: JSON.stringify(createPayload) } };
@@ -66,7 +66,14 @@ suite.forElement('esignature', 'envelopes', (test) => {
     return cloud.withOptions(opts).postFile(test.api, path)
       .then(r => envelopeId = r.body.envelopeId)
       .then(r => cloud.post(`${test.api}/${envelopeId}/recipients`, recipient))
-      .then(r => cloud.post(`${test.api}/${envelopeId}/recipients/${recipient.agents[0].recipientId}/tabs`, tab));
+      .then(r => cloud.post(`${test.api}/${envelopeId}/recipients/${recipient.agents[0].recipientId}/tabs`, tab))
+      .then(r => cloud.get(`${test.api}/${envelopeId}/recipients`))
+      .then(r => cloud.withOptions({ qs: { where: 'include_tabs=\'true\'' } }).get(`${test.api}/${envelopeId}/recipients`))
+	  .then(r => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body).to.not.be.undefined;
+        expect(r.body.tabs).to.not.be.null;
+      });
   });
 
   test.withValidation(envelopesSchema)

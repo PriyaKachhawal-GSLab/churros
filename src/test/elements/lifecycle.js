@@ -60,6 +60,7 @@ before(() => {
       getInstance = provisioner.create(element)
       .catch(e => {
         if (argv.backup === 'use backup') { //if default flag
+          logger.error(e.message);
           deleteInstance = false;
           return provisioner.getBackup(element);
         } else {
