@@ -46,7 +46,11 @@ documents.override('folders', () => {
 
     it('should allow RU /folders/metadata and RU /folders/:id/metadata', () => {
       let updatedFolder,
-        folderTemp = { path: `/a-${folder.name}` };
+        folderTemp = {
+          path: `/a-${folder.name}`,
+          description: "churros description"
+        };
+        folder.description = "churros update by id";
       return cloud.withOptions({ qs: { path: folder.path } }).get('/hubs/documents/folders/metadata')
         .then(r => cloud.withOptions({ qs: { path: folder.path } }).patch('/hubs/documents/folders/metadata', folderTemp))
         .then(r => updatedFolder = r.body)

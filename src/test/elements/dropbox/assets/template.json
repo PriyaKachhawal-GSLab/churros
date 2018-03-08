@@ -1,0 +1,11 @@
+{
+    "name": "c<<random.alphaNumeric##10>>",
+    "description": "These properties describe how confidential this file or folder is.",
+    "fields": [
+        {
+            "name": "Security Policy",
+            "description": "This is the security policy of the file or folder described.\nPolicies can be Confidential, Public or Internal.",
+            "type": "string"
+        }
+    ]
+}
