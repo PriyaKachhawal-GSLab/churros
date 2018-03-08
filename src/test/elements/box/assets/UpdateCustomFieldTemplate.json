@@ -1,0 +1,10 @@
+{
+  "op": "addField",
+  "data": {
+    "displayName": "Category",
+    "key": "category",
+    "hidden": false,
+    "type": "string"
+  },
+  "scope": "enterprise"
+}
