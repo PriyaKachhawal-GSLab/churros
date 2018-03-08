@@ -136,6 +136,20 @@
     "vendorPath": "accountNumber"
   }]
 },
+"delivery-locations": {
+    "vendorName": "delivery-locations",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "deliveryLocationNumber"
+    }]
+  },
+"contacts": {
+    "vendorName": "contacts",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "customerContactNumber"
+    }]
+  },
 "invoices":{
   "vendorName": "invoices",
   "fields": [{

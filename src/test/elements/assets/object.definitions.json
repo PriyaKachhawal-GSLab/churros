@@ -2315,6 +2315,15 @@
     "path": "id",
     "type": "string"
   }]
+},
+"delivery-locations":{
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
 }
 
 }
