@@ -32,12 +32,10 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
   before(() => cloud.post(test.api, payload)
     .then(r => contactId = r.body.id));
 
-  it('should allow CUD for / addresses', () => {
+  it('should allow CUD for ${test.api}/:id/addresses', () => {
   	let addressId;
   	return cloud.post(`${test.api}/${contactId}/addresses`, payloadAddress)
-      .then(r => {
-        addressId = r.body.id;
-      })
+      .then(r => addressId = r.body.id)
       .then(r => cloud.put(`${test.api}/${contactId}/addresses/${addressId}`, payloadAddressUpdate))
       .then(r => cloud.delete(`${test.api}/${contactId}/addresses/${addressId}`));
   });
