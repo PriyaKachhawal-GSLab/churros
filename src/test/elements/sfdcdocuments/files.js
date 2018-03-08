@@ -15,9 +15,10 @@ suite.forElement('documents', 'files', null, (test) => {
   let query = { path: `/Penguins-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` };
 
   before(() => cloud.withOptions({ qs: query }).postFile(test.api, jpgFile)
-    .then(r => jpgFileBody = r.body));
+  .then(r => jpgFileBody = r.body));
 
   after(() => cloud.delete(`${test.api}/${jpgFileBody.id}`));
+  
   it('should allow ping for sfdcdocuments', () => {
     return cloud.get(`/hubs/documents/ping`);
   });
@@ -85,6 +86,7 @@ suite.forElement('documents', 'files', null, (test) => {
       .then(r => cloud.delete(`${test.api}/${jpgFileBody.feedId}/comments/${commentId1}`))
       .then(r => cloud.delete(`${test.api}/${jpgFileBody.feedId}/comments/${commentId2}`));
   });
+  
   it(`should allow paginating for ${test.api}/comments by path`, () => {
     let commentId1, commentId2, nextPage;
     return cloud.withOptions({ qs: { path: jpgFileBody.path } }).post(`${test.api}/comments`, commentPayload)
@@ -112,9 +114,8 @@ suite.forElement('documents', 'files', null, (test) => {
       .then(r => cloud.withOptions({ qs: { path: jpgFileBody.path } }).delete(`${test.api}/comments/${commentId2}`));
   });
 
-  it(`should allow CS for ${test.api}/comments by path`, () => cloud.withOptions({ qs: { path: jpgFileBody.path } }).cs	(`${test.api}/comments`,commentPayload));
+  it(`should allow CRDS for ${test.api}/comments by path`, () => cloud.withOptions({ qs: { path: jpgFileBody.path } }).crds(`${test.api}/comments`,commentPayload));
   
-
   it(`should handle raw parameter for ${test.api}/comments`, () => {
     let commentId;
     return cloud.post(`${test.api}/${jpgFileBody.feedId}/comments`, commentPayload)
