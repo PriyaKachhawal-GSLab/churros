@@ -355,10 +355,6 @@
         "type": "string"
       },
       {
-        "path": "address",
-        "type": "address"
-      },
-      {
         "path": "description",
         "type": "string"
       },
