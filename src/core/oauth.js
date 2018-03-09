@@ -95,10 +95,21 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       return browser.getCurrentUrl();
     case 'actessentialsoauth':
       browser.get(r.body.oauthUrl);
+
       browser.findElement(webdriver.By.id('Username')).sendKeys(username);
       browser.findElement(webdriver.By.id('Password')).sendKeys(password);
       browser.findElement(webdriver.By.name('Answer')).click();
       return browser.getCurrentUrl();
+  case 'economic':
+        browser.get(r.body.oauthUrl);
+        browser.isElementPresent(webdriver.By.id('aftalenr'));
+        browser.findElement(webdriver.By.name('aftalenr')).sendKeys(config['agreementId']);
+        browser.findElement(webdriver.By.name('brugernavn')).sendKeys(username);
+        browser.findElement(webdriver.By.name('password')).sendKeys(password);
+        browser.findElement(webdriver.By.id('edit-submit')).click();
+        browser.sleep(3000);
+        waitForElement(webdriver.By.className('grant-access-button'));
+        return browser.getCurrentUrl();
     case 'box':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.name('login')).sendKeys(username);
