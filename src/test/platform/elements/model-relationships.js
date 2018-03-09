@@ -75,19 +75,21 @@ suite.forPlatform('elements/models', {}, (test) => {
         expect(r.body.parentModelIds).to.include(leadModelId);
     };
 
-    return cloud.post(`/elements/${elementId}/models`, contactModel, contactValidator)
+    return cloud.post(`/elements/${elementId}/models`, contactModel)
         .then(r => {
             contactModelId = r.body.id;
             leadModel.fields[0].relatedModelId = contactModelId;
         })
-        .then(() => cloud.post(`/elements/${elementId}/models`, leadModel, leadValidator))
-        .then(() => leadModelId = r.body.id)
+        .then(() => cloud.get(`/elements/${elementId}/models/${contactModelId}`, contactValidator))
+        .then(() => cloud.post(`/elements/${elementId}/models`, leadModel))
+        .then(r => leadModelId = r.body.id)
+        .then(() => cloud.get(`/elements/${elementId}/models/${leadModelId}`, leadValidator))
         .then(() => cloud.get(`/elements/${elementId}/models/${contactModelId}`, contactValidator2))
         .then(() => cloud.delete(`elements/${elementId}/models/${contactModelId}`))
         .then(() => cloud.delete(`elements/${elementId}/models/${leadModelId}`))
         .catch(e => {
-            if (contactModelId) cloud.delete(`elements/${elementId}/models/${contactModelId}`);
-            if (leadModelId) cloud.delete(`elements/${elementId}/models/${leadModelId}`);
+            if (contactModelId) { cloud.delete(`elements/${elementId}/models/${contactModelId}`); }
+            if (leadModelId) { cloud.delete(`elements/${elementId}/models/${leadModelId}`); }
             throw e;
         });
   });

@@ -30,5 +30,6 @@
 			"sampleValue": "$churrosContactAddress",
 			"relatedModelId": "<replace-me>"
         }
-	]
+	],
+    "commitMessage": "initial commit"
 }
