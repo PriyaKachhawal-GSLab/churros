@@ -9,5 +9,5 @@ const dealsPayload = tools.requirePayload(`${__dirname}/assets/deals.json`);
 suite.forElement('marketing', 'polling', null, (test) => {
   test.withApi('/hubs/marketing/accounts').should.supportPolling(accountsPayload, 'accounts');
   test.withApi('/hubs/marketing/contacts').should.supportPolling(contactsPayload, 'contacts');
-  test.withApi('/hubs/marketing/deals').should.supportPolling(contactsPayload, 'deals');
+  test.withApi('/hubs/marketing/deals').should.supportPolling(dealsPayload, 'deals');
 });
