@@ -10,7 +10,7 @@ const voucherPayload = tools.requirePayload(`${__dirname}/assets/voucher.json`);
 suite.forElement('erp', 'voucher-attachments', { payload: payload }, (test) => {
   let textFile = __dirname + '/assets/test.txt';
   let opts = { qs: { folderId: 'inbox' } };
-  let fileId, voucherNumber, VoucherSeries;
+  let fileId;
   before(() => cloud.withOptions(opts).postFile('/hubs/erp/files', textFile)
     .then(r => fileId = r.body.Id)
     .then(r => cloud.post('/hubs/erp/vouchers', voucherPayload))

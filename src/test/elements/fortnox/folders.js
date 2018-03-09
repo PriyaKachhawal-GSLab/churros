@@ -1,8 +1,6 @@
 'use strict';
 
 const suite = require('core/suite');
-const cloud = require('core/cloud');
-const fs = require('fs');
 
 suite.forElement('erp', 'folders', (test) => {
   let rootFolderId = 'root';
