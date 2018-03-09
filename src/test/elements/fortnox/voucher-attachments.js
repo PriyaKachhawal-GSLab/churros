@@ -31,11 +31,4 @@ suite.forElement('erp', 'voucher-attachments', { payload: payload }, (test) => {
       .then(r => cloud.get(`${test.api}/${fileId}`))
       .then(r => cloud.delete(`${test.api}/${fileId}`));
   });
-  /*  it(`should allow pagination with page and pageSize for voucher-attachments`, () => {
-      return cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(test.api)
-        .then(r => expect(r.body.length).to.be.below(2))
-        .then(r => cloud.withOptions({ qs: { page: 2, pageSize: 2 } }).get(test.api))
-        .then(r => expect(r.body.length).to.be.below(3));
-    });
-    */
 });
