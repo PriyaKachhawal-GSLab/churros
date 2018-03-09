@@ -27,10 +27,10 @@ suite.forElement('erp', 'customers', { payload: payload }, (test) => {
   after(() => cloud.delete(`${test.api}/${customerId}`));
 
   it('should support CRUDS for /customers/:id/contacts', () => {
-    return cloud.cruds(`${test.api}/${customerId}/contacts`, contactPayload,chakram.put);
+    return cloud.cruds(`${test.api}/${customerId}/contacts`, contactPayload, chakram.put);
   });
   it(`should support CRUDS for /customers/:id/delivery-locations`, () => {
-    return cloud.cruds(`${test.api}/${customerId}/delivery-locations`, deliveryLocationPayload,chakram.put);
+    return cloud.cruds(`${test.api}/${customerId}/delivery-locations`, deliveryLocationPayload, chakram.put);
   });
 
 });

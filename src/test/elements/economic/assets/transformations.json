@@ -13,6 +13,20 @@
       "vendorPath": "customerNumber"
     }]
   },
+  "contacts": {
+    "vendorName": "contacts",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "customerContactNumber"
+    }]
+  },
+  "delivery-locations": {
+    "vendorName": "delivery-locations",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "deliveryLocationNumber"
+    }]
+  },
   "departments": {
     "vendorName": "departments",
     "fields": [{
@@ -136,20 +150,6 @@
     "vendorPath": "accountNumber"
   }]
 },
-"delivery-locations": {
-    "vendorName": "delivery-locations",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "deliveryLocationNumber"
-    }]
-  },
-"contacts": {
-    "vendorName": "contacts",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "customerContactNumber"
-    }]
-  },
 "invoices":{
   "vendorName": "invoices",
   "fields": [{

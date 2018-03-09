@@ -9,7 +9,9 @@ const customerPayload = tools.requirePayload(`${__dirname}/assets/customer.json`
 const invoiceDraftPayload = tools.requirePayload(`${__dirname}/assets/invoicesDrafts.json`);
 const payload = tools.requirePayload(`${__dirname}/assets/invoices.json`);
 
-suite.forElement('erp', 'invoices', { payload: payload },{skip:true}, (test) => {
+suite.forElement('erp', 'invoices', {
+  payload: payload
+}, (test) => {
   let Id, customerId, productId;
 
   before(() => cloud.post('/hubs/erp/products', productPayload)
@@ -26,19 +28,16 @@ suite.forElement('erp', 'invoices', { payload: payload },{skip:true}, (test) => 
       Id = r.body.id;
       Id = parseInt(Id);
     }));
-  after(() => cloud.delete(`/hubs/erp/products/${productId}`)
-    .then(r => cloud.delete(`/hubs/erp/customers/${customerId}`)));
+
   test.should.supportSr();
   test.should.supportNextPagePagination(1);
-  test
-    .withOptions({ qs: { where: `currency = 'DKK' ` } })
+  test.withOptions({ qs: { where: `currency = 'DKK' ` } })
     .withName('should support Ceql currency  search')
     .withValidation(r => {
       expect(r).to.statusCode(200);
       const validValues = r.body.filter(obj => obj.currency = 'DKK');
       expect(validValues.length).to.equal(r.body.length);
-    })
-    .should.return200OnGet();
+    }).should.return200OnGet();
   it('should support PUT  for /invoices/:id/', () => {
     return cloud.put(`${test.api}/${Id}`);
 

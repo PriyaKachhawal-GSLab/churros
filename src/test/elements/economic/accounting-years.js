@@ -27,20 +27,33 @@ suite.forElement('erp', 'accounting-years', (test) => {
     let id, pId;
     return cloud.get(`${test.api}`)
       .then(r => id = r.body[0].id)
-      .then(r => cloud.withOptions({ qs: { where: `date = '2016-12-31'` } }).get(`${test.api}/${id}/entries`))
-      .then(r => cloud.withOptions({ qs: { where: `accountNumber = '1010'` } }).get(`${test.api}/${id}/entries`))
+
+    .then(r => cloud.withOptions({ qs: { where: `date = '2016-12-31'` } }).get(`${test.api}/${id}/entries`))
+      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.date === '2016-12-31').length))
+
+    .then(r => cloud.withOptions({ qs: { where: `accountNumber = '1010'` } }).get(`${test.api}/${id}/entries`))
+      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.account.accountNumber === 1010).length))
       .then(r => cloud.get(`${test.api}/${id}/totals`))
       .then(r => cloud.withOptions({ qs: { where: `accountNumber = 1010` } }).get(`${test.api}/${id}/totals`))
+      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.account.accountNumber === 1010).length))
       .then(r => cloud.get(`${test.api}/${id}/vouchers`))
       .then(r => cloud.withOptions({ qs: { where: `date = '2016-12-31'` } }).get(`${test.api}/${id}/vouchers`))
+      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.date === '2016-12-31').length))
       .then(r => cloud.withOptions({ qs: { where: `accountNumber = 1010` } }).get(`${test.api}/${id}/vouchers`))
+      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.account.accountNumber === 1010).length))
+      .then(r => cloud.withOptions({ qs: { where: `accountNumber = 1010` } }).get(`${test.api}/${id}/totals`))
+      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.account.accountNumber === 1010).length))
       .then(r => cloud.get(`${test.api}/${id}/periods`))
-      .then(r =>  pId = r.body[0].periodNumber)
+      .then(r => pId = r.body[0].periodNumber)
       .then(r => cloud.withOptions({ qs: { where: `accountNumber = 1010` } }).get(`${test.api}/${id}/periods`))
+      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.accountingYear.year === id).length))
       .then(r => cloud.withOptions({ qs: { where: `fromDate = '2016-12-31'` } }).get(`${test.api}/${id}/periods`))
+      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.fromDate === '2016-12-31').length))
       .then(r => cloud.get(`${test.api}/${id}/periods/${pId}`))
       .then(r => cloud.get(`${test.api}/${id}/periods/${pId}/entries`))
       .then(r => cloud.withOptions({ qs: { where: `date = '2016-12-31'` } }).get(`${test.api}/${id}/periods/${pId}/entries`))
-      .then(r => cloud.withOptions({ qs: { where: `accountNumber = 1010` } }).get(`${test.api}/${id}/periods/${pId}/entries`));
+      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.date === '2016-12-31').length))
+      .then(r => cloud.withOptions({ qs: { where: `accountNumber = 1010` } }).get(`${test.api}/${id}/periods/${pId}/entries`))
+      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.account.accountNumber === 1010).length));
   });
 });
