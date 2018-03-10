@@ -10,7 +10,7 @@ const wait = (browser, ms) => browser.wait(() => false, ms);
 
 const manipulateDom = (element, browser, r, username, password, config) => {
   let waitForElement = function(locator, timeout) {
-    timeout = timeout || 3000;
+    timeout = timeout || 30000;
     let brow = this;
     return brow.wait(() => brow.isElementPresent(locator), timeout).then(() => brow.sleep(100));
   };
@@ -100,15 +100,19 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('Password')).sendKeys(password);
       browser.findElement(webdriver.By.name('Answer')).click();
       return browser.getCurrentUrl();
-  case 'economic':
+
+    case 'economic':
         browser.get(r.body.oauthUrl);
-        browser.isElementPresent(webdriver.By.id('aftalenr'));
-        browser.findElement(webdriver.By.name('aftalenr')).sendKeys(config['agreementId']);
+	waitForElement(webdriver.By.id('btnRedirect'));
+        browser.findElement(webdriver.By.id('btnRedirect')).click();
+        waitForElement(webdriver.By.name('aftalenr'));
+        browser.findElement(webdriver.By.name('aftalenr')).sendKeys(config.agreementId);
         browser.findElement(webdriver.By.name('brugernavn')).sendKeys(username);
         browser.findElement(webdriver.By.name('password')).sendKeys(password);
         browser.findElement(webdriver.By.id('edit-submit')).click();
-        browser.sleep(3000);
-        waitForElement(webdriver.By.className('grant-access-button'));
+        waitForElement(webdriver.By.xpath('html/body/div[1]/div/div[2]/div/div/div[2]/button'));
+        browser.findElement(webdriver.By.xpath('html/body/div[1]/div/div[2]/div/div/div[2]/button')).click();
+        browser.sleep(2000);
         return browser.getCurrentUrl();
     case 'box':
       browser.get(r.body.oauthUrl);
