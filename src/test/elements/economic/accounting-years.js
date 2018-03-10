@@ -6,8 +6,7 @@ const expect = require('chakram').expect;
 
 suite.forElement('erp', 'accounting-years', (test) => {
   let id;
-  before(() =>
-    return cloud.get(`${test.api}`)
+  before(() =>  cloud.get(`${test.api}`)
       .then(r => id = r.body[0].id));
 
   test.should.supportSr();
