@@ -84,6 +84,19 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('user_session_submit')).click();
       browser.findElement(webdriver.By.name('commit')).click();
       return browser.getCurrentUrl();
+    case 'economic':
+         browser.get(r.body.oauthUrl);
+ 	       waitForElement(webdriver.By.id('btnRedirect'));
+         browser.findElement(webdriver.By.id('btnRedirect')).click();
+         waitForElement(webdriver.By.name('aftalenr'));
+         browser.findElement(webdriver.By.name('aftalenr')).sendKeys(config.agreementId);
+         browser.findElement(webdriver.By.name('brugernavn')).sendKeys(username);
+         browser.findElement(webdriver.By.name('password')).sendKeys(password);
+         browser.findElement(webdriver.By.id('edit-submit')).click();
+         waitForElement(webdriver.By.xpath('html/body/div[1]/div/div[2]/div/div/div[2]/button'));
+         browser.findElement(webdriver.By.xpath('html/body/div[1]/div/div[2]/div/div/div[2]/button')).click();
+         browser.sleep(2000);
+         return browser.getCurrentUrl();
     case 'actoneb':
     case 'acton':
       browser.get(r.body.oauthUrl);
@@ -105,19 +118,6 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.name('password')).sendKeys(password);
       browser.findElement(webdriver.By.name('login_submit')).click();
       browser.findElement(webdriver.By.name('consent_accept')).click();
-      return browser.getCurrentUrl();
-    case 'economic':
-      browser.get(r.body.oauthUrl);
-      waitForElement(webdriver.By.id('btnRedirect'));
-      browser.findElement(webdriver.By.id('btnRedirect')).click();
-      waitForElement(webdriver.By.name('aftalenr'));
-      browser.findElement(webdriver.By.name('aftalenr')).sendKeys(config.agreementId);
-      browser.findElement(webdriver.By.name('brugernavn')).sendKeys(username);
-      browser.findElement(webdriver.By.name('password')).sendKeys(password);
-      browser.findElement(webdriver.By.id('edit-submit')).click();
-      waitForElement(webdriver.By.xpath('html/body/div[1]/div/div[2]/div/div/div[2]/button'));
-      browser.findElement(webdriver.By.xpath('html/body/div[1]/div/div[2]/div/div/div[2]/button')).click();
-      browser.sleep(2000);
       return browser.getCurrentUrl();
     case 'square':
       browser.get(r.body.oauthUrl);
