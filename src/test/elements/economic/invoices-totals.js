@@ -1,5 +1,6 @@
 'use strict';
 const suite = require('core/suite');
+const expect = require('chakram').expect;
 
 suite.forElement('erp', 'invoices-totals', (test) => {
   test.should.supportS();
