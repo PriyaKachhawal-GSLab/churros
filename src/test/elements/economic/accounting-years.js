@@ -6,6 +6,10 @@ const expect = require('chakram').expect;
 
 suite.forElement('erp', 'accounting-years', (test) => {
   let id;
+  before(() =>
+    return cloud.get(`${test.api}`)
+      .then(r => id = r.body[0].id));
+
   test.should.supportSr();
   test.should.supportNextPagePagination(1);
   test.withOptions({ qs: { where: `fromDate = '2011-01-01' ` } })
@@ -24,10 +28,6 @@ suite.forElement('erp', 'accounting-years', (test) => {
       expect(validValues.length).to.equal(r.body.length);
     }).should.return200OnGet();
 
-  before(() =>
-    return cloud.get(`${test.api}`)
-      .then(r => id = r.body[0].id);
-  );
   it('should support S for /accounting-years/:year/entries', () => {
 
     return cloud.withOptions({ qs: { where: `date = '2016-12-31'` } }).get(`${test.api}/${id}/entries`)
