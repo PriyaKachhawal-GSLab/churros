@@ -3,12 +3,10 @@
 const suite = require('core/suite');
 const expect = require('chakram').expect;
 
-
 suite.forElement('erp', 'currencies', (test) => {
   test.should.supportSr();
   test.should.supportNextPagePagination(1);
-  test
-    .withOptions({ qs: { where: `code = 'ADE' ` } })
+  test.withOptions({ qs: { where: `code = 'ADE' ` } })
     .withName('should support Ceql code search')
     .withValidation(r => {
       expect(r).to.statusCode(200);

@@ -6,7 +6,6 @@ const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/journalVouchers.json`);
 
-
 suite.forElement('erp', 'journals', { payload: payload }, (test) => {
   let jpgFile = __dirname + '/assets/brady.jpg';
   test.should.supportSr();

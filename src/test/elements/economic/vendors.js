@@ -16,5 +16,4 @@ suite.forElement('erp', 'vendors', { payload: payload }, (test) => {
       const validValues = r.body.filter(obj => obj.name = 'madhuri');
       expect(validValues.length).to.equal(r.body.length);
     }).should.return200OnGet();
-
 });

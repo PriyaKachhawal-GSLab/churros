@@ -9,11 +9,8 @@ const customerPayload = tools.requirePayload(`${__dirname}/assets/customer.json`
 const invoiceDraftPayload = tools.requirePayload(`${__dirname}/assets/invoicesDrafts.json`);
 const payload = tools.requirePayload(`${__dirname}/assets/invoices.json`);
 
-suite.forElement('erp', 'invoices', {
-  payload: payload
-}, (test) => {
+suite.forElement('erp', 'invoices', { payload: payload }, (test) => {
   let Id, customerId, productId;
-
   before(() => cloud.post('/hubs/erp/products', productPayload)
     .then(r => productId = r.body.id)
     .then(r => cloud.post('/hubs/erp/customers', customerPayload))
@@ -38,6 +35,7 @@ suite.forElement('erp', 'invoices', {
       const validValues = r.body.filter(obj => obj.currency = 'DKK');
       expect(validValues.length).to.equal(r.body.length);
     }).should.return200OnGet();
+
   it('should support PUT  for /invoices/:id/', () => {
     return cloud.put(`${test.api}/${Id}`);
 

@@ -2,8 +2,8 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const expect = require('chakram').expect;
 const chakram = require('chakram');
+const expect = chakram.expect;
 
 const payload = tools.requirePayload(`${__dirname}/assets/paymentTerms.json`);
 

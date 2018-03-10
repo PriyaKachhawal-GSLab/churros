@@ -3,7 +3,6 @@
 const suite = require('core/suite');
 const expect = require('chakram').expect;
 
-
 suite.forElement('erp', 'vat-accounts', (test) => {
   test.should.supportSr();
   test.should.supportNextPagePagination(1);

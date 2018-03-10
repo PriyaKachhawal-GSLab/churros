@@ -2,9 +2,7 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-
 const expect = require('chakram').expect;
-
 
 suite.forElement('erp', 'product-groups', (test) => {
   test.should.supportSr();

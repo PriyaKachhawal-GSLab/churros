@@ -5,6 +5,7 @@ const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
 suite.forElement('erp', 'accounting-years', (test) => {
+  let id;
   test.should.supportSr();
   test.should.supportNextPagePagination(1);
   test.withOptions({ qs: { where: `fromDate = '2011-01-01' ` } })
@@ -14,6 +15,7 @@ suite.forElement('erp', 'accounting-years', (test) => {
       const validValues = r.body.filter(obj => obj.fromDate = '2011-01-01');
       expect(validValues.length).to.equal(r.body.length);
     }).should.return200OnGet();
+
   test.withOptions({ qs: { where: `accountNumber = 1010 ` } })
     .withName('should support Ceql accountNumber search')
     .withValidation(r => {
@@ -22,28 +24,33 @@ suite.forElement('erp', 'accounting-years', (test) => {
       expect(validValues.length).to.equal(r.body.length);
     }).should.return200OnGet();
 
-
-  it('should support S for /accounting-years/:year/entries', () => {
-    let id, pId;
+  before(() =>
     return cloud.get(`${test.api}`)
-      .then(r => id = r.body[0].id)
+      .then(r => id = r.body[0].id);
+  );
+  it('should support S for /accounting-years/:year/entries', () => {
 
-    .then(r => cloud.withOptions({ qs: { where: `date = '2016-12-31'` } }).get(`${test.api}/${id}/entries`))
+    return cloud.withOptions({ qs: { where: `date = '2016-12-31'` } }).get(`${test.api}/${id}/entries`)
       .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.date === '2016-12-31').length))
+      .then(r => cloud.withOptions({ qs: { where: `accountNumber = '1010'` } }).get(`${test.api}/${id}/entries`))
+      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.account.accountNumber === 1010).length));
+  });
 
-    .then(r => cloud.withOptions({ qs: { where: `accountNumber = '1010'` } }).get(`${test.api}/${id}/entries`))
-      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.account.accountNumber === 1010).length))
-      .then(r => cloud.get(`${test.api}/${id}/totals`))
+  it('should support S for /accounting-years/:year/totals', () => {
+    return cloud.get(`${test.api}/${id}/totals`)
       .then(r => cloud.withOptions({ qs: { where: `accountNumber = 1010` } }).get(`${test.api}/${id}/totals`))
-      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.account.accountNumber === 1010).length))
-      .then(r => cloud.get(`${test.api}/${id}/vouchers`))
+      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.account.accountNumber === 1010).length));
+  });
+  it('should support S for /accounting-years/:year/vouchers', () => {
+    return cloud.get(`${test.api}/${id}/vouchers`)
       .then(r => cloud.withOptions({ qs: { where: `date = '2016-12-31'` } }).get(`${test.api}/${id}/vouchers`))
       .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.date === '2016-12-31').length))
       .then(r => cloud.withOptions({ qs: { where: `accountNumber = 1010` } }).get(`${test.api}/${id}/vouchers`))
-      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.account.accountNumber === 1010).length))
-      .then(r => cloud.withOptions({ qs: { where: `accountNumber = 1010` } }).get(`${test.api}/${id}/totals`))
-      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.account.accountNumber === 1010).length))
-      .then(r => cloud.get(`${test.api}/${id}/periods`))
+      .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.account.accountNumber === 1010).length));
+  });
+  it('should support SR for /accounting-years/:year/periods and /accounting-years/:year/periods/:id/entries', () => {
+    let pId;
+    return cloud.get(`${test.api}/${id}/periods`)
       .then(r => pId = r.body[0].periodNumber)
       .then(r => cloud.withOptions({ qs: { where: `accountNumber = 1010` } }).get(`${test.api}/${id}/periods`))
       .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.accountingYear.year === id).length))

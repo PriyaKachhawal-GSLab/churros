@@ -4,7 +4,7 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const chakram = require('chakram');
-const expect = require('chakram').expect;
+const expect = chakram.expect;
 const payload = tools.requirePayload(`${__dirname}/assets/customerGroups.json`);
 payload.customerGroupNumber = tools.randomInt();
 

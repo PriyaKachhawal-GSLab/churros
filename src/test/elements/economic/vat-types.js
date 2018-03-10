@@ -20,6 +20,5 @@ suite.forElement('erp', 'vat-types', (test) => {
     return cloud.get(`${test.api}`)
       .then(r => Vid = r.body[0].id)
       .then(r => cloud.get(`${test.api}/${Vid}/vat-report-setups`));
-
   });
 });

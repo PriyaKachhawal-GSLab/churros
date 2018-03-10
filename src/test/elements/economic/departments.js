@@ -3,13 +3,11 @@
 const suite = require('core/suite');
 const expect = require('chakram').expect;
 
-
 suite.forElement('erp', 'departments', (test) => {
 
   test.should.supportSr();
   test.should.supportNextPagePagination(1);
-  test
-    .withOptions({ qs: { where: `name = 'Test' ` } })
+  test.withOptions({ qs: { where: `name = 'Test' ` } })
     .withName('should support Ceql name search')
     .withValidation(r => {
       expect(r).to.statusCode(200);
