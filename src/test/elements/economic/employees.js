@@ -13,6 +13,5 @@ suite.forElement('erp', 'employees', (test) => {
        expect(r).to.statusCode(200);
        const validValues = r.body.filter(obj => obj.name = 'test');
        expect(validValues.length).to.equal(r.body.length);
-     })
-     .should.return200OnGet();
+     }).should.return200OnGet();
 });
