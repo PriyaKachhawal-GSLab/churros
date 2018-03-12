@@ -1,0 +1,912 @@
+[
+  {
+    "listId": 1,
+    "metaData": {
+      "lastSizeChangeAt": 1520840234157,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1520840234108
+    },
+    "createdAt": 1513853621201,
+    "archived": false,
+    "deleteable": false,
+    "portalId": 4156235,
+    "name": "gd@kfd.com",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "type": "string",
+          "list": 0,
+          "operator": "EQ",
+          "beforeTimestamp": 0,
+          "firstOccurrenceBeforeTimestamp": 0,
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "form": "string",
+          "checkPastVersions": true,
+          "lastOccurrenceAfterTimestamp": 0,
+          "lastOccurrenceBeforeTimestamp": 0,
+          "property": "twitterhandle",
+          "maxOccurrences": 5,
+          "afterTimestamp": 0,
+          "minOccurrences": 3,
+          "value": "@hubspot"
+        }
+      ]
+    ],
+    "internalListId": 790,
+    "listType": "DYNAMIC",
+    "updatedAt": 1520840214133
+  },
+  {
+    "listId": 2,
+    "metaData": {
+      "lastSizeChangeAt": 1518682323942,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1518682323899
+    },
+    "createdAt": 1513853621355,
+    "archived": false,
+    "deleteable": false,
+    "portalId": 4156235,
+    "name": "ienster",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "internalListId": 257,
+    "listType": "DYNAMIC",
+    "updatedAt": 1518682304330
+  },
+  {
+    "listId": 3,
+    "metaData": {
+      "lastSizeChangeAt": 1513853637484,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1513853637130
+    },
+    "createdAt": 1513853621514,
+    "archived": false,
+    "deleteable": false,
+    "portalId": 4156235,
+    "name": "Weekly Subscribers - Default HubSpot Blog",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "blog_default_hubspot_blog_5488627814_subscription",
+          "type": "enumeration",
+          "value": "weekly",
+          "operator": "SET_ANY"
+        }
+      ]
+    ],
+    "internalListId": 3,
+    "listType": "DYNAMIC",
+    "updatedAt": 1513853621514
+  },
+  {
+    "listId": 4,
+    "metaData": {
+      "lastSizeChangeAt": 1515533602069,
+      "size": 1,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1513853637130
+    },
+    "createdAt": 1513853621786,
+    "archived": false,
+    "deleteable": false,
+    "portalId": 4156235,
+    "name": "Monthly Subscribers - Default HubSpot Blog",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "blog_default_hubspot_blog_5488627814_subscription",
+          "type": "enumeration",
+          "value": "monthly",
+          "operator": "SET_ANY"
+        }
+      ]
+    ],
+    "internalListId": 4,
+    "listType": "DYNAMIC",
+    "updatedAt": 1513853621786
+  },
+  {
+    "listId": 227,
+    "metaData": {
+      "lastSizeChangeAt": 1518413065774,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1518413065683
+    },
+    "createdAt": 1518413045953,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "internet",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 227,
+    "listType": "DYNAMIC",
+    "updatedAt": 1518413045953
+  },
+  {
+    "listId": 228,
+    "metaData": {
+      "lastSizeChangeAt": 1519689071358,
+      "size": 1,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1518417349286
+    },
+    "createdAt": 1518417329504,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "interneftut",
+    "dynamic": false,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 228,
+    "listType": "STATIC",
+    "updatedAt": 1519198336496
+  },
+  {
+    "listId": 229,
+    "metaData": {
+      "lastSizeChangeAt": 1518417657042,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1518417656994
+    },
+    "createdAt": 1518417638027,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "identerneftut",
+    "dynamic": false,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 229,
+    "listType": "STATIC",
+    "updatedAt": 1518417638027
+  },
+  {
+    "listId": 230,
+    "metaData": {
+      "lastSizeChangeAt": 1520834060277,
+      "size": 1,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1518418961885
+    },
+    "createdAt": 1518418943010,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "idensdterneftut",
+    "dynamic": false,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 230,
+    "listType": "STATIC",
+    "updatedAt": 1518418943010
+  },
+  {
+    "listId": 231,
+    "metaData": {
+      "lastSizeChangeAt": 1518419970608,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1518419970504
+    },
+    "createdAt": 1518419951235,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "ridensdterneftut",
+    "dynamic": false,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 231,
+    "listType": "STATIC",
+    "updatedAt": 1518419951235
+  },
+  {
+    "listId": 232,
+    "metaData": {
+      "lastSizeChangeAt": 1518420241951,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1518420241901
+    },
+    "createdAt": 1518420221796,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "rridensdterneftut",
+    "dynamic": false,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 232,
+    "listType": "STATIC",
+    "updatedAt": 1518420221796
+  },
+  {
+    "listId": 257,
+    "metaData": {
+      "lastSizeChangeAt": 1518696492556,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1518696492397
+    },
+    "createdAt": 1518696471857,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "iointernet.userNam",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 258,
+    "listType": "DYNAMIC",
+    "updatedAt": 1518696471857
+  },
+  {
+    "listId": 258,
+    "metaData": {
+      "lastSizeChangeAt": 1518696527421,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1518696527366
+    },
+    "createdAt": 1518696507256,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "iointerenet.userNam",
+    "dynamic": false,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 259,
+    "listType": "STATIC",
+    "updatedAt": 1518696507256
+  },
+  {
+    "listId": 259,
+    "metaData": {
+      "lastSizeChangeAt": 1518696643936,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1518696643761
+    },
+    "createdAt": 1518696622306,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "useernName",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 260,
+    "listType": "DYNAMIC",
+    "updatedAt": 1518696622306
+  },
+  {
+    "listId": 260,
+    "metaData": {
+      "lastSizeChangeAt": 1518696683975,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1518696683907
+    },
+    "createdAt": 1518696662970,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "useerynName",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 261,
+    "listType": "DYNAMIC",
+    "updatedAt": 1518696662970
+  },
+  {
+    "listId": 261,
+    "metaData": {
+      "lastSizeChangeAt": 1518696734770,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1518696734680
+    },
+    "createdAt": 1518696714872,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "useereynName",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 262,
+    "listType": "DYNAMIC",
+    "updatedAt": 1518696714872
+  },
+  {
+    "listId": 268,
+    "metaData": {
+      "lastSizeChangeAt": 1518771210993,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1518771210926
+    },
+    "createdAt": 1518771191244,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "tweqeters",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 270,
+    "listType": "DYNAMIC",
+    "updatedAt": 1518771191244
+  },
+  {
+    "listId": 347,
+    "metaData": {
+      "lastSizeChangeAt": 1519384928253,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1519384928177
+    },
+    "createdAt": 1519384906344,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "Nellie_Muller60",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 349,
+    "listType": "DYNAMIC",
+    "updatedAt": 1519384906344
+  },
+  {
+    "listId": 348,
+    "metaData": {
+      "lastSizeChangeAt": 0,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1519384930275
+    },
+    "createdAt": 1519384930275,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "cq8xq",
+    "dynamic": false,
+    "filters": [],
+    "authorId": 2910341,
+    "internalListId": 350,
+    "listType": "STATIC",
+    "updatedAt": 1519384930275
+  },
+  {
+    "listId": 353,
+    "metaData": {
+      "lastSizeChangeAt": 1519386303525,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1519386303362
+    },
+    "createdAt": 1519386283618,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "Thaddeus_Littel31",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 355,
+    "listType": "DYNAMIC",
+    "updatedAt": 1519386283618
+  },
+  {
+    "listId": 354,
+    "metaData": {
+      "lastSizeChangeAt": 0,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1519386302926
+    },
+    "createdAt": 1519386302926,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "8mjpc",
+    "dynamic": false,
+    "filters": [],
+    "authorId": 2910341,
+    "internalListId": 356,
+    "listType": "STATIC",
+    "updatedAt": 1519386302926
+  },
+  {
+    "listId": 359,
+    "metaData": {
+      "lastSizeChangeAt": 1519627519923,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1519627519867
+    },
+    "createdAt": 1519627500687,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "Kylie_Pagac",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 361,
+    "listType": "DYNAMIC",
+    "updatedAt": 1519627500687
+  },
+  {
+    "listId": 360,
+    "metaData": {
+      "lastSizeChangeAt": 0,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1519627524056
+    },
+    "createdAt": 1519627524056,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "koye1r",
+    "dynamic": false,
+    "filters": [],
+    "authorId": 2910341,
+    "internalListId": 362,
+    "listType": "STATIC",
+    "updatedAt": 1519627524056
+  },
+  {
+    "listId": 464,
+    "metaData": {
+      "lastSizeChangeAt": 1520020161147,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1520020161048
+    },
+    "createdAt": 1520020137315,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "Mauricio_Howell",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 466,
+    "listType": "DYNAMIC",
+    "updatedAt": 1520020137315
+  },
+  {
+    "listId": 465,
+    "metaData": {
+      "lastSizeChangeAt": 0,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1520020139398
+    },
+    "createdAt": 1520020139398,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "1wiw1t",
+    "dynamic": false,
+    "filters": [],
+    "authorId": 2910341,
+    "internalListId": 467,
+    "listType": "STATIC",
+    "updatedAt": 1520020139398
+  },
+  {
+    "listId": 512,
+    "metaData": {
+      "lastSizeChangeAt": 1520335948161,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1520335948091
+    },
+    "createdAt": 1520335928638,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "tweeters-CCT",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 514,
+    "listType": "DYNAMIC",
+    "updatedAt": 1520335928638
+  },
+  {
+    "listId": 513,
+    "metaData": {
+      "lastSizeChangeAt": 1520371854414,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1520371854085
+    },
+    "createdAt": 1520371829628,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "d-CCT",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 515,
+    "listType": "DYNAMIC",
+    "updatedAt": 1520371829628
+  },
+  {
+    "listId": 514,
+    "metaData": {
+      "lastSizeChangeAt": 1520373161832,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1520373161761
+    },
+    "createdAt": 1520373138567,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "f-CCT",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 516,
+    "listType": "DYNAMIC",
+    "updatedAt": 1520373138567
+  },
+  {
+    "listId": 785,
+    "metaData": {
+      "lastSizeChangeAt": 1520839835904,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1520839835860
+    },
+    "createdAt": 1520839816995,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "g@k.com",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "property": "twitterhandle",
+          "type": "string",
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 787,
+    "listType": "DYNAMIC",
+    "updatedAt": 1520839816995
+  },
+  {
+    "listId": 786,
+    "metaData": {
+      "lastSizeChangeAt": 1520839902318,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1520839902266
+    },
+    "createdAt": 1520839883099,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "g@kd.com",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "beforeTimestamp": 0,
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "form": "string",
+          "property": "twitterhandle",
+          "type": "string",
+          "list": 0,
+          "afterTimestamp": 0,
+          "value": "@hubspot",
+          "operator": "EQ"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 788,
+    "listType": "DYNAMIC",
+    "updatedAt": 1520839883099
+  },
+  {
+    "listId": 787,
+    "metaData": {
+      "lastSizeChangeAt": 1520840027531,
+      "size": 0,
+      "processing": "DONE",
+      "error": "",
+      "lastProcessingStateChangeAt": 1520840027478
+    },
+    "createdAt": 1520840008493,
+    "archived": false,
+    "portalId": 4156235,
+    "name": "g@kfd.com",
+    "dynamic": true,
+    "filters": [
+      [
+        {
+          "type": "string",
+          "list": 0,
+          "operator": "EQ",
+          "beforeTimestamp": 0,
+          "firstOccurrenceBeforeTimestamp": 0,
+          "filterFamily": "PropertyValue",
+          "withinTimeMode": "PAST",
+          "form": "string",
+          "checkPastVersions": true,
+          "lastOccurrenceAfterTimestamp": 0,
+          "lastOccurrenceBeforeTimestamp": 0,
+          "property": "twitterhandle",
+          "maxOccurrences": 5,
+          "afterTimestamp": 0,
+          "minOccurrences": 3,
+          "value": "@hubspot"
+        }
+      ]
+    ],
+    "authorId": 2910341,
+    "internalListId": 789,
+    "listType": "DYNAMIC",
+    "updatedAt": 1520840008493
+  }
+]
