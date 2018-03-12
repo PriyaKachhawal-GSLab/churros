@@ -6,6 +6,7 @@ const addressModel = require('./assets/models/address.json');
 const contactModel = require('./assets/models/contact.json');
 const leadModel = require('./assets/models/lead.json');
 const statusModel = require('./assets/models/status.json');
+const R = require('ramda');
 
 const chakram = require('chakram');
 const expect = chakram.expect;
@@ -23,8 +24,9 @@ suite.forPlatform('elements/models', {}, (test) => {
   after(() => cloud.delete(`elements/${elementId}/models/${addressModelId}`)
     .then(() => cloud.delete(`elements/${elementId}/models/${statusModelId}`)));
 
-  it('should support referencing a related model in the sampleValue of model fields', () => {
+  it('should managing relationships correctly when referencing related models in the sampleValue of model fields', () => {
     let contactModelId, leadModelId;
+
     contactModel.fields = [{
         "vendorName": "churrosVendorStatusId",
         "dataType": {
@@ -55,6 +57,33 @@ suite.forPlatform('elements/models', {}, (test) => {
         "relatedModelId": addressModelId
     }];
 
+    const contactLeadIdField = leadId => {
+        return {
+            "vendorName": "churrosContactLeadId",
+            "dataType": {
+                "jsonType": "string",
+                "format": "string"
+            },
+            "sampleValue": "$churrosLead.id",
+            "relatedModelId": leadModelId
+        };
+    };
+
+    const addFieldToPutPayload = (field, fields) => {
+        return {
+            commitMessage: 'add a field',
+            data: R.append(field, fields)
+        };
+    };
+
+    const removeFieldFromPutPayload = (fieldName, fields) => {
+        const fieldToRemove = R.find(R.propEq('vendorName', fieldName))(fields);
+        return {
+            commitMessage: 'remove a field',
+            data: R.without([fieldToRemove], fields)
+        };
+    };
+
     const contactValidator = r => {
         expect(r).to.have.statusCode(200);
         expect(r.body.childModelIds).to.include(addressModelId);
@@ -68,11 +97,26 @@ suite.forPlatform('elements/models', {}, (test) => {
         expect(r.body.childModelIds).to.include(contactModelId);
     };
 
-    const contactValidator2 = r => {
+    const contactValidatorParent = r => {
         expect(r).to.have.statusCode(200);
         expect(r.body.childModelIds).to.include(addressModelId);
         expect(r.body.childModelIds).to.include(statusModelId);
         expect(r.body.parentModelIds).to.include(leadModelId);
+    };
+
+    const contactValidatorCircular = r => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body.childModelIds).to.include(addressModelId);
+        expect(r.body.childModelIds).to.include(statusModelId);
+        expect(r.body.childModelIds).to.include(leadModelId);
+        expect(r.body.childModelIds.length).to.equal(3);
+        expect(r.body.parentModelIds).to.include(leadModelId);
+    };
+
+    const validatorNoAddress = r => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body.childModelIds).to.not.include(addressModelId);
+        expect(r.body.childModelIds).to.include(statusModelId);
     };
 
     return cloud.post(`/elements/${elementId}/models`, contactModel)
@@ -84,7 +128,17 @@ suite.forPlatform('elements/models', {}, (test) => {
         .then(() => cloud.post(`/elements/${elementId}/models`, leadModel))
         .then(r => leadModelId = r.body.id)
         .then(() => cloud.get(`/elements/${elementId}/models/${leadModelId}`, leadValidator))
-        .then(() => cloud.get(`/elements/${elementId}/models/${contactModelId}`, contactValidator2))
+        .then(() => cloud.get(`/elements/${elementId}/models/${contactModelId}`, contactValidatorParent))
+
+        // test a circular reference
+        .then(r => cloud.put(`/elements/${elementId}/models/${contactModelId}/fields`, addFieldToPutPayload(contactLeadIdField(leadModelId), r.body.fields)))
+        .then(() => cloud.get(`/elements/${elementId}/models/${contactModelId}`, contactValidatorCircular))
+
+        // test removing a field with relationship and ensure its removed from parent and all top parents
+        .then(r => cloud.put(`/elements/${elementId}/models/${contactModelId}/fields`, removeFieldFromPutPayload('churrosVendorAddress', r.body.fields)))
+        .then(() => cloud.get(`/elements/${elementId}/models/${contactModelId}`, validatorNoAddress))
+        .then(() => cloud.get(`/elements/${elementId}/models/${leadModelId}`, validatorNoAddress))
+
         .then(() => cloud.delete(`elements/${elementId}/models/${contactModelId}`))
         .then(() => cloud.delete(`elements/${elementId}/models/${leadModelId}`))
         .catch(e => {
