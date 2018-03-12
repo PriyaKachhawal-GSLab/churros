@@ -1,0 +1,10 @@
+{
+  "description": "test description",
+  "external_sync_identifier": "BACK",
+ 
+  "invitability_level": "admins_only",
+  "member_viewability_level": "admins_only",
+  "name": "Group1",
+  "provenance": "Active Directory",
+"type" : "Group"
+}
