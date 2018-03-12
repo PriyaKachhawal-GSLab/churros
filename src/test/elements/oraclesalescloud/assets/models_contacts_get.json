@@ -1,0 +1,293 @@
+ {
+    "CreationDate": "2015-10-16T17:48:26.946+00:00",
+    "PartyNumberKey": "530",
+    "ContactUniqueName": "George Smith",
+    "NamedFlag": false,
+    "PartyStatus": "A",
+    "FavoriteContactFlag": "true",
+    "AccountSourceSystem": "RNOW",
+    "Department": "Store",
+    "FormattedWorkPhoneNumber": "+1 (415) 343-5524",
+    "SalesProfileStatus": "ACTIVE",
+    "AccountPartyId": 100000004495093,
+    "links": [
+      {
+        "kind": "item",
+        "rel": "self",
+        "name": "contacts",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530",
+        "properties": {
+          "changeIndicator": "ACED0005737200136A6176612E7574696C2E41727261794C6973747881D21D99C7619D03000149000473697A65787000000008770400000008737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B02000078700000000D7371007E00020000000E7371007E0002000000057371007E0002000000037372001B6F7261636C652E6A626F2E646F6D61696E2E4E756C6C56616C75655899C1C58DAABEEB02000149000A6D53514C54797065496478700000000C71007E00097371007E00020000000371007E000978"
+        }
+      },
+      {
+        "kind": "item",
+        "rel": "canonical",
+        "name": "contacts",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "JobTitleCodeLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/JobTitleCodeLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "FaxCountryCodeLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/FaxCountryCodeLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "WorkPhoneCountryCodeLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/WorkPhoneCountryCodeLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "HomePhoneCountryCodeLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/HomePhoneCountryCodeLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "SalesProfileTypeLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/SalesProfileTypeLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "DoNotEmailFlagLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/DoNotEmailFlagLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "SalesBuyingRoleCodeLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/SalesBuyingRoleCodeLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "CertificationLevelLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/CertificationLevelLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "CurrenciesLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/CurrenciesLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "GenderLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/GenderLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "DepartmentCodeLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/DepartmentCodeLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "MobileCountryCodeLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/MobileCountryCodeLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "DoNotContactFlagLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/DoNotContactFlagLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "CertificationReasonCodeLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/CertificationReasonCodeLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "RegistrationStatusLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/RegistrationStatusLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "DoNotCallFlagLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/DoNotCallFlagLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "MaritalStatusLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/MaritalStatusLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "SalesProfileStatusLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/SalesProfileStatusLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "DataCloudStatusLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/DataCloudStatusLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "StatusLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/StatusLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "RentOwnIndLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/RentOwnIndLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "PreferredContactMethodLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/PreferredContactMethodLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "PersonPreNameAdjunctLookupVO",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/PersonPreNameAdjunctLookupVO"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "RatedCurrenciesLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/RatedCurrenciesLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "ContactRoleLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/ContactRoleLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "DoNotMailFlagLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/DoNotMailFlagLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "SalesAffinityCodeLookupLOV",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/SalesAffinityCodeLookupLOV"
+      },
+      {
+        "kind": "collection",
+        "rel": "lov",
+        "name": "SearchFilters",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/lov/SearchFilters"
+      },
+      {
+        "kind": "collection",
+        "rel": "child",
+        "name": "Attachment",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/child/Attachment"
+      },
+      {
+        "kind": "collection",
+        "rel": "child",
+        "name": "PictureAttachment",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/child/PictureAttachment"
+      },
+      {
+        "kind": "collection",
+        "rel": "child",
+        "name": "PrimaryAddress",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/child/PrimaryAddress"
+      },
+      {
+        "kind": "collection",
+        "rel": "child",
+        "name": "SalesTeamMember",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/child/SalesTeamMember"
+      },
+      {
+        "kind": "collection",
+        "rel": "child",
+        "name": "Note",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/child/Note"
+      },
+      {
+        "kind": "collection",
+        "rel": "child",
+        "name": "CustomerClassification",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/child/CustomerClassification"
+      },
+      {
+        "kind": "collection",
+        "rel": "child",
+        "name": "Address",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/child/Address"
+      },
+      {
+        "kind": "collection",
+        "rel": "child",
+        "name": "Relationship",
+        "href": "https://ucf5-fap0642-crm.oracledemos.com:443/crmCommonApi/resources/11.1.11/contacts/530/child/Relationship"
+      }
+    ],
+    "CreatedByModule": "HZ_IMPORT",
+    "ExistingCustomerFlag": false,
+    "DoNotMailFlag": false,
+    "LastUpdatedBy": "john.dunbar",
+    "EmailContactPointType": "EMAIL",
+    "CreatedBy": "MANDY.STEWARD",
+    "DeceasedFlag": false,
+    "EmailAddress": "demousercpg@oracleads.com",
+    "DeleteFlag": true,
+    "HeadOfHouseholdFlag": false,
+    "LastAssignmentDate": "2015-10-16",
+    "LastName": "Smith",
+    "OwnerEmailAddress": "fap0642-lisa.jones@oracleads.com",
+    "ContactIsPrimaryForAccount": "N",
+    "AccountSourceSystemReferenceValue": "197",
+    "AccountName": "Axcense Foods123",
+    "LastUpdateLogin": "-1",
+    "OwnerName": "Lisa Jones",
+    "ExistingCustomerFlagLastUpdateDate": "2015-10-16",
+    "OwnerPartyNumber": "20",
+    "WorkPhoneNumber": "3435524",
+    "SalesProfileNumber": "100020",
+    "AssignmentExceptionFlag": false,
+    "JobTitle": "Accounts Payable Clerk, Store",
+    "WorkPhoneAreaCode": "415",
+    "SourceObjectType": "SALES_PARTY_CONTACT",
+    "AccountPartyNumber": "529",
+    "UpdateFlag": true,
+    "DoNotCallFlag": false,
+    "WorkPhoneCountryCode": "1",
+    "PersonProfileId": 100000004495094,
+    "PartyType": "PERSON",
+    "OwnerPartyId": 300000001367905,
+    "FirstName": "George",
+    "SalesBuyingRoleCode": "KEY_DECISION_MAKER",
+    "WorkPhoneContactPointType": "PHONE",
+    "SourceSystemReferenceValue": "CON_2207",
+    "Type": "ZCA_CONTACT",
+    "PartyNumber": "530",
+    "DoNotContactFlag": false,
+    "PartyId": 100000004495094,
+    "DoNotEmailFlag": false,
+    "SourceSystem": "RNOW",
+    "ContactName": "George Smith",
+    "SellToPartySiteId": 100000004496293,
+    "SalesAffinityCode": "FAVORABLE",
+    "LastUpdateDate": "2017-08-08T17:43:43.481+00:00"
+  }

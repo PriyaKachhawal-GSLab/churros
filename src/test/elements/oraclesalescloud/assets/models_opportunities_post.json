@@ -1,0 +1,42 @@
+{
+  "SalesMethodId": 300000000118806,
+  "OptyLastUpdateDate": "2018-03-05T09:59:26.001+00:00",
+  "UpsideAmount": 0,
+  "ExpectAmount": 0,
+  "StatusCode": "OPEN",
+  "Name": "opt46",
+  "CurrencyCode": "USD",
+  "OwnerResourcePartyId": 300000001367905,
+  "PrimaryOrganizationId": 300000001341151,
+  "links": [
+    {
+      "kind": "item",
+      "rel": "self",
+      "name": "opportunities",
+      "href": "https://ucf5-fap0642-crm.oracledemos.com:443/salesApi/resources/11.1.11/opportunities/17002",
+      "properties": {
+        "changeIndicator": "ACED0005737200136A6176612E7574696C2E41727261794C6973747881D21D99C7619D03000149000473697A65787000000002770400000002737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B0200007870000000017371007E00020000000178"
+      }
+    },
+    {
+      "kind": "item",
+      "rel": "canonical",
+      "name": "opportunities",
+      "href": "https://ucf5-fap0642-crm.oracledemos.com:443/salesApi/resources/11.1.11/opportunities/17002"
+    }
+  ],
+  "DownsideAmount": 0,
+  "OptyNumber": "170028700",
+  "BudgetedFlag": false,
+  "OptyCreatedBy": "lisa.jones",
+  "WinProb": 0,
+  "OptyCreationDate": "2018-03-05T09:59:26+00:00",
+  "OptyLastUpdatedBy": "lisa.jones",
+  "SalesChannelCd": "ZPM_DIRECT_CHANNEL_TYPES",
+  "ForecastOverrideCode": "NEVER",
+  "Revenue": 0,
+  "ChampionFlag": false,
+  "PrimaryRevenueId": 300000081315687,
+  "Registered": "NO",
+  "EffectiveDate": "2018-03-25"
+}
