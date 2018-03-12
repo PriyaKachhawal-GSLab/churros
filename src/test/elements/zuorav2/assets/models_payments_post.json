@@ -1,0 +1,18 @@
+{
+    "Status": "Processed",
+    "AccountId": "8f12a6d205cc9c986cd7395fb07f0752",
+    "AccountingCode": "Credit Card",
+    "UpdatedDate": "2017-02-26T21:39:39.000-08:00",
+    "PaymentMethodId": "8f12a6d2d9d47bcc7a4df4aa26a2efd5",
+    "UpdatedById": "2c92c0955fa5fd32015fbcca3d4b2ce2",
+    "Amount": 101,
+    "AppliedCreditBalanceAmount": 101,
+
+    "Type": "Electronic",
+    "CreatedById": "2c92c0955fa5fd32015fbcca3d4b2ce2",
+    "ReferenceId": "6444602.832957139",
+    "Gateway": "Test Gateway",
+    "CreatedDate": "2017-12-21T21:39:39.000-08:00",
+
+    "EffectiveDate": "2017-12-21"
+  }
