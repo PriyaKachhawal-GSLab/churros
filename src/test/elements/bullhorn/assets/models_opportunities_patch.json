@@ -1,0 +1,44 @@
+{
+  "numOpenings": 1,
+  "description": "if you have to ask then I can;",
+  "salary": 0,
+  "type": "Full-time",
+  "title": "model sample opportunity NEW PATCHED",
+  "estimatedDuration": 2,
+  "taxStatus": "W2",
+  "expectedCloseDate": 1521608400000,
+  "isDeleted": false,
+  "clientContact": {
+    "firstName": "Your",
+    "lastName": "Mom",
+    "id": 483
+  },
+  "onSite": "On-Site",
+  "actualCloseDate": 1522213200000,
+  "yearsRequired": 0,
+  "owner": {
+    "firstName": "Jim",
+    "lastName": "MacLeod",
+    "id": 1
+  },
+  "reasonClosed": "Won:Placed",
+  "committed": false,
+  "clientCorporation": {
+    "name": "Imported Contacts",
+    "id": 4
+  },
+  "address": {
+    "countryID": 1
+  },
+  "dealValue": 1.11,
+  "estimatedStartDate": 1519880400000,
+  "estimatedHoursPerWeek": 40,
+  "priority": 0,
+  "salaryUnit": "Yearly",
+  "willRelocate": false,
+  "taxRate": 0,
+  "isOpen": true,
+  "expectedPayRate": 0,
+  "effectiveDate": 1520665200000,
+  "status": "Negotiating"
+}
