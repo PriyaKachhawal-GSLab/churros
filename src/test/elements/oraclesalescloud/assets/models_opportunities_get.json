@@ -1,0 +1,70 @@
+{
+  "CreationDate": "2018-03-08T19:35:04+00:00",
+  "SalesMethodId": 300000000118806,
+  "OptyLastUpdateDate": "2018-03-05T09:59:26.001+00:00",
+  "AverageDaysAtStage": 30,
+  "SourceType": "OPPORTUNITY",
+  "UpsideAmount": 0,
+  "ExpectAmount": 0,
+  "StatusCode": "OPEN",
+  "PartyName1": "Lisa Jones",
+  "StgOrder": 1,
+  "Name": "opt46",
+  "CurrencyCode": "USD",
+  "QuotaFactor": 3,
+  "UpdateFlag": true,
+  "StageStatusCd": "OPEN",
+  "OwnerResourcePartyId": 300000001367905,
+  "PrimaryOrganizationId": 300000001341151,
+  "links": [
+    {
+      "kind": "item",
+      "rel": "self",
+      "name": "opportunities",
+      "href": "https://ucf5-fap0642-crm.oracledemos.com:443/salesApi/resources/11.1.11/opportunities/170028700",
+      "properties": {
+        "changeIndicator": "ACED0005737200136A6176612E7574696C2E41727261794C6973747881D21D99C7619D03000149000473697A65787000000002770400000002737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B0200007870000000017372001B6F7261636C652E6A626F2E646F6D61696E2E4E756C6C56616C75655899C1C58DAABEEB02000149000A6D53514C54797065496478700000000C78"
+      }
+    },
+    {
+      "kind": "item",
+      "rel": "canonical",
+      "name": "opportunities",
+      "href": "https://ucf5-fap0642-crm.oracledemos.com:443/salesApi/resources/11.1.11/opportunities/170028700"
+    },
+    {
+      "kind": "collection",
+      "rel": "lov",
+      "name": "SalesStageLOV",
+      "href": "https://ucf5-fap0642-crm.oracledemos.com:443/salesApi/resources/11.1.11/opportunities/170028700/lov/SalesStageLOV"
+    }
+  ],
+  "DownsideAmount": 0,
+  "LookupCategory": "OPEN",
+  "OptyNumber": "170028700",
+  "LastUpdatedBy": "lisa.jones",
+  "BudgetedFlag": false,
+  "OptyCreatedBy": "lisa.jones",
+  "CreatedBy": "lisa.jones",
+  "MaximumDaysInStage": 800,
+  "SalesStage": "01 - Qualification",
+  "RcmndWinProb": 0,
+  "SalesMethod": "Standard Sales Process",
+  "PhaseCd": "QUALIFICATION-DISCOVERY",
+  "SalesStageId": 300000000118812,
+  "OptyId": 300000081332930,
+  "WinProb": 0,
+  "EmailAddress": "fap0642-lisa.jones@oracleads.com",
+  "DeleteFlag": true,
+  "OptyCreationDate": "2018-03-05T09:59:26+00:00",
+  "OptyLastUpdatedBy": "lisa.jones",
+  "SalesChannelCd": "ZPM_DIRECT_CHANNEL_TYPES",
+  "ForecastOverrideCode": "NEVER",
+  "Revenue": 0,
+  "ChampionFlag": false,
+  "PrimaryRevenueId": 300000081315687,
+  "DescriptionText": "Looking for the Right Contacts, Characteristics, Determining the Need, Budget and Sponsor",
+  "Registered": "NO",
+  "LastUpdateDate": "2018-03-08T19:35:04.429+00:00",
+  "EffectiveDate": "2018-03-25"
+}
