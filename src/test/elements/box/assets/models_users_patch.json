@@ -1,27 +1,21 @@
 {
-  "address": "Test address",
-  "can_see_managed_users": true,
-  "enterprise": {
-        "type": "enterprise",
-        "id": "17077211",
-        "name": "seanrose enterprise"
-    },
-  "id": "string",
-  "is_exempt_from_device_limits": true,
-  "is_exempt_from_login_verification": true,
-  "is_external_collab_restricted": true,
-  "is_password_reset_required": true,
-  "is_sync_enabled": true,
-  "job_title": "Title",
-  "language": "en",
-  "login":"string1@box.com",
-  "name": "test name",
-  "phone": "13131233",
-  "role": "coadmin",
-  "space_amount": 0,
-  "status": "active",
+ "address": "Test address",
+ "can_see_managed_users": true,
+ "is_exempt_from_device_limits": true,
+ "is_exempt_from_login_verification": true,
+ "is_external_collab_restricted": true,
+ "is_password_reset_required": true,
+ "is_sync_enabled": true,
+ "job_title": "Title",
+ "language": "en",
+ "login":"User12@box.com",
+ "name": "test name",
+ "phone": "13131233",
+ "role": "coadmin",
+ "space_amount": 0,
+ "status": "active",
  "timezone": "America/Los_Angeles",
-  "tracking_codes": [
-    {}
-  ]
+ "tracking_codes": [
+ {}
+ ]
 }
