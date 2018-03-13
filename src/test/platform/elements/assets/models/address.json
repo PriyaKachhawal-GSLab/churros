@@ -1,0 +1,16 @@
+{
+    "name": "churrosContactAddress",
+    "vendorName":"churrosVendorAddress",
+    "modelFields": [
+      {
+        "name": "churrosStreet",
+        "vendorName": "churrosVendorStreet",
+        "dataType": {
+          "jsonType":"string",
+          "format": "string"
+        },
+        "sampleValue": "123 Main St"
+      } 
+    ],
+    "commitMessage": "initial commit"
+  }
