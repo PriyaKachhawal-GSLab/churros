@@ -1,0 +1,16 @@
+{
+  "dealId": 247423782,
+  "associations": {
+   
+  },
+  "properties": {
+    "dealname": "teru",
+    "amount": "5657",
+    "dealstage": "contractsent",
+    "pipeline": "default",
+    "dealtype": "newbusiness",
+    "description": "df",
+    "closed_lost_reason": "dfsg",
+    "closed_won_reason": "vvhsvc"
+  }
+}
