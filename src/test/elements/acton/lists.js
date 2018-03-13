@@ -7,6 +7,7 @@ const contactPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`)
 const contactUpdatePayload = tools.requirePayload(`${__dirname}/assets/contactsUpdate.json`);
 const fs = require('fs');
 const cloud = require('core/cloud');
+const expect = require('chakram').expect;
 
 suite.forElement('marketing', 'lists', { payload: payload }, (test) => {
 
@@ -30,6 +31,7 @@ suite.forElement('marketing', 'lists', { payload: payload }, (test) => {
     opts = { formData: { list: JSON.stringify(listCreate), file: fs.createReadStream(documentPath) } };
     return cloud.withOptions(opts).post(test.api, undefined)
       .then(r => {
+        expect(r.body.id).to.not.be.null;
         listId = r.body.listId;
         cloud.delete(`${test.api}/${listId}`);
       });
