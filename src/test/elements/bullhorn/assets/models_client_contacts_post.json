@@ -1,0 +1,43 @@
+{
+  "address": {
+    "address1": "string",
+    "address2": "string",
+    "city": "string",
+    "countryCode": "US",
+    "countryID": 1,
+    "countryName": "United States",
+    "state": "string",
+    "zip": "string"
+  },
+  "clientCorporation": {
+    "id": 51
+  },
+  "comments": "string",
+  "description": "string",
+  "desiredSkills": [
+    "string"
+  ],
+  "desiredSpecialties": [
+    "string"
+  ],
+  "division": "Accounting",
+  "email": "string",
+  "email2": "string",
+  "fax": "string",
+  "firstName": "string",
+  "id": 0,
+  "lastName": "string",
+  "middleName": "string",
+  "mobile": "string",
+  "nickName": "string",
+  "occupation": "string",
+  "owner": {
+    "firstName": "REST",
+    "lastName": "API User",
+    "id": 4
+  },
+  "phone": "string",
+  "phone2": "string",
+  "source": "string",
+  "status": "New Lead"
+}
