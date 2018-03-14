@@ -1,8 +1,6 @@
 'use strict';
 
 const suite = require('core/suite');
-const tools = require('core/tools');
-const cloud = require('core/cloud');
 const contractPayload = require('./assets/contracts');
 
 suite.forElement('helpdesk', 'contracts', { payload: contractPayload }, (test) => {
