@@ -7,7 +7,7 @@ const expect = require('chakram').expect;
 let payload = tools.requirePayload(`${__dirname}/assets/voucher-attachments.json`);
 const voucherPayload = tools.requirePayload(`${__dirname}/assets/voucher.json`);
 
-suite.forElement('erp', 'voucher-attachments', { payload: payload }, (test) => {
+suite.forElement('erp', 'voucher-attachments', { skip: true, payload: payload }, (test) => {
   let textFile = __dirname + '/assets/test.txt';
   let opts = { qs: { folderId: 'inbox' } };
   let fileId;
