@@ -13,6 +13,7 @@ const crudsObject = (url, schema, createPayload, updatePayload) => {
   let object;
   return cloud.post(url, createPayload, schema)
     .then(r => object = r.body)
+    .then(r => cloud.get(url))
     .then(r => cloud.get(url + '/' + object.id))
     .then(r => cloud.put(url + '/' + object.id, updatePayload, schema))
     .then(r => cloud.delete(url + '/' + object.id));
