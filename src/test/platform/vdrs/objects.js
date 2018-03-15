@@ -11,6 +11,6 @@ const objectPayload = require('core/tools').requirePayload(`${__dirname}/assets/
 suite.forPlatform('vdrs/objects', {payload: objectPayload}, test => {
 
   // NOTE - you need the 'vdrAdmin' role to run these tests
-  test.withOptions({churros: {updatePayload: R.assoc('objectName', 'updatedObjectName2', objectPayload)}}).should.supportCrud(chakram.put);
+  test.withOptions({churros: {updatePayload: R.assoc('objectName', 'updatedObjectName2', objectPayload)}}).should.supportCruds(chakram.put);
 
 });
