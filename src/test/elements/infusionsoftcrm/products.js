@@ -4,7 +4,7 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const payload = require('./assets/products');
 
-suite.forElement('crm', 'products', { payload: payload }, (test) => {
+suite.forElement('crm', 'products', { skip: true, payload: payload }, (test) => {
 
   it('Should allow to GET and PATCH /products/{id}/inventory', () => {
     return cloud.get(`${test.api}/4/inventory`)
