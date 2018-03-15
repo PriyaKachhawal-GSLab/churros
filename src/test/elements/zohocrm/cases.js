@@ -3,7 +3,6 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const casesPayload = tools.requirePayload(`${__dirname}/assets/cases.json`);
-const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
 suite.forElement('crm', 'cases', { payload: casesPayload }, (test) => {
