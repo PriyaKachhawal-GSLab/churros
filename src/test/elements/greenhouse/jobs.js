@@ -6,11 +6,11 @@ const postingsPayload = require('./assets/postings');
 const cloud = require('core/cloud');
 const chakram = require('chakram');
 const expect = require('chakram').expect;
-const queryString={ qs: { 'user_id': 461299 } }
+const queryString={ qs: { 'user_id': 461299 } };
 
 suite.forElement('general', 'jobs', { payload: payload, }, (test) => {
 	
-	let jobId, resumeFile = __dirname + '/assets/resume.txt';;
+	let jobId;
 	before(() => cloud.post(test.api, payload)
     .then(r => jobId = r.body.id));
    
