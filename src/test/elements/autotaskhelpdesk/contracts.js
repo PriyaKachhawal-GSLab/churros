@@ -4,6 +4,7 @@ const suite = require('core/suite');
 const contractPayload = require('./assets/contracts');
 const expect = require('chakram').expect;
 
+//skipping the testcases as there is no delete API present
 suite.forElement('helpdesk', 'contracts', { payload: contractPayload, skip: true }, (test) => {	
 	 test.should.supportCrus();
 	 test.should.supportPagination('id');
