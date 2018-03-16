@@ -89,7 +89,7 @@ suite.forElement('ecommerce', 'orders', { payload: payload}, (test) => {
       //For delete orders to be success ,Sales Tax Calculation should be set to 'manual' in the vendor account
       .then(r => cloud.delete(`${test.api}/${orderId}/shipments/${shipmentId}`));
   });
-  it('should support CRUDS for orders/{id}/transations', () => {
+  it('should support search for orders/{id}/transations', () => {
     return cloud.get(`${test.api}/${orderId}/transactions`);
   });
   after(() => cloud.delete(`${test.api}/${orderId}`));
