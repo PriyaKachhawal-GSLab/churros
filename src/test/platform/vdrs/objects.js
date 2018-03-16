@@ -1,9 +1,7 @@
 'use strict';
 
 const suite = require('core/suite');
-const cloud = require('core/cloud');
 const chakram = require('chakram');
-const expect = chakram.expect;
 const R = require('ramda');
 
 const objectPayload = require('core/tools').requirePayload(`${__dirname}/assets/object.json`);

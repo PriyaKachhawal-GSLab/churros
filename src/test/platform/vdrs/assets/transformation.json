@@ -1,0 +1,23 @@
+{
+	"vendorName": "churrosContactTransform",
+	"elementKey": "closeio",
+	"fields": [{
+			"type": "string",
+			"path": "email",
+			"vendorPath": "Email",
+			"vendorType": "string"
+		},
+		{
+			"type": "string",
+			"path": "id",
+			"vendorPath": "Id",
+			"vendorType": "string"
+		},
+		{
+			"type": "string",
+			"path": "name",
+			"vendorPath": "Name",
+			"vendorType": "string"
+		}
+	]
+}
