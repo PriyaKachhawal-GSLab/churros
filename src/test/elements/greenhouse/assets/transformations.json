@@ -1,0 +1,10 @@
+{
+  "jobs": {
+    "vendorName": "openings",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "id"
+    }]
+  }
+  
+}
