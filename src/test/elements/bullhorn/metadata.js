@@ -1,6 +1,5 @@
 'use strict';
 const suite = require('core/suite');
-const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 var objects = [
     "candidates",
@@ -23,5 +22,4 @@ objects.forEach(obj => {
             .withName('should support return only custom fields')
             .should.return200OnGet();
     });
-
 });
