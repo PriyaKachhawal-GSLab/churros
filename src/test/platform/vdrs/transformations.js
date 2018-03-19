@@ -11,7 +11,6 @@ const transformationPayload = require('core/tools').requirePayload(`${__dirname}
 suite.forPlatform('vdrs/objects/{id}/transformations', {payload: objectPayload}, test => {
     let objectId;
     before(() => {
-      const opts = { qs: { where: 'defaultAccount=true' } };
       return cloud.post('/vdrs/objects', objectPayload)
         .then(r => {
           objectId = r.body.id;
