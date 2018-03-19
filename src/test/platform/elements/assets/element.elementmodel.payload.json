@@ -7,6 +7,7 @@
   "nullsRequired": false,
   "searchableJoins": "and, or",
   "vendorDocumentationUrl": "http://cloud-elements.com/developers",
+  "modelType": "standard",
   "modelFields": [
     {
       "name": "churrosDrink<<random.alphaNumeric##4>>",
