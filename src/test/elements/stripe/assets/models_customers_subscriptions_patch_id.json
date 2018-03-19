@@ -1,0 +1,9 @@
+{
+  "quantity": 1,
+  "cancel_at_period_end": false,
+  "coupon": "15OFF",
+  "trial_end": 1523453200,
+  "billing": "charge_automatically",
+  "tax_percent": 23,
+  "plan": "ruby-jar2"
+}
