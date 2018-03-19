@@ -126,6 +126,7 @@ const testTransformationForInstance = (objectName, objDefUrl, transUrl) => {
     // test normal transformation
     .then(r => cloud.post(transUrl, genDefaultTrans({})))
     .then(r => cloud.get('hubs/crm/' + objectName, r => {
+      expect(r).to.have.statusCode(200);
       expect(r.body).to.not.be.empty;
       r.body.forEach(item => {
         expect(item.churrosId).to.not.be.empty;
@@ -136,6 +137,7 @@ const testTransformationForInstance = (objectName, objDefUrl, transUrl) => {
     // test remove config
     .then(r => cloud.put(transUrl, genTransWithRemove({})))
     .then(r => cloud.get('hubs/crm/' + objectName, r => {
+      expect(r).to.have.statusCode(200);
       expect(r.body).to.not.be.empty;
       r.body.forEach(item => {
         expect(item.churrosMod).to.be.empty;
@@ -144,6 +146,7 @@ const testTransformationForInstance = (objectName, objDefUrl, transUrl) => {
     // test passThrough config
     .then(r => cloud.put(transUrl, genTransWithPassThrough({})))
     .then(r => cloud.get('hubs/crm/' + objectName, r => {
+      expect(r).to.have.statusCode(200);
       expect(r.body).to.not.be.empty;
       r.body.forEach(item => {
         expect(item.churrosMod).to.be.empty;
@@ -238,6 +241,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
     return cloud.post(getObjectDefUrl('organizations', objectName), genBaseObjectDef({}))
       .then(r => cloud.post(getTransformUrl('organizations', objectName, elementKey), genBaseTrans({})))
       .then(r => cloud.get(`hubs/crm/${objectName}`, r => {
+        expect(r).to.have.statusCode(200);
         expect(r.body).to.not.be.null;
         r.body.forEach(item => {
           expect(item.churrosId).to.not.be.empty;
@@ -257,6 +261,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
         return cloud.post(getTransformUrl('accounts/' + accountId, objectName, elementKey), trans);
       })
       .then(r => cloud.get(`accounts/${accountId}/elements/${elementKey}/transformations/${objectName}`, r => {
+        expect(r).to.have.statusCode(200);
         expect(r.body).to.not.be.null;
         let foundId = false,
           foundName = false;
@@ -268,6 +273,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
         expect(foundName);
       }))
       .then(r => cloud.get('hubs/crm/' + objectName, r => {
+        expect(r).to.have.statusCode(200);
         expect(r.body).to.not.be.null;
         r.body.forEach(item => {
           expect(item.churrosId).to.not.be.empty;
@@ -285,6 +291,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
         return cloud.post(getTransformUrl('instances/' + sfdcId, objectName), trans);
       })
       .then(r => cloud.get(`instances/${sfdcId}/transformations/${objectName}`, r => {
+        expect(r).to.have.statusCode(200);
         expect(r.body).to.not.be.null;
         let foundId = false,
           foundName = false,
@@ -299,6 +306,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
         expect(foundMod);
       }))
       .then(r => cloud.get('hubs/crm/' + objectName, r => {
+        expect(r).to.have.statusCode(200);
         expect(r.body).to.not.be.null;
         r.body.forEach(item => {
           expect(item.churrosId).to.not.be.empty;
