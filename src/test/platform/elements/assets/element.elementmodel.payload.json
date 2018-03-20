@@ -8,6 +8,7 @@
   "searchableJoins": "and, or",
   "vendorDocumentationUrl": "http://cloud-elements.com/developers",
   "modelType": "standard",
+  "notes": "I like all sorts of toasty breads",
   "modelFields": [
     {
       "name": "churrosDrink<<random.alphaNumeric##4>>",
