@@ -11,7 +11,7 @@ const purchaseCreditPayload = build({ reference: "INVV" + tools.randomInt() });
 
 suite.forElement('finance', 'invoices', { payload: purchaseCreditPayload }, (test) => {
   let code, id, contact_id, tax_rate_id, ledger_account_id;
-  it(`should support GET ${test.api}`, () => {
+  it(`should support CRUS ${test.api}`, () => {
     cloud.get(`/hubs/finance/contacts`)
       .then(r => {
         if (r.body.length > 0) {
