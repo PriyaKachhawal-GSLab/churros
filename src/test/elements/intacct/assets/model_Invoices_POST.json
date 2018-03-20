@@ -1,0 +1,127 @@
+{
+  "customerid": "TSY003",
+  "datecreated": {
+    "year": "2014",
+    "month": "10",
+    "day": "10"
+  },
+  
+  "dateposted": {
+    "year": "2015",
+    "month": "10",
+    "day": "10"
+  },
+   "datepaid": {
+        "day": "19",
+        "month": "02",
+        "year": "2018"
+    },
+ "exchratedate": {
+        "day": "30",
+        "month": "06",
+        "year": "2015"
+    },
+    "exchratetype": "Intacct Daily Rate",
+    "externalid": "35523",
+  "datedue": {
+    "year": "2016",
+    "month": "10",
+    "day": "10"
+  },
+   "trx_totalselected": 0,
+   "trx_totaldue": 1312123,
+    "trx_totalpaid": 0,
+    "currency": "USD",
+    "state": "Posted",
+    "key": 2803,
+      "batchkey": 706,
+    "totalselected": 0,
+    "totaldue": 1312123,
+    "trx_totalamount": 1312123,
+    "basecurr": "USD",
+  "action": "Submit",
+  "invoiceno": "45ABX",
+  "ponumber": "2480877",
+  "description": "Invoice",
+  
+
+  "customfields": {
+    "customfield": [{
+        "customfieldname": "TESTDATer1",
+        "customfieldvalue": "12/10/2001"
+      },
+      {
+        "customfieldname": "TESTTEXTer1",
+        "customfieldvalue": "CustomFieldTexter1"
+      }
+    ]
+  },
+  "invoiceitems": {
+        "lineitem": [{
+        "glaccountno": "4000",
+           
+        
+        
+         "totalpaid": "0",
+         "totaldue": "750",
+         "trx_amount": "750",
+          "glaccounttitle": "Revenue",
+         "trx_totalpaid": "0",
+         "trx_totaldue": "750",
+         
+           "currency": "USD",
+         "projectkey": "2313213" ,
+         "customerkey": "dw21",
+         "vendorkey": "3211",
+         "employeekey": "22442",
+          "itemkey": "24551",
+         "classkey": "32313",
+         "contractkey": "31321",
+         
+        "amount": "3133",
+        "departmentid": "10",
+        "memo": "Just another",
+         "locationid": "1006",
+          "key": "7142",
+            "revrecstartdate": {
+      "year": "2016",
+      "month": "06",
+      "day": "01"
+   },
+   "revrecenddate": {
+      "year": "2017",
+      "month": "05",
+      "day": "31"
+   },
+      "defrevaccount" : "2312",
+        "customfields": {
+          "customfield": [{
+              "customfieldname": "TESTDATer2",
+              "customfieldvalue": "12/10/2002"
+            },
+            {
+              "customfieldname": "TESTTEXTer2",
+              "customfieldvalue": "CustomFieldTextLineItemer2"
+            }
+          ]
+        }
+      },
+      {
+        "glaccountno": "4000",
+        "amount": "40",
+        "departmentid": "10",
+        "customfields": {
+          "customfield": [{
+              "customfieldname": "TESTDATEer3",
+              "customfieldvalue": "12/10/2003"
+            },
+            {
+              "customfieldname": "TESTTEXTer4",
+              "customfiel |datedvalue": "CustomFieldTextLineItemer4"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
