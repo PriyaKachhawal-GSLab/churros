@@ -1,6 +1,19 @@
 {
 	"vendorName": "churrosContactTransform",
 	"elementKey": "closeio",
+	"script": {
+		"body": "transformedObject.foo = 'bar'; done(transformedObject);",
+		"mimeType": "application/javascript",
+      	"filterEmptyResponse": false
+	},
+	"configuration": [
+		{
+		  "properties": {
+			"bool": "true"
+		  },
+		  "type": "inherit"
+		}
+	],
 	"fields": [{
 			"type": "string",
 			"path": "email",
@@ -18,6 +31,21 @@
 			"path": "name",
 			"vendorPath": "Name",
 			"vendorType": "string"
+		},
+		{
+		  "type": "string",
+		  "path": "churrosToRemove",
+		  "vendorPath": "LastModifiedDate",
+		  "vendorType": "string",
+		  "configuration": [
+			{
+			"type": "remove",
+			"properties": {
+			  "fromVendor": true,
+			  "toVendor": true
+			}
+			}
+		  ]
 		}
 	]
 }

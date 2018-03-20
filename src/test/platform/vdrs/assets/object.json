@@ -12,6 +12,10 @@
       {
         "type": "string",
         "path": "name"
+      },
+      {
+        "type": "string",
+        "path": "churrosToRemove"
       }
     ]
 }
