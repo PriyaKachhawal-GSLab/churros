@@ -56,7 +56,7 @@
       }
     ]
   },
-  "invoiceitems": {
+  "updateinvoiceitems": {
         "lineitem": [{
         "glaccountno": "4000",
            
