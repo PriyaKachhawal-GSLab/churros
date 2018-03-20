@@ -13,7 +13,7 @@ suite.forElement('finance', 'purchase-credit-notes', { payload: purchaseCreditPa
   let code, id, contact_id, ledger_account_id;
 
 
-  it(`should support GET ${test.api}`, () => {
+  it(`should support CRUS ${test.api}`, () => {
     cloud.get(`/hubs/finance/contacts`)
       .then(r => {
         if (r.body.length > 0) {
