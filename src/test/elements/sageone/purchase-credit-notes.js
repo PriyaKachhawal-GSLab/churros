@@ -48,7 +48,7 @@ suite.forElement('finance', 'purchase-credit-notes', { payload: purchaseCreditPa
             const validValues = r.body.filter(obj => obj.reference === `${code}`);
             expect(validValues.length).to.equal(r.body.length);
           }).should.return200OnGet();
-        return cloud.withOptions({ qs: { void_reason: `Temporary Reason` } }).delete(`${test.api}/${id}`)
+        return cloud.withOptions({ qs: { void_reason: `Temporary Reason` } }).delete(`${test.api}/${id}`);
       });
   });
 
