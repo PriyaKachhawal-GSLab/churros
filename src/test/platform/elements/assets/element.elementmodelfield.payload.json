@@ -29,7 +29,12 @@
           "method": "GET",
           "direction": "RESPONSE",
           "populated": "SOMETIMES"
-        }
+        },
+        {
+        "method": "POST",
+        "direction": "RESPONSE",
+        "populated": "SOMETIMES"
+      }
       ]
     }
   ],
