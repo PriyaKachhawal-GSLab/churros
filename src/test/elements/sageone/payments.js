@@ -11,7 +11,7 @@ const paymentsPayload = build({ reference: "re" + tools.randomInt() });
 
 suite.forElement('finance', 'payments', { payload: paymentsPayload }, (test) => {
   let id = "VENDOR_PAYMENT";
-  let bank_account_id, contact_id
+  let bank_account_id, contact_id;
   it(`should support CRUS ${test.api}`, () => {
     cloud.get(`/hubs/finance/contacts`)
       .then(r => {
