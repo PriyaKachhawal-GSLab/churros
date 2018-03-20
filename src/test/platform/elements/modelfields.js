@@ -28,16 +28,23 @@ const putReadObject = (url, payload, additionalProcessing) => {
     );
 };
 
+const removeLastModelFieldMethod = modelFieldMethods => {
+  const mf = R.dropLast(1, modelFieldMethods);
+  return mf;
+};
+
+const updateModelFieldMethods = modelField => R.assoc('fieldMethods', removeLastModelFieldMethod(modelField.fieldMethods), modelField);
+
 const updateAndValidateFieldMethod = (url, payload) => {
   const ogFieldMethodCount = payload.fieldMethods.length;
   const newPayload = {data: [updateModelFieldMethods(payload)], commitMessage: "patch it"};
   const newFieldMethodCount = newPayload.data[0].fieldMethods.length;
-  expect(ogFieldMethodCount).to.not.equal(newFieldMethodCount)
+  expect(ogFieldMethodCount).to.not.equal(newFieldMethodCount);
   return cloud.put(url, newPayload).then(r => {  
     expect(R.head(r.body).fieldMethods.length).to.equal(newFieldMethodCount); 
     return r;
   });
-}
+};
 
 const genObject = opts => {
   let newPayload = fieldPayload;
@@ -47,12 +54,6 @@ const genObject = opts => {
   return newPayload;
 };
 
-const updateModelFieldMethods = modelField => R.assoc('fieldMethods', removeLastModelFieldMethod(modelField.fieldMethods), modelField);
-
-const removeLastModelFieldMethod = modelFieldMethods => {
-  const mf = R.dropLast(1, modelFieldMethods);
-  return mf;
-}
 
 suite.forPlatform('elements/modelfields', {payload: fieldPayload, schema: fieldSchema}, function(test) {
   let element, keyUrl, idUrl, modelId, idUrlWithModel, newModelId, keyUrlWithModel;
