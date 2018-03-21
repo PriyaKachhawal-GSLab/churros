@@ -24,7 +24,7 @@ suite.forElement('general', 'candidates', { payload: payload, }, (test) => {
   test.should.supportPagination(2);
   test.withApi(test.api)
     .withOptions({ qs: { where: "candidate_ids=47436388 and job_id=418899" } })
-    .withValidation(r => expect(r.body.filter(obj => obj.id == "47436388")).to.not.be.empty)
+    .withValidation(r => expect(r.body.filter(obj => obj.id === "47436388")).to.not.be.empty)
     .withName('should allow GET with option candidateId and job_id')
     .should.return200OnGet();
   
