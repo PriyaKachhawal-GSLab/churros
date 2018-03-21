@@ -6,14 +6,15 @@ const postingsPayload = require('./assets/postings');
 const cloud = require('core/cloud');
 const chakram = require('chakram');
 const expect = require('chakram').expect;
-const queryString={ qs: { 'user_id': 461299 } }
+const queryString={ qs: { 'user_id': 461299 } };
 
  //Need to skip as there is no delete API 
 suite.forElement('general', 'jobs', { payload: payload, skip:true}, (test) => {
 	
-  let jobId, resumeFile = __dirname + '/assets/resume.txt';;
-  before(() => cloud.post(test.api, payload)
-  .then(r => jobId = r.body.id));
+
+	let jobId;
+	before(() => cloud.post(test.api, payload)
+    .then(r => jobId = r.body.id));
    
   //Need to skip as there is no delete API 
   test.withOptions({ skip: true }).should.supportCrus();

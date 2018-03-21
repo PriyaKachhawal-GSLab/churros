@@ -2,15 +2,16 @@
 const expect = require('chakram').expect;
 const suite = require('core/suite');
 const payload = require('./assets/candidates');
-const attachmentPayload=require('./assets/attachment')
-const notesPayload=require('./assets/notes')
+const attachmentPayload=require('./assets/attachment');
+const notesPayload=require('./assets/notes');
 const cloud = require('core/cloud');
 const opts = { formData: { body: JSON.stringify(attachmentPayload) } };
-const queryString={ qs: { 'User Id': 461299 } }
 
-suite.forElement('general', 'candidates', { payload: payload }, (test) => {
+const queryString={ qs: { 'User Id': 461299 } };
+
+suite.forElement('general', 'candidates', { payload: payload, }, (test) => {
 	
-   let candidateId, resumeFile = __dirname + '/assets/resume.txt';;
+   let candidateId, resumeFile = __dirname + '/assets/resume.txt';
    before(() => cloud.post(test.api, payload)
    .then(r => candidateId = r.body.id));
    after(() => cloud.withOptions(queryString).delete(`${test.api}/${candidateId}`));
@@ -31,12 +32,9 @@ suite.forElement('general', 'candidates', { payload: payload }, (test) => {
 	return cloud.post(`${test.api}/${candidateId}/notes`,notesPayload)
 	.then(r =>cloud.get(`${test.api}/${candidateId}/notes`))
 	.then(r=>{
-		expect(r.body.length).to.not.be.empty
+		expect(r.body.length).to.not.be.empty;
 	});
   });
   
 
 }); 
-
-  
-  
