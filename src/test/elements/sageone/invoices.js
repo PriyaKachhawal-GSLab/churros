@@ -34,8 +34,8 @@ suite.forElement('finance', 'invoices', { payload: purchaseCreditPayload }, (tes
         tax_rate_id = r.body[0].id;
       });
     payload.contact_id = contact_id;
-    payload.invoice_lines.ledger_account_id = ledger_account_id;
-    payload.invoice_lines.tax_rate_id = tax_rate_id;
+    payload.invoice_lines[0].ledger_account_id = ledger_account_id;
+    payload.invoice_lines[0].tax_rate_id = tax_rate_id;
     test.should.supportCrus(chakram.put);
   });
 
