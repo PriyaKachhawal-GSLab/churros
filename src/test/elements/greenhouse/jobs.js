@@ -12,9 +12,9 @@ const queryString={ qs: { 'user_id': 461299 } };
 suite.forElement('general', 'jobs', { payload: payload, skip:true}, (test) => {
 	
 
-	let jobId;
-	before(() => cloud.post(test.api, payload)
-    .then(r => jobId = r.body.id));
+  let jobId;
+  before(() => cloud.post(test.api, payload)
+  .then(r => jobId = r.body.id));
    
   //Need to skip as there is no delete API 
   test.withOptions({ skip: true }).should.supportCrus();
