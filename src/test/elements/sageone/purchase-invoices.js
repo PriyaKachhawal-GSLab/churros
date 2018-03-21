@@ -10,22 +10,48 @@ const build = (overrides) => Object.assign({}, payload, overrides);
 const purchaseInvoicesPayload = build({ reference: "re" + tools.randomInt() });
 
 suite.forElement('finance', 'purchase-invoices', { payload: purchaseInvoicesPayload }, (test) => {
-  let code, id;
-  test.should.supportCrus(chakram.put);
-  test.should.supportPagination();
-  it(`should support GET ${test.api}`, () => {
-    return cloud.get(test.api)
-      .then(r => code = r.body[0].reference)
-      .then(r => cloud.get(test.api))
-      .then(r => id = r.body[0].id)
-      .then(r => cloud.withOptions({ qs: { void_reason: `Temporary Reason` } }).delete(`${test.api}/${id}`));
+  let code, id, contact_id, ledger_account_id;
+
+  it(`should support CRUS ${test.api}`, () => {
+    cloud.get(`/hubs/finance/contacts`)
+      .then(r => {
+        if (r.body.length > 0) {
+          return;
+        }
+        contact_id = r.body[0].id;
+      });
+    cloud.get(`/hubs/finance/ledger-accounts`)
+      .then(r => {
+        if (r.body.length <= 0) {
+          return;
+        }
+        ledger_account_id = r.body[0].id;
+      });
+    payload.contact_id = contact_id;
+    payload.invoice_lines[0].ledger_account_id = ledger_account_id;
+    test.should.supportCrus(chakram.put);
   });
-  test
-    .withName(`should support searching ${test.api} by reference`)
-    .withOptions({ qs: { where: `search ='${code}'` } })
-    .withValidation((r) => {
-      expect(r).to.have.statusCode(200);
-      const validValues = r.body.filter(obj => obj.reference === `${code}`);
-      expect(validValues.length).to.equal(r.body.length);
-    }).should.return200OnGet();
+
+  test.should.supportPagination();
+
+  it(`should support DELETE on ${test.api}/{id}`, () => {
+    return cloud.withOptions({ qs: { where: `status_id ='UNPAID'` } })
+      .get(test.api)
+      .then(r => {
+        if (r.body.length <= 0) {
+          return;
+        }
+        code = r.body[0].reference;
+        id = r.body[0].id;
+        test
+          .withName(`should support searching ${test.api} by reference`)
+          .withOptions({ qs: { where: `search ='${code}'` } })
+          .withValidation((r) => {
+            expect(r).to.have.statusCode(200);
+            const validValues = r.body.filter(obj => obj.reference === `${code}`);
+            expect(validValues.length).to.equal(r.body.length);
+          }).should.return200OnGet();
+        return cloud.withOptions({ qs: { void_reason: `Temporary Reason` } }).delete(`${test.api}/${id}`);
+      });
+  });
 });
