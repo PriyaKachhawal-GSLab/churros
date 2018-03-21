@@ -22,7 +22,7 @@ const order = () => ({
   }]
 });
 suite.forElement('ecommerce', 'metafields', { payload: payload, skip: false }, (test) => {
-  const objectName = 'orders';
+  const objectName = 'order';
   let orderId;
   before(() => cloud.post(`/hubs/ecommerce/orders`, order())
     .then(r => orderId = r.body.id)
@@ -37,16 +37,16 @@ suite.forElement('ecommerce', 'metafields', { payload: payload, skip: false }, (
   });
   it(`should allow GET for /hubs/ecommerce/{objectName}/{orderId}/metafields/{metafieldId}`, () => {
     let metafieldId;
-    return cloud.post(`/hubs/ecommerce/${objectName}/${orderId}/metafields`,payload())
+    return cloud.post(`/hubs/ecommerce/orders/${orderId}/metafields`,payload())
     .then(r => metafieldId = r.body.id)
     .then(r => cloud.get(`/hubs/ecommerce/${objectName}/${orderId}/metafields/${metafieldId}`))
     .then(r => cloud.delete(`/hubs/ecommerce/${objectName}/${orderId}/metafields/${metafieldId}`));
   });
   it(`should allow PATCH for /hubs/ecommerce/{objectName}/{orderId}/metafields/{metafieldId}`, () => {
     let metafieldId;
-    return cloud.post(`/hubs/ecommerce/${objectName}/${orderId}/metafields`,payload())
+    return cloud.post(`/hubs/ecommerce/orders/${orderId}/metafields`,payload())
     .then(r => metafieldId = r.body.id)
-    .then(r => cloud.patch(`/hubs/ecommerce/${objectName}/${orderId}/metafields/${metafieldId}`, updatePayload(metafieldId)))
+    .then(r => cloud.patch(`/hubs/ecommerce/orders/${orderId}/metafields/${metafieldId}`, updatePayload(metafieldId)))
     .then(r => cloud.delete(`/hubs/ecommerce/${objectName}/${orderId}/metafields/${metafieldId}`));
   });
   it(`should allow DELETE for /hubs/ecommerce/orders/{orderId}`, () => {
