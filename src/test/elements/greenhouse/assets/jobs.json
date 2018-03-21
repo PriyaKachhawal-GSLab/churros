@@ -1,6 +1,6 @@
 {
-  "job_name": "test",
-  "job_post_name": "test",
+  "job_name": "<<random.word>>",
+  "job_post_name": "<<random.word>>",
   "number_of_openings": 1,
   "template_job_id": 415256 ,
   "user_id": 461299

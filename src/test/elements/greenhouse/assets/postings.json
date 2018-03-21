@@ -1,6 +1,6 @@
 {
     "openings": [
-      {"opening_id": "abc-123"}
+      {"opening_id": "<<random.word>>"}
     ],
 	"user_id":461299
 }

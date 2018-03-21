@@ -8,13 +8,11 @@ const cloud = require('core/cloud');
 const opts = { formData: { body: JSON.stringify(attachmentPayload) } };
 const queryString={ qs: { 'User Id': 461299 } }
 
-const headers = { 'Content-Type': 'multipart/form-data' };
-
-suite.forElement('general', 'candidates', { payload: payload, }, (test) => {
+suite.forElement('general', 'candidates', { payload: payload }, (test) => {
 	
    let candidateId, resumeFile = __dirname + '/assets/resume.txt';;
    before(() => cloud.post(test.api, payload)
-    .then(r => candidateId = r.body.id));
+   .then(r => candidateId = r.body.id));
    after(() => cloud.withOptions(queryString).delete(`${test.api}/${candidateId}`));
 
   it('should test POST of /attachments', () => {
@@ -22,10 +20,10 @@ suite.forElement('general', 'candidates', { payload: payload, }, (test) => {
   });
   
   test.withOptions(queryString).should.supportCruds();
-  test.should.supportPagination(1);
+  test.should.supportPagination(2);
   test.withApi(test.api)
     .withOptions({ qs: { where: "candidate_ids=47436388 and job_id=418899" } })
-    .withValidation(r => expect(r.body.filter(obj => obj.id >= "47436388")).to.not.be.empty)
+    .withValidation(r => expect(r.body.filter(obj => obj.id == "47436388")).to.not.be.empty)
     .withName('should allow GET with option candidateId and job_id')
     .should.return200OnGet();
   
@@ -37,6 +35,7 @@ suite.forElement('general', 'candidates', { payload: payload, }, (test) => {
 	});
   });
   
+
 }); 
 
   
