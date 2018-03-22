@@ -1,5 +1,5 @@
 {
-  "customerid": "TSY003",
+  "customerid": "SON123",
   "datecreated": {
     "year": "2014",
     "month": "10",
@@ -22,7 +22,7 @@
         "year": "2015"
     },
     "exchratetype": "Intacct Daily Rate",
-    "externalid": "35523",
+  
   "datedue": {
     "year": "2016",
     "month": "10",
@@ -38,7 +38,7 @@
     "totalselected": 0,
     "totaldue": 1312123,
     "trx_totalamount": 1312123,
-    "basecurr": "USD",
+   
   "action": "Submit",
   "invoiceno": "45ABX",
   "ponumber": "2480877",
@@ -57,7 +57,7 @@
     ]
   },
   "updateinvoiceitems": {
-        "lineitem": [{
+        "updatelineitem": [{
         "glaccountno": "4000",
            
         
