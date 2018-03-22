@@ -1,0 +1,103 @@
+{
+    "id": 26,
+    "name": "ObjectFormula",
+    "userId": 12,
+    "accountId": 12,
+    "createdDate": "2018-01-26T16:29:55Z",
+    "steps": [
+        {
+            "id": 233,
+            "onSuccess": [
+                "some"
+            ],
+            "onFailure": [],
+            "name": "finalStep",
+            "type": "script",
+            "properties": {
+                "body": "done({\n  statusCode: 420,\n  result: {\n    location: \"Down by the river\"\n  }\n})"
+            }
+        },
+        {
+            "id": 272,
+            "onSuccess": [],
+            "onFailure": [],
+            "name": "oneMore",
+            "type": "elementRequest",
+            "properties": {
+                "method": "POST",
+                "api": "/contacts",
+                "elementInstanceId": "${config.blahInstance}"
+            }
+        },
+        {
+            "id": 269,
+            "onSuccess": [
+                "anotherOne"
+            ],
+            "onFailure": [],
+            "name": "some",
+            "type": "elementRequest",
+            "properties": {
+                "method": "GET",
+                "api": "/MyContact",
+                "elementInstanceId": "${config.blahInstance}"
+            }
+        },
+        {
+            "id": 270,
+            "onSuccess": [
+                "more"
+            ],
+            "onFailure": [],
+            "name": "anotherOne",
+            "type": "elementRequest",
+            "properties": {
+                "method": "POST",
+                "api": "/MyContact ",
+                "elementInstanceId": "${config.blahInstance}"
+            }
+        },
+        {
+            "id": 271,
+            "onSuccess": [
+                "oneMore"
+            ],
+            "onFailure": [],
+            "name": "more",
+            "type": "elementRequest",
+            "properties": {
+                "method": "PATCH",
+                "api": "/contacts/anotherthing/",
+                "elementInstanceId": "${config.blahInstance}"
+            }
+        }
+    ],
+    "triggers": [
+        {
+            "id": 23,
+            "onSuccess": [
+                "finalStep"
+            ],
+            "onFailure": [],
+            "type": "manual",
+            "async": true,
+            "name": "trigger",
+            "properties": {}
+        }
+    ],
+    "method": "GET",
+    "uri": "/whereIsGreg",
+    "active": true,
+    "debugLoggingEnabled": true,
+    "singleThreaded": false,
+    "api": "GET /whereIsGreg",
+    "configuration": [
+        {
+            "id": 86,
+            "key": "blahInstance",
+            "name": "blahInstance",
+            "type": "elementInstance",
+            "required": true
+        }
+    ]
+}
