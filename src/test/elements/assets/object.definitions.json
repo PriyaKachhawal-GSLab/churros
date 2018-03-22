@@ -26,6 +26,13 @@
       }
     ]
   },
+  "appointments": {
+    "vendorName": "appointments",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "Key"
+    }]
+  },
   "custom-record-types": {
     "fields": [{
         "path": "idTransformed",

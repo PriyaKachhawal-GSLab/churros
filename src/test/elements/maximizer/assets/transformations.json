@@ -12,5 +12,12 @@
       "path": "id",
       "vendorPath": "Key"
     }]
+  },
+  "appointments": {
+    "vendorName": "appointments",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "Key"
+    }]
   }
 }
