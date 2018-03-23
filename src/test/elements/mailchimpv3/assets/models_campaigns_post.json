@@ -1,0 +1,65 @@
+{
+  "id": "string",
+  "recipients": {
+    "list_id": "017517f5ab"
+  },
+  "rss_opts": {
+    "constrain_rss_img": true,
+    "feed_url": "https://blog.mailchimp.com/feed/",
+    "frequency": "daily",
+    "schedule": {
+      "daily_send": {
+        "friday": true,
+        "monday": true,
+        "saturday": true,
+        "sunday": true,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      },
+      "hour": 0,
+      "monthly_send_date": 0,
+      "weekly_send_day": "sunday"
+    }
+  },
+  "settings": {
+    "authenticate": true,
+    "auto_fb_post": [
+      "string"
+    ],
+    "auto_footer": true,
+    "auto_tweet": true,
+    "fb_comments": true,
+    "from_name": "string",
+    "inline_css": true,
+    "preview_text": "string",
+    "reply_to": "string@ce.com",
+    "subject_line": "string",
+    "template_id": 0,
+    "title": "string",
+    "to_name": "string",
+    "use_conversation": true
+  },
+  "social_card": {
+    "description": "string",
+    "image_url": "string",
+    "title": "string"
+  },
+  "tracking": {
+    "capsule": {
+      "notes": true
+    },
+    "clicktale": "string",
+    "ecomm360": true,
+    "goal_tracking": true,
+    "google_analytics": "string",
+    "html_clicks": true,
+    "opens": true,
+    "salesforce": {
+      "campaign": true,
+      "notes": true
+    },
+    "text_clicks": true
+  },
+  "type": "rss"
+}
