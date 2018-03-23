@@ -28,4 +28,6 @@ suite.forElement('erp', 'voucher-attachments', { payload: payload }, (test) => {
       .then(r => cloud.get(`${test.api}/${fileId}`))
       .then(r => cloud.delete(`${test.api}/${fileId}`));
   });
+  
+  after(() => test.withApi(`/hubs/erp/files/${fileId}`).should.return404OnDelete());
 });
