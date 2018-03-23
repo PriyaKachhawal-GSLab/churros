@@ -3,7 +3,6 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const expect = require('chakram').expect;
 const voucherPayload = tools.requirePayload(`${__dirname}/assets/voucher.json`);
 let payload = {};
 
