@@ -11,6 +11,12 @@
     "fields": [{
       "path": "id",
       "vendorPath": "internalId"
+    }, {
+      "path": "email",
+      "vendorPath": "email"
+    }, {
+      "path": "name",
+      "vendorPath": "companyName"
     }]
   },
   "projects": {
@@ -123,6 +129,9 @@
     "fields": [{
       "path": "id",
       "vendorPath": "internalId"
+    }, {
+      "path": "email",
+      "vendorPath": "email"
     }]
   },
   "credit-terms": {
