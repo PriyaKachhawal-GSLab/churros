@@ -186,6 +186,30 @@ const it404 = (name, api, invalidId, method, cloudCb, options) => {
   boomGoesTheDynamite(n, () => cloudCb(api, (r) => expect(r).to.have.statusCode(404)), options ? options.skip : false);
 };
 
+const itValidation = (name, api, method, payload, options, validationCb) => {
+  const getCloudMethod = (method) => {
+    let cloudMethod;
+    if (method.toUpperCase() === 'POST') {
+      cloudMethod = cloud.withOptions(options).post;
+    } else if (method.toUpperCase() === 'PATCH') {
+      cloudMethod = cloud.withOptions(options).patch;
+    } else if (method.toUpperCase() === 'PUT') {
+      cloudMethod = cloud.withOptions(options).put;
+    } else if (method.toUpperCase() === 'GET') {
+      cloudMethod = cloud.withOptions(options).get;
+    } else if (method.toUpperCase() === 'DELETE') {
+      cloudMethod = cloud.withOptions(options).delete;
+    }
+    return cloudMethod;
+  };
+  const n = name || `should throw pass validation when trying to ${method} ${api}`;
+  if (payload) {
+    boomGoesTheDynamite(n, () => getCloudMethod(method)(api, payload, validationCb), options ? options.skip : false);
+  } else {
+    boomGoesTheDynamite(n, () => getCloudMethod(method)(api, validationCb), options ? options.skip : false);
+  }
+};
+
 const itUpdate404 = (name, api, payload, invalidId, method, chakramUpdateCb, options) => {
   const n = name || `should throw a 404 when trying to ${method} ${api} with an ID that does not exist`;
   if (invalidId) api = api + '/' + invalidId;
@@ -417,6 +441,11 @@ const itBulkUpload = (name, hub, endpoint, metadata, filePath, options, where) =
 
 const runTests = (api, payload, validationCb, tests, hub) => {
   const should = (api, validationCb, payload, options, name, hub) => ({
+    /**
+     * Flexible HTTP request test that validates basic response
+     * @memberof module:core/suite.test.should
+     */
+    supportValidation: (method) => itValidation(name, api, method, payload, options, validationCb),
     /**
      * HTTP POST that validates that the response is a 400
      * @memberof module:core/suite.test.should
