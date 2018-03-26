@@ -149,6 +149,7 @@ describe('suite', () => {
     /* no with... functions, which will just use the defaults that were passed in to the `suite.forPlatform` above */
     test.should.supportValidation('GET');
     test.should.supportValidation('POST');
+    test.should.supportValidation('DELETE');
     test.should.return200OnPost();
     test.should.return404OnGet(456);
     test.should.supportSr();
