@@ -104,6 +104,14 @@ describe('suite', () => {
       .withApi('/foo/123')
       .should.supportValidation('DELETE');
 
+    test
+      .withApi('/foo/123')
+      .should.supportValidation('PATCH');
+
+    test
+      .withApi('/foo/123')
+      .should.supportValidation('PUT');  
+
     /* all of these are equivalent just as examples */
     test.should.return404OnPatch(456);
     test
