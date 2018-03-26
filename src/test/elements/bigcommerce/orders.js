@@ -29,7 +29,7 @@ const shipmentsUpdate = () => ({
   "comments": "UpdateThis"
 });
 /*  orders with Sales Tax Calculation set to 'automatic' in Vendor account are not allowed to be deleted
-    Hence skip the tests if Tax calculation = 'automatic' 
+    Hence skip the tests if Tax calculation = 'automatic'
 */
 suite.forElement('ecommerce', 'orders', { payload: payload}, (test) => {
   test.withOptions(options).should.supportCruds();
@@ -88,6 +88,9 @@ suite.forElement('ecommerce', 'orders', { payload: payload}, (test) => {
       .then(r => cloud.get(`${test.api}/${orderId}/shipments/count`))
       //For delete orders to be success ,Sales Tax Calculation should be set to 'manual' in the vendor account
       .then(r => cloud.delete(`${test.api}/${orderId}/shipments/${shipmentId}`));
+  });
+  it('should support search for orders/{id}/transations', () => {
+    return cloud.get(`${test.api}/${orderId}/transactions`);
   });
   after(() => cloud.delete(`${test.api}/${orderId}`));
 

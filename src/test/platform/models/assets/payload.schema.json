@@ -311,7 +311,7 @@
                 "type": "shipMethod"
             },
             "tranDate": {
-                "x-samplevalue": "2016-6-30T05:28:05.007Z",
+                "x-samplevalue": "2016-06-30T05:28:05.007Z",
                 "x-mask": "yyyy-MM-dd'T'HH:mm:ss.SSSZ",
                 "format": "date-time",
                 "type": "string"

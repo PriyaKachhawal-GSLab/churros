@@ -7,8 +7,8 @@ const tools = require('core/tools');
 const transactionPayload = tools.requirePayload(`${__dirname}/assets/transactions.json`);
 const transactionPayloadCapture = tools.requirePayload(`${__dirname}/assets/transactionsCapture.json`);
 
-
-suite.forElement('employee', 'locations', (test) => {
+//Skipping, since it only works with Sandbox. In general - we are not able to create, capture or delete a transaction
+suite.forElement('employee', 'locations', {skip:true}, (test) => {
   test.should.supportPagination();
   it(`should allow CRDS for /locations/:id/transactions`, () => {
     let transactionId, locId = slocPayload.lid;
