@@ -100,6 +100,10 @@ describe('suite', () => {
       .withValidation(genSchema())
       .should.supportValidation('POST');
 
+    test
+      .withApi('/foo/123')
+      .should.supportValidation('DELETE');
+
     /* all of these are equivalent just as examples */
     test.should.return404OnPatch(456);
     test
@@ -149,7 +153,6 @@ describe('suite', () => {
     /* no with... functions, which will just use the defaults that were passed in to the `suite.forPlatform` above */
     test.should.supportValidation('GET');
     test.should.supportValidation('POST');
-    test.should.supportValidation('DELETE');
     test.should.return200OnPost();
     test.should.return404OnGet(456);
     test.should.supportSr();
