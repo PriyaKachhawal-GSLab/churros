@@ -3,19 +3,23 @@
     "fields": [
       {
         "type": "string",
-        "path": "email"
+        "path": "email",
+        "level": "system"
       },
       {
         "type": "string",
-        "path": "id"
+        "path": "id",
+        "level": "system"
       },
       {
         "type": "string",
-        "path": "name"
+        "path": "name",
+        "level": "system"
       },
       {
         "type": "string",
-        "path": "churrosToRemove"
+        "path": "churrosToRemove",
+        "level": "system"
       }
     ]
 }
