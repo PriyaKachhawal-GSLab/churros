@@ -3,9 +3,10 @@ const cloud = require('core/cloud');
 const noFields = require('core/tools').requirePayload(`${__dirname}/assets/nofield-definition.json`);
 const expect = require('chai').expect;
 const R = require('ramda');
+const tools = require('core/tools');
 
 const orgCommonResource = {
-  name: 'foo',
+  name: `foo-${tools.random()}`,
   fields: [{
     path: 'id',
     type: 'number'
@@ -14,6 +15,17 @@ const orgCommonResource = {
     type: 'string'
   }]
 };
+
+const orgCommonResourceTwo = {
+  name: `foo-${tools.random()}`,
+  fields: [{
+    path: 'id',
+    type: 'number'
+  }, {
+    path: 'name',
+    type: 'string'
+  }]
+}
 
 suite.forPlatform('common-resources', {}, () => {
   const orgUrl = `/organizations/objects/${orgCommonResource.name}/definitions`;
@@ -39,6 +51,30 @@ suite.forPlatform('common-resources', {}, () => {
       .then(r => cloud.get(`${api}/${noFields.name}`))
       .then(r => cloud.delete(`${api}/${noFields.name}`));
   });
+
+  it('should support renaming common resources', () => {
+    const newName = `${orgCommonResourceTwo.name}-rename`
+    const renamePayload ={
+      name: newName
+    }
+
+    const validation = r => {
+      const response = r.body;
+      expect(response).to.be.an('object');
+      expect(response.name).to.eq(newName);
+      expect(response.fields).to.be.an('array').and.have.length(2);
+    }
+
+    const checkOldDoesntExist = r => {
+      expect(r.response.statusCode).to.eq(404)
+    }
+
+    return cloud.post(`/organizations/objects/${orgCommonResourceTwo.name}/definitions`, orgCommonResourceTwo)
+      .then(r => cloud.patch(`${api}/${orgCommonResourceTwo.name}`,renamePayload))
+      .then(r => cloud.get(`${api}/${newName}`, validation))
+      .then(r => cloud.get(`${api}/${orgCommonResourceTwo.name}`,checkOldDoesntExist))
+      .then(r => cloud.delete(`${api}/${newName}`))
+  })
 
   after(() => cloud.delete(orgUrl));
 });
