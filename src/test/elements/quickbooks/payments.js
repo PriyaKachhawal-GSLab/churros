@@ -19,12 +19,7 @@ suite.forElement('finance', 'payments', { payload: payload }, (test) => {
       .then(r => {
         if (Id)
           return cloud.get(`${test.api}/${Id}`);
-      })
-	  .then(r=> {
-		  if(Id)
-			  return 
-	  })
-	  ;
+      });
   });
   //Need to skip as there is no delete API
   test.withOptions({ skip: true }).should.supportCrus();
@@ -46,12 +41,12 @@ suite.forElement('finance', 'payments', { payload: payload }, (test) => {
           Id = r.body[0].id;
         }
       })
-	  .then(r=> {
-		  if(Id)
-			  return cloud.patch(`${test.api}/${Id}/void`)
-				.then(r=>{
-					expect(r.body.privateNote).to.contain('Voided');
-				});
-	  });
+    .then(r=> {
+      if(Id)
+	return cloud.patch(`${test.api}/${Id}/void`)
+	.then(r=>{
+	     expect(r.body.privateNote).to.contain('Voided');
+        });
+     });
   });
 });
