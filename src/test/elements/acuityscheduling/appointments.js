@@ -35,7 +35,7 @@ suite.forElement('scheduling', 'appointments', { payload: payload }, (test) => {
   const options = {
     churros: {
       updatePayload: {
-        "notes": "It's funny because he is fat !"
+        "email": "alan.phil.stu@vegas.com"
       }
     }
   };
