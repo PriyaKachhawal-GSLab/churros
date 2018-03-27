@@ -13,11 +13,11 @@ pluralSchema.definitions.transformation = schema;
 
 // Adds the correct vdrFieldId to the transformation field by matching on the path and then removes the path
 const addMatchingVdrFieldId = (vdrFields, tField) => {
-    const matchingVdrField = R.find(R.propEq('path', tField.path))(vdrFields)
+    const matchingVdrField = R.find(R.propEq('path', tField.path))(vdrFields);
     return R.pipe(
         R.assoc('vdrFieldId', matchingVdrField.id),
         R.dissoc('path')
-    )(tField)
+    )(tField);
 };
 
 suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
