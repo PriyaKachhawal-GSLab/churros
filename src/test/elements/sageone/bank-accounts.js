@@ -3,8 +3,10 @@
 const suite = require('core/suite');
 const expect = require('chakram').expect;
 const tools = require('core/tools');
-const build = (overrides) => Object.assign({}, payload, overrides);
+
+
 const payload = tools.requirePayload(`${__dirname}/assets/bankAccount.json`);
+const build = (overrides) => Object.assign({}, payload, overrides);
 const bankAccountPayload = build({ date: Date(), reference: "re" + tools.randomInt() });
 
 
