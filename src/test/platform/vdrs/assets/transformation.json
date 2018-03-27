@@ -27,7 +27,12 @@
 		{
 			"path": "name",
 			"vendorPath": "Name",
-			"vendorType": "string"
+			"vendorType": "string",
+		  "configuration": [
+				{
+					"type": "transformDate"
+				}
+		  ]
 		},
 		{
 		  "path": "churrosToRemove",
