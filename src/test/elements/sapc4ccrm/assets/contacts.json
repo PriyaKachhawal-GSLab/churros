@@ -1,5 +1,5 @@
 {
   "FirstName": "<<name.firstName>>",
   "LastName": "<<name.lastName>>",
-  "CategoryCode": "1"
+   "CategoryCode": "1"
 }
