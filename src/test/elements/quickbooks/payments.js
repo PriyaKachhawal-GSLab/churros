@@ -19,7 +19,12 @@ suite.forElement('finance', 'payments', { payload: payload }, (test) => {
       .then(r => {
         if (Id)
           return cloud.get(`${test.api}/${Id}`);
-      });
+      })
+	  .then(r=> {
+		  if(Id)
+			  return 
+	  })
+	  ;
   });
   //Need to skip as there is no delete API
   test.withOptions({ skip: true }).should.supportCrus();
@@ -32,5 +37,21 @@ suite.forElement('finance', 'payments', { payload: payload }, (test) => {
       expect(validValues.length).to.equal(r.body.length);
       expect(r.response.headers['elements-total-count']).to.exist;
     }).should.return200OnGet();
-
+  	
+  it('should allow Patch for hubs/finance/payments/{id}/void', () => {
+    let Id;
+    return cloud.get(`${test.api}`)
+      .then(r => {
+        if (r.body && r.body.length > 0) {
+          Id = r.body[0].id;
+        }
+      })
+	  .then(r=> {
+		  if(Id)
+			  return cloud.patch(`${test.api}/${Id}/void`)
+				.then(r=>{
+					expect(r.body.privateNote).to.contain('Voided');
+				});
+	  });
+  });
 });
