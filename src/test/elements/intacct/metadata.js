@@ -11,7 +11,7 @@ var objects = [
 ];
 
 objects.forEach(obj => {
-    suite.forElement('finan', `objects/${obj}/metadata`, (test) => {
+    suite.forElement('finance', `objects/${obj}/metadata`, (test) => {
         test.should.supportS();
         test.withApi(test.api)
             .withOptions({ qs: { customFieldsOnly: true } })
