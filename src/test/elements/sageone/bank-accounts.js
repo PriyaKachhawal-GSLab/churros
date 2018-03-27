@@ -2,10 +2,15 @@
 
 const suite = require('core/suite');
 const expect = require('chakram').expect;
+const tools = require('core/tools');
+const build = (overrides) => Object.assign({}, payload, overrides);
+const payload = tools.requirePayload(`${__dirname}/assets/bankAccount.json`);
+const bankAccountPayload = build({ date: Date(), reference: "re" + tools.randomInt() });
 
-suite.forElement('finance', 'bank-accounts', (test) => {
+
+suite.forElement('finance', 'bank-accounts', { payload: bankAccountPayload },(test) => {
   let date = '2017-05-05';
-  test.should.supportSr();
+  test.should.supportCrs();
   test.should.supportPagination();
   test
    .withName(`should support searching ${test.api} by lastModifiedDate`)

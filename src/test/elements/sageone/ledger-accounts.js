@@ -2,9 +2,15 @@
 
 const suite = require('core/suite');
 const expect = require('chakram').expect;
+const tools = require('core/tools');
 
-suite.forElement('finance', 'ledger-accounts', (test) => {
-  test.should.supportSr();
+const payload = tools.requirePayload(`${__dirname}/assets/ledgerAccount.json`);
+const build = (overrides) => Object.assign({}, payload, overrides);
+const ledgerAccountPayload = build({ date: Date(), reference: "re" + tools.randomInt() });
+
+
+suite.forElement('finance', 'ledger-accounts', { payload: ledgerAccountPayload },(test) => {
+  test.should.supportCrs();
   test.should.supportPagination();
   test
     .withName(`should support searching ${test.api} by visible_in`)
