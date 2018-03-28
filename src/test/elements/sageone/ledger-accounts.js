@@ -5,11 +5,10 @@ const expect = require('chakram').expect;
 const tools = require('core/tools');
 
 const payload = tools.requirePayload(`${__dirname}/assets/ledgerAccount.json`);
-const build = (overrides) => Object.assign({}, payload, overrides);
-const ledgerAccountPayload = build({ date: Date(), reference: "re" + tools.randomInt() });
 
 
-suite.forElement('finance', 'ledger-accounts', { payload: ledgerAccountPayload },(test) => {
+
+suite.forElement('finance', 'ledger-accounts', { payload: payload },(test) => {
   test.should.supportCrs();
   test.should.supportPagination();
   test

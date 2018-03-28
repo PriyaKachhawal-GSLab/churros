@@ -6,11 +6,8 @@ const tools = require('core/tools');
 
 
 const payload = tools.requirePayload(`${__dirname}/assets/bankAccount.json`);
-const build = (overrides) => Object.assign({}, payload, overrides);
-const bankAccountPayload = build({ date: Date(), reference: "re" + tools.randomInt() });
 
-
-suite.forElement('finance', 'bank-accounts', { payload: bankAccountPayload },(test) => {
+suite.forElement('finance', 'bank-accounts', { payload: payload },(test) => {
   let date = '2017-05-05';
   test.should.supportCrs();
   test.should.supportPagination();
