@@ -7,10 +7,9 @@ const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/custom-objects.json`);
 
 suite.forElement('marketing', 'custom-objects', { payload: payload }, (test) => {
-	let customObjectName, id;
+  let customObjectName = 'afrinCustom_c', id;
   it('should allow R for /custom-objects, /custom-fields-templates and CRUD for /custom-objects{customObjectName}/custom-fields', () => {
     return cloud.get(test.api)
-	.then(r => customObjectName = 'afrinCustom_c')
 	.then(r => cloud.get(`${test.api}/${customObjectName}/custom-fields-templates`))
 	.then(r => cloud.post(`${test.api}/${customObjectName}/custom-fields`, payload))
 	.then(r => id = r.body[0].marketoGUID)
