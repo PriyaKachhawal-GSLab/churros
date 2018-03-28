@@ -94,6 +94,24 @@ describe('suite', () => {
       .withOptions({})
       .should.return200OnPost();
 
+    test
+      .withApi('/foo')
+      .withJson(genPayload())
+      .withValidation(genSchema())
+      .should.supportValidation('POST');
+
+    test
+      .withApi('/foo/123')
+      .should.supportValidation('DELETE');
+
+    test
+      .withApi('/foo/123')
+      .should.supportValidation('PATCH');
+
+    test
+      .withApi('/foo/123')
+      .should.supportValidation('PUT');  
+
     /* all of these are equivalent just as examples */
     test.should.return404OnPatch(456);
     test
@@ -141,6 +159,8 @@ describe('suite', () => {
     .withApi('/foo/pagination')
     .should.supportPagination('id');
     /* no with... functions, which will just use the defaults that were passed in to the `suite.forPlatform` above */
+    test.should.supportValidation('GET');
+    test.should.supportValidation('POST');
     test.should.return200OnPost();
     test.should.return404OnGet(456);
     test.should.supportSr();
