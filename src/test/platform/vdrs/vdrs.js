@@ -27,7 +27,6 @@ suite.forPlatform('vdrs', {payload, schema}, test => {
         .then(r => {
             vdrId = r.body.id;
             updatePayload = genUpdatePayload(payload, r.body.fields);
-            console.log(updatePayload);
         })
         .then(() => cloud.get(`/vdrs/${vdrId}`, schema))
         .then(() => cloud.get(`/vdrs`, pluralSchema))
