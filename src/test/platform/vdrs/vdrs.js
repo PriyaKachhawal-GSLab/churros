@@ -2,7 +2,6 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const chakram = require('chakram');
 const R = require('ramda');
 
 const payload = require('core/tools').requirePayload(`${__dirname}/assets/vdr.json`);
@@ -11,12 +10,6 @@ const pluralSchema = require('core/tools').requirePayload(`${__dirname}/assets/v
 pluralSchema.definitions.vdr = schema;
 
 suite.forPlatform('vdrs', {payload, schema}, test => {
-
-  // Adds the correct id to the vdr field by matching on the path
-  const addMatchingVdrFieldId = (createdFields, field) => {
-    const matchingField = R.find(R.propEq('path', field.path))(createdFields);
-    return R.assoc('id', matchingField.id)(field);
-  };
 
   const genUpdatePayload = (payload, newFields) => {
     let up = R.assoc('objectName', 'updatedObjectName2', payload);
@@ -40,5 +33,5 @@ suite.forPlatform('vdrs', {payload, schema}, test => {
         .then(() => cloud.get(`/vdrs`, pluralSchema))
         .then(() => cloud.put(`/vdrs/${vdrId}`, updatePayload, schema))
         .then(() => cloud.delete(`/vdrs/${vdrId}`));
-  })
+  });
 });
