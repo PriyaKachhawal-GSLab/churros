@@ -14,6 +14,32 @@ const pathUpdate = () => ({
 suite.forElement('documents', 'files', (test) => {
   let query = { path: `/churros/CloudElements-${tools.random()}.png` };
   let path = __dirname + '/assets/CE_logo.png';
+  let jpgFileBody,revisionId,fileId,filePath;
+
+  before(() => cloud.withOptions({ qs : { path: `/brady-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg`, overwrite: true } }).postFile(test.api, path)
+  .then(r => jpgFileBody = r.body));
+
+  after(() => cloud.delete(`${test.api}/${jpgFileBody.id}`));
+
+  it('it should allow RS for documents/files/:id/revisions', () => {
+      return cloud.get(`${test.api}/${jpgFileBody.id}/revisions`)
+      .then(r => {
+        revisionId = r.body[0].id;
+        fileId = r.body[0].fileId;
+        filePath = r.body[0].filePath;
+      })
+      .then(() => cloud.get(`${test.api}/${fileId}/revisions/${revisionId}`));
+  });
+
+  it('it should allow RS for documents/files/revisions by path', () => {
+      return cloud.withOptions({ qs: {path : `${filePath}`} }).get(`${test.api}/revisions`)
+      .then(r => {
+        revisionId = r.body[0].id;
+
+      })
+      .then(() => cloud.withOptions({ qs: {path : `${filePath}`} }).get(`${test.api}/revisions/${revisionId}`));
+  });
+
 
   it('should allow CRUD cycle by id', () => {
     let fileId = -1;
