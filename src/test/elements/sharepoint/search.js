@@ -5,6 +5,8 @@ const tools = require('core/tools');
 const cloud = require('core/cloud');
 
 suite.forElement('documents', 'search', null, (test) => {
+
+  test.should.supportNextPagePagination(1);
   it('should allow GET /hubs/documents/search ', () => {
     let UploadFile = __dirname + '/assets/Penguins.jpg',
       srcPath;

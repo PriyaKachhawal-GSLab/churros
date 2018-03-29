@@ -23,6 +23,8 @@ suite.forElement('documents', 'folders', {}, (test) => {
 
   after(() => cloud.delete(`${test.api}/${folderTagPayload.id}`));
 
+  test.withApi(`${test.api}/contents`).withOptions({qs: {path :'/'}}).should.supportNextPagePagination(1);
+  
   it(`should allow CD for ${test.api} and GET collaborations`, () => {
     let folderId;
     return cloud.post(test.api, folderPayload)
