@@ -9,6 +9,7 @@ const defaults = require('core/defaults');
 const schema = require('./assets/transformation.schema');
 const objDefSchema = require('./assets/objectDefinition.schema');
 const noFields = tools.requirePayload(`${__dirname}/assets/nofield-definition.json`);
+const noFields2 = tools.requirePayload(`${__dirname}/assets/nofield-definition.json`);
 
 const getConfig = (type, from, to) => ({
   type: type,
@@ -350,5 +351,33 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       .then(r => cloud.put('/transformations', noFieldV2Payload))
       .then(r => cloud.delete(`/instances/${sfdcId}/transformations/${noFields.name}`))
       .then(r => cloud.delete(`/common-resources/${noFields.name}`).catch(r => {}));
+  });
+
+  it('should return a list of mapped element ids when retrieving common-resources', () => {
+    let crName;
+    const simpleTransform  = {
+      "level":"account",
+      "fields":[],
+      "configuration":[],
+      "script":{"body":"console.log('Hey there')"},
+      "objectName": noFields2.name,
+      "vendorName":"Lead",
+      "elementInstanceId": sfdcId
+    };
+
+    const validator = r => {
+      expect(r.body.mappedElementIds).to.have.length(3);
+    };
+
+    return cloud.put('/common-resources', noFields2)
+      .then(r => crName = r.body.name)
+      .then(r => cloud.post(getTransformUrl('organizations', noFields2.name, 'sfdc'), simpleTransform))
+      .then(r => cloud.post(getTransformUrl('organizations', noFields2.name, 'closeio'), simpleTransform))
+      .then(r => cloud.post(getTransformUrl('organizations', noFields2.name, 'zohocrm'), simpleTransform))
+      .then(r => cloud.get(`/common-resources/${noFields2.name}`, validator))
+      .then(r => cloud.delete(getTransformUrl('organizations', noFields2.name, 'sfdc')))
+      .then(r => cloud.delete(getTransformUrl('organizations', noFields2.name, 'closeio')))
+      .then(r => cloud.delete(getTransformUrl('organizations', noFields2.name, 'zohocrm')))
+      .then(r => cloud.delete(`/common-resources/${noFields2.name}`).catch(r => {}));
   });
 });

@@ -3,6 +3,7 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const chakram = require('chakram');
+const expect = chakram.expect;
 const R = require('ramda');
 
 const vdrPayload = require('core/tools').requirePayload(`${__dirname}/assets/vdr.json`);
@@ -45,4 +46,18 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
             .crud(`/vdrs/${vdrId}/transformations`, transformationPayload, schema, chakram.put)
             .then(r => cloud.get(`/vdrs/${vdrId}/transformations`, pluralSchema));
     });
+
+    it('should return a list of mapped element ids on a VDR when a transformation exists', () => {
+        let transformationId;
+    
+        const validator = r => {
+          expect(r).to.have.statusCode(200);
+          expect(r.body.mappedElementIds).to.have.length(1);
+        };
+    
+        return cloud.post(`/vdrs/${vdrId}/transformations`, transformationPayload)
+            .then(r => transformationId = r.body.id)
+            .then(() => cloud.get(`/vdrs/${vdrId}`, validator))
+            .then(() => cloud.delete(`/vdrs/${vdrId}/transformations/${transformationId}`));
+      });
 });
