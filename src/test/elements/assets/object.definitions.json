@@ -8,6 +8,30 @@
       "type": "string"
     }]
   },
+  "requisitions": {
+    "fields": [{  
+      "path": "idTransformed",
+      "type": "string"
+    },
+    {
+    
+      "path": "id",
+      "type": "string"
+    }
+    ]
+  },
+  "candidates": {
+    "fields": [{  
+      "path": "idTransformed",
+      "type": "string"
+    },
+    {
+    
+      "path": "id",
+      "type": "string"
+    }
+    ]
+  },
   "accounts": {
     "fields": [{
         "path": "idTransformed",
