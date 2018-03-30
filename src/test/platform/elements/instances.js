@@ -336,7 +336,7 @@ suite.forPlatform('elements/instances', opts, (test) => {
       expect(filter(n => !["vendor","ceCanonical", "vdr"].includes(n.type), body).length).to.be.eq(0);
     };
     defaults.token(closeioInstance.token);
-    return cloud.getWithOptions(`/objects`, {headers:{'Elements-Version': 'Helium'}}, validate);
+    return cloud.withOptions({headers:{'Elements-Version': 'Helium'}}).get(`/objects`, validate);
   });
 
   it('should allow disabling and enabling  an instance', () => {
