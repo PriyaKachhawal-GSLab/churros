@@ -9,9 +9,7 @@ suite.forElement('finance', 'objects', null, (test) => {
   });
 
   it('should support GET /objects/:objectName/metadata for all objects', () => {
-    let objects;
     return cloud.get(test.api)
-    .then(r => objects = r.body)
-    .then(r => Promise.all(objects.map(obj => cloud.get(`${test.api}/${obj}/metadata`))));
+    .then(r => Promise.all(r.body.map(obj => cloud.get(`${test.api}/${obj}/metadata`))));
   });
 });
