@@ -323,6 +323,18 @@ suite.forPlatform('elements/instances', opts, (test) => {
       .then(r => expect(parseInt(r.response.headers['elements-element-instance-id'])).to.equal(instanceId));
   });
 
+  it('should support getting a detailed list of objects', () => {
+    const validate = r => {
+      const body = r.response.body;
+      expect(body.length).to.be.gt(0);
+      expect(body[0]).to.haveOwnProperty('name');
+      expect(body[0]).to.haveOwnProperty('vendorName');
+      expect(body[0]).to.haveOwnProperty('type');
+    }
+    defaults.token(closeioInstance.token);
+    return cloud.getWithOptions(`/objects`, {headers:{'Elements-Version': 'Helium'}}, validate);
+  })
+
   it('should allow disabling and enabling  an instance', () => {
     let instanceId;
     defaults.token(closeioInstance.token);
