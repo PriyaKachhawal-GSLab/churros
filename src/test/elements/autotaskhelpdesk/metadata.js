@@ -26,5 +26,5 @@ suite.forElement('helpdesk', '/objects', (test) => {
              // we cannot guarantee that every object has custom fields ... so here i am checking reverese condition
              .then(r => expect(r.body.fields.filter(field => (field.custom === false))).to.be.empty);
         });
-    }))
+    }));
 });
