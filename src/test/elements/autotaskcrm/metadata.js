@@ -1,6 +1,7 @@
 'use strict';
 
 const suite = require('core/suite');
+const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
 var objects = [
@@ -16,31 +17,18 @@ var objects = [
   "SalesOrder"
 ];
 
-objects.forEach(obj => {
-  suite.forElement('crm', `objects/${obj}/metadata`, (test) => {
+suite.forElement('crm', '/objects', (test) => {
+    return Promise.all(objects.map(obj => {
+        it(`should support GET /objects/${obj}/metadata`, () => {
+             return cloud.get(`${test.api}/${obj}/metadata`)
+             // we can guarantee that every object has fields ... which holds custom = false
+            .then(r => expect(r.body.fields.filter(field => (field.custom === false))).to.not.be.empty);
+        });
 
-    const validateAccountType = (fields) => {
-      if (expect(fields.filter(field => (field.vendorPath === 'accountType' && field.vendorNativeType === 'picklist' && expect(field).to.contain.key('picklistValues')))).to.not.be.empty)
-        return true;
-      else
-        return false;
-    };
-
-    test.should.supportS();
-    test.withApi(test.api)
-      .withValidation(r => {
-        expect(r.body.fields.filter(field => (field.custom === false))).to.not.be.empty;
-        if (obj === 'Account') {
-          expect(validateAccountType(r.body.fields)).to.be.true;
-        }
-      })
-      .withName('should support return all fields')
-      .should.return200OnGet();
-
-    test.withApi(test.api)
-      .withOptions({ qs: { customFieldsOnly: true } })
-      .withValidation(r => expect(r.body.fields.filter(field => (field.custom === true))))
-      .withName('should support return only custom fields')
-      .should.return200OnGet();
-  });
+        it(`should support GET /objects/${obj}/metadata customFieldsOnly parameter`, () => {
+             return cloud.withOptions({qs:{customFieldsOnly: true}}).get(`${test.api}/${obj}/metadata`)
+             // we cannot guarantee that every object has custom fields ... so here i am checking reverese condition
+             .then(r => expect(r.body.fields.filter(field => (field.custom === false))).to.be.empty);
+        });
+    }))
 });
