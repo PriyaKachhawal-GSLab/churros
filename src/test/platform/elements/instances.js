@@ -331,13 +331,13 @@ suite.forPlatform('elements/instances', opts, (test) => {
       expect(body[0]).to.haveOwnProperty('name');
       expect(body[0]).to.haveOwnProperty('vendorName');
       expect(body[0]).to.haveOwnProperty('type');
-      expect(filter(n => n.type === "vendor").length, body).to.be.gt(0)
-      expect(filter(n => n.type === "ceCanonical", body).length).to.be.gt(0)
-      expect(filter(n => !["vendor","ceCanonical", "vdr"].includes(n.type), body).length).to.be.eq(0)
-    }
+      expect(filter(n => n.type === "vendor").length, body).to.be.gt(0);
+      expect(filter(n => n.type === "ceCanonical", body).length).to.be.gt(0);
+      expect(filter(n => !["vendor","ceCanonical", "vdr"].includes(n.type), body).length).to.be.eq(0);
+    };
     defaults.token(closeioInstance.token);
     return cloud.getWithOptions(`/objects`, {headers:{'Elements-Version': 'Helium'}}, validate);
-  })
+  });
 
   it('should allow disabling and enabling  an instance', () => {
     let instanceId;
