@@ -33,21 +33,4 @@ suite.forPlatform('vdrs', {payload, schema}, test => {
         .then(() => cloud.put(`/vdrs/${vdrId}`, updatePayload, schema))
         .then(() => cloud.delete(`/vdrs/${vdrId}`));
   });
-
-  it('should support cloning a VDR from the system catalog to the user\'s account', () => {
-    let vdrId;
-    const newObjectName = 'myNewObjectName';
-    return cloud.post('/vdrs', payload, schema)
-        .then(r => {
-            vdrId = r.body.id;
-        })
-        .then(() => cloud.post(`/vdrs/${vdrId}/clone`, {}))
-        .then(() => cloud.get(`/accounts/objects/${payload.objectName}/definitions`))
-        // test cloning with a new objectName
-        .then(() => cloud.post(`/vdrs/${vdrId}/clone`, {objectName: newObjectName}))
-        .then(() => cloud.get(`/accounts/objects/${newObjectName}/definitions`))
-        .then(() => cloud.delete(`/accounts/objects/${payload.objectName}/definitions`))
-        .then(() => cloud.delete(`/accounts/objects/${newObjectName}/definitions`))
-        .then(() => cloud.delete(`/vdrs/${vdrId}`));
-  });
 });
