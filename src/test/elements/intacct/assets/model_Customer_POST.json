@@ -1,0 +1,68 @@
+{
+  "deliveryoptions": {
+    "deliveryoption": 
+      "email"
+    
+  },
+  "contactlist": {
+    "contactitem": [
+      {
+        "contactname": "02bhsg1ra4i",
+        "category": "Category 1"
+      },
+      {
+        "contactname": "01cpspw9",
+        "category": "Category 2"
+      }
+    ]
+  },
+  "recordno": 841,
+  "parentid": "BAR001--Barney's Inc.",
+  "taxid": 576578,
+  "vsoepricelist": "PL Name",
+  "resaleno": 2232131,
+  "currency": "INR",
+  "accountlabel": "Label",
+  "comments": "Test Comment",
+  "totaldue": 0,
+  "shippingmethod": "Ship[ me",
+  "termname": "MF",
+  "whenmodified": "03/20/2018 08:00:35",
+  "custrepid": "6--Suzanne Murray",
+  "glaccountno": "1005--WAMU",
+  "supdocid": 101,
+  "glgroup": "GL",
+  "onhold": true,
+  "contactinfo": {
+    "contact": {
+      "mailaddress": {
+        "zip": 787887,
+        "country": "India",
+        "address2": "add2",
+        "city": "city1",
+        "address1": "add1",
+        "state": "state1"
+      },
+      "printas": "customer1",
+      "firstname": "first1",
+      "taxable": true,
+      "initial": "middle1",
+      "lastname": "last",
+      "phone1": 76866786778,
+      "contactname": "Custmoer2(CSS123)",
+      "email2": "s2@gslab.com",
+      "email1": "sss@gslab.com",
+      "pager": "pager",
+      "url1": "http://url",
+      "companyname": "Custmoer2",
+      "cellphone": 23133132121,
+      "fax": "133-131",
+      "taxgroup": "Tax group 1"
+    }
+  },
+  "customerid": "SS1234",
+  "name": "Custmoer1234",
+  "territoryid": "TR123--Territory Name",
+  "creditlimit": 11.32,
+  "status": "active"
+}
