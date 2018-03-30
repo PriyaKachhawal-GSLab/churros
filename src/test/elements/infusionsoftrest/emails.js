@@ -1,14 +1,12 @@
 'use strict';
 
 const suite = require('core/suite');
-const chakram = require('chakram');
 const expect = require('chakram').expect;
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 
 let payload = tools.requirePayload(`${__dirname}/assets/emails.json`);
 let syncEmailPayload = tools.requirePayload(`${__dirname}/assets/syncEmail.json`);
-let syncEmailId;
 const unsyncEmailPayload = {"ids": []};
 
 suite.forElement('crm', 'emails', { payload: payload },(test) => {

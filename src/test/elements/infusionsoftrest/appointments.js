@@ -2,7 +2,6 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const chakram = require('chakram');
 const expect = require('chakram').expect;
 
 let payload = tools.requirePayload(`${__dirname}/assets/appointments.json`);

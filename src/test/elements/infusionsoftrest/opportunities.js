@@ -1,7 +1,6 @@
 'use strict';
 
 const suite = require('core/suite');
-const chakram = require('chakram');
 const expect = require('chakram').expect;
 const cloud = require('core/cloud');
 const tools = require('core/tools');
@@ -21,7 +20,6 @@ suite.forElement('crm', 'opportunities', {payload: payload, skip: true}, (test) 
     .should.return200OnGet();
 
   it('should support S for /opportunity/stage_pipeline', () => {
-    let orderId;
     return cloud.get(`/opportunity/stage_pipeline`);
   });
 });
