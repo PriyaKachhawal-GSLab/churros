@@ -1,8 +1,6 @@
 'use strict';
 
 const suite = require('core/suite');
-const chakram = require('chakram');
-const expect = require('chakram').expect;
 const cloud = require('core/cloud');
 const tools = require('core/tools');
 
@@ -15,8 +13,7 @@ suite.forElement('crm', 'tags', { payload: tagPayload, skip: true }, (test) => {
   test.should.supportPagination();
 
   it.skip('should support C for /tags/categories', () => {
-    let orderId;
-    return cloud.post('/tags/categories', categoryPayload)
+    return cloud.post('/tags/categories', categoryPayload);
   });
 
   it('should support CRD /tags/{id}/contacts', () => {
