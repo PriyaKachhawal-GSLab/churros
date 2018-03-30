@@ -9,7 +9,6 @@ suite.forElement('documents', 'ping', (test) => {
     .withValidation(r => {
       expect(r).to.have.statusCode(200);
       expect(r.body.endpoint).to.equal('dropbox');
-      expect(r.body.valid).to.equal(true);
     })
     .should.return200OnGet();
 });

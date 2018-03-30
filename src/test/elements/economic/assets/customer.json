@@ -1,0 +1,14 @@
+{
+  "paymentTerms": {
+    "paymentTermsNumber": 2
+  },
+  "customerGroup": {
+    "customerGroupNumber": 1
+  },
+  "barred": false,
+  "name": "<<random.word>>",
+  "currency": "DKK",
+  "vatZone": {
+    "vatZoneNumber": 1
+  }
+}

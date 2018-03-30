@@ -1,0 +1,16 @@
+{
+  "description": "Payment",
+  "receipt_email": "ven-test-update@gmail.com",
+  "shipping": {
+    "address": {
+      "city": "Pune",
+      "country": "India",
+      "line1": "street1",
+      "line2": "No2",
+      "postal_code": "9869211",
+      "state": "Maha"
+    },
+    "name": "Ven-test-1",
+    "phone": "0973209g"
+  }
+}
