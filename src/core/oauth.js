@@ -20,6 +20,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('username')).sendKeys(username);
       browser.findElement(webdriver.By.id('password')).sendKeys(password);
+      browser.manage().window().maximize(); //for maximizing the window size.
       browser.findElement(webdriver.By.name('access')).click();
       return browser.getCurrentUrl();
     case 'adobe-esign':
@@ -220,7 +221,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then(r => browser.findElement(webdriver.By.xpath('/html/body/div/p[1]/button[2]')))
         .then(r => r.click())
         .then(r => browser.getCurrentUrl())
-        .catch(r => browser.getCurrentUrl());      
+        .catch(r => browser.getCurrentUrl());
     case 'eloqua':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.xpath('//*[@id="login-button"]')).click();
@@ -680,7 +681,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.get(r.body.oauthUrl);
       browser.wait(webdriver.until.elementLocated(webdriver.By.name('email'), 5000));
       browser.findElement(webdriver.By.name('email')).sendKeys(username);
-      browser.findElement(webdriver.By.xpath('/html/body/div/div/div/main/section/div[1]/div/form/div[3]/button/span')).click();  
+      browser.findElement(webdriver.By.xpath('/html/body/div/div/div/main/section/div[1]/div/form/div[3]/button/span')).click();
       browser.findElement(webdriver.By.name('password')).sendKeys(password);
       browser.findElement(webdriver.By.xpath('/html/body/div/div/div/main/section/div[1]/div/form/div[4]/button/div/span')).click();
       return browser.getCurrentUrl();
@@ -699,7 +700,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       return browser.getCurrentUrl();
     case 'docushareflex':
       if (config['provider.version'] === '1') {
-        /* For version 1 Docushare renders a popup that selenium can't handle with firefox - eg browser.switchTo().alert()  
+        /* For version 1 Docushare renders a popup that selenium can't handle with firefox - eg browser.switchTo().alert()
         * There is also a firefox issue with sending the Basic credentials in the URL if you're targeting a sub-resource on a domain.
         * To workaround we first hit the main domain with the creds in the URL then call the sub-resource (our OG auth url);
         **/

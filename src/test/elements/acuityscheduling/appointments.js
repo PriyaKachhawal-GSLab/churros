@@ -22,7 +22,7 @@ suite.forElement('scheduling', 'appointments', { payload: payload }, (test) => {
     .then(r => payload.appointmentTypeID = appointmentTypeID)
     .then(r => cloud.withOptions({ qs: { date: `${futureDate}`, appointmentTypeID: `${appointmentTypeID}` } }).get(`/hubs/scheduling/available-times`))
     .then(r => payload.datetime = r.body[0].time)
-    .then(r => cloud.post('/hubs/scheduling/appointments', payload))
+    .then(r => cloud.post(test.api, payload))
     .then(r => {
       appointmentId = r.body.id;
       email = r.body.email;
