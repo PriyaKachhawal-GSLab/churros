@@ -4,9 +4,9 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const payload = require('./assets/products-inventory');
 
-suite.forElement('crm', 'products', { skip: true, payload: payload }, (test) => {
-// There is no retriveAll operation neither POST operation supported by vendor. Hence productId is hardcoded in the test
-// that is specific to the account.
+suite.forElement('crm', 'products', { payload: payload }, (test) => {
+  // There is no retriveAll operation neither POST operation supported by vendor. Hence productId is hardcoded in the test
+  // that is specific to the churros account.
   it('Should allow to GET and PATCH /products/{id}/inventory', () => {
     let productId = 4;
     return cloud.get(`${test.api}/${productId}/inventory`)
