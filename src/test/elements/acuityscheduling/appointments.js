@@ -57,7 +57,8 @@ suite.forElement('scheduling', 'appointments', { payload: payload }, (test) => {
   });
 
   it('should allow PATCH /appointments/{id}/reschedule', () => {
-    return cloud.patch(`${test.api}/${appointmentId}/reschedule`, reschedulePayload);
+    return cloud.patch(`${test.api}/${appointmentId}/reschedule`, reschedulePayload)
+      .then(r => expect(r.body).to.not.be.empty);
   });
 
   it('should allow GET /appointments/{id}/payments', () => {

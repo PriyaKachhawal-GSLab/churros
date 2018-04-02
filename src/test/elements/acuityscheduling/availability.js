@@ -22,6 +22,7 @@ suite.forElement('scheduling', 'available', { payload: payload }, (test) => {
   });
 
   it(`should allow POST ${test.api}-times/validate`, () => {
-    return cloud.post(`${test.api}-times/validate`, payload);
+    return cloud.post(`${test.api}-times/validate`, payload)
+      .then(r => expect(r.body).to.not.be.empty);
   });
 });
