@@ -3,6 +3,7 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
+const expect = require('chakram').expect;
 let payload = tools.requirePayload(`${__dirname}/assets/available-times.json`);
 
 suite.forElement('scheduling', 'available', { payload: payload }, (test) => {
