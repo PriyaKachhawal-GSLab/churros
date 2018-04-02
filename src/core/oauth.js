@@ -473,6 +473,20 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then((element) => element.click(), (err) => {}); // ignore this
       browser.sleep(2000); //Paypal takes some time to confirm creds
       return browser.getCurrentUrl();
+    case 'quickbooks--oauth2': 
+      browser.get(r.body.oauthUrl);
+      browser.findElement(webdriver.By.name('Email')).sendKeys(username);
+      browser.findElement(webdriver.By.name('Password')).sendKeys(password);
+      browser.findElement(webdriver.By.id('ius-sign-in-submit-btn')).click();
+      browser.wait(() => browser.isElementPresent(webdriver.By.name('companySelectionWidgetCompanySelector_href')), 10000)
+        .thenCatch(r => true);
+      browser.findElement(webdriver.By.name('companySelectionWidgetCompanySelector_href'))
+        .then((element) => element.click(), (err) => {}); // ignore this
+      browser.wait(() => browser.isElementPresent(webdriver.By.id('authorizeBtn')), 5000)
+        .thenCatch(r => true);
+      browser.findElement(webdriver.By.className('btn ha-button ha-button-primary pull-right')).click();
+      browser.sleep(5000); // So flaky, quickbooks' 302 takes forever
+      return browser.getCurrentUrl();
     case 'quickbooks':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.name('Email')).sendKeys(username);
