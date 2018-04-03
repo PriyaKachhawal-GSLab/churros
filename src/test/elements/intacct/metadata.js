@@ -22,5 +22,5 @@ suite.forElement('finance', '/objects', (test) => {
       then(r => expect(r.body.fields.filter(field => (field.vendorPath.startsWith("custom") &&
         field.custom === true))));
     });
-  }))
+  }));
 });
