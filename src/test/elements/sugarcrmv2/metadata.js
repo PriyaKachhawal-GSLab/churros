@@ -33,6 +33,6 @@ objects.forEach(obj => {
         .withValidation(r => expect(r.body.fields.filter(field => (field.vendorPath.endsWith("_c") && field.custom === true))))
         .withName(`should support return only custom fields for ${obj}`)
         .should.return200OnGet();
-    }))
+    }));
   });
 });
