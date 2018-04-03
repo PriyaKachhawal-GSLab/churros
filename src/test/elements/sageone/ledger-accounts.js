@@ -3,13 +3,15 @@
 const suite = require('core/suite');
 const expect = require('chakram').expect;
 const tools = require('core/tools');
+const chakram = require('chakram');
+
 
 const payload = tools.requirePayload(`${__dirname}/assets/ledgerAccount.json`);
 
 
 
 suite.forElement('finance', 'ledger-accounts', { payload: payload },(test) => {
-  test.should.supportCrs();
+  test.should.supportCrus(chakram.put);
   test.should.supportPagination();
   test
     .withName(`should support searching ${test.api} by visible_in`)
