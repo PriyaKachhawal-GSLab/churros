@@ -6,11 +6,11 @@ const objects = require('./assets/metadata');
 
 suite.forElement('finance', `objects`, (test) => {
   return Promise.all(objects.map(obj => {
-    it('should support GET /objects/{objectName}/metadata', () => {
+    it(`should support GET ${test.api}/${obj}/metadata`, () => {
       return cloud.get(`${test.api}/${obj}/metadata`);
     });
 
-    it('should support GET /objects/{objectName}/metadata customFieldsOnly parameter', () => {
+    it(`should support GET ${test.api}/${obj}/metadata customFieldsOnly parameter`, () => {
       return cloud.withOptions({ qs: { customFieldsOnly: true } }).get(`${test.api}/${obj}/metadata`).
       then(r => expect(r.body.fields.filter(field => (field.vendorPath.endsWith("_c") && field.custom === true))));
     });
