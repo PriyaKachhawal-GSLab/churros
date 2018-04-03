@@ -26,11 +26,13 @@ var objects = [
 
 objects.forEach(obj => {
   suite.forElement('finance', `objects/${obj}/metadata`, (test) => {
-    test.should.supportS();
-    test.withApi(test.api)
-      .withOptions({ qs: { customFieldsOnly: true } })
-      .withValidation(r => expect(r.body.fields.filter(field => (field.vendorPath.endsWith("_c") && field.custom === true))))
-      .withName(`should support return only custom fields for ${obj}`)
-      .should.return200OnGet();
+    return Promise.all(objects.map(obj => {
+      test.should.supportS();
+      test.withApi(test.api)
+        .withOptions({ qs: { customFieldsOnly: true } })
+        .withValidation(r => expect(r.body.fields.filter(field => (field.vendorPath.endsWith("_c") && field.custom === true))))
+        .withName(`should support return only custom fields for ${obj}`)
+        .should.return200OnGet();
+    }))
   });
 });
