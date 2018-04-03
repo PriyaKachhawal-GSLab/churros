@@ -1,8 +1,6 @@
 {
-	"description": "Descriptionss",
-	"end_date": 
-	"2018-03-16T12:45:00.000Z",
-	"start_date": 
-	"2018-03-16T12:15:00.000Z",
-	"title": "Title1"
+	"description": "<<random.word>>",
+	"end_date": "2019-03-16T12:45:00.000Z",
+	"start_date": "2019-03-16T12:15:00.000Z",
+	"title": "<<random.word>>"
 }

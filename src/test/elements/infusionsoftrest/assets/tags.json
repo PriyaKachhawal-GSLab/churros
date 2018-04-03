@@ -1,6 +1,6 @@
 {
       "name": "<<random.word>>",
-      "description": "Test",
+      "description": "<<random.word>>",
       "category": {
         "id": 1,
         "name": "Customer Tags"

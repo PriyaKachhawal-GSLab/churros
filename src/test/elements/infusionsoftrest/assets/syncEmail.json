@@ -1,10 +1,10 @@
 {
-"emails": [
-{
-   "subject": "<<random.word>>",
+  "emails": [
+    {
+      "subject": "<<random.word>>",
       "headers": null,
       "contact_id": 0,
-	  "html_content": "New content",
+      "html_content": "New content",
       "sent_to_address": "developer@cloud-elements.com",
       "sent_to_cc_addresses": null,
       "sent_to_bcc_addresses": null,
@@ -13,6 +13,6 @@
       "sent_date": "2018-04-12T16:56:27.000Z",
       "received_date": null,
       "opened_date": null
-}
-]
+    }
+  ]
 }
