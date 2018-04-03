@@ -1,38 +1,18 @@
 'use strict';
 const suite = require('core/suite');
+const cloud = require('core/cloud');
 const expect = require('chakram').expect;
-var objects = [
-  "accountsNotes",
-  "leadsNotes",
-  "campaigns",
-  "incidents",
-  "campaignsNotes",
-  "incidentsNotesAttachments",
-  "tasks",
-  "incidentsHistory",
-  "incidentsNotes",
-  "accountsActivities",
-  "contactsActivities",
-  "opportunities",
-  "users",
-  "activities",
-  "leads",
-  "activitiesRaw",
-  "accounts",
-  "opportunitiesNotes",
-  "contacts",
-  "contactsNotes"
-];
+const objects = require('./assets/metadata');
 
-objects.forEach(obj => {
-  suite.forElement('finance', `objects/${obj}/metadata`, (test) => {
-    return Promise.all(objects.map(obj => {
-      test.should.supportS();
-      test.withApi(test.api)
-        .withOptions({ qs: { customFieldsOnly: true } })
-        .withValidation(r => expect(r.body.fields.filter(field => (field.vendorPath.endsWith("_c") && field.custom === true))))
-        .withName(`should support return only custom fields for ${obj}`)
-        .should.return200OnGet();
-    }));
-  });
+suite.forElement('finance', `objects`, (test) => {
+  return Promise.all(objects.map(obj => {
+    it('should support GET /objects/{objectName}/metadata', () => {
+      return cloud.get(`${test.api}/${obj}/metadata`);
+    });
+
+    it('should support GET /objects/{objectName}/metadata customFieldsOnly parameter', () => {
+      return cloud.withOptions({ qs: { customFieldsOnly: true } }).get(`${test.api}/${obj}/metadata`).
+      then(r => expect(r.body.fields.filter(field => (field.vendorPath.endsWith("_c") && field.custom === true))));
+    });
+  }));
 });
