@@ -67,7 +67,7 @@ suite.forPlatform('common-resources', {}, () => {
       expect(usage[0]).to.haveOwnProperty('formulaName');
       expect(usage[0]).to.haveOwnProperty('formulaId');
       expect(usage[0]).to.haveOwnProperty('usageCount');
-      expect(usage[0]).property('usageCount').to.eq(2);
+      expect(usage[0]).property('usageCount').to.eq(3);
     };
     return cloud.get(`${api}/MyContact/usages`, validation);
   });
