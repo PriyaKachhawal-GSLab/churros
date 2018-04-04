@@ -1,0 +1,30 @@
+{
+  "email_address": "ss@cloud-elements.com",
+  "email_type": "html",
+ 
+  "interests": {},
+  "ip_opt": "198.2.191.34",
+  "ip_signup": "198.2.191.12",
+  "language": "en",
+  "location": {
+    "latitude": 23,
+    "longitude": 24
+  },
+
+   
+     "merge_fields": {
+    "CE TAG": "testq",
+    "FNAME": "test",
+    "LNAME": "test",
+    "MMERGE5": "tests",
+    "MMERGE6": "twat",
+    "MMERGE7": "22",
+    "MMERGE8": "wfq",
+    "MMERGE9": "121e"
+  },
+  
+  "status": "subscribed",
+  "timestamp_opt": "2015-09-16 19:24:29",
+  "timestamp_signup": "2015-09-16 19:24:29",
+  "vip": true
+}

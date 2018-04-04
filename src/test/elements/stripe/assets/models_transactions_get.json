@@ -1,0 +1,5816 @@
+[
+  {
+    "amount": -400,
+    "available_on": 1521458980,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C7MBMGdZbyQGmEeuxU62C3m",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521458980,
+    "fee": 0,
+    "fee_details": [],
+    "description": "ccrbyhbhnnitsmr3haor",
+    "source": "tr_1C7MBMGdZbyQGmEeuxU62C3m",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C7MBMGdZbyQGmEe1A1abK2K",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1522022400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C7MB3GdZbyQGmEeVHyHTma9",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521458961,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C7MB3GdZbyQGmEeVHyHTma9",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C7MB3GdZbyQGmEeuO4FE7Gx",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 400,
+    "available_on": 1522022400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C7MA8GdZbyQGmEezW89uzxZ",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521458906,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C7MA8GdZbyQGmEezW89uzxZ",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C7MAAGdZbyQGmEeckABjELF",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": -400,
+    "available_on": 1521450106,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C7JsEGdZbyQGmEePTOimk2U",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521450106,
+    "fee": 0,
+    "fee_details": [],
+    "description": "yow5u25l0tfmxaud6lxr",
+    "source": "tr_1C7JsEGdZbyQGmEePTOimk2U",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C7JsEGdZbyQGmEe99nJmRSA",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1522022400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C7JrwGdZbyQGmEe6Uh2Jw72",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521450088,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C7JrwGdZbyQGmEe6Uh2Jw72",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C7JrwGdZbyQGmEeedT0bEIL",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 400,
+    "available_on": 1522022400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C7JqyGdZbyQGmEeylmNMdTV",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521450029,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C7JqyGdZbyQGmEeylmNMdTV",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C7JqzGdZbyQGmEePwvND664",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521936000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C6yF6GdZbyQGmEeJIHOiyN6",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521366956,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C6yF6GdZbyQGmEeJIHOiyN6",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C6yF6GdZbyQGmEeNx2g7G4n",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521936000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C6yEyGdZbyQGmEeqo6QLjW2",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521366948,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C6yEyGdZbyQGmEeqo6QLjW2",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C6yEyGdZbyQGmEe1qghFOSO",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": -148,
+    "available_on": 1521676800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=re_1C6wS8GdZbyQGmEeFl40tUKd",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521360076,
+    "fee": -34,
+    "fee_details": [
+      {
+        "amount": -34,
+        "application": null,
+        "description": "Stripe processing fee refund",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": "REFUND FOR CHARGE (Payment)",
+    "source": "re_1C6wS8GdZbyQGmEeFl40tUKd",
+    "type": "refund",
+    "currency": "usd",
+    "id": "txn_1C6wS8GdZbyQGmEelAQEIovH",
+    "net": -114,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 2101,
+    "available_on": 1521936000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C6wAhGdZbyQGmEezGpmpUdc",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521359014,
+    "fee": 91,
+    "fee_details": [
+      {
+        "amount": 91,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": "vEn-test-charges-capture1",
+    "source": "ch_1C6wAhGdZbyQGmEezGpmpUdc",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C6wB0GdZbyQGmEeQSM209Yl",
+    "net": 2010,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 2100,
+    "available_on": 1521936000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C6w8MGdZbyQGmEen111OQWm",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521358850,
+    "fee": 91,
+    "fee_details": [
+      {
+        "amount": 91,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": "vEn-test-charges-capture",
+    "source": "ch_1C6w8MGdZbyQGmEen111OQWm",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C6w8MGdZbyQGmEebv8ltMX1",
+    "net": 2009,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": -400,
+    "available_on": 1521199722,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C6GjmGdZbyQGmEevH2Mz81u",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521199722,
+    "fee": 0,
+    "fee_details": [],
+    "description": "rc0aacqhe9l1kk5vims4i",
+    "source": "tr_1C6GjmGdZbyQGmEevH2Mz81u",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C6GjmGdZbyQGmEe19oumWme",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521763200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C6GjTGdZbyQGmEejmjFP5p2",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521199703,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C6GjTGdZbyQGmEejmjFP5p2",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C6GjUGdZbyQGmEeLtmNSWzy",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 400,
+    "available_on": 1521763200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C6GiYGdZbyQGmEe7p9NJfX1",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521199647,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C6GiYGdZbyQGmEe7p9NJfX1",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C6GiaGdZbyQGmEegw4SN53L",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": -400,
+    "available_on": 1521185604,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C6D44GdZbyQGmEeAte1oCg5",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521185604,
+    "fee": 0,
+    "fee_details": [],
+    "description": "wi2ih30gycbydqp8pvi",
+    "source": "tr_1C6D44GdZbyQGmEeAte1oCg5",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C6D44GdZbyQGmEe8o3VCsx3",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521763200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C6D3iGdZbyQGmEeSpZc2kPg",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521185582,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C6D3iGdZbyQGmEeSpZc2kPg",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C6D3iGdZbyQGmEeY71i0SNq",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 400,
+    "available_on": 1521763200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C6D2eGdZbyQGmEe6lYIvL1l",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521185517,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C6D2eGdZbyQGmEe6lYIvL1l",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C6D2fGdZbyQGmEeSZgEyfGO",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 1,
+    "available_on": 1521676800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=trr_1C6BOvGdZbyQGmEeNeysS278",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521179209,
+    "fee": 0,
+    "fee_details": [],
+    "description": "REFUND FOR TRANSFER",
+    "source": "tr_1C61HTGdZbyQGmEeApuaWXG3",
+    "type": "transfer_refund",
+    "currency": "usd",
+    "id": "txn_1C6BOvGdZbyQGmEesxxK1APn",
+    "net": 1,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": -1,
+    "available_on": 1521676800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=re_1C6BOuGdZbyQGmEeaiEXkmOr",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521179208,
+    "fee": 0,
+    "fee_details": [],
+    "description": "REFUND FOR CHARGE (Payment)",
+    "source": "re_1C6BOuGdZbyQGmEeaiEXkmOr",
+    "type": "refund",
+    "currency": "usd",
+    "id": "txn_1C6BOuGdZbyQGmEeq56Ii5Ez",
+    "net": -1,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": -1,
+    "available_on": 1521676800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=re_1C6BJ7GdZbyQGmEeWLNNtM7t",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521178849,
+    "fee": 0,
+    "fee_details": [],
+    "description": "REFUND FOR CHARGE (Payment)",
+    "source": "re_1C6BJ7GdZbyQGmEeWLNNtM7t",
+    "type": "refund",
+    "currency": "usd",
+    "id": "txn_1C6BJ7GdZbyQGmEeNyis7BJI",
+    "net": -1,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 150,
+    "available_on": 1521763200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=fee_1C6B8jAaQjfDD77K8Mn9JsaP",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521178205,
+    "fee": 0,
+    "fee_details": [],
+    "description": "Application fee from application CloudElements for ven-test@gmail.com (acct_1C60bWAaQjfDD77K)",
+    "source": "fee_1C6B8jAaQjfDD77K8Mn9JsaP",
+    "type": "application_fee",
+    "currency": "usd",
+    "id": "txn_1C6B8jGdZbyQGmEetN53ZDdd",
+    "net": 150,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": -150,
+    "available_on": 1521763200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C6B8jGdZbyQGmEeS7sLdX8L",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521178205,
+    "fee": 0,
+    "fee_details": [],
+    "description": null,
+    "source": "tr_1C6B8jGdZbyQGmEeS7sLdX8L",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C6B8jGdZbyQGmEeG0DcJzza",
+    "net": -150,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 150,
+    "available_on": 1521763200,
+    "sourced_transfers": {
+      "data": [
+        {
+          "date": 1521178205,
+          "balance_transaction": "txn_1C6B8jGdZbyQGmEeG0DcJzza",
+          "livemode": false,
+          "destination": "acct_1C60bWAaQjfDD77K",
+          "description": null,
+          "failure_message": null,
+          "type": "stripe_account",
+          "statement_descriptor": null,
+          "currency": "usd",
+          "id": "tr_1C6B8jGdZbyQGmEeS7sLdX8L",
+          "reversals": {
+            "data": [],
+            "total_count": 0,
+            "has_more": false,
+            "url": "/v1/transfers/tr_1C6B8jGdZbyQGmEeS7sLdX8L/reversals",
+            "object": "list"
+          },
+          "amount": 150,
+          "transfer_group": "group_ch_1C5oWG2eZvKYlo2COxhyWgxG",
+          "failure_code": null,
+          "method": "standard",
+          "created": 1521178205,
+          "source_transaction": "ch_1C6B8jGdZbyQGmEeIhPqAmY4",
+          "source_type": "card",
+          "amount_reversed": 0,
+          "recipient": null,
+          "destination_payment": "py_1C6B8jAaQjfDD77Kqa43YLsC",
+          "application_fee": null,
+          "reversed": false,
+          "object": "transfer",
+          "status": "paid"
+        }
+      ],
+      "total_count": 1,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C6B8jGdZbyQGmEeIhPqAmY4",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521178205,
+    "fee": 34,
+    "fee_details": [
+      {
+        "amount": 34,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": "Payment",
+    "source": "ch_1C6B8jGdZbyQGmEeIhPqAmY4",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C6B8kGdZbyQGmEeGdymMWVe",
+    "net": 116,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 150,
+    "available_on": 1521676800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=fee_1C61HTAaQjfDD77Kk7bryqtz",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521140307,
+    "fee": 0,
+    "fee_details": [],
+    "description": "Application fee from application CloudElements for ven-test@gmail.com (acct_1C60bWAaQjfDD77K)",
+    "source": "fee_1C61HTAaQjfDD77Kk7bryqtz",
+    "type": "application_fee",
+    "currency": "usd",
+    "id": "txn_1C61HTGdZbyQGmEe90vGDguq",
+    "net": 150,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": -150,
+    "available_on": 1521676800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C61HTGdZbyQGmEeApuaWXG3",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521140307,
+    "fee": 0,
+    "fee_details": [],
+    "description": null,
+    "source": "tr_1C61HTGdZbyQGmEeApuaWXG3",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C61HTGdZbyQGmEeqtFDrOwx",
+    "net": -150,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 150,
+    "available_on": 1521676800,
+    "sourced_transfers": {
+      "data": [
+        {
+          "date": 1521140307,
+          "balance_transaction": "txn_1C61HTGdZbyQGmEeqtFDrOwx",
+          "livemode": false,
+          "destination": "acct_1C60bWAaQjfDD77K",
+          "description": null,
+          "failure_message": null,
+          "type": "stripe_account",
+          "statement_descriptor": null,
+          "currency": "usd",
+          "id": "tr_1C61HTGdZbyQGmEeApuaWXG3",
+          "reversals": {
+            "data": [
+              {
+                "balance_transaction": "txn_1C6BOvGdZbyQGmEesxxK1APn",
+                "amount": 1,
+                "transfer": "tr_1C61HTGdZbyQGmEeApuaWXG3",
+                "created": 1521179209,
+                "currency": "usd",
+                "id": "trr_1C6BOvGdZbyQGmEeNeysS278",
+                "object": "transfer_reversal"
+              }
+            ],
+            "total_count": 1,
+            "has_more": false,
+            "url": "/v1/transfers/tr_1C61HTGdZbyQGmEeApuaWXG3/reversals",
+            "object": "list"
+          },
+          "amount": 150,
+          "transfer_group": "group_ch_1C5oWG2eZvKYlo2COxhyWgxG",
+          "failure_code": null,
+          "method": "standard",
+          "created": 1521140307,
+          "source_transaction": "ch_1C61HSGdZbyQGmEebxKBANaG",
+          "source_type": "card",
+          "amount_reversed": 1,
+          "recipient": null,
+          "destination_payment": "py_1C61HTAaQjfDD77KmgWfwXDF",
+          "application_fee": null,
+          "reversed": false,
+          "object": "transfer",
+          "status": "paid"
+        }
+      ],
+      "total_count": 1,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C61HSGdZbyQGmEebxKBANaG",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521140306,
+    "fee": 34,
+    "fee_details": [
+      {
+        "amount": 34,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": "Payment",
+    "source": "ch_1C61HSGdZbyQGmEebxKBANaG",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C61HTGdZbyQGmEehaboES1V",
+    "net": 116,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": -400,
+    "available_on": 1521126812,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C5xloGdZbyQGmEee1f6JIYW",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521126812,
+    "fee": 0,
+    "fee_details": [],
+    "description": "kswi98d98ybnedujcq5mi",
+    "source": "tr_1C5xloGdZbyQGmEee1f6JIYW",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C5xloGdZbyQGmEe22NAlTMU",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521676800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5xlPGdZbyQGmEe1ZKY7XWQ",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521126787,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5xlPGdZbyQGmEe1ZKY7XWQ",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5xlPGdZbyQGmEe8M394Ml2",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 400,
+    "available_on": 1521676800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5xk9GdZbyQGmEeWgLYNiI4",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521126711,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5xk9GdZbyQGmEeWgLYNiI4",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5xkBGdZbyQGmEeT7BpNxMi",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 3750,
+    "available_on": 1521676800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5xFMGdZbyQGmEeNlYkj0Pv",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521124800,
+    "fee": 139,
+    "fee_details": [
+      {
+        "amount": 139,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5xFMGdZbyQGmEeNlYkj0Pv",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5xFMGdZbyQGmEeoRICDj1Z",
+    "net": 3611,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 3750,
+    "available_on": 1521676800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5uejGdZbyQGmEeHMW1u75c",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521114841,
+    "fee": 139,
+    "fee_details": [
+      {
+        "amount": 139,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5uejGdZbyQGmEeHMW1u75c",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5uejGdZbyQGmEeWGfrIZ3M",
+    "net": 3611,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 4750,
+    "available_on": 1521676800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5ue4GdZbyQGmEeP2f842jy",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521114800,
+    "fee": 168,
+    "fee_details": [
+      {
+        "amount": 168,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5ue4GdZbyQGmEeP2f842jy",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5ue4GdZbyQGmEejaLNC8L0",
+    "net": 4582,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": -400,
+    "available_on": 1521112633,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C5u57GdZbyQGmEe1PCZPxYb",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521112633,
+    "fee": 0,
+    "fee_details": [],
+    "description": "xgkeqlalxj3s25a5rk9",
+    "source": "tr_1C5u57GdZbyQGmEe1PCZPxYb",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C5u57GdZbyQGmEe2oNf8mqe",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521676800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5u4hGdZbyQGmEe4wanyTDN",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521112607,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5u4hGdZbyQGmEe4wanyTDN",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5u4hGdZbyQGmEesXNwvzuo",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 400,
+    "available_on": 1521676800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5u3MGdZbyQGmEebBWFXjNL",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521112526,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5u3MGdZbyQGmEebBWFXjNL",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5u3OGdZbyQGmEeipqegjGw",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521676800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5sOQGdZbyQGmEeJtRl2Cii",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521106142,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5sOQGdZbyQGmEeJtRl2Cii",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5sOQGdZbyQGmEeyhZZ87OC",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": -400,
+    "available_on": 1521030378,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C5YgQGdZbyQGmEexmlAPC9a",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521030378,
+    "fee": 0,
+    "fee_details": [],
+    "description": "vdjvh1i",
+    "source": "tr_1C5YgQGdZbyQGmEexmlAPC9a",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C5YgQGdZbyQGmEer3nlSVkc",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521590400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5YfXGdZbyQGmEebvz3zIsq",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521030323,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5YfXGdZbyQGmEebvz3zIsq",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5YfXGdZbyQGmEeRaOMWjfd",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 400,
+    "available_on": 1521590400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5YcPGdZbyQGmEe722ZdiK8",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521030133,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5YcPGdZbyQGmEe722ZdiK8",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5YcTGdZbyQGmEeM1CX1qGB",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": -400,
+    "available_on": 1521027417,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C5XufGdZbyQGmEeTLM1HLaN",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521027417,
+    "fee": 0,
+    "fee_details": [],
+    "description": "z3l6te9apbiqe86ko6r",
+    "source": "tr_1C5XufGdZbyQGmEeTLM1HLaN",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C5XufGdZbyQGmEerNt7ftP5",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521590400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5XuNGdZbyQGmEe7dAbEDZQ",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521027399,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5XuNGdZbyQGmEe7dAbEDZQ",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5XuNGdZbyQGmEeFvjS3nP1",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 400,
+    "available_on": 1521590400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5XtQGdZbyQGmEeQDMhayWy",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521027342,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5XtQGdZbyQGmEeQDMhayWy",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5XtSGdZbyQGmEeqs51X2rn",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": -400,
+    "available_on": 1521012974,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C5U9iGdZbyQGmEecd8cpB3g",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521012974,
+    "fee": 0,
+    "fee_details": [],
+    "description": "k083wf6zvky6opq9cc8fr",
+    "source": "tr_1C5U9iGdZbyQGmEecd8cpB3g",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C5U9iGdZbyQGmEe7tkIEe4e",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521590400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5U9OGdZbyQGmEe9oTe32In",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521012954,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5U9OGdZbyQGmEe9oTe32In",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5U9OGdZbyQGmEeThhJ4ywE",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 400,
+    "available_on": 1521590400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5U8UGdZbyQGmEe98OrBhu2",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521012900,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5U8UGdZbyQGmEe98OrBhu2",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5U8WGdZbyQGmEe6vXq1fgK",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": -400,
+    "available_on": 1521009020,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C5T7wGdZbyQGmEeEFE2rFE5",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521009020,
+    "fee": 0,
+    "fee_details": [],
+    "description": "hodglj",
+    "source": "tr_1C5T7wGdZbyQGmEeEFE2rFE5",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C5T7wGdZbyQGmEeeRfYf9pZ",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521590400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5T7PGdZbyQGmEeaP0wiOVP",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521008987,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5T7PGdZbyQGmEeaP0wiOVP",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5T7PGdZbyQGmEeQJXjJGxj",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 400,
+    "available_on": 1521590400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5T5kGdZbyQGmEetpmi2SJh",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1521008886,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5T5kGdZbyQGmEetpmi2SJh",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5T5mGdZbyQGmEe7JuhoPxY",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521504000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C5GyZGdZbyQGmEeKHTdVZct",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520962311,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C5GyZGdZbyQGmEeKHTdVZct",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C5GyaGdZbyQGmEeM3B0Yx7u",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "pending"
+  },
+  {
+    "amount": -400,
+    "available_on": 1520860227,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C4qQ3GdZbyQGmEeRKuCwZIK",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520860227,
+    "fee": 0,
+    "fee_details": [],
+    "description": "nymzbtzcoetbgo008jjor",
+    "source": "tr_1C4qQ3GdZbyQGmEeRKuCwZIK",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C4qQ3GdZbyQGmEeAK8PNWHG",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521417600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C4qP1GdZbyQGmEex0Zw7FjJ",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520860163,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C4qP1GdZbyQGmEex0Zw7FjJ",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C4qP1GdZbyQGmEeI3E3LPqC",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1521417600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C4qMNGdZbyQGmEeDm3psb6m",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520860001,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C4qMNGdZbyQGmEeDm3psb6m",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C4qMPGdZbyQGmEevLM42qSA",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1520846198,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C4mlmGdZbyQGmEepiyFTAzp",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520846198,
+    "fee": 0,
+    "fee_details": [],
+    "description": "t15w6ljicjgtx83erk9",
+    "source": "tr_1C4mlmGdZbyQGmEepiyFTAzp",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C4mlmGdZbyQGmEeIfWMW4g2",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521417600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C4mlTGdZbyQGmEeNtoSmQ3H",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520846179,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C4mlTGdZbyQGmEeNtoSmQ3H",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C4mlUGdZbyQGmEeY5UKaaZW",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1521417600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C4mkRGdZbyQGmEeDasaUT4r",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520846117,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C4mkRGdZbyQGmEeDasaUT4r",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C4mkTGdZbyQGmEe2aw5h67t",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521331200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C4TcHGdZbyQGmEe9uDR3PLn",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520772573,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C4TcHGdZbyQGmEe9uDR3PLn",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C4TcHGdZbyQGmEeJBaN8hTX",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521331200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C4TYhGdZbyQGmEerQbPWUao",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520772351,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C4TYhGdZbyQGmEerQbPWUao",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C4TYhGdZbyQGmEeMN2we1zg",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1520594055,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C3jAxGdZbyQGmEeZTFxOooF",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520594055,
+    "fee": 0,
+    "fee_details": [],
+    "description": "er3oo73gr7yjmunmi",
+    "source": "tr_1C3jAxGdZbyQGmEeZTFxOooF",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C3jAxGdZbyQGmEeUIzhNe0E",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1521158400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C3jAaGdZbyQGmEeBJWIXmEi",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520594032,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C3jAaGdZbyQGmEeBJWIXmEi",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C3jAaGdZbyQGmEe5eUnT53b",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1521158400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C3j9SGdZbyQGmEe5SHU2eAJ",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520593964,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C3j9SGdZbyQGmEe5SHU2eAJ",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C3j9UGdZbyQGmEegYoP9Hps",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1520437690,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C34UwGdZbyQGmEeLVxHhPYm",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520437690,
+    "fee": 0,
+    "fee_details": [],
+    "description": "19pyhby0e64hkak8olxr",
+    "source": "tr_1C34UwGdZbyQGmEeLVxHhPYm",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C34UwGdZbyQGmEexbqD3xN6",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1520985600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C34U5GdZbyQGmEe5OFUo0ag",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520437637,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C34U5GdZbyQGmEe5OFUo0ag",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C34U5GdZbyQGmEe8Cds7eOy",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1520985600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C34PgGdZbyQGmEevAQXdTim",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520437366,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C34PgGdZbyQGmEevAQXdTim",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C34PiGdZbyQGmEem6hvRpdV",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1520418067,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C2zORGdZbyQGmEeAURqcfaS",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520418067,
+    "fee": 0,
+    "fee_details": [],
+    "description": "k4dt2dmh43zab1n61or",
+    "source": "tr_1C2zORGdZbyQGmEeAURqcfaS",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C2zORGdZbyQGmEebfS9YGm2",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1520985600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C2zO9GdZbyQGmEeBTe44Tia",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520418049,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C2zO9GdZbyQGmEeBTe44Tia",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C2zOAGdZbyQGmEeyFK4CoPa",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1520985600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C2zNAGdZbyQGmEeCfvRRjJK",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520417989,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C2zNAGdZbyQGmEeCfvRRjJK",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C2zNBGdZbyQGmEewSG7RPgS",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1520252284,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C2IGWGdZbyQGmEeGwlu23aH",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520252284,
+    "fee": 0,
+    "fee_details": [],
+    "description": "t9piqd5e6t37njgd5cdi",
+    "source": "tr_1C2IGWGdZbyQGmEeGwlu23aH",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C2IGWGdZbyQGmEejebQnNrR",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1520812800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C2IGDGdZbyQGmEewpAmZlkQ",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520252265,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C2IGDGdZbyQGmEewpAmZlkQ",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C2IGDGdZbyQGmEejJ850xOV",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1520812800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C2IFGGdZbyQGmEeOmnANrl0",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520252207,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C2IFGGdZbyQGmEeOmnANrl0",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C2IFHGdZbyQGmEewI0QGm7u",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1520245725,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C2GYjGdZbyQGmEeqhbVE59y",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520245725,
+    "fee": 0,
+    "fee_details": [],
+    "description": "23vsh00mgjbv0cz0k9",
+    "source": "tr_1C2GYjGdZbyQGmEeqhbVE59y",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C2GYjGdZbyQGmEejtcKiC32",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1520812800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C2GYOGdZbyQGmEeWAX0FYdT",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520245704,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C2GYOGdZbyQGmEeWAX0FYdT",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C2GYOGdZbyQGmEeRfGvCLUH",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1520812800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C2GX9GdZbyQGmEeInovX9RC",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520245629,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C2GX9GdZbyQGmEeInovX9RC",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C2GXBGdZbyQGmEetStb84Ud",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1520640000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C1cb1GdZbyQGmEeyRSaJfBR",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520092107,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C1cb1GdZbyQGmEeyRSaJfBR",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C1cb1GdZbyQGmEeWajBb7nw",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1520640000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C1Z77GdZbyQGmEepsAAZnor",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520078721,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C1Z77GdZbyQGmEepsAAZnor",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C1Z77GdZbyQGmEeB7X4PMiP",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1520640000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C1Z29GdZbyQGmEeSnzGsop3",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1520078413,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C1Z29GdZbyQGmEeSnzGsop3",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C1Z29GdZbyQGmEeoj4z9RAa",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1519993736,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C1D0OGdZbyQGmEeNBOZxUkb",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519993736,
+    "fee": 0,
+    "fee_details": [],
+    "description": "u7n8wqe9jp74criqw7b9",
+    "source": "tr_1C1D0OGdZbyQGmEeNBOZxUkb",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C1D0OGdZbyQGmEeUvAnUEOo",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1520553600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C1D07GdZbyQGmEepzyl707K",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519993719,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C1D07GdZbyQGmEepzyl707K",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C1D07GdZbyQGmEeZhMvr4pO",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1520553600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C1CzDGdZbyQGmEeVBx1PsJ6",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519993665,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C1CzDGdZbyQGmEeVBx1PsJ6",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C1CzFGdZbyQGmEeZD9wWpCl",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1519989165,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C1BofGdZbyQGmEeX3tYK4xu",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519989165,
+    "fee": 0,
+    "fee_details": [],
+    "description": "91wiky29rontg5cul3di",
+    "source": "tr_1C1BofGdZbyQGmEeX3tYK4xu",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C1BofGdZbyQGmEeN7ipMQfU",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1520553600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C1BoKGdZbyQGmEePTOqWfif",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519989144,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C1BoKGdZbyQGmEePTOqWfif",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C1BoKGdZbyQGmEecINLE3UY",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1520553600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C1BnEGdZbyQGmEe9DvsA8AJ",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519989077,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C1BnEGdZbyQGmEe9DvsA8AJ",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C1BnFGdZbyQGmEecY3OLeEY",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1520380800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C0b1EGdZbyQGmEes4QXT5LM",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519847716,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C0b1EGdZbyQGmEes4QXT5LM",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C0b1EGdZbyQGmEeTM2IDC4f",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1519820300,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C0Tt2GdZbyQGmEeP3CH6fWV",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519820300,
+    "fee": 0,
+    "fee_details": [],
+    "description": "f6msvrv7kjfzhot8g2e29",
+    "source": "tr_1C0Tt2GdZbyQGmEeP3CH6fWV",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C0Tt2GdZbyQGmEeBgWKZSKp",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1520380800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C0TskGdZbyQGmEeunWfluxF",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519820282,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C0TskGdZbyQGmEeunWfluxF",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C0TskGdZbyQGmEeylktHdez",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1520380800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C0TroGdZbyQGmEe7BUJ7ski",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519820226,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C0TroGdZbyQGmEe7BUJ7ski",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C0TrqGdZbyQGmEewQNcgeql",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1519813878,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1C0SDSGdZbyQGmEe0IvAai46",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519813878,
+    "fee": 0,
+    "fee_details": [],
+    "description": "yk0lrgzqizh05fljif6r",
+    "source": "tr_1C0SDSGdZbyQGmEe0IvAai46",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1C0SDSGdZbyQGmEeMxSQfJ6A",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1520380800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C0SD5GdZbyQGmEe6i6S9msi",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519813855,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C0SD5GdZbyQGmEe6i6S9msi",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C0SD6GdZbyQGmEepQLySLts",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1520380800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C0SBnGdZbyQGmEeOhkbelVf",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519813776,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C0SBnGdZbyQGmEeOhkbelVf",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C0SBoGdZbyQGmEeYJQFF8zX",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1520294400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1C03HbGdZbyQGmEeM17ZQmMw",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519718035,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1C03HbGdZbyQGmEeM17ZQmMw",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1C03HbGdZbyQGmEeWdshuEel",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1519647287,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BzksVGdZbyQGmEecf9hc6ax",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519647287,
+    "fee": 0,
+    "fee_details": [],
+    "description": "imvc3uaipxh9zsdwvcxr",
+    "source": "tr_1BzksVGdZbyQGmEecf9hc6ax",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BzksVGdZbyQGmEewpJfgcGs",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1520208000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BzksBGdZbyQGmEe01i5D4R8",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519647267,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BzksBGdZbyQGmEe01i5D4R8",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BzksBGdZbyQGmEe00opgKLh",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1520208000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BzkrGGdZbyQGmEeDzEt0DpH",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519647212,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BzkrGGdZbyQGmEeDzEt0DpH",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BzkrIGdZbyQGmEeSxGCQPlj",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1519639112,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BzikeGdZbyQGmEepmGyGitO",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519639112,
+    "fee": 0,
+    "fee_details": [],
+    "description": "3qplqyvkev79x4gf1or",
+    "source": "tr_1BzikeGdZbyQGmEepmGyGitO",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BzikeGdZbyQGmEemk7mTl6w",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1520208000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BzikLGdZbyQGmEeAyPUB581",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519639093,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BzikLGdZbyQGmEeAyPUB581",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BzikLGdZbyQGmEeUkD5gNyE",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1520208000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BzijIGdZbyQGmEewt9GWLDL",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519639029,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BzijIGdZbyQGmEewt9GWLDL",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BzijKGdZbyQGmEeXXpU3o5w",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1519386035,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1ByeulGdZbyQGmEevEhx9D95",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519386035,
+    "fee": 0,
+    "fee_details": [],
+    "description": "1poeacogyrdjgzr27qfr",
+    "source": "tr_1ByeulGdZbyQGmEevEhx9D95",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1ByeulGdZbyQGmEehq2MB1Kf",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519948800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1ByeuSGdZbyQGmEeDmhkiWfG",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519386016,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1ByeuSGdZbyQGmEeDmhkiWfG",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1ByeuTGdZbyQGmEeJzFtkHpn",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1519948800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1ByetWGdZbyQGmEeVYagLrlA",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519385960,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1ByetWGdZbyQGmEeVYagLrlA",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1ByetYGdZbyQGmEen6l4k5LX",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1519379855,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BydJ5GdZbyQGmEeyYHTFE8t",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519379855,
+    "fee": 0,
+    "fee_details": [],
+    "description": "4u8s029wd6v7trj2a9k9",
+    "source": "tr_1BydJ5GdZbyQGmEeyYHTFE8t",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BydJ5GdZbyQGmEezwCLQPFp",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519948800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BydIlGdZbyQGmEeJdkqMgEl",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519379835,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BydIlGdZbyQGmEeJdkqMgEl",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BydIlGdZbyQGmEeYXLuV1CO",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1519948800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BydHfGdZbyQGmEe8S215f5f",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519379770,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BydHfGdZbyQGmEe8S215f5f",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BydHiGdZbyQGmEe067N1Ds8",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519862400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1ByTmEGdZbyQGmEevkEjDxr0",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519343222,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1ByTmEGdZbyQGmEevkEjDxr0",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1ByTmEGdZbyQGmEeGoCezxPx",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519862400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1ByTm1GdZbyQGmEeQUyPrzCD",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519343209,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1ByTm1GdZbyQGmEeQUyPrzCD",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1ByTm1GdZbyQGmEe0AstQkQs",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519862400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1ByTlyGdZbyQGmEeLHsb4vHC",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519343206,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1ByTlyGdZbyQGmEeLHsb4vHC",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1ByTlyGdZbyQGmEelPYiaAG6",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519862400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1ByTlrGdZbyQGmEeFPpQn7ib",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519343199,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1ByTlrGdZbyQGmEeFPpQn7ib",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1ByTlrGdZbyQGmEeoYK8xRxK",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519862400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1ByTlpGdZbyQGmEezKQinfxd",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519343197,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1ByTlpGdZbyQGmEezKQinfxd",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1ByTlpGdZbyQGmEemei9YE60",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519862400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1ByReVGdZbyQGmEe7uoxxQHA",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519335055,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1ByReVGdZbyQGmEe7uoxxQHA",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1ByReWGdZbyQGmEejfHKbk01",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519862400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1ByN3SGdZbyQGmEe9GN1gDBJ",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519317382,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1ByN3SGdZbyQGmEe9GN1gDBJ",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1ByN3SGdZbyQGmEeiFZwn5T4",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 4000,
+    "available_on": 1519776000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1By3PrGdZbyQGmEeWi1Qdfnr",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519241891,
+    "fee": 146,
+    "fee_details": [
+      {
+        "amount": 146,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1By3PrGdZbyQGmEeWi1Qdfnr",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1By3PrGdZbyQGmEeD6ftMWGE",
+    "net": 3854,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1519213364,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BxvzkGdZbyQGmEelTJLZZrj",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519213364,
+    "fee": 0,
+    "fee_details": [],
+    "description": "pn6dd86nolu8994wjyvi",
+    "source": "tr_1BxvzkGdZbyQGmEelTJLZZrj",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BxvzkGdZbyQGmEe2Pfainr6",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519776000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BxvzTGdZbyQGmEeeUS5f48L",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519213347,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BxvzTGdZbyQGmEeeUS5f48L",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BxvzTGdZbyQGmEe0FYmQ3PD",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1519776000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BxvybGdZbyQGmEe0p7acaIp",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519213294,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BxvybGdZbyQGmEe0p7acaIp",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BxvycGdZbyQGmEeOgCyXroG",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1519205715,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1Bxu0NGdZbyQGmEepe6DjRCw",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519205715,
+    "fee": 0,
+    "fee_details": [],
+    "description": "vpfg8d2130kdozntgldi",
+    "source": "tr_1Bxu0NGdZbyQGmEepe6DjRCw",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1Bxu0NGdZbyQGmEePhEqM0Pe",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519776000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Bxu03GdZbyQGmEeQckSLY0v",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519205695,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Bxu03GdZbyQGmEeQckSLY0v",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Bxu03GdZbyQGmEecqjtfRgX",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1519776000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Bxtz3GdZbyQGmEe2bZ5WKLw",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519205636,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Bxtz3GdZbyQGmEe2bZ5WKLw",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Bxtz6GdZbyQGmEe5ffu4pzw",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1519036630,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BxC1CGdZbyQGmEeHG3Gd1Yd",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519036630,
+    "fee": 0,
+    "fee_details": [],
+    "description": "glqpeghjam0wptf8yqfr",
+    "source": "tr_1BxC1CGdZbyQGmEeHG3Gd1Yd",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BxC1CGdZbyQGmEeQHE4iWw2",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519603200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BxC0tGdZbyQGmEegG9N4UVJ",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519036611,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BxC0tGdZbyQGmEegG9N4UVJ",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BxC0uGdZbyQGmEeqx0jgax7",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1519603200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BxBzzGdZbyQGmEer9PCynR2",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519036557,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BxBzzGdZbyQGmEer9PCynR2",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BxC01GdZbyQGmEexpJS1oHY",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1519032691,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BxAzfGdZbyQGmEeJtajCKma",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519032691,
+    "fee": 0,
+    "fee_details": [],
+    "description": "9nh09upqk4gyvoxvquxr",
+    "source": "tr_1BxAzfGdZbyQGmEeJtajCKma",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BxAzfGdZbyQGmEeGX5M0oRb",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519603200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BxAzNGdZbyQGmEeDcaMdLSS",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519032673,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BxAzNGdZbyQGmEeDcaMdLSS",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BxAzOGdZbyQGmEej5xPNf67",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1519603200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BxAyPGdZbyQGmEevdU63vR4",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1519032616,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BxAyPGdZbyQGmEevdU63vR4",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BxAySGdZbyQGmEeNn1Q4jND",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 60,
+    "available_on": 1519516800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BwyRoGdZbyQGmEeknWGlNNr",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518984464,
+    "fee": 32,
+    "fee_details": [
+      {
+        "amount": 32,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BwyRoGdZbyQGmEeknWGlNNr",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BwyRoGdZbyQGmEeZXCLJkGY",
+    "net": 28,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519516800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BworWGdZbyQGmEeNtZZXfS0",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518947618,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BworWGdZbyQGmEeNtZZXfS0",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BworWGdZbyQGmEeAnlHrMNC",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519516800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BworOGdZbyQGmEeldHoON4N",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518947610,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BworOGdZbyQGmEeldHoON4N",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BworPGdZbyQGmEelp0a3Ff6",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1518781032,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1Bw7WeGdZbyQGmEePGjMc9oA",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518781032,
+    "fee": 0,
+    "fee_details": [],
+    "description": "3uumscna82t96t2r19k9",
+    "source": "tr_1Bw7WeGdZbyQGmEePGjMc9oA",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1Bw7WeGdZbyQGmEeorS4R1bP",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519344000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Bw7WNGdZbyQGmEe8y5vLzYs",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518781015,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Bw7WNGdZbyQGmEe8y5vLzYs",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Bw7WNGdZbyQGmEe1Mxc2B4L",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1519344000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Bw7VPGdZbyQGmEeJ7j5gNsW",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518780957,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Bw7VPGdZbyQGmEeJ7j5gNsW",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Bw7VRGdZbyQGmEeciqciIWm",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1518774503,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1Bw5pLGdZbyQGmEeiRlMD464",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518774503,
+    "fee": 0,
+    "fee_details": [],
+    "description": "09x56exv7syx79orbe29",
+    "source": "tr_1Bw5pLGdZbyQGmEeiRlMD464",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1Bw5pLGdZbyQGmEe5CdZEoBz",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519344000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Bw5p3GdZbyQGmEeX5e5M5Lr",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518774485,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Bw5p3GdZbyQGmEeX5e5M5Lr",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Bw5p4GdZbyQGmEe9fS3ekS2",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1519344000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Bw5o3GdZbyQGmEetNDn03QC",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518774425,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Bw5o3GdZbyQGmEetNDn03QC",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Bw5o5GdZbyQGmEeRED96UN0",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519257600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Bvj3GGdZbyQGmEe3TtbZv9V",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518686954,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Bvj3GGdZbyQGmEe3TtbZv9V",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Bvj3HGdZbyQGmEeeZpBN32a",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1518607515,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BvONzGdZbyQGmEeTiHUU8n6",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518607515,
+    "fee": 0,
+    "fee_details": [],
+    "description": "ktt7ciw5zzu5gng919k9",
+    "source": "tr_1BvONzGdZbyQGmEeTiHUU8n6",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BvONzGdZbyQGmEecsMsgxx9",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519171200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BvONhGdZbyQGmEeyelFhKA9",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518607497,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BvONhGdZbyQGmEeyelFhKA9",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BvONhGdZbyQGmEeRsYo8sRs",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1519171200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BvOMpGdZbyQGmEeAsypz11i",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518607445,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BvOMpGdZbyQGmEeAsypz11i",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BvOMrGdZbyQGmEegfR1IIds",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1518599917,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BvMPRGdZbyQGmEe6wToE8eL",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518599917,
+    "fee": 0,
+    "fee_details": [],
+    "description": "j7gds97vd5d3pd3qpk3xr",
+    "source": "tr_1BvMPRGdZbyQGmEe6wToE8eL",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BvMPRGdZbyQGmEeZ2HY3WEB",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519171200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BvMPAGdZbyQGmEeaw7doM6G",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518599900,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BvMPAGdZbyQGmEeaw7doM6G",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BvMPAGdZbyQGmEetVvBR46f",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1519171200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BvMOEGdZbyQGmEeApKLGQXZ",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518599844,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BvMOEGdZbyQGmEeApKLGQXZ",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BvMOGGdZbyQGmEeHyeNyMfu",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1519084800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Bv7bbGdZbyQGmEefKUcKAhj",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518543011,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Bv7bbGdZbyQGmEefKUcKAhj",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Bv7bbGdZbyQGmEerGnvuf2u",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1518434734,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BufRCGdZbyQGmEetom1QCMu",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518434734,
+    "fee": 0,
+    "fee_details": [],
+    "description": "0409p086zmb9w63tmx6r",
+    "source": "tr_1BufRCGdZbyQGmEetom1QCMu",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BufRCGdZbyQGmEevmVsUqHh",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1518998400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BufQuGdZbyQGmEeuXkAXS0F",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518434716,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BufQuGdZbyQGmEeuXkAXS0F",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BufQvGdZbyQGmEeVar3sH8Y",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1518998400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BufPuGdZbyQGmEeJKgNnk28",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518434656,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BufPuGdZbyQGmEeJKgNnk28",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BufPwGdZbyQGmEeqrRqs2ec",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1518427991,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BudgRGdZbyQGmEezbiAJtfG",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518427991,
+    "fee": 0,
+    "fee_details": [],
+    "description": "4t95fac76ot2zuf8ncdi",
+    "source": "tr_1BudgRGdZbyQGmEezbiAJtfG",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BudgRGdZbyQGmEei9XCgQx1",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1518998400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BudeQGdZbyQGmEeOzgWQTEI",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518427866,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BudeQGdZbyQGmEeOzgWQTEI",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BudeQGdZbyQGmEei9Y1HKmp",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1518998400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BudbiGdZbyQGmEeTjm5KE8b",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518427699,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BudbiGdZbyQGmEeTjm5KE8b",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BudbjGdZbyQGmEePN66wzP7",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1518912000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BuKF9GdZbyQGmEerraRPn1N",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518353263,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BuKF9GdZbyQGmEerraRPn1N",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BuKFAGdZbyQGmEejlidc3rF",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1518912000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BuKF1GdZbyQGmEenbuVboEd",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518353255,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BuKF1GdZbyQGmEenbuVboEd",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BuKF1GdZbyQGmEeuAk73Qvz",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1518176306,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BtaD0GdZbyQGmEezNjcEAJR",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518176306,
+    "fee": 0,
+    "fee_details": [],
+    "description": "5py27u4c9hso432i6bt9",
+    "source": "tr_1BtaD0GdZbyQGmEezNjcEAJR",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BtaD0GdZbyQGmEerd8CrRGy",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1518739200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BtaCjGdZbyQGmEexj4rq6ds",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518176289,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BtaCjGdZbyQGmEexj4rq6ds",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BtaCkGdZbyQGmEeTu91E4hG",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1518739200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BtaBrGdZbyQGmEeDHq11anM",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518176237,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BtaBrGdZbyQGmEeDHq11anM",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BtaBtGdZbyQGmEeopqXsgTE",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1518168619,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BtYD1GdZbyQGmEeDnfziKH4",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518168619,
+    "fee": 0,
+    "fee_details": [],
+    "description": "3ek2plj7ew66c4zvkj4i",
+    "source": "tr_1BtYD1GdZbyQGmEeDnfziKH4",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BtYD1GdZbyQGmEeXKoa8VFt",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1518739200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BtYCiGdZbyQGmEe3g9oIyZt",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518168600,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BtYCiGdZbyQGmEe3g9oIyZt",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BtYCiGdZbyQGmEeDdundTAM",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1518739200,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BtYBiGdZbyQGmEeY6yepQ47",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518168540,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BtYBiGdZbyQGmEeY6yepQ47",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BtYBkGdZbyQGmEev5aYOYdZ",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1518002127,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BsqtfGdZbyQGmEea1DMri3N",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518002127,
+    "fee": 0,
+    "fee_details": [],
+    "description": "rjflq9mj8zuo6m0lik9",
+    "source": "tr_1BsqtfGdZbyQGmEea1DMri3N",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BsqtfGdZbyQGmEekxeh0yBk",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1518566400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BsqtNGdZbyQGmEe1WJoeIHj",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518002109,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BsqtNGdZbyQGmEe1WJoeIHj",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BsqtNGdZbyQGmEeccbdD50Y",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1518566400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BsqsWGdZbyQGmEekTV9TqEC",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1518002058,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BsqsWGdZbyQGmEekTV9TqEC",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BsqsYGdZbyQGmEeMd4MLIJE",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1517995338,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1Bsp8AGdZbyQGmEeaB5madx5",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517995338,
+    "fee": 0,
+    "fee_details": [],
+    "description": "yevmaffo0s8voswcdi",
+    "source": "tr_1Bsp8AGdZbyQGmEeaB5madx5",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1Bsp8AGdZbyQGmEeAg4XxEqj",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1518566400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Bsp7tGdZbyQGmEeajjOnz9H",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517995321,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Bsp7tGdZbyQGmEeajjOnz9H",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Bsp7tGdZbyQGmEeFqYKZfic",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1518566400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Bsp71GdZbyQGmEeOsYxbLXY",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517995268,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Bsp71GdZbyQGmEeOsYxbLXY",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Bsp72GdZbyQGmEemSMwWn1k",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1517829616,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1Bs81EGdZbyQGmEeCSc4L2qV",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517829616,
+    "fee": 0,
+    "fee_details": [],
+    "description": "lap0j42x25mid7qilik9",
+    "source": "tr_1Bs81EGdZbyQGmEeCSc4L2qV",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1Bs81EGdZbyQGmEes6A9ZKRN",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1518393600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Bs80xGdZbyQGmEehBLb4cm2",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517829599,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Bs80xGdZbyQGmEehBLb4cm2",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Bs80yGdZbyQGmEeJ08K9NlO",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1518393600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Bs805GdZbyQGmEe50IBxsFv",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517829546,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Bs805GdZbyQGmEe50IBxsFv",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Bs806GdZbyQGmEejDqiRyKu",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1517822938,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1Bs6HWGdZbyQGmEe91YipcXM",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517822938,
+    "fee": 0,
+    "fee_details": [],
+    "description": "ojt7v29cqx6a4bbq8semi",
+    "source": "tr_1Bs6HWGdZbyQGmEe91YipcXM",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1Bs6HWGdZbyQGmEe9yMn05Ka",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1518393600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Bs6HDGdZbyQGmEeaSOgiZcy",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517822919,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Bs6HDGdZbyQGmEeaSOgiZcy",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Bs6HDGdZbyQGmEe5NUat2wH",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1518393600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Bs6GJGdZbyQGmEeuWI7rYIh",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517822865,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Bs6GJGdZbyQGmEeuWI7rYIh",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Bs6GLGdZbyQGmEeTZWSQO8v",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1518220800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BrTGLGdZbyQGmEeNpYNYqy9",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517672949,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BrTGLGdZbyQGmEeNpYNYqy9",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BrTGLGdZbyQGmEeY0DJwI9z",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1518220800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BrPleGdZbyQGmEebwdj9SP5",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517659514,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BrPleGdZbyQGmEebwdj9SP5",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BrPleGdZbyQGmEemCBVjXjt",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1518220800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BrPh3GdZbyQGmEe8czdMMx6",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517659229,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BrPh3GdZbyQGmEe8czdMMx6",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BrPh3GdZbyQGmEeRPSXNNC7",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1517570685,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1Br2evGdZbyQGmEeUfsK18Vn",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517570685,
+    "fee": 0,
+    "fee_details": [],
+    "description": "vmqz7pzm9ryh9llerk9",
+    "source": "tr_1Br2evGdZbyQGmEeUfsK18Vn",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1Br2evGdZbyQGmEeXjqsh5Vq",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1518134400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Br2eeGdZbyQGmEeRzbPNvSa",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517570668,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Br2eeGdZbyQGmEeRzbPNvSa",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Br2eeGdZbyQGmEepgPSXslK",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1518134400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Br2dmGdZbyQGmEeWUbOOet9",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517570616,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Br2dmGdZbyQGmEeWUbOOet9",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Br2doGdZbyQGmEe8cb9Pdup",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1517563148,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1Br0hMGdZbyQGmEe3E9gc5Lm",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517563148,
+    "fee": 0,
+    "fee_details": [],
+    "description": "oz05cn2pdf5o8tr19k9",
+    "source": "tr_1Br0hMGdZbyQGmEe3E9gc5Lm",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1Br0hMGdZbyQGmEeCicgv28V",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1518134400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Br0h4GdZbyQGmEevx5S6wM6",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517563130,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Br0h4GdZbyQGmEevx5S6wM6",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Br0h4GdZbyQGmEeOKYXQonG",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1518134400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1Br0g7GdZbyQGmEekKSx1HSs",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517563073,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1Br0g7GdZbyQGmEekKSx1HSs",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1Br0g9GdZbyQGmEeOBCcN1DR",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1517397482,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BqJbKGdZbyQGmEea9Zzkwlz",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517397482,
+    "fee": 0,
+    "fee_details": [],
+    "description": "osf2a3ni2xdonu4z5xw29",
+    "source": "tr_1BqJbKGdZbyQGmEea9Zzkwlz",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BqJbKGdZbyQGmEeq0TtWQF4",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1517961600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BqJb4GdZbyQGmEeWuAurP3W",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517397466,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BqJb4GdZbyQGmEeWuAurP3W",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BqJb4GdZbyQGmEeQa9pxfTf",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1517961600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BqJaAGdZbyQGmEefSSBKwMl",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517397411,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BqJaAGdZbyQGmEefSSBKwMl",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BqJaCGdZbyQGmEeSwrYggjO",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1517391323,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BqHzzGdZbyQGmEeMVqDYrXo",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517391323,
+    "fee": 0,
+    "fee_details": [],
+    "description": "5a91wum44ninysmrt3xr",
+    "source": "tr_1BqHzzGdZbyQGmEeMVqDYrXo",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BqHzzGdZbyQGmEeiqRFlLw3",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1517961600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BqHziGdZbyQGmEeDgPqAIem",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517391306,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BqHziGdZbyQGmEeDgPqAIem",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BqHziGdZbyQGmEe7uG5d4gt",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1517961600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BqHyjGdZbyQGmEeE25SW5Lk",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517391246,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BqHyjGdZbyQGmEeE25SW5Lk",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BqHykGdZbyQGmEeIfV4wg3T",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1517224474,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BpaasGdZbyQGmEe3AJbvmW2",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517224474,
+    "fee": 0,
+    "fee_details": [],
+    "description": "apb4b2oqww3q421b2csor",
+    "source": "tr_1BpaasGdZbyQGmEe3AJbvmW2",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BpaasGdZbyQGmEeIPVjIZRx",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1517788800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BpaaaGdZbyQGmEendTG82AK",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517224456,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BpaaaGdZbyQGmEendTG82AK",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BpaaaGdZbyQGmEeJZ8riEHu",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1517788800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BpaZiGdZbyQGmEeBDZyfgTk",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517224404,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BpaZiGdZbyQGmEeBDZyfgTk",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BpaZkGdZbyQGmEejbj6PrGz",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1517218124,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BpYwSGdZbyQGmEetL9gdJZh",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517218124,
+    "fee": 0,
+    "fee_details": [],
+    "description": "p9yfew6g0iaq1oamj9k9",
+    "source": "tr_1BpYwSGdZbyQGmEetL9gdJZh",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BpYwSGdZbyQGmEe6CjYDDnL",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1517788800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BpYw8GdZbyQGmEetZEEMU5i",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517218104,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BpYw8GdZbyQGmEetZEEMU5i",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BpYw9GdZbyQGmEeiGFF1VT8",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1517788800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BpYvBGdZbyQGmEe2b5LnVvX",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517218047,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BpYvBGdZbyQGmEe2b5LnVvX",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BpYvDGdZbyQGmEelEDnA5gc",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1517702400,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BpKP2GdZbyQGmEe4mQcHcos",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517162236,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BpKP2GdZbyQGmEe4mQcHcos",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BpKP2GdZbyQGmEeIhU7H7oA",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1517616000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BooTrGdZbyQGmEeBwqlhcSF",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1517039527,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BooTrGdZbyQGmEeBwqlhcSF",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BooTrGdZbyQGmEeXX8OZe9M",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1516965828,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BoVJAGdZbyQGmEeNFwe7F2G",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1516965828,
+    "fee": 0,
+    "fee_details": [],
+    "description": "k0hs0dfpuimm3gdxtj4i",
+    "source": "tr_1BoVJAGdZbyQGmEeNFwe7F2G",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BoVJBGdZbyQGmEe6TaaTMjD",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1517529600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BoVItGdZbyQGmEerXRPMbbO",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1516965811,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BoVItGdZbyQGmEerXRPMbbO",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BoVItGdZbyQGmEeEdHIMA33",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1517529600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BoVHzGdZbyQGmEeChf5WUze",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1516965757,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BoVHzGdZbyQGmEeChf5WUze",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BoVI1GdZbyQGmEepFHzJJqk",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1516959059,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BoTXzGdZbyQGmEeAFTdjyrN",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1516959059,
+    "fee": 0,
+    "fee_details": [],
+    "description": "ivwtfbtbi7po2ocg14i",
+    "source": "tr_1BoTXzGdZbyQGmEeAFTdjyrN",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BoTXzGdZbyQGmEeapI45fae",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1517529600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BoTXgGdZbyQGmEekrdXcP7y",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1516959040,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BoTXgGdZbyQGmEekrdXcP7y",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BoTXgGdZbyQGmEeHWUPzbmL",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1517529600,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BoTWjGdZbyQGmEe5zP6mZ15",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1516958983,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BoTWjGdZbyQGmEe5zP6mZ15",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BoTWlGdZbyQGmEeGMYaSk37",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1516793644,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BnmW0GdZbyQGmEeULPX3o6D",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1516793644,
+    "fee": 0,
+    "fee_details": [],
+    "description": "2hirdos8mx7nab6zdunmi",
+    "source": "tr_1BnmW0GdZbyQGmEeULPX3o6D",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BnmW0GdZbyQGmEesUvFEWYM",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1517356800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BnmVkGdZbyQGmEeWmxe0bbG",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1516793628,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BnmVkGdZbyQGmEeWmxe0bbG",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BnmVkGdZbyQGmEeH3wAhVYo",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1517356800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BnmUrGdZbyQGmEeCZs9JNG3",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1516793575,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BnmUrGdZbyQGmEeCZs9JNG3",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BnmUtGdZbyQGmEeF66L5UoC",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": -400,
+    "available_on": 1516785721,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=tr_1BnkSDGdZbyQGmEea8vT2oWT",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1516785721,
+    "fee": 0,
+    "fee_details": [],
+    "description": "eonhr8kvpkbdz6vj10pb9",
+    "source": "tr_1BnkSDGdZbyQGmEea8vT2oWT",
+    "type": "transfer",
+    "currency": "usd",
+    "id": "txn_1BnkSDGdZbyQGmEewxB6dSZG",
+    "net": -400,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1517356800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BnkRwGdZbyQGmEejtoLtI0b",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1516785704,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BnkRwGdZbyQGmEejtoLtI0b",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BnkRwGdZbyQGmEeFvQnjgdR",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 400,
+    "available_on": 1517356800,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BnkR3GdZbyQGmEeV6ifTjkh",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1516785651,
+    "fee": 42,
+    "fee_details": [
+      {
+        "amount": 42,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BnkR3GdZbyQGmEeV6ifTjkh",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BnkR5GdZbyQGmEeF8acrhsW",
+    "net": 358,
+    "object": "balance_transaction",
+    "status": "available"
+  },
+  {
+    "amount": 2000,
+    "available_on": 1517184000,
+    "sourced_transfers": {
+      "data": [],
+      "total_count": 0,
+      "has_more": false,
+      "url": "/v1/transfers?source_transaction=ch_1BnEznGdZbyQGmEe0FjLhQLl",
+      "object": "list"
+    },
+    "exchange_rate": null,
+    "created": 1516664795,
+    "fee": 88,
+    "fee_details": [
+      {
+        "amount": 88,
+        "application": null,
+        "description": "Stripe processing fees",
+        "currency": "usd",
+        "type": "stripe_fee"
+      }
+    ],
+    "description": null,
+    "source": "ch_1BnEznGdZbyQGmEe0FjLhQLl",
+    "type": "charge",
+    "currency": "usd",
+    "id": "txn_1BnEznGdZbyQGmEeKAk0efbK",
+    "net": 1912,
+    "object": "balance_transaction",
+    "status": "available"
+  }
+]

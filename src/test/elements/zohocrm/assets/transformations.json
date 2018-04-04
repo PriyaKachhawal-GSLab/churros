@@ -25,6 +25,14 @@
     }]
 
   },
+  "cases": {
+    "vendorName": "Cases",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "CASEID"
+    }]
+
+  },
   "contacts": {
     "vendorName": "Contacts",
     "fields": [{

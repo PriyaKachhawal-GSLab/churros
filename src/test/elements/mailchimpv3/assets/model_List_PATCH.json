@@ -1,0 +1,25 @@
+{
+  "visibility": "pub",
+  "name": "Sonali Test List",
+  "contact": {
+    "zip": "80216",
+    "country": "164",
+    "address2": "",
+    "city": "Denver",
+    "phone": "",
+    "address1": "3001 Brighton Blvd",
+    "company": "Cloud Elements LLC",
+    "state": "CO"
+  },
+   "permission_reminder": "Churros test",
+    "use_archive_bar": true,
+     "campaign_defaults": {
+    "from_email": "mailchimp@cloud-elements.com",
+    "subject": "",
+    "language": "en",
+    "from_name": "Senor Churro"
+  },
+  "notify_on_subscribe" : "mailchimp122@cloud-elements.com",
+  "notify_on_unsubscribe": "nmailchimp23@cloud-elements.comoti",
+  "email_type_option": false
+  }
