@@ -1,23 +1,22 @@
 'use strict';
-
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
-
 var objects = [
+  "Quote",
   "Account",
-  "Task",
   "Invoice",
-  "Opportunity",
-  "ClientPortalUser",
-  "Resource",
+  "TimeEntry",
+  "TaxCategory",
   "Product",
+  "PurchaseOrder",
+  "Tax",
   "BillingItem",
-  "Contact",
-  "SalesOrder"
+  "ExpenseReport",
+  "ProductVendor"
 ];
 
-suite.forElement('crm', '/objects', (test) => {
+suite.forElement('finance', '/objects', (test) => {
     return Promise.all(objects.map(obj => {
         it(`should support GET /objects/${obj}/metadata`, () => {
              return cloud.get(`${test.api}/${obj}/metadata`)

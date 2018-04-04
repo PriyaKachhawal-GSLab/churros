@@ -1,20 +1,18 @@
 'use strict';
-
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
-
 var objects = [
-  "Account",
-  "Task",
-  "Invoice",
-  "Opportunity",
-  "ClientPortalUser",
-  "Resource",
-  "Product",
-  "BillingItem",
-  "Contact",
-  "SalesOrder"
+  "PriceBooks",
+  "Products",
+  "Potentials",
+  "Tasks",
+  "Contacts",
+  "Events",
+  "Calls",
+  "Leads",
+  "Campaigns",
+  "Accounts"
 ];
 
 suite.forElement('crm', '/objects', (test) => {
