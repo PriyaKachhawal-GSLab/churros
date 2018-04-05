@@ -8,14 +8,13 @@ const chakram = require('chakram');
 const expect = require('chakram').expect;
 const queryString={ qs: { 'user_id': 461299 } };
 
- //Need to skip as there is no delete API
 suite.forElement('general', 'jobs', { payload: payload}, (test) => {
 
 
   let jobId;
   before(() => cloud.post(test.api, payload)
   .then(r => jobId = r.body.id));
-
+  
   test.should.supportCrus();
   test.withApi(test.api)
   .withOptions({ qs: { where: "created_after='2015-11-19T19:53:32.565Z'" } })
