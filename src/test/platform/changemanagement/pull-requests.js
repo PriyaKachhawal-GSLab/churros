@@ -37,7 +37,7 @@ const genCommit = (type, id, m) => {
 };
 
 suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1, 'message', false)}, test => {
-    let newUser, elementId, modelId, modelName;
+    let newUser, elementId, modelId, modelName, resource;
     before(() => {
       const opts = { qs: { where: 'defaultAccount=true' } };
       return cloud.withOptions(opts).get('/accounts')
@@ -50,14 +50,18 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1,
           newUser = r.body;
         })
         .then(() => cloud.get(`elements/closeio`))
-        .then(r => elementId = r.body.id)
-        .then(r => cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post(`elements/${elementId}/models`, modelPayload))
+        .then(r => {
+            elementId = r.body.id;
+            resource = R.head(r.body.resources);
+          }
+        )
+        .then(r => cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post(`elements/${elementId}/models`, Object.assign({}, modelPayload, {resources:[resource]})))
         .then(r => {
           modelId = r.body.id;
           modelName = r.body.name;
         });
     });
-  
+
     after(() => {
         try {
             if (newUser) cloud.delete(`/users/${newUser.id}`, R.always(true));
@@ -112,7 +116,7 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1,
   });
 
   // NOTE: can only be run as a superModelAdmin
-  it.skip('should support approving a PR made by another user and searching for other users PRs as a super model admin', () => {   
+  it('should support approving a PR made by another user and searching for other users PRs as a super model admin', () => {
     const validator = (r, status) => {
         expect(r).to.have.statusCode(200);
         expect(r.body.length > 0).to.equal(true);
@@ -120,10 +124,10 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1,
             expect(pr.status).to.equal(status);
         });
     };
-  
+
     let prId;
-  
-    return cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post('/change-management/pull-requests', genPr('model', 2, 'first', false))
+
+    return cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post('/change-management/pull-requests', genPr('model', modelId, 'first', false))
         .then(r => cloud.patch(`/change-management/pull-requests/${r.body.id}`, {status: 'approved'}))
         .then(r => prId = r.body.id)
         .then(() => cloud.get(`/change-management/pull-requests?statuses%5B%5D=approved`, r => validator(r, 'approved')))
@@ -131,7 +135,27 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1,
   });
 
   // NOTE: can only be run as a superModelAdmin
-  it.skip('should support merging PRs for creating, updating and deleting models from the catalog', () => {   
+  it('should return a hydrated diff of the entity on GET', () => {
+    const validator = (r) => {
+      expect(r).to.have.statusCode(200);
+      expect(r.body).to.have.ownProperty('originalVersion');
+      expect(r.body).to.have.ownProperty('newVersion');
+      const newVersion = JSON.parse(r.body.newVersion);
+      expect(newVersion).to.have.ownProperty('resources');
+      //validate that the resource has been associated
+      expect(newVersion.resources).to.have.length(1);
+    };
+
+    let prId;
+
+    return cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post('/change-management/pull-requests', genPr('model', modelId, 'first', false))
+        .then(r => prId = r.body.id)
+        .then(() => cloud.withOptions({qs:{hydrateDiff:true}}).get(`/change-management/pull-requests/${prId}`, r => validator(r)))
+        .then(() => cloud.delete(`/change-management/pull-requests/${prId}`));
+  });
+
+  // NOTE: can only be run as a superModelAdmin
+  it('should support merging PRs for creating, updating and deleting models from the catalog', () => {
     const mergeValidator = r => {
         expect(r).to.have.statusCode(200);
         expect(r.body.status).to.equal('merged');
@@ -142,9 +166,9 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1,
         expect(r.body.status).to.equal('merged');
         expect(R.contains('element-closeio-account-system-model', r.body.systemEntityReference)).to.be.true;
     };
-    
+
     let prId, prId2, prId3, modelId2, sysModel;
-    
+
     return cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post('/change-management/commits',  genCommit('model', modelId, 'commit msg'))
         .then(() => cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post('/change-management/pull-requests', genPr('model', modelId, 'first', false)))
         .then(r => cloud.put(`/change-management/pull-requests/${r.body.id}/merge`, null, mergeValidator))
