@@ -15,16 +15,10 @@ suite.forElement('finance', 'payments', { payload: paymentsPayload }, (test) => 
   it(`should support CRUS ${test.api}`, () => {
     cloud.get(`/hubs/finance/contacts`)
       .then(r => {
-        if (r.body.length > 0) {
-          return;
-        }
         contact_id = r.body[0].id;
       });
     cloud.get(`/hubs/finance/bank-accounts`)
       .then(r => {
-        if (r.body.length <= 0) {
-          return;
-        }
         bank_account_id = r.body[0].id;
       });
     payload.contact_id = contact_id;

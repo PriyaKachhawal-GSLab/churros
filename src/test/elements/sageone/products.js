@@ -14,17 +14,11 @@ suite.forElement('finance', 'products', { payload: productsPayload }, (test) => 
   it(`should support CRUDS ${test.api}`, () => {
     cloud.get(`/hubs/finance/ledger-accounts`)
       .then(r => {
-        if (r.body.length < 2) {
-          return;
-        }
         purchase_ledger_account_id = r.body[0].id;
         sales_ledger_account_id = r.body[1].id;
       });
     cloud.get(`/hubs/finance/product-sales-price-types`)
       .then(r => {
-        if (r.body.length <= 0) {
-          return;
-        }
         product_sales_price_type_id = r.body[0].id;
       });
     payload.purchase_ledger_account_id = purchase_ledger_account_id;
@@ -37,9 +31,6 @@ suite.forElement('finance', 'products', { payload: productsPayload }, (test) => 
   it(`should support GET ${test.api}`, () => {
     return cloud.get(test.api)
       .then(r => {
-        if (r.body.length <= 0) {
-          return;
-        }
         code = r.body[0].reference;
         test
           .withName(`should support searching ${test.api} by item_code`)

@@ -14,9 +14,6 @@ suite.forElement('finance', 'journal-entries', { payload: journalPayload }, (tes
   it(`should support CRS ${test.api}`, () => {
     cloud.get(`/hubs/finance/ledger-accounts`)
       .then(r => {
-        if (r.body.length <= 0) {
-          return;
-        }
         ledger_account_id = r.body[0].id;
       });
     payload.journal_lines[0].ledger_account_id = ledger_account_id;

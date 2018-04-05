@@ -14,23 +14,14 @@ suite.forElement('finance', 'invoices', { payload: purchaseCreditPayload }, (tes
   it(`should support CRUS ${test.api}`, () => {
     cloud.get(`/hubs/finance/contacts`)
       .then(r => {
-        if (r.body.length > 0) {
-          return;
-        }
         contact_id = r.body[0].id;
       });
     cloud.get(`/hubs/finance/ledger-accounts`)
       .then(r => {
-        if (r.body.length <= 0) {
-          return;
-        }
         ledger_account_id = r.body[0].id;
       });
     cloud.get(`/hubs/finance/tax_rates`)
       .then(r => {
-        if (r.body.length <= 0) {
-          return;
-        }
         tax_rate_id = r.body[0].id;
       });
     payload.contact_id = contact_id;
@@ -44,9 +35,6 @@ suite.forElement('finance', 'invoices', { payload: purchaseCreditPayload }, (tes
   it(`should support GET ${test.api}`, () => {
     return cloud.get(test.api)
       .then(r => {
-        if (r.body.length <= 0) {
-          return;
-        }
         code = r.body[0].reference;
         id = r.body[0].id;
         test

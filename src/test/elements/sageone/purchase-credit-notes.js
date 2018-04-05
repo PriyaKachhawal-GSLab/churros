@@ -16,16 +16,10 @@ suite.forElement('finance', 'purchase-credit-notes', { payload: purchaseCreditPa
   it(`should support CRUS ${test.api}`, () => {
     cloud.get(`/hubs/finance/contacts`)
       .then(r => {
-        if (r.body.length <= 0) {
-          return;
-        }
         contact_id = r.body[0].id;
       });
     cloud.get(`/hubs/finance/ledger-accounts`)
       .then(r => {
-        if (r.body.length <= 0) {
-          return;
-        }
       });
     payload.contact_id = contact_id;
     payload.credit_note_lines[0].ledger_account_id = ledger_account_id;
@@ -36,9 +30,6 @@ suite.forElement('finance', 'purchase-credit-notes', { payload: purchaseCreditPa
   it(`should support GET ${test.api}`, () => {
     return cloud.get(test.api)
       .then(r => {
-        if (r.body.length <= 0) {
-          return;
-        }
         code = r.body[0].reference;
         id = r.body[0].id;
         test

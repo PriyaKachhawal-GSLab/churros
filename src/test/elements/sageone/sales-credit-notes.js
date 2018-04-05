@@ -14,23 +14,14 @@ suite.forElement('finance', 'sales-credit-notes', { payload: salesCreditNotesPay
   it(`should support CRUS ${test.api}`, () => {
     cloud.get(`/hubs/finance/contacts`)
       .then(r => {
-        if (r.body.length > 0) {
-          return;
-        }
         contact_id = r.body[0].id;
       });
     cloud.get(`/hubs/finance/ledger-accounts`)
       .then(r => {
-        if (r.body.length <= 0) {
-          return;
-        }
         ledger_account_id = r.body[0].id;
       });
     cloud.get(`/hubs/finance/tax_rates`)
       .then(r => {
-        if (r.body.length <= 0) {
-          return;
-        }
         tax_rate_id = r.body[0].id;
       });
     payload.contact_id = contact_id;
