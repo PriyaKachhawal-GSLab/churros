@@ -351,4 +351,53 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       .then(r => cloud.delete(`/instances/${sfdcId}/transformations/${noFields.name}`))
       .then(r => cloud.delete(`/common-resources/${noFields.name}`).catch(r => {}));
   });
+
+  it('should support renaming object defintions and transformations at the org level', ()=> {
+    let objectName = 'churros-object-' + tools.random();
+    let newObjectName = 'churros-renamed-' + tools.random();
+    const renamePayload = {
+      "name": `${newObjectName}`
+    };
+    return cloud.post(getObjectDefUrl('organizations',objectName), genBaseObjectDef({}))
+      .then(r => cloud.post(getTransformUrl('organizations', objectName, elementKey), genBaseTrans({})))
+      .then(r=> cloud.patch(`/organizations/objects/${objectName}`, renamePayload))
+      .then(r=> cloud.get(getObjectDefUrl('organizations',newObjectName)))
+      .then(r=> cloud.get(getTransformUrl('organizations', newObjectName, elementKey)))
+      .then(r => cloud.delete(getTransformUrl('organizations', newObjectName, elementKey)))
+      .then(r => cloud.delete(getObjectDefUrl('organizations', newObjectName)));
+  });
+
+  it('should support renaming object defintions and transformations at the account level', ()=> {
+    let objectName = 'churros-object-' + tools.random();
+    let newObjectName = 'churros-renamed-' + tools.random();
+    const renamePayload = {
+      "name": `${newObjectName}`
+    };
+    let accountId;
+    return getPlatformAccounts()
+      .then(r => r.body.forEach(account => accountId = (account.defaultAccount) ? accountId = account.id : accountId))
+      .then(r => cloud.post(getObjectDefUrl('accounts/' + accountId,objectName), genBaseObjectDef({})))
+      .then(r => cloud.post(getTransformUrl('accounts/' + accountId, objectName, elementKey), genBaseTrans({})))
+      .then(r=> cloud.patch(`accounts/${accountId}/objects/${objectName}`, renamePayload))
+      .then(r=> cloud.get(getObjectDefUrl('accounts/' + accountId,newObjectName)))
+      .then(r=> cloud.get(getTransformUrl('accounts/' + accountId, newObjectName, elementKey)))
+      .then(r => cloud.delete(getTransformUrl('accounts/' + accountId, newObjectName, elementKey)))
+      .then(r => cloud.delete(getObjectDefUrl('accounts/' + accountId, newObjectName)));
+  });
+
+  it('should support renaming object defintions and transformations at the instance level', ()=> {
+    let objectName = 'churros-object-' + tools.random();
+    let newObjectName = 'churros-renamed-' + tools.random();
+    const renamePayload = {
+      "name": `${newObjectName}`
+    };
+    
+    return cloud.post(getObjectDefUrl('instances/' + sfdcId,objectName), genBaseObjectDef({}))
+      .then(r => cloud.post(`instances/${sfdcId}/transformations/${objectName}`, genBaseTrans({})))
+      .then(r=> cloud.patch(`instances/${sfdcId}/objects/${objectName}`, renamePayload))
+      .then(r=> cloud.get(getObjectDefUrl('instances/' + sfdcId, newObjectName)))
+      .then(r=> cloud.get(`instances/${sfdcId}/transformations/${newObjectName}`))
+      .then(r => cloud.delete(`instances/${sfdcId}/transformations/${newObjectName}`))
+      .then(r => cloud.delete(getObjectDefUrl('instances/' + sfdcId, newObjectName)));
+  });
 });

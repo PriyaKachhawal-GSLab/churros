@@ -1,0 +1,8 @@
+{
+  "ADDRESS_TYPE": "Home",
+  "STREET": "<<random.word>>",
+  "CITY": "<<random.word>>",
+  "STATE": "ST1",
+  "POSTCODE": "411045",
+  "COUNTRY": "India"
+}

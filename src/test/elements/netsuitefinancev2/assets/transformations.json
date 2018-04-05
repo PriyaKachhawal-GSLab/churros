@@ -1,9 +1,22 @@
 {
+  "currencies": {
+    "vendorName": "Currency",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "internalId"
+    }]
+  },
   "customers": {
     "vendorName": "Customer",
     "fields": [{
       "path": "id",
       "vendorPath": "internalId"
+    }, {
+      "path": "email",
+      "vendorPath": "email"
+    }, {
+      "path": "name",
+      "vendorPath": "companyName"
     }]
   },
   "projects": {
@@ -116,6 +129,9 @@
     "fields": [{
       "path": "id",
       "vendorPath": "internalId"
+    }, {
+      "path": "email",
+      "vendorPath": "email"
     }]
   },
   "credit-terms": {

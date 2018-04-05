@@ -84,6 +84,19 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('user_session_submit')).click();
       browser.findElement(webdriver.By.name('commit')).click();
       return browser.getCurrentUrl();
+    case 'economic':
+         browser.get(r.body.oauthUrl);
+ 	       waitForElement(webdriver.By.id('btnRedirect'));
+         browser.findElement(webdriver.By.id('btnRedirect')).click();
+         waitForElement(webdriver.By.name('aftalenr'));
+         browser.findElement(webdriver.By.name('aftalenr')).sendKeys(config.agreementId);
+         browser.findElement(webdriver.By.name('brugernavn')).sendKeys(username);
+         browser.findElement(webdriver.By.name('password')).sendKeys(password);
+         browser.findElement(webdriver.By.id('edit-submit')).click();
+         waitForElement(webdriver.By.xpath('html/body/div[1]/div/div[2]/div/div/div[2]/button'));
+         browser.findElement(webdriver.By.xpath('html/body/div[1]/div/div[2]/div/div/div[2]/button')).click();
+         browser.sleep(2000);
+         return browser.getCurrentUrl();
     case 'actoneb':
     case 'acton':
       browser.get(r.body.oauthUrl);
@@ -214,7 +227,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then(r => browser.findElement(webdriver.By.xpath('/html/body/div/p[1]/button[2]')))
         .then(r => r.click())
         .then(r => browser.getCurrentUrl())
-        .catch(r => browser.getCurrentUrl());      
+        .catch(r => browser.getCurrentUrl());
     case 'eloqua':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.xpath('//*[@id="login-button"]')).click();
@@ -460,6 +473,20 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then((element) => element.click(), (err) => {}); // ignore this
       browser.sleep(2000); //Paypal takes some time to confirm creds
       return browser.getCurrentUrl();
+    case 'quickbooks--oauth2': 
+      browser.get(r.body.oauthUrl);
+      browser.findElement(webdriver.By.name('Email')).sendKeys(username);
+      browser.findElement(webdriver.By.name('Password')).sendKeys(password);
+      browser.findElement(webdriver.By.id('ius-sign-in-submit-btn')).click();
+      browser.wait(() => browser.isElementPresent(webdriver.By.name('companySelectionWidgetCompanySelector_href')), 10000)
+        .thenCatch(r => true);
+      browser.findElement(webdriver.By.name('companySelectionWidgetCompanySelector_href'))
+        .then((element) => element.click(), (err) => {}); // ignore this
+      browser.wait(() => browser.isElementPresent(webdriver.By.id('authorizeBtn')), 5000)
+        .thenCatch(r => true);
+      browser.findElement(webdriver.By.className('btn ha-button ha-button-primary pull-right')).click();
+      browser.sleep(5000); // So flaky, quickbooks' 302 takes forever
+      return browser.getCurrentUrl();
     case 'quickbooks':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.name('Email')).sendKeys(username);
@@ -674,7 +701,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.get(r.body.oauthUrl);
       browser.wait(webdriver.until.elementLocated(webdriver.By.name('email'), 5000));
       browser.findElement(webdriver.By.name('email')).sendKeys(username);
-      browser.findElement(webdriver.By.xpath('/html/body/div/div/div/main/section/div[1]/div/form/div[3]/button/span')).click();  
+      browser.findElement(webdriver.By.xpath('/html/body/div/div/div/main/section/div[1]/div/form/div[3]/button/span')).click();
       browser.findElement(webdriver.By.name('password')).sendKeys(password);
       browser.findElement(webdriver.By.xpath('/html/body/div/div/div/main/section/div[1]/div/form/div[4]/button/div/span')).click();
       return browser.getCurrentUrl();
@@ -693,7 +720,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       return browser.getCurrentUrl();
     case 'docushareflex':
       if (config['provider.version'] === '1') {
-        /* For version 1 Docushare renders a popup that selenium can't handle with firefox - eg browser.switchTo().alert()  
+        /* For version 1 Docushare renders a popup that selenium can't handle with firefox - eg browser.switchTo().alert()
         * There is also a firefox issue with sending the Basic credentials in the URL if you're targeting a sub-resource on a domain.
         * To workaround we first hit the main domain with the creds in the URL then call the sub-resource (our OG auth url);
         **/

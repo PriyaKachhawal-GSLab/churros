@@ -1,0 +1,46 @@
+{
+  "churrosTestObject": {
+    "fields": [{
+        "type": "string",
+        "path": "id"
+      },
+      {
+        "type": "string",
+        "path": "email"
+      },
+      {
+        "type": "string",
+        "path": "name"
+      }
+    ],
+    "level": "organization"
+  },
+  "churrosTestObjectXform": {
+    "level": "organization",
+    "vendorName": "Customer",
+    "fields": [{
+        "path": "id",
+        "vendorPath": "internalId",
+        "level": "organization"
+      },
+      {
+        "path": "email",
+        "vendorPath": "email",
+        "level": "organization"
+      },
+      {
+        "path": "name",
+        "vendorPath": "companyName",
+        "level": "organization"
+      }
+    ],
+    "configuration": [{
+      "type": "passThrough",
+      "properties": {
+        "fromVendor": false,
+        "toVendor": false
+      }
+    }],
+    "isLegacy": false
+  }
+}

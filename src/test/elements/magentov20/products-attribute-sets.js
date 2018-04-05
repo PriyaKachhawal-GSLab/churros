@@ -68,11 +68,11 @@ suite.forElement('ecommerce', 'products-attribute-sets', { payload: productsAttr
   });
   test
     .withName(`should support searching /hubs/ecommerce/products-attribute-sets-groups by attribute_set_id`)
-    .withOptions({ qs: { where: `attribute_set_id=21` } })
+    .withOptions({ qs: { where: `attribute_set_id=15` } })
     .withApi(`/hubs/ecommerce/products-attribute-sets-groups`)
     .withValidation((r) => {
       expect(r).to.have.statusCode(200);
-      const validValues = r.body.filter(obj => obj.attribute_set_id === 21);
+      const validValues = r.body.filter(obj => obj.attribute_set_id === 15);
       expect(validValues.length).to.equal(r.body.length);
     }).should.return200OnGet();
 
