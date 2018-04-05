@@ -3,6 +3,7 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const chakram = require('chakram');
+const expect = chakram.expect;
 const R = require('ramda');
 
 const vdrPayload = require('core/tools').requirePayload(`${__dirname}/assets/vdr.json`);
@@ -45,4 +46,39 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
             .crud(`/vdrs/${vdrId}/transformations`, transformationPayload, schema, chakram.put)
             .then(r => cloud.get(`/vdrs/${vdrId}/transformations`, pluralSchema));
     });
+
+    it('should return a list of mapped element ids on a VDR when a transformation exists', () => {
+        let transformationId;
+    
+        const validator = r => {
+          expect(r).to.have.statusCode(200);
+          expect(r.body.mappedElementIds).to.have.length(1);
+        };
+    
+        return cloud.post(`/vdrs/${vdrId}/transformations`, transformationPayload)
+            .then(r => transformationId = r.body.id)
+            .then(() => cloud.get(`/vdrs/${vdrId}`, validator))
+            .then(() => cloud.delete(`/vdrs/${vdrId}/transformations/${transformationId}`));
+    });
+
+    it('should support cloning a VDR and its transformations from the system catalog to the user\'s account', () => {
+        let accountId, transformationId;
+        const newObjectName = 'myNewObjectName';
+  
+        return cloud.post(`/vdrs/${vdrId}/transformations`, transformationPayload)
+            .then(r => transformationId = r.body.id)
+            // test a basic clone
+            .then(() => cloud.post(`/vdrs/${vdrId}/clone`, {}))
+            .then(() => cloud.get(`/accounts/objects/${vdrPayload.objectName}/definitions`))
+            // test cloning with a new objectName and including transformations
+            .then(() => cloud.post(`/vdrs/${vdrId}/clone?cloneTransformations=true`, {objectName: newObjectName}))
+            .then(() => cloud.get(`/accounts/objects/${newObjectName}/definitions`))
+            .then(() => cloud.get(`/accounts`)) //get the user's accountId (assuming they are the default account)
+            .then(r => r.body.forEach(account => accountId = (account.defaultAccount) ? accountId = account.id : accountId))
+            .then(() => cloud.get(`/accounts/${accountId}/elements/${transformationPayload.elementKey}/transformations/${newObjectName}`))
+            .then(() => cloud.delete(`/accounts/${accountId}/elements/${transformationPayload.elementKey}/transformations/${newObjectName}`))
+            .then(() => cloud.delete(`/accounts/objects/${vdrPayload.objectName}/definitions`))
+            .then(() => cloud.delete(`/accounts/objects/${newObjectName}/definitions`))
+            .then(() => cloud.delete(`/vdrs/${vdrId}/transformations/${transformationId}`));
+      });
 });
