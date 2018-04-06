@@ -116,7 +116,7 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1,
   });
 
   // NOTE: can only be run as a superModelAdmin
-  it('should support approving a PR made by another user and searching for other users PRs as a super model admin', () => {
+  it.skip('should support approving a PR made by another user and searching for other users PRs as a super model admin', () => {
     const validator = (r, status) => {
         expect(r).to.have.statusCode(200);
         expect(r.body.length > 0).to.equal(true);
@@ -135,7 +135,7 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1,
   });
 
   // NOTE: can only be run as a superModelAdmin
-  it('should return a hydrated diff of the entity on GET', () => {
+  it.skip('should return a hydrated diff of the entity on GET', () => {
     const validator = (r) => {
       expect(r).to.have.statusCode(200);
       expect(r.body).to.have.ownProperty('originalVersion');
@@ -155,7 +155,7 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1,
   });
 
   // NOTE: can only be run as a superModelAdmin
-  it('should support merging PRs for creating, updating and deleting models from the catalog', () => {
+  it.skip('should support merging PRs for creating, updating and deleting models from the catalog', () => {
     const mergeValidator = r => {
         expect(r).to.have.statusCode(200);
         expect(r.body.status).to.equal('merged');
