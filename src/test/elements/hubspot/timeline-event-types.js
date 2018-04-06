@@ -30,18 +30,18 @@ suite.forElement('marketing', 'timeline-event-types', {payload: payload}, (test)
        .then(r => cloud.delete(`${test.api}/${eventTypes.id}`));
    };
 
-   it('it should allow CUD for /timeline-event-types/:id/properties', () => {
+   it('it should allow CUD for /timeline-event-types/:id/timelineEventTypesProperties', () => {
      const cb = (eventTypes) => {
        let eventProperties;
-       return cloud.post(`${test.api}/${eventTypes.id}/properties`,propertiesPayload)
+       return cloud.post(`${test.api}/${eventTypes.id}/timelineEventTypesProperties`,propertiesPayload)
          .then(r => {
              expect(r.body).to.contain.key('name');
              eventProperties = r.body;
              eventProperties.label = faker.random.word();
          })
-         .then(r => cloud.patch(`${test.api}/${eventTypes.id}/properties/${eventProperties.id}`,eventProperties))
+         .then(r => cloud.patch(`${test.api}/${eventTypes.id}/timelineEventTypesProperties/${eventProperties.id}`,eventProperties))
          .then(r => expect(r.body).to.contain.key('label'))
-         .then(r => cloud.delete(`${test.api}/${eventTypes.id}/properties/${eventProperties.id}`));
+         .then(r => cloud.delete(`${test.api}/${eventTypes.id}/timelineEventTypesProperties/${eventProperties.id}`));
      };
      return eventTypesWrap(cb);
    });
