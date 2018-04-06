@@ -10,7 +10,7 @@ const commentPayload = tools.requirePayload(`${__dirname}/assets/comment.json`);
 
 
 suite.forElement('documents', 'files', null, (test) => {
-  let jpgFileBody,revisionId,revisionFileId,revisionFilePath,jpgFile = __dirname + '/assets/Penguins.jpg';
+  let jpgFileBody,revisionId,jpgFile = __dirname + '/assets/Penguins.jpg';
   let query = { path: `/Penguins-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` };
 
   before(() => cloud.withOptions({ qs: query , overwrite: true }).postFile(test.api, jpgFile)
@@ -22,8 +22,8 @@ suite.forElement('documents', 'files', null, (test) => {
           return cloud.get(`${test.api}/${jpgFileBody.id}/revisions`)
           .then(r => {
             revisionId = r.body[0].id;
-            revisionFileId = r.body[0].fileId;
-            revisionFilePath = r.body[0].filePath;
+            expect(r.body[0]).to.have.property('fileId');
+            expect(r.body[0]).to.have.property('filePath');
           })
           .then(() => cloud.get(`${test.api}/${jpgFileBody.id}/revisions/${revisionId}`));
       });
