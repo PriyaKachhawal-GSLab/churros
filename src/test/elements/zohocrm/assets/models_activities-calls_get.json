@@ -1,0 +1,23 @@
+{
+    "Call Start Time": "2018-03-21 06:18:00",
+    "Call Owner": "Atul Barve",
+    "Description": "activity call desc",
+    "MODIFIEDBY": "1242160000000071001",
+    "Call Purpose": "Prospecting",
+    "Contact Name": "Sandeep Patil",
+    "Billable": "true",
+    "Call Duration": "15:00",
+    "SMCREATORID": "1242160000000071001",
+    "SMOWNERID": "1242160000000071001",
+    "CONTACTID": "1242160000003358001",
+    "Modified Time": "2018-03-23 07:03:19",
+    "Subject": "activities create call123",
+    "Call Type": "Outbound",
+    "ACTIVITYID": "1242160000003422002",
+    "Created Time": "2018-03-23 07:03:19",
+    "Modified By": "Atul Barve",
+    "Call Status": "Attended Dialled",
+    "Call Result": "call result",
+    "Call Duration (in seconds)": "900",
+    "Created By": "Atul Barve"
+}
