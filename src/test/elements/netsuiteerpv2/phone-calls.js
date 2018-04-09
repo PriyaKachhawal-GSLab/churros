@@ -1,7 +1,6 @@
 'use strict';
 
 const suite = require('core/suite');
-const cloud = require('core/cloud');
 const phoneCallsPayload = require('./assets/phone-calls');
 
 suite.forElement('erp', 'phone-calls', { payload: phoneCallsPayload }, (test) => {
