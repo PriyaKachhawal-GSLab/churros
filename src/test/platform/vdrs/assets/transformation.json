@@ -1,0 +1,52 @@
+{
+	"vendorName": "churrosContactTransform",
+	"elementKey": "closeio",
+	"script": {
+		"body": "transformedObject.foo = 'bar'; done(transformedObject);",
+		"mimeType": "application/javascript",
+    "filterEmptyResponse": false
+	},
+	"configuration": [
+		{
+		  "properties": {
+				"bool": "true"
+		  },
+		  "type": "inherit"
+		}
+	],
+	"fields": [{
+			"path": "email",
+			"vendorPath": "Email",
+			"vendorType": "string"
+		},
+		{
+			"path": "id",
+			"vendorPath": "Id",
+			"vendorType": "string"
+		},
+		{
+			"path": "name",
+			"vendorPath": "Name",
+			"vendorType": "string",
+		  "configuration": [
+				{
+					"type": "transformDate"
+				}
+		  ]
+		},
+		{
+		  "path": "churrosToRemove",
+		  "vendorPath": "LastModifiedDate",
+		  "vendorType": "string",
+		  "configuration": [
+				{
+					"type": "remove",
+					"properties": {
+						"fromVendor": true,
+						"toVendor": true
+					}
+				}
+		  ]
+		}
+	]
+}
