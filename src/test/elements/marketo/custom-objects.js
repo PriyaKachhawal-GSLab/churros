@@ -21,9 +21,11 @@ suite.forElement('marketing', 'custom-objects', { payload: payload }, (test) => 
 		return cloud.withOptions(options).get(`${test.api}/${customObjectName}/custom-fields`)
 		.then(r => {
 			expect(r.body).to.not.be.null;
+			id = r.body[0].marketoGUID;
 			options.qs.nextPage = r.response.headers['elements-next-page-token'];
-			return cloud.withOptions(options).get(`${test.api}/${customObjectName}/custom-fields`);
-		});
+		})
+		.then(r => cloud.withOptions(options).get(`${test.api}/${customObjectName}/custom-fields`))
+		.then(r => expect(r.body[0].marketoGUID).to.not.be.equal(id));
 	});
 	it('should allow CRUD for /custom-objects/{customObjectName}/custom-fields', () =>{
 		const updatePayload = () => ({
