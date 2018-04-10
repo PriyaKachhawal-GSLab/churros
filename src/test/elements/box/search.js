@@ -10,6 +10,7 @@ suite.forElement('documents', 'search', null, (test) => {
     setTimeout(done, 2500);
   });
 
+  test.should.supportNextPagePagination(1);
 
   it('should support template filtering for GET /search', () => {
     let folderPath = '/TestFolderDoNoDelete';
