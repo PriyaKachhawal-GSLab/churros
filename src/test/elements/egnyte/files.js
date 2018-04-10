@@ -4,10 +4,15 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
 const basePath = '/Shared/churros';
+const chakram = require('chakram');
+const expect = chakram.expect;
+
 
 suite.forElement('documents', 'files', (test) => {
   let path = `${__dirname}/assets/Penguins.jpg`;
   let query = { path: `${basePath}/Penguins-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` };
+  let revisionId;
+  let entry_id='7390d6ad-b7d0-49d9-949e-d98782dbc267';
 
   const fileWrap = (cb) => {
     let file;
@@ -18,6 +23,26 @@ suite.forElement('documents', 'files', (test) => {
       .then(r => cloud.delete(`/hubs/documents/files/${file.id}`));
   };
 
+  it('it should allow RS for documents/files/:id/revisions', () => {
+      return cloud.get(`${test.api}/${entry_id}/revisions`)
+      .then(r => {
+        revisionId = r.body[0].id;
+        expect(r.body[0]).to.have.property('id');
+        expect(r.body[0]).to.have.property('fileName');
+      })
+      .then(() => cloud.get(`${test.api}/${entry_id}/revisions/${revisionId}`));
+  });
+
+  it('it should allow RS for documents/files/revisions by path', () => {
+      return cloud.withOptions({ qs: query }).get(`${test.api}/revisions`)
+      .then(r => {
+        revisionId = r.body[0].id;
+        expect(r.body[0]).to.have.property('id');
+        expect(r.body[0]).to.have.property('fileName');
+      })
+      .then(() => cloud.withOptions({ qs: query }).get(`${test.api}/revisions/${revisionId}`));
+  });
+  
   it('should allow CRD /files and RD /files/:id', () => {
     const cb = (file) => {
       return cloud.get(`/hubs/documents/files/${file.id}`);
@@ -30,7 +55,7 @@ suite.forElement('documents', 'files', (test) => {
       .then(() => cloud.withOptions({ qs: { path: file.path } }).get('/hubs/documents/files'))
       .then(r => cloud.withOptions({ qs: { path: file.path } }).delete('/hubs/documents/files'));
   });
-
+ 
   it('should allow GET /files/links and /files/:id/links', () => {
     const cb = (file) => {
       return cloud.get(`/hubs/documents/files/${file.id}/links`)
@@ -73,4 +98,6 @@ suite.forElement('documents', 'files', (test) => {
 
     return fileWrap(cb);
   });
+ 
+
 });
