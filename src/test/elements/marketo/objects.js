@@ -37,7 +37,10 @@ suite.forElement('marketing', 'objects', (test) => {
     return Promise.all(objects.map(obj => {
         it(`should support GET /objects/${obj}/metadata`, () => {
              return cloud.get(`${test.api}/${obj}/metadata`)
-            .then(r => expect(r.body.fields.filter(field => field.vendorPath)).to.not.be.empty);
+            .then(r => {
+              expect(r.body.fields).to.not.be.empty;
+              expect(r.body.fields.filter(field => field.vendorPath)).to.not.be.empty;
+            });
         });
     }));
 });
