@@ -1,0 +1,20 @@
+{
+  "title": "<<random.word>>",
+  "location": {
+    "countryCode": "in",
+
+    "city": "Jategaon",
+    "postalCode": "414301",
+    "address": "Pune - Ahmednagar Highway",
+    "regionCode": "MH"
+  },
+  "industry": {
+    "id": "it_and_services"
+  },
+  "experienceLevel": {
+    "id": "entry_level"
+  },
+  "function": {
+    "id": "information_technology"
+  }
+}

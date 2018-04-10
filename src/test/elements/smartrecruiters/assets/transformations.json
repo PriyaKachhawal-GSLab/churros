@@ -1,0 +1,30 @@
+{
+  "candidates": {
+    "vendorName": "candidates",
+    "fields": [{
+        "path": "id",
+        "vendorPath": "id"
+      }]
+  },
+  "jobs": {
+    "vendorName": "jobs",
+    "fields": [{
+        "path": "id",
+        "vendorPath": "id"
+      }]
+  },
+  "positions": {
+    "vendorName": "positions",
+    "fields": [{
+        "path": "id",
+        "vendorPath": "id"
+      }]
+  },
+  "offers": {
+    "vendorName": "offers",
+    "fields": [{
+        "path": "id",
+        "vendorPath": "id"
+      }]
+  }
+}
