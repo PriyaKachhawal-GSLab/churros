@@ -27,26 +27,23 @@ suite.forElement('payment', 'plans', { payload: payload }, (test) => {
         let product_id = r.body[0].product;
         let opts = plansWithProduct;
         opts.product = product_id;
-        test.should.supportCd(opts);
+        cloud.cd(test.api, opts)
         opts = plansWithProduct;
         opts.product = {};
-        opts.product.id = tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10);
-        test.should.supportCd(opts);
+        opts.product.id = r.body[0].product;
+        return cloud.cd(test.api, opts);
       })
       .then(r => {
         let opts = plansWithProduct;
         opts.product = {};
         opts.product.id = tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10);
-        opts.product.name = tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10);
-        cloud.post(test.api, opts, (r) => {
-          expect(r).to.have.statusCode(400);
-        });
+        return cloud.post(test.api, opts, (r) => expect(r).to.have.statusCode(400));
       })
       .then(r => {
         let opts = plansWithProduct;
         opts.product = {};
         opts.product.name = tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10);
-        test.should.supportCd(opts);
+        return cloud.cd(test.api, opts);
       });
   });
 });
