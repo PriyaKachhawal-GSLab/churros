@@ -23,7 +23,7 @@ suite.forElement('finance', 'payments', { payload: paymentsPayload }, (test) => 
       });
     payload.contact_id = contact_id;
     payload.bank_account_id = bank_account_id;
-    test.should.supportCrus(chakram.put);
+    cloud.crus(chakram.put);
   });
   test.should.supportPagination();
   test

@@ -29,21 +29,11 @@ suite.forElement('finance', 'purchase-invoices', { payload: purchaseInvoicesPayl
       });
     payload.contact_id = contact_id;
     payload.invoice_lines[0].ledger_account_id = ledger_account_id;
-    test.should.supportCrus(chakram.put);
-  });
-
-  test.should.supportPagination();
-
-  it(`should support DELETE on ${test.api}/{id}`, () => {
-    return cloud.withOptions({ qs: { where: `status_id ='UNPAID'` } })
-      .get(test.api)
+    cloud.crus(chakram.put)
       .then(r => {
-        if (r.body.length <= 0) {
-          return;
-        }
         code = r.body[0].reference;
         id = r.body[0].id;
-        test
+        cloud
           .withName(`should support searching ${test.api} by reference`)
           .withOptions({ qs: { where: `search ='${code}'` } })
           .withValidation((r) => {
@@ -54,4 +44,5 @@ suite.forElement('finance', 'purchase-invoices', { payload: purchaseInvoicesPayl
         return cloud.withOptions({ qs: { void_reason: `Temporary Reason` } }).delete(`${test.api}/${id}`);
       });
   });
+  test.should.supportPagination();
 });

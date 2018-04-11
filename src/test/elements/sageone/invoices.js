@@ -27,13 +27,7 @@ suite.forElement('finance', 'invoices', { payload: purchaseCreditPayload }, (tes
     payload.contact_id = contact_id;
     payload.invoice_lines[0].ledger_account_id = ledger_account_id;
     payload.invoice_lines[0].tax_rate_id = tax_rate_id;
-    test.should.supportCrus(chakram.put);
-  });
-
-  test.should.supportPagination();
-
-  it(`should support GET ${test.api}`, () => {
-    return cloud.get(test.api)
+    cloud.crus(chakram.put)
       .then(r => {
         code = r.body[0].reference;
         id = r.body[0].id;
@@ -48,4 +42,6 @@ suite.forElement('finance', 'invoices', { payload: purchaseCreditPayload }, (tes
         return cloud.withOptions({ qs: { void_reason: `Temporary Reason` } }).delete(`${test.api}/${id}`);
       });
   });
+
+  test.should.supportPagination();
 });

@@ -27,20 +27,11 @@ suite.forElement('finance', 'sales-credit-notes', { payload: salesCreditNotesPay
     payload.contact_id = contact_id;
     payload.credit_note_lines.ledger_account_id = ledger_account_id;
     payload.credit_note_lines.tax_rate_id = tax_rate_id;
-    test.should.supportCrus(chakram.put);
-  });
-
-  test.should.supportPagination();
-
-  it(`should support GET ${test.api}`, () => {
-    return cloud.get(test.api)
+    cloud.crus(chakram.put)
       .then(r => {
-        if (r.body.length <= 0) {
-          return;
-        }
         code = r.body[0].reference;
         id = r.body[0].id;
-        test
+        cloud
           .withName(`should support searching ${test.api} by reference`)
           .withOptions({ qs: { where: `search ='${id}'` } })
           .withValidation((r) => {
@@ -51,4 +42,5 @@ suite.forElement('finance', 'sales-credit-notes', { payload: salesCreditNotesPay
         return cloud.withOptions({ qs: { void_reason: `Temporary Reason` } }).delete(`${test.api}/${id}`);
       });
   });
+  test.should.supportPagination();
 });

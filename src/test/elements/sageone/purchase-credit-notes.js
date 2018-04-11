@@ -13,26 +13,22 @@ suite.forElement('finance', 'purchase-credit-notes', { payload: purchaseCreditPa
   let code, id, contact_id, ledger_account_id;
 
 
-  it(`should support CRUS ${test.api}`, () => {
+  it(`should support CRUDS ${test.api}`, () => {
     cloud.get(`/hubs/finance/contacts`)
       .then(r => {
         contact_id = r.body[0].id;
       });
     cloud.get(`/hubs/finance/ledger-accounts`)
       .then(r => {
+        ledger_account_id = r.body[0].id;
       });
-    payload.contact_id = contact_id;
-    payload.credit_note_lines[0].ledger_account_id = ledger_account_id;
-    test.should.supportCrus(chakram.put);
-  });
-
-  test.should.supportPagination();
-  it(`should support GET ${test.api}`, () => {
-    return cloud.get(test.api)
+      payload.contact_id = contact_id;
+      payload.credit_note_lines[0].ledger_account_id = ledger_account_id;
+      cloud.crus(chakram.put)
       .then(r => {
-        code = r.body[0].reference;
-        id = r.body[0].id;
-        test
+        code = r.body.reference;
+        id = r.body.id;
+        cloud
           .withName(`should support searching ${test.api} by reference`)
           .withOptions({ qs: { where: `search ='${code}'` } })
           .withValidation((r) => {
@@ -43,5 +39,5 @@ suite.forElement('finance', 'purchase-credit-notes', { payload: purchaseCreditPa
         return cloud.withOptions({ qs: { void_reason: `Temporary Reason` } }).delete(`${test.api}/${id}`);
       });
   });
-
+  test.should.supportPagination();
 });

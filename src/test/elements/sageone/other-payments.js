@@ -28,7 +28,7 @@ suite.forElement('finance', 'other-payments', { payload: otherpaymentsPayload },
     payload.contact_id = contact_id;
     payload.payment_lines[0].ledger_account_id = ledger_account_id;
     payload.bank_account_id = bank_account_id;
-    test.should.supportCruds(chakram.put);
+    cloud.cruds(chakram.put);
   });
   test.should.supportPagination();
   test

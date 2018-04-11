@@ -24,7 +24,7 @@ suite.forElement('finance', 'products', { payload: productsPayload }, (test) => 
     payload.purchase_ledger_account_id = purchase_ledger_account_id;
     payload.sales_ledger_account_id = sales_ledger_account_id;
     payload.sales_prices[0].product_sales_price_type_id = product_sales_price_type_id;
-    test.should.supportCruds(chakram.put);
+    cloud.cruds(chakram.put);
   });
   test.should.supportPagination();
 

@@ -27,16 +27,11 @@ suite.forElement('finance', 'sales-quotes', { payload: salesQuotesPayload }, (te
     payload.contact_id = contact_id;
     payload.quote_lines[0].ledger_account_id = ledger_account_id;
     payload.quote_lines[0].tax_rate_id = tax_rate_id;
-    test.should.supportCrus(chakram.put);
-  });
-
-  test.should.supportPagination();
-
-  it(`should support GET ${test.api}`, () => {
-    return cloud.get(test.api)
+    cloud.crus(chakram.put);
+    cloud.get(test.api)
       .then(r => {
         id = r.body[0].reference;
-        test
+        cloud
           .withName(`should support searching ${test.api} by reference`)
           .withOptions({ qs: { where: `search ='${id}'` } })
           .withValidation((r) => {
@@ -46,4 +41,5 @@ suite.forElement('finance', 'sales-quotes', { payload: salesQuotesPayload }, (te
           }).should.return200OnGet();
       });
   });
+  test.should.supportPagination();
 });

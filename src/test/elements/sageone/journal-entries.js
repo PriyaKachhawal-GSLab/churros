@@ -11,6 +11,7 @@ const journalPayload = build({ date: Date(), reference: "re" + tools.randomInt()
 suite.forElement('finance', 'journal-entries', { payload: journalPayload }, (test) => {
   let lastdate = '2017-05-11T10:26:55Z';
   let ledger_account_id;
+  //Need to skip as no delete API present
   it(`should support CRS ${test.api}`, () => {
     cloud.get(`/hubs/finance/ledger-accounts`)
       .then(r => {
@@ -18,7 +19,7 @@ suite.forElement('finance', 'journal-entries', { payload: journalPayload }, (tes
       });
     payload.journal_lines[0].ledger_account_id = ledger_account_id;
     payload.journal_lines[1].ledger_account_id = ledger_account_id;
-    test.should.supportCrs();
+    cloud.crs();
   });
 
   test.should.supportPagination();
