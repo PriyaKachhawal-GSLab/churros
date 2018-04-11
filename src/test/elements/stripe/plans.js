@@ -27,7 +27,7 @@ suite.forElement('payment', 'plans', { payload: payload }, (test) => {
         let product_id = r.body[0].product;
         let opts = plansWithProduct;
         opts.product = product_id;
-        cloud.cd(test.api, opts)
+        cloud.cd(test.api, opts);
         opts = plansWithProduct;
         opts.product = {};
         opts.product.id = r.body[0].product;
