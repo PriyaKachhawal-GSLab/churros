@@ -475,7 +475,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then((element) => element.click(), (err) => {}); // ignore this
       browser.sleep(2000); //Paypal takes some time to confirm creds
       return browser.getCurrentUrl();
-    case 'quickbooks--oauth2':
+    case 'quickbooks--oauth2': 
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.name('Email')).sendKeys(username);
       browser.findElement(webdriver.By.name('Password')).sendKeys(password);
