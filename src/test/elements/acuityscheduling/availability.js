@@ -7,8 +7,6 @@ const expect = require('chakram').expect;
 let payload = tools.requirePayload(`${__dirname}/assets/available-times.json`);
 
 suite.forElement('scheduling', 'available', { payload: payload }, (test) => {
-  let month = '2019-02';
-  let date = '2019-02-06';
   let appointmentTypeID;
   before(() => cloud.get('/hubs/scheduling/appointment-types')
     .then(r => appointmentTypeID = r.body[0].id)
