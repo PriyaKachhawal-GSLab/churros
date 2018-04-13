@@ -194,5 +194,12 @@
       "path": "id",
       "vendorPath": "ID"
     }]
+  },
+   "contracts": {
+    "vendorName": "contracts",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
   }
 }
