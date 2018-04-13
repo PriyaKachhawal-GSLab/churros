@@ -14,14 +14,6 @@ suite.forElement('scheduling', 'available', { payload: payload }, (test) => {
     .then(r => appointmentTypeID = r.body[0].id)
     .then(r => payload.appointmentTypeID = appointmentTypeID));
 
-  it(`should allow GET ${test.api}-dates`, () => {
-    return cloud.withOptions({ qs: { month: `${month}`, appointmentTypeID: `${appointmentTypeID}` } }).get(`${test.api}-dates`);
-  });
-
-  it(`should allow GET ${test.api}-times`, () => {
-    return cloud.withOptions({ qs: { date: `${date}`, appointmentTypeID: `${appointmentTypeID}` } }).get(`${test.api}-times`);
-  });
-
   it(`should allow POST ${test.api}-times/validate`, () => {
     return cloud.post(`${test.api}-times/validate`, payload)
       .then(r => expect(r.body).to.not.be.empty);

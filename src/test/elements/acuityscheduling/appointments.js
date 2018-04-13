@@ -20,16 +20,16 @@ suite.forElement('scheduling', 'appointments', { payload: payload }, (test) => {
   before(() => cloud.get('/hubs/scheduling/appointment-types')
     .then(r => appointmentTypeID = r.body[0].id)
     .then(r => payload.appointmentTypeID = appointmentTypeID)
-    .then(r => cloud.withOptions({ qs: { date: `${futureDate}`, appointmentTypeID: `${appointmentTypeID}` } }).get(`/hubs/scheduling/available-times`))
+    .then(r => cloud.withOptions({ qs: { date: `${futureDate}` } }).get(`/hubs/scheduling/appointment-types/${appointmentTypeID}/available-times`))
     .then(r => payload.datetime = r.body[0].time)
     .then(r => cloud.post(test.api, payload))
     .then(r => {
       appointmentId = r.body.id;
       email = r.body.email;
     })
-    .then(r => cloud.withOptions({ qs: { date: `${futureDate}`, appointmentTypeID: `${appointmentTypeID}` } }).get(`/hubs/scheduling/available-times`))
+    .then(r => cloud.withOptions({ qs: { date: `${futureDate}` } }).get(`/hubs/scheduling/appointment-types/${appointmentTypeID}/available-times`))
     .then(r => payload.datetime = r.body[0].time)
-    .then(r => cloud.withOptions({ qs: { date: `${futureDate}`, appointmentTypeID: `${appointmentTypeID}` } }).get(`/hubs/scheduling/available-times`))
+    .then(r => cloud.withOptions({ qs: { date: `${futureDate}` } }).get(`/hubs/scheduling/appointment-types/${appointmentTypeID}/available-times`))
     .then(r => reschedulePayload.datetime = r.body[0].time));
 
   const options = {
@@ -51,6 +51,14 @@ suite.forElement('scheduling', 'appointments', { payload: payload }, (test) => {
       expect(validValues.length).to.equal(r.body.length);
     })
     .should.return200OnGet();
+
+  it(`should allow GET appointment-types/{id}/available-dates`, () => {
+    return cloud.withOptions({ qs: { month: `${month}` } }).get(`/hubs/scheduling/appointment-types/${appointmentTypeID}/available-dates`);
+  });
+
+  it(`should allow GET appointment-types/{id}/available-times`, () => {
+    return cloud.withOptions({ qs: { date: `${date}` } }).get(`/hubs/scheduling/appointment-types/${appointmentTypeID}/available-times`);
+  });
 
   it('should allow GET /appointments/{id}/payments', () => {
     return cloud.get(`${test.api}/${appointmentId}/payments`);
