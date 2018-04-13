@@ -1,5 +1,6 @@
 {
     "objectName": "churrosContact<<random.alphaNumeric##10>>",
+    "description": "churros VDR",
     "fields": [
       {
         "type": "string",

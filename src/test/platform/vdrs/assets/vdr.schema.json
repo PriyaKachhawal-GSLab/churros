@@ -4,6 +4,9 @@
     "id": {
       "type": "number"
     },
+    "description": {
+      "type": "string"
+    },
     "objectName": {
       "type": "string"
     },
