@@ -10,7 +10,7 @@ suite.forElement('scheduling', 'appointments', { payload: payload }, (test) => {
   let appointmentId, appointmentTypeID, email;
   let reschedulePayload = {};
   // Generate future date in desired format
-  var currentDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+  var currentDate = new Date();
   var day = currentDate.getDate();
   var month = currentDate.getMonth() + 1;
   var year = currentDate.getFullYear();
@@ -53,11 +53,12 @@ suite.forElement('scheduling', 'appointments', { payload: payload }, (test) => {
     .should.return200OnGet();
 
   it(`should allow GET appointment-types/{id}/available-dates`, () => {
-    return cloud.withOptions({ qs: { month: `${month}` } }).get(`/hubs/scheduling/appointment-types/${appointmentTypeID}/available-dates`);
+    let appointmentMonth = year + "-" + month;
+    return cloud.withOptions({ qs: { month: `${appointmentMonth}` } }).get(`/hubs/scheduling/appointment-types/${appointmentTypeID}/available-dates`);
   });
 
   it(`should allow GET appointment-types/{id}/available-times`, () => {
-    return cloud.withOptions({ qs: { date: `${date}` } }).get(`/hubs/scheduling/appointment-types/${appointmentTypeID}/available-times`);
+    return cloud.withOptions({ qs: { date: `${futureDate}` } }).get(`/hubs/scheduling/appointment-types/${appointmentTypeID}/available-times`);
   });
 
   it('should allow GET /appointments/{id}/payments', () => {
