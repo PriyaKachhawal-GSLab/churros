@@ -10,10 +10,9 @@ const postingPayload = tools.requirePayload(`${__dirname}/assets/jobPostingsPayl
 suite.forElement('humancapital', 'jobs', { payload: payload }, (test) => {
   var jobId;
   before(() => cloud.post(test.api, payload)
-    .then(r => jobId = r.body.id)
-    //  .then(r => cloud.post(`${test.api}/${jobId}/job-ads`, payload))
-    //.then(r => jobId = r.body.id)
-  );
+    .then(r => jobId = r.body.id));
+  	 after(() => cloud.delete(`/hubs/humancapital/jobs/${jobId}`));
+
   // where is not supported
   it('should support CRUS for /jobs/{id}/job-ads', () => {
     return cloud.crus(`${test.api}/${jobId}/job-ads`, jobAdsPayload, chakram.put)
@@ -22,12 +21,12 @@ suite.forElement('humancapital', 'jobs', { payload: payload }, (test) => {
 
   });
 
-  // To post the job ads need some special permissions hence not every job we can post
-  it.skip('should support CUD for /jobs/:id/job-ads/:jobId/posting', () => {
-    return cloud.post(`${test.api}/${jobId}/job-ads/${jobId}/postings`, postingPayload)
-      .then(r => cloud.get(`${test.api}/${jobId}/job-ads/${jobId}/postings`))
-      .then(r => cloud.delete(`${test.api}/${jobId}/job-ads/${jobId}/postings`));
-
+  it('should support CUD for /jobs/:id/job-ads/:jobAdsId/posting', () => {
+  let jobAdsId;
+    return cloud.get(`${test.api}/${jobId}/job-ads`)
+	      .then(r => jobAdsId = r.body[0].id)
+	      .then(cloud.post(`${test.api}/${jobId}/job-ads/${jobAdsId}/postings`, postingPayload))
+          .then(r => cloud.get(`${test.api}/${jobId}/job-ads/${jobAdsId}/postings`))
+          .then(r => cloud.delete(`${test.api}/${jobId}/job-ads/${jobAdsId}/postings`));
   });
-
 });
