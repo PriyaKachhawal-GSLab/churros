@@ -357,7 +357,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
     let objectName = 'churros-object-' + tools.random();
     let newObjectName = 'churros-renamed-' + tools.random();
     const renamePayload = {
-      "name": `${newObjectName}`
+      "objectName": `${newObjectName}`
     };
     return cloud.post(getObjectDefUrl('organizations',objectName), genBaseObjectDef({}))
       .then(r => cloud.post(getTransformUrl('organizations', objectName, elementKey), genBaseTrans({})))
@@ -372,7 +372,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
     let objectName = 'churros-object-' + tools.random();
     let newObjectName = 'churros-renamed-' + tools.random();
     const renamePayload = {
-      "name": `${newObjectName}`
+      "objectName": `${newObjectName}`
     };
     let accountId;
     return getPlatformAccounts()
@@ -390,7 +390,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
     let objectName = 'churros-object-' + tools.random();
     let newObjectName = 'churros-renamed-' + tools.random();
     const renamePayload = {
-      "name": `${newObjectName}`
+      "objectName": `${newObjectName}`
     };
     
     return cloud.post(getObjectDefUrl('instances/' + sfdcId,objectName), genBaseObjectDef({}))
