@@ -37,6 +37,9 @@
             },
             "level": {
               "enum": [ "organization", "account", "instance", "system" ]
+            },
+            "displayName": {
+              "type": "string"
             }
         },
         "required": [
