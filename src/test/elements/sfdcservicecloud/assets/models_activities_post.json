@@ -1,0 +1,22 @@
+{
+  "DurationInMinutes": 23,
+  "ActivityDateTime": "2018-03-16T08:00:00.000+0000",
+  "attributes": {
+    "type": "string",
+    "url": "string"
+  },
+  "Description": "string",
+  "EventSubtype": "Event",
+  "IsAllDayEvent": false,
+  "IsPrivate": false,
+  "IsReminderSet": true,
+  "Location": "string",
+  "RecurrenceInterval": null,
+  "ReminderDateTime": "2018-03-16T07:00:00.000+0000",
+  "ShowAs": "Busy",
+  "StartDateTime": "2018-03-16T08:00:00.000+0000",
+  "Subject": "string",
+  "WhatId": "5000H000013a1UPQAY",
+  "WhoId": "0030H00004ucHpdQAE"
+}
+

@@ -178,6 +178,26 @@ suite.forPlatform('elements/instances', opts, (test) => {
       });
   });
 
+  it('should support searchText', () => {
+    return cloud.withOptions({ qs: { 'searchText': 'churros' } }).get('instances')
+      .then(r => {
+        r.body.map(s => expect(s.name.includes('churros')).to.equal(true));
+      });
+  });
+
+  it('should support searchText and tags', () => {
+    return cloud.withOptions({ qs: { 'searchText': 'churros', 'tags[]': 'churros-instance' } })
+      .get('instances')
+      .then(r => {
+        r.body.map(s => expect(s.name.includes('churros')).to.equal(true) &&
+                        expect(s.tags.includes('churros-instance')).to.equal(true));
+      });
+  });
+
+  it('should fail there are no instances matching search', () => {
+    return cloud.withOptions({ qs: { 'searchText': 'somelongrandomstringwithnocolisions', 'tags[]': 'churros-instance' } })
+      .get('instances', r => expect(r).to.have.statusCode(404));
+  });
 
   it('should support update with reprovision by key', () => updateInstanceWithReprovision('/instances', instanceSchema));
 

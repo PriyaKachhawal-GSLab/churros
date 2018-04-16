@@ -47,6 +47,8 @@ suite.forElement('documents', 'folders', (test) => {
     return folderWrap(cb);
   });
 
+  test.withApi(`${test.api}/contents`).withOptions({qs: {path :'/'}}).should.supportNextPagePagination(1);
+
   it('should allow paginating with page and pageSize for GET /folders/contents and GET /folders/:id/contents', () => {
     const getWithOptions = (api, option, result) => {
       return cloud.withOptions(option).get(api)

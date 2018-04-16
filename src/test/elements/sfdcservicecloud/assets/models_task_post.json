@@ -1,0 +1,17 @@
+{
+  "CallDisposition": "string",
+  "CallDurationInSeconds": 0,
+  "CallObject": "string",
+  "CallType": "Inbound",
+  "Description": "string",
+  "IsReminderSet": true,
+  "Priority": "Normal",
+  "Status": "Not Started",
+  "Subject": "string",
+  "TaskSubtype": "Task",
+  "IsRecurrence": true,
+  "RecurrenceStartDateOnly": "2018-03-14T11:57:23.482Z",
+  "RecurrenceType": "RecursEveryWeekday",
+  "RecurrenceDayOfWeekMask": 2,
+  "RecurrenceEndDateOnly": "2018-05-14T11:57:23.482Z"
+}

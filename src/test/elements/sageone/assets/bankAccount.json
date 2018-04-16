@@ -1,0 +1,12 @@
+{
+ 
+    "bank_account_type_id": "CREDIT_CARD",
+    "bank_account_details": {
+      "account_name": "<<random.word>>",
+     "account_number": "<<random.number>>",
+      "sort_code": "112233",
+      "bic": "MIDLGB22123",
+      "iban": "GB15 MIDL 4005 1512 3456 78"
+}
+
+}
