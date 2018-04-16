@@ -6,6 +6,7 @@ const R = require('ramda');
 const common = require('../formulas/assets/common');
 const commonResourceFormula = require('../formulas/assets/formulas/formula-with-common-resource');
 const tools = require('core/tools');
+const {filter} = require('ramda');
 
 const orgCommonResource = {
   name: `foo-${tools.random()}`,
@@ -67,7 +68,7 @@ suite.forPlatform('common-resources', {}, () => {
       expect(usage[0]).to.haveOwnProperty('formulaName');
       expect(usage[0]).to.haveOwnProperty('formulaId');
       expect(usage[0]).to.haveOwnProperty('usageCount');
-      expect(usage[0]).property('usageCount').to.eq(3);
+      expect(filter(n => n.usageCount === 3, usage)).length.to.be.gte(1);
     };
     return cloud.get(`${api}/MyContact/usages`, validation);
   });

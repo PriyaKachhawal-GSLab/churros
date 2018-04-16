@@ -1,9 +1,5 @@
 {
-    "id": 26,
     "name": "ObjectFormula",
-    "userId": 12,
-    "accountId": 12,
-    "createdDate": "2018-01-26T16:29:55Z",
     "steps": [
         {
             "id": 233,
@@ -63,7 +59,7 @@
                 "more"
             ],
             "onFailure": [],
-            "name": "anotherOne",
+            "name": "anotherOneTwo",
             "type": "elementRequest",
             "properties": {
                 "method": "POST",
@@ -88,7 +84,6 @@
     ],
     "triggers": [
         {
-            "id": 23,
             "onSuccess": [
                 "finalStep"
             ],
@@ -97,21 +92,6 @@
             "async": true,
             "name": "trigger",
             "properties": {}
-        }
-    ],
-    "method": "GET",
-    "uri": "/whereIsGreg",
-    "active": true,
-    "debugLoggingEnabled": true,
-    "singleThreaded": false,
-    "api": "GET /whereIsGreg",
-    "configuration": [
-        {
-            "id": 86,
-            "key": "blahInstance",
-            "name": "blahInstance",
-            "type": "elementInstance",
-            "required": true
         }
     ]
 }
