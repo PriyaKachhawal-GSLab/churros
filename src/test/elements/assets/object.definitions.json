@@ -2513,5 +2513,14 @@
       "path": "id",
       "type": "string"
     }]
+  },
+  "sites": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
   }
 }
