@@ -58,8 +58,8 @@ suite.forElement('documents', 'files', (test) => {
   it('should return classType specific fields for documents when present', () => {
     let fileId = 874; //this is hardcoded in Docushare File name is DONOTDELETE-Churros-INVOICE
     return cloud.get(`${test.api}/${fileId}/metadata`)
-    .then(r => expect(r.body.properties.invoiceNumber).to.equal('151515'))
-  })
+    .then(r => expect(r.body.properties.invoiceNumber).to.equal('151515'));
+  });
 
   it('should allow POST /files/copy and POST /files/:id/copy', () => {
     const copy1 = { path: '/churrosCopy1' + tools.random() };
