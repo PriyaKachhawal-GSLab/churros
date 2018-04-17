@@ -3,7 +3,10 @@ const cloud = require('core/cloud');
 const noFields = require('core/tools').requirePayload(`${__dirname}/assets/nofield-definition.json`);
 const expect = require('chai').expect;
 const R = require('ramda');
+const common = require('../formulas/assets/common');
+const commonResourceFormula = require('../formulas/assets/formulas/formula-with-common-resource');
 const tools = require('core/tools');
+const {filter} = require('ramda');
 
 const orgCommonResource = {
   name: `foo-${tools.random()}`,
@@ -30,7 +33,12 @@ const orgCommonResourceTwo = {
 suite.forPlatform('common-resources', {}, () => {
   const orgUrl = `/organizations/objects/${orgCommonResource.name}/definitions`;
   const api = '/common-resources';
-  before(() => cloud.post(orgUrl, orgCommonResource));
+  let formulaId;
+  before(() => {
+    cloud.post(orgUrl, orgCommonResource)
+    .then(common.createFormula(commonResourceFormula))
+    .then(r => formulaId = r.body.id);
+  });
 
   it('should support returning all common resources that exist', () => {
     const v = r => {
@@ -52,6 +60,23 @@ suite.forPlatform('common-resources', {}, () => {
       .then(r => cloud.delete(`${api}/${noFields.name}`));
   });
 
+  it('should support finding usages in formulas', () => {
+    const validation = r => {
+      const usage = r.body.formulaUsages;
+      expect(r.body).to.haveOwnProperty('formulaUsages');
+      expect(usage).to.have.length.gte(1);
+      expect(usage[0]).to.haveOwnProperty('formulaName');
+      expect(usage[0]).to.haveOwnProperty('formulaId');
+      expect(usage[0]).to.haveOwnProperty('usageCount');
+      expect(filter(n => n.usageCount === 3, usage)).length.to.be.gte(1);
+    };
+    return cloud.get(`${api}/MyContact/usages`, validation);
+  });
+
+  after(() => {
+    cloud.delete(orgUrl)
+    .then(common.deleteFormula(formulaId));
+  });
   it('should support renaming common resources', () => {
     const newName = `${orgCommonResourceTwo.name}-rename`;
     const renamePayload ={
