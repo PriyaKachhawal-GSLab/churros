@@ -4,10 +4,11 @@ const cloud = require('core/cloud');
 const payload = tools.requirePayload(`${__dirname}/assets/employee.json`);
 const categoriesPayload = tools.requirePayload(`${__dirname}/assets/categories.json`);
 const attachmentUpdatePayload = tools.requirePayload(`${__dirname}/assets/updateAttachment.json`);
-var empId = 0;
-var categoryId;
 
 suite.forElement('humancapital', 'employees', { payload: payload }, (test) => {
+    let empId;
+    let categoryId;
+
     before(() => {
         return cloud.get('employees')
             .then(r => empId = r.body[0].id)
@@ -20,7 +21,7 @@ suite.forElement('humancapital', 'employees', { payload: payload }, (test) => {
     });
     let txtFile = __dirname + '/assets/History.txt';
 
-    it(`should allow Cruds for ${test.api}/${empId}/categories/{categoryId}/attachments`, () => {
+    it(`should allow Cruds for ${test.api}/:empId/categories/:categoryId/attachments`, () => {
         let attachmentId;
         let query = { fileName: tools.random(), share: 'yes' };
         return cloud.withOptions({ qs: query }).postFile(`${test.api}/${empId}/categories/${categoryId}/attachments`, txtFile)
