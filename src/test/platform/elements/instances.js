@@ -12,6 +12,7 @@ const objDefPayload = require('./assets/accountObjectDefinition');
 const sfdcSwaggerSchema = require('./assets/closeioSwagger.schema');
 const defaults = require('core/defaults');
 const logger = require('winston');
+const {filter} = require('ramda');
 
 const genInstance = (element, o) => ({
   name: (o.name || 'churros-instance'),
@@ -341,6 +342,21 @@ suite.forPlatform('elements/instances', opts, (test) => {
       .then(r => instanceId = r.body.id)
       .then(() => cloud.get(`/incidents`))
       .then(r => expect(parseInt(r.response.headers['elements-element-instance-id'])).to.equal(instanceId));
+  });
+
+  it('should support getting a detailed list of objects', () => {
+    const validate = r => {
+      const body = r.response.body;
+      expect(body.length).to.be.gt(0);
+      expect(body[0]).to.haveOwnProperty('name');
+      expect(body[0]).to.haveOwnProperty('vendorName');
+      expect(body[0]).to.haveOwnProperty('type');
+      expect(filter(n => n.type === "vendor").length, body).to.be.gt(0);
+      expect(filter(n => n.type === "ceCanonical", body).length).to.be.gt(0);
+      expect(filter(n => !["vendor","ceCanonical", "vdr"].includes(n.type), body).length).to.be.eq(0);
+    };
+    defaults.token(closeioInstance.token);
+    return cloud.withOptions({headers:{'Elements-Version': 'Helium'}}).get(`/objects`, validate);
   });
 
   it('should allow disabling and enabling  an instance', () => {
