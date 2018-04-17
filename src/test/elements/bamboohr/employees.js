@@ -1,7 +1,6 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/employee.json`);
 const categoriesPayload = tools.requirePayload(`${__dirname}/assets/categories.json`);
 const attachmentUpdatePayload = tools.requirePayload(`${__dirname}/assets/updateAttachment.json`);
