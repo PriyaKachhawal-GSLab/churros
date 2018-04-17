@@ -8,6 +8,7 @@ const build = (overrides) => Object.assign({}, productsPayload, overrides);
 const updatePayload = build({ handle: tools.random() });
 
 suite.forElement('payment', 'product-families', (test) => {
+  let productFamilyId;
   const payload = {
     "name": "churros name",
     "description": "churros description",
@@ -15,7 +16,6 @@ suite.forElement('payment', 'product-families', (test) => {
   };
   test.withOptions({ qs: { where: 'direction=\'desc\'' } }).should.return200OnGet();
   it(`should allow SR for ${test.api}/{productFamilyId}`, () => {
-    let productFamilyId;
     return cloud.post(test.api, payload)
       .then(r => cloud.get(test.api))
       .then(r => productFamilyId = r.body[0].id)
