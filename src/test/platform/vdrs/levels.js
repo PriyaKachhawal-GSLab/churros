@@ -6,19 +6,22 @@ const tools = require('core/tools');
 const defaults = require('core/defaults');
 const R = require('ramda');
 const expect = require('chakram').expect;
+const provisioner = require('core/provisioner');
 
 const payload = require('core/tools').requirePayload(`${__dirname}/assets/vdr.json`);
 const schema = require('core/tools').requirePayload(`${__dirname}/assets/vdr.schema.json`);
 const pluralSchema = require('core/tools').requirePayload(`${__dirname}/assets/vdrs.schema.json`);
 pluralSchema.definitions.vdr = schema;
 
+// NOTE: these tests assume your organization has upgraded to v2 VDRs
+
 suite.forPlatform('level-vdr-apis', {payload, schema}, test => {
-  let accountId, newAccount, newUser;
+  let accountId, newAccount, newUser, closeioId, stripeId;
   before(() => {
       return cloud.get(`/accounts`)
           .then(r => r.body.forEach(account => accountId = (account.defaultAccount) ? accountId = account.id : accountId))
           .then(() => {
-              const account = { name: `${tools.random()}churros`, externalId: 'churros@cloud-elements.com'};
+              const account = { name: `${tools.random()}churros`, externalId: `${tools.random()}@cloud-elements.com`};
               return cloud.post(`/accounts`, account);
           })
           .then(r => newAccount = r.body)
@@ -27,12 +30,19 @@ suite.forPlatform('level-vdr-apis', {payload, schema}, test => {
             return cloud.post(`/accounts/${newAccount.id}/users`, user);
           })
           .then(r => newUser = r.body)
-          .then(() => cloud.put(`/users/${newUser.id}/roles/admin`));
+          .then(() => cloud.put(`/users/${newUser.id}/roles/admin`))
+          .then(() => provisioner.create('closeio'))
+          .then(r => closeioId = r.body.id)
+          .then(() => provisioner.create('stripe'))
+          .then(r => stripeId = r.body.id);
   });
 
   after(() => {
     return cloud.delete(`/users/${newUser.id}`, R.always(true))
-      .then(() => cloud.delete(`/accounts/${newAccount.id}`));
+      .then(() => cloud.withOptions({ headers: { Authorization: `User ${defaults.secrets().userSecret}, Organization ${defaults.secrets().orgSecret}` } }).delete(`/accounts/${newAccount.id}`))
+      .then(() => {
+        if (closeioId) { provisioner.delete(closeioId); }
+      });
   });
 
   const updatePayload = () => {
@@ -93,6 +103,18 @@ suite.forPlatform('level-vdr-apis', {payload, schema}, test => {
         .then(() => cloud.get(`/accounts/${accountId}/objects/definitions`, r => expect(r).to.have.statusCode(404)));
   });
 
+  // instance
+  it('should support CRUDS for instance level VDRs using the /instances/{id}/objects/{objectName}/definitions APIs', () => {
+    return cloud.post(`/instances/${closeioId}/objects/${payload.objectName}/definitions`, payload, schema)
+        .then(() => cloud.get(`/instances/${closeioId}/objects/${payload.objectName}/definitions`, schema))
+        .then(() => cloud.get(`/instances/${closeioId}/objects/definitions`, r => expect(R.has(payload.objectName, r.body)).to.be.true))
+        .then(() => cloud.put(`/instances/${closeioId}/objects/${payload.objectName}/definitions`, updatePayload(), schema))
+        .then(r => cloud.delete(`/instances/${closeioId}/objects/${r.body.objectName}/definitions`));
+  });
+
+  // common-resource
+
+  // combination
   it('should support vdr fields for different levels and accounts and only return the correct fields', () => {
     const genObj = path => {
       return {
@@ -114,26 +136,26 @@ suite.forPlatform('level-vdr-apis', {payload, schema}, test => {
     return cloud.post(`/organizations/objects/${payload.objectName}/definitions`, genObj('org'), validate('org'))
         .then(() => cloud.post(`/accounts/${accountId}/objects/${payload.objectName}/definitions`, genObj('acct1'), validate('acct1')))
         .then(() => cloudWithUser().post(`/accounts/${newAccount.id}/objects/${payload.objectName}/definitions`, genObj('acct2'), validate('acct2')))
+        .then(() => cloud.post(`/instances/${closeioId}/objects/${payload.objectName}/definitions`,  genObj('closeio'), validate('closeio')))
+        .then(() => cloud.post(`/instances/${stripeId}/objects/${payload.objectName}/definitions`, genObj('stripe'), validate('stripe')))
         .then(r => cloud.get(`/organizations/objects/${payload.objectName}/definitions`, validate('org')))
         .then(r => cloud.get(`/accounts/${accountId}/objects/${payload.objectName}/definitions`, validate('acct1')))
         .then(r => cloudWithUser().get(`/accounts/${newAccount.id}/objects/${payload.objectName}/definitions`, validate('acct2')))
-        .then(r => cloud.delete(`/accounts/${accountId}/objects/${payload.objectName}/definitions`))
+        // .then(r => cloud.delete(`/accounts/${accountId}/objects/${payload.objectName}/definitions`))
         .then(r => cloudWithUser().get(`/accounts/${newAccount.id}/objects/${payload.objectName}/definitions`, validate('acct2')))
-        .then(r => cloud.delete(`organizations/objects/${payload.objectName}/definitions`))
+        .then(() => cloud.get(`/instances/${closeioId}/objects/${payload.objectName}/definitions`, validate('closeio')))
+        .then(() => cloud.get(`/instances/${stripeId}/objects/${payload.objectName}/definitions`, validate('stripe')))
+        // .then(() => cloud.delete(`/instances/${closeioId}/objects/${payload.objectName}/definitions`))
+        // .then(() => cloud.delete(`/instances/${stripeId}/objects/${payload.objectName}/definitions`))
+        // .then(r => cloud.delete(`organizations/objects/${payload.objectName}/definitions`))
         .then(r => cloudWithUser().delete(`/accounts/${newAccount.id}/objects/${payload.objectName}/definitions`));
   });
 
-  // instance
-
-  // common-resource
-
-  // combination - create org then account then instance
-    // ensure gets and deletes only mod the existing ones
-    // ensure can't create org twice in a row
-
-  // test creating objects with the same name at different levels and that deleting one does not delete the others
-  it('should support organization and account level definitions with the same name', () => {
+    // test that you can't create at the same level and name twice
+    // test creating objects with the same name at different levels and that get and delete only gets/deletes the correct level
+  it('should support organization, account and instance level definitions with the same name', () => {
     return cloud.post(`/organizations/objects/${payload.objectName}/definitions`, payload, schema)
+        .then(() => cloud.post(`/organizations/objects/${payload.objectName}/definitions`, payload, r => expect(r).to.have.statusCode(409)))
         .then(() => cloud.post(`/accounts/objects/${payload.objectName}/definitions`, payload, schema))
         .then(r => cloud.delete(`/accounts/objects/${payload.objectName}/definitions`))
         .then(r => cloud.get(`/accounts/objects/${payload.objectName}/definitions`, r => expect(r).to.have.statusCode(404)))

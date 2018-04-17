@@ -3,6 +3,7 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const chakram = require('chakram');
+const tools = require('core/tools');
 const expect = chakram.expect;
 const R = require('ramda');
 
@@ -63,7 +64,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
 
     it('should support cloning a VDR and its transformations from the system catalog to the user\'s account', () => {
         let accountId, transformationId;
-        const newObjectName = 'myNewObjectName';
+        const newObjectName = `${tools.random()}churros`;
   
         return cloud.post(`/vdrs/${vdrId}/transformations`, transformationPayload)
             .then(r => transformationId = r.body.id)
