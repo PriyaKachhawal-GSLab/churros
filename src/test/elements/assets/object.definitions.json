@@ -2513,5 +2513,41 @@
       "path": "id",
       "type": "string"
     }]
-  }
+  },
+  "candidates": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+ },
+ "positions": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+ },
+ "offers": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+ },
+ "industries": {
+  "fields": [{
+    "path": "idTransformed",
+    "type": "string"
+  }, {
+    "path": "id",
+    "type": "string"
+  }]
+ }
 }

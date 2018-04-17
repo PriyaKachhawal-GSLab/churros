@@ -12,6 +12,8 @@ const hiringPayload = tools.requirePayload(`${__dirname}/assets/hiringTeams.json
 const jobAdsPayload = tools.requirePayload(`${__dirname}/assets/jobAds.json`);
 const notesPayload = tools.requirePayload(`${__dirname}/assets/jobsNotes.json`);
 const jobPositionPayload = tools.requirePayload(`${__dirname}/assets/jobsPostions.json`);
+const postingPayload = tools.requirePayload(`${__dirname}/assets/jobPostingsPayload.json`);
+
 const options = {
   churros: {
     updatePayload: {
@@ -28,7 +30,7 @@ suite.forElement('humancapital', 'jobs', { payload: payload }, (test) => {
     .then(r => cloud.get('/hubs/humancapital/users'))
     .then(r => hiringPayload.id = r.body[r.body.length - 1].id));
 
-    after(() => cloud.delete(`${test.api}/${jobId}`));
+  after(() => cloud.delete(`${test.api}/${jobId}`));
 
   test.should.supportCruds(chakram.put);
   test.withOptions(options).should.supportCruds();
@@ -41,8 +43,20 @@ suite.forElement('humancapital', 'jobs', { payload: payload }, (test) => {
       expect(validValues.length).to.equal(r.body.length);
     }).should.return200OnGet();
 
+  // where is not supported
   it('should support CRUS for /jobs/{id}/job-ads', () => {
-    return cloud.crus(`${test.api}/${jobId}/job-ads`, jobAdsPayload, chakram.put);
+    return cloud.crus(`${test.api}/${jobId}/job-ads`, jobAdsPayload, chakram.put)
+      .then(r => cloud.withOptions({ qs: { pageSize: 1 } }).get(`${test.api}/${jobId}/job-ads`))
+      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(`${test.api}/${jobId}/job-ads`));
+  });
+
+  it('should support CUD for /jobs/:id/job-ads/:jobAdsId/posting', () => {
+    let jobAdsId;
+    return cloud.get(`${test.api}/${jobId}/job-ads`)
+      .then(r => jobAdsId = r.body[0].id)
+      .then(cloud.post(`${test.api}/${jobId}/job-ads/${jobAdsId}/postings`, postingPayload))
+      .then(r => cloud.get(`${test.api}/${jobId}/job-ads/${jobAdsId}/postings`))
+      .then(r => cloud.delete(`${test.api}/${jobId}/job-ads/${jobAdsId}/postings`));
   });
 
   it('should support CUD for /jobs/:id/hiring-teams', () => {
@@ -55,10 +69,10 @@ suite.forElement('humancapital', 'jobs', { payload: payload }, (test) => {
   });
 
 
-  it('should support C /jobs/:id/candidates and  C /jobs/:id/candidates/cv' , () => {
+  it('should support C /jobs/:id/candidates and  C /jobs/:id/candidates/cv', () => {
     let path = __dirname + '/assets/Resumes.pdf';
     return cloud.post(`${test.api}/${jobId}/candidates`, payloadCandidate)
-      .then(r =>  cloud.postFile(`${test.api}/${jobId}/candidates/resumes`, path));
+      .then(r => cloud.postFile(`${test.api}/${jobId}/candidates/resumes`, path));
   });
 
   //pagination not supported

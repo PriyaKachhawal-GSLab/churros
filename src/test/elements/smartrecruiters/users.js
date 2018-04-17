@@ -4,7 +4,7 @@ const suite = require('core/suite');
 const chakram = require('chakram');
 const expect = chakram.expect;
 
-suite.forElement('humancapital', 'users', { }, (test) => {
+suite.forElement('humancapital', 'users', {}, (test) => {
 
   test.should.supportS();
   test.should.supportPagination(1);

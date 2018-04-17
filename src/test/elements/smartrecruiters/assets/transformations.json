@@ -26,5 +26,12 @@
         "path": "id",
         "vendorPath": "id"
       }]
+  },
+  "industries": {
+    "vendorName": "industries",
+    "fields": [{
+        "path": "id",
+        "vendorPath": "id"
+      }]
   }
 }

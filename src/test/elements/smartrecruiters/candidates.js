@@ -9,21 +9,21 @@ const payload1 = tools.requirePayload(`${__dirname}/assets/candidates.json`);
 const payload2 = tools.requirePayload(`${__dirname}/assets/candidates.json`);
 const jobPayload = tools.requirePayload(`${__dirname}/assets/jobs.json`);
 const statusPayload = tools.requirePayload(`${__dirname}/assets/statusUpdate.json`);
-const onBordingPayload =tools.requirePayload(`${__dirname}/assets/onBording.json`);
+const onBordingPayload = tools.requirePayload(`${__dirname}/assets/onBording.json`);
 const cloud = require('core/cloud');
 
 suite.forElement('humancapital', 'candidates', { payload: payload }, (test) => {
-  var jobId, candidatesId ,candidatesId2;
+  var jobId, candidatesId, candidatesId2;
   before(() => cloud.post('/hubs/humancapital/jobs', jobPayload)
     .then(r => jobId = r.body.id)
     .then(r => cloud.post(`/hubs/humancapital/jobs/${jobId}/candidates`, payload1))
-    .then ( r => candidatesId= r.body.id)
+    .then(r => candidatesId = r.body.id)
     .then(r => cloud.post(`${test.api}`, payload2))
-    .then ( r => candidatesId2= r.body.id));
+    .then(r => candidatesId2 = r.body.id));
 
   after(() => cloud.delete(`/hubs/humancapital/jobs/${jobId}`)
-  .then(r => cloud.delete(`${test.api}/${candidatesId2}`))
-);
+    .then(r => cloud.delete(`${test.api}/${candidatesId2}`))
+  );
 
   test.should.supportCruds();
   test.should.supportPagination();
@@ -37,31 +37,36 @@ suite.forElement('humancapital', 'candidates', { payload: payload }, (test) => {
     })
     .should.return200OnGet();
 
-// pagination is not supported hence not added pagination test
-it('should support SU for /candidates/{candidatesId}/jobs/:id/onboarding-status', () => {
-  return cloud.put(`${test.api}/${candidatesId}/jobs/${jobId}/onboarding-status`, onBordingPayload)
-  .then(r => cloud.get(`${test.api}/${candidatesId}/jobs/${jobId}/onboarding-status`) );
-});
+  // pagination is not supported hence not added pagination test
+  it('should support SU for /candidates/{candidatesId}/jobs/:id/onboarding-status', () => {
+    return cloud.put(`${test.api}/${candidatesId}/jobs/${jobId}/onboarding-status`, onBordingPayload)
+      .then(r => cloud.get(`${test.api}/${candidatesId}/jobs/${jobId}/onboarding-status`));
+  });
 
 
-it('should support CRS /candidates/:id/attachments' , () => {
-  let path = __dirname + '/assets/Resumes.pdf';
-  let attachId;
-  return cloud.postFile(`${test.api}/${candidatesId2}/attachments`, path)
-  .then ( r => attachId= r.body.id)
-    .then(r =>  cloud.get(`${test.api}/${candidatesId2}/attachments`))
-    .then(r => cloud.withOptions({ qs: { pageSize: 1 } }).get(`${test.api}/${candidatesId2}/attachments`)
-    .then(r =>  cloud.withOptions({ qs: { pageSize: 1 } }).get(`${test.api}/${candidatesId2}/attachments/${attachId}`)));
-});
-//We can not post the offers  hence mark it as skip
-it.skip('should support SU for /candidates/{candidatesId}/jobs/:id/offers', () => {
-  let offerId;
-  return cloud.get(`${test.api}/${candidatesId}/jobs/${jobId}/offers`)
-  .then ( r => offerId= r.body[0].id)
-  .then(r => cloud.get(`${test.api}/${candidatesId}/jobs/${jobId}/offers/${offerId}`) );
-});
+  it('should support CRS /candidates/:id/attachments', () => {
+    let path = __dirname + '/assets/Resumes.pdf';
+    let attachId;
+    return cloud.postFile(`${test.api}/${candidatesId2}/attachments`, path)
+      .then(r => attachId = r.body.id)
+      .then(r => cloud.get(`${test.api}/${candidatesId2}/attachments`))
+      .then(r => cloud.withOptions({ qs: { pageSize: 1 } }).get(`${test.api}/${candidatesId2}/attachments`)
+        .then(r => cloud.withOptions({ qs: { pageSize: 1 } }).get(`${test.api}/${candidatesId2}/attachments/${attachId}`)));
+  });
 
-it.skip('should support U for /candidates/{candidatesId}/jobs/:id/status', () => {
-  return cloud.put(`${test.api}/${candidatesId}/jobs/${jobId}/status`,statusPayload);
-});
+  it('should support SU for /candidates/{candidatesId2}/jobs/:id/offers', () => {
+    let offerId;
+    return cloud.get(`${test.api}/${candidatesId}/jobs/${jobId}/offers`)
+      .then(r => {
+        if (r.body.length <= 0) {
+          return;
+        }
+        offerId = r.body[0].id;
+        return cloud.get(`${test.api}/${candidatesId}/jobs/${jobId}/offers/${offerId}`);
+      });
+  });
+
+  it('should support U for /candidates/{candidatesId}/jobs/:id/status', () => {
+    return cloud.put(`${test.api}/${candidatesId}/jobs/${jobId}/status`, statusPayload);
+  });
 });
