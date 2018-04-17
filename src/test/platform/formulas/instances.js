@@ -120,6 +120,20 @@ suite.forPlatform('formulas', opts, (test) => {
         .then(r => expect(r.body.length).to.equal(0));
     });
 
+    it('should support searchText', () => {
+      return cloud.withOptions({ qs: { 'searchText': 'mula-inst' } }).get('formulas/instances')
+        .then(r => {
+          r.body.map(s => expect(s.name.includes('mula-inst')).to.equal(true));
+        });
+    });
+
+    it('should support searchText with inactive', () => {
+      return cloud.withOptions({ qs: { 'searchText': 'mula-inst', includeInactive: true } }).get('formulas/instances')
+        .then(r => {
+          r.body.map(s => expect(s.name.includes('mula-inst')).to.equal(true));
+        });
+    });
+
     /* 404 on PUT where formula and formula instance do not exist */
     test
       .withApi('/formulas/-1/instances/-1/active')

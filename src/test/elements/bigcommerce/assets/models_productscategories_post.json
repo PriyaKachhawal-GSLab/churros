@@ -1,0 +1,15 @@
+{
+    "is_visible": true,
+    "page_title": "New Title",
+    "description": "New category",
+    "meta_keywords": "new",
+    "search_keywords": "Category",
+    "url": "/kids/",
+    "meta_description": "new cat description",
+    "layout_file": "Newcategory.html",
+    "parent_id": 1,
+    "name": "Kids",
+    "image_file": "http://placehold.it/120x120&text=image3",
+    "sort_order": 1
+  }
+  

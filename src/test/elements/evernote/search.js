@@ -14,5 +14,6 @@ suite.forElement('documents', 'search', (test) => {
       .then(r => srcPath = r.body.path)
       .then(r => cloud.withOptions({ qs: { path: srcPath } }).get(test.api));
   });
+  test.should.supportNextPagePagination(1);
   test.should.supportPagination();
 });

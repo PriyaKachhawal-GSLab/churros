@@ -1,0 +1,22 @@
+{
+    "AccountId": "0010H00002IqSxqQAF",
+    "attributes": {
+        "type": "attribute_type_1",
+        "url": "www.ven-test.com"
+    },
+    "ContactId": "0030H00004rpk55QAA",
+    "Description": "string",
+    "IsEscalated": false,
+    "Origin": "Email",
+    "OwnerId": "005i0000001VNdeAAG",
+    "ParentId": "",
+    "Priority": "Normal1234",
+    "Reason": "ven-test-model-payload",
+    "Status": "New123",
+    "Subject": "ven-test-subject",
+    "SuppliedCompany": "ven-test-company",
+    "SuppliedEmail": "info@salesforce.com",
+    "SuppliedName": "ven-test1442",
+    "SuppliedPhone": "5785089",
+    "Type": "Feature564"
+}

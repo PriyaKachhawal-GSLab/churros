@@ -23,4 +23,6 @@ suite.forElement('documents', 'folders', { payload: payload, skip: true}, (test)
       .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).get(`${test.api}/${folderId}/contents`))
       .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).get(`${test.api}/${folderId}/metadata`));
   });
+
+  test.withApi(`${test.api}/contents`).withOptions({qs: {path :'/'}}).should.supportNextPagePagination(1);
 });

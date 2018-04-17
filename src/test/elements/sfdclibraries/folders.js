@@ -16,6 +16,7 @@
       const contentsIdApi = test.api + churrosFolderId + '/contents';
       const metadataIdApi = test.api + churrosFolderId + '/metadata';
 
+      test.withApi(contentsApi).withOptions({qs: {path :'/'}}).should.supportNextPagePagination(1);
       test.withOptions({ qs: { path: '/' } }).withApi(contentsApi).should.return200OnGet();
       test.withOptions(options1ApiPaging).withApi(contentsApi).should.return200OnGet();
       test.withOptions({ qs: { path: '/', details: true } }).withApi(contentsApi).should.return200OnGet();

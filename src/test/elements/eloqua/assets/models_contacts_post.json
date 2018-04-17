@@ -1,0 +1,43 @@
+{
+  "accessedAt": "123456789",
+  "accountId": "string",
+  "accountName": "string",
+  "address1": "string",
+  "address2": "string",
+  "address3": "string",
+  "bouncebackDate": "123456789",
+  "businessPhone": "string",
+  "city": "string",
+  "country": "string",
+  "createdAt": "2018-03-13T07:05:23.022Z",
+  "createdBy": "string",
+  "currentStatus": "string",
+  "depth": "minimal",
+  "description": "string",
+  "emailAddress": "string12@abc.com",
+  "emailFormatPreference": "unspecified",
+  "fax": "string",
+  "fieldValues": [
+    {
+      "id": "100005",
+      "type": "FieldValue",
+      "value": "123456789"
+    }
+  ],
+  "firstName": "string",
+  "id": "123",
+  "isBounceback": "true",
+  "isSubscribed": "true",
+  "lastName": "string",
+  "mobilePhone": "string",
+  "name": "string",
+  "postalCode": "string",
+  "province": "string",
+  "salesPerson": "string",
+  "subscriptionDate": "123456789",
+  "title": "string",
+  "type": "Contact",
+  "unsubscriptionDate": "123456789",
+  "updatedAt": "123456789",
+  "updatedBy": "string"
+}

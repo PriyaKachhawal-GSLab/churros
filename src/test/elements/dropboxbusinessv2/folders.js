@@ -12,7 +12,7 @@ suite.forElement('documents', 'folders', (test) => {
   let rootPath = "/";
   let memberId = props.getForKey('dropboxbusinessv2', 'username');
   let random = `${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 20)}`;
-
+  
   it('should allow GET /folders/metadata for root folder', () => {
     let query = { path: rootPath };
     return cloud.withOptions({qs: query, headers: { "Elements-As-Team-Member": memberId }}).get("/hubs/documents/folders/metadata")
@@ -88,6 +88,8 @@ suite.forElement('documents', 'folders', (test) => {
 
      return folderWrap(cb);
    });
+
+   test.withApi(`${test.api}/contents`).withOptions({qs: {path :'/'}}).should.supportNextPagePagination(1);
 
    it('should allow GET /folders/contents', () => {
      return cloud.withOptions({qs: { path: `/` } , headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)

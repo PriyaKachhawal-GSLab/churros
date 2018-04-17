@@ -11,7 +11,7 @@ suite.forElement('documents', 'folders', (test) => {
   let rootPath = "/";
   let random = `${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 20)}`;
 
-
+  test.withApi(`${test.api}/contents`).withOptions({qs: {path :'/'}}).should.supportNextPagePagination(1);
 
   it('should allow GET /folders/metadata for root folder', () => {
     let query = { path: rootPath };
@@ -90,19 +90,11 @@ suite.forElement('documents', 'folders', (test) => {
     return folderWrap(cb);
   });
 
+  test.withApi(`${test.api}/contents`).withOptions({qs: {path :'/'}}).should.supportNextPagePagination(1);
+
   it('should allow GET /folders/contents', () => {
     return cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
       .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.directory === true || obj.directory === false).length));
-  });
-
-  it.skip('should allow GET /folders/contents with name', () => {
-    return cloud.withOptions({ qs: { path: `/`, where: "name='dontdelete.jpg'" } }).get(`${test.api}/contents`)
-      .then(r => expect(r.body[0].name).to.contain('dontdelete'));
-  });
-
-  it.skip('should allow GET /folders/contents with extension', () => {
-    return cloud.withOptions({ qs: { path: `/`, where: "extension='.csv'" } }).get(`${test.api}/contents`)
-      .then(r => expect(r.body[0].name).to.contain('.csv'));
   });
 
   it('should return parentFolderId for GET /folders/content', ()=> {

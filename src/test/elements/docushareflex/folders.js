@@ -43,6 +43,8 @@ suite.forElement('documents', 'folders', (test) => {
     return folderWrap(cb);
   });
 
+  test.withApi(`${test.api}/contents`).withOptions({qs: {path :'/'}}).should.supportNextPagePagination(1);
+
   it('should allow RU /folders/metadata and RU /folders/:id/metadata', () => {
     const cb = (folder) => {
       let updatedFolder;

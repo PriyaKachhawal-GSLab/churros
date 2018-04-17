@@ -1,5 +1,3 @@
 [{
-  "email": "fakeEmail@faker.com",
-  "first name": "<<name.firstName>>",
-  "last name": "<<name.lastName>>"
+  "email": "fakeEmail@faker.com"
 }]
