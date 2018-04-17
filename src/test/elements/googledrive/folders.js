@@ -64,6 +64,8 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
       .then(r => cloud.withOptions({ qs: { path: `${destPath}` } }).delete(`${test.api}`));
   });
 
+  test.withApi(`${test.api}/contents`).withOptions({qs: {path :'/'}}).should.supportNextPagePagination(1);
+  
   it('should allow GET /folders/contents', () => {
     return cloud.withOptions({ qs: { path: `/${directoryPath}` } }).get(`${test.api}/contents`);
   });

@@ -5,6 +5,7 @@ const tools = require('core/tools');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/categories.json`);
+const payload2 = tools.requirePayload(`${__dirname}/assets/categories.json`);
 
 const categoryProduct = (categoryId, position, sku) => ({
   "productLink": {
@@ -20,7 +21,7 @@ const categoryMove = (parentId) => ({
 const product = (attributeSetId) => ({
   "product": {
     "attribute_set_id": attributeSetId,
-    "name": tools.random(),
+    "name": tools.randomStr('abcdefghijklmnopqrstuvwxyz', 10),
     "price": 300,
     "sku": "ce" + tools.randomInt(),
     "status": 1,
@@ -75,7 +76,7 @@ suite.forElement('ecommerce', 'categories', { payload: payload }, (test) => {
   });
   it(`should allow CUDS for /hubs/ecommerce/categories/{id}/products`, () => {
     let position, sku, attributeSetId;
-    return cloud.post(`/hubs/ecommerce/categories`, payload)
+    return cloud.post(`/hubs/ecommerce/categories`, payload2)
       .then(r => categoryId = r.body.id)
       .then(r => cloud.get(`/hubs/ecommerce/categories/${categoryId}`))
       .then(r => position = r.body.position)

@@ -1,0 +1,9 @@
+{
+  "type": "array",
+  "items": {
+      "$ref": "#/definitions/vdr"
+  },
+  "definitions": {
+    "vdr": {}
+  }
+}

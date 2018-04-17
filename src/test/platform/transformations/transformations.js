@@ -9,6 +9,7 @@ const defaults = require('core/defaults');
 const schema = require('./assets/transformation.schema');
 const objDefSchema = require('./assets/objectDefinition.schema');
 const noFields = tools.requirePayload(`${__dirname}/assets/nofield-definition.json`);
+const noFields2 = tools.requirePayload(`${__dirname}/assets/nofield-definition.json`);
 
 const getConfig = (type, from, to) => ({
   type: type,
@@ -126,6 +127,7 @@ const testTransformationForInstance = (objectName, objDefUrl, transUrl) => {
     // test normal transformation
     .then(r => cloud.post(transUrl, genDefaultTrans({})))
     .then(r => cloud.get('hubs/crm/' + objectName, r => {
+      expect(r).to.have.statusCode(200);
       expect(r.body).to.not.be.empty;
       r.body.forEach(item => {
         expect(item.churrosId).to.not.be.empty;
@@ -136,6 +138,7 @@ const testTransformationForInstance = (objectName, objDefUrl, transUrl) => {
     // test remove config
     .then(r => cloud.put(transUrl, genTransWithRemove({})))
     .then(r => cloud.get('hubs/crm/' + objectName, r => {
+      expect(r).to.have.statusCode(200);
       expect(r.body).to.not.be.empty;
       r.body.forEach(item => {
         expect(item.churrosMod).to.be.empty;
@@ -144,6 +147,7 @@ const testTransformationForInstance = (objectName, objDefUrl, transUrl) => {
     // test passThrough config
     .then(r => cloud.put(transUrl, genTransWithPassThrough({})))
     .then(r => cloud.get('hubs/crm/' + objectName, r => {
+      expect(r).to.have.statusCode(200);
       expect(r.body).to.not.be.empty;
       r.body.forEach(item => {
         expect(item.churrosMod).to.be.empty;
@@ -238,6 +242,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
     return cloud.post(getObjectDefUrl('organizations', objectName), genBaseObjectDef({}))
       .then(r => cloud.post(getTransformUrl('organizations', objectName, elementKey), genBaseTrans({})))
       .then(r => cloud.get(`hubs/crm/${objectName}`, r => {
+        expect(r).to.have.statusCode(200);
         expect(r.body).to.not.be.null;
         r.body.forEach(item => {
           expect(item.churrosId).to.not.be.empty;
@@ -257,6 +262,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
         return cloud.post(getTransformUrl('accounts/' + accountId, objectName, elementKey), trans);
       })
       .then(r => cloud.get(`accounts/${accountId}/elements/${elementKey}/transformations/${objectName}`, r => {
+        expect(r).to.have.statusCode(200);
         expect(r.body).to.not.be.null;
         let foundId = false,
           foundName = false;
@@ -268,6 +274,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
         expect(foundName);
       }))
       .then(r => cloud.get('hubs/crm/' + objectName, r => {
+        expect(r).to.have.statusCode(200);
         expect(r.body).to.not.be.null;
         r.body.forEach(item => {
           expect(item.churrosId).to.not.be.empty;
@@ -285,6 +292,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
         return cloud.post(getTransformUrl('instances/' + sfdcId, objectName), trans);
       })
       .then(r => cloud.get(`instances/${sfdcId}/transformations/${objectName}`, r => {
+        expect(r).to.have.statusCode(200);
         expect(r.body).to.not.be.null;
         let foundId = false,
           foundName = false,
@@ -299,6 +307,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
         expect(foundMod);
       }))
       .then(r => cloud.get('hubs/crm/' + objectName, r => {
+        expect(r).to.have.statusCode(200);
         expect(r.body).to.not.be.null;
         r.body.forEach(item => {
           expect(item.churrosId).to.not.be.empty;
@@ -342,5 +351,82 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       .then(r => cloud.put('/transformations', noFieldV2Payload))
       .then(r => cloud.delete(`/instances/${sfdcId}/transformations/${noFields.name}`))
       .then(r => cloud.delete(`/common-resources/${noFields.name}`).catch(r => {}));
+  });
+
+  it('should support renaming object defintions and transformations at the org level', ()=> {
+    let objectName = 'churros-object-' + tools.random();
+    let newObjectName = 'churros-renamed-' + tools.random();
+    const renamePayload = {
+      "objectName": `${newObjectName}`
+    };
+    return cloud.post(getObjectDefUrl('organizations',objectName), genBaseObjectDef({}))
+      .then(r => cloud.post(getTransformUrl('organizations', objectName, elementKey), genBaseTrans({})))
+      .then(r=> cloud.patch(`/organizations/objects/${objectName}`, renamePayload))
+      .then(r=> cloud.get(getObjectDefUrl('organizations',newObjectName)))
+      .then(r=> cloud.get(getTransformUrl('organizations', newObjectName, elementKey)))
+      .then(r => cloud.delete(getTransformUrl('organizations', newObjectName, elementKey)))
+      .then(r => cloud.delete(getObjectDefUrl('organizations', newObjectName)));
+  });
+
+  it('should support renaming object defintions and transformations at the account level', ()=> {
+    let objectName = 'churros-object-' + tools.random();
+    let newObjectName = 'churros-renamed-' + tools.random();
+    const renamePayload = {
+      "objectName": `${newObjectName}`
+    };
+    let accountId;
+    return getPlatformAccounts()
+      .then(r => r.body.forEach(account => accountId = (account.defaultAccount) ? accountId = account.id : accountId))
+      .then(r => cloud.post(getObjectDefUrl('accounts/' + accountId,objectName), genBaseObjectDef({})))
+      .then(r => cloud.post(getTransformUrl('accounts/' + accountId, objectName, elementKey), genBaseTrans({})))
+      .then(r=> cloud.patch(`accounts/${accountId}/objects/${objectName}`, renamePayload))
+      .then(r=> cloud.get(getObjectDefUrl('accounts/' + accountId,newObjectName)))
+      .then(r=> cloud.get(getTransformUrl('accounts/' + accountId, newObjectName, elementKey)))
+      .then(r => cloud.delete(getTransformUrl('accounts/' + accountId, newObjectName, elementKey)))
+      .then(r => cloud.delete(getObjectDefUrl('accounts/' + accountId, newObjectName)));
+  });
+
+  it('should support renaming object defintions and transformations at the instance level', ()=> {
+    let objectName = 'churros-object-' + tools.random();
+    let newObjectName = 'churros-renamed-' + tools.random();
+    const renamePayload = {
+      "objectName": `${newObjectName}`
+    };
+    
+    return cloud.post(getObjectDefUrl('instances/' + sfdcId,objectName), genBaseObjectDef({}))
+      .then(r => cloud.post(`instances/${sfdcId}/transformations/${objectName}`, genBaseTrans({})))
+      .then(r=> cloud.patch(`instances/${sfdcId}/objects/${objectName}`, renamePayload))
+      .then(r=> cloud.get(getObjectDefUrl('instances/' + sfdcId, newObjectName)))
+      .then(r=> cloud.get(`instances/${sfdcId}/transformations/${newObjectName}`))
+      .then(r => cloud.delete(`instances/${sfdcId}/transformations/${newObjectName}`))
+      .then(r => cloud.delete(getObjectDefUrl('instances/' + sfdcId, newObjectName)));
+  });
+
+  it('should return a list of mapped element ids when retrieving common-resources', () => {
+    let crName;
+    const simpleTransform  = {
+      "level":"account",
+      "fields":[],
+      "configuration":[],
+      "script":{"body":"console.log('Hey there')"},
+      "objectName": noFields2.name,
+      "vendorName":"Lead",
+      "elementInstanceId": sfdcId
+    };
+
+    const validator = r => {
+      expect(r.body.mappedElementIds).to.have.length(3);
+    };
+
+    return cloud.put('/common-resources', noFields2)
+      .then(r => crName = r.body.name)
+      .then(r => cloud.post(getTransformUrl('organizations', noFields2.name, 'sfdc'), simpleTransform))
+      .then(r => cloud.post(getTransformUrl('organizations', noFields2.name, 'closeio'), simpleTransform))
+      .then(r => cloud.post(getTransformUrl('organizations', noFields2.name, 'zohocrm'), simpleTransform))
+      .then(r => cloud.get(`/common-resources/${noFields2.name}`, validator))
+      .then(r => cloud.delete(getTransformUrl('organizations', noFields2.name, 'sfdc')))
+      .then(r => cloud.delete(getTransformUrl('organizations', noFields2.name, 'closeio')))
+      .then(r => cloud.delete(getTransformUrl('organizations', noFields2.name, 'zohocrm')))
+      .then(r => cloud.delete(`/common-resources/${noFields2.name}`).catch(r => {}));
   });
 });

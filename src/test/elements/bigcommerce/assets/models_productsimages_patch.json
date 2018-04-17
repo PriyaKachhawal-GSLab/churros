@@ -1,0 +1,8 @@
+{
+  
+  "description": "Patch Image desc",
+  "image_file": "http://placehold.it/120x120&text=image2",
+  "sort_order": 1,
+  "is_thumbnail": false
+
+}

@@ -6,6 +6,7 @@ const cloud = require('core/cloud');
 const Buffer = require('buffer').Buffer;
 const logger = require('winston');
 const faker = require('faker');
+const tools = require('core/tools');
 
 const rootFolder = '/My Files & Folders';
 
@@ -16,11 +17,31 @@ const checkSize = (fileSize, downloadedSize) => {
 };
 
 suite.forElement('documents', 'files', (test) => {
+  let revisionFile = __dirname + '/assets/CE_logo.png';
   let query = { path: rootFolder + `/file-${faker.random.number()}.txt` };
   let metadataPatch = { path: rootFolder + `/file-${faker.random.number()}.txt` };
   let copyPath = { path: rootFolder + `/churros-${faker.random.number()}.txt` };
-  let fileId;
-  let filePath;
+  let fileId,filePath, revisionFileBody,revisionId,revisionFileId,revisionFilePath;
+
+  before(() => cloud.withOptions({ qs : { path: `/Personal Folders/brady-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.txt`, overwrite: true } }).postFile(test.api, revisionFile)
+  .then(r => revisionFileBody = r.body));
+
+  after(() => cloud.delete(`${test.api}/${revisionFileBody.id}`));
+
+  it('it should allow RS for documents/files/:id/revisions', () => {
+        return cloud.get(`${test.api}/${revisionFileBody.id}/revisions`)
+        .then(r => {
+          revisionId = r.body[0].id;
+          revisionFileId = r.body[0].fileId;
+          revisionFilePath = r.body[0].filePath;
+        })
+        .then(() => cloud.get(`${test.api}/${revisionFileId}/revisions/${revisionId}`));
+    });
+
+    it('it should allow RS for documents/files/revisions by path', () => {
+        return cloud.withOptions({ qs: {path : `${revisionFilePath}`} }).get(`${test.api}/revisions`)
+        .then(() => cloud.withOptions({ qs: {path : `${revisionFilePath}`} }).get(`${test.api}/revisions/${revisionId}`));
+    });
 
   it('should get file metadata by id/path', () => {
     let path = __dirname + '/assets/file.txt';

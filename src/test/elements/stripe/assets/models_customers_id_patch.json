@@ -1,0 +1,25 @@
+{
+  "account_balance": 1000,
+  "business_vat_id": 89612,
+  "coupon": "25OFF",
+  "description": "ven-test-1",
+  "email": "ven-test@gmail.com",
+
+  "metadata": {
+    "custom1": "ven-custom-update",
+    "custom2": "ven-custom2"
+  },
+ 
+  "shipping": {
+    "address": {
+      "city": "Pune",
+      "country": "India",
+      "line1": "street1",
+      "line2": "No2",
+      "postal_code": "9869211",
+      "state": "Maha"
+    },
+    "name": "Ven-test-1-update",
+    "phone": "86908gu689"
+  }
+}

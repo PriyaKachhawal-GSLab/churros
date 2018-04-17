@@ -18,6 +18,12 @@
     "fields": [{
       "path": "id",
       "vendorPath": "id"
+    }, {
+      "path": "email",
+      "vendorPath": "email"
+    }, {
+      "path": "name",
+      "vendorPath": "name"
     }]
   },
   "agents": {
