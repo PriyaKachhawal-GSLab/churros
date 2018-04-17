@@ -6,8 +6,7 @@ const cloud = require('core/cloud');
 const subscriptionPayload = tools.requirePayload(`${__dirname}/assets/subscriptions.json`);
 
 suite.forElement('payment', 'subscriptions', { payload: subscriptionPayload }, (test) => {
-  test.withOptions({ qs: { where: 'direction=\'desc\''}}).should.return200OnGet();
-//  test.should.supportCrds();
+  test.withOptions({ qs: { where: 'direction=\'desc\'' } }).should.return200OnGet();
 
   it(`should allow SR for ${test.api}`, () => {
     let subscriptionId;
