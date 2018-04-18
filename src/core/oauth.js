@@ -16,6 +16,13 @@ const manipulateDom = (element, browser, r, username, password, config) => {
   };
   waitForElement = waitForElement.bind(browser);
   switch (element) {
+    case 'acuityscheduling':
+      browser.get(r.body.oauthUrl);
+      browser.findElement(webdriver.By.id('username')).sendKeys(username);
+      browser.findElement(webdriver.By.id('password')).sendKeys(password);
+      browser.manage().window().maximize(); //for maximizing the window size.
+      browser.findElement(webdriver.By.name('access')).click();
+      return browser.getCurrentUrl();
     case 'adobe-esign':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.name('j_username')).sendKeys(username);
