@@ -1544,6 +1544,17 @@
       }
     ]
   },
+  "emails": {
+    "fields": [{
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
   "listsActivities": {
     "fields": [{
         "path": "idTransformed",
@@ -2066,6 +2077,15 @@
       "type": "string"
     }]
   },
+    "tags": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
   "vendor-credits": {
     "fields": [{
       "path": "idTransformed",
@@ -2325,6 +2345,15 @@
     ]
   },
   "chargecard-transactions": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+  },
+  "appointments": {
     "fields": [{
       "path": "idTransformed",
       "type": "string"
