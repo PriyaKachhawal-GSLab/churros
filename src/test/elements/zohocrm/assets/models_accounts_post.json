@@ -1,5 +1,5 @@
 {
-    "Account Name": "Account name2",
+    "Account Name": "Account name11",
     "Account Number": "12345678",
     "Account Owner": "Atul Barve",
     "Account Site": "acc site",
@@ -13,7 +13,6 @@
     "Billing Street": "bill street",
     "Created By": "Atul Barve",
     "Created Time": "2018-03-12 21:07:12",
-    "Custom Text Field": "cust field",
     "Description": "desc info",
     "Employees": "121231231",
     "Fax": "534534534534534",
@@ -36,6 +35,7 @@
     "SMCREATORID": "1242160000000071001",
     "SMOWNERID": "1242160000000071001",
     "Ticker Symbol": "ticker symbol",
-    "Website": "www.mywebsite.com",
-    "E-mail":"abc.def@gmail.com"
+    "Website": "myweb.com",
+    "E-mail":"abc.def@gmail.com",
+    "Tag":"Tag details"
 }
