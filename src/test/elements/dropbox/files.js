@@ -15,8 +15,6 @@ suite.forElement('documents','files',(test) => {
   var jpgFileBody,revisionId;
   let query = { path: `/brady-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` };
 
-
-
   before(() => cloud.withOptions({ qs : query }).postFile(test.api, jpgFile)
   .then(r => jpgFileBody = r.body)
   .then(r => cloud.post('/hubs/documents/custom-fields-templates', temPayload))
@@ -44,16 +42,9 @@ suite.forElement('documents','files',(test) => {
   });
 
   it(' it should allow RS for /files/{id}/custom-fields-templates/{templateKeyId}/custom-fields', () => {
-
-    return cloud.post('/hubs/documents/custom-fields-templates', temPayload)
-        .then(r => {
-          tempKey = r.body.template_id;
-          updatePayload.add_or_update_fields[0].name = temPayload.fields[0].name;
-          payload.fields[0].name = temPayload.fields[0].name;
-        })
-        .then(r => cloud.post(`/files/${jpgFileBody.refId}/custom-fields-templates/${tempKey}/custom-fields`, payload))
-        .then(r => cloud.put(`/hubs/documents/files/${jpgFileBody.refId}/custom-fields-templates/${tempKey}/custom-fields`, updatePayload))
-        .then(r => cloud.delete(`/hubs/documents/files/${jpgFileBody.refId}/custom-fields-templates/${tempKey}/custom-fields`));
+    return cloud.post(`/files/${jpgFileBody.id}/custom-fields-templates/${tempKey}/custom-fields`, payload)
+        .then(r => cloud.put(`/hubs/documents/files/${jpgFileBody.id}/custom-fields-templates/${tempKey}/custom-fields`, updatePayload))
+        .then(r => cloud.delete(`/hubs/documents/files/${jpgFileBody.id}/custom-fields-templates/${tempKey}/custom-fields`));
   });
 
 
