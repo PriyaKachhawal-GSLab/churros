@@ -4,15 +4,11 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const expect = require('chakram').expect;
 const cloud = require('core/cloud');
-const jobSubmissionsPayload = require('./assets/job-submissions');
+//const jobSubmissionsPayload = require('./assets/job-submissions');
+const payload = tools.requirePayload(`${__dirname}/assets/job-submissions.json`);
+const updatePayload = { "comments": tools.random() };
 
-const updatePayload = {
-  "comments": "Comment on updated job-submissions"
-};
-
-suite.forElement('crm', 'job-submissions', { payload: jobSubmissionsPayload }, (test) => {
-  const build = (overrides) => Object.assign({}, jobSubmissionsPayload, overrides);
-  const payload = build({ comments: tools.random() });
+suite.forElement('crm', 'job-submissions', { payload: payload }, (test) => {
   it('should create a job-submissions and then update', () => {
     let jobSubmissionsId;
     return cloud.post(test.api, payload)
