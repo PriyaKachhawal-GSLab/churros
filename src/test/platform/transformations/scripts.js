@@ -94,7 +94,7 @@ suite.forPlatform('transformation scripts', (test) => {
       expect(body.currencySymbol).to.equal('€');
       expect(body.iso2CountryCode).to.equal('FR');
       expect(body.iso3CountryCode).to.equal('MEX');
-    }
+    };
     return scriptTest(lt('transformationFunctions'), { isCleanup: true, validator: validateFuncs });
-  })
+  });
 });
