@@ -1,0 +1,10 @@
+{
+  "vendorName": "contacts",
+  "script": {
+    "body": "'use strict'; const email = CE.randomEmail(); const base64 = CE.b64('foobarbaz'); const decode64 = CE.decode64(base64); const hmacHard = CE.hmac('sha256')('hex')('foobarbaz', 'bazbarfoo'); const hmacEasy = CE.hmacSha256Hex('foobarbaz', 'bazbarfoo'); const currencyCode = CE.currencyCode('United States'); const currencySymbol = CE.currencySymbol('EUR'); const iso2CountryCode = CE.iso2CountryCode('france'); const iso3CountryCode = CE.iso3CountryCode('mexico'); done({email: email, base64: base64, decode64: decode64, hmacHard: hmacHard, hmacEasy: hmacEasy, currencyCode: currencyCode, currencySymbol: currencySymbol, iso2CountryCode: iso2CountryCode, iso3CountryCode: iso3CountryCode});"
+  },
+  "fields": [{
+    "path": "id",
+    "vendorPath": "id"
+  }]
+}
