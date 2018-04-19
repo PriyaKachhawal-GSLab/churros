@@ -4,12 +4,11 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const expect = require('chakram').expect;
 const cloud = require('core/cloud');
-//const jobSubmissionsPayload = require('./assets/job-submissions');
 const payload = tools.requirePayload(`${__dirname}/assets/job-submissions.json`);
 const updatePayload = { "comments": tools.random() };
 
 suite.forElement('crm', 'job-submissions', { payload: payload }, (test) => {
-  it('should create a job-submissions and then update', () => {
+  it('should support CRUDS for job-submissions', () => {
     let jobSubmissionsId;
     return cloud.post(test.api, payload)
       .then(r => jobSubmissionsId = r.body.changedEntityId)
