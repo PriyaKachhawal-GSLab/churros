@@ -112,8 +112,6 @@ suite.forPlatform('level-vdr-apis', {payload, schema}, test => {
         .then(r => cloud.delete(`/instances/${closeioId}/objects/${r.body.objectName}/definitions`));
   });
 
-  // common-resource
-
   // combination
   it('should support vdr fields for different levels and accounts and only return the correct fields', () => {
     const genObj = path => {
@@ -141,13 +139,13 @@ suite.forPlatform('level-vdr-apis', {payload, schema}, test => {
         .then(r => cloud.get(`/organizations/objects/${payload.objectName}/definitions`, validate('org')))
         .then(r => cloud.get(`/accounts/${accountId}/objects/${payload.objectName}/definitions`, validate('acct1')))
         .then(r => cloudWithUser().get(`/accounts/${newAccount.id}/objects/${payload.objectName}/definitions`, validate('acct2')))
-        // .then(r => cloud.delete(`/accounts/${accountId}/objects/${payload.objectName}/definitions`))
+        .then(r => cloud.delete(`/accounts/${accountId}/objects/${payload.objectName}/definitions`))
         .then(r => cloudWithUser().get(`/accounts/${newAccount.id}/objects/${payload.objectName}/definitions`, validate('acct2')))
         .then(() => cloud.get(`/instances/${closeioId}/objects/${payload.objectName}/definitions`, validate('closeio')))
         .then(() => cloud.get(`/instances/${stripeId}/objects/${payload.objectName}/definitions`, validate('stripe')))
-        // .then(() => cloud.delete(`/instances/${closeioId}/objects/${payload.objectName}/definitions`))
-        // .then(() => cloud.delete(`/instances/${stripeId}/objects/${payload.objectName}/definitions`))
-        // .then(r => cloud.delete(`organizations/objects/${payload.objectName}/definitions`))
+        .then(() => cloud.delete(`/instances/${closeioId}/objects/${payload.objectName}/definitions`))
+        .then(() => cloud.delete(`/instances/${stripeId}/objects/${payload.objectName}/definitions`))
+        .then(r => cloud.delete(`organizations/objects/${payload.objectName}/definitions`))
         .then(r => cloudWithUser().delete(`/accounts/${newAccount.id}/objects/${payload.objectName}/definitions`));
   });
 
