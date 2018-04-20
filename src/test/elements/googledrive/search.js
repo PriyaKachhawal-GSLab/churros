@@ -59,4 +59,6 @@ suite.forElement('documents', 'search', null, (test) => {
   // GDrive needs some time to process deleting files in a previous test :[
 
   test.should.supportPagination('id');
+
+  test.should.supportNextPagePagination(1);
 });

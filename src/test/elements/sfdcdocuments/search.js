@@ -8,6 +8,8 @@ suite.forElement('documents', 'search', null, (test) => {
 
   test.should.supportPagination();
 
+  test.should.supportNextPagePagination(1);
+
   test.withOptions({ qs: { path: '/' } })
     .should.return200OnGet();
 

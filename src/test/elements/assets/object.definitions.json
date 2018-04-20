@@ -31,15 +31,6 @@
       }
     ]
   },
-  "appointments": {
-    "vendorName": "appointments",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "Key"
-      }
-    ]
-  },
   "custom-record-types": {
     "fields": [
       {
@@ -1668,6 +1659,18 @@
       }
     ]
   },
+  "emails": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
   "listsActivities": {
     "fields": [
       {
@@ -2192,6 +2195,18 @@
       }
     ]
   },
+  "tags": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
   "products-attribute-sets-groups": {
     "fields": [
       {
@@ -2580,6 +2595,18 @@
       }
     ]
   },
+  "appointments": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
   "institutions": {
     "fields": [
       {
@@ -2701,6 +2728,18 @@
     ]
   },
   "vendor-groups": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "contracts": {
     "fields": [
       {
         "path": "idTransformed",

@@ -21,6 +21,9 @@
         "objectName": {
             "type": "string"
         },
+        "displayName": {
+            "type": "string"
+        },
         "vendorName": {
             "type": "string"
         },
