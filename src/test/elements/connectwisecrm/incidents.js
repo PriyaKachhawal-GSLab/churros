@@ -18,7 +18,7 @@ suite.forElement('crm', 'incidents', { payload: payload }, (test) => {
       .then(r => incidentId = r.body.id)
       .then(r => cloud.put(`${test.api}/${incidentId}/comments`, commentsPayload))
       .then(r => commentsId = r.body.id)
-	  .then(r => cloud.get(`${test.api}/${incidentId}/comments`))
+      .then(r => cloud.get(`${test.api}/${incidentId}/comments`))
       .then(r => cloud.get(`${test.api}/${incidentId}/comments/${commentsId}`))
       .then(r => cloud.patch(`${test.api}/${incidentId}/comments/${commentsId}`, {noteText: 'Hey, I am Churros, have fun', isPartOfResolution: true}))
       .then(r => cloud.delete(`${test.api}/${incidentId}`));
