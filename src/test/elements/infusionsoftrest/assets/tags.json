@@ -1,0 +1,8 @@
+{
+      "name": "<<random.word>>",
+      "description": "<<random.word>>",
+      "category": {
+        "id": 1,
+        "name": "Customer Tags"
+      }
+    }

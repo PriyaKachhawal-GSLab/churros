@@ -88,6 +88,8 @@ suite.forElement('documents', 'folders', (test) => {
         return folderWrap(cb);
       });
 
+      test.withApi(`${test.api}/contents`).withOptions({qs: {path :'/'}}).should.supportNextPagePagination(1);
+
       it('should allow GET /folders/contents', () => {
         return cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
           .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.directory === true || obj.directory === false).length));

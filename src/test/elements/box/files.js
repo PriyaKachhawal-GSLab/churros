@@ -127,7 +127,7 @@ suite.forElement('documents', 'files', (test) => {
    * While we don't offer the POST /revisions endpoint we'll need to hardcode the file data
    */
   it('should allow RS for documents/files/:id/revisions', () => {
-    const fileId = 158316363797;
+    const fileId = 288284426512;
     let revisionId;
     return cloud.get(`${test.api}/${fileId}/revisions`)
       .then(r => {
@@ -138,7 +138,7 @@ suite.forElement('documents', 'files', (test) => {
   });
 
   it('should allow RS for documents/files/revisions by path', () => {
-    let options = { qs: { path: '/TestFolderDoNoDelete/Sample WordDoc.docx' } };
+    let options = { qs: { path: '/ChurrosRevisionsAPIDontDelete/revisionstestfile.txt' } };
     let revisionId;
     return cloud.withOptions(options).get(`${test.api}/revisions`)
       .then(r => {

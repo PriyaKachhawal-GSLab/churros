@@ -1,0 +1,44 @@
+{
+  "supportCase": {
+    "internalId": "100164",
+    "name": "CAS00000074 Laptop battery is dead"
+  },
+  "transaction": {
+    "name": "Opportunity #OPP00000001"
+  },
+  "owner": {
+    "internalId": "-5",
+    "name": "Alex Wolfe"
+  },
+  "accessLevel": false,
+  "endDate": "2014-09-24T12:30:00+05:30",
+  "title": "PC10",
+  "message": "Model 22234C  Search vendor database",
+  "contactList": {
+    "contact": [
+      {
+        "phone": "",
+        "company": {
+          "internalId": "31",
+          "name": "Brian K Harris"
+        },
+        "email": ""
+      }
+    ],
+    "replaceAll": false
+  },
+  "timedEvent": false,
+  "phone": "(510) 555-5290",
+  "company": {
+    "internalId": "31",
+    "name": "Brian K Harris"
+  },
+  "assigned": {
+    "internalId": "-5",
+    "name": "Alex Wolfe"
+  },
+  "startDate": "2014-09-24T12:30:00+05:30",
+  "status": {
+    "value": "_scheduled"
+  }
+}

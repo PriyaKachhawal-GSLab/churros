@@ -4,6 +4,9 @@
     "id": {
       "type": "number"
     },
+    "description": {
+      "type": "string"
+    },
     "objectName": {
       "type": "string"
     },
@@ -34,6 +37,9 @@
             },
             "level": {
               "enum": [ "organization", "account", "instance", "system" ]
+            },
+            "displayName": {
+              "type": "string"
             }
         },
         "required": [

@@ -10,15 +10,12 @@ const updateProduct = (productName) => ({
 });
 
 suite.forElement('payment', 'products', (test) => {
-  test.withOptions({ qs: { where: 'direction=\'desc\''}}).should.return200OnGet();
   it(`should allow RU for ${test.api}`, () => {
-    let productId;
+    let productId = 3802547;
     let productName;
-    return cloud.get(`${test.api}`)
-      .then(r => productId = r.body[0].id)
-      .then(r => cloud.get(`${test.api}/${productId}`))
+    // no GET /products API is available and deleting existing products is not allowed
+    return cloud.get(`${test.api}/${productId}`)
       .then(r => productName = r.body.product.name)
       .then(r => cloud.patch(`${test.api}/${productId}`, updateProduct(productName)));
   });
-  test.should.supportPagination();
 });

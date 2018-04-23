@@ -22,6 +22,8 @@ suite.forElement('documents', 'search', (test) => {
       .then(r => cloud.delete(`/hubs/documents/files/${file.id}`));
   };
 
+  test.should.supportNextPagePagination(1);
+
   it(`should allow GET for ${test.api}`, () => {
     const cb = (file) => {
       return cloud.withOptions({ qs: searchQuery }).get(`${test.api}`);

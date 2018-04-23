@@ -47,6 +47,15 @@ suite.forElement('payment', 'charges', { payload: payload }, (test) => {
       const validValues = r.body.filter(obj => obj.transfer_group === 'group_ch_1CCK6bGdZbyQGmEeC1eUPelf');
       expect(validValues.length).to.equal(r.body.length);
     }).should.return200OnGet();
+
+  test
+    .withName(`should support searching ${test.api} by nested fields source.object`)
+    .withOptions({ qs: { where: 'source.object = \'card\'' } })
+    .withValidation((r) => {
+      expect(r).to.have.statusCode(200);
+      const validValues = r.body.filter(obj => obj.source.object === 'card');
+      expect(validValues.length).to.equal(r.body.length);
+    }).should.return200OnGet();
   
   test.should.supportPagination();
   test.should.supportNextPagePagination(1);

@@ -1,0 +1,23 @@
+{
+    "Status": "Planning",
+    "Description": "campaign desc456",
+    "MODIFIEDBY": "1242160000000071001",
+    "SMCREATORID": "1242160000000071001",
+    "SMOWNERID": "1242160000000071001",
+    "Expected Revenue": "1234",
+    "Modified Time": "2018-04-10 20:14:36",
+    "Created Time": "2018-04-10 20:14:36",
+    "Modified By": "Atul Barve",
+    "Actual Cost": "1201",
+    "Type": "Conference",
+    "Start Date": "2018-04-11",
+    "End Date": "2018-04-15",
+    "Expected Response": "2302",
+    "Budgeted Cost": "1302",
+    "Campaign Owner": "Atul Barve",
+    "Created By": "Atul Barve",
+    "Tag": "tagval",
+    "CAMPAIGNID": "1242160000003579047",
+    "Campaign Name": "Campaign name456",
+    "Num sent": "2"
+}
