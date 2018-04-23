@@ -334,6 +334,10 @@ suite.forPlatform('elements/instances', opts, (test) => {
       expect(filter(n => n.type === "vendor").length, body).to.be.gt(0);
       expect(filter(n => n.type === "ceCanonical", body).length).to.be.gt(0);
       expect(filter(n => !["vendor","ceCanonical", "vdr"].includes(n.type), body).length).to.be.eq(0);
+      // Check that for each ceCanonical object, there is a matching vendor object
+      body.filter(n => n.type === "ceCanonical").forEach(object => {
+        expect(filter(n=> n.type === "vendor" && n.name === object.vendorName, body)).to.have.length.gt(0);
+      })
     };
     defaults.token(closeioInstance.token);
     return cloud.withOptions({headers:{'Elements-Version': 'Helium'}}).get(`/objects`, validate);
