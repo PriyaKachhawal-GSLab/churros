@@ -8,7 +8,7 @@ suite.forElement('analytics', 'folders', (test) => {
   let folderId, reportId, folder, folderName = 'Dont_Delete_LaunchBI_FOLDER';
 
   it('should allow GET /folders', () => {
-    return cloud.get(test.api)
+    return cloud.withOptions({ qs: { id: '00O0H000006W76a'} }).get(test.api)
       .then(r => {
         folder = r.body.filter(obj => obj.Name && obj.Name === folderName);
         expect(folder).to.not.be.empty;
