@@ -81,4 +81,37 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
             .then(() => cloud.delete(`/accounts/objects/${newObjectName}/definitions`))
             .then(() => cloud.delete(`/vdrs/${vdrId}/transformations/${transformationId}`));
       });
+
+    it('should support cloning a subset of transformations by elementKey', () => {
+        let accountId;
+        let transformationIds = [];
+        const newObjectName = vdrPayload.objectName;
+
+        const transformationOne = transformationPayload;
+        const transformationTwo = R.assoc('elementKey', 'sfdc', transformationPayload)
+        const transformationThree = R.assoc('elementKey', 'hubspotcrm', transformationPayload)
+
+        return cloud.post(`/vdrs/${vdrId}/transformations`, transformationPayload)
+            .then(r => transformationIds.push(r.body.id))
+            .then(()=> cloud.post(`/vdrs/${vdrId}/transformations`, transformationTwo))
+            .then(r => transformationIds.push(r.body.id))
+            .then(()=> cloud.post(`/vdrs/${vdrId}/transformations`, transformationThree))
+            .then(r => transformationIds.push(r.body.id))
+            // Test cloning two of the three mapped elements
+            .then(() => cloud.post(`/vdrs/${vdrId}/clone?elementKeys=${transformationTwo.elementKey},${transformationOne.elementKey}`, {}))
+            .then(() => cloud.get(`/accounts/objects/${newObjectName}/definitions`))
+            // Get the default account id
+            .then(() => cloud.get(`/accounts`)) 
+            .then(r => r.body.forEach(account => accountId = (account.defaultAccount) ? accountId = account.id : accountId))
+            // Validate that the transformation was clone correctly
+            .then(() => cloud.get(`/accounts/11/elements/${transformationOne.elementKey}/transformations/${newObjectName}`))
+            .then(() => cloud.get(`/accounts/11/elements/${transformationTwo.elementKey}/transformations/${newObjectName}`))
+            // Cleanup
+            .then(() => cloud.delete(`/accounts/11/elements/${transformationOne.elementKey}/transformations/${newObjectName}`))
+            .then(() => cloud.delete(`/accounts/11/elements/${transformationTwo.elementKey}/transformations/${newObjectName}`))
+            .then(() => cloud.delete(`/accounts/objects/${newObjectName}/definitions`))
+            .then(() => transformationIds.forEach(id => {
+                cloud.delete(`/vdrs/${vdrId}/transformations/${id}`)
+            }))
+    })
 });
