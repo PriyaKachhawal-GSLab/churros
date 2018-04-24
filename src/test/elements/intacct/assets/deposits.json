@@ -1,0 +1,19 @@
+{
+   "bankaccountid": "Teampay",
+   "depositdate": {
+      "year": "2018",
+      "month": "04",
+      "day": "30"
+   },
+   "depositid": "Deposit Slip 2015-06-30",
+   "receiptkeys": {
+      "receiptkey": ["2874"]
+   },
+   "description": "Desc",
+   "customfields": {
+      "customfield":[ {
+         "customfieldname": "customfield1",
+         "customfieldvalue": "customvalue1"
+      }]
+   }
+}
