@@ -3,7 +3,6 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/leads.json`);
 const updatedPayload = tools.requirePayload(`${__dirname}/assets/leads.json`);
 const interactionPayload = {
