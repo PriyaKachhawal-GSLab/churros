@@ -11,25 +11,19 @@ const otherpaymentsPayload = build({ reference: "re" + tools.randomInt(), date: 
 
 suite.forElement('finance', 'other-payments', { payload: otherpaymentsPayload }, (test) => {
   let id = "VENDOR_PAYMENT";
-  let bank_account_id, contact_id, ledger_account_id;
-  it(`should support CRUDS ${test.api}`, () => {
-    cloud.get(`/hubs/finance/contacts`)
+  let bank_account_id, contact_id;
+  before(() => {
+    return cloud.get(`/hubs/finance/contacts`)
       .then(r => {
         contact_id = r.body[0].id;
-      });
-    cloud.get(`/hubs/finance/ledger-accounts`)
-      .then(r => {
-        ledger_account_id = r.body[0].id;
-      });
-    cloud.get(`/hubs/finance/bank_accounts`)
+        otherpaymentsPayload.contact_id = contact_id;
+      }).then(r => cloud.get(`/hubs/finance/bank-accounts`))
       .then(r => {
         bank_account_id = r.body[0].id;
+        otherpaymentsPayload.bank_account_id = bank_account_id;
       });
-    payload.contact_id = contact_id;
-    payload.payment_lines[0].ledger_account_id = ledger_account_id;
-    payload.bank_account_id = bank_account_id;
-    cloud.cruds(chakram.put);
   });
+  test.should.supportCruds(chakram.put);
   test.should.supportPagination();
   test
     .withName(`should support searching ${test.api} by transaction_type_id`)

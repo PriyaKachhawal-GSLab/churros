@@ -107,7 +107,7 @@ const run = (suite, options, cliArgs) => {
   if (cliArgs.polling) args += ` --polling ${cliArgs.polling}`;
   if (cliArgs.params) args += ` --params '${cliArgs.params}'`;
   if (cliArgs.save) args += ` --save '${cliArgs.save}'`;
-  if (cliArgs.backup) args += ` --backup '${cliArgs.backup}'`;
+//  if (cliArgs.backup) args += ` --backup '${cliArgs.backup}'`;
   if (cliArgs.transform) args += ` --transform`;
   if (cliArgs.sync) args += ` --sync`;
   if (cliArgs.file) args += ` --file ${cliArgs.file}`;
