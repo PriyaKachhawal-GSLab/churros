@@ -7,17 +7,17 @@ const expect = require('chakram').expect;
 
 suite.forElement('helpdesk', 'bulk', null, (test) => {
 
-    const validJson = (r) => {
-        expect(r).to.have.statusCode(200);
-        expect(r.body).to.not.be.null;
-        expect(r.body).to.be.an('array');
-        expect(r.body[0].id).to.not.be.null;
-        return true;
-    };
+  const validJson = (r) => {
+    expect(r).to.have.statusCode(200);
+    expect(r.body).to.not.be.null;
+    expect(r.body).to.be.an('array');
+    expect(r.body[0].id).to.not.be.null;
+    return true;
+  };
 
   it('should support json bulk download for incidents', () => {
     let bulkId;
-    const opts = { qs: { q: "select * from incidents" } };
+    const opts = { qs: { q: "select * from incidents limit 10" } };
 
     // start bulk download
     return cloud.withOptions(opts).post('/bulk/query')
@@ -26,13 +26,11 @@ suite.forElement('helpdesk', 'bulk', null, (test) => {
         bulkId = r.body.id;
       })
       // get bulk download status
-      .then(r => tools.wait.upTo(60000).for(() => cloud.get(`/bulk/${bulkId}/status`, r => {
+      .then(r => tools.wait.upTo(30000).for(() => cloud.get(`/bulk/${bulkId}/status`, r => {
         expect(r.body.status).to.equal('COMPLETED');
         expect(r.body.recordsCount > 0).to.be.true;
         expect(r.body.recordsFailedCount).to.equal(0);
       })))
-      .then(r => cloud.withOptions({ headers: { accept: "application/json" }}).get(`/bulk/${bulkId}/incidents`, r => validJson(r)
-      ));
+      .then(r => cloud.withOptions({ headers: { accept: "application/json" } }).get(`/bulk/${bulkId}/incidents`, r => validJson(r)));
   });
-
 });
