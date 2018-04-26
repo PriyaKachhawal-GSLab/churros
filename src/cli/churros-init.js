@@ -36,7 +36,7 @@ const buildQuestion = (name, type, message, validate, defaultValue) => {
 };
 
 const saveSauce = (answers) => {
-  const propsDir = (process.env.HOME || process.env.USERPROFILE) + '/.churros/';
+  const propsDir = process.env.HOME + '/.churros/';
   const file = propsDir + 'sauce.json';
 
   const format = (url) => {
