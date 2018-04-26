@@ -10,7 +10,7 @@ const build = (overrides) => Object.assign({}, payload, overrides);
 const purchaseCreditPayload = build({ reference: "PCN" + tools.randomInt() });
 
 suite.forElement('finance', 'purchase-credit-notes', { payload: purchaseCreditPayload }, (test) => {
-  let code, id, contact_id, ledger_account_id;
+  let code, id;
 
   before(() => {
     return cloud.get(`/hubs/finance/contacts`)
