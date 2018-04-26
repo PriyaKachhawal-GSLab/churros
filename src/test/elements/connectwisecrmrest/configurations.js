@@ -3,7 +3,6 @@
 const cloud = require('core/cloud');
 const suite = require('core/suite');
 const tools = require('core/tools');
-const expect = require('chakram').expect;
 const oPayload = require('./assets/organizations');
 const build = (overrides) => Object.assign({}, oPayload, overrides);
 const orgPayload = build({ identifier: tools.randomStr('abcdefghijklmnopqrstuvwxyz0123456789', 10) });
