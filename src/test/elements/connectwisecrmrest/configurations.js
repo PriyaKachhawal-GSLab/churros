@@ -3,6 +3,7 @@
 const cloud = require('core/cloud');
 const suite = require('core/suite');
 const tools = require('core/tools');
+const expect = require('chakram').expect;
 const oPayload = require('./assets/organizations');
 const build = (overrides) => Object.assign({}, oPayload, overrides);
 const orgPayload = build({ identifier: tools.randomStr('abcdefghijklmnopqrstuvwxyz0123456789', 10) });
@@ -23,6 +24,7 @@ suite.forElement('crm', 'configurations', { payload: incidentpayload }, (test) =
       .then(r => {
         incidentId = r.body.id;
         configurationPayload.company = { id: organizationId };
+        configurationPayload.name = tools.random();
       })
       .then(r => cloud.post(test.api, configurationPayload))
       .then(r => {
@@ -30,8 +32,13 @@ suite.forElement('crm', 'configurations', { payload: incidentpayload }, (test) =
         incidentConfigurationPayload.id = id;
       })
       .then(r => cloud.withOptions({ qs: { where: "lastUpdated>='2018-04-26T00:00:00Z'" } }).get(test.api))
+      .then(r => expect(r).to.have.statusCode(200))
       .then(r => cloud.put(`hubs/crm/incidents/${incidentId}/configurations`, incidentConfigurationPayload))
       .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(`hubs/crm/incidents/${incidentId}/configurations`))
+      .then(r => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body).to.have.lengthOf(1);
+      })
       .then(r => cloud.delete(`${test.api}/${id}`))
       .then(r => cloud.delete(`/hubs/crm/incidents/${incidentId}`))
       .then(r => cloud.delete(`/hubs/crm/organizations/${organizationId}`));
