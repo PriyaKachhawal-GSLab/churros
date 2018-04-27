@@ -3,7 +3,6 @@
 const suite = require('core/suite');
 const listPayload = require('./assets/lists');
 const contactPayload = require('./assets/contacts');
-const tools = require('core/tools');
 const chakram = require('chakram');
 const cloud = require('core/cloud');
 const expect = chakram.expect;
