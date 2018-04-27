@@ -134,6 +134,41 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1,
         .then(() => cloud.delete(`/change-management/pull-requests/${prId}`));
   });
 
+  // NOTE: can only be run with qaApprovePullRequest privileges
+  it.skip('should support approving a PR as a QA user', () => {
+    let prId;
+    const validator = (r) => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body.qaApproved).to.equal(true);
+        return r;
+    };
+
+    return cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post('/change-management/pull-requests', genPr('model', modelId, 'first', false))
+        .then(r => cloud.patch(`/change-management/pull-requests/${r.body.id}`, {qaApproved: true}, r => validator(r)))
+        .then(r => prId = r.body.id)
+        .then(r => cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).patch(`/change-management/pull-requests/${prId}`, {qaApproved: true}, r => expect(r).to.have.statusCode(403)))
+        .then(() => cloud.delete(`/change-management/pull-requests/${prId}`));
+  });
+
+
+  // NOTE: can only be run with qaApprovePullRequest privileges
+  it.skip('should support cloning an entity for testing as a QA user', () => {
+    let prId, qaModelId;
+    const validator = (r) => {
+        expect(r.body.filter(model => model.isQa)).to.have.length(1);
+    };
+
+    return cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post('/change-management/pull-requests', genPr('model', modelId, 'first', false))
+        .then(r => prId = r.body.id)
+        .then(r => cloud.post(`/change-management/pull-requests/${prId}/clonedEntity`, {})
+        .then(r => cloud.get(`/elements/${elementId}/models`), r => validator(r)))
+        .then(r => {
+          qaModelId = R.head(r.body.filter(model => model.isQA)).id;
+        })
+        .then(r => cloud.delete(`/elements/${elementId}/models/${qaModelId}`))
+        .then(() => cloud.delete(`/change-management/pull-requests/${prId}`));
+  });
+
   // NOTE: can only be run as a superModelAdmin
   it.skip('should return a hydrated diff of the entity on GET', () => {
     const validator = (r) => {
