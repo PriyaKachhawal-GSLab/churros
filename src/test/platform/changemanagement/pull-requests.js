@@ -160,7 +160,7 @@ suite.forPlatform('change-management/pull-requests', {payload: genPr('model', 1,
 
     return cloud.withOptions({ headers: { Authorization: `User ${newUser.secret}, Organization ${defaults.secrets().orgSecret}` } }).post('/change-management/pull-requests', genPr('model', modelId, 'first', false))
         .then(r => prId = r.body.id)
-        .then(r => cloud.post(`/change-management/pull-requests/${prId}/clonedEntity`, {})
+        .then(r => cloud.post(`/change-management/pull-requests/${prId}/qaEntity`, {})
         .then(r => cloud.get(`/elements/${elementId}/models`), r => validator(r)))
         .then(r => {
           qaModelId = R.head(r.body.filter(model => model.isQA)).id;
