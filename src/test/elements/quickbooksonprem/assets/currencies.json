@@ -7,6 +7,6 @@
     "ThousandSeparator": "Comma"
   },
   "IsUserDefinedCurrency": "true",
-  "IsActive": "false",
-  "Name": "<<name.firstName>>"
+  "IsActive": "true",
+  "Name": "Churros"
 }
