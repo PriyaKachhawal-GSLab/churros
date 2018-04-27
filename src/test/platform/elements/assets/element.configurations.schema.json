@@ -5,6 +5,21 @@
       "type": "array",
       "items": {
         "$ref": "element.configuration.schema.json"
+      },
+      "providerData": {
+        "type": "array",
+        "items": {
+          "$ref": "element.configuration.schema.json"
+        }
+      },
+      "authentication" : {
+        "type": "object",
+        "properties": {
+          "type": {
+            "id": "type",
+            "type": "string"
+          }
+        }
       }
     }
   }
