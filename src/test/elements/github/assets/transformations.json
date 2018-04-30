@@ -1,0 +1,11 @@
+{
+  "branches": {
+    "vendorName": "branches",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "name"
+      }
+    ]
+  }
+}
