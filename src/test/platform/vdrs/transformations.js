@@ -104,7 +104,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
             .then(()=> cloud.post(`/vdrs/${vdrId}/transformations`, transformationThree))
             .then(r => transformationIds.push(r.body.id))
             // Test cloning two of the three mapped elements
-            .then(() => cloud.post(`/vdrs/${vdrId}/clone?elementKeys=${transformationTwo.elementKey},${transformationOne.elementKey}`, {}))
+            .then(() => cloud.post(`/vdrs/${vdrId}/clone?elementKeys[]=${transformationTwo.elementKey}&elementKeys[]=${transformationOne.elementKey}`, {}))
             .then(() => cloud.get(`/accounts/objects/${newObjectName}/definitions`))
             // Get the default account id
             .then(() => cloud.get(`/accounts`)) 
