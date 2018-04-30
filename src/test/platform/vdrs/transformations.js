@@ -6,7 +6,7 @@ const chakram = require('chakram');
 const expect = chakram.expect;
 const R = require('ramda');
 
-const {randomStr} = require('core/tools')
+const {randomStr} = require('core/tools');
 
 const vdrPayload = require('core/tools').requirePayload(`${__dirname}/assets/vdr.json`);
 const transformationPayload = require('core/tools').requirePayload(`${__dirname}/assets/transformation.json`);
@@ -90,12 +90,12 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
         const newObjectName = vdrPayload.objectName;
 
         const transformationOne = transformationPayload;
-        const transformationTwo = R.assoc('elementKey', 'sfdc', transformationPayload)
-        const transformationThree = R.assoc('elementKey', 'hubspotcrm', transformationPayload)
+        const transformationTwo = R.assoc('elementKey', 'sfdc', transformationPayload);
+        const transformationThree = R.assoc('elementKey', 'hubspotcrm', transformationPayload);
 
         const expectEmpty = r => {
             expect(r).to.have.statusCode(404);
-        }
+        };
 
         return cloud.post(`/vdrs/${vdrId}/transformations`, transformationPayload)
             .then(r => transformationIds.push(r.body.id))
@@ -119,7 +119,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
             .then(() => cloud.delete(`/accounts/${accountId}/elements/${transformationTwo.elementKey}/transformations/${newObjectName}`))
             .then(() => cloud.delete(`/accounts/objects/${newObjectName}/definitions`))
             .then(() => transformationIds.forEach(id => {
-                cloud.delete(`/vdrs/${vdrId}/transformations/${id}`)
-            }))
-    })
+                cloud.delete(`/vdrs/${vdrId}/transformations/${id}`);
+            }));
+    });
 });
