@@ -6,6 +6,8 @@ const chakram = require('chakram');
 const expect = chakram.expect;
 const R = require('ramda');
 
+const {randomStr} = require('core/tools')
+
 const vdrPayload = require('core/tools').requirePayload(`${__dirname}/assets/vdr.json`);
 const transformationPayload = require('core/tools').requirePayload(`${__dirname}/assets/transformation.json`);
 const schema = require('core/tools').requirePayload(`${__dirname}/assets/transformation.schema.json`);
@@ -63,7 +65,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
 
     it('should support cloning a VDR and its transformations from the system catalog to the user\'s account', () => {
         let accountId, transformationId;
-        const newObjectName = 'myNewObjectName';
+        const newObjectName = `myNewObjectName-${randomStr('string', 6)}`;
   
         return cloud.post(`/vdrs/${vdrId}/transformations`, transformationPayload)
             .then(r => transformationId = r.body.id)
@@ -71,7 +73,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
             .then(() => cloud.post(`/vdrs/${vdrId}/clone`, {}))
             .then(() => cloud.get(`/accounts/objects/${vdrPayload.objectName}/definitions`))
             // test cloning with a new objectName and including transformations
-            .then(() => cloud.post(`/vdrs/${vdrId}/clone?cloneTransformations=true`, {objectName: newObjectName}))
+            .then(() => cloud.post(`/vdrs/${vdrId}/clone?cloneAllTransformations=true`, {objectName: newObjectName}))
             .then(() => cloud.get(`/accounts/objects/${newObjectName}/definitions`))
             .then(() => cloud.get(`/accounts`)) //get the user's accountId (assuming they are the default account)
             .then(r => r.body.forEach(account => accountId = (account.defaultAccount) ? accountId = account.id : accountId))
@@ -91,6 +93,10 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
         const transformationTwo = R.assoc('elementKey', 'sfdc', transformationPayload)
         const transformationThree = R.assoc('elementKey', 'hubspotcrm', transformationPayload)
 
+        const expectEmpty = r => {
+            expect(r).to.have.statusCode(404);
+        }
+
         return cloud.post(`/vdrs/${vdrId}/transformations`, transformationPayload)
             .then(r => transformationIds.push(r.body.id))
             .then(()=> cloud.post(`/vdrs/${vdrId}/transformations`, transformationTwo))
@@ -104,11 +110,13 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
             .then(() => cloud.get(`/accounts`)) 
             .then(r => r.body.forEach(account => accountId = (account.defaultAccount) ? accountId = account.id : accountId))
             // Validate that the transformation was clone correctly
-            .then(() => cloud.get(`/accounts/11/elements/${transformationOne.elementKey}/transformations/${newObjectName}`))
-            .then(() => cloud.get(`/accounts/11/elements/${transformationTwo.elementKey}/transformations/${newObjectName}`))
+            .then(() => cloud.get(`/accounts/${accountId}/elements/${transformationOne.elementKey}/transformations/${newObjectName}`))
+            .then(() => cloud.get(`/accounts/${accountId}/elements/${transformationTwo.elementKey}/transformations/${newObjectName}`))
+            // Validate only the first two element trasformations were cloned
+            .then(() => cloud.get(`/accounts/${accountId}/elements/${transformationThree.elementKey}/transformations/${newObjectName}`, expectEmpty))
             // Cleanup
-            .then(() => cloud.delete(`/accounts/11/elements/${transformationOne.elementKey}/transformations/${newObjectName}`))
-            .then(() => cloud.delete(`/accounts/11/elements/${transformationTwo.elementKey}/transformations/${newObjectName}`))
+            .then(() => cloud.delete(`/accounts/${accountId}/elements/${transformationOne.elementKey}/transformations/${newObjectName}`))
+            .then(() => cloud.delete(`/accounts/${accountId}/elements/${transformationTwo.elementKey}/transformations/${newObjectName}`))
             .then(() => cloud.delete(`/accounts/objects/${newObjectName}/definitions`))
             .then(() => transformationIds.forEach(id => {
                 cloud.delete(`/vdrs/${vdrId}/transformations/${id}`)
