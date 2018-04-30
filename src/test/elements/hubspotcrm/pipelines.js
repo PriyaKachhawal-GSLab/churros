@@ -9,7 +9,7 @@ suite.forElement('crm', 'pipelines', { payload: payload }, (test) => {
 
   it(`should allow CRUDS for ${test.api}`, () => {
     const updatePayload = {
-      "label": "test123Pipe",
+      "label": "test123PipeLbl",
       "displayOrder": 10,
       "stages": [{
         "label": "test123Pipe"
