@@ -8,8 +8,6 @@ const tools = require('core/tools');
 const cloud = require('core/cloud');
 const moment = require('moment');
 
-var contactsId = 396139;
-
 suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
   test.should.supportNextPagePagination(2);
   test.withName('should allow pagination for all contacts with page and nextPage').withOptions({ qs: { all: true } }).should.supportNextPagePagination(2);
