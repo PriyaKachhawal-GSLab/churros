@@ -7,8 +7,9 @@ const cloud = require('core/cloud');
 
 const payload = tools.requirePayload(`${__dirname}/assets/deposits.json`);
 const SalesPayload = tools.requirePayload(`${__dirname}/assets/salesReceipts.json`);
+
 suite.forElement('finance', 'deposits', { payload: payload }, (test) => {
-  before(() => cloud.post('/hubs/humancapital/sales-receipts', SalesPayload)
+  before(() => cloud.post('/hubs/finance/sales-receipts', SalesPayload)
     .then(r => payload.receiptkeys.receiptkey[0] = r.body.id));
   test.should.supportSr();
   it(`should allow CRUDS for ${test.api}`, () => {
