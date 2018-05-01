@@ -3,7 +3,6 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const chakram = require('chakram');
-const tools = require('core/tools');
 const expect = chakram.expect;
 const R = require('ramda');
 
