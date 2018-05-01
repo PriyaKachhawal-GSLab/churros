@@ -34,11 +34,10 @@ suite.forPlatform('common-resources', {}, () => {
   const orgUrl = `/organizations/objects/${orgCommonResource.name}/definitions`;
   const api = '/common-resources';
   let formulaId;
-  before(() => {
-    cloud.post(orgUrl, orgCommonResource)
-    .then(common.createFormula(commonResourceFormula))
-    .then(r => formulaId = r.body.id);
-  });
+  before(() => cloud.post(orgUrl, orgCommonResource)
+    .then(() => common.createFormula(commonResourceFormula))
+    .then(r => formulaId = r.id)
+  );
 
   it('should support returning all common resources that exist', () => {
     const v = r => {
@@ -73,10 +72,10 @@ suite.forPlatform('common-resources', {}, () => {
     return cloud.get(`${api}/MyContact/usages`, validation);
   });
 
-  after(() => {
-    cloud.delete(orgUrl)
-    .then(common.deleteFormula(formulaId));
-  });
+  after(() => cloud.delete(orgUrl)
+    .then(common.deleteFormula(formulaId))
+  );
+
   it('should support renaming common resources', () => {
     const newName = `${orgCommonResourceTwo.name}-rename`;
     const renamePayload ={
@@ -100,6 +99,4 @@ suite.forPlatform('common-resources', {}, () => {
       .then(r => cloud.get(`${api}/${orgCommonResourceTwo.name}`,checkOldDoesntExist))
       .then(r => cloud.delete(`${api}/${newName}`));
   });
-
-  after(() => cloud.delete(orgUrl));
 });
