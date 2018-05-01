@@ -7,6 +7,7 @@ const contactPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`)
 const contactUpdatePayload = tools.requirePayload(`${__dirname}/assets/contactsUpdate.json`);
 const fs = require('fs');
 const cloud = require('core/cloud');
+const expect = require('chakram').expect;
 
 suite.forElement('marketing', 'lists', { payload: payload }, (test) => {
 
@@ -77,6 +78,15 @@ suite.forElement('marketing', 'lists', { payload: payload }, (test) => {
       .then(fi => filteredLists = fi)
       .then(() => cloud.post(`/hubs/marketing/lists/${filteredLists[0].id}/contacts`, contactPayload))
       .then(contacts => cloud.get(`/hubs/marketing/lists/${filteredLists[0].id}/contacts/${contacts.body[0].id}`));
+  });
+
+  it('it should support GET a /objects/listsContacts/metadata', () => {
+    let filteredLists;
+    return cloud.get('/hubs/marketing/lists')
+      .then(r => filteredLists = r.body.filter(r => r.id))
+      .then(() => cloud.post(`/hubs/marketing/lists/${filteredLists[0].id}/contacts`, contactPayload))
+      .then(r => cloud.withOptions({ qs: { discoveryId: `${filteredLists[0].id}`} }).get(`/hubs/marketing/objects/listsContacts/metadata`))
+      .then(r => expect(r.body.fields).to.not.be.empty);
   });
 
   it('it should support PATCH a contact inside a list', () => {

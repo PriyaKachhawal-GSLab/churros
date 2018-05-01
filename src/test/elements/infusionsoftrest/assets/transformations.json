@@ -1,0 +1,72 @@
+{
+  "contacts": {
+    "vendorName": "contacts",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "id"
+    }]
+  },
+  "appointments": {
+    "vendorName": "appointments",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "id"
+    }]
+  },
+  "tasks": {
+    "vendorName": "tasks",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "id"
+    }]
+  },
+  "products": {
+    "vendorName": "products",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "Id"
+    }]
+  },
+  "transactions": {
+   "vendorName": "transactions",
+   "fields": [{
+     "path": "id",
+     "vendorPath": "id"
+    }]
+  },
+  "orders": {
+   "vendorName": "orders",
+   "fields": [{
+     "path": "id",
+     "vendorPath": "id"
+    }]
+  },
+  "tags": {
+   "vendorName": "tags",
+   "fields": [{
+     "path": "id",
+     "vendorPath": "id"
+    }]
+  },
+  "opportunities": {
+   "vendorName": "opportunities",
+   "fields": [{
+     "path": "id",
+     "vendorPath": "id"
+    }]
+  },
+  "files": {
+   "vendorName": "files",
+   "fields": [{
+     "path": "id",
+     "vendorPath": "id"
+    }]
+  },
+  "emails": {
+   "vendorName": "emails",
+   "fields": [{
+     "path": "id",
+     "vendorPath": "id"
+    }]
+  }
+}

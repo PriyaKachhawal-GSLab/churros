@@ -8,5 +8,6 @@
   "primaryKey": false,
   "hidden": false,
   "readOnly": false,
-  "nullable": false
+  "nullable": false,
+  "commitMessage":"first commit"
     }

@@ -1,0 +1,93 @@
+{
+  "attributes": {
+    "subject": "Test Phone Call Creation via Churros Again",
+    "phonenumber": "222-333-5555",
+    "prioritycode": 1,
+    "actualdurationminutes": 30,
+    "description": "Sample Phone Call Activity Churros Again",
+    "statecode": 0,
+    "statuscode": 1,
+    "leftvoicemail": false,
+    "activitytypecode": "phonecall",
+    "actualstart": 1524067137000,
+    "from": {
+      "EntityName": "activityparty",
+      "Entities": [
+        {
+          "LogicalName": "activityparty",
+          "Attributes": [
+            {
+              "Value": {
+                "Value": 1
+              },
+              "Key": "participationtypemask"
+            },
+            {
+              "Value": {
+                "LogicalName": "systemuser",
+                "Id": "11411afe-2b69-e611-80dd-c4346bb5ebe0"
+              },
+              "Key": "ownerid"
+            },
+            {
+              "Value": {
+                "LogicalName": "contact",
+                "Id": "c8be80ab-2d69-e611-80dd-c4346bb5ebe0"
+              },
+              "Key": "partyid"
+            }
+          ]
+        }
+      ]
+    },
+    "directioncode": true,
+    "isregularactivity": true,
+    "timezoneruleversionnumber": 0,
+    "isworkflowcreated": false,
+    "isbilled": false,
+    "to": {
+      "EntityName": "activityparty",
+      "Entities": [
+        {
+          "LogicalName": "activityparty",
+          "KeyAttributes": [],
+          "Attributes": [
+            {
+              "Value": {
+                "Value": 2
+              },
+              "Key": "participationtypemask"
+            },
+            {
+              "Value": {
+                "LogicalName": "systemuser",
+                "KeyAttributes": [],
+                "Id": "11411afe-2b69-e611-80dd-c4346bb5ebe0"
+              },
+              "Key": "ownerid"
+            },
+            {
+              "Value": {
+                "LogicalName": "account",
+                "KeyAttributes": [],
+                "Id": "a8a19cdd-88df-e311-b8e5-6c3be5a8b200",
+                "Name": "Update robot testQA"
+              },
+              "Key": "partyid"
+            },
+            {
+              "Value": "e2bcfe61-2143-e811-811d-e0071b66cf61",
+              "Key": "activitypartyid"
+            },
+            {
+              "Value": {
+                "Value": 0
+              },
+              "Key": "instancetypecode"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
