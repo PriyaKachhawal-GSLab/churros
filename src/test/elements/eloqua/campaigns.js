@@ -3,7 +3,6 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
-const chakram = require('chakram');
 const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
 const campaignsPayload = tools.requirePayload(`${__dirname}/assets/campaigns.json`);
 
@@ -26,7 +25,7 @@ suite.forElement('marketing', 'campaigns', { payload: campaignsPayload }, (test)
   });
 
   it('should allow UD for /hubs/marketing/campaigns/:id/contacts', () => {
-    let campaignId, contactId, contactPostPayload, id = 18;
+    let contactId, contactPostPayload, id = 18;
     return cloud.post(`/hubs/marketing/contacts`, contactsPayload)
       .then(r => contactId = r.body.id)
       .then(r => contactPostPayload = [{ "id": contactId }])
