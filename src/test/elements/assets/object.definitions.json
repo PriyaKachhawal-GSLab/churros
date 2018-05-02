@@ -1542,6 +1542,18 @@
       }
     ]
   },
+  "cash-sales": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
   "terms": {
     "fields": [
       {
