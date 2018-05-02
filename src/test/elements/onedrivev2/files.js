@@ -56,7 +56,13 @@ suite.forElement('documents', 'files', (test) => {
   it('should allow R /files/links and R /files/:id/links', () => {
     const cb = (file) => {
       return cloud.withOptions({ qs: { path: file.path } }).get('/hubs/documents/files/links')
-        .then(r => cloud.get(`/hubs/documents/files/${file.id}/links`));
+        .then(r => {
+          expect(r.body.cloudElementsLink).to.not.be.empty;
+        })
+        .then(r => cloud.get(`/hubs/documents/files/${file.id}/links`))
+        .then(r => {
+          expect(r.body.cloudElementsLink).to.not.be.empty;
+        });
     };
     return fileWrap(cb);
   });
