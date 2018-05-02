@@ -8,11 +8,9 @@ const tools = require('core/tools');
 const cloud = require('core/cloud');
 const moment = require('moment');
 
-var contactsId = 396139;
-
 suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
   test.should.supportNextPagePagination(2);
-  test.withName('should allow pagination for all contacts with page and nextPage').withOptions({qs: { all: true }}).should.supportNextPagePagination(2);
+  test.withName('should allow pagination for all contacts with page and nextPage').withOptions({ qs: { all: true } }).should.supportNextPagePagination(2);
 
   it('should test CRUD for /contacts and GET /contacts/{id}/activities', () => {
     const updatePayload = {
@@ -29,8 +27,8 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
       .then(r => cloud.get(`${test.api}/${contactId}/activities`))
       .then(r => cloud.withOptions(options).get(`${test.api}/${contactId}/activities`))
       .then(r => options.qs.nextPage = r.response.headers['elements-next-page-token'])
-      .then(r => cloud.withOptions(options).get(`${test.api}/${contactId}/activities`))
       .then(r => cloud.patch(`${test.api}/${contactId}`, updatePayload))
+      .then(r => cloud.get(`${test.api}/${contactId}/activities`))
       .then(r => cloud.delete(`${test.api}/${contactId}`));
   });
 
@@ -85,7 +83,4 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
       .then(r => cloud.delete('/organizations/objects/churrosTestObject/definitions'));
   });
   test.should.supportNextPagePagination(1);
-});
-suite.forElement('crm', `contacts/${contactsId}/activities`, { payload: payload }, (test) => {
-  test.should.supportPagination();
 });
