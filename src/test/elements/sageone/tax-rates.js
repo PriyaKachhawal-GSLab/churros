@@ -9,12 +9,10 @@ const build = (overrides) => Object.assign({}, payload, overrides);
 const taxRatesPayload = build({ reference: "re" + tools.randomInt() });
 
 suite.forElement('finance', 'tax-rates', { payload: taxRatesPayload }, (test) => {
-  let name;
   test.should.supportCrus(chakram.put);
-  test.should.supportPagination();
+  test.should.supportPagination(1);
   it(`should support GET ${test.api}`, () => {
-    return cloud.get(test.api)
-      .then(r => name = r.body[0].name);
+    return cloud.get(test.api);
   });
 });
 //where clause doesnot work

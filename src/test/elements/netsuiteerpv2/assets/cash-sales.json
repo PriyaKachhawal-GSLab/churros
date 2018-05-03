@@ -1,0 +1,148 @@
+{
+  "discountRate": "2.00",
+  "salesRep": {
+    "internalId": "1249366",
+    "name": "Aiden T Somerhalder4"
+  },
+
+  "endDate": "2018-07-27T12:30:00+05:30",
+  "salesEffectiveDate": "2018-04-26T12:30:00+05:30",
+
+  "memo": "testmemo",
+  "itemCostDiscTaxable": false,
+  "exchangeRate": 1,
+  "fax": "123456789",
+  "toBeFaxed": false,
+  
+  "shippingCost": 0,
+  "leadSource": {
+    "internalId": "99995",
+    "name": "Distribution Monthly Mailer"
+  },
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg."
+  },
+  "excludeCommission": false,
+  "taxRate": 15.5,
+  "shipMethod": {
+    "internalId": "2",
+    "name": "Pick-up at store"
+  },
+  "toBeEmailed": false,
+  "postingPeriod": {
+    "internalId": "156",
+    "name": "Jan 2010"
+  },
+  "paymentMethod": {
+    "internalId": "1",
+    "name": "Cash"
+  },
+  "tranDate": "2018-04-25T12:30:00+05:30",
+  "expCostDiscTaxable": false,
+  "_class": {
+    "internalId": "71820",
+    "name": "1g7srw"
+  },
+  "shipIsResidential": false,
+  "startDate": "2018-04-25T12:30:00+05:30",
+  
+  "tranId": "CSA0008888",
+  "expCostDiscprint": false,
+  "discountItem": {
+    "internalId": "-6",
+    "name": "Partner Discount"
+  },
+  "taxItem": {
+    "internalId": "-112",
+    "name": "CA-SAN MATEO"
+  },
+  "isRecurringPayment": false,
+ 
+  
+  "billAddressList": {
+    "internalId": "407759",
+    "name": "test label adr"
+  },
+  "currency": {
+    "internalId": "1",
+    "name": "USA"
+  },
+  "promoCode": {
+    "internalId": "10",
+    "name": "CMWI05"
+  },
+  "department": {
+    "internalId": "28512",
+    "name": "ChurrosAdmin"
+  },
+  "timeDiscPrint": false,
+  "email": "Constantin.Wunsch@hotmail.com",
+  
+  "itemCostDiscPrint": false,
+  "otherRefNum": "12345",
+  "toBePrinted": true,
+ 
+  "chargeIt": false,
+  "isTaxable": true,
+  "ccApproved": false,
+  "undepFunds": false,
+  "message": "The author and publisher disclaim any warranties (express or implied), merchantability, or fitness for any particular purpose. The author and publisher shall in no event be held liable to any party for any direct, indirect, punitive, special, incidental or other consequential damages arising directly or indirectly from any use of this material, which is provided “as is”, and without warranties.",
+  "timeDiscTaxable": false,
+  "paypalProcess": false,
+  
+  "partner": {
+    "internalId": "164",
+    "name": "Jasper Supply"
+  },
+
+  
+  "location": {
+    "internalId": "5",
+    "name": "01: San Francisco : QA Hold"
+  },
+  "billingAddress": {
+    "zip": "411045",
+    "country": {
+      "value": "_unitedStates"
+    },
+    "addressee": "Abernathy, Turcotte and Rempel",
+    "addr2": "addr 2 line",
+    "addr1": "addr 1 line",
+    "city": "pune",
+    "attention": "test attention",
+    "state": "A",
+    "addrText": "test attention<br>Abernathy, Turcotte and Rempel<br>addr 1 line<br>addr 2 line<br>pune A 411045<br>United States",
+    "addrPhone": "(879) 876-4567"
+  },
+  "entity": {
+    "internalId": "301031",
+    "name": "Abernathy, Turcotte and Rempel"
+  },
+  "account": {
+    "internalId": "5",
+    "name": "1008 Cash on Hand"
+  },
+"itemList": {
+    "item": [
+      {
+        "item": {
+          "internalId": "491",
+          "name": "CAM00004"
+        },
+        "quantity": 1,
+        "line": 1,
+        "price": {
+          "internalId": "3",
+          "name": "5% Discount Level"
+        },
+        "costEstimateType": {
+          "value": "_custom"
+        },
+        "description": "Delivers the quality you expect from a 3.2 MegaPixel camera",
+        "isTaxable": true
+      }
+    ],
+    "replaceAll": false
+  }
+}

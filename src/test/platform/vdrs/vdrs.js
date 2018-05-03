@@ -21,7 +21,7 @@ suite.forPlatform('vdrs', {payload, schema}, test => {
   };
 
   // NOTE - you need the 'vdrAdmin' role to run these tests
-  it('should support CRUDS for VDRs', () => {
+  it('should support CRUDS for system VDRs', () => {
     let vdrId, updatePayload;
     return cloud.post('/vdrs', payload, schema)
         .then(r => {

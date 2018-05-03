@@ -8,17 +8,17 @@ const vendorPayload = tools.requirePayload(`${__dirname}/assets/vendor.json`);
 const payload = (vendorId) => ({
   "vendorid": vendorId,
   "datecreated": {
-    "year": "2010",
+    "year": "2018",
     "month": "10",
     "day": "13"
   },
   "dateposted": {
-    "year": "2010",
+    "year": "2018",
     "month": "10",
     "day": "13"
   },
   "datedue": {
-    "year": "2010",
+    "year": "2018",
     "month": "10",
     "day": "26"
   },

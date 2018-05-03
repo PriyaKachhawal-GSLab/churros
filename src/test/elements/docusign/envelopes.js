@@ -27,7 +27,7 @@ suite.forElement('esignature', 'envelopes', (test) => {
       .then(r => cloud.get(`${test.api}/${envelopeId}/custom_fields`));
   });
 
-  it(`should support C on ${test.api}, SRU ${test.api}/:id/documents`, () => {
+  it(`should support C on ${test.api}, SRUD ${test.api}/:id/documents`, () => {
     let envelopeId = "-1";
     let path = __dirname + '/assets/MrRobotPdf.pdf';
     let documentPath = __dirname + '/assets/Test.pdf';
@@ -46,7 +46,8 @@ suite.forElement('esignature', 'envelopes', (test) => {
       .then(r => documentId = r.body[0].documentId)
       .then(r => cloud.withOptions(patchDocuments).patch(`${test.api}/${envelopeId}/documents/${documentId}`, undefined,
         (r) => expect(r).to.have.schemaAnd200(documentsSchema)))
-      .then(r => cloud.get(`${test.api}/${envelopeId}/documents/${documentId}`));
+      .then(r => cloud.get(`${test.api}/${envelopeId}/documents/${documentId}`)
+      .then(r => cloud.delete(`${test.api}/${envelopeId}/documents/${documentId}`)));
   });
 
   it(`should support Ceql search on ${test.api} and S on ${test.api}/:id/documents/certificates`, () => {

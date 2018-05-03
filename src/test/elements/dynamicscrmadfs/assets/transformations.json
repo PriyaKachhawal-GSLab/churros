@@ -89,6 +89,20 @@
       "vendorPath": "attributes.incidentid"
     }]
   },
+  "lists": {
+    "vendorName": "list",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "attributes.listid"
+    }]
+  },
+  "phonecall": {
+    "vendorName": "phonecall",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "attributes.activityid"
+    }]
+  },
   "knowledge-articles": {
     "vendorName": "knowledgearticle",
     "fields": [{
