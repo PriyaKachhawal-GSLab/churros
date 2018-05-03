@@ -36,7 +36,7 @@ suite.forElement('crm', 'metadata', (test) => {
   const validVdrMetadata = r => {
     expect(r).to.have.statusCode(200);
     expect(r.body.fields).to.be.an.array;
-    expect(r.body.fields.length).to.equal(2);
+    expect(r.body.fields.length).to.equal(3);
 
     let field = r.body.fields.find((obj) => { return obj.vendorPath === 'Id'; });
     expect(field).to.not.be.null;
@@ -57,7 +57,7 @@ suite.forElement('crm', 'metadata', (test) => {
   const validVdrMetadataForNestedObject = r => {
     expect(r).to.have.statusCode(200);
     expect(r.body.fields).to.be.an.array;
-    expect(r.body.fields.length).to.equal(2);
+    expect(r.body.fields.length).to.equal(3);
 
     let field = r.body.fields.find((obj) => { return obj.vendorPath === 'Phone'; });
     expect(field).to.not.be.null;
