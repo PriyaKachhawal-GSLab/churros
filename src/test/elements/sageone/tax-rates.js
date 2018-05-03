@@ -11,10 +11,21 @@ const taxRatesPayload = build({ reference: "re" + tools.randomInt() });
 suite.forElement('finance', 'tax-rates', { payload: taxRatesPayload }, (test) => {
   let name;
   test.should.supportCrus(chakram.put);
-  test.should.supportPagination();
+  test.withOptions({ qs: { page: 1, pageSize: 1 } }).should.supportPagination();
   it(`should support GET ${test.api}`, () => {
     return cloud.get(test.api)
       .then(r => name = r.body[0].name);
   });
+    it.skip('should support CRUDS for tax-rates', () => {
+      let companyId;
+      return cloud.post(test.api, payload)
+        .then(r => id = r.body.id)
+        .then(r => cloud.withOptions({ qs: { fields: 'percentage,agency' } })
+          .get(`${test.api}/${id}`)
+          .then(r => {
+            expect(r.body).to.contain.key('percentage');
+            expect(r.body).to.contain.key('agency');
+          }));
+        });
 });
 //where clause doesnot work
