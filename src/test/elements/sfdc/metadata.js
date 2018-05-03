@@ -54,6 +54,17 @@ suite.forElement('crm', 'metadata', (test) => {
     expect(field).to.be.undefined;
   };
 
+  const validVdrMetadataForNestedObject = r => {
+    expect(r).to.have.statusCode(200);
+    expect(r.body.fields).to.be.an.array;
+    expect(r.body.fields.length).to.equal(2);
+
+    let field = r.body.fields.find((obj) => { return obj.vendorPath === 'Phone'; });
+    expect(field).to.not.be.null;
+    field = r.body.fields.find((obj) => { return obj.path === 'nestedObject.phone'; });
+    expect(field).to.not.be.null;
+  };
+
   const validateSalutation = (r) => {
     let isPicklist = false;
     r.body.fields.forEach(field => isPicklist =
@@ -89,6 +100,17 @@ suite.forElement('crm', 'metadata', (test) => {
       .then(r => validVdrMetadata(r))
       .then(r => cloud.delete('/organizations/elements/sfdc/transformations/churrosTestObject'))
       .then(r => cloud.delete('/organizations/objects/churrosTestObject/definitions'));
+  });
+
+  it('should support VDR metadata for nested objects', () => {
+    return cloud.post('/organizations/objects/churrosTestNestedObject/definitions', resources.churrosTestNestedObject, () => {})
+      .then(r => cloud.post('/organizations/objects/churrosTestObject/definitions', resources.churrosTestObject, () => {}))
+      .then(r => cloud.post('/organizations/elements/sfdc/transformations/churrosTestObject', resources.churrosTestObjectXform, () => {}))
+      .then(r => cloud.get('/objects/churrosTestObject/metadata'))
+      .then(r => validVdrMetadataForNestedObject(r))
+      .then(r => cloud.delete('/organizations/elements/sfdc/transformations/churrosTestObject'))
+      .then(r => cloud.delete('/organizations/objects/churrosTestObject/definitions'))
+      .then(r => cloud.delete('/organizations/objects/churrosTestNestedObject/definitions'));
   });
 
   test.withApi('/objects/contacts/metadata').withValidation(metaValid).withName(
