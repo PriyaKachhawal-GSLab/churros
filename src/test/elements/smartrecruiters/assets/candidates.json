@@ -1,0 +1,54 @@
+{
+  "firstName": "<<random.word>>",
+  "lastName": "<<random.word>>",
+  "email": "<<internet.email>>",
+  "phoneNumber": "9922212905",
+  "location": {
+    "country": "India",
+    "countryCode": "91",
+    "regionCode": "412105",
+    "region": "Pune",
+    "city": "Pune",
+    "lat": 0,
+    "lng": 0
+  },
+  "web": {
+    "skype": "madhurikadam",
+    "linkedin": "madhurikadam",
+    "facebook": "madhurikadam",
+    "twitter": "madhurikadam",
+    "website": "https://cloud-elements.com"
+  },
+  "tags": [
+    "JAVA"
+  ],
+  "education": [
+    {
+      "institution": "MIT",
+      "degree": "BE",
+      "major": "Computers",
+      "current": true,
+      "location": "Pune",
+      "startDate": "2012",
+      "endDate": "2016",
+      "description": "BE"
+    }
+  ],
+  "experience": [
+    {
+      "title": "SOFTWARE ENGINEER",
+      "company": "GS",
+      "current": true,
+      "startDate": "2017",
+      "endDate": "2017",
+      "location": "Pune",
+      "description": "string"
+    }
+  ],
+  "sourceDetails": {
+    "sourceTypeId": "REFERRALS",
+    "sourceSubTypeId": "BO_REFERRER",
+    "sourceId": "5ab13d9be4b09c1adde4efd7"
+  },
+  "internal": false
+}
