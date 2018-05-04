@@ -7,6 +7,8 @@ const cloud = require('core/cloud');
 let listPayload = tools.requirePayload(`${__dirname}/assets/sitesLists.json`);
 let sitePayload = tools.requirePayload(`${__dirname}/assets/sites.json`);
 let listItemsPayload = tools.requirePayload(`${__dirname}/assets/listItems.json`);
+let updateListPayload = tools.requirePayload(`${__dirname}/assets/listUpdatePayload.json`);
+let updateListItemPayload = tools.requirePayload(`${__dirname}/assets/updateListItemPayload.json`);
 
 suite.forElement('documents', 'sites', { payload: listPayload }, (test) => {
 
@@ -19,13 +21,7 @@ suite.forElement('documents', 'sites', { payload: listPayload }, (test) => {
 
   it('should support CRUDS for sites/lists', () => {
     let listId;
-    const updateListPayload = {
-      "__metadata": {
-        "type": "SP.List"
-      },
-      "BaseTemplate": 100,
-      "Title": "Churros-UpdateListTitle"  
-    };
+    
     return cloud.post(`${test.api}/lists`, listPayload)
       .then(r => listId = r.body.Id)
       .then(r => cloud.get(`${test.api}/lists/${listId}`))
@@ -38,12 +34,7 @@ suite.forElement('documents', 'sites', { payload: listPayload }, (test) => {
     let listId;
     let itemId;
     let fullName;
-    const updateListItemPayload = {
-      "__metadata": {
-        "type": "SP.Data.April02ListItem"
-      },
-      "Title": "Churros-List Item"
-    };
+    
     return cloud.post(`${test.api}/lists`, listPayload)
       .then(r => listId = r.body.Id)
       .then(r => cloud.get(`${test.api}/lists/${listId}`))
