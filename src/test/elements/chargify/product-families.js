@@ -19,7 +19,8 @@ suite.forElement('payment', 'product-families', (test) => {
     return cloud.post(test.api, payload)
       .then(r => cloud.get(test.api))
       .then(r => productFamilyId = r.body[0].id)
-      .then(r => cloud.get(`${test.api}/${productFamilyId}`));
+      .then(r => cloud.get(`${test.api}/${productFamilyId}`))
+	  .then(r => cloud.get(`${test.api}/${productFamilyId}/products`));
   });
   // skipping because no delete API is present for prdocuts resource
   it.skip(`should allow POST for ${test.api}/{productFamilyId}/products`, () => {
