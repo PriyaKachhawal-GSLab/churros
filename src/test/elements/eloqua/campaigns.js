@@ -8,7 +8,7 @@ const campaignsPayload = tools.requirePayload(`${__dirname}/assets/campaigns.jso
 
 suite.forElement('marketing', 'campaigns', { payload: campaignsPayload }, (test) => {
   it(`should allow CRUDS for ${test.api}, PATCH /campaigns/activate/:id and PATCH /campaigns/deactivate/:id`, () => {
-    let campaignId; //, contactId, contactPostPayload, id = 18;
+    let campaignId;
     return cloud.post(test.api, campaignsPayload)
       .then(r => {
         campaignId = r.body.id;
