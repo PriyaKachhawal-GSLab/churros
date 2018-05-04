@@ -11,6 +11,10 @@ const productsPayload = build({ item_code: "item" + tools.randomInt() });
 
 suite.forElement('finance', 'products', { payload: productsPayload }, (test) => {
   let code;
+  before(() => {
+    return cloud.get(`/hubs/finance/product-sales-price-types`)
+      .then(r => productsPayload.sales_prices[0].product_sales_price_type_id = r.body[0].id);
+  });
   test.should.supportCruds(chakram.put);
   test.should.supportPagination();
   it(`should support GET ${test.api}`, () => {

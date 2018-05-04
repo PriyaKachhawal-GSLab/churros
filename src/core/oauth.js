@@ -349,8 +349,10 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.xpath('//div[1]/input')).sendKeys(username);
       browser.findElement(webdriver.By.xpath('//div[2]/input')).sendKeys(password);
-      browser.findElement(webdriver.By.xpath('//div/button[1]')).click();
-      browser.sleep(5000);
+      browser.findElement(webdriver.By.xpath('/html/body/div[2]/div/div[1]/div[4]/form[1]/button')).click();
+      browser.sleep(2000);
+      browser.findElement(webdriver.By.name('approve')).click();
+      browser.sleep(2000);
       return browser.getCurrentUrl();
     case 'hubspotcrm':
     case 'hubspot':
