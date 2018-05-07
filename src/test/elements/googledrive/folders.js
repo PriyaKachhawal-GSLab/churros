@@ -123,7 +123,7 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
     let path;
     return cloud.post(`${test.api}`, payload)
       .then(r => path = r.body.path)
-      .then(r => cloud.withOptions({ qs: { path: `${path}` } }).delete(`${test.api}`))
+      .then(r => cloud.withOptions({ qs: { path: `${path}` } }).delete(`${test.api}`));
   });
 
 });
