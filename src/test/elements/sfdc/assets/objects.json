@@ -1,4 +1,11 @@
 {
+  "churrosTestNestedObject": {
+    "fields": [{
+      "type": "string",
+      "path": "phone"
+    }],
+    "level": "organization"
+  },
   "churrosTestObject": {
     "fields": [{
         "type": "string",
@@ -11,6 +18,10 @@
       {
         "type": "string",
         "path": "firstName"
+      },
+      {
+        "type": "churrosTestNestedObject",
+        "path": "nestedObject"
       }
     ],
     "level": "organization"
@@ -26,6 +37,11 @@
       {
         "path": "email",
         "vendorPath": "Email",
+        "level": "organization"
+      },
+      {
+        "path": "nestedObject.phone",
+        "vendorPath": "Phone",
         "level": "organization"
       }
     ],
