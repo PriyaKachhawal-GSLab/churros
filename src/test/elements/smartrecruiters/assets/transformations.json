@@ -13,6 +13,13 @@
         "vendorPath": "id"
       }]
   },
+    "jobs": {
+    "vendorName": "jobs",
+    "fields": [{
+        "path": "id",
+        "vendorPath": "id"
+      }]
+  },
   "positions": {
     "vendorName": "positions",
     "fields": [{
