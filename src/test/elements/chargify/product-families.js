@@ -15,7 +15,7 @@ suite.forElement('payment', 'product-families', (test) => {
     "handle": tools.random()
   };
   test.withOptions({ qs: { where: 'direction=\'desc\'' } }).should.return200OnGet();
-  it(`should allow SR for ${test.api}/{productFamilyId}`, () => {
+  it(`should allow SR for ${test.api}/{productFamilyId} and S for ${test.api}/{productFamilyId}/Products`, () => {
     return cloud.post(test.api, payload)
       .then(r => cloud.get(test.api))
       .then(r => productFamilyId = r.body[0].id)
