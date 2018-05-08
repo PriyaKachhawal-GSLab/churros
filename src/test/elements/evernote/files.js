@@ -3,6 +3,8 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
+const chakram = require('chakram');
+const expect = chakram.expect;
 const foldersPayload = require('./assets/folders');
 
 suite.forElement('documents', 'files', (test) => {
@@ -34,5 +36,27 @@ suite.forElement('documents', 'files', (test) => {
       .then(r => cloud.get(`${test.api}/${fileId}/metadata`))
       .then(r => cloud.patch(`${test.api}/${fileId}/metadata`, filesPayload))
       .then(r => cloud.delete(`${test.api}/${fileId}`));
+  });
+
+  it('should allow RS for documents/files/:id/revisions', () => {
+    const fileId = 'd59f5f2f-0137-4393-9469-e72f1443cd9f';
+    let revisionId;
+    return cloud.get(`${test.api}/${fileId}/revisions`)
+      .then(r => {
+        expect(r.body[0]).to.contain.key('id');
+        revisionId = r.body[0].id;
+      })
+      .then(() => cloud.get(`${test.api}/${fileId}/revisions/${revisionId}`));
+  });
+
+  it('should allow RS for documents/files/revisions by path', () => {
+    let options = { qs: { path: '/Dont_Delete_Churros_Test_NoteBook/d59f5f2f-0137-4393-9469-e72f1443cd9f' } };
+    let revisionId;
+    return cloud.withOptions(options).get(`${test.api}/revisions`)
+      .then(r => {
+        expect(r.body[0]).to.contain.key('id');
+        revisionId = r.body[0].id;
+      })
+      .then(() => cloud.withOptions(options).get(`${test.api}/revisions/${revisionId}`));
   });
 });
