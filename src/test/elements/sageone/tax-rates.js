@@ -11,24 +11,16 @@ const taxRatesPayload = build({
   reference: "re" + tools.randomInt()
 });
 
-suite.forElement('finance', 'tax-rates', {
-  payload: taxRatesPayload
-}, (test) => {
+suite.forElement('finance', 'tax-rates', { payload: taxRatesPayload }, (test) => {
   test.should.supportCrus(chakram.put);
   test.should.supportPagination(1);
   it(`should support GET ${test.api}`, () => {
     return cloud.get(test.api);
   });
 
-  test
-    .withOptions({
-      qs: {
-        attributes: 'percentage'
-      }
-    })
-    .withValidation((r) => {
-      expect(r).to.have.statusCode(200);
-      expect(r.body[0]).to.contain.key('percentage');
-    }).should.return200OnGet();
+  test.withOptions({ qs: { attributes: 'percentage' } }).withValidation((r) => {
+    expect(r).to.have.statusCode(200);
+    expect(r.body[0]).to.contain.key('percentage');
+  }).should.return200OnGet();
 });
 //where clause doesnot work
