@@ -2892,6 +2892,15 @@
       "type": "string"
     }]
   },
+  "sites": {
+    "fields": [{
+      "path": "idTransformed",
+      "type": "string"
+    }, {
+      "path": "id",
+      "type": "string"
+    }]
+},
   "candidates": {
   "fields": [{
     "path": "idTransformed",
@@ -2927,7 +2936,6 @@
     "path": "id",
     "type": "string"
   }]
-
   },
   "phone-calls": {
     "fields": [
@@ -2954,4 +2962,3 @@
     ]
   }
 }
-
