@@ -14,7 +14,7 @@ suite.forElement('humancapital', 'requisitions', {payload}, (test) => {
         .then(r => {
             let title = r.body[0].title;
             return cloud.withOptions({qs: { where: `title = '${title}'`}}).get(test.api)
-            .then(r => expect(r.body.length).to.equal(r.body.filter(req => req.title == title).length))
-        })
+            .then(r => expect(r.body.length).to.equal(r.body.filter(req => req.title === title).length));
+        });
     });
 });
