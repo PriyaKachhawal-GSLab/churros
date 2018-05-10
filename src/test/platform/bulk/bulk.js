@@ -108,7 +108,6 @@ suite.forPlatform('bulk', (test) => {
   });
 
   it('should fail bulk workflow with invalid FaaR specification', () => {
-    let bulkId;
     let bulkFormula = require('./assets/hubspotcrm.formula.faar.json');
     // start bulk workflow
     return cloud.post('/formulas', bulkFormula)
