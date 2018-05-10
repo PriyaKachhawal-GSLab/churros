@@ -9,6 +9,7 @@ const tools = require('core/tools');
 
 let workflow = require('./assets/hubspotcrm.workflow.json');
 let workflowFaar = require('./assets/hubspotcrm.workflow.faar.json');
+let invalidWorkflowFaar = require('./assets/hubspotcrm.invalid.workflow.faar.json');
 
 suite.forPlatform('bulk', (test) => {
   let instanceId;
@@ -98,8 +99,29 @@ suite.forPlatform('bulk', (test) => {
         expect(r.body[ 0 ].status).to.equal('COMPLETED');
       })))
       .then(r => cloud.withOptions({ qs: { parentBulkLoaderId: r.body[0].bulkLoaderId } }).get('/bulkloader'))
-      .then(r => expect(r.body.length).to.equal(2))
-      .then(() => cloud.delete(`/formulas/${bulkFormula.id}`));
+      .then(r => expect(r.body.length).to.equal(4))
+      .then(() => cloud.delete(`/formulas/${bulkFormula.id}`))
+      .catch(e => {
+        if (bulkFormula.id) cloud.delete(`/formulas/${bulkFormula.id}`);
+        throw new Error(e);
+      });
+  });
+
+  it('should fail bulk workflow with invalid FaaR specification', () => {
+    let bulkId;
+    let bulkFormula = require('./assets/hubspotcrm.formula.faar.json');
+    // start bulk workflow
+    return cloud.post('/formulas', bulkFormula)
+      .then(r => bulkFormula.id = r.body.id)
+      .then(() => cloud.post('/hubs/crm/bulk/workflows', invalidWorkflowFaar, r => {
+        expect(r).to.have.statusCode(400);
+        expect(r.body.message).to.equal("The 'postprocess' and 'postprocessFaarUri' options are incompatible");
+      }))
+      .then(() => cloud.delete(`/formulas/${bulkFormula.id}`))
+      .catch(e => {
+        if (bulkFormula.id) cloud.delete(`/formulas/${bulkFormula.id}`);
+        throw new Error(e);
+      });
   });
 
   it('should support scheduled bulk workflow', () => {
