@@ -1,0 +1,22 @@
+ {
+    "privacy_policy": {
+      "link_text": "<<random.word>>",
+      "url": "http://www.twitter.com/"
+    },
+    
+    "custom_disclaimer": {
+      "checkboxes": [
+        {
+          "is_required": true,
+          "is_checked_by_default": true,
+          
+          "text": "I Agree",
+          "key": "i_agree"
+        }
+      ],
+      "title": "<<random.word>>",
+      "body": {
+        "text": "Please read the policy very carefully before accepting"
+      }
+    }
+  }
