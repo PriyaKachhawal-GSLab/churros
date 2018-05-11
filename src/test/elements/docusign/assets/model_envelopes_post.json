@@ -1,0 +1,61 @@
+{
+  "documents": [
+    {
+      "documentId": "3",
+      "uri": "/envelopes/44efc9e6-915e-4b1d-9b54-801410d6922d/documents/1",
+      "remoteUrl": "",
+      "name": "minlist.pdf",
+      "password": "pwd",
+      "transformPdfFields": "true",
+      "fileExtension": "pdf",
+      "matchBoxes": [
+        {
+          "pageNumber": 1,
+          "xPosition": 2,
+          "yPosition": 3,
+          "width": 4,
+          "height": 5
+        }
+      ],
+      "order": "asc",
+      "pages": "3",
+      "documentFields": [],
+      "encryptedWithKeyManager": "false",
+      "documentBase64": "",
+      "applyAnchorTabs": "true",
+      "display": "inline",
+      "includeInDownload": "true",
+      "signerMustAcknowledge": "no_interaction",
+      "templateLocked": "false",
+      "templateRequired": "false",
+      "documentGroup": "",
+      "fileFormatHint": "pdf",
+      "authoritativeCopy": true
+    }
+  ],
+  "customFields": {
+    "textCustomFields": [
+      {
+        "fieldId": "1",
+        "name": "textcustom",
+        "show": "true",
+        "required": "true",
+        "value": "textcustomval",
+        "configurationType": "salesforce"
+      }
+    ],
+    "listCustomFields": [
+      {
+        "listItems": [
+          "2"
+        ],
+        "fieldId": "2",
+        "name": "listcustom",
+        "show": "true",
+        "required": "true",
+        "value": "listcustomval",
+        "configurationType": "salesforce"
+      }
+    ]
+  }
+}
