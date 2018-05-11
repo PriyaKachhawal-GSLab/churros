@@ -2952,6 +2952,42 @@
         "type": "string"
       }
     ]
+  },
+  "defects": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "userStory": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "projects": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   }
 }
 
