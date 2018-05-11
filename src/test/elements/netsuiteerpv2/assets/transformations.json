@@ -206,6 +206,15 @@
       }
     ]
   },
+  "cash-sales": {
+    "vendorName": "CashSale",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "internalId"
+      }
+    ]
+  },
   "employees": {
     "vendorName": "Employee",
     "fields": [

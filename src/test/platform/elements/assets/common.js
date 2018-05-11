@@ -16,7 +16,8 @@ exports.genElement = (opts) => ({
   name: (opts.name || 'Churros'),
   description: (opts.description || "A Churros element"),
   authentication: (opts.authentication) || { type: 'basic' },
-  configuration: (opts.configuration) || [exports.genBaseUrlConfig({})]
+  configuration: (opts.configuration) || [exports.genBaseUrlConfig({})],
+  modelType: 'basic'
 });
 
 exports.genElementWithObjects = (opts) => ({

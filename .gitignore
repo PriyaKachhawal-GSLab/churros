@@ -35,6 +35,7 @@ src/core/cleanup.json
 
 build/
 dist/
+*.rdb
 
 .coveralls.yml
 

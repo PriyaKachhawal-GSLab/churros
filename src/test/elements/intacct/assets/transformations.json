@@ -201,5 +201,41 @@
       "path": "id",
       "vendorPath": "RECORDNO"
     }]
+  },
+    "credit-memos": {
+    "vendorName": "",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "aradjustmentid"
+      }
+    ]
+  },
+  "debit-memos": {
+    "vendorName": "",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "apadjustmentid"
+      }
+    ]
+  },
+  "sales-receipts": {
+    "vendorName": "",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "OTHERRECEIPTSid"
+      }
+    ]
+  },
+  "deposits": {
+    "vendorName": "",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "RECORDNO"
+      }
+    ]
   }
 }

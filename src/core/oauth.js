@@ -46,6 +46,19 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       }, 5000);
       browser.findElement(webdriver.By.className('btn')).click();
       return browser.getCurrentUrl();
+    case 'sapborestbylaunchbi':
+    case 'sapbobylaunchbi':
+    case 'salesforcebylaunchbi':
+    case 'tableaubylaunchbi':
+    browser.get(r.body.oauthUrl);
+    browser.findElement(webdriver.By.id('username')).sendKeys(username);
+    browser.findElement(webdriver.By.id('password')).sendKeys(password);
+    browser.findElement(webdriver.By.xpath('//*[@id="loginform"]/table/tbody/tr[6]/td/input')).click();
+    browser.wait(() => browser.isElementPresent(webdriver.By.xpath('//*[@id="ui-id-2"]/table/tbody/tr[4]/td[2]/input')), 5000)
+      .thenCatch(r => true); // ignore
+    browser.findElement(webdriver.By.xpath('//*[@id="ui-id-2"]/table/tbody/tr[4]/td[2]/input'))
+      .then((element) => element.click(), (err) => {}); // ignore this
+    return browser.getCurrentUrl();
     case 'bullhorn--v1':
     case 'bullhorn--v2':
       browser.get(r.body.oauthUrl);
@@ -336,8 +349,10 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.xpath('//div[1]/input')).sendKeys(username);
       browser.findElement(webdriver.By.xpath('//div[2]/input')).sendKeys(password);
-      browser.findElement(webdriver.By.xpath('//div/button[1]')).click();
-      browser.sleep(5000);
+      browser.findElement(webdriver.By.xpath('/html/body/div[2]/div/div[1]/div[4]/form[1]/button')).click();
+      browser.sleep(2000);
+      browser.findElement(webdriver.By.name('approve')).click();
+      browser.sleep(2000);
       return browser.getCurrentUrl();
     case 'hubspotcrm':
     case 'hubspot':
