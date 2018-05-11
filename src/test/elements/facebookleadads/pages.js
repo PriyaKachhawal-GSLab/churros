@@ -21,7 +21,7 @@ suite.forElement('marketing', 'pages', null, (test) => {
         if (r.body.length <= 0) {
           return;
         } else {
-          pageId = pageId = r.body[0].id;
+          pageId = r.body[0].id;
           return cloud.withOptions({ qs: { fields: 'id,name' } }).get(`${test.api}/${pageId}`);
         }
       });
