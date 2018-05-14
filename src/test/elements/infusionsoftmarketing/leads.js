@@ -12,7 +12,7 @@ suite.forElement('marketing', 'leads', { payload: payload }, (test) => {
     .withName('should support search by filter')
     .withValidation(r => {
       expect(r).to.statusCode(200);
-      const validValues = r.body.filter(obj => obj.State = 'OpportunityTitle');
+      const validValues = r.body.filter(obj => obj.OpportunityTitle = 'Final');
       expect(validValues.length).to.equal(r.body.length);
     })
     .should.return200OnGet();
