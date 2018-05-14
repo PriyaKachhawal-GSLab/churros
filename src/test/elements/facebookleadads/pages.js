@@ -35,8 +35,8 @@ suite.forElement('marketing', 'pages', null, (test) => {
 
   it(`should allow CR for ${test.api}/${pageId}/context-cards`, () => {
     return cloud.get(test.api)
-      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 3 } }).get(`${test.api}/${pageId}/context-cards`))
-      .then(r => cloud.withOptions({ qs: { access_token: accessToken } }).post(`${test.api}/${pageId}/context-cards`,contextCard));
+      .then(r => cloud.withOptions({ qs: { access_token: accessToken } }).post(`${test.api}/${pageId}/context-cards`,contextCard))
+      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 3 } }).get(`${test.api}/${pageId}/context-cards`));
   });
 
   it(`should allow C for ${test.api}/${pageId}/thank-you-card`, () => {
@@ -46,19 +46,19 @@ suite.forElement('marketing', 'pages', null, (test) => {
 
   it(`should allow CR for ${test.api}/${pageId}/draft-forms`, () => {
     return cloud.get(test.api)
-      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 3 } }).get(`${test.api}/${pageId}/draft-forms`))
-      .then(r => cloud.withOptions({ qs: { access_token: accessToken } }).post(`${test.api}/${pageId}/draft-forms`,draftForm));
+      .then(r => cloud.withOptions({ qs: { access_token: accessToken } }).post(`${test.api}/${pageId}/draft-forms`,draftForm))
+      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 3 } }).get(`${test.api}/${pageId}/draft-forms`));
   });
 
   it(`should allow CR for ${test.api}/${pageId}/forms`, () => {
     return cloud.get(test.api)
-      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 3 } }).get(`${test.api}/${pageId}/forms`))
-      .then(r => cloud.withOptions({ qs: { access_token: accessToken } }).post(`${test.api}/${pageId}/forms`,form));
+      .then(r => cloud.withOptions({ qs: { access_token: accessToken } }).post(`${test.api}/${pageId}/forms`,form))
+      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 3 } }).get(`${test.api}/${pageId}/forms`));
   });
 
   it(`should allow CR for ${test.api}/${pageId}/legal-content`, () => {
     return cloud.get(test.api)
-      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 3 } }).get(`${test.api}/${pageId}/legal-content`))
-      .then(r => cloud.withOptions({ qs: { access_token: accessToken } }).post(`${test.api}/${pageId}/legal-content`,legalContent));
+      .then(r => cloud.withOptions({ qs: { access_token: accessToken } }).post(`${test.api}/${pageId}/legal-content`,legalContent))
+      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 3 } }).get(`${test.api}/${pageId}/legal-content`));
   });
 });
