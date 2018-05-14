@@ -486,15 +486,19 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       r.body.oauthUrl = `https://www.sandbox${r.body.oauthUrl.split('https://www')[1]}`; // jshint ignore:line
     case 'paypalv2':
       browser.get(r.body.oauthUrl);
-      waitForElement(webdriver.By.id('email'), 5000);
+      // browser.sleep(50000);
+      waitForElement(webdriver.By.id('email'), 50000);
       browser.findElement(webdriver.By.id('email')).sendKeys(username);
+      browser.findElement(webdriver.By.id('btnNext')).click();
+      browser.sleep(2000); //We need some time here to fill the password
+      waitForElement(webdriver.By.id('password'), 50000);
       browser.findElement(webdriver.By.id('password')).sendKeys(password);
-      waitForElement(webdriver.By.id('btnLogin'));
+      // waitForElement(webdriver.By.id('btnLogin'));
       browser.findElement(webdriver.By.id('btnLogin')).click();
       waitForElement(webdriver.By.id('agreeConsent')).thenCatch(r => true);
       browser.findElement(webdriver.By.id('agreeConsent'))
-        .then((element) => element.click(), (err) => {}); // ignore this
-      browser.sleep(2000); //Paypal takes some time to confirm creds
+        .then((element) => element.click(), (err) => {}, ); // ignore this
+        browser.sleep(5000); //Paypal takes some time to confirm creds
       return browser.getCurrentUrl();
     case 'quickbooks--oauth2': 
       browser.get(r.body.oauthUrl);
