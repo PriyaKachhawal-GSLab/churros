@@ -12,7 +12,6 @@ suite.forElement('marketing', 'campaigns', { payload: campaignsPayload }, (test)
     return cloud.post(test.api, campaignsPayload)
       .then(r => {
         campaignId = r.body.id;
-        campaignsPayload.id = campaignId;
       })
       .then(r => cloud.get(`${test.api}/${campaignId}`))
       .then(r => cloud.put(`${test.api}/${campaignId}`, campaignsPayload))
