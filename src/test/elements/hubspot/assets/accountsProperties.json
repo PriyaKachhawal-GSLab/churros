@@ -1,0 +1,6 @@
+{
+  "name": "hs_<<random.alphaNumeric##8>>",
+  "label": "hs <<random.word>>",
+  "groupName": "",
+  "type": "string"
+}
