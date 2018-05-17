@@ -6,12 +6,12 @@ let application = require('./assets/application');
 
 suite.forPlatform('applications', { payload: application }, (test) => {
   it(`should allow CRUD for applications`, () => {
-    var companyId
-    var applicationId
+    var companyId;
+    var applicationId;
     return cloud.get('organizations/me')
       .then(r => {
-        companyId = r.body.id
-        application.company.id = companyId
+        companyId = r.body.id;
+        application.company.id = companyId;
       })
       .then(() => cloud.post('applications', application))
       .then(r => applicationId = r.body.id)
@@ -20,9 +20,9 @@ suite.forPlatform('applications', { payload: application }, (test) => {
       .then(r => cloud.get('applications/all'))
       .then(() => cloud.delete(`applications/${applicationId}`))
       .catch(e => {
-        if (applicationId) cloud.delete(`applications/${applicationId}`)
-        throw new Error(e)
-      })
+        if (applicationId) cloud.delete(`applications/${applicationId}`);
+        throw new Error(e);
+      });
   });
 
 });
