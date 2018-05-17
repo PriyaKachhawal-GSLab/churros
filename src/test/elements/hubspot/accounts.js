@@ -45,7 +45,7 @@ suite.forElement('marketing', 'accounts', { payload: payload }, (test) => {
     .withName('should allow pagination for accounts/properties with page and nextPage')
     .should.supportNextPagePagination(2);
 
-  it('should allow CRUD for hubs/marketing/accounts/propertygroups', () => {
+  it('should allow CUDS for hubs/marketing/accounts/propertygroups', () => {
     propertygroups.name = propertygroups.name.toLowerCase();
     let id;
     const updatePropertygroups = {
