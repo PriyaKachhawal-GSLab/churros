@@ -19,7 +19,6 @@ suite.forElement('marketing', 'custom-objects', { payload: payload }, (test) => 
       .then(r => cloud.post(test.api, payload))
       .then(r => {
         id = r.body.id;
-        updatePayload.id = id;
       })
       .then(r => cloud.get(`${test.api}/${id}`))
       .then(r => cloud.put(`${test.api}/${id}`, updatePayload))
