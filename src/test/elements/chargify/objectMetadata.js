@@ -20,7 +20,7 @@ suite.forElement('payment', 'objectMetadata', (test) => {
     .withOptions({ qs: { customFieldsOnly: true } })
     .withValidation(r => {
       expect(r).to.have.statusCode(200);
-      expect(r.body.fields).to.not.be.empty;
+      expect(r.body.fields).to.be.empty;
       const customValues = r.body.fields.filter(field => field.custom && field.custom === true);
       expect(customValues).to.deep.equal(r.body.fields);
     }).should.supportValidation('GET');
