@@ -439,6 +439,15 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('okClick')).click();
       browser.sleep(2000);
       return browser.getCurrentUrl();
+  case  'smartrecruiters':
+      browser.get(r.body.oauthUrl);
+
+      browser.findElement(webdriver.By.id('email')).sendKeys(username);
+      browser.findElement(webdriver.By.id('password')).sendKeys(password);
+      browser.findElement(webdriver.By.id('sign-in-btn')).click();
+      waitForElement(webdriver.By.xpath('//*[@id="approveAccessForm"]/input[3]'));
+      browser.findElement(webdriver.By.xpath('//*[@id="approveAccessForm"]/input[3]')).click();
+      return browser.getCurrentUrl();
     case 'namely':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('user_email')).sendKeys(username);
@@ -446,6 +455,14 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.className('to-login')).click();
       browser.findElement(webdriver.By.xpath('/html/body/div[1]/div[3]/section/div/div/div/form[2]/div/button')).click();
       return browser.getCurrentUrl();
+     case 'typeform':
+        browser.get(r.body.oauthUrl);
+        browser.findElement(webdriver.By.xpath('//*[@id="___gatsby"]/div/div/div/div/div/div/div/div/div/div/div[3]/div[2]/div/input[1]')).sendKeys(username);
+        browser.findElement(webdriver.By.xpath('//*[@id="___gatsby"]/div/div/div/div/div/div/div/div/div/div/div[3]/div[2]/div/input[2]')).sendKeys(password);
+        browser.findElement(webdriver.By.xpath('//*[@id="___gatsby"]/div/div/div/div/div/div/div/div/div/div/div[3]/div[2]/div/form/button')).click();
+        waitForElement(webdriver.By.xpath('//*[@id="___gatsby"]/div/div/div/div/div/div/div/div/div/div/form/div/button[2]'));
+        browser.findElement(webdriver.By.xpath('//*[@id="___gatsby"]/div/div/div/div/div/div/div/div/div/div/form/div/button[2]')).click();
+        return browser.getCurrentUrl();
     case 'onedrivev2':
     case 'onedrive':
     case 'onenote':
@@ -496,7 +513,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then((element) => element.click(), (err) => {}); // ignore this
       browser.sleep(2000); //Paypal takes some time to confirm creds
       return browser.getCurrentUrl();
-    case 'quickbooks--oauth2': 
+    case 'quickbooks--oauth2':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.name('Email')).sendKeys(username);
       browser.findElement(webdriver.By.name('Password')).sendKeys(password);
