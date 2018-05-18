@@ -6,6 +6,7 @@ const tools = require('core/tools');
 const expect = require('chakram').expect;
 const faker = require('faker');
 const payload = require('./assets/folders');
+const quoteFolderPayload = require('./assets/quotefolders');
 const updatePayload = {
   path: `/${tools.random()}`
 };
@@ -121,7 +122,7 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
 
   it(`should allow POST /folders with quote'Andbackslash\\InFolderName`, () => {
     let path;
-    return cloud.post(`${test.api}`, payload)
+    return cloud.post(`${test.api}`, quoteFolderPayload)
       .then(r => path = r.body.path)
       .then(r => cloud.withOptions({ qs: { path: `${path}` } }).delete(`${test.api}`));
   });
