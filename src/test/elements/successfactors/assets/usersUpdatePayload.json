@@ -1,0 +1,6 @@
+  {
+
+    "firstName": "<<random.word>>",
+    "status": "T",
+    "username": "<<name.firstName>>"
+  }
