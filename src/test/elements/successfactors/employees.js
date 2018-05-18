@@ -72,7 +72,7 @@ suite.forElement('Humancapital', 'employees', { payload: employeePayload }, (tes
    //Hardcoding the value for EmployeeID field as there is no post API supported for this to later get that record
    let id;
    return cloud.get(`${test.api}/104064/addresses`)
-      .then(r => { id = r.body[0].addressType};)
+      .then(r => { id = r.body[0].addressType;})
       .then(r => cloud.withOptions( { qs: {startDate : '2013-07-06T00:00:00', expand : 'countryNav' }}).get(`${test.api}/104064/addresses/${id}`));
     });
 
@@ -89,7 +89,7 @@ suite.forElement('Humancapital', 'employees', { payload: employeePayload }, (tes
     let relationship;
     let name;
     return cloud.get(`/${test.api}/108731/emergency-contacts`)
-      .then(r =>{ id = r.body[0].personIdExternal; relationship = r.body[0].relationship;  name = r.body[0].name};)
+      .then(r =>{ id = r.body[0].personIdExternal; relationship = r.body[0].relationship;  name = r.body[0].name;})
       .then(r => cloud.withOptions( { qs: {relationship : relationship, expand : 'personNav' }}).get(`${test.api}/${id}/emergency-contacts/${name}`));
   });
 
@@ -107,7 +107,7 @@ suite.forElement('Humancapital', 'employees', { payload: employeePayload }, (tes
     let id;
     let relatedPersonIdExternal;
     return cloud.get(`${test.api}/103201/relationships`)
-      .then(r =>{ id = r.body[0].personIdExternal; relatedPersonIdExternal = r.body[0].relatedPersonIdExternal};)
+      .then(r =>{ id = r.body[0].personIdExternal; relatedPersonIdExternal = r.body[0].relatedPersonIdExternal;})
       .then(r => cloud.withOptions( { qs: {relatedPersonIdExternal : relatedPersonIdExternal, startDate : '2018-04-16T00:00:00',  expand : 'relPersonalNav'}}).get(`${test.api}/${id}/relationships/${relatedPersonIdExternal}`));
   });
 
@@ -116,7 +116,7 @@ suite.forElement('Humancapital', 'employees', { payload: employeePayload }, (tes
     let id;
     let emailType;
     return cloud.get(`${test.api}/103201/emails`)
-    .then(r =>{ id = r.body[0].personIdExternal; emailType = r.body[0].emailType};)
+    .then(r =>{ id = r.body[0].personIdExternal; emailType = r.body[0].emailType;})
     .then(r => cloud.withOptions( { qs: {expand : 'emailTypeNav'}}).get(`${test.api}/${id}/emails/${emailType}`));
   });
 });
