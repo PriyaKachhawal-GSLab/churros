@@ -6,7 +6,7 @@ const expect = chakram.expect;
 
 suite.forElement('humancapital', 'users', {}, (test) => {
 
-  test.should.supportS();
+  test.should.supportSr();
   test.should.supportPagination(1);
   test.withOptions({ qs: { where: `updatedAfter = '2018-02-26T12:50:02.594+0000' ` } })
     .withName('should support Ceql updatedAfter search')
