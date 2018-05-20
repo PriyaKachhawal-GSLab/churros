@@ -1,4 +1,4 @@
 {
-    "firstName": "<<random.word>>",
-    "lastName": "<<random.word>>"
+    "firstName": "<<name.firstName>>",
+    "lastName": "<<name.lastName>>"
 }

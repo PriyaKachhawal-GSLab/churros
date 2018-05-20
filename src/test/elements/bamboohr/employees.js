@@ -6,8 +6,8 @@ const categoriesPayload = tools.requirePayload(`${__dirname}/assets/categories.j
 const attachmentUpdatePayload = tools.requirePayload(`${__dirname}/assets/updateAttachment.json`);
 
 suite.forElement('humancapital', 'employees', { payload: payload }, (test) => {
-    let empId;
-    let categoryId;
+    
+    let empId, categoryId;
     before(() => {
         return cloud.get('employees')
             .then(r => empId = r.body[0].id)

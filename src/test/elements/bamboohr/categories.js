@@ -5,6 +5,7 @@ const attachmentUpdatePayload = tools.requirePayload(`${__dirname}/assets/update
 const categoriesPost = tools.requirePayload(`${__dirname}/assets/categories.json`);
 
 suite.forElement('humancapital', 'categories', { payload: categoriesPost }, (test) => {
+
     let categoryId;
     before(() => {
         return cloud.get(test.api)
