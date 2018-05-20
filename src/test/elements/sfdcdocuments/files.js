@@ -10,15 +10,29 @@ const commentPayload = tools.requirePayload(`${__dirname}/assets/comment.json`);
 
 
 suite.forElement('documents', 'files', null, (test) => {
-  let jpgFileBody,
-  jpgFile = __dirname + '/assets/Penguins.jpg';
+  let jpgFileBody,revisionId,jpgFile = __dirname + '/assets/Penguins.jpg';
   let query = { path: `/Penguins-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` };
 
-  before(() => cloud.withOptions({ qs: query }).postFile(test.api, jpgFile)
+  before(() => cloud.withOptions({ qs: query , overwrite: true }).postFile(test.api, jpgFile)
   .then(r => jpgFileBody = r.body));
 
   after(() => cloud.delete(`${test.api}/${jpgFileBody.id}`));
-  
+
+  it('it should allow RS for documents/files/:id/revisions', () => {
+          return cloud.get(`${test.api}/${jpgFileBody.id}/revisions`)
+          .then(r => {
+            revisionId = r.body[0].id;
+            expect(r.body[0]).to.have.property('fileId');
+            expect(r.body[0]).to.have.property('filePath');
+          })
+          .then(() => cloud.get(`${test.api}/${jpgFileBody.id}/revisions/${revisionId}`));
+      });
+
+      it('it should allow RS for documents/files/revisions by path', () => {
+          return cloud.withOptions({ qs: {path : `${jpgFileBody.path}`} }).get(`${test.api}/revisions`)
+          .then(() => cloud.withOptions({ qs: {path : `${jpgFileBody.path}`} }).get(`${test.api}/revisions/${revisionId}`));
+      });
+
   it('should allow ping for sfdcdocuments', () => {
     return cloud.get(`/hubs/documents/ping`);
   });
@@ -56,12 +70,12 @@ suite.forElement('documents', 'files', null, (test) => {
       .then(r => cloud.patch(`${test.api}/${fileId}/metadata`, upload))
       .then(r => cloud.delete(`${test.api}/${fileId}`));
   });
-  
-  
-  
+
+
+
   it(`should allow CRDS for ${test.api}/:id/comments`, () => cloud.crds(`${test.api}/${jpgFileBody.feedId}/comments`, commentPayload));
-  
-  
+
+
   it(`should allow paginating for ${test.api}/:id/comments`, () => {
     let commentId1, commentId2, nextPage;
     return cloud.post(`${test.api}/${jpgFileBody.feedId}/comments`, commentPayload)
@@ -88,7 +102,7 @@ suite.forElement('documents', 'files', null, (test) => {
       .then(r => cloud.delete(`${test.api}/${jpgFileBody.feedId}/comments/${commentId1}`))
       .then(r => cloud.delete(`${test.api}/${jpgFileBody.feedId}/comments/${commentId2}`));
   });
-  
+
   it(`should allow paginating for ${test.api}/comments by path`, () => {
     let commentId1, commentId2, nextPage;
     return cloud.withOptions({ qs: { path: jpgFileBody.path } }).post(`${test.api}/comments`, commentPayload)
@@ -117,7 +131,7 @@ suite.forElement('documents', 'files', null, (test) => {
   });
 
   it(`should allow CRDS for ${test.api}/comments by path`, () => cloud.withOptions({ qs: { path: jpgFileBody.path } }).crds(`${test.api}/comments`,commentPayload));
-  
+
   it(`should handle raw parameter for ${test.api}/comments`, () => {
     let commentId;
     return cloud.post(`${test.api}/${jpgFileBody.feedId}/comments`, commentPayload)

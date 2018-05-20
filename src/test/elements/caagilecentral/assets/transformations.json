@@ -1,0 +1,29 @@
+{
+  "defects": {
+    "vendorName": "defects",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "ObjectID"
+      }
+    ]
+  },
+  "userStory": {
+    "vendorName": "userStory",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "ObjectID"
+      }
+    ]
+  },
+  "projects": {
+    "vendorName": "projects",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "ObjectID"
+      }
+    ]
+  }
+}

@@ -13,6 +13,8 @@ const recipient = require('./assets/envelopes.recipient.json');
 const tab = require('./assets/recipients.tab.json');
 const documents = require('./assets/envelopes.documents.json');
 const patchDocument = require('./assets/envelopes.patchDocument.json');
+const documentsNew = require('./assets/envelopes.documentsNew.json');
+const patchDocumentNew = require('./assets/envelopes.patchDocumentNew.json');
 
 suite.forElement('esignature', 'envelopes', (test) => {
   it(`should support CRU on ${test.api}`, () => {
@@ -27,7 +29,7 @@ suite.forElement('esignature', 'envelopes', (test) => {
       .then(r => cloud.get(`${test.api}/${envelopeId}/custom_fields`));
   });
 
-  it(`should support C on ${test.api}, SRU ${test.api}/:id/documents`, () => {
+  it(`should support C on ${test.api}, SRUD ${test.api}/:id/documents`, () => {
     let envelopeId = "-1";
     let path = __dirname + '/assets/MrRobotPdf.pdf';
     let documentPath = __dirname + '/assets/Test.pdf';
@@ -35,6 +37,8 @@ suite.forElement('esignature', 'envelopes', (test) => {
     let documentId;
     const putDocuments = { formData: { document: JSON.stringify(documents), file: fs.createReadStream(documentPath) } };
     const patchDocuments = { formData: { document: JSON.stringify(patchDocument), file: fs.createReadStream(documentPath) } };
+	const putDocumentsNew = { formData: { document: JSON.stringify(documentsNew), file: fs.createReadStream(documentPath) } };
+    const patchDocumentsNew = { formData: { document: JSON.stringify(patchDocumentNew), file: fs.createReadStream(documentPath) } };
 
     return cloud.withOptions(opts).postFile(test.api, path)
       .then(r => envelopeId = r.body.envelopeId)
@@ -42,11 +46,16 @@ suite.forElement('esignature', 'envelopes', (test) => {
         (r) => expect(r).to.have.schemaAnd200(documentsSchema)))
       .then(r => cloud.withOptions(putDocuments).put(`${test.api}/${envelopeId}/documents`, undefined,
         (r) => expect(r).to.have.schemaAnd200(documentsSchema)))
+	  .then(r => cloud.withOptions(putDocumentsNew).put(`${test.api}/${envelopeId}/documents`, undefined,
+        (r) => expect(r).to.have.schemaAnd200(documentsSchema)))
       .then(r => cloud.get(`${test.api}/${envelopeId}/documents`))
       .then(r => documentId = r.body[0].documentId)
       .then(r => cloud.withOptions(patchDocuments).patch(`${test.api}/${envelopeId}/documents/${documentId}`, undefined,
         (r) => expect(r).to.have.schemaAnd200(documentsSchema)))
-      .then(r => cloud.get(`${test.api}/${envelopeId}/documents/${documentId}`));
+      .then(r => cloud.withOptions(patchDocumentsNew).patch(`${test.api}/${envelopeId}/documents/${documentId}`, undefined,
+        (r) => expect(r).to.have.schemaAnd200(documentsSchema)))
+      .then(r => cloud.get(`${test.api}/${envelopeId}/documents/${documentId}`)
+      .then(r => cloud.delete(`${test.api}/${envelopeId}/documents/${documentId}`)));
   });
 
   it(`should support Ceql search on ${test.api} and S on ${test.api}/:id/documents/certificates`, () => {

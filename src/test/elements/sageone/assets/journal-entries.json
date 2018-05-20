@@ -3,13 +3,13 @@
   "reference": "JOURNAL001",
   "description": "A journal description",
   "journal_lines": [{
-      "ledger_account_id": "f9a54bed2f5a11e795ab0ed51759bcc7",
+      "ledger_account_id": "f0b70559479211e8a8f11281a7acf536",
       "details": "Line 1",
       "debit": 50,
       "credit": 0
     },
     {
-      "ledger_account_id": "f9a54bed2f5a11e795ab0ed51759bcc7",
+      "ledger_account_id": "f0b70559479211e8a8f11281a7acf536",
       "details": "Line 2",
       "debit": 0,
       "credit": 50

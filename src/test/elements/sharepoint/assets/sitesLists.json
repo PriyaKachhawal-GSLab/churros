@@ -1,0 +1,10 @@
+{
+  "__metadata": {
+    "type": "SP.List"
+  },
+  "AllowContentTypes": true,
+  "BaseTemplate": 100,
+  "ContentTypesEnabled": true,
+  "Description": "<<random.word>>",
+  "Title": "<<random.word>>"
+}

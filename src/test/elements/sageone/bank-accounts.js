@@ -1,11 +1,16 @@
 'use strict';
 
+const chakram = require('chakram');
 const suite = require('core/suite');
 const expect = require('chakram').expect;
+const tools = require('core/tools');
 
-suite.forElement('finance', 'bank-accounts', (test) => {
+
+const payload = tools.requirePayload(`${__dirname}/assets/bankAccount.json`);
+
+suite.forElement('finance', 'bank-accounts', { payload: payload },(test) => {
   let date = '2017-05-05';
-  test.should.supportSr();
+  test.should.supportCruds(chakram.put);
   test.should.supportPagination();
   test
    .withName(`should support searching ${test.api} by lastModifiedDate`)

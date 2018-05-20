@@ -1,4 +1,13 @@
 {
+  "accounts": {
+    "vendorName": "Account",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "id"
+      }
+    ]
+  },
   "contacts": {
     "vendorName": "Contact",
     "fields": [{

@@ -4,15 +4,31 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
-suite.forElement('crm', 'objects', (test) => {
-    const validateAccountType = (fields) => {
-        let isPicklist = false;
-        fields.forEach(field => isPicklist = (field.vendorPath === 'accountType' && field.vendorNativeType === 'picklist' && expect(field).to.contain.key('picklistValues')));
-        return isPicklist;
-    };
+var objects = [
+  "Account",
+  "Task",
+  "Invoice",
+  "Opportunity",
+  "ClientPortalUser",
+  "Resource",
+  "Product",
+  "BillingItem",
+  "Contact",
+  "SalesOrder"
+];
 
-    it('should include picklist for account metadata', () => {
-        return cloud.get(test.api + '/Account/metadata')
-            .then(r => validateAccountType(r.body.fields));
-    });
+suite.forElement('crm', '/objects', (test) => {
+    return Promise.all(objects.map(obj => {
+        it(`should support GET /objects/${obj}/metadata`, () => {
+             return cloud.get(`${test.api}/${obj}/metadata`)
+             // we can guarantee that every object has fields ... which holds custom = false
+            .then(r => expect(r.body.fields.filter(field => (field.custom === false))).to.not.be.empty);
+        });
+
+        it(`should support GET /objects/${obj}/metadata customFieldsOnly parameter`, () => {
+             return cloud.withOptions({qs:{customFieldsOnly: true}}).get(`${test.api}/${obj}/metadata`)
+             // we cannot guarantee that every object has custom fields ... so here i am checking reverese condition
+             .then(r => expect(r.body.fields.filter(field => (field.custom === false))).to.be.empty);
+        });
+    }));
 });

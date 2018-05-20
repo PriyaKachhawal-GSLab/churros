@@ -11,6 +11,11 @@ const purchaseCreditPayload = build({ reference: "PCN" + tools.randomInt() });
 
 suite.forElement('finance', 'purchase-credit-notes', { payload: purchaseCreditPayload }, (test) => {
   let code, id;
+
+  before(() => {
+    return cloud.get(`/hubs/finance/contacts`)
+      .then(r => purchaseCreditPayload.contact_id = r.body[0].id);
+  });
   test.should.supportCrus(chakram.put);
   test.should.supportPagination();
   it(`should support GET ${test.api}`, () => {

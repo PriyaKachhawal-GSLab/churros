@@ -14,6 +14,35 @@ const pathUpdate = () => ({
 suite.forElement('documents', 'files', (test) => {
   let query = { path: `/churros/CloudElements-${tools.random()}.png` };
   let path = __dirname + '/assets/CE_logo.png';
+  let jpgFileBody,revisionId;
+
+  before(() => cloud.withOptions({ qs : { path: `/brady-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg`, overwrite: true } }).postFile(test.api, path)
+  .then(r => {
+    jpgFileBody = r.body;
+  }));
+
+  after(() => cloud.delete(`${test.api}/${jpgFileBody.id}`));
+
+  it('it should allow RS for documents/files/:id/revisions', () => {
+      return cloud.get(`${test.api}/${jpgFileBody.id}/revisions`)
+      .then(r => {
+        revisionId = r.body[0].id;
+        expect(r.body[0]).to.have.property('fileId');
+        expect(r.body[0]).to.have.property('filePath');
+      })
+      .then(() => cloud.get(`${test.api}/${jpgFileBody.id}/revisions/${revisionId}`));
+  });
+
+  it('it should allow RS for documents/files/revisions by path', () => {
+      return cloud.withOptions({ qs: {path : `${jpgFileBody.path}`} }).get(`${test.api}/revisions`)
+      .then(r => {
+        revisionId = r.body[0].id;
+        expect(r.body[0]).to.have.property('fileId');
+        expect(r.body[0]).to.have.property('filePath');
+      })
+      .then(() => cloud.withOptions({ qs: {path : `${jpgFileBody.path}`} }).get(`${test.api}/revisions/${revisionId}`));
+  });
+
 
   it('should allow CRUD cycle by id', () => {
     let fileId = -1;

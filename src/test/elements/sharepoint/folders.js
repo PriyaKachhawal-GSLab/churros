@@ -7,6 +7,9 @@ const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/folders.json`);
 
 suite.forElement('documents', 'folders', { payload: payload }, (test) => {
+
+  test.withApi(`${test.api}/contents`).withOptions({qs: {path :'/'}}).should.supportNextPagePagination(1);
+  
   it('should allow CRD for hubs/documents/folders and GET for hubs/documents/folders/metadata by path', () => {
     let srcPath;
     return cloud.post(test.api, payload)

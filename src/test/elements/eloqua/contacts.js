@@ -33,10 +33,11 @@ suite.forElement('marketing', 'contacts', { payload: payload }, (test) => {
     }
   }).should.return200OnGet();
 
-  it('should allow GET hubs/marketing/contacts/{contactId}/activities', () => {
+  it('should allow GET hubs/marketing/contacts/{contactId}/activities and GET hubs/marketing/contacts/{contactId}/membership', () => {
     let contactId;
     return cloud.get(test.api)
       .then(r => contactId = r.body[0].id)
+      .then(r => cloud.get(`${test.api}/${contactId}/membership`))
       .then(r => cloud.withOptions({ qs: { where: `startAt='1417556990' AND endAt='1447567663' AND type='emailOpen'` } }).get(`${test.api}/${contactId}/activities`))
       .then(r => cloud.withOptions({ qs: { where: `startAt='1417556990' AND endAt='1447567663' AND type='emailOpen'`, page: 1, pageSize: 1 } }).get(`${test.api}/${contactId}/activities`));
   });

@@ -206,6 +206,15 @@
       }
     ]
   },
+  "cash-sales": {
+    "vendorName": "CashSale",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "internalId"
+      }
+    ]
+  },
   "employees": {
     "vendorName": "Employee",
     "fields": [
@@ -532,6 +541,15 @@
   },
   "custom-records": {
     "vendorName": "CustomRecord",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "internalId"
+      }
+    ]
+  },
+  "phone-calls": {
+    "vendorName": "PhoneCall",
     "fields": [
       {
         "path": "id",

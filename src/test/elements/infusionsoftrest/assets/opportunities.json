@@ -1,0 +1,12 @@
+{
+	"contact": {
+        "id": 32
+    },
+    "stage": {
+        "id": 18,
+        "name": "New Opportunity",
+        "details": null,
+        "reasons": []
+    },
+	"opportunity_title": "<<random.word>>"
+}

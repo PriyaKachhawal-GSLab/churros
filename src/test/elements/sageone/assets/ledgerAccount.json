@@ -1,0 +1,12 @@
+{
+  
+    "ledger_account_type_id": "OVERHEADS",
+   
+    "included_in_chart": true,
+    "name": "ce<<random.alphaNumeric##6>>",
+    "display_name": "ce<<random.alphaNumeric##6>>",
+    "nominal_code": "<<random.number>>",
+    "visible_in_sales": true,
+    "visible_in_other_receipts": true
+  
+}

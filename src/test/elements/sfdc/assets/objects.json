@@ -1,0 +1,57 @@
+{
+  "churrosTestNestedObject": {
+    "fields": [{
+      "type": "string",
+      "path": "phone"
+    }],
+    "level": "organization"
+  },
+  "churrosTestObject": {
+    "fields": [{
+        "type": "string",
+        "path": "id"
+      },
+      {
+        "type": "string",
+        "path": "email"
+      },
+      {
+        "type": "string",
+        "path": "firstName"
+      },
+      {
+        "type": "churrosTestNestedObject",
+        "path": "nestedObject"
+      }
+    ],
+    "level": "organization"
+  },
+  "churrosTestObjectXform": {
+    "level": "organization",
+    "vendorName": "Contact",
+    "fields": [{
+        "path": "id",
+        "vendorPath": "Id",
+        "level": "organization"
+      },
+      {
+        "path": "email",
+        "vendorPath": "Email",
+        "level": "organization"
+      },
+      {
+        "path": "nestedObject.phone",
+        "vendorPath": "Phone",
+        "level": "organization"
+      }
+    ],
+    "configuration": [{
+      "type": "passThrough",
+      "properties": {
+        "fromVendor": false,
+        "toVendor": false
+      }
+    }],
+    "isLegacy": false
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number"
+    },
+    "description": {
+      "type": "string"
+    },
+    "objectName": {
+      "type": "string"
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+          "$ref": "#/definitions/field"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "objectName",
+    "fields"
+  ],
+  "definitions": {
+    "field": {
+        "type": "object",
+        "properties": {
+            "id": {
+              "type": "number"
+            },
+            "path": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "level": {
+              "enum": [ "organization", "account", "instance", "system" ]
+            },
+            "displayName": {
+              "type": "string"
+            }
+        },
+        "required": [
+          "id",
+          "path",
+          "type",
+          "level"
+        ]
+    }
+  }
+}

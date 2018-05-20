@@ -1,0 +1,9 @@
+{
+	"title": "<<random.word>>",
+	"body": "This is custom thank you page",
+	"button_type": "VIEW_WEBSITE",
+	"button_text": "View this website",
+	"website_url": "www.google.com",
+	"business_phone_number": "+1-541-754-3010",
+	"country_code": "US"
+}

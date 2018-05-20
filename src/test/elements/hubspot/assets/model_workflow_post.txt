@@ -1,0 +1,105 @@
+{
+  "actions": [
+    {
+      "acceptActions": [
+        {
+          "newValue": "rest",
+          "propertyName": "churros",
+          "actionId": 89,
+          "errors": [
+            "appcon8vly5jvvyrphk20ozuxr"
+          ],
+          "stepId": 89,
+          "type": "string"
+        }
+      ],
+      "errors": "appcon89kf1gm2p8wqj1370hpvi",
+      "anchorSetting": {
+        "boundary": "ON",
+        "execTimeOfDay": "12:00 PM"
+      },
+      "delayMillis": 0,
+      "filters": [
+        [
+          {
+            "afterTimestamp": 0,
+            "beforeTimestamp": 0,
+            "checkPastVersions": true,
+            "computed_property": "xf",
+            "filterFamily": "sd",
+            "firstOccurrenceAfterTimestamp": 0,
+            "firstOccurrenceBeforeTimestamp": 0,
+            "form": "drty",
+            "lastOccurrenceAfterTimestamp": 0,
+            "lastOccurrenceBeforeTimestamp": 0,
+            "list": 0,
+            "maxOccurrences": "er3",
+            "minOccurrences": "23",
+            "operator": "sub",
+            "property": "multi",
+            "type": "sdr",
+            "value": "xfr",
+            "withinTimeMode": "yes"
+          }
+        ]
+      ],
+      "filtersListHbaseId": 89,
+      "filtersListId": 89,
+      "info": "appconooqrbg3j1vui2oab57b9",
+      "operator": "appcon1hmquq1rr75rxwcr0y66r",
+      "rejectActions": [
+        {
+          "actionId": 89,
+          "errors": [
+            "appconvrtdptalm79pwyojemi"
+          ],
+          "newValue": "appcon7wfx1z2824wmiktn8kt9",
+          "propertyName": "appcon5kj0u8g1i89pvzfwp14i",
+          "stepId": 89,
+          "type": "appconplk6cwmk43lyw2v8wipb9"
+        }
+      ],
+        "stepId": 89,
+      "type": "DELAY",
+       "warnings": "appcondd2wf8jvyqbs4zz4obt9"
+    },
+    {
+      "newValue": "HubSpot",
+      "propertyName": "company",
+      "rejectActions": [
+        {
+          "newValue": "ert",
+          "propertyName": "sdr",
+          "type": "zd"
+        }
+      ],
+      "type": "SET_CONTACT_PROPERTY"
+    }
+  ],
+  "allowContactToTriggerMultipleTimes": false,
+  "canEnrollFromSalesforce": true,
+  "enabled": true,
+  "eventAnchor": {
+    "contactPropertyAnchor": "strinjghfg",
+    "staticDateAnchor": "10/09/2100"
+  },
+    "goalCriteria": [
+        {
+        }
+    ],
+  "name": "Test Workflow",
+  
+  "onlyExecOnBizDays": false,
+    "segmentCriteria": [
+        {
+        }
+    ],
+  "suppressionSetting": [
+    "tyu"
+  ],
+  "type": "STATIC_ANCHOR",
+  "unenrollmentSetting": {
+    "excludedWorkflows": [],
+    "type": "NONE"
+  }
+}

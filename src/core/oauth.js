@@ -16,6 +16,13 @@ const manipulateDom = (element, browser, r, username, password, config) => {
   };
   waitForElement = waitForElement.bind(browser);
   switch (element) {
+    case 'acuityscheduling':
+      browser.get(r.body.oauthUrl);
+      browser.findElement(webdriver.By.id('username')).sendKeys(username);
+      browser.findElement(webdriver.By.id('password')).sendKeys(password);
+      browser.manage().window().maximize(); //for maximizing the window size.
+      browser.findElement(webdriver.By.name('access')).click();
+      return browser.getCurrentUrl();
     case 'adobe-esign':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.name('j_username')).sendKeys(username);
@@ -39,6 +46,19 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       }, 5000);
       browser.findElement(webdriver.By.className('btn')).click();
       return browser.getCurrentUrl();
+    case 'sapborestbylaunchbi':
+    case 'sapbobylaunchbi':
+    case 'salesforcebylaunchbi':
+    case 'tableaubylaunchbi':
+    browser.get(r.body.oauthUrl);
+    browser.findElement(webdriver.By.id('username')).sendKeys(username);
+    browser.findElement(webdriver.By.id('password')).sendKeys(password);
+    browser.findElement(webdriver.By.xpath('//*[@id="loginform"]/table/tbody/tr[6]/td/input')).click();
+    browser.wait(() => browser.isElementPresent(webdriver.By.xpath('//*[@id="ui-id-2"]/table/tbody/tr[4]/td[2]/input')), 5000)
+      .thenCatch(r => true); // ignore
+    browser.findElement(webdriver.By.xpath('//*[@id="ui-id-2"]/table/tbody/tr[4]/td[2]/input'))
+      .then((element) => element.click(), (err) => {}); // ignore this
+    return browser.getCurrentUrl();
     case 'bullhorn--v1':
     case 'bullhorn--v2':
       browser.get(r.body.oauthUrl);
@@ -329,8 +349,10 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.xpath('//div[1]/input')).sendKeys(username);
       browser.findElement(webdriver.By.xpath('//div[2]/input')).sendKeys(password);
-      browser.findElement(webdriver.By.xpath('//div/button[1]')).click();
-      browser.sleep(5000);
+      browser.findElement(webdriver.By.xpath('/html/body/div[2]/div/div[1]/div[4]/form[1]/button')).click();
+      browser.sleep(2000);
+      browser.findElement(webdriver.By.name('approve')).click();
+      browser.sleep(2000);
       return browser.getCurrentUrl();
     case 'hubspotcrm':
     case 'hubspot':
@@ -370,6 +392,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
           .thenCatch(r => browser.getCurrentUrl());
       }, 7000);
     case 'infusionsoftecommerce':
+    case 'infusionsoftrest':
     case 'infusionsoftcrm':
     case 'infusionsoftmarketing':
       browser.get(r.body.oauthUrl);
@@ -472,6 +495,20 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('agreeConsent'))
         .then((element) => element.click(), (err) => {}); // ignore this
       browser.sleep(2000); //Paypal takes some time to confirm creds
+      return browser.getCurrentUrl();
+    case 'quickbooks--oauth2': 
+      browser.get(r.body.oauthUrl);
+      browser.findElement(webdriver.By.name('Email')).sendKeys(username);
+      browser.findElement(webdriver.By.name('Password')).sendKeys(password);
+      browser.findElement(webdriver.By.id('ius-sign-in-submit-btn')).click();
+      browser.wait(() => browser.isElementPresent(webdriver.By.name('companySelectionWidgetCompanySelector_href')), 10000)
+        .thenCatch(r => true);
+      browser.findElement(webdriver.By.name('companySelectionWidgetCompanySelector_href'))
+        .then((element) => element.click(), (err) => {}); // ignore this
+      browser.wait(() => browser.isElementPresent(webdriver.By.id('authorizeBtn')), 5000)
+        .thenCatch(r => true);
+      browser.findElement(webdriver.By.className('btn ha-button ha-button-primary pull-right')).click();
+      browser.sleep(5000); // So flaky, quickbooks' 302 takes forever
       return browser.getCurrentUrl();
     case 'quickbooks':
       browser.get(r.body.oauthUrl);
