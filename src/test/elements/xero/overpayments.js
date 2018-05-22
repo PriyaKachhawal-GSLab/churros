@@ -34,7 +34,7 @@ suite.forElement('finance', 'overpayments', (test) => {
         .then(() => cloud.get(`${test.api}/${overpaymentId}`))
         .then(r => expect(r.body.Type).to.equal('SPEND-OVERPAYMENT'))
         .then(() => cloud.get(test.api))
-        .then(r => expect(r.body[0]).to.have.property('Type'))
+        .then(r => expect(r.body[0]).to.have.property('Type'));
     });
 
     it('should support POST /overpayments/:id/allocations', () => {
@@ -43,6 +43,6 @@ suite.forElement('finance', 'overpayments', (test) => {
         .then(() => cloud.post('/invoices', invoicePayload))
         .then(r => allocationOverpayment.Invoice.InvoiceID = r.body.id)
         .then(() =>cloud.post(`${test.api}/${overpaymentId}/allocations`, allocationOverpayment))
-        .then(r => expect(r.body).to.have.property('Overpayment'))
+        .then(r => expect(r.body).to.have.property('Overpayment'));
     });
 });
