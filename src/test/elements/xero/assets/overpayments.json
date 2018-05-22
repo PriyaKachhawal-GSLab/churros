@@ -1,0 +1,16 @@
+{
+  "Type": "SPEND-OVERPAYMENT",
+  "Contact": {
+    "Name": "<<name.firstName>>"
+  },
+  "LineAmountTypes": "NoTax",
+  "LineItems": [
+    {
+      "Description": "Forgot to cancel auto-renewal payment",
+      "LineAmount": "5000.00"
+    }
+  ],
+  "BankAccount": {
+    "AccountID": ""
+  }
+}
