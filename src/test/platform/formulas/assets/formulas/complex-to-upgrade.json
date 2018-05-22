@@ -86,6 +86,7 @@
           "retry": "false",
           "elementInstanceId": "${trigger_instance}",
           "method": "GET",
+          "path": " ",
           "query": "${steps.setup_page_parameters}"
         }
       },
@@ -123,6 +124,7 @@
           "path": "${looper}",
           "retry": "false",
           "elementInstanceId": "${config.trigger_instance}",
+          "query": "",
           "method": "GET"
         }
       },
