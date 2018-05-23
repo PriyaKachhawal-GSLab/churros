@@ -1,5 +1,609 @@
-[
-  {
-    "id": "49688"
-  }
-]
+{
+    "isMemberAllowedReEntry": "false",
+    "clrEndDate": "1625980463",
+    "description": "Do Not Delete this Campaign",
+    "isEmailMarketingCampaign": "true",
+    "campaignCategory": "contact",
+    "budgetedCost": "10052.232",
+    "permissions": [
+        "Retrieve",
+        "Delete",
+        "Update",
+        "Activate"
+    ],
+    "fieldValues": [
+        {
+            "id": "4",
+            "type": "FieldValue",
+            "value": "hi",
+            "name": "yay_field"
+        }
+    ],
+    "crmId": "0",
+    "actualCost": "0.00",
+    "product": "",
+    "campaignType": "",
+    "currentStatus": "Draft",
+    "isSyncedWithCRM": "true",
+    "endAt": "1565330399",
+    "isIncludedInROI": "false",
+    "folderId": "308",
+    "elements": [
+        {
+            "withinLast": "604800",
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-41",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignEmail",
+                    "connectedId": "-93",
+                    "terminalType": "no"
+                },
+                {
+                    "id": "-40",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignWaitAction",
+                    "connectedId": "-94",
+                    "terminalType": "yes"
+                }
+            ],
+            "name": "Clicked Email?",
+            "emailId": "1119",
+            "numberOfClicks": "1",
+            "id": "-92",
+            "position": {
+                "x": "224",
+                "y": "171",
+                "type": "Position"
+            },
+            "evaluateNoAfter": "0",
+            "type": "CampaignEmailClickthroughRule"
+        },
+        {
+            "isAllowingSentToMasterExclude": "true",
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-39",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignEmailClickthroughRule",
+                    "connectedId": "-92",
+                    "terminalType": "out"
+                }
+            ],
+            "emailId": "1119",
+            "sendTimeLength": "2",
+            "isAllowingSentToUnsubscribe": "true",
+            "type": "CampaignEmail",
+            "includeListUnsubscribeHeader": "false",
+            "sendTimePeriod": "sendEmailsOverANumberOfHours",
+            "schedule": {
+                "elements": [
+                    {
+                        "duration": "86340",
+                        "relativeStart": "172800",
+                        "type": "ScheduleElement"
+                    }
+                ],
+                "type": "Schedule",
+                "displayTimeZoneId": "67"
+            },
+            "sendingSignatureUserId": "11",
+            "name": "Email",
+            "id": "-93",
+            "position": {
+                "x": "63",
+                "y": "230",
+                "type": "Position"
+            },
+            "isAllowingResend": "true"
+        },
+        {
+            "isNotificationEnabled": "True",
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-42",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignWebsiteVisitRule",
+                    "connectedId": "-109",
+                    "terminalType": "out"
+                }
+            ],
+            "name": "Wait",
+            "waitUntil": "1526619600",
+            "id": "-94",
+            "position": {
+                "x": "475",
+                "y": "317",
+                "type": "Position"
+            },
+            "type": "CampaignWaitAction",
+            "displayTimeZoneId": "77"
+        },
+        {
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-43",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignEmail",
+                    "connectedId": "-93",
+                    "terminalType": "out"
+                }
+            ],
+            "segmentId": "19",
+            "name": "Segment Members",
+            "isRecurring": "true",
+            "id": "-95",
+            "position": {
+                "x": "32",
+                "y": "0",
+                "type": "Position"
+            },
+            "type": "CampaignSegment",
+            "isFinished": "false",
+            "reEvaluationFrequency": "3600"
+        },
+        {
+            "formId": "18",
+            "memberCount": "0",
+            "name": "Form (reporting only)",
+            "id": "-96",
+            "position": {
+                "x": "111",
+                "y": "518",
+                "type": "Position"
+            },
+            "type": "CampaignForm"
+        },
+        {
+            "memberCount": "0",
+            "name": "Landing Page (reporting only)",
+            "id": "-97",
+            "position": {
+                "x": "52",
+                "y": "412",
+                "type": "Position"
+            },
+            "landingPageId": "697",
+            "type": "CampaignLandingPage"
+        },
+        {
+            "condition": {
+                "type": "TextValueCondition",
+                "value": "e",
+                "operator": "equal"
+            },
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-44",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignCustomObjectFieldComparisonRule",
+                    "connectedId": "-99",
+                    "terminalType": "yes"
+                },
+                {
+                    "id": "-45",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignAddToCampaignAction",
+                    "connectedId": "-100",
+                    "terminalType": "no"
+                }
+            ],
+            "name": "Compare Contact Fields",
+            "id": "-98",
+            "position": {
+                "x": "426",
+                "y": "565",
+                "type": "Position"
+            },
+            "evaluateNoAfter": "86400",
+            "type": "CampaignContactFieldComparisonRule",
+            "fieldId": "100007"
+        },
+        {
+            "customObjectId": "9",
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-46",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignEmailSentRule",
+                    "connectedId": "-101",
+                    "terminalType": "yes"
+                },
+                {
+                    "id": "-47",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignEmailOpenedRule",
+                    "connectedId": "-102",
+                    "terminalType": "no"
+                }
+            ],
+            "name": "Compare Custom Object Fields",
+            "fieldCondition": {
+                "condition": {
+                    "type": "TextValueCondition",
+                    "value": "5",
+                    "operator": "contains"
+                },
+                "type": "FieldCondition",
+                "fieldId": "100"
+            },
+            "id": "-99",
+            "position": {
+                "x": "449",
+                "y": "762",
+                "type": "Position"
+            },
+            "evaluateNoAfter": "0",
+            "type": "CampaignCustomObjectFieldComparisonRule"
+        },
+        {
+            "campaignId": "402",
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-48",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignCustomObjectFieldComparisonRule",
+                    "connectedId": "-99",
+                    "terminalType": "out"
+                }
+            ],
+            "name": "Add to Campaign",
+            "id": "-100",
+            "position": {
+                "x": "53",
+                "y": "646",
+                "type": "Position"
+            },
+            "type": "CampaignAddToCampaignAction",
+            "campaignElementId": "61"
+        },
+        {
+            "memberCount": "50",
+            "outputTerminals": [
+                {
+                    "id": "-49",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignRemoveFromContactListAction",
+                    "connectedId": "-105",
+                    "terminalType": "no"
+                },
+                {
+                    "id": "-50",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignMoveToContactListAction",
+                    "connectedId": "-106",
+                    "terminalType": "yes"
+                }
+            ],
+            "name": "Sent Email?",
+            "emailId": "847",
+            "id": "-101",
+            "position": {
+                "x": "475",
+                "y": "953",
+                "type": "Position"
+            },
+            "evaluateNoAfter": "0",
+            "type": "CampaignEmailSentRule"
+        },
+        {
+            "numberOfOpens": "1",
+            "withinLast": "604800",
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-51",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CanvasMoveToProgramAction",
+                    "connectedId": "-103",
+                    "terminalType": "no"
+                },
+                {
+                    "id": "-52",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CanvasAddToProgramAction",
+                    "connectedId": "-104",
+                    "terminalType": "yes"
+                }
+            ],
+            "name": "Opened Email?",
+            "emailId": "56",
+            "id": "-102",
+            "position": {
+                "x": "131",
+                "y": "962",
+                "type": "Position"
+            },
+            "evaluateNoAfter": "0",
+            "type": "CampaignEmailOpenedRule"
+        },
+        {
+            "memberCount": "0",
+            "name": "Move to Program",
+            "programElementId": "115",
+            "id": "-103",
+            "position": {
+                "x": "65",
+                "y": "1191",
+                "type": "Position"
+            },
+            "type": "CanvasMoveToProgramAction",
+            "programId": "1"
+        },
+        {
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-53",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignMoveToCampaignAction",
+                    "connectedId": "-108",
+                    "terminalType": "out"
+                }
+            ],
+            "name": "Add to Program",
+            "programElementId": "115",
+            "id": "-104",
+            "position": {
+                "x": "278",
+                "y": "1277",
+                "type": "Position"
+            },
+            "type": "CanvasAddToProgramAction",
+            "programId": "1"
+        },
+        {
+            "listId": "67",
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-54",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignMoveToProgramBuilderAction",
+                    "connectedId": "-107",
+                    "terminalType": "out"
+                }
+            ],
+            "name": "Remove from Shared List",
+            "id": "-105",
+            "position": {
+                "x": "391",
+                "y": "1154",
+                "type": "Position"
+            },
+            "type": "CampaignRemoveFromContactListAction"
+        },
+        {
+            "listId": "67",
+            "memberCount": "0",
+            "name": "Move to Shared List",
+            "id": "-106",
+            "position": {
+                "x": "701",
+                "y": "1176",
+                "type": "Position"
+            },
+            "type": "CampaignMoveToContactListAction"
+        },
+        {
+            "programStepId": "154",
+            "memberCount": "0",
+            "name": "Move to Program Builder",
+            "id": "-107",
+            "position": {
+                "x": "476",
+                "y": "1392",
+                "type": "Position"
+            },
+            "type": "CampaignMoveToProgramBuilderAction",
+            "programId": "22"
+        },
+        {
+            "campaignId": "402",
+            "memberCount": "0",
+            "name": "Move to Campaign",
+            "id": "-108",
+            "position": {
+                "x": "267",
+                "y": "1573",
+                "type": "Position"
+            },
+            "type": "CampaignMoveToCampaignAction",
+            "campaignElementId": "61"
+        },
+        {
+            "numberOfVisits": "1",
+            "withinLast": "604800",
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-55",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignContactFieldComparisonRule",
+                    "connectedId": "-98",
+                    "terminalType": "no"
+                },
+                {
+                    "id": "-56",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignSubmitFormRule",
+                    "connectedId": "-110",
+                    "terminalType": "yes"
+                }
+            ],
+            "name": "Visited Website?",
+            "id": "-109",
+            "position": {
+                "x": "638",
+                "y": "381",
+                "type": "Position"
+            },
+            "evaluateNoAfter": "604800",
+            "type": "CampaignWebsiteVisitRule"
+        },
+        {
+            "formId": "18",
+            "withinLast": "604800",
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-57",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignContactFilterMembershipRule",
+                    "connectedId": "-111",
+                    "terminalType": "yes"
+                }
+            ],
+            "name": "Submitted Form?",
+            "id": "-110",
+            "position": {
+                "x": "746",
+                "y": "557",
+                "type": "Position"
+            },
+            "evaluateNoAfter": "777600",
+            "type": "CampaignSubmitFormRule"
+        },
+        {
+            "filterId": "4",
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-58",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignContactListMembershipRule",
+                    "connectedId": "-112",
+                    "terminalType": "no"
+                },
+                {
+                    "id": "-59",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignDateComparisonRule",
+                    "connectedId": "-113",
+                    "terminalType": "yes"
+                }
+            ],
+            "name": "Shared Filter Member?",
+            "id": "-111",
+            "position": {
+                "x": "847",
+                "y": "760",
+                "type": "Position"
+            },
+            "evaluateNoAfter": "172800",
+            "type": "CampaignContactFilterMembershipRule"
+        },
+        {
+            "listId": "22",
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-60",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignMoveToContactListAction",
+                    "connectedId": "-106",
+                    "terminalType": "no"
+                }
+            ],
+            "name": "Shared List Member?",
+            "id": "-112",
+            "position": {
+                "x": "641",
+                "y": "931",
+                "type": "Position"
+            },
+            "evaluateNoAfter": "0",
+            "type": "CampaignContactListMembershipRule"
+        },
+        {
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-61",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CanvasRunUpdateRuleSet",
+                    "connectedId": "-114",
+                    "terminalType": "yes"
+                }
+            ],
+            "name": "Compare Date",
+            "Parameter": {
+                "Operator": "OnBefore",
+                "DisplayTimeZoneId": "67",
+                "From": "1525932000",
+                "IsNegated": "True"
+            },
+            "id": "-113",
+            "position": {
+                "x": "845",
+                "y": "970",
+                "type": "Position"
+            },
+            "type": "CampaignDateComparisonRule"
+        },
+        {
+            "updateRuleSetId": "74",
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-161",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignAddToContactListAction",
+                    "connectedId": "-220",
+                    "terminalType": "out"
+                }
+            ],
+            "name": "Update Rules",
+            "id": "-114",
+            "position": {
+                "x": "889",
+                "y": "1125",
+                "type": "Position"
+            },
+            "type": "CanvasRunUpdateRuleSet"
+        },
+        {
+            "listId": "65",
+            "memberCount": "0",
+            "outputTerminals": [
+                {
+                    "id": "-162",
+                    "type": "CampaignOutputTerminal",
+                    "connectedType": "CampaignAddToProgramBuilderAction",
+                    "connectedId": "-221",
+                    "terminalType": "out"
+                }
+            ],
+            "name": "Add to Shared List",
+            "id": "-220",
+            "position": {
+                "x": "861",
+                "y": "1358",
+                "type": "Position"
+            },
+            "type": "CampaignAddToContactListAction"
+        },
+        {
+            "programStepId": "125",
+            "memberCount": "0",
+            "name": "Add to Program Builder",
+            "id": "-221",
+            "position": {
+                "x": "728",
+                "y": "1506",
+                "type": "Position"
+            },
+            "type": "CampaignAddToProgramBuilderAction",
+            "programId": "19"
+        }
+    ],
+    "name": "hello_testing_updated",
+    "region": "CO"
+}
