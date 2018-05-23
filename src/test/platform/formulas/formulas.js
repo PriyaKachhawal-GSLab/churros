@@ -75,7 +75,7 @@ suite.forPlatform('formulas', opts, (test) => {
       .then(r => validateResults(formulaId, r, fullResponse));
   });
 
-    it('should allow adding and removing "scheduled" trigger to a formula', () => {
+  it('should allow adding and removing "scheduled" trigger to a formula', () => {
     const f = common.genFormula({});
     const t = common.genTrigger({});
 
@@ -260,10 +260,24 @@ suite.forPlatform('formulas', opts, (test) => {
 
       const get = formula.steps.filter(s => s.name === 'get_contacts')[0];
       expect(get.properties.elementInstanceId).to.equal('${config.trigger_instance}');
+      expect(get.properties.path).to.satisfy(function(value) {
+        if (value === undefined || value === '') {
+          return true;
+        } else {
+          return false;
+        }
+      });
 
       const retrieve = formula.steps.filter(s => s.name === 'retrieve_contact')[0];
       expect(retrieve.properties.api).to.equal('/hubs/crm/contacts/${steps.looper.entry}');
-      expect(retrieve.properties.path).to.equal(undefined);
+      expect(retrieve.properties.path).to.be.undefined;
+      expect(retrieve.properties.query).to.satisfy(function(value) {
+        if (value === undefined || value === '') {
+          return true;
+        } else {
+          return false;
+        }
+      });
     };
 
     const validatorRollback = (formula) => {
@@ -384,8 +398,10 @@ suite.forPlatform('formulas', opts, (test) => {
 
     let formulaId;
     return cloud.post(test.api, f, schema)
-      .then(r => { expect(r.body.debugLoggingEnabled).to.equal(true);
-        formulaId = r.body.id; })
+      .then(r => {
+        expect(r.body.debugLoggingEnabled).to.equal(true);
+        formulaId = r.body.id;
+      })
       .then(r => cloud.patch(`${test.api}/${formulaId}`, patchBody))
       .then(r => expect(r.body.debugLoggingEnabled).to.equal(false))
       .then(r => cloud.delete(`${test.api}/${formulaId}`))
@@ -404,8 +420,10 @@ suite.forPlatform('formulas', opts, (test) => {
 
     let formulaId;
     return cloud.post(test.api, f, schema)
-      .then(r => { expect(r.body.debugLoggingEnabled).to.equal(true);
-        formulaId = r.body.id; })
+      .then(r => {
+        expect(r.body.debugLoggingEnabled).to.equal(true);
+        formulaId = r.body.id;
+      })
       .then(r => cloud.patch(`${test.api}/${formulaId}`, patchBody, (r) => {
         expect(r).to.have.statusCode(400);
         expect(r.body.message).to.contain('Execution debug logging can be disabled only for formula engine v3');
