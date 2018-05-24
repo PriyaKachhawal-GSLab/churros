@@ -1,0 +1,7 @@
+{
+    "name": "scriptStep123",
+    "type": "script",
+    "properties": {
+      "body":"done();"
+    }
+}
