@@ -496,7 +496,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then((element) => element.click(), (err) => {}); // ignore this
       browser.sleep(2000); //Paypal takes some time to confirm creds
       return browser.getCurrentUrl();
-    case 'quickbooks--oauth2': 
+    case 'quickbooks--oauth2':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.name('Email')).sendKeys(username);
       browser.findElement(webdriver.By.name('Password')).sendKeys(password);
@@ -628,6 +628,14 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.className('primary'))
         .then((element) => element.click(), (err) => {});
       return browser.getCurrentUrl();
+    case  'smartrecruiters':
+       browser.get(r.body.oauthUrl);
+       browser.findElement(webdriver.By.id('email')).sendKeys(username);
+       browser.findElement(webdriver.By.id('password')).sendKeys(password);
+       browser.findElement(webdriver.By.id('sign-in-btn')).click();
+       waitForElement(webdriver.By.xpath('//*[@id="approveAccessForm"]/input[3]'));
+       browser.findElement(webdriver.By.xpath('//*[@id="approveAccessForm"]/input[3]')).click();
+       return browser.getCurrentUrl();
     case 'microsoftgraph':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('i0116')).sendKeys(username);
