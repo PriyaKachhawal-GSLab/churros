@@ -7,7 +7,6 @@ const tools = require('core/tools');
 const payload = tools.requirePayload(`${__dirname}/assets/messages.json`);
 const updatePayload = tools.requirePayload(`${__dirname}/assets/updateMessages.json`);
 const updateMultiple = tools.requirePayload(`${__dirname}/assets/updateMultipleMessages.json`);
-const deleteMultiple = tools.requirePayload(`${__dirname}/assets/deleteMultipleMessages.json`);
 
 suite.forElement('general', 'messages', { payload: payload }, (test) => {
   let messageId;
@@ -32,7 +31,7 @@ suite.forElement('general', 'messages', { payload: payload }, (test) => {
       .then(r => cloud.post(`${test.api}/${messageId}/trash`))
       .then(r => cloud.post(`${test.api}/${messageId}/untrash`))
       .then(r => cloud.delete(`${test.api}/${messageId}`))
-      return cloud.withOptions(opts).postFile(`${test.api}/import`, path)
+      .then(r => cloud.withOptions(opts).postFile(`${test.api}/import`, path))
       .then(r => messageId = r.body.id)
       .then(r => {
         updateMultiple.ids[0] = messageId;
