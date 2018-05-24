@@ -64,13 +64,13 @@ suite.forPlatform('formulas', { name: 'formula steps', schema: schema }, (test) 
     return cloud.post(test.api, validStatusCodeJson)
       .then(r => {
         validFormulaId = r.body.id;
-        firstStep = R.head(r.body.steps)
+        firstStep = R.head(r.body.steps);
         firstStepId = firstStep.id;
       })
       .then(r => cloud.post(`${test.api}/${validFormulaId}/steps`, scriptStep))
       .then(r => {
           secondStepId = r.body.id;
-          secondStepName = r.body.name
+          secondStepName = r.body.name;
         })
       .then(r => cloud.put(`${test.api}/${validFormulaId}/steps/${firstStepId}`, R.assoc('onSuccess', [secondStepName], firstStep)))
       .then(r => cloud.delete(`formulas/${validFormulaId}/steps/${secondStepId}`))
