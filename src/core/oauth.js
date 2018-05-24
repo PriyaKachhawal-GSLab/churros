@@ -306,6 +306,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then((element) => element.click(), (err) => {}); // ignore this
       browser.sleep(2000);
       return browser.getCurrentUrl();
+    case 'gmail':
     case 'googlesuite':
     case 'googlesheets':
     case 'googledrive':
