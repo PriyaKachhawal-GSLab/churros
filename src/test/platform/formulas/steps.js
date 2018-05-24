@@ -54,25 +54,6 @@ suite.forPlatform('formulas', { name: 'formula steps', schema: schema }, (test) 
       });
   });
 
-    /* make sure step properties are being validated properly when adding a step to an existing formula */
-  it('should allow deletion and recreation of a formula step of the same name on a success hook', () => {
-    const validator = (r) => {
-      expect(r).to.have.statusCode(400);
-      expect(r.body.message).to.contain('retryAttempts');
-      return r;
-    };
-
-    let formulaId;
-    return cloud.post(test.api, common.genFormula({}))
-      .then(r => formulaId = r.body.id)
-      .then(r => cloud.post(`${test.api}/${formulaId}/steps`, invalidJson.steps[0], validator))
-      .then(r => cloud.delete(`${test.api}/${formulaId}`))
-      .catch(e => {
-        if (formulaId) cloud.delete(`${test.api}/${formulaId}`);
-        throw new Error(e);
-      });
-  });
-
   it('should fully delete step associations to avoid conflicts', () => {
     let validFormulaId, firstStepId, firstStep, secondStepId, secondStepName;
     const validator = r => {
