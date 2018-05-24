@@ -80,10 +80,6 @@ suite.forPlatform('formulas', { name: 'formula steps', schema: schema }, (test) 
 
    it('can delete a step that isnt in a success/failure hook', () => {
     let validFormulaId, secondStepId;
-    const validator = r => {
-      const step = R.head(r.body.steps.filter(step => step.name === `${R.head(validStatusCodeJson.steps).name}`));
-      expect(step.onSuccess).to.have.length(0);
-    };
 
     return cloud.post(test.api, validStatusCodeJson)
       .then(r => {
