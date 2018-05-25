@@ -13,6 +13,4 @@ suite.forElement('messaging', 'messages', { payload: payload }, (test) => {
       .then(() => tools.sleep(10))		//takes some time for Mailjet to process the POST request
       .then(r => cloud.get(`${test.api}/${messageId}`));
   });
-  test.should.supportS();
-  test.should.supportPagination();
 });
