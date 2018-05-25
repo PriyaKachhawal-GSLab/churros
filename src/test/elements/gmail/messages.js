@@ -36,12 +36,7 @@ suite.forElement('general', 'messages', { payload: payload }, (test) => {
       .then(r => {
         updateMultiple.ids[0] = messageId;
         })
-      .then(r => cloud.patch(`${test.api}/multiple`, updateMultiple))
-      /*.then(r => {
-        deleteMultiple.ids[0] = messageId;
-      })
-      .then(r => cloud.delete(`${test.api}/multiple`, deleteMultiple))*/
-      ;
+      .then(r => cloud.patch(`${test.api}/multiple`, updateMultiple));
   });
   test.withApi(test.api).should.supportNextPagePagination(1);
 });
