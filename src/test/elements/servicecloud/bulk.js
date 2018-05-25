@@ -20,7 +20,7 @@ suite.forElement('helpdesk', 'bulk', null, (test) => {
       // get bulk upload status
       .then(r => tools.wait.upTo(30000).for(() => cloud.get(`/hubs/helpdesk/bulk/${bulkId}/status`, r => {
         expect(r.body.status).to.equal('COMPLETED');
-        expect(r.body.recordsCount).to.equal(1);
+        expect(r.body.recordsCount).to.equal(2);
         expect(r.body.recordsFailedCount).to.equal(0);
       })))
       // get bulk upload errors
