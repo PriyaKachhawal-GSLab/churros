@@ -19,10 +19,10 @@ suite.forElement('general', 'messages', { payload: payload }, (test) => {
       return cloud.withOptions(opts).postFile(test.api, path)
       .then(r => messageId = r.body.id)
       .then(r => cloud.withOptions({ qs: { where:`q=\'subject:${subject}\'`  } }).get(`${test.api}`))
-	    .then(r => {
-			 expect(r).to.statusCode(200);
-			 expect(r.body.length).to.be.equal(1);
-	    })
+      .then(r => {
+			  expect(r).to.statusCode(200);
+			  expect(r.body.length).to.be.equal(1);
+      })
       .then(r => cloud.get(test.api))
       .then(r => cloud.get(`${test.api}/${messageId}`))
       .then(r => attachmentId = r.body.payload.parts[1].body.attachmentId)
