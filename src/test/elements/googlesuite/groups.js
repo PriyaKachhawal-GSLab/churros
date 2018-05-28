@@ -4,6 +4,7 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const payload = tools.requirePayload(`${__dirname}/assets/groups.json`);
+const patchPayload = tools.requirePayload(`${__dirname}/assets/groupsUpdate.json`);
 const contactPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
 
 suite.forElement('general', 'groups', { payload: payload }, (test) => {
@@ -22,11 +23,14 @@ suite.forElement('general', 'groups', { payload: payload }, (test) => {
   return cloud.get(test.api)
    .then(r => cloud.post(test.api, payload))
    .then(r => {
-	       groupId=r.body.id;
-	       payload.etag=r.body.etag;
+	       groupId = r.body.id;
               })
    .then(r => cloud.get(`${test.api}/${groupId}`))
-   .then(r => cloud.patch(`${test.api}/${groupId}`, payload))
+   .then(r => {
+         patchPayload["etag"] = r.body.etag;
+         patchPayload["name"] = r.body.name;
+              })
+   .then(r => cloud.patch(`${test.api}/${groupId}`, patchPayload))
    .then(r => cloud.patch(`${test.api}/${groupId}/contacts`, groupContactsPayload))
    .then(r => cloud.post(`${test.api}/${groupId}/contacts/${contactId}`, null))
    .then(r => cloud.delete(`${test.api}/${groupId}/contacts/${contactId}`, null))
