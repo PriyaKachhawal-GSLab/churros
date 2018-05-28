@@ -20,7 +20,7 @@ suite.forElement('marketing', 'leads', { payload: payload }, (test) => {
       .then(r => cloud.get(`${test.api}/${id}`))
       .then(r => cloud.patch(`${test.api}/${id}`, updatedPayload))
       .then(r => cloud.withOptions({ qs: { where: `id in ( ${id} )` } }).get(test.api))
-      .then(r => expect(r.body).to.have.lengthOf(1))
+      .then(r => expect(r.body).to.have.lengthOf(1) && expect(r.body[0].person.id).to.equal(id))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
 
