@@ -27,8 +27,8 @@ suite.forElement('general', 'groups', { payload: payload }, (test) => {
               })
    .then(r => cloud.get(`${test.api}/${groupId}`))
    .then(r => {
-         patchPayload["etag"] = r.body.etag;
-         patchPayload["name"] = r.body.name;
+         patchPayload.etag = r.body.etag;
+         patchPayload.name = r.body.name;
               })
    .then(r => cloud.patch(`${test.api}/${groupId}`, patchPayload))
    .then(r => cloud.patch(`${test.api}/${groupId}/contacts`, groupContactsPayload))
