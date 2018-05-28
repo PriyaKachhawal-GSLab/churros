@@ -1,6 +1,8 @@
 'use strict';
 
 const suite = require('core/suite');
+const chakram = require('chakram');
+const expect = chakram.expect;
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const payload = tools.requirePayload(`${__dirname}/assets/leads.json`);
@@ -18,6 +20,7 @@ suite.forElement('marketing', 'leads', { payload: payload }, (test) => {
       .then(r => cloud.get(`${test.api}/${id}`))
       .then(r => cloud.patch(`${test.api}/${id}`, updatedPayload))
       .then(r => cloud.withOptions({ qs: { where: `id in ( ${id} )` } }).get(test.api))
+      .then(r => expect(r.body).to.have.lengthOf(1))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
 
