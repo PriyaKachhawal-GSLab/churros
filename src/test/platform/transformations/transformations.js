@@ -353,6 +353,15 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       .then(r => cloud.delete(`/common-resources/${noFields.name}`).catch(r => {}));
   });
 
+  // todo - make this work with payloads with fields
+  // it('should support upserting a transformation with multi-level fields', () => {
+  //   return cloud.put('/common-resources', noFields)
+  //     .then(r => cloud.post(`/instances/${sfdcId}/transformations/${noFields.name}`, {vendorName: "Lead"}))
+  //     .then(r => cloud.put('/transformations', noFieldV2Payload))
+  //     .then(r => cloud.delete(`/instances/${sfdcId}/transformations/${noFields.name}`))
+  //     .then(r => cloud.delete(`/common-resources/${noFields.name}`).catch(r => {}));
+  // });
+
   it.skip('should support renaming object defintions and transformations at the org level', ()=> {
     let objectName = 'churros-object-' + tools.random();
     let newObjectName = 'churros-renamed-' + tools.random();
