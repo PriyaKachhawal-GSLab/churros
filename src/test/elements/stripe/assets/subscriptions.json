@@ -1,0 +1,16 @@
+{
+  " billing": "charge_automatically",
+  "customer": "cus_CxJBOeifhp5V2f",
+  "items": [
+    {
+      "plan": "plan_ChEvY5ZTAjB2mv",
+      "quantity": 1
+    }
+  ],
+  "metadata": {
+    "key": "asqqw"
+  },
+  "prorate": true,
+  "source": {},
+  "tax_percent": 10
+}

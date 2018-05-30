@@ -97,5 +97,14 @@
         "vendorPath": "id"
       }
     ]
+  },
+  "subscriptions": {
+    "vendorName": "subscriptions",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "id"
+      }
+    ]
   }
 }
