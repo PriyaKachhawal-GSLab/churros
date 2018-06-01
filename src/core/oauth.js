@@ -449,6 +449,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
     case 'onedrivev2':
     case 'onedrive':
     case 'onenote':
+    case 'outlookemail':
       browser.get(r.body.oauthUrl);
       waitForElement(webdriver.By.id('i0116'));
       browser.findElement(webdriver.By.id('i0116')).sendKeys(username);
