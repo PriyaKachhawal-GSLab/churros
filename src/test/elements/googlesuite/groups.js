@@ -10,33 +10,32 @@ const contactPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`)
 suite.forElement('general', 'groups', { payload: payload }, (test) => {
 
   let contactId;
-  const groupContactsPayload={
-	            "resourceNamesToAdd":[
-		     ]};
+  const groupContactsPayload = {
+    "resourceNamesToAdd": [
+    ]
+  };
   before(() => cloud.post('/hubs/general/contacts', contactPayload)
-	.then(r => contactId = r.body.id)
-	.then(r => groupContactsPayload.resourceNamesToAdd.push(contactId)));
- 
+    .then(r => contactId = r.body.id)
+    .then(r => groupContactsPayload.resourceNamesToAdd.push(contactId)));
+
 
   let groupId;
   it('should test CRUDS of  /groups', () => {
-  return cloud.get(test.api)
-   .then(r => cloud.post(test.api, payload))
-   .then(r => {
-	       groupId = r.body.id;
-              })
-   .then(r => cloud.get(`${test.api}/${groupId}`))
-   .then(r => {
-         patchPayload.etag = r.body.etag;
-         patchPayload.name = r.body.name;
-              })
-   .then(r => cloud.patch(`${test.api}/${groupId}`, patchPayload))
-   .then(r => cloud.patch(`${test.api}/${groupId}/contacts`, groupContactsPayload))
-   .then(r => cloud.post(`${test.api}/${groupId}/contacts/${contactId}`, null))
-   .then(r => cloud.delete(`${test.api}/${groupId}/contacts/${contactId}`, null))
-   .then(r => cloud.delete(`${test.api}/${groupId}`));
+    return cloud.get(test.api)
+      .then(r => cloud.post(test.api, payload))
+      .then(r => groupId = r.body.id)
+      .then(r => cloud.get(`${test.api}/${groupId}`))
+      .then(r => {
+        patchPayload.etag = r.body.etag;
+        patchPayload.name = r.body.name;
+      })
+      .then(r => cloud.patch(`${test.api}/${groupId}`, patchPayload))
+      .then(r => cloud.patch(`${test.api}/${groupId}/contacts`, groupContactsPayload))
+      .then(r => cloud.post(`${test.api}/${groupId}/contacts/${contactId}`, null))
+      .then(r => cloud.delete(`${test.api}/${groupId}/contacts/${contactId}`, null))
+      .then(r => cloud.delete(`${test.api}/${groupId}`));
   });
- 
+
   after(() => cloud.delete(`/hubs/general/contacts/${contactId}`));
 
   test.should.supportNextPagePagination(1);
