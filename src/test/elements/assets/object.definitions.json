@@ -3021,11 +3021,7 @@
       }
     ]
   },
-<<<<<<< HEAD
   "business-partners": {
-=======
-  "applications": {
->>>>>>> master
     "fields": [
       {
         "path": "idTransformed",
@@ -3036,10 +3032,21 @@
         "type": "string"
       }
     ]
-<<<<<<< HEAD
-  }  
-=======
   },
+  "applications": {
+    
+        "fields": [
+          {
+            "path": "idTransformed",
+            "type": "string"
+          },
+          {
+            "path": "id",
+            "type": "string"
+          }
+        ]
+    
+      }  ,
   "user-accounts": {
     "fields": [
       {
@@ -3052,5 +3059,4 @@
       }
     ]
   }
->>>>>>> master
 }
