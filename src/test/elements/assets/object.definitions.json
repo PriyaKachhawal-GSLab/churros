@@ -3033,7 +3033,7 @@
       }
     ]
   },
-  "user-Accounts": {
+  "user-accounts": {
     "fields": [
       {
         "path": "idTransformed",

@@ -1,6 +1,6 @@
 {
-  "user-Accounts": {
-    "vendorName": "user-Accounts",
+  "user-accounts": {
+    "vendorName": "user-accounts",
     "fields": [{
       "path": "id",
       "vendorPath": "userId"

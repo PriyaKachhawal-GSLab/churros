@@ -10,10 +10,8 @@ const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
 suite.forElement('Humancapital', 'employees', { payload: employeePayload }, (test) => {
-  let userId;
-  let employeeId;
-  let managerId;
-  before((done) => cloud.post('user-Accounts', payload)
+  let userId, employeeId, managerId;
+  before((done) => cloud.post('user-accounts', payload)
     .then(r => {
       userId = r.body.id;
       employeePayload.userId = userId;
@@ -61,10 +59,10 @@ suite.forElement('Humancapital', 'employees', { payload: employeePayload }, (tes
       });
   });
 
-  it(`should support CS for ${test.api}/{id}/personal`, () => {
-    return cloud.post(`${test.api}/${employeeId}/personal`, personalPayload)
-      .then(r => cloud.get(`${test.api}/${employeeId}/personal`))
-      .then(r => cloud.withOptions({qs: {page: 1, pageSize: 1}}).get(`${test.api}/${employeeId}/personal`));
+  it(`should support CS for ${test.api}/{id}/personal-details`, () => {
+    return cloud.post(`${test.api}/${employeeId}/personal-details`, personalPayload)
+      .then(r => cloud.get(`${test.api}/${employeeId}/personal-details`))
+      .then(r => cloud.withOptions({qs: {page: 1, pageSize: 1}}).get(`${test.api}/${employeeId}/personal-details`));
   });
 
   it(`should support SR for ${test.api}/{id}/addresses`, () => {
@@ -85,18 +83,15 @@ suite.forElement('Humancapital', 'employees', { payload: employeePayload }, (tes
   it(`should support SR for ${test.api}/{id}/emergency-contacts`, () => {
   //The endpoint supports different date format than what is returned in GET response. So startDate is hardcoded here
   //Hardcoding the value for EmployeeID field as there is no post API supported for this to later get that record
-    let id;
-    let relationship;
-    let name;
-    return cloud.get(`/${test.api}/108731/emergency-contacts`)
+    let id, relationship, name;
+    return cloud.get(`${test.api}/108731/emergency-contacts`)
       .then(r =>{ id = r.body[0].personIdExternal; relationship = r.body[0].relationship;  name = r.body[0].name;})
       .then(r => cloud.withOptions( { qs: {relationship : relationship, expand : 'personNav' }}).get(`${test.api}/${id}/emergency-contacts/${name}`));
   });
 
   it(`should support SR for ${test.api}/{id}/phones`, () => {
   //Hardcoding the value for EmployeeID field as there is no post API supported for this to later get that record 
-    let id;
-    let phoneType;
+    let id, phoneType;
     return cloud.get(`${test.api}/108731/phones`)
       .then(r =>{ id = r.body[0].personIdExternal; phoneType = r.body[0].phoneType;})
       .then(r => cloud.withOptions( { qs: {phoneType : phoneType}}).get(`${test.api}/${id}/phones/${phoneType}`));
@@ -113,8 +108,7 @@ suite.forElement('Humancapital', 'employees', { payload: employeePayload }, (tes
 
   it(`should support SR for ${test.api}/{id}/emails`, () => {
   //Hardcoding the value for EmployeeID field as there is no post API supported for this to later get that record
-    let id;
-    let emailType;
+    let id, emailType;
     return cloud.get(`${test.api}/103201/emails`)
     .then(r =>{ id = r.body[0].personIdExternal; emailType = r.body[0].emailType;})
     .then(r => cloud.withOptions( { qs: {expand : 'emailTypeNav'}}).get(`${test.api}/${id}/emails/${emailType}`));
