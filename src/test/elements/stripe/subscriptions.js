@@ -4,6 +4,7 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const customer = require('./assets/customers');
+const payload = require('./assets/subscriptions');
 
 const createSubscription = (planId) => ({
   "plan": "gold"
@@ -19,11 +20,18 @@ const plan = () => ({
   "id": tools.random()
 });
 
-suite.forElement('payment', 'subscriptions', (test) => {
+suite.forElement('payment', 'subscriptions', { payload: payload }, (test) => {
   let customerId, planId;
 
+  const opts = {
+    churros: {
+      updatePayload: {
+        quantity: 2
+      }
+    }
+  };
   test.should.supportNextPagePagination(2);
-  test.should.supportSr();
+  test.withOptions(opts).should.supportCruds();
 
   before(() => cloud.post(`/hubs/payment/customers`, customer)
     .then(r => customerId = r.body.id)

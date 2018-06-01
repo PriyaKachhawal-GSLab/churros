@@ -12,18 +12,14 @@
     "name": "Jenny Rosen"
   },
   "currency": "usd",
-  "items": [{
+  "items": [
+    {
       "parent": "sku_8UEPIi3s4MWMsa",
       "amount": 1000,
       "quantity": 1,
       "description": "hoverboard",
       "currency": "usd",
       "type": "sku"
-    },
-    {
-      "amount": 0,
-      "description": "Taxes (included)",
-      "currency": "usd"
     }
   ],
   "email": "jenny@ros.en"
