@@ -404,19 +404,13 @@ const itBulkDownload = (name, hub, metadata, options, opts, endpoint) => {
 
 const itBulkDownloadBasic = (name, hub, metadata, options, opts, endpoint) => {
   const n = name || `should support bulk download with options`;
-  let bulkId, bulkResults, jsonMeta, csvMeta;
+  let bulkId, jsonMeta, csvMeta;
   // gets metadata ready for testing csv and json responses
-  const getJson = opts ? opts.json : false;
   jsonMeta = JSON.parse(JSON.stringify(metadata));
   metadata ? metadata.headers ? jsonMeta.headers.accept = "application/json" : jsonMeta.headers = { accept: "application/json" } : jsonMeta = { headers: { accept: "application/json" } };
-  const getCsv = opts ? opts.csv : false;
   csvMeta = JSON.parse(JSON.stringify(metadata));
   metadata ? metadata.headers ? csvMeta.headers.accept = "text/csv" : csvMeta.headers = { accept: "text/csv" } : csvMeta = { headers: { accept: "text/csv" } };
-  const element = opts ? opts.element : null;
   metadata = tools.updateMetadata(metadata);
-  // gets integer limit from ceql query
-  const limit = tools.getLimit(metadata);
-  const fields = tools.getFieldsFromTransformation(element || argv.element, endpoint);
   boomGoesTheDynamite(n, () => {
     // start the bulk download
     return cloud.withOptions(metadata).post(`/hubs/${hub}/bulk/query`)
@@ -431,32 +425,7 @@ const itBulkDownloadBasic = (name, hub, metadata, options, opts, endpoint) => {
       })))
       .then(r => {
         expect(r.body.recordsFailedCount).to.equal(0);
-        // expect(r.body.recordsCount).to.equal(bulkResults.length);
-      })
-      // get bulk query results in JSON
-      .then(r => getJson ? cloud.withOptions(jsonMeta)
-        .get(`/hubs/${hub}/bulk/${bulkId}/${endpoint}`, r => {
-          if (fields !== null) {
-            let bulkDownloadResults = tools.getFieldsMap(tools.getJson(r.body), fields);
-            // expect(bulkDownloadResults).to.deep.equal(tools.getFieldsMap(bulkResults, fields));
-          } else {
-            let bulkDownloadResults = tools.getKey(tools.getJson(r.body), 'id');
-            // expect(bulkDownloadResults).to.deep.equal(tools.getKey(bulkResults, 'id'));
-          }
-        }) : Promise.resolve(null))
-      // get bulk query results in CSV
-      .then(r => getCsv ? cloud.withOptions(csvMeta)
-        .get(`/hubs/${hub}/bulk/${bulkId}/${endpoint}`, r => {
-          if (typeof r.body === 'string') {
-            if (fields !== null) {
-              let bulkDownloadResults = tools.getFieldsMap(tools.csvParse(r.body), fields);
-              // expect(bulkDownloadResults).to.deep.equal(tools.getFieldsMap(bulkResults, fields));
-            } else {
-              let bulkDownloadResults = tools.getKey(tools.csvParse(r.body), 'id');
-              // expect(bulkDownloadResults).to.deep.equal(tools.getKey(bulkResults, 'id'));
-            }
-          }
-        }) : Promise.resolve(null));
+      });
   }, options ? options.skip : false);
 };
 
@@ -574,7 +543,13 @@ const runTests = (api, payload, validationCb, tests, hub) => {
      * @memberof module:core/suite.test.should
      */
     supportBulkDownload: (metadata, opts, object) => itBulkDownload(name, hub, metadata, options, opts, object),
-
+    /**
+     * Downloads bulk with options and verifies it completes and that none fail. Does not validate accuracy of bulk
+     * @param {object} metadata -> headers, query string etc...
+     * @param {object} opts -> To test json and csv. If null it will test endpoints default. EXAMPLE "{json: true, csv: true}"
+     * @param {string} object -> object we are calling: contacts, accounts, etc..
+     * @memberof module:core/suite.test.should
+     */
     supportBulkDownloadBasic: (metadata, opts, object) => itBulkDownloadBasic(name, hub, metadata, options, opts, object),
     /**
      * Uploads bulk with options to specific object and verifies it completes and that none fail. Deletes records after completion

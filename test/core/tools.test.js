@@ -90,6 +90,22 @@ describe('tools', () => {
 
   it('should support sleeping for x seconds', () => tools.sleep(1));
 
+  it('should support waiting until a specific time for a succesful predicate', () => {
+    let i = 0;
+    const pred = () => new Promise((res, rej) => ++i > 2 ? res(true) : rej());
+    return tools.wait.until(10000, 2000).for(pred)
+      .then(r => expect(r).to.equal(true));
+  });
+
+  it('should support waiting until a specific time for an unsuccesful predicate', () => {
+    const pred = () => new Promise((res, rej) => rej());
+    return tools.wait.until(10000, 5000).for(pred)
+      .then(r => {
+        throw Error('Failed');
+      })
+      .catch(e => true);
+  });
+
   it('should support waiting a specific time for a succesful predicate', () => {
     let i = 0;
     const pred = () => new Promise((res, rej) => ++i > 2 ? res(true) : rej());

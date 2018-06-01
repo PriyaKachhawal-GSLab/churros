@@ -136,9 +136,18 @@ exports.wait = {
      */
     for: waitFor(max)
   }),
-  /** TODO docs
-  */
+  /**
+   * Waits until a particular `interval` to start waiting for a Promise to resolve until the `max`
+   * @param {number} max The max number of seconds to wait
+   * @param {number} interval The number of seconds to wait until starting and cadence
+   * @namespace until
+   * @memberof module:core/tools.wait
+   */
   until: (max, interval) => ({
+    /**
+     * Waits until a particular `interval` to start waiting for a Promise to resolve until the `max`
+     * @memberof module:core/tools.wait.waitUntil
+     */
     for: waitUntil(max, interval)
   }),
   /**
