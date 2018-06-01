@@ -87,6 +87,8 @@ exports.sleep = secs => {
   sleep.sleep(secs);
 };
 
+
+
 const waitFor = max => pred => new Promise((res, rej) => {
   const doit = (ms) => {
     return pred()
@@ -99,6 +101,20 @@ const waitFor = max => pred => new Promise((res, rej) => {
         setTimeout(doit, 3000, ms - 3000); });
   };
   doit(max);
+});
+
+const waitUntil = (max, interval) => pred => new Promise((res, rej) => {
+  const doit = (ms) => {
+    return pred()
+      .then(r => res(r))
+      .then(r => res(r))
+      .catch(e => {
+        if (ms - interval < 0) {
+          return rej(e || `Predicate was not true within the maximum time allowed of ${max} ms.`);
+        }
+        setTimeout(doit, interval, ms - interval); });
+  };
+  setTimeout(doit, interval, max - interval);
 });
 
 /**
@@ -119,6 +135,11 @@ exports.wait = {
      * @memberof module:core/tools.wait.upTo
      */
     for: waitFor(max)
+  }),
+  /** TODO docs
+  */
+  until: (max, interval) => ({
+    for: waitUntil(max, interval)
   }),
   /**
    * Waits up to 15 seconds for a Promise to resolve
