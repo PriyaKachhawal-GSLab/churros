@@ -14,7 +14,7 @@ suite.forElement('marketing', 'campaigns', { payload: campaignsPayload }, (test)
         campaignId = r.body.id;
       })
       .then(r => cloud.get(`${test.api}/${campaignId}`))
-      .then(r => cloud.put(`${test.api}/${campaignId}`, campaignsPayload))
+      .then(r => cloud.patch(`${test.api}/${campaignId}`, campaignsPayload))
       .then(r => cloud.patch(`${test.api}/${campaignId}/activate`))
       .then(r => cloud.patch(`${test.api}/${campaignId}/deactivate`))
       .then(r => cloud.get(test.api))

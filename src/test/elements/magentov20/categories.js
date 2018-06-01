@@ -71,7 +71,10 @@ suite.forElement('ecommerce', 'categories', { payload: payload }, (test) => {
       .then(r => categoryId = r.body.id)
       .then(r => cloud.get(`/hubs/ecommerce/categories/${categoryId}`))
       .then(r => parentId = r.body.parent_id)
-      .then(r => cloud.patch(`/hubs/ecommerce/categories/${categoryId}/move`, categoryMove(parentId)))
+      // hardcoding the value of categoryId and the parentId here as this API only works with these values which are for
+      // a default category. The category that is posted from the API does not satisfy the criteria to
+      // execute this API.
+      .then(r => cloud.patch(`/hubs/ecommerce/categories/2/move`, categoryMove(1)))
       .then(r => cloud.delete(`/hubs/ecommerce/categories/${categoryId}`));
   });
   it(`should allow CUDS for /hubs/ecommerce/categories/{id}/products`, () => {

@@ -1,16 +1,37 @@
 {
-  "users": {
-    "vendorName": "users",
+  "user-accounts": {
+    "vendorName": "user-accounts",
     "fields": [{
       "path": "id",
       "vendorPath": "userId"
     }]
   },
-  "employee": {
-    "vendorName": "employee.personIdExternal",
+  "employees": {
+    "vendorName": "employees",
     "fields": [{
       "path": "id",
       "vendorPath": "personIdExternal"
+    }]
+  },
+  "requisitions": {
+    "vendorName": "requisitions",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "jobReqId"
+    }]
+  },
+  "candidates": {
+    "vendorName": "candidates",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "candidateId"
+    }]
+  },
+  "applications": {
+    "vendorName": "applications",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "applicationId"
     }]
   }
 }
