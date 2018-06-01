@@ -12,27 +12,27 @@
     ]
   },
   "requisitions": {
-    "fields": [{  
-      "path": "idTransformed",
-      "type": "string"
-    },
-    {
-    
-      "path": "id",
-      "type": "string"
-    }
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
     ]
   },
   "candidates": {
-    "fields": [{  
-      "path": "idTransformed",
-      "type": "string"
-    },
-    {
-    
-      "path": "id",
-      "type": "string"
-    }
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
     ]
   },
   "accounts": {
@@ -472,31 +472,28 @@
     ]
   },
   "debit-memos": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "sales-receipts": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-  },
-   "deposits": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "credit-terms": {
     "fields": [
@@ -2899,67 +2896,76 @@
     ]
   },
   "invoice-drafts": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "delivery-locations": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "sites": {
-    "fields": [{
-      "path": "idTransformed",
-      "type": "string"
-    }, {
-      "path": "id",
-      "type": "string"
-    }]
-},
-  "candidates": {
-  "fields": [{
-    "path": "idTransformed",
-    "type": "string"
-  }, {
-    "path": "id",
-    "type": "string"
-  }]
- },
- "positions": {
-  "fields": [{
-    "path": "idTransformed",
-    "type": "string"
-  }, {
-    "path": "id",
-    "type": "string"
-  }]
- },
- "offers": {
-  "fields": [{
-    "path": "idTransformed",
-    "type": "string"
-  }, {
-    "path": "id",
-    "type": "string"
-  }]
- },
- "industries": {
-  "fields": [{
-    "path": "idTransformed",
-    "type": "string"
-  }, {
-    "path": "id",
-    "type": "string"
-  }]
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "positions": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "offers": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "industries": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
   },
   "phone-calls": {
     "fields": [
@@ -3009,18 +3015,6 @@
       }
     ]
   },
-  "projects": {
-    "fields": [
-      {
-        "path": "idTransformed",
-        "type": "string"
-      },
-      {
-        "path": "id",
-        "type": "string"
-      }
-    ]
-  },
   "business-partners": {
     "fields": [
       {
@@ -3034,19 +3028,17 @@
     ]
   },
   "applications": {
-    
-        "fields": [
-          {
-            "path": "idTransformed",
-            "type": "string"
-          },
-          {
-            "path": "id",
-            "type": "string"
-          }
-        ]
-    
-      }  ,
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
   "user-accounts": {
     "fields": [
       {
