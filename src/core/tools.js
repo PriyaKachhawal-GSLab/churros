@@ -87,8 +87,6 @@ exports.sleep = secs => {
   sleep.sleep(secs);
 };
 
-
-
 const waitFor = max => pred => new Promise((res, rej) => {
   const doit = (ms) => {
     return pred()
