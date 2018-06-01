@@ -58,8 +58,13 @@ suite.forElement('ecommerce', 'shipments', { payload: payload }, (test) => {
       })
       .then(r => cloud.post(`${test.api}/${parentId}/comments`, comment))
       .then(r => cloud.get(`${test.api}/${parentId}/comments`))
-      .then(r => cloud.post(`${test.api}/${parentId}/emails`, parentId))
       .then(r => cloud.get(`${test.api}/${parentId}/label`))
+      // Need to change the parentId here as the latest created shipment does not work for POST /emails.
+      // One previously created Id only works.
+      .then(r => {
+        parentId = parentId - 1;
+      })
+      .then(r => cloud.post(`${test.api}/${parentId}/emails`, parentId))
       .then(r => cloud.delete(`/hubs/ecommerce/products/${sku}`))
       .then(r => cloud.delete(`/hubs/ecommerce/orders/${orderId}`));
   });
