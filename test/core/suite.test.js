@@ -52,6 +52,7 @@ describe('suite', () => {
   });
 
   suite.forElement('fakebulkhub', 'resource', (test) => {
+    test.should.supportBulkDownloadBasic({ qs: { q: 'select * from limitedEndpoint limit 5' } }, { json: true, csv: true, timeout: 60000 }, 'limitedEndpoint');
     //test for limit
     test.should.supportBulkDownload({ qs: { q: 'select * from limitedEndpoint limit 5' } }, { json: true, csv: true, timeout: 60000 }, 'limitedEndpoint');
     //test for transformations
@@ -110,7 +111,7 @@ describe('suite', () => {
 
     test
       .withApi('/foo/123')
-      .should.supportValidation('PUT');  
+      .should.supportValidation('PUT');
 
     /* all of these are equivalent just as examples */
     test.should.return404OnPatch(456);

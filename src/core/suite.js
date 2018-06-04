@@ -402,6 +402,33 @@ const itBulkDownload = (name, hub, metadata, options, opts, endpoint) => {
   }, options ? options.skip : false);
 };
 
+const itBulkDownloadBasic = (name, hub, metadata, options, opts, endpoint) => {
+  const n = name || `should support bulk download with options`;
+  let bulkId, jsonMeta, csvMeta;
+  // gets metadata ready for testing csv and json responses
+  jsonMeta = JSON.parse(JSON.stringify(metadata));
+  metadata ? metadata.headers ? jsonMeta.headers.accept = "application/json" : jsonMeta.headers = { accept: "application/json" } : jsonMeta = { headers: { accept: "application/json" } };
+  csvMeta = JSON.parse(JSON.stringify(metadata));
+  metadata ? metadata.headers ? csvMeta.headers.accept = "text/csv" : csvMeta.headers = { accept: "text/csv" } : csvMeta = { headers: { accept: "text/csv" } };
+  metadata = tools.updateMetadata(metadata);
+  boomGoesTheDynamite(n, () => {
+    // start the bulk download
+    return cloud.withOptions(metadata).post(`/hubs/${hub}/bulk/query`)
+      .then(r => {
+        expect(r.body.status).to.equal('CREATED');
+        bulkId = r.body.id;
+      })
+      // get bulk download status
+      .then(r => tools.wait.until(opts.timeout ? opts.timeout : 60000, 5000).for(() => cloud.get(`/hubs/${hub}/bulk/${bulkId}/status`, r => {
+        expect(r.body.status).to.equal('COMPLETED');
+        return r;
+      })))
+      .then(r => {
+        expect(r.body.recordsFailedCount).to.equal(0);
+      });
+  }, options ? options.skip : false);
+};
+
 const itBulkUpload = (name, hub, endpoint, metadata, filePath, options, where) => {
   const n = name || `should support bulk upload with options`;
   let bulkId;
@@ -516,6 +543,14 @@ const runTests = (api, payload, validationCb, tests, hub) => {
      * @memberof module:core/suite.test.should
      */
     supportBulkDownload: (metadata, opts, object) => itBulkDownload(name, hub, metadata, options, opts, object),
+    /**
+     * Downloads bulk with options and verifies it completes and that none fail. Does not validate accuracy of bulk
+     * @param {object} metadata -> headers, query string etc...
+     * @param {object} opts -> To test json and csv. If null it will test endpoints default. EXAMPLE "{json: true, csv: true}"
+     * @param {string} object -> object we are calling: contacts, accounts, etc..
+     * @memberof module:core/suite.test.should
+     */
+    supportBulkDownloadBasic: (metadata, opts, object) => itBulkDownloadBasic(name, hub, metadata, options, opts, object),
     /**
      * Uploads bulk with options to specific object and verifies it completes and that none fail. Deletes records after completion
      * @param {object} metadata -> headers, query string etc...

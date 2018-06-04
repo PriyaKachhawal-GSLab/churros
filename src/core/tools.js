@@ -101,6 +101,20 @@ const waitFor = max => pred => new Promise((res, rej) => {
   doit(max);
 });
 
+const waitUntil = (max, interval) => pred => new Promise((res, rej) => {
+  const doit = (ms) => {
+    return pred()
+      .then(r => res(r))
+      .then(r => res(r))
+      .catch(e => {
+        if (ms - interval < 0) {
+          return rej(e || `Predicate was not true within the maximum time allowed of ${max} ms.`);
+        }
+        setTimeout(doit, interval, ms - interval); });
+  };
+  setTimeout(doit, interval, max - interval);
+});
+
 /**
  * Wait for up to a maximum number of milliseconds for a Promise to resolve.
  * @memberof module:core/tools
@@ -119,6 +133,20 @@ exports.wait = {
      * @memberof module:core/tools.wait.upTo
      */
     for: waitFor(max)
+  }),
+  /**
+   * Waits until a particular `interval` to start waiting for a Promise to resolve until the `max`
+   * @param {number} max The max number of seconds to wait
+   * @param {number} interval The number of seconds to wait until starting and cadence
+   * @namespace until
+   * @memberof module:core/tools.wait
+   */
+  until: (max, interval) => ({
+    /**
+     * Waits until a particular `interval` to start waiting for a Promise to resolve until the `max`
+     * @memberof module:core/tools.wait.waitUntil
+     */
+    for: waitUntil(max, interval)
   }),
   /**
    * Waits up to 15 seconds for a Promise to resolve
