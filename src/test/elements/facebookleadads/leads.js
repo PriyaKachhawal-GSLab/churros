@@ -4,8 +4,9 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 
 suite.forElement('marketing', 'leads', null, (test) => {
-  //Currently we have this formId available with Leads, hence hardcoding the same.
-  //Used https://developers.facebook.com/tools/lead-ads-testing to create leads
+  //Used https://developers.facebook.com/tools/lead-ads-testing to create test leads
+  //Otherwise you need to pay for publishing the ad and then create leads under it
+  //Currently we have this formId available with test Leads, hence hardcoding the same.
   //Value of formLeadId will change if you delete the existing lead.
   let formId = 1856949527939272;
   it('should allow R for /hubs/marketing/forms/{formId}/leads', () => {
