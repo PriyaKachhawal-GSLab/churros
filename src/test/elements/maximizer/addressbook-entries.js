@@ -10,6 +10,9 @@ const addressbookentryPayload = tools.requirePayload(`${__dirname}/assets/addres
 const contactPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
 const addressPayload = tools.requirePayload(`${__dirname}/assets/addresses.json`);
 const opportunityPayload = tools.requirePayload(`${__dirname}/assets/opportunities.json`);
+const notePayload = tools.requirePayload(`${__dirname}/assets/notes.json`);
+const documentPayload = tools.requirePayload(`${__dirname}/assets/documents.json`);
+
 
 suite.forElement('crm', 'addressbook-entries', { payload: addressbookentryPayload }, (test) => {
   let parentKey;
@@ -33,6 +36,8 @@ suite.forElement('crm', 'addressbook-entries', { payload: addressbookentryPayloa
       contactPayload.ParentKey = r.body.id;
       addressPayload.ParentKey = r.body.id;
       opportunityPayload.AbEntryKey = r.body.id;
+      notePayload.Parent = r.body.id;
+      documentPayload.Parent = r.body.id;
     })
   );
 
@@ -93,6 +98,48 @@ suite.forElement('crm', 'addressbook-entries', { payload: addressbookentryPayloa
       .then(() => cloud.delete(`/hubs/crm/opportunities/${opportunityId}`))
       .catch(e => {
         if (opportunityId) cloud.delete(`/hubs/crm/opportunities/${opportunityId}`);
+        throw new Error(e);
+      });
+  });
+
+  it('should allow CRUDS for /notes', () => {
+    let noteId;
+    return cloud.post(`/hubs/crm/notes`, notePayload)
+      .then(r => noteId = r.body.Key)
+      .then(() => cloud.withOptions({ qs: { where: `Type='${notePayload.Type}'` } }).get(`/hubs/crm/notes`))
+      .then(r => expect(r.body[0].Type).to.equal(notePayload.Type))
+      .then(() => cloud.withOptions({ qs: { fields:`Key,Text,SecStatus,Type` } }).get(`/hubs/crm/notes`))
+      .then(r => expect(Object.keys(r.body[0]).length).to.equal(4))
+      .then(() => cloud.get(`/hubs/crm/notes/${noteId}`))
+      .then(r => expect(r.body.Type).to.equal(notePayload.Type))
+      .then(() => cloud.withOptions({ qs: { fields:`Key,Text,SecStatus,Type` } }).get(`/hubs/crm/notes/${noteId}`))
+      .then(r => expect(Object.keys(r.body).length).to.equal(4))
+      .then(() => notePayload.Text = faker.name.title())
+      .then(() => cloud.patch(`/hubs/crm/notes/${noteId}`, notePayload))
+      .then(() => cloud.delete(`/hubs/crm/notes/${noteId}`))
+      .catch(e => {
+        if (noteId) cloud.delete(`/hubs/crm/notes/${noteId}`);
+        throw new Error(e);
+      });
+  });
+
+  it('should allow CRUDS for /documents', () => {
+    let documentId;
+    return cloud.post(`/hubs/crm/documents`, documentPayload)
+      .then(r => documentId = r.body.Key)
+      .then(() => cloud.withOptions({ qs: { where: `Name like '${documentPayload.Name}'` } }).get(`/hubs/crm/documents`))
+      .then(r => expect(r.body[0].Name).to.equal(documentPayload.Name))
+      .then(() => cloud.withOptions({ qs: { fields:`Name,Type,Description,Key` } }).get(`/hubs/crm/documents`))
+      .then(r => expect(Object.keys(r.body[0]).length).to.equal(4))
+      .then(() => cloud.get(`/hubs/crm/documents/${documentId}`))
+      .then(r => expect(r.body.Name).to.equal(documentPayload.Name))
+      .then(() => cloud.withOptions({ qs: { fields:`Name,Type,Description,Key` } }).get(`/hubs/crm/documents/${documentId}`))
+      .then(r => expect(Object.keys(r.body).length).to.equal(4))
+      .then(() => documentPayload.Name = faker.name.title())
+      .then(() => cloud.patch(`/hubs/crm/documents/${documentId}`, documentPayload))
+      .then(() => cloud.delete(`/hubs/crm/documents/${documentId}`))
+      .catch(e => {
+        if (documentId) cloud.delete(`/hubs/crm/documents/${documentId}`);
         throw new Error(e);
       });
   });
