@@ -21,6 +21,12 @@
   "description": "Invoice",
   "currency": "USD",
   "exchrate": "0.875",
+  "billto": {
+     "contactname": "Maxwell Warner(C1006)"
+  },
+  "shipto": {
+     "contactname": "Maxwell Warner(C1006)"
+  },
   "customfields": {
     "customfield": [{
         "customfieldname": "TESTDATer1",
