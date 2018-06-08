@@ -1,0 +1,30 @@
+{
+    "objectName": "churrosContact<<random.alphaNumeric##10>>",
+    "description": "churros VDR",
+    "fields": [
+      {
+        "type": "string",
+        "path": "email",
+        "level": "system",
+        "displayName": "Real Email"
+      },
+      {
+        "type": "string",
+        "path": "id",
+        "level": "system",
+        "displayName": "System IDZ"
+      },
+      {
+        "type": "string",
+        "path": "name",
+        "level": "system",
+        "displayName": "Name?"
+      },
+      {
+        "type": "string",
+        "path": "churrosToRemove",
+        "level": "system",
+        "displayName": "Word"
+      }
+    ]
+}
