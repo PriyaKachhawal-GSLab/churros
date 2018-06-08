@@ -1,0 +1,11 @@
+{
+  "vendorName": "contacts",
+  "isLegacy": false,
+  "fields": [{
+    "path": "id",
+    "vendorPath": "id",
+    "script": {
+      "body": "done('transformedObject');"
+    }
+  }]
+}
