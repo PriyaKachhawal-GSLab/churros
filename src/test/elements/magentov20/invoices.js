@@ -33,4 +33,12 @@ suite.forElement('ecommerce', 'invoices', { payload: payload }, (test) => {
         it(`should allow C for /hubs/ecommerce/invoices/{entity_id}/emails`, () => {
           return cloud.post(`/hubs/ecommerce/invoices/${entity_id}/emails`);
         });
+        //Skipped since this requires an invoice to be set to Authorize only payment method, which can be done through UI
+        it.skip(`should allow C for /hubs/ecommerce/invoices/{entity_id}/capture`, () => {
+          return cloud.post(`/hubs/ecommerce/invoices/${entity_id}/capture`);
+        });
+        //Skipped since this requires an invoice to be set to Authorize only payment method, which can be done through UI
+        it.skip(`should allow D for /hubs/ecommerce/invoices/{entity_id}`, () => {
+          return cloud.delete(`/hubs/ecommerce/invoices/${entity_id}`);
+        });
       });
