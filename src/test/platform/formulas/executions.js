@@ -88,7 +88,7 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
   before(() => {
     return provisioner.create('onedrivev2')
       .then(r => onedriveId = r.body.id)
-      .then(r => provisioner.create('closeio', { 'event.notification.enabled': true, 'event.vendor.type': 'polling', 'event.poller.refresh_interval': 999999999 }))      
+      .then(r => provisioner.create('closeio', { 'event.notification.enabled': true, 'event.vendor.type': 'polling', 'event.poller.refresh_interval': 999999999 }))     
       .then(r => closeioId = r.body.id)
       .catch(e => {
         console.log(`Failed to finish before()...${e}`);
@@ -726,7 +726,7 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
       //for v3
       bulkTransferStepExecutionValues.filter(sevs => sevs.key === 'bulkTransfer.upload.request.form').map(sev => {
         const sevJSON = JSON.parse(sev.value);
-        expect(sevJSON.metaData.identifierFieldName).to.equal('Id');
+        expect(JSON.parse(sevJSON.metaData).identifierFieldName).to.equal('Id');
       });
       //for v1
       bulkTransferStepExecutionValues.filter(sevs => sevs.key === 'bulkTransfer.upload.request.metaData').map(sev => {
