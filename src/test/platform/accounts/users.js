@@ -60,7 +60,7 @@ describe('account users', () => {
       return cloud.put(`/accounts/${accountId}/users/${userId}`, r.body);
     })
     .then(r => expect(r.body.city).to.equal(newCity));
-  })
+  });
 
   it('should support deactivating and reactivating a user', () => {
     let userId;

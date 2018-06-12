@@ -48,7 +48,7 @@ suite.forPlatform('accounts', { payload: account, schema: accountSchema }, (test
       .then(r => expect(r.body.name).to.equal(newName1))
       .then(r => cloud.put(`${api}`, put))
       .then(r => expect(r.body.name).to.equal(newName2) && expect(r.body.description).equals(newDescription) && expect(r.body.externalId).to.equal(newExternalId));
-    })
+    });
 
     it('should support CRD of roles for own account', () => {
       const api = `/accounts/${accountId}/roles`;
