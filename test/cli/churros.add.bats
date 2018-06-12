@@ -5,7 +5,7 @@ USAGE="  Usage: churros-add [options] [command]"
 @test "It should support churros help add" {
   run churros help add
   [ "$status" -eq 0 ]
-  [ "${lines[0]}" = "${USAGE}" ]
+  [ "${lines[1]}" = "${USAGE}" ]
 }
 
 @test "It should handle churros add [INVALID_SUITE_TYPE]" {
