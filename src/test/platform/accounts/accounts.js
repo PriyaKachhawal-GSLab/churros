@@ -28,6 +28,28 @@ suite.forPlatform('accounts', { payload: account, schema: accountSchema }, (test
         });
     });
 
+    it('should support U', () => {
+      const newName1 = 'Updated Name 1';
+      const newName2 = 'Updated Name 2';
+      const newExternalId = 'External ID 1';
+      const newDescription = 'New Description';
+      const patch = {
+        name: newName1
+      };
+      const put = {
+        name: newName2,
+        externalId: newExternalId,
+        description: 'New Description'
+      };
+
+      const api = `/accounts/${accountId}`;
+      return cloud.patch(`${api}`, patch)
+      .then(r => cloud.get(`${api}`))
+      .then(r => expect(r.body.name).to.equal(newName1))
+      .then(r => cloud.put(`${api}`, put))
+      .then(r => expect(r.body.name).to.equal(newName2) && expect(r.body.description).equals(newDescription) && expect(r.body.externalId).to.equal(newExternalId));
+    })
+
     it('should support CRD of roles for own account', () => {
       const api = `/accounts/${accountId}/roles`;
       return cloud.put(`${api}/admin`, null, roleSchema)

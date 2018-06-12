@@ -46,6 +46,22 @@ describe('account users', () => {
     return cloud.post(`/accounts/${accountId}/users`, {}, r => expect(r).to.have.status(400));
   });
 
+  it('should support U', () => {
+    const newExternalId = 'new-ext-id';
+    const newCity = 'Anytown';
+    let userId;
+    return cloud.post(`/accounts/${accountId}/users`, user)
+    .then(r => { userId = r.body.id; return r; })
+    .then(r => expect(r.body.active).to.be.true)
+    .then(() => cloud.patch(`/accounts/${accountId}/users/${userId}`, { externalId: newExternalId }))
+    .then(r => { expect(r.body.externalId).to.equal(newExternalId); return r; })
+    .then(r => {
+      r.body.city = newCity;
+      return cloud.put(`/accounts/${accountId}/users/${userId}`, r.body);
+    })
+    .then(r => expect(r.body.city).to.equal(newCity));
+  })
+
   it('should support deactivating and reactivating a user', () => {
     let userId;
     return cloud.post(`/accounts/${accountId}/users`, user)
@@ -90,7 +106,7 @@ describe('account users', () => {
     // Validate that the job been deleted
     .then(() => defaults.withDefaults(userSecret, orgSecret, user.email))
     .then(() => cloud.get(`/jobs`))
-    .then(r => { console.log(r.body); expect(r.body.length).to.equal(0); })
+    .then(r => expect(r.body.length).to.equal(0))
     // Clean up after ourselves
     .then(() => defaults.reset())
     .then(() => cloud.delete(`/accounts/${acctId}`));
