@@ -115,7 +115,6 @@ const run = (suite, options, cliArgs) => {
   // loop over each element, constructing the proper paths to pass to mocha
   let cmd = "";
   if (resources.includes('.DS_Store')) resources.splice(resources.indexOf('.DS_Store'), 1);
-  console.log('resources', resources);
   resources.forEach((resource, index) => {
     const allMochaPaths = baseMochaPaths.slice();
     let baseResource = resource;
@@ -145,7 +144,7 @@ const run = (suite, options, cliArgs) => {
     if (isElement(suite)) cmd += ` --element ${resource}`;
     if (index !== resources.length - 1) cmd += " && "; // not the last one, then append &&
   });
-  console.log('cmd', cmd);
+
   process.exit(shell.exec(cmd).code); // execute the cmd and make our exit code the same as 'churros test' code
 };
 
