@@ -433,7 +433,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
   it('should allow try it out functionality', () => {
     let objectName = 'churros-object-' + tools.random();
 
-    let objDefUrl = getObjectDefUrl('organizations', objectName)
+    let objDefUrl = getObjectDefUrl('organizations', objectName);
     let transUrl = getTransformUrl('organizations', objectName, elementKey);
     let payload = {
       payload: {
@@ -442,7 +442,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
         "LastModifiedDate": "mods bro"
       },
       elementId
-    }
+    };
 
     return cloud.post(objDefUrl, genDefaultObjectDef({}))
       // test normal transformation
@@ -475,5 +475,5 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
         cloud.delete(objDefUrl);
         throw new Error(e);
       });
-  })
+  });
 });
