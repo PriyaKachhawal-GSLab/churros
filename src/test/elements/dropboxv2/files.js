@@ -3,6 +3,8 @@
 const cloud = require('core/cloud');
 const suite = require('core/suite');
 const tools = require('core/tools');
+const expect = require('chakram').expect;
+const revokelinkaccessPayload = require('./assets/revokelinkaccess.json');
 
 suite.forElement('documents', 'files', (test) => {
 
@@ -26,5 +28,14 @@ suite.forElement('documents', 'files', (test) => {
       .then(r => revisionId = r.body[0].id)
       .then(() => cloud.withOptions({ qs: query }).get(`${test.api}/revisions/${revisionId}`));
   });
+
+  it('it should allow C for documents/files/revoke-link-access', () => {
+      return cloud.get(`${test.api}/${jpgFileBody.id}/links`)
+      .then(r => revokelinkaccessPayload.url = r.body.providerViewLink)
+      .then(r => cloud.post(`${test.api}/revoke-link-access`, revokelinkaccessPayload))
+      .then(r => expect(r.body).to.be.empty);
+  });
+
+
 
 });
