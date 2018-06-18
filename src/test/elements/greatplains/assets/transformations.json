@@ -1,0 +1,38 @@
+{
+  "customers": {
+    "vendorName": "customer",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "key.id"
+      }
+    ]
+  },
+  "classes": {
+    "vendorName": "ItemClass",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "key.id"
+      }
+    ]
+  },
+  "credit-terms": {
+    "vendorName": "PaymentTerm",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "key.id"
+      }
+    ]
+  },
+  "employees": {
+    "vendorName": "Employee",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "employeeKey.id"
+      }
+    ]
+  }
+}
