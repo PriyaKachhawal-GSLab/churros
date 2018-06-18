@@ -1,5 +1,5 @@
 {
-  "product": {
+ 
     "attribute_set_id": 4,
     "name": "Myproduct",
     "price": 300,
@@ -17,5 +17,5 @@
       "attribute_code": "description",
       "value": "mystrore"
     }]
-  }
+  
 }

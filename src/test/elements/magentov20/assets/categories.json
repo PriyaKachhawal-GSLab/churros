@@ -1,5 +1,5 @@
 {
-  "category": {
+  
     "name": "<<random.word>>",
     "is_active": true,
     "position": 1,
@@ -12,5 +12,5 @@
       "attribute_code": "display_mode",
       "value": "PRODUCTS"
     }]
-  }
+  
 }

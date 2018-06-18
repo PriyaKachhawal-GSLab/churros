@@ -1,93 +1,128 @@
 {
   "bills": {
     "vendorName": "Bill",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "TxnID"
-    }]
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "TxnID"
+      }
+    ]
   },
   "credit-memos": {
     "vendorName": "CreditMemo",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "TxnID"
-    }]
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "TxnID"
+      }
+    ]
   },
   "credit-terms": {
     "vendorName": "Terms",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "ListID"
-    }]
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "ListID"
+      }
+    ]
   },
   "customers": {
     "vendorName": "Customer",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "ListID"
-    }]
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "ListID"
+      }
+    ]
   },
   "employees": {
     "vendorName": "Employee",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "ListID"
-    }]
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "ListID"
+      }
+    ]
   },
   "invoices": {
     "vendorName": "Invoice",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "TxnID"
-    }]
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "TxnID"
+      }
+    ]
   },
   "journal-entries": {
     "vendorName": "JournalEntry",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "TxnID"
-    }]
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "TxnID"
+      }
+    ]
   },
   "payments": {
     "vendorName": "ReceivePayment",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "TxnID"
-    }]
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "TxnID"
+      }
+    ]
   },
   "bill-payment-checks": {
     "vendorName": "BillPaymentCheck",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "TxnID"
-    }]
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "TxnID"
+      }
+    ]
   },
   "bill-payment-cards": {
     "vendorName": "BillPaymentCreditCard",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "TxnID"
-    }]
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "TxnID"
+      }
+    ]
   },
   "creditcard-charges": {
     "vendorName": "CreditCardCharge",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "TxnID"
-    }]
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "TxnID"
+      }
+    ]
   },
   "vendor-credits": {
     "vendorName": "VendorCredit",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "TxnID"
-    }]
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "TxnID"
+      }
+    ]
   },
   "creditcard-credits": {
     "vendorName": "CreditCardCredit",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "TxnID"
-    }]
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "TxnID"
+      }
+    ]
+  },
+  "checks": {
+    "vendorName": "Check",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "TxnID"
+      }
+    ]
   }
 }

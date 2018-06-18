@@ -111,7 +111,7 @@ suite.forElement('ecommerce', 'products', { payload: productPayload }, (test) =>
     return cloud.get(`/hubs/ecommerce/products`)
       .then(r => sku = r.body[1].sku)
       .then(r => cloud.get(`${test.api}/${sku}/media`))
-      .then(r => entryId = r.body[1].id)
+      .then(r => entryId = r.body[0].id)
       .then(r => cloud.get(`${test.api}/${sku}/media/${entryId}`));
   });
   it.skip(`should allow DELETE for ${test.api}/{sku}/media/{entryId}`, () => { //No post so not deleting

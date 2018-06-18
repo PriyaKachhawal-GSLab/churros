@@ -1,5 +1,5 @@
 {
-  "attribute": {
+  
     "is_wysiwyg_enabled": false,
     "is_html_allowed_on_front": false,
     "used_for_sort_by": true,
@@ -31,5 +31,5 @@
     "is_unique": "0",
     "frontend_class": "validate-length maximum-length-255",
     "validation_rules": []
-  }
+  
 }

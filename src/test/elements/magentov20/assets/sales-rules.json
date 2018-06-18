@@ -1,5 +1,5 @@
 {
-  "rule": {
+  
     "name": "<<name.firstName>>",
     "website_ids": [
       1
@@ -41,5 +41,5 @@
     "uses_per_coupon": 0,
     "simple_free_shipping": "0",
     "extension_attributes": {}
-  }
+  
 }

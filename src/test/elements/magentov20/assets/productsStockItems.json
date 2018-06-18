@@ -1,5 +1,5 @@
 {
-  "stockItem": {
+  
     "min_sale_qty": 1,
     "qty_increments": 0,
     "stock_status_changed_auto": 1,
@@ -25,5 +25,5 @@
     "is_qty_decimal": false,
     "use_config_manage_stock": true,
     "use_config_min_sale_qty": 1
-  }
+  
 }
