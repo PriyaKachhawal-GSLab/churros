@@ -1,0 +1,32 @@
+{
+    "addresses": {
+      "employeeAddress": [
+        {
+          "key": {
+            "id": "primary"
+          }
+        }
+      ]
+    },
+    "benefitStartDate": "2018-06-18",
+    "defaultAddressKey": {
+      "id": "primary"
+    },
+    "departmentKey": {
+      "id": "SALE"
+    },
+    "employmentStartDate": "2010-06-18",
+    "employmentType": "FULL_TIME_REGULAR",
+    "name": {
+      "alternate": "afd",
+      "family": "qwe",
+      "given": "zxc",
+      "middle": "dfg",
+      "preferred": "asdf",
+      "suffix": "mr"
+    },
+    "positionKey": {
+      "id": "ADA"
+    },
+    "taxIdentifier": "qwert"
+  }
