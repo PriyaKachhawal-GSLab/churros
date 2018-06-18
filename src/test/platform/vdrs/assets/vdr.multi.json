@@ -15,15 +15,17 @@
         "displayName": "An Account Field"
       },
       {
+        "type": "int",
         "path": "instanceField",
         "level": "instance",
-        "instanceId": 123,
+        "associatedId": 123,
         "displayName": "An Instance field!"
       },
       {
+        "type": "int",
         "path": "instanceField2",
         "level": "instance",
-        "instanceId": 456,
+        "associatedId": 456,
         "displayName": "An Instance field on another instance"
       }
     ]
