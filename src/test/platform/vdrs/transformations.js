@@ -8,7 +8,7 @@ const R = require('ramda');
 
 const {randomStr} = require('core/tools');
 
-const vdrPayload = require('core/tools').requirePayload(`${__dirname}/assets/vdr.json`);
+const vdrPayload = require('core/tools').requirePayload(`${__dirname}/assets/vdr.system.json`);
 const transformationPayload = require('core/tools').requirePayload(`${__dirname}/assets/transformation.json`);
 const schema = require('core/tools').requirePayload(`${__dirname}/assets/transformation.schema.json`);
 const pluralSchema = require('core/tools').requirePayload(`${__dirname}/assets/transformations.schema.json`);
