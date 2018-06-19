@@ -26,7 +26,7 @@ const addMatchingVdrFieldId = (vdrFields, tField) => {
 suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
     let vdrId, updatePayload;
     before(() => {
-      return cloud.post('/vdrs', vdrPayload)
+      return cloud.post('/vdrs?systemOnly=true', vdrPayload)
         .then(r => {
             vdrId = r.body.id;
             // add the vdr field ids to each of the transformation fields
@@ -39,7 +39,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
     });
   
     after(() => {
-        if (vdrId) cloud.delete(`/vdrs/${vdrId}`);
+        if (vdrId) cloud.delete(`/vdrs/${vdrId}?systemOnly=true`);
     });
 
     // NOTE - you need the 'vdrAdmin' role to run these tests
