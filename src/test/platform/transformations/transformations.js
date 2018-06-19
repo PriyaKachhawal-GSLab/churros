@@ -498,7 +498,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       },
       instanceId: sfdcId,
       method: 'POST'
-    }
+    };
 
     return cloud.post(objDefUrl, genDefaultObjectDef({}))
       // test normal transformation
@@ -545,7 +545,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
 
     let objDefUrl = getObjectDefUrl('organizations', objectName);
     let transUrl = getTransformUrl('organizations', objectName, elementKey);
-    let transWithScript = Object.assign({}, genDefaultTrans({}), {script: {body: 'done({...transformedObject, churrosScript: "script"})'}})
+    let transWithScript = Object.assign({}, genDefaultTrans({}), {script: {body: 'done({...transformedObject, churrosScript: "script"})'}});
     let payload = {
       payload: {
         "Id": "123",
