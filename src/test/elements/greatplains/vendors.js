@@ -1,5 +1,5 @@
 const suite = require('core/suite');
-const tools = require('core/tools');
+//const tools = require('core/tools');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/vendors.json`);

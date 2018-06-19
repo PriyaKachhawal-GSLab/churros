@@ -2,7 +2,7 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const tools = require('core/tools');
+//const tools = require('core/tools');
 const expect = require('chakram').expect;
 
 suite.forElement('finance', 'credit-terms', (test) => {
@@ -13,8 +13,7 @@ suite.forElement('finance', 'credit-terms', (test) => {
         .then(r => cloud.get(`${test.api}/${encodeURIComponent(id)}`));
     });
 
-    var ID = encodeURIComponent('2% 10/Net 30')
-    console.log('yayaya', ID);
+    var ID = encodeURIComponent('2% 10/Net 30');
     test.withApi(test.api)
     .withOptions({ qs: { where: `id='2% 10/Net 30'` } })
     .withValidation(r => expect(r.body.filter(obj => obj.key.id !== "")).to.not.be.empty)

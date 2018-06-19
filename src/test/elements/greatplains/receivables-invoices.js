@@ -19,5 +19,5 @@ suite.forElement('finance', 'receivables-invoices', (test) => {
     .withValidation(r => expect(r.body.filter(obj => obj.key.id !== "")).to.not.be.empty)
     .withName('should allow GET with option lastModifiedDate')
     .should.return200OnGet();
-    test.should.supportPagination()
+    test.should.supportPagination();
   });
