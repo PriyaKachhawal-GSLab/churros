@@ -2,7 +2,7 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const tools = require('core/tools');
+//const tools = require('core/tools');
 
 suite.forElement('finance', 'ping', (test) => {
     it(`should support S for ${test.api}`, () => {
