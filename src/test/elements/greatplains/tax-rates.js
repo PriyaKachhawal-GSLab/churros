@@ -2,7 +2,7 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const tools = require('core/tools');
+//const tools = require('core/tools');
 const expect = require('chakram').expect;
 suite.forElement('finance', 'tax-rates', (test) => {
     it(`should support RS for ${test.api}`, () => {
@@ -19,5 +19,5 @@ suite.forElement('finance', 'tax-rates', (test) => {
     .withValidation(r => expect(r.body.filter(obj => obj.taxDetailKey.id !== "")).to.not.be.empty)
     .withName('should allow GET with option taxDetailKeyId')
     .should.return200OnGet();
-    test.should.supportPagination()
+    test.should.supportPagination();
   });

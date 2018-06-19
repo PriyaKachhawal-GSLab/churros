@@ -2,7 +2,7 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const tools = require('core/tools');
+//const tools = require('core/tools');
 const expect = require('chakram').expect;
 suite.forElement('finance', 'receivables-invoices', (test) => {
     it(`should support RS for ${test.api}`, () => {

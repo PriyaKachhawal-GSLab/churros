@@ -13,7 +13,7 @@ suite.forElement('finance', 'credit-terms', (test) => {
         .then(r => cloud.get(`${test.api}/${encodeURIComponent(id)}`));
     });
 
-    var ID = encodeURIComponent('2% 10/Net 30');
+    //var ID = encodeURIComponent('2% 10/Net 30');
     test.withApi(test.api)
     .withOptions({ qs: { where: `id='2% 10/Net 30'` } })
     .withValidation(r => expect(r.body.filter(obj => obj.key.id !== "")).to.not.be.empty)
