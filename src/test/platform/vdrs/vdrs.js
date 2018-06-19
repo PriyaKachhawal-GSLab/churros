@@ -11,7 +11,6 @@ const expect = chakram.expect;
 
 const vdrSystem = require('core/tools').requirePayload(`${__dirname}/assets/vdr.system.json`);
 const vdrMulti = require('core/tools').requirePayload(`${__dirname}/assets/vdr.multi.json`);
-const vdrMultiWithSystem = require('core/tools').requirePayload(`${__dirname}/assets/vdr.extend.json`);
 const schema = require('core/tools').requirePayload(`${__dirname}/assets/vdr.schema.json`);
 const pluralSchema = require('core/tools').requirePayload(`${__dirname}/assets/vdrs.schema.json`);
 pluralSchema.definitions.vdr = schema;
@@ -94,7 +93,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
         .then(r => {
           // validate added org field
           expect(r.body.fields.length).to.equal(5);
-          // validate did not change name - todo - fix as it does! 
+          // validate did not change name of the sys vdr
           expect(r.body.objectName).to.equal(vdrSystem.objectName);
           updatePayloadSys = genUpdatePayload(vdrSystem, r.body.fields, 'system');
         })
