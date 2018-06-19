@@ -52,7 +52,7 @@ suite.forElement('payment', 'customers', { payload: payload }, (test) => {
     return cloud.post(`/hubs/payment/customers`, payload)
       .then(r => customerId = r.body.id)
       .then(r => cloud.post(`${test.api}/${customerId}/payment-methods`, paymentPayload))
-      .then(r => paymentId = r.body.paymentMethodId)
+      .then(r => paymentId = r.body.id)
       .then(r => cloud.get(`${test.api}/${customerId}/payment-methods`))
       .then(r => cloud.put(`${test.api}/${customerId}/payment-methods/${paymentId}`, paymentUpdatePayload))
       .then(r => cloud.delete(`${test.api}/${customerId}/payment-methods/${paymentId}`));

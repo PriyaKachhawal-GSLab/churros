@@ -6,7 +6,7 @@
       "vendorPath": "Id"
     }, {
       "path": "id",
-      "vendorPath": "accountId"
+      "vendorPath": "Id"
     }]
   },
   "payment-methods": {
