@@ -1,5 +1,6 @@
 'use strict';
 
+const R = require('ramda');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 const provisioner = require('core/provisioner');
@@ -25,11 +26,13 @@ suite.forPlatform('transformation scripts', (test) => {
 
     const transformationCreatedValidator = (r, value) => {
       expect(r).to.have.statusCode(200);
-			console.log('r.body', r.body);
+      expect(r.body.fields).to.not.be.empty;
+      expect(R.find(R.has('script'))(r.body.fields)).to.not.be.empty;
       return r;
     };
 
     const validatorWrapper = (r) => {
+      console.log('validate', r.body);
       const validator = (options.validator || ((object) => expect(object.foo).to.equal('bar')));
       expect(r).to.have.statusCode(200);
       expect(r.body).to.not.be.null;
@@ -49,34 +52,10 @@ suite.forPlatform('transformation scripts', (test) => {
   };
 
   /**
-   * Represents a good update script test, where going from the original transformation to the updated transformation
-   * should be successful and the API call should transform data properly.
-   */
-  const goodUpdateScriptTest = (original, update) => {
-    return scriptTest(original, { isCleanup: false })
-      .then(r => cloud.put(`/instances/${closeioId}/transformations/contacts`, update))
-      .then(r => cloud.get(`/hubs/crm/contacts/${contactId}`, (r) => expect(r.body.foo).to.equal('bar')))
-      .then(r => cloud.delete(`/instances/${closeioId}/transformations/contacts`))
-      .then(r => cloud.delete(`/instances/${closeioId}/objects/contacts/definitions`));
-  };
-
-  /**
-   * Represents a bad update script test, where going from the original transformation to the updated transformation
-   * should return a 400 as it is not permitted.
-   */
-  const badUpdateScriptTest = (original, update) => {
-    return scriptTest(original, { isCleanup: false })
-      .then(r => cloud.put(`/instances/${closeioId}/transformations/contacts`, update, (r) => expect(r).to.have.statusCode(400)))
-      .then(r => cloud.delete(`/instances/${closeioId}/transformations/contacts`))
-      .then(r => cloud.delete(`/instances/${closeioId}/objects/contacts/definitions`));
-  };
-
-  /**
    * Loads a transformation from the given file name from the assets directory
    */
   const lt = (fileName) => require(`./assets/${fileName}`);
 
-  it('should support field javascript with scripting engine to v1', () => scriptTest(lt('simple-v1-field-transformation')));
   it('should support field javascript with scripting engine to v2', () => scriptTest(lt('simple-v2-field-transformation')));
 
 });
