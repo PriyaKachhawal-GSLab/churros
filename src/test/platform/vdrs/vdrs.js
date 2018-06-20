@@ -117,9 +117,9 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
         })
         .then(() => cloudWithOrgUser().delete(`/vdrs/${vdrId}`))
         .then(r => {
-          // validate it returned the warning header and didn't delete the system vdr
+          // validate it returned the Elements-Error header and didn't delete the system vdr
           expect(r.response.statusCode).to.equal(200);
-          expect(r.response.headers.warning).to.contain('199');
+          expect(r.response.headers['elements-error']).to.contain('ignored');
         })
         .then(() => cloudWithOrgUser().get(`/vdrs/${vdrId}`, schema))
         .then(r => {
@@ -134,24 +134,24 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
         .then(() => cloudWithOrgUser().post('/vdrs', vdrMulti, schema))
         .then(r => {
           expect(r.body.fields.length).to.equal(4);
-          expect(r.response.headers.warning).to.be.undefined;
+          expect(r.response.headers['elements-error']).to.be.undefined;
           vdrId = r.body.id;
           updatePayload = genUpdatePayload(vdrMulti, r.body.fields, 'organization');
         })
         .then(() => cloudWithOrgUser().get(`/vdrs/${vdrId}`, schema))
         .then(r => {
           expect(r.body.fields.length).to.equal(4);
-          expect(r.response.headers.warning).to.be.undefined;
+          expect(r.response.headers['elements-error']).to.be.undefined;
         })
         .then(() => cloudWithOrgUser().get(`/vdrs`, pluralSchema))
         .then(() => cloudWithOrgUser().put(`/vdrs/${vdrId}`, updatePayload, schema))
         .then(r => {
           expect(r.body.fields.length).to.equal(5);
-          expect(r.response.headers.warning).to.be.undefined;
+          expect(r.response.headers['elements-error']).to.be.undefined;
         })
         .then(() => cloudWithOrgUser().delete(`/vdrs/${vdrId}`))
         .then(r => {
-          expect(r.response.headers.warning).to.be.undefined;
+          expect(r.response.headers['elements-error']).to.be.undefined;
         })
         .then(() => cloudWithOrgUser().get(`/vdrs/${vdrId}`, r => expect(r).to.have.statusCode(404)))
         .then(() => cloud.delete(`/users/${orgUser.id}/roles/org-admin`));
@@ -163,7 +163,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
         .then(() => cloudWithAcctUser().post('/vdrs', vdrMulti, schema))
         .then(r => {
           expect(r.body.fields.length).to.equal(3);
-          expect(r.response.headers.warning).to.contain('199');
+          expect(r.response.headers['elements-error']).to.contain('ignored');
           vdrId = r.body.id;
           updatePayload = genUpdatePayload(vdrMulti, r.body.fields, 'organization');
           updatePayload = genUpdatePayload(vdrMulti, updatePayload.fields, 'account');
@@ -176,11 +176,11 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
         .then(() => cloudWithAcctUser().put(`/vdrs/${vdrId}`, updatePayload, schema))
         .then(r => {
           expect(r.body.fields.length).to.equal(4);
-          expect(r.response.headers.warning).to.contain('199');
+          expect(r.response.headers['elements-error']).to.contain('ignored');
         })
         .then(() => cloudWithAcctUser().delete(`/vdrs/${vdrId}`)) // can delete bc no org level fields
         .then(r => {
-          expect(r.response.headers.warning).to.be.undefined;
+          expect(r.response.headers['elements-error']).to.be.undefined;
         })
         .then(() => cloudWithAcctUser().get(`/vdrs/${vdrId}`, r => expect(r).to.have.statusCode(404)))
         .then(() => cloud.delete(`/users/${acctUser.id}/roles/admin`));
@@ -191,7 +191,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
     return cloudWithAcctUser().post('/vdrs', vdrMulti, schema)
         .then(r => {
           expect(r.body.fields.length).to.equal(2);
-          expect(r.response.headers.warning).to.contain('199');
+          expect(r.response.headers['elements-error']).to.contain('ignored');
           vdrId = r.body.id;
           updatePayload = genUpdatePayload(vdrMulti, r.body.fields, 'organization');
           updatePayload = genUpdatePayload(vdrMulti, updatePayload.fields, 'account');
@@ -204,11 +204,11 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
         .then(() => cloudWithAcctUser().put(`/vdrs/${vdrId}`, updatePayload, schema))
         .then(r => {
           expect(r.body.fields.length).to.equal(2);
-          expect(r.response.headers.warning).to.contain('199');
+          expect(r.response.headers['elements-error']).to.contain('ignored');
         })
         .then(() => cloudWithAcctUser().delete(`/vdrs/${vdrId}`)) // can delete bc no org or acct level fields
         .then(r => {
-          expect(r.response.headers.warning).to.be.undefined;
+          expect(r.response.headers['elements-error']).to.be.undefined;
         })
         .then(() => cloudWithAcctUser().get(`/vdrs/${vdrId}`, r => expect(r).to.have.statusCode(404)));
   });
