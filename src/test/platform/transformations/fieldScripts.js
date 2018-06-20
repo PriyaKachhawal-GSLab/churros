@@ -52,7 +52,7 @@ suite.forPlatform('transformation scripts', (test) => {
       "script": {
         "body": "transformedObject.foo = 'bar'; done(transformedObject);"
       }
-    }
+    };
 
 
     return cloud.delete(`/instances/${closeioId}/objects/contacts/definitions`).catch(() => {})
