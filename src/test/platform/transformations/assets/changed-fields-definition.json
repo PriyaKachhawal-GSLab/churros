@@ -1,0 +1,42 @@
+{
+  "name": "<<random.word>>",
+  "elementInstanceIds": [],
+  "mappedElementIds": [],
+  "fields": [
+    {
+      "type": "string",
+      "path": "orgId2",
+      "associatedLevel": "organization"
+    },
+    {
+      "type": "string",
+      "path": "accId2",
+      "associatedLevel": "account"
+    },
+    {
+      "type": "string",
+      "path": "instId2",
+      "associatedLevel": "instance"
+    }
+  ],
+  "changedFields": [
+    {
+      "type": "string",
+      "path": "orgId2",
+      "oldPath": "orgId",
+      "associatedLevel": "organization"
+    },
+    {
+      "type": "string",
+      "path": "accId2",
+      "oldPath": "accId",
+      "associatedLevel": "account"
+    },
+    {
+      "type": "string",
+      "path": "instId2",
+      "oldPath": "instId",
+      "associatedLevel": "instance"
+    }
+  ]
+}

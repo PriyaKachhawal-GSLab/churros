@@ -1,11 +1,15 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const noFields = require('core/tools').requirePayload(`${__dirname}/assets/nofield-definition.json`);
+const provisioner = require('core/provisioner');
+const tools = require('core/tools');
+const noFields = tools.requirePayload(`${__dirname}/assets/nofield-definition.json`);
+const simpleDefinition = tools.requirePayload(`${__dirname}/assets/simple-definition.json`);
+const basicTransformation = require('./assets/basic-transformation');
+const changedFields = tools.requirePayload(`${__dirname}/assets/changed-fields-definition.json`);
 const expect = require('chai').expect;
 const R = require('ramda');
 const common = require('../formulas/assets/common');
 const commonResourceFormula = require('../formulas/assets/formulas/formula-with-common-resource');
-const tools = require('core/tools');
 const {filter} = require('ramda');
 
 const orgCommonResource = {
@@ -33,12 +37,24 @@ const orgCommonResourceTwo = {
 suite.forPlatform('common-resources', {}, () => {
   const orgUrl = `/organizations/objects/${orgCommonResource.name}/definitions`;
   const api = '/common-resources';
-  let formulaId;
+  let formulaId, closeioId, elementId, accountId, orgId;
   before(() => cloud.post(orgUrl, orgCommonResource)
     .then(() => common.createFormula(commonResourceFormula))
     .then(r => formulaId = r.id)
+    .then(() => cloud.get('/organizations/me'))
+    .then(r => orgId = r.body.id)
+    .then(() => cloud.get('/accounts'))
+    .then(r => accountId = r.body[0].id)
+    .then(() => provisioner.create('closeio'))
+    .then(r => {
+      closeioId = r.body.id;
+      elementId = r.body.element.id;
+    })
   );
-
+  after(() => cloud.delete(orgUrl)
+    .then(common.deleteFormula(formulaId))
+    .then(() => cloud.delete(`/instances/${closeioId}`))
+  );
   it('should support returning all common resources that exist', () => {
     const v = r => {
       expect(r.response.statusCode).to.equal(200);
@@ -72,10 +88,6 @@ suite.forPlatform('common-resources', {}, () => {
     return cloud.get(`${api}/MyContact/usages`, validation);
   });
 
-  after(() => cloud.delete(orgUrl)
-    .then(common.deleteFormula(formulaId))
-  );
-
   it('should support renaming common resources', () => {
     const newName = `${orgCommonResourceTwo.name}-rename`;
     const renamePayload ={
@@ -99,4 +111,22 @@ suite.forPlatform('common-resources', {}, () => {
       .then(r => cloud.get(`${api}/${orgCommonResourceTwo.name}`,checkOldDoesntExist))
       .then(r => cloud.delete(`${api}/${newName}`));
   });
+  function updateFields(obj, path) {
+    const options = {organization: orgId, account: accountId, instance: closeioId};
+    const cb = arr => arr.map(f => Object.assign({}, f, {associatedId: options[f.associatedLevel]}));
+    return R.over(R.lensProp(path), cb, obj);
+  }
+  it('should support PUT with changed fields', () => {
+    const overRidden = {name: simpleDefinition.name, elementInstanceIds: [closeioId], mappedElementIds: [elementId]};
+    const transformations = Object.assign({}, basicTransformation, overRidden, {objectName: simpleDefinition.name, elementInstanceId: closeioId});
+    return cloud.put(api, simpleDefinition)
+      .then(r => cloud.put('/transformations', transformations))
+      .then(r => cloud.put(api, updateFields(Object.assign({}, changedFields, overRidden), 'fields')))
+      .then(r => cloud.get(`${api}/${simpleDefinition.name}`))
+      .then(r => cloud.get(`/instances/${closeioId}/transformations/${simpleDefinition.name}`))
+      .then(r => expect(r.body.fields.map(t => t.path).sort()).to.deep.equals(['accId2', 'instId2', 'orgId2']))
+      .then(r => cloud.delete(`/instances/${closeioId}/transformations/${simpleDefinition.name}?propagate=true`))
+      .then(r => cloud.delete(`${api}/${simpleDefinition.name}`));
+  });
+
 });
