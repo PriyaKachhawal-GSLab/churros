@@ -9,10 +9,10 @@ const R = require('ramda');
 const chakram = require('chakram');
 const expect = chakram.expect;
 
-const vdrSystem = require('core/tools').requirePayload(`${__dirname}/assets/vdr.system.json`);
-const vdrMulti = require('core/tools').requirePayload(`${__dirname}/assets/vdr.multi.json`);
-const schema = require('core/tools').requirePayload(`${__dirname}/assets/vdr.schema.json`);
-const pluralSchema = require('core/tools').requirePayload(`${__dirname}/assets/vdrs.schema.json`);
+const vdrSystem = tools.requirePayload(`${__dirname}/assets/vdr.system.json`);
+const vdrMulti = tools.requirePayload(`${__dirname}/assets/vdr.multi.json`);
+const schema = tools.requirePayload(`${__dirname}/assets/vdr.schema.json`);
+const pluralSchema = tools.requirePayload(`${__dirname}/assets/vdrs.schema.json`);
 pluralSchema.definitions.vdr = schema;
 
 suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
@@ -51,7 +51,9 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
     after(() => {
       return cloud.delete(`/users/${orgUser.id}`, R.always(true))
         .then(() => cloud.delete(`/users/${acctUser.id}`, R.always(true)))
-        .then(() => cloud.delete(`/accounts/${account.id}`, R.always(true)));
+        .then(() => cloud.delete(`/accounts/${account.id}`, R.always(true)))
+        .then(() => cloud.delete(`/instances/${instance1Id}`, R.always(true)))
+        .then(() => cloud.delete(`/instances/${instance2Id}`, R.always(true)));
   });
 
   const cloudWithOrgUser = () => cloud.withOptions({ headers: { Authorization: `User ${orgUser.secret}, Organization ${defaults.secrets().orgSecret}` } });
