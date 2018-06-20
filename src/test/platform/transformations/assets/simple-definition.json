@@ -3,20 +3,20 @@
   "elementInstanceIds": [],
   "mappedElementIds": [],
   "fields": [
-		{
-				"type": "string",
-				"path": "orgId",
-				"associatedLevel": "organization"
-		},
-		{
-				"type": "string",
-				"path": "accId",
-				"associatedLevel": "account"
-		},
-		{
-				"type": "string",
-				"path": "instId",
-				"associatedLevel": "instance"
-		}
+    {
+      "type": "string",
+      "path": "orgId",
+      "associatedLevel": "organization"
+    },
+    {
+      "type": "string",
+      "path": "accId",
+      "associatedLevel": "account"
+    },
+    {
+      "type": "string",
+      "path": "instId",
+      "associatedLevel": "instance"
+    }
   ]
 }

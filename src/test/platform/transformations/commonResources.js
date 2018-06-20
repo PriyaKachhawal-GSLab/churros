@@ -117,7 +117,7 @@ suite.forPlatform('common-resources', {}, () => {
     return R.over(R.lensProp(path), cb, obj);
   }
   it('should support PUT with changed fields', () => {
-    const overRidden = {name: simpleDefinition.name, elementInstanceIds: [closeioId], mappedElementIds: [elementId]}
+    const overRidden = {name: simpleDefinition.name, elementInstanceIds: [closeioId], mappedElementIds: [elementId]};
     const transformations = Object.assign({}, basicTransformation, overRidden, {objectName: simpleDefinition.name, elementInstanceId: closeioId});
     return cloud.put(api, simpleDefinition)
       .then(r => cloud.put('/transformations', transformations))
