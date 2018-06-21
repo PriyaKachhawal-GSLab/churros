@@ -920,6 +920,10 @@
       {
         "path": "modified_date",
         "type": "string"
+      },
+      {
+        "path": "id",
+        "vendorPath": "key.id"
       }
     ]
   },
@@ -1248,7 +1252,11 @@
       {
         "path": "id",
         "type": "string"
-      }
+      },
+      {
+        "path": "id",
+        "vendorPath": "taxDetailKey.id"
+      }       
     ]
   },
   "tokens": {
@@ -1624,6 +1632,10 @@
       {
         "path": "id",
         "type": "string"
+      },
+      {
+        "path": "id",
+        "vendorPath": "key.id"
       }
     ]
   },
@@ -3052,6 +3064,19 @@
       {
         "path": "id",
         "type": "string"
+      }
+    ]
+  },
+  "receivables-invoices": {
+    "vendorName": "ReceivablesInvoice",
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "vendorPath": "key.id"
       }
     ]
   }

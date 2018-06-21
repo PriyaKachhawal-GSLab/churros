@@ -5,15 +5,7 @@ const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 suite.forElement('finance', 'tax-rates', (test) => {
   test.should.supportPagination();
-    it(`should support RS for ${test.api}`, () => {
-      let id;
-      return cloud.get(`${test.api}`)
-    
-       
-        .then(r => id = r.body[0].taxDetailKey.id)
-        
-        .then(r => cloud.get(`${test.api}/${id}`));
-    });
+  test.should.supportSr();
     test.withApi(test.api)
     .withOptions({ qs: { where: `taxDetailKeyId='AUSSTE+PS0N0'` } })
     .withValidation(r => expect(r.body.filter(obj => obj.taxDetailKey.id !== "")).to.not.be.empty)
