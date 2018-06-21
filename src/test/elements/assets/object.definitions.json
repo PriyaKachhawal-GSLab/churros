@@ -1016,6 +1016,10 @@
       {
         "path": "Id",
         "type": "string"
+      },
+      {
+        "path": "id",
+        "vendorPath": "key.id"
       }
     ]
   },

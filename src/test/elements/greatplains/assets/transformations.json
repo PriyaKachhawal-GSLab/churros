@@ -34,5 +34,14 @@
         "vendorPath": "employeeKey.id"
       }
     ]
+  },
+  "vendors": {
+    "vendorName": "Vendor",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "key.id"
+      }
+    ]
   }
 }
