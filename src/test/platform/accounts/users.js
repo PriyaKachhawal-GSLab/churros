@@ -116,6 +116,7 @@ describe('account users', () => {
     let acctId;
     let userId;
     let userSecret;
+    let instanceId;
 
     return cloud.post(`/accounts/`, account2)
     .then(r => acctId = r.body.id)
@@ -124,6 +125,7 @@ describe('account users', () => {
     // Create a pipedrive instance with the new user's credentials
     .then(() => defaults.withDefaults(userSecret, orgSecret, user.email))
     .then(() => provisioner.create('pipedrive'))
+    .then(r => instanceId = r.body.id)
     // Validate that the instance is there for the new user
     .then(() => defaults.withDefaults(userSecret, orgSecret, user.email))
     .then(() => cloud.get(`/instances`))
@@ -140,7 +142,6 @@ describe('account users', () => {
     .then(r => expect(r.body.filter(a => a.externalId === account2.externalId).length).to.equal(1))
     // Validate the the user was deleted
     .then(() => cloud.get(`/accounts/${acctId}/users/${userId}`, r => expect(r).to.have.status(404)))
-    .then(() => cloud.get(`/instances`, r => expect(r).to.have.status(404)))
     // Clean up after ourselves
     .then(() => cloud.delete(`/accounts/${acctId}`));
   });
