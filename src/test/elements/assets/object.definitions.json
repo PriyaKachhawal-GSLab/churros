@@ -504,10 +504,6 @@
       {
         "path": "id",
         "type": "string"
-      },
-      {
-        "path": "id",
-        "vendorPath": "key.id"
       }
     ]
   },
@@ -712,10 +708,6 @@
       {
         "path": "id",
         "type": "string"
-      },
-      {
-        "path": "id",
-        "vendorPath": "TxnID"
       }
     ]
   },
@@ -928,10 +920,6 @@
       {
         "path": "modified_date",
         "type": "string"
-      },
-      {
-        "path": "id",
-        "vendorPath": "key.id"
       }
     ]
   },
@@ -1028,10 +1016,6 @@
       {
         "path": "Id",
         "type": "string"
-      },
-      {
-        "path": "id",
-        "vendorPath": "key.id"
       }
     ]
   },
@@ -1260,10 +1244,6 @@
       {
         "path": "id",
         "type": "string"
-      },
-      {
-        "path": "id",
-        "vendorPath": "taxDetailKey.id"
       }
     ]
   },
@@ -1640,10 +1620,6 @@
       {
         "path": "id",
         "type": "string"
-      },
-      {
-        "path": "id",
-        "vendorPath": "key.id"
       }
     ]
   },
@@ -3072,18 +3048,6 @@
       {
         "path": "id",
         "type": "string"
-      }
-    ]
-  },
-  "receivables-invoices": {
-    "fields": [
-      {
-        "path": "idTransformed",
-        "type": "string"
-      },
-      {
-        "path": "id",
-        "vendorPath": "key.id"
       }
     ]
   }

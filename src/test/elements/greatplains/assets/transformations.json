@@ -34,50 +34,5 @@
         "vendorPath": "employeeKey.id"
       }
     ]
-  },
-  "ledger-accounts": {
-    "vendorName": "GLAccount",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "key.id"
-      }
-    ]
-  },
-  "products": {
-    "vendorName": "Item",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "key.id"
-      }
-    ]
-  },
-  "receivables-invoices": {
-    "vendorName": "ReceivablesInvoice",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "key.id"
-      }
-    ]
-  },
-  "tax-rates": {
-    "vendorName": "TaxDetail",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "taxDetailKey.id"
-      }
-    ]
-  },
-  "vendors": {
-    "vendorName": "Vendor",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "key.id"
-      }
-    ]
   }
 }
