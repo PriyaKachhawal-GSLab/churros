@@ -1,0 +1,32 @@
+{
+    "objectName": "churrosContact<<random.alphaNumeric##10>>",
+    "description": "churros VDR",
+    "fields": [
+      {
+        "type": "string",
+        "path": "orgField",
+        "level": "organization",
+        "displayName": "An Org Field"
+      },
+      {
+        "type": "string",
+        "path": "acctField",
+        "level": "account",
+        "displayName": "An Account Field"
+      },
+      {
+        "type": "int",
+        "path": "instanceField",
+        "level": "instance",
+        "associatedId": 123,
+        "displayName": "An Instance field!"
+      },
+      {
+        "type": "int",
+        "path": "instanceField2",
+        "level": "instance",
+        "associatedId": 456,
+        "displayName": "An Instance field on another instance"
+      }
+    ]
+}

@@ -6,12 +6,12 @@ const chakram = require('chakram');
 const expect = chakram.expect;
 const R = require('ramda');
 
-const {randomStr} = require('core/tools');
+const tools = require('core/tools');
 
-const vdrPayload = require('core/tools').requirePayload(`${__dirname}/assets/vdr.json`);
-const transformationPayload = require('core/tools').requirePayload(`${__dirname}/assets/transformation.json`);
-const schema = require('core/tools').requirePayload(`${__dirname}/assets/transformation.schema.json`);
-const pluralSchema = require('core/tools').requirePayload(`${__dirname}/assets/transformations.schema.json`);
+const vdrPayload = tools.requirePayload(`${__dirname}/assets/vdr.system.json`);
+const transformationPayload = tools.requirePayload(`${__dirname}/assets/transformation.json`);
+const schema = tools.requirePayload(`${__dirname}/assets/transformation.schema.json`);
+const pluralSchema = tools.requirePayload(`${__dirname}/assets/transformations.schema.json`);
 pluralSchema.definitions.transformation = schema;
 
 // Adds the correct vdrFieldId to the transformation field by matching on the path and then removes the path
@@ -26,7 +26,7 @@ const addMatchingVdrFieldId = (vdrFields, tField) => {
 suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
     let vdrId, updatePayload;
     before(() => {
-      return cloud.post('/vdrs', vdrPayload)
+      return cloud.post('/vdrs?systemOnly=true', vdrPayload)
         .then(r => {
             vdrId = r.body.id;
             // add the vdr field ids to each of the transformation fields
@@ -39,7 +39,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
     });
   
     after(() => {
-        if (vdrId) cloud.delete(`/vdrs/${vdrId}`);
+        if (vdrId) cloud.delete(`/vdrs/${vdrId}?systemOnly=true`);
     });
 
     // NOTE - you need the 'vdrAdmin' role to run these tests
@@ -65,7 +65,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
 
     it('should support cloning a VDR and its transformations from the system catalog to the user\'s account', () => {
         let accountId, transformationId;
-        const newObjectName = `myNewObjectName-${randomStr('string', 6)}`;
+        const newObjectName = `myNewObjectName-${tools.randomStr('string', 6)}`;
   
         return cloud.post(`/vdrs/${vdrId}/transformations`, transformationPayload)
             .then(r => transformationId = r.body.id)
