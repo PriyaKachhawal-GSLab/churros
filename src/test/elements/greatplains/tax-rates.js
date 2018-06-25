@@ -1,5 +1,4 @@
 'use strict';
-
 const suite = require('core/suite');
 const expect = require('chakram').expect;
 suite.forElement('finance', 'tax-rates', (test) => {

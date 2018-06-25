@@ -1,10 +1,7 @@
 'use strict';
-
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-
 const expect = require('chakram').expect;
-
 suite.forElement('finance', 'credit-terms', (test) => {
   test.should.supportPagination();
   test.should.supportSr();
