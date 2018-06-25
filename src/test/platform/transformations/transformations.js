@@ -181,7 +181,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
   it('should support org-level object definition CRUD by name', () => crudObjectDefsByName('organizations', genDefaultObjectDef({}), genDefaultObjectDef({}), objDefSchema));
   it('should support org-level transformation CRUD by name and element key', () => crudTransformsByName('organizations', elementKey, genDefaultTrans({}), genDefaultTrans({}), schema));
   it('should support org-level transformation CRUD by name and element ID', () => crudTransformsByName('organizations', elementId, genDefaultTrans({}), genDefaultTrans({}), schema));
-  it.skip('should support org-level transformations', () => {
+  it('should support org-level transformations', () => {
     let objectName = 'churros-object-' + tools.random();
     return testTransformation(sfdcId, objectName, getObjectDefUrl('organizations', objectName), getTransformUrl('organizations', objectName, elementKey));
   });
@@ -214,7 +214,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       .then(r => r.body.forEach(account => accountId = (account.defaultAccount) ? accountId = account.id : accountId))
       .then(r => crudTransformsByName('accounts/' + accountId, elementId, genDefaultTrans({}), genDefaultTrans({}), schema));
   });
-  it.skip('should support account-level transformations', () => {
+  it('should support account-level transformations', () => {
     let objectName = 'churros-object-' + tools.random();
     let accountId, level;
     return getPlatformAccounts()
@@ -230,13 +230,13 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
   it('should support instance-level transformation CRUD by name', () => {
     return crudTransformsByName(`instances/${sfdcId}`, undefined, genDefaultTrans({}), genDefaultTrans({}), schema);
   });
-  it.skip('should support instance-level transformations', () => {
+  it('should support instance-level transformations', () => {
     let objectName = 'churros-object-' + tools.random();
     let level = `instances/${sfdcId}`;
     return testTransformationForInstance(objectName, getObjectDefUrl(level, objectName), getTransformUrl(level, objectName));
   });
 
-  it.skip('should support transformation inheritance', () => {
+  it('should support transformation inheritance', () => {
     let objectName = 'churros-object-' + tools.random();
     let accountId;
     return cloud.post(getObjectDefUrl('organizations', objectName), genBaseObjectDef({}))
@@ -353,16 +353,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       .then(r => cloud.delete(`/common-resources/${noFields.name}`).catch(r => {}));
   });
 
-  // todo - make this work with payloads with fields
-  // it('should support upserting a transformation with multi-level fields', () => {
-  //   return cloud.put('/common-resources', noFields)
-  //     .then(r => cloud.post(`/instances/${sfdcId}/transformations/${noFields.name}`, {vendorName: "Lead"}))
-  //     .then(r => cloud.put('/transformations', noFieldV2Payload))
-  //     .then(r => cloud.delete(`/instances/${sfdcId}/transformations/${noFields.name}`))
-  //     .then(r => cloud.delete(`/common-resources/${noFields.name}`).catch(r => {}));
-  // });
-
-  it.skip('should support renaming object defintions and transformations at the org level', ()=> {
+  it('should support renaming object defintions and transformations at the org level', ()=> {
     let objectName = 'churros-object-' + tools.random();
     let newObjectName = 'churros-renamed-' + tools.random();
     const renamePayload = {
@@ -377,7 +368,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       .then(r => cloud.delete(getObjectDefUrl('organizations', newObjectName)));
   });
 
-  it.skip('should support renaming object defintions and transformations at the account level', ()=> {
+  it('should support renaming object defintions and transformations at the account level', ()=> {
     let objectName = 'churros-object-' + tools.random();
     let newObjectName = 'churros-renamed-' + tools.random();
     const renamePayload = {
@@ -395,7 +386,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       .then(r => cloud.delete(getObjectDefUrl('accounts/' + accountId, newObjectName)));
   });
 
-  it.skip('should support renaming object defintions and transformations at the instance level', ()=> {
+  it('should support renaming object defintions and transformations at the instance level', ()=> {
     let objectName = 'churros-object-' + tools.random();
     let newObjectName = 'churros-renamed-' + tools.random();
     const renamePayload = {
