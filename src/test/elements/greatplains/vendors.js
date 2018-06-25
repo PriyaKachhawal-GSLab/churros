@@ -10,7 +10,5 @@ suite.forElement('finance', 'vendors', {payload:payload},(test) => {
     .withOptions({ qs: { where: `id='ACETRAVE0001'` } })
     .withValidation(r => expect(r.body.filter(obj => obj.key.id !== "")).to.not.be.empty)
     .withName('should allow GET with option id')
-    .should.return200OnGet();
-   
-    
+    .should.return200OnGet();   
 });
