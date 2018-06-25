@@ -8,9 +8,9 @@ const R = require('ramda');
 const expect = require('chakram').expect;
 const provisioner = require('core/provisioner');
 
-const payload = require('core/tools').requirePayload(`${__dirname}/assets/vdr.json`);
-const schema = require('core/tools').requirePayload(`${__dirname}/assets/vdr.schema.json`);
-const pluralSchema = require('core/tools').requirePayload(`${__dirname}/assets/vdrs.schema.json`);
+const payload = tools.requirePayload(`${__dirname}/assets/vdr.system.json`);
+const schema = tools.requirePayload(`${__dirname}/assets/vdr.schema.json`);
+const pluralSchema = tools.requirePayload(`${__dirname}/assets/vdrs.schema.json`);
 pluralSchema.definitions.vdr = schema;
 
 // NOTE: these tests assume your organization has upgraded to v2 VDRs
