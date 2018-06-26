@@ -270,10 +270,12 @@ suite.forPlatform('elements/instances', opts, (test) => {
     .then(r => cloud.get(`instances/${instance.id}`))
     .then(r => expect(r.body.tags).to.have.length(0))
     .then(r => provisioner.delete(instance.id))
-    .catch(r => {
+    .catch(e => {
       if(instance && instance.id){
         provisioner.delete(instance.id);
-      }});
+      }
+      throw e;
+    });
 
 
   });
