@@ -269,7 +269,11 @@ suite.forPlatform('elements/instances', opts, (test) => {
     .then(r => cloud.put(`instances/${instance.id}`, assoc('tags', [], instance)))
     .then(r => cloud.get(`instances/${instance.id}`))
     .then(r => expect(r.body.tags).to.have.length(0))
-    .then(r => provisioner.delete(instance.id));
+    .then(r => provisioner.delete(instance.id))
+    .catch(r => {
+      if(instance && instance.id){
+        provisioner.delete(instance.id);
+      }});
 
 
   });
