@@ -5,7 +5,6 @@ const payload = require('core/tools').requirePayload(`${__dirname}/assets/prospe
 const expect = require('chakram').expect;
 const cloud = require('core/cloud');
 
-
 suite.forElement('crm', 'prospects', { payload: payload }, (test) => {
   test.should.supportCruds();
   test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
