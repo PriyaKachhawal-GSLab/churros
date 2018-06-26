@@ -5,7 +5,6 @@ const payload =  require('core/tools').requirePayload(`${__dirname}/assets/leads
 const expect = require('chakram').expect;
 const cloud = require('core/cloud');
 
-
 suite.forElement('crm', 'leads', { payload: payload }, (test) => {
   test.should.supportCruds();
   test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.return200OnGet();
