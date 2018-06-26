@@ -5,7 +5,7 @@ const payload = require('./assets/activities');
 const expect = require('chakram').expect;
 const cloud = require('core/cloud');
 
-suite.forElement('crm', 'activities', { payload: payload}, (test) => {
+suite.forElement('crm', 'activities', { payload: payload }, (test) => {
   test.should.supportCruds();
   test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.return200OnGet();
   it(`should support S, with IN operator for /hubs/crm/activities`, () => {
