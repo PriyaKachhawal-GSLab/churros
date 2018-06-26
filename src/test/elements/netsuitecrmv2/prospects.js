@@ -3,15 +3,23 @@
 const suite = require('core/suite');
 const payload = require('core/tools').requirePayload(`${__dirname}/assets/prospects.json`);
 const expect = require('chakram').expect;
+const cloud = require('core/cloud');
+
 
 suite.forElement('crm', 'prospects', { payload: payload }, (test) => {
   test.should.supportCruds();
   test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
-  test.withOptions({ qs: { where: `internalId in (80,78,1)` }})
-  .withValidation(r => {
-  expect(r).to.statusCode(200);
-  const validValues = r.body.filter(obj => obj.id.indexOf('80','78','1'));
-  expect(validValues.length).to.equal(r.body.length);
-  }).should.return200OnGet();
+  it(`should support S, with IN operator for /hubs/crm/prospects`, () => {
+    let internalIds = [];
+    return cloud.withOptions({ qs: {page: 1, pageSize: 5} }).get(`/hubs/crm/prospects`)
+    .then(r => r.body.forEach(function (entry) {
+    if (entry.id)
+      internalIds.push(entry.id);
+    }))
+    .then(r => cloud.withOptions({ qs: { where: `internalId in (${internalIds})`} }).get((test.api), (r) => {
+    expect(r.body.length).to.equal(5);
+    expect(r).to.have.statusCode(200);
+    }));
+  });
   test.should.supportCeqlSearch('id');
 });
