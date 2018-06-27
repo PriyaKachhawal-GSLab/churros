@@ -577,7 +577,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
   });
 
   it('should support instance allow nulls and remove unmapped fields on vdr', () => {
-    let config, transform, definition;
+    let config;
     const objectName = 'churros-object-' + tools.random();
     const transPayload =  genDefaultTrans({configuration: [{type: "passThrough", properties: {fromVendor: false, toVendor: false}}]});
     const objDefUrl = getObjectDefUrl('organizations', objectName);
