@@ -17,7 +17,7 @@ suite.forPlatform('faar2', {}, (test) => {
       if (!faarFormula) {
         return cloud.post('formulas', formula).then(f => faarFormula = f.body);
       } else {
-        return newResource.formulaId = faarFormula.id;
+        newResource.formulaId = faarFormula.id;
       }
     })
     .then(r => {
