@@ -13,9 +13,9 @@ suite.forPlatform('faar2', {}, (test) => {
 
   before(() => cloud.get('formulas')
     .then(r => {
-      faarFormula = R.pipe(R.prop('body'), R.find(R.propEq('name', 'GET /formula')))(r)
+      faarFormula = R.pipe(R.prop('body'), R.find(R.propEq('name', 'GET /formula')))(r);
       if (!faarFormula) {
-        return cloud.post('formulas', formula).then(f => faarFormula = f.body)
+        return cloud.post('formulas', formula).then(f => faarFormula = f.body);
       } else {
         return newResource.formulaId = faarFormula.id;
       }
@@ -67,7 +67,7 @@ suite.forPlatform('faar2', {}, (test) => {
   after(() => {
       return cloud.delete(`formulas/${faarFormula.id}/instances/${formulaInstance.id}`)
     .then(r => {
-      return provisioner.delete(newInstance.id, 'elements/sfdc/instances')
+      return provisioner.delete(newInstance.id, 'elements/sfdc/instances');
     })
     .then(r => {
       return cloud.delete(`elements/sfdc/resources/${faarResource.id}`);  
