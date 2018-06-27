@@ -587,7 +587,6 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       .then(() => cloud.patch(`/instances/${sfdcId}/configuration/${config.id}`, Object.assign({}, config, { propertyValue: 'false' })))
       .then(() => cloud.get(`/instances/${sfdcId}/configuration/${config.id}`, r => expect(r.body.propertyValue).to.equal('false')))
       .then(() => cloud.post(objDefUrl, genDefaultObjectDef({})))
-        // test normal transformation
       .then(r => cloud.post(transUrl, transPayload))
       .then(r => cloud.get('hubs/crm/' + objectName))
       .then(r => {
