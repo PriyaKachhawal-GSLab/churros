@@ -5,15 +5,20 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const provisioner = require('core/provisioner');
 const newResource = require('./assets/faar2/resource.json');
+const R = require('ramda');
 let formula = require('./assets/faar2/formula.json');
 
 suite.forPlatform('faar2', {}, (test) => {
   let faarFormula, faarResource, newInstance, formulaInstance;
 
-  before(() => cloud.post('formulas', formula)
+  before(() => cloud.get('formulas')
     .then(r => {
-      faarFormula = r.body;
-      newResource.formulaId = faarFormula.id;
+      faarFormula = R.pipe(R.prop('body'), R.find(R.propEq('name', 'GET /formula')))(r)
+      if (!faarFormula) {
+        return cloud.post('formulas', formula).then(f => faarFormula = f.body)
+      } else {
+        return newResource.formulaId = faarFormula.id;
+      }
     })
     .then(r => {
       return provisioner.create('sfdc');
@@ -60,17 +65,15 @@ suite.forPlatform('faar2', {}, (test) => {
   });
 
   after(() => {
-    return provisioner.delete(newInstance.id, 'elements/sfdc/instances')
+      return cloud.delete(`formulas/${faarFormula.id}/instances/${formulaInstance.id}`)
+    .then(r => {
+      return provisioner.delete(newInstance.id, 'elements/sfdc/instances')
+    })
     .then(r => {
       return cloud.delete(`elements/sfdc/resources/${faarResource.id}`);  
     })
     .then(r => {
-      if (formulaInstance) {
-        return cloud.delete(`formulas/${faarFormula.id}/instances/${formulaInstance.id}`)
-          .then(r => cloud.delete(`formulas/${faarFormula.id}`));
-      } else { 
-        return cloud.delete(`formulas/${faarFormula.id}`);
-      }
+      cloud.delete(`formulas/${faarFormula.id}`);
     }).catch(err => {
       console.log("something failed " + err);
     });
