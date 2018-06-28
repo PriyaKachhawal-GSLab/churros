@@ -25,7 +25,6 @@ suite.forElement('crm', 'accounts', { payload: accountsPayload }, (test) => {
 
   it('should allow CRUDS for accounts/{id}/notes', () => {
     let accountId = -1;
-    let notesId = -1;
     return cloud.post(test.api, accountsPayload)
       .then(r => accountId = r.body.id)
       .then(r => cloud.cruds(`${test.api}/${accountId}/notes`, notesPayload, chakram.put))
