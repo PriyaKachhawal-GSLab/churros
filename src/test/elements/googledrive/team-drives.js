@@ -2,6 +2,7 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
+const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/team-drives.json`);
 
 suite.forElement('documents', 'team-drives', { payload: payload }, (test) => {
@@ -41,5 +42,6 @@ suite.forElement('documents', 'team-drives', { payload: payload }, (test) => {
       expect(r).to.statusCode(200);
       const validValues = r.body.filter(obj => new Date(obj.createdTime).getTime() >= 1389744000000);
       expect(validValues.length).to.equal(r.body.length);
-    });
+    })
+    .should.return200OnGet();
 });

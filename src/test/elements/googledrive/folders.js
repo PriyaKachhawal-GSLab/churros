@@ -35,10 +35,10 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
     let srcPath, destPath;
     return cloud.post(`${test.api}`, payload)
       .then(r => {
-        srcPath = r.body.path;
-        expect(r.body.properties.thumbnailLink).to.be.undefined;
-        expect(r.body.properties.mimeType).to.be.undefined;
-      })
+            srcPath = r.body.path;
+            expect(r.body.properties.thumbnailLink).to.be.undefined;
+            expect(r.body.properties.mimeType).to.be.undefined;
+          })
       .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).get(`${test.api}/contents`))
       .then(r => cloud.withOptions({ qs: { path: `${srcPath}`, page: 1, pageSize: 1 } }).get(`${test.api}/contents`))
       .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).post(`${test.api}/copy`, updatePayload))
@@ -65,7 +65,7 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
       .then(r => cloud.withOptions({ qs: { path: `${destPath}` } }).delete(`${test.api}`));
   });
 
-  test.withApi(`${test.api}/contents`).withOptions({ qs: { path: '/' } }).should.supportNextPagePagination(1);
+  test.withApi(`${test.api}/contents`).withOptions({qs: {path :'/'}}).should.supportNextPagePagination(1);
 
   it('should allow GET /folders/contents', () => {
     return cloud.withOptions({ qs: { path: `/${directoryPath}` } }).get(`${test.api}/contents`);
@@ -108,15 +108,15 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
     .should.return200OnGet();
 
   test.withApi(`${test.api}/root/contents`)
-    .withName(`should allow GET for /folders/contents with orderBy createdDate desc`)
-    .withOptions({ qs: { pageSize: 5, page: 1, orderBy: `createdDate desc`, calculateFolderPath: false } })
-    .withValidation(r => {
-      expect(r).to.have.statusCode(200);
-      date1 = new Date(r.body[0].createdDate).getTime();
-      date2 = new Date(r.body[1].createdDate).getTime();
-      expect(date1 >= date2).to.be.true;
-    })
-    .should.return200OnGet();
+      .withName(`should allow GET for /folders/contents with orderBy createdDate desc`)
+      .withOptions({ qs: {  pageSize: 5, page: 1, orderBy: `createdDate desc`, calculateFolderPath: false } })
+      .withValidation(r => {
+        expect(r).to.have.statusCode(200);
+        date1 = new Date(r.body[0].createdDate).getTime();
+        date2 = new Date(r.body[1].createdDate).getTime();
+        expect(date1 >= date2).to.be.true;
+      })
+      .should.return200OnGet();
 
   test.withOptions({ qs: { path: '/' } }).withApi('/folders/contents').should.supportPagination('id');
 
@@ -142,7 +142,6 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
       }).get(`/hubs/documents/folders/contents`)
       .then(r => values = (r.body.filter(obj => obj.directory === true)))
       .then(r => folderId = values[0].id)
-      .then(r => cloud.withOptions({ qs: { includeTeamDrives: true } }).get(`/hubs/documents/folders/${folderId}/contents`))
+      .then(r => cloud.withOptions({ qs: { includeTeamDrives: true } }).get(`/hubs/documents/folders/${folderId}/contents`));
   });
-
 });
