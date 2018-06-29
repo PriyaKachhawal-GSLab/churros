@@ -3,7 +3,8 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
-const payload = require('./assets/files');const expect = require('chakram').expect;
+const payload = require('./assets/files');
+const expect = require('chakram').expect;
 const faker = require('faker');
 const folderPayload = require('./assets/folders');
 const randomInt = tools.randomInt();
