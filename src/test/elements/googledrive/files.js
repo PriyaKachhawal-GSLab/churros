@@ -68,7 +68,7 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
         qs: {
           path: `/`,
           includeTeamDrives: true,
-          teamdriveId: `${teamdriveId}`
+          teamDriveId: `${teamdriveId}`
         }
       }).get(`/hubs/documents/folders/contents`)
       .then(r => values = (r.body.filter(obj => obj.directory === false)))
@@ -86,7 +86,7 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
       qs: {
         path: `${filePath}`,
         includeTeamDrives: true,
-        teamdriveId: `${teamdriveId}`
+        teamDriveId: `${teamdriveId}`
       }
     }).get(test.api);
   });

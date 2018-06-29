@@ -137,7 +137,7 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
         qs: {
           path: `/`,
           includeTeamDrives: true,
-          teamdriveId: `${teamdriveId}`
+          teamDriveId: `${teamdriveId}`
         }
       }).get(`/hubs/documents/folders/contents`)
       .then(r => values = (r.body.filter(obj => obj.directory === true)))
