@@ -127,7 +127,10 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
       .then(r => cloud.withOptions({ qs: { path: `${path}` } }).delete(`${test.api}`));
   });
 
-  it('should allow GET team-drive /folders/contents and /folders/{id}/contents', () => {
+  it.skip('should allow GET team-drive /folders/contents and /folders/{id}/contents', () => {
+    // Skipping the test as POST /folders API is not enhanced to work with teamdrive
+    // Hardcoded the teamdrive Id because the 'churros.sauce@gmail.com' does not have teamdrive service enabled
+    // Below is the hardcoded teamdriveId that below to 'googledrive@cloud-elements.com' account
     let teamdriveId = "0ALHeVBw49XAXUk9PVA",
       folderId, values;
     return cloud.withOptions({
