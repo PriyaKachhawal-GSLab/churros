@@ -16,7 +16,6 @@ const options = {
       "first_name": "Churros",
       "middle_name": "P.",
       "country": "US",
-      "user_name": "churro.s",
       "email": "claude-update@churros.com",
       "roles": "",
       "last_name": "UPDATE",
