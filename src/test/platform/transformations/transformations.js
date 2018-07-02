@@ -1,6 +1,7 @@
 'use strict';
 
 const expect = require('chakram').expect;
+const R = require('ramda');
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
@@ -573,5 +574,36 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
         cloud.delete(objDefUrl);
         throw new Error(e);
       });
+  });
+
+  it('should support instance allow nulls and remove unmapped fields on vdr', () => {
+    let config;
+    const objectName = 'churros-object-' + tools.random();
+    const transPayload =  genDefaultTrans({configuration: [{type: "passThrough", properties: {fromVendor: false, toVendor: false}}]});
+    const objDefUrl = getObjectDefUrl('organizations', objectName);
+    const transUrl = getTransformUrl('organizations', objectName, elementKey);
+    return cloud.get(`/instances/${sfdcId}/configuration`)
+      .then(r => config = R.find(R.propEq('key', 'filter.response.nulls'))(r.body))
+      .then(() => cloud.patch(`/instances/${sfdcId}/configuration/${config.id}`, Object.assign({}, config, { propertyValue: 'false' })))
+      .then(() => cloud.get(`/instances/${sfdcId}/configuration/${config.id}`, r => expect(r.body.propertyValue).to.equal('false')))
+      .then(() => cloud.post(objDefUrl, genDefaultObjectDef({})))
+      .then(r => cloud.post(transUrl, transPayload))
+      .then(r => cloud.get('hubs/crm/' + objectName))
+      .then(r => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body).to.not.be.empty;
+        r.body.forEach(item => {
+          expect(item.churrosId).to.not.be.empty;
+          expect(item.churrosName).to.not.be.empty;
+          expect(item.churrosMod).to.not.be.empty;
+        });
+        const keys = Object.keys(r.body[0]);
+        return keys.filter(key => r.body[0][key] === null);
+      })
+      .then(r => expect(r.length > 0).to.equal(false))
+      // clean up
+      .then(() => cloud.patch(`/instances/${sfdcId}/configuration/${config.id}`, Object.assign({}, config, { propertyValue: 'true' })))
+      .then(() => cloud.delete(transUrl))
+      .then(() => cloud.delete(objDefUrl));
   });
 });
