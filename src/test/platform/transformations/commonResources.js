@@ -53,7 +53,7 @@ suite.forPlatform('common-resources', {}, () => {
   );
   after(() => cloud.delete(orgUrl)
     .then(common.deleteFormula(formulaId))
-    .then(() => cloud.delete(`/instances/${closeioId}`))
+    .then(() => provisioner.delete(closeioId))
   );
   it('should support returning all common resources that exist', () => {
     const v = r => {
