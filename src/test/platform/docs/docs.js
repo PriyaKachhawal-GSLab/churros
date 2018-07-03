@@ -5,7 +5,7 @@ const cloud = require('core/cloud');
 const swaggerParser = require('swagger-parser');
 const expect = require('chakram').expect;
 
-suite.forPlatform('docs', {}, () => {
+suite.forPlatform('docs', {skip: true}, () => {
   let hubs, elements;
 
   before(() => cloud.get('/elements')
