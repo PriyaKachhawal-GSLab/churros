@@ -12,15 +12,15 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
   
   it('should allow CRD for hubs/documents/folders and GET for hubs/documents/folders/metadata by path', () => {
     let srcPath;
-    return cloud.post(test.api, payload)
+  return cloud.withOptions({headers: { "Subsite": "/RobotSite" }}).post(test.api, payload)
       .then(r => {
         srcPath = r.body.path;
         expect(r.body.parentFolderId).to.not.be.null;
       })
-      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).get(`${test.api}/contents`))
-      .then(r => cloud.withOptions({ qs: { path: `${srcPath}`, page: 1, pageSize: 1 } }).get(`${test.api}/contents`))
-      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).get(`${test.api}/metadata`))
-      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).delete(test.api));
+      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` },headers: { "Subsite": "/RobotSite" } }).get(`${test.api}/contents`))
+      .then(r => cloud.withOptions({ qs: { path: `${srcPath}`, page: 1, pageSize: 1 },headers: { "Subsite": "/RobotSite" } }).get(`${test.api}/contents`))
+      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` },headers: { "Subsite": "/RobotSite" }} ).get(`${test.api}/metadata`))
+      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` },headers: { "Subsite": "/RobotSite" }} ).delete(test.api));
   });
 
   it('should allow CRD for hubs/documents/folders and GET for hubs/documents/folders/metadata by id', () => {
