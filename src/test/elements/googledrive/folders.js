@@ -7,6 +7,7 @@ const expect = require('chakram').expect;
 const faker = require('faker');
 const payload = require('./assets/folders');
 const quoteFolderPayload = require('./assets/quotefolders');
+const teamDrivePayload = tools.requirePayload(`${__dirname}/assets/team-drives.json`);
 const updatePayload = {
   path: `/${tools.random()}`
 };
@@ -17,7 +18,7 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
   let jpgFile = __dirname + '/assets/Penguins.jpg';
   let pngFile = __dirname + '/assets/Dice.png';
   let textFile = __dirname + '/assets/textFile.txt';
-  let jpgFileBody, pngFileBody, textFileBody, date1, date2;
+  let jpgFileBody, pngFileBody, textFileBody, date1, date2, teamDriveId;
 
   before(() =>
     cloud.withOptions({ qs: { path: `/${directoryPath}/Penguins.jpg`, overwrite: 'true' } }).postFile(`/hubs/documents/files`, jpgFile)
@@ -27,9 +28,12 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
     .then(() => cloud.withOptions({ qs: { path: `/${directoryPath}/textFile.txt`, overwrite: 'true' } }).postFile(`/hubs/documents/files`, textFile))
     .then(r => textFileBody = r.body)
     .then(() => cloud.withOptions({ qs: { path: `/${directoryPath}` } }).get(`${test.api}/metadata`))
-    .then(r => directoryId = r.body.id));
+    .then(r => directoryId = r.body.id)
+    .then(() => cloud.post('/hubs/documents/team-drives',teamDrivePayload))
+    .then(r => teamDriveId = r.body.id));
 
-  after(() => cloud.withOptions({ qs: { path: `/${directoryPath}` } }).delete(`/hubs/documents/folders`));
+  after(() => cloud.withOptions({ qs: { path: `/${directoryPath}` } }).delete(`/hubs/documents/folders`)
+  .then(() => cloud.delete(`/hubs/documents/team-drives/${teamDriveId}`)));
 
   it('should allow CRD for hubs/documents/folders and RU for hubs/documents/folders/metadata by path', () => {
     let srcPath, destPath;
@@ -127,21 +131,16 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
       .then(r => cloud.withOptions({ qs: { path: `${path}` } }).delete(`${test.api}`));
   });
 
-  it.skip('should allow GET team-drive /folders/contents and /folders/{id}/contents', () => {
-    // Skipping the test as POST /folders API is not enhanced to work with teamdrive
-    // Hardcoded the teamdrive Id because the 'churros.sauce@gmail.com' does not have teamdrive service enabled
-    // Below is the hardcoded teamdriveId that below to 'googledrive@cloud-elements.com' account
-    let teamdriveId = "0ALHeVBw49XAXUk9PVA",
-      folderId, values;
+  it('should allow GET team-drive /folders/contents and /folders/{id}/contents', () => {
     return cloud.withOptions({
         qs: {
           path: `/`,
           includeTeamDrives: true,
-          teamDriveId: `${teamdriveId}`
+          teamDriveId: `${teamDriveId}`
         }
       }).get(`/hubs/documents/folders/contents`)
-      .then(r => values = (r.body.filter(obj => obj.directory === true)))
-      .then(r => folderId = values[0].id)
-      .then(r => cloud.withOptions({ qs: { includeTeamDrives: true } }).get(`/hubs/documents/folders/${folderId}/contents`));
+      .then(r => expect(r).to.have.statusCode(200))
+      .then(r => cloud.withOptions({ qs: { includeTeamDrives: true } }).get(`/hubs/documents/folders/${teamDriveId}/contents`))
+      .then(r => expect(r).to.have.statusCode(200));
   });
 });

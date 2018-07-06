@@ -31,9 +31,15 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
     jpgFile = __dirname + '/assets/Penguins.jpg',
     textFile = __dirname + '/assets/textFile.txt';
   let query = { path: `/Penguins-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` };
+  // POST /files API is not enhanced to work with team-drives. Hence using an existing team-drive that contains an uploaded file.
+  const teamDriveName = 'DONT_DELETE';
+  let teamDriveId, values;
 
   before(() => cloud.withOptions({ qs: query }).postFile(test.api, jpgFile)
-    .then(r => jpgFileBody = r.body));
+    .then(r => jpgFileBody = r.body)
+    .then(() => cloud.get('/hubs/documents/team-drives'))
+    .then(r => values = r.body.filter(obj => obj.name === teamDriveName))
+    .then(r => teamDriveId = values[0].id));
 
   after(() => cloud.delete(`${test.api}/${jpgFileBody.id}`));
 
@@ -286,17 +292,13 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
           .then(() => cloud.delete(`${test.api}/${textFileBody2.id}`));
     });
 
-  it.skip('should allow GET team-drive /files by providing file id', () => {
-    // Skipping the test as POST /folders API is not enhanced to work with teamdrive
-    // Hardcoded the teamdrive Id because the 'churros.sauce@gmail.com' does not have teamdrive service enabled
-    // Below is the hardcoded teamdriveId that below to 'googledrive@cloud-elements.com' account
-    let teamdriveId = "0ALHeVBw49XAXUk9PVA",
-      fileId, values;
+  it('should allow GET team-drive /files by providing file id', () => {
+    let fileId, values;
     return cloud.withOptions({
         qs: {
           path: `/`,
           includeTeamDrives: true,
-          teamDriveId: `${teamdriveId}`
+          teamDriveId: `${teamDriveId}`
         }
       }).get(`/hubs/documents/folders/contents`)
       .then(r => values = (r.body.filter(obj => obj.directory === false)))
@@ -304,17 +306,14 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
       .then(r => cloud.withOptions({ qs: { includeTeamDrives: true } }).get(`${test.api}/${fileId}`));
   });
 
-  it.skip('should allow GET team-drive /files by providing path', () => {
-    // Skipping the test as POST /folders API is not enhanced to work with teamdrive
-    // Hardcoded the teamdrive Id because the 'churros.sauce@gmail.com' does not have teamdrive service enabled
-    // Below is the hardcoded teamdriveId that below to 'googledrive@cloud-elements.com' account
-    let teamdriveId = "0ALHeVBw49XAXUk9PVA",
-      filePath = "/dont_delete.txt";
+  it('should allow GET team-drive /files by providing path', () => {
+    // Hardcoded the filePath as POST /files API is not enhanced to work with teamdrives.
+    let filePath = "/dont_delete.txt";
     return cloud.withOptions({
       qs: {
         path: `${filePath}`,
         includeTeamDrives: true,
-        teamDriveId: `${teamdriveId}`
+        teamDriveId: `${teamDriveId}`
       }
     }).get(test.api);
   });
