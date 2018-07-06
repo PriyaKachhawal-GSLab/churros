@@ -5,6 +5,7 @@ const cloud = require('core/cloud');
 const tools = require('core/tools');
 const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/files.json`);
+const subsite = { "Subsite": "/RobotSite" };
 
 suite.forElement('documents', 'files', { payload: payload }, (test) => {
   let jpgFile = __dirname + '/assets/Penguins.jpg';
@@ -36,18 +37,18 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
   it('should allow CRD for hubs/documents/files and RU for hubs/documents/files/metadata by path', () => {
     let UploadFile = __dirname + '/assets/Penguins.jpg',
       srcPath;
-    return cloud.withOptions({ qs: { path: `/${tools.random()}`, overwrite: 'true', size: '777835' }, headers: { "Subsite": "/RobotSite" } }).postFile(test.api, UploadFile)
+    return cloud.withOptions({ qs: { path: `/${tools.random()}`, overwrite: 'true', size: '777835' }, headers: subsite  }).postFile(test.api, UploadFile)
       .then(r => {
         srcPath = r.body.path;
         expect(r.body.parentFolderId).to.not.be.null;
       })
-      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` }, headers: { "Subsite": "/RobotSite" } }).get(test.api))
-      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` }, headers: { "Subsite": "/RobotSite" } }).post(`${test.api}/copy`, payload))
-      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` }, headers: { "Subsite": "/RobotSite" } }).get(`${test.api}/links`))
-      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` }, headers: { "Subsite": "/RobotSite" } }).get(`${test.api}/metadata`))
-      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` }, headers: { "Subsite": "/RobotSite" } }).patch(`${test.api}/metadata`, payload))
+      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` }, headers: subsite }).get(test.api))
+      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` }, headers: subsite }).post(`${test.api}/copy`, payload))
+      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` }, headers: subsite  }).get(`${test.api}/links`))
+      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` }, headers: subsite  }).get(`${test.api}/metadata`))
+      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` }, headers: subsite  }).patch(`${test.api}/metadata`, payload))
       .then(r => srcPath = r.body.path)
-      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` }, headers: { "Subsite": "/RobotSite" } }).delete(test.api));
+      .then(r => cloud.withOptions({ qs: { path: `${srcPath}` }, headers: subsite  }).delete(test.api));
   });
 
   it('should allow CRD for hubs/documents/files and RU for hubs/documents/files/metadata by id', () => {
