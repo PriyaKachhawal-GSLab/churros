@@ -1,4 +1,0 @@
-{
-  "Name": "<<name.firstName>>",
-  "CRONExpression": "0 1 12 L * ?"
-}

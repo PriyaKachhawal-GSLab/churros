@@ -1,6 +1,0 @@
-{
-  "notes": "churros Customer",
-  "last_name": "<<name.lastName>>",
-  "first_name": "<<name.firstName>>",
-  "email": "<<internet.email>>"
-}

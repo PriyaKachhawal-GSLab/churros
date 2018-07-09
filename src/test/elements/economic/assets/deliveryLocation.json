@@ -1,8 +1,0 @@
-{
-  "address": "<<random.word>>",
-  "barred": true,
-  "city": "<<random.word>>",
-  "country": "India",
-  "postalCode": "412105",
-  "termsOfDelivery": "<<random.word>>"
-}

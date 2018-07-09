@@ -1,6 +1,0 @@
-{
-    "type": "Cash",
-    "amount": {
-        "amount": "<<commerce.price>>"
-    }
-}

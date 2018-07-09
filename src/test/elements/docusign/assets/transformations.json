@@ -1,9 +1,0 @@
-{
-  "payments": {
-    "vendorName": "templates",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "templateId"
-    }]
-  }
-}

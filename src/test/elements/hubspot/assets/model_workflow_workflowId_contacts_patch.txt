@@ -1,7 +1,0 @@
-[
-  {
-    "properties": {
-      "email": "e@fg.com"
-    }
-  }
-]

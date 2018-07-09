@@ -1,8 +1,0 @@
-{
-    "name": "Nintex 790 - Load Test",
-    "configuration": {
-      "element.instance": "{REPLACE}",
-      "event.notification.authtoken": "{}",
-      "event.notification.url": "{REPLACE}"
-    }
-}

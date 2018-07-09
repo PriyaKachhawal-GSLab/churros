@@ -1,7 +1,0 @@
-{
-    "description": "<<company.catchPhrase>>",
-    "type": "<<lorem.word>>",
-    "ownerId": "005i0000001VNdeAAG",
-    "name": "<<company.companyName>>",
-    "status": "<<random.word>>"
-}

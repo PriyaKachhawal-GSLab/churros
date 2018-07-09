@@ -1,8 +1,0 @@
-{
-  "name": "<<name.firstName>>",
-  "discount_rules": [{
-    "type": "all",
-    "method": "percent",
-    "amount": 5.00
-  }]
-}

@@ -1,7 +1,0 @@
-{
-  "name": "Color",
-  "slug": "churros<<random.alphaNumeric##4>>",
-  "type": "select",
-  "order_by": "menu_order",
-  "has_archives": true
-}

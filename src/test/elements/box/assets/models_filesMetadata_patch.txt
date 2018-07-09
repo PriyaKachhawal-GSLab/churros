@@ -1,7 +1,0 @@
-{
-  "path": "/file",
-  "size": 8,
-  "name": "file",
-  "directory": true,
-  "properties": {}
-}

@@ -1,7 +1,0 @@
-{
-  "person": {
-    "lastName": "<<name.lastName>>",
-    "firstName": "<<name.firstName>>",
-    "email": "<<internet.email>>"
-  }
-}

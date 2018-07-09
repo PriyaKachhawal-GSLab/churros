@@ -1,7 +1,0 @@
-{
- "Name": "<<name.firstName>>",
- "TaxCode": "a1f0Y0000051HOmQAM",
- "TaxTreatment": "a1i0Y000001706SQAQ",
- "Template": "a1Q0Y00000EiWMEUA3",
- "uid" : "<<random.uuid>>"
-}

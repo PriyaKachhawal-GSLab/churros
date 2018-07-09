@@ -1,6 +1,0 @@
-{
-  "variables":{
-     "role_delegator_group" : "group",
-    "role_delegator_user" : "user"
-   }	
-}

@@ -1,9 +1,0 @@
-{
-  "sites": {
-    "vendorName": "sites",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "Id"
-    }]
-  }
-}

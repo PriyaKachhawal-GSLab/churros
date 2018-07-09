@@ -1,5 +1,0 @@
-{
-  "Currency": "Currency__c",
-  "Description": "<<name.title>>",
-  "LedgerAccount": "AccountsReceivable"
-}

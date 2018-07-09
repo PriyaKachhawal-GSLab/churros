@@ -1,9 +1,0 @@
-{
-    "name": "Lithium Test - Sfdc bulk2",
-    "configuration": {
-      "counter": "0",
-      "email": "churros@churros.com",
-      "lithiumlsw.instance.id": "{REPLACE}",
-      "sfdc.instance.id": "{REPLACE}"
-    }
-}

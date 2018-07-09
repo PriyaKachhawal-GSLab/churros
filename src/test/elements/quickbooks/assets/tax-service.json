@@ -1,9 +1,0 @@
-{
-  "taxCode":"<<random.word>>",
-  "taxRateDetails": [{
-    "rateValue": 0,
-    "taxAgencyId": "123",
-    "taxRateName": "<<random.word>>"
-  }]
-}
-

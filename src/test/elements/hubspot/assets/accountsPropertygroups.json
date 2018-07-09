@@ -1,6 +1,0 @@
-{
-  "displayName": "<<random.word>>",
-  "displayOrder": 0,
-  "hubspotDefined": false,
-  "name": "hs_<<random.alphaNumeric##8>>"
-}

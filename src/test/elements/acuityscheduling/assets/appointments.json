@@ -1,8 +1,0 @@
-{
-  "email": "<<internet.email>>",
-  "firstName": "<<name.firstName>>",
-  "lastName": "<<name.lastName>>",
-  "notes": "<<random.words>>",
-  "phone": "<<phone.phoneNumber>>",
-  "appointmentTypeID": 1
-}

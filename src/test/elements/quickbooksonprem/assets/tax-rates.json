@@ -1,9 +1,0 @@
-{
-    "IsActive": "true",
-    "ItemDesc": "Sample Sales Tax",
-    "TaxRate": "3.50",
-    "TaxVendorRef": {
-        "FullName": "A Cheung Limited"
-    },
-    "Name": "SampleSalesTax"
-}

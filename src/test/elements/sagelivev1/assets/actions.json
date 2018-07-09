@@ -1,8 +1,0 @@
-{
-  "Name": "<<name.firstName>>",
-  "Context": "Record",
-  "Language": "en",
-  "SObjectType": "s2cor__Sage_INV_Trade_Document__c",
-  "Title": "<<name.title>>",
-  "Type": "Lightning Component"
-}

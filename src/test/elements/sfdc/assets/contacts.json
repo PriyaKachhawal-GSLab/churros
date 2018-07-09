@@ -1,8 +1,0 @@
-{
-    "firstName" : "<<name.firstName>>",
-    "lastName": "<<name.lastName>>",
-    "title": "<<name.jobTitle>>",
-    "department": "<<commerce.department>>",
-    "phone": "<<phone.phoneNumber>>",
-    "email": "<<internet.email>>"
-}

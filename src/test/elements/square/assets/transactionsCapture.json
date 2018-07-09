@@ -1,9 +1,0 @@
-{
-  "idempotency_key" : "<<random.uuid>>",
-  "card_nonce": "fake-card-nonce-ok",
-  "amount_money": {
-    "amount": 5000,
-    "currency": "USD"
-  },
-  "delay_capture": true
-}

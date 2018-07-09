@@ -1,9 +1,0 @@
-{
-    "Dimension": "a0C0Y000000Pm6lUAC",
-    "Ownerid": "0050Y000000d9mwQAA",
-    "Multiplicity": "Single",
-    "attributes": {
-      "type": "s2cor__Sage_ACC_Dimension_Rule__c",
-      "reference": "dimension-rules"
-    }
-  }

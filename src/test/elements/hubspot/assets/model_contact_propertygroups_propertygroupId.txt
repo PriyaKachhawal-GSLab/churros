@@ -1,6 +1,0 @@
-{
-  "displayName": "ConversiontytInformation",
-  "name": "conversioninformation",
-  "displayOrder": 5,
-  "hubspotDefined": true
-}

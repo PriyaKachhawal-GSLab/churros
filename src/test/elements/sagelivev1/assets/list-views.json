@@ -1,6 +1,0 @@
-{
-  "Name": "<<name.firstName>>",
-  "Language": "en",
-  "SObjectType": "s2cor__Sage_ACC_Journal__c",
-  "Title": "<<name.title>>"
-}

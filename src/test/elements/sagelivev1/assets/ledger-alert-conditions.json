@@ -1,7 +1,0 @@
-{
-  "Amount": 200,
-  "Operator": "=",
-  "CompareTo" : "Customer",
-  "LedgerAlert" :"a0Z0Y000000K7R0UAK",
-  "Column":"Price"
-}

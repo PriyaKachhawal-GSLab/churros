@@ -1,6 +1,0 @@
-{
-    "name" : "ChurrosTestAccount<<random.alphaNumeric##3>>",
-    "type": "<<lorem.word>>",
-    "phone": "<<phone.phoneNumber>>",
-    "website": "<<internet.url>>"
-}
