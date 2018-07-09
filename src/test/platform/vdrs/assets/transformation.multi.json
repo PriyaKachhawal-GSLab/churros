@@ -1,0 +1,51 @@
+{
+	"vendorName": "churrosMultiLevelTransform",
+	"elementKey": "closeio",
+	"instanceId": "REPLACE_ME",
+	"script": {
+		"body": "transformedObject.foo = 'bar'; done(transformedObject);",
+		"mimeType": "application/javascript",
+		"filterEmptyResponse": false,
+		"level": "instance",
+		"instanceId": "REPLACE_ME"
+	},
+	"configuration": [
+		{
+		  "properties": {
+				"bool": "true"
+		  },
+			"type": "inherit",
+			"level": "organization"
+		}
+	],
+	"fields": [{
+			"path": "orgField",
+			"vendorPath": "ORG",
+			"vendorType": "string"
+		},
+		{
+			"path": "acctField",
+			"vendorPath": "ACCT",
+			"vendorType": "string"
+		},
+		{
+			"path": "instanceField",
+			"vendorPath": "INST",
+			"vendorType": "string"
+		},
+		{
+			"path": "instanceField2",
+			"vendorPath": "INST2",
+			"vendorType": "string",
+		  "configuration": [
+				{
+					"type": "remove",
+					"properties": {
+						"fromVendor": true,
+						"toVendor": true
+					}
+				}
+		  ]
+		}
+	]
+}

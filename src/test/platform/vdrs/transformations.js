@@ -1,15 +1,18 @@
 'use strict';
 
 const suite = require('core/suite');
+const provisioner = require('core/provisioner');
 const cloud = require('core/cloud');
+const tools = require('core/tools');
+const defaults = require('core/defaults');
+const R = require('ramda');
 const chakram = require('chakram');
 const expect = chakram.expect;
-const R = require('ramda');
 
-const tools = require('core/tools');
-
-const vdrPayload = tools.requirePayload(`${__dirname}/assets/vdr.system.json`);
-const transformationPayload = tools.requirePayload(`${__dirname}/assets/transformation.json`);
+const vdrSystem = tools.requirePayload(`${__dirname}/assets/vdr.system.json`);
+const vdrMulti = tools.requirePayload(`${__dirname}/assets/vdr.multi.json`);
+const transformationSystem = tools.requirePayload(`${__dirname}/assets/transformation.system.json`);
+const transformationMulti = tools.requirePayload(`${__dirname}/assets/transformation.multi.json`);
 const schema = tools.requirePayload(`${__dirname}/assets/transformation.schema.json`);
 const pluralSchema = tools.requirePayload(`${__dirname}/assets/transformations.schema.json`);
 pluralSchema.definitions.transformation = schema;
@@ -24,30 +27,102 @@ const addMatchingVdrFieldId = (vdrFields, tField) => {
 };
 
 suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
-    let vdrId, updatePayload;
+    let account, orgUser, acctUser, instanceId;
+    let vdrSysId, vdrMultiId;
+    let updatePayloadSys, updatePayloadMulti;
     before(() => {
-      return cloud.post('/vdrs?systemOnly=true', vdrPayload)
+      const opts = { qs: { where: 'defaultAccount=true' } };
+      return cloud.withOptions(opts).get('/accounts')
         .then(r => {
-            vdrId = r.body.id;
+          expect(r.body.length).to.equal(1);
+          const user = { email: `churros+vdrs${tools.random()}@churros.com`, firstName: 'frank', lastName: 'ricard', password: 'Bingobango1!' };
+          return cloud.post(`/accounts/${r.body[0].id}/users`, user);
+        })
+        .then(r => {
+          orgUser = r.body;
+        })
+        .then(() => cloud.post(`/accounts`, {name: `churros+vdrs${tools.random()}`, externalId: `churros${tools.random()}@cloud-elements.com`}))
+        .then(r =>{
+          account = r.body;
+          const user = { email: `churros+vdrs${tools.random()}@churros.com`, firstName: 'frank', lastName: 'ricard', password: 'Bingobango1!' };
+          return cloud.post(`/accounts/${account.id}/users`, user);
+        })
+        .then(r => {
+          acctUser = r.body;
+        })
+        .then(r => provisioner.create('closeio'))       
+        .then(r => {
+          instanceId = r.body.id;
+          vdrMulti.fields[2].associatedId = instanceId;
+          vdrMulti.fields[3].associatedId = instanceId;
+          transformationMulti.script.instanceId = instanceId;
+          transformationMulti.isntanceId = instanceId;
+        })
+        .then(r => cloud.post('/vdrs?systemOnly=true', vdrSystem))
+        .then(r => {
+            vdrSysId = r.body.id;
             // add the vdr field ids to each of the transformation fields
-            transformationPayload.fields = R.map(f => addMatchingVdrFieldId(r.body.fields, f), transformationPayload.fields);
+            transformationSystem.fields = R.map(f => addMatchingVdrFieldId(r.body.fields, f), transformationSystem.fields);
 
             // set the update payload to change the name and remove a field
-            updatePayload = R.assoc('vendorName', 'updatedVendorName', transformationPayload);
-            updatePayload.fields = R.dropLast(1, updatePayload.fields);
+            updatePayloadSys = R.assoc('vendorName', 'updatedVendorName', transformationSystem);
+            updatePayloadSys.fields = R.dropLast(1, updatePayloadSys.fields);
+        })
+        .then(r => cloud.post('/vdrs', vdrMulti))
+        .then(r => {
+            vdrMultiId = r.body.id;
+            // add the vdr field ids to each of the transformation fields
+            transformationMulti.fields = R.map(f => addMatchingVdrFieldId(r.body.fields, f), transformationMulti.fields);
+
+            // set the update payload to change the name and remove an instance field
+            updatePayloadMulti = R.assoc('vendorName', 'updatedVendorName', transformationSystem);
+            updatePayloadMulti.fields = R.dropLast(1, updatePayloadMulti.fields);
         });
     });
-  
+
     after(() => {
-        if (vdrId) cloud.delete(`/vdrs/${vdrId}?systemOnly=true`);
-    });
+      return cloud.delete(`/users/${orgUser.id}`, R.always(true))
+        .then(() => cloud.delete(`/users/${acctUser.id}`, R.always(true)))
+        .then(() => cloud.delete(`/accounts/${account.id}`, R.always(true)))
+        .then(() => cloud.delete(`/instances/${instanceId}`, R.always(true)))
+        .then(() => cloud.delete(`/vdrs/${vdrSysId}?systemOnly=true`, R.always(true)))
+        .then(() => cloud.delete(`/vdrs/${vdrMultiId}`, R.always(true)));
+  });
 
     // NOTE - you need the 'vdrAdmin' role to run these tests
     it('should test CRUDS for vdr transformations', () => {
-        return cloud.withOptions({churros: {updatePayload}})
-            .crud(`/vdrs/${vdrId}/transformations`, transformationPayload, schema, chakram.put)
-            .then(r => cloud.get(`/vdrs/${vdrId}/transformations`, pluralSchema));
+        return cloud.withOptions({churros: {updatePayloadSys}})
+            .crud(`/vdrs/${vdrSysId}/transformations`, transformationSystem, schema, chakram.put)
+            .then(r => cloud.get(`/vdrs/${vdrSysId}/transformations`, pluralSchema));
     });
+
+    it('should support CRUDS for multi-level VDR transformations for user with OAI privs', () => {
+        let transformationSysId, updatePayload;
+        return cloud.put(`/users/${orgUser.id}/roles/org-admin`)
+            .then(() => cloudWithOrgUser().post(`/vdrs/${vdrMultiId}/transformations`, transformationMulti, schema))
+            .then(r => {
+              expect(r.body.fields.length).to.equal(4);
+              expect(r.response.headers['elements-error']).to.be.undefined;
+              transformationSysId = r.body.id;
+            })
+            .then(() => cloudWithOrgUser().get(`/vdrs/${vdrMultiId}/transformations/${transformationSysId}`, schema))
+            .then(r => {
+              expect(r.body.fields.length).to.equal(4);
+              expect(r.response.headers['elements-error']).to.be.undefined;
+            })
+            .then(() => cloudWithOrgUser().get(`/vdrs/${vdrMultiId}/transformations`, pluralSchema))
+            .then(() => cloudWithOrgUser().put(`/vdrs/${vdrMultiId}/transformations/${transformationSysId}`, updatePayloadMulti, schema))
+            .then(r => {
+              expect(r.body.fields.length).to.equal(3);
+              expect(r.response.headers['elements-error']).to.be.undefined;
+            })
+            .then(() => cloudWithOrgUser().delete(`/vdrs/${vdrMultiId}/transformations/${transformationSysId}`))
+            .then(r => {
+              expect(r.response.headers['elements-error']).to.be.undefined;
+            })
+            .then(() => cloudWithOrgUser().get(`/vdrs/${vdrMultiId}/transformations/${transformationSysId}`, r => expect(r).to.have.statusCode(404)))
+            .then(() => cloud.delete(`/users/${orgUser.id}/roles/org-admin`));
+        });
 
     it('should return a list of mapped element ids on a VDR when a transformation exists', () => {
         let transformationId;
@@ -57,54 +132,54 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
           expect(r.body.mappedElementIds).to.have.length(1);
         };
     
-        return cloud.post(`/vdrs/${vdrId}/transformations`, transformationPayload)
+        return cloud.post(`/vdrs/${vdrSysId}/transformations`, transformationSystem)
             .then(r => transformationId = r.body.id)
-            .then(() => cloud.get(`/vdrs/${vdrId}`, validator))
-            .then(() => cloud.delete(`/vdrs/${vdrId}/transformations/${transformationId}`));
+            .then(() => cloud.get(`/vdrs/${vdrSysId}`, validator))
+            .then(() => cloud.delete(`/vdrs/${vdrSysId}/transformations/${transformationId}`));
     });
 
     it('should support cloning a VDR and its transformations from the system catalog to the user\'s account', () => {
         let accountId, transformationId;
         const newObjectName = `myNewObjectName-${tools.randomStr('string', 6)}`;
   
-        return cloud.post(`/vdrs/${vdrId}/transformations`, transformationPayload)
+        return cloud.post(`/vdrs/${vdrSysId}/transformations`, transformationSystem)
             .then(r => transformationId = r.body.id)
             // test a basic clone
-            .then(() => cloud.post(`/vdrs/${vdrId}/clone`, {}))
-            .then(() => cloud.get(`/accounts/objects/${vdrPayload.objectName}/definitions`))
+            .then(() => cloud.post(`/vdrs/${vdrSysId}/clone`, {}))
+            .then(() => cloud.get(`/accounts/objects/${vdrSystem.objectName}/definitions`))
             // test cloning with a new objectName and including transformations
-            .then(() => cloud.post(`/vdrs/${vdrId}/clone?cloneAllTransformations=true`, {objectName: newObjectName}))
+            .then(() => cloud.post(`/vdrs/${vdrSysId}/clone?cloneAllTransformations=true`, {objectName: newObjectName}))
             .then(() => cloud.get(`/accounts/objects/${newObjectName}/definitions`))
             .then(() => cloud.get(`/accounts`)) //get the user's accountId (assuming they are the default account)
             .then(r => r.body.forEach(account => accountId = (account.defaultAccount) ? accountId = account.id : accountId))
-            .then(() => cloud.get(`/accounts/${accountId}/elements/${transformationPayload.elementKey}/transformations/${newObjectName}`))
-            .then(() => cloud.delete(`/accounts/${accountId}/elements/${transformationPayload.elementKey}/transformations/${newObjectName}`))
-            .then(() => cloud.delete(`/accounts/objects/${vdrPayload.objectName}/definitions`))
+            .then(() => cloud.get(`/accounts/${accountId}/elements/${transformationSystem.elementKey}/transformations/${newObjectName}`))
+            .then(() => cloud.delete(`/accounts/${accountId}/elements/${transformationSystem.elementKey}/transformations/${newObjectName}`))
+            .then(() => cloud.delete(`/accounts/objects/${vdrSystem.objectName}/definitions`))
             .then(() => cloud.delete(`/accounts/objects/${newObjectName}/definitions`))
-            .then(() => cloud.delete(`/vdrs/${vdrId}/transformations/${transformationId}`));
+            .then(() => cloud.delete(`/vdrs/${vdrSysId}/transformations/${transformationId}`));
       });
 
     it('should support cloning a subset of transformations by elementKey', () => {
         let accountId;
         let transformationIds = [];
-        const newObjectName = vdrPayload.objectName;
+        const newObjectName = vdrSystem.objectName;
 
-        const transformationOne = transformationPayload;
-        const transformationTwo = R.assoc('elementKey', 'sfdc', transformationPayload);
-        const transformationThree = R.assoc('elementKey', 'hubspotcrm', transformationPayload);
+        const transformationOne = transformationSystem;
+        const transformationTwo = R.assoc('elementKey', 'sfdc', transformationSystem);
+        const transformationThree = R.assoc('elementKey', 'hubspotcrm', transformationSystem);
 
         const expectEmpty = r => {
             expect(r).to.have.statusCode(404);
         };
 
-        return cloud.post(`/vdrs/${vdrId}/transformations`, transformationPayload)
+        return cloud.post(`/vdrs/${vdrSysId}/transformations`, transformationSystem)
             .then(r => transformationIds.push(r.body.id))
-            .then(()=> cloud.post(`/vdrs/${vdrId}/transformations`, transformationTwo))
+            .then(()=> cloud.post(`/vdrs/${vdrSysId}/transformations`, transformationTwo))
             .then(r => transformationIds.push(r.body.id))
-            .then(()=> cloud.post(`/vdrs/${vdrId}/transformations`, transformationThree))
+            .then(()=> cloud.post(`/vdrs/${vdrSysId}/transformations`, transformationThree))
             .then(r => transformationIds.push(r.body.id))
             // Test cloning two of the three mapped elements
-            .then(() => cloud.post(`/vdrs/${vdrId}/clone?elementKeys[]=${transformationTwo.elementKey}&elementKeys[]=${transformationOne.elementKey}`, {}))
+            .then(() => cloud.post(`/vdrs/${vdrSysId}/clone?elementKeys[]=${transformationTwo.elementKey}&elementKeys[]=${transformationOne.elementKey}`, {}))
             .then(() => cloud.get(`/accounts/objects/${newObjectName}/definitions`))
             // Get the default account id
             .then(() => cloud.get(`/accounts`)) 
@@ -119,7 +194,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
             .then(() => cloud.delete(`/accounts/${accountId}/elements/${transformationTwo.elementKey}/transformations/${newObjectName}`))
             .then(() => cloud.delete(`/accounts/objects/${newObjectName}/definitions`))
             .then(() => transformationIds.forEach(id => {
-                cloud.delete(`/vdrs/${vdrId}/transformations/${id}`);
+                cloud.delete(`/vdrs/${vdrSysId}/transformations/${id}`);
             }));
     });
 });
