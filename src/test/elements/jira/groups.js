@@ -1,12 +1,9 @@
 'use strict';
-
 const suite = require('core/suite');
-
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
-suite.forElement('helpdesk', 'groups', null, (test) => {
-
+suite.forElement('helpdesk', 'groups', (test) => {
   it('should allow SR for groups', () => {
     let groupname;
     return cloud.get('/hubs/helpdesk/groups')
@@ -20,7 +17,5 @@ suite.forElement('helpdesk', 'groups', null, (test) => {
       expect(r).to.statusCode(200);
       const validValues = r.body.filter(obj => JSON.stringify(obj).toLowerCase().indexOf('admin'));
       expect(validValues.length).to.equal(r.body.length);
-    })
-    .should.return200OnGet();
-
+    }).should.return200OnGet();
 });
