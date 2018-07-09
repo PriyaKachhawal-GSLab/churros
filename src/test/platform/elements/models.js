@@ -23,6 +23,7 @@ const genObject = (options) => {
   let newPayload = payload || {};
   newPayload.createdDateName = (options.createdDateName || 'created_dt');
   newPayload.resources = (options.resources || []);
+  newPayload.id = (options.id || null);
   return newPayload;
 };
 
@@ -47,7 +48,7 @@ suite.forPlatform('elements/models', opts, (test) => {
           expect(r.body.name).to.equal(payload.name);
           modelId = r.body.id;
         })
-        .then(() => cloud.put(`/elements/${element.key}/models`, genObject({})))
+        .then(() => cloud.put(`/elements/${element.key}/models`, genObject({id: modelId})))
         .then(r => {
           expect(r.body.id).to.equal(modelId);
           expect(r.body.name).to.equal(payload.name);

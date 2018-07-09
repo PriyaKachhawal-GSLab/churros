@@ -1,7 +1,7 @@
 {
   "name": "churrosLeadModel",
   "vendorName": "churrosLeadModel",
-  "fields": [
+  "modelFields": [
     {
       "vendorName": "churrosLeadContact",
       "dataType": {
