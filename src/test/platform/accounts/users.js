@@ -140,7 +140,6 @@ describe('account users', () => {
     .then(r => expect(r.body.filter(a => a.externalId === account2.externalId).length).to.equal(1))
     // Validate the the user was deleted
     .then(() => cloud.get(`/accounts/${acctId}/users/${userId}`, r => expect(r).to.have.status(404)))
-    .then(() => cloud.get(`/instances`, r => expect(r).to.have.status(404)))
     // Clean up after ourselves
     .then(() => cloud.delete(`/accounts/${acctId}`));
   });

@@ -3,8 +3,6 @@
 const cloud = require('core/cloud');
 const suite = require('core/suite');
 const tools = require('core/tools');
-const expect = require('chakram').expect;
-const revokelinkaccessPayload = require('./assets/revokelinkaccess.json');
 
 suite.forElement('documents', 'files', (test) => {
 
@@ -29,13 +27,14 @@ suite.forElement('documents', 'files', (test) => {
       .then(() => cloud.withOptions({ qs: query }).get(`${test.api}/revisions/${revisionId}`));
   });
 
-  it('it should allow C for documents/files/revoke-link-access', () => {
-      return cloud.get(`${test.api}/${jpgFileBody.id}/links`)
-      .then(r => revokelinkaccessPayload.url = r.body.providerViewLink)
-      .then(r => cloud.post(`${test.api}/revoke-link-access`, revokelinkaccessPayload))
-      .then(r => expect(r.body).to.be.empty);
+  it('it should allow D for documents/files/{id}/links', () => {
+       return cloud.get(`${test.api}/${jpgFileBody.id}/links`)
+       .then(() => cloud.delete(`${test.api}/${jpgFileBody.id}/links`));
+   });
+
+   it('it should allow D for documents/files/links', () => {
+       var filePath = jpgFileBody.path;
+       return cloud.get(`${test.api}/${jpgFileBody.id}/links`)
+      .then(() => cloud.withOptions({ qs: { path: filePath  } }).delete(`${test.api}/links`));
   });
-
-
-
 });
