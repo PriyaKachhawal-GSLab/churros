@@ -258,7 +258,7 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
   it('should allow download of cloudElementsLink', () => {
     return cloud.get(`/files/${jpgFileBody.id}/links`)
     .then(r => cloud.withOptions({baseUrl: null}).get(r.body.cloudElementsLink));
-  })
+  });
 
   it(`should allow POST /files/:id/thumbnails by providing folder id`, () => {
       const thumbnailFile = {
