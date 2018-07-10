@@ -43,8 +43,8 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
         .then(r => provisioner.create('closeio'))       
         .then(r => {
           instance2Id = r.body.id;
-          vdrMulti.fields[2].associatedId = instance1Id;
-          vdrMulti.fields[3].associatedId = instance2Id;
+          vdrMulti.fields[2].instanceId = instance1Id;
+          vdrMulti.fields[3].instanceId = instance2Id;
         });
     });
 
@@ -59,11 +59,11 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
   const cloudWithOrgUser = () => cloud.withOptions({ headers: { Authorization: `User ${orgUser.secret}, Organization ${defaults.secrets().orgSecret}` } });
   const cloudWithAcctUser = () => cloud.withOptions({ headers: { Authorization: `User ${acctUser.secret}, Organization ${defaults.secrets().orgSecret}` } });
 
-  const genUpdatePayload = (payload, fields, newFieldLevel, associatedId) => {
+  const genUpdatePayload = (payload, fields, newFieldLevel, instanceId) => {
     let up = R.assoc('objectName', 'updatedObjectName2', payload);
     up.fields = fields;
     up.fields[0].path = 'anUpdateField';
-    up.fields.push({type: 'string', path: 'aNewField', level: newFieldLevel, associatedId});
+    up.fields.push({type: 'string', path: 'aNewField', level: newFieldLevel, instanceId});
     return up;
   };
 

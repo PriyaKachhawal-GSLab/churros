@@ -21,23 +21,27 @@
 	"fields": [{
 			"path": "orgField",
 			"vendorPath": "ORG",
-			"vendorType": "string"
+			"vendorType": "string",
+			"level": "organization"
 		},
 		{
 			"path": "acctField",
 			"vendorPath": "ACCT",
-			"vendorType": "string"
+			"vendorType": "string",
+			"level": "account"
 		},
 		{
 			"path": "instanceField",
 			"vendorPath": "INST",
-			"vendorType": "string"
+			"vendorType": "string",
+			"level": "instance"
 		},
 		{
 			"path": "instanceField2",
 			"vendorPath": "INST2",
 			"vendorType": "string",
-		  "configuration": [
+			"level": "instance",
+		  	"configuration": [
 				{
 					"type": "remove",
 					"properties": {
@@ -45,7 +49,7 @@
 						"toVendor": true
 					}
 				}
-		  ]
+		  	]
 		}
 	]
 }
