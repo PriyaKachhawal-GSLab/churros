@@ -7,18 +7,16 @@ const modelPayload = require('core/tools').requirePayload(`${__dirname}/assets/e
 const fieldPayload = require('core/tools').requirePayload(`${__dirname}/assets/element.elementmodelfield.payload.json`);
 
 const putReadObject = (url, payload) => {
-  let object;
   return cloud
     .put(url, payload, modelSchema)
     .then(r => cloud.get(url))
     .then(r =>
       cloud.put(
         url,
-        {
-          ...r.body,
+        Object.assign(r.body, {
           modelFields: [],
           commitMessage: 'deleted things'
-        },
+        }),
         modelSchema
       )
     );
@@ -30,7 +28,7 @@ const genObject = (opts, model) => {
   if (opts.data && opts.data.length > 0) {
     newField = opts.data[0];
   }
-  return {...newPayload, modelFields: [...newPayload.modelFields, newField]};
+  return Object.assign(newPayload, {modelFields: newPayload.modelFields.concat(newField)});
 };
 
 suite.forPlatform('elements/modelfields', {payload: modelPayload, schema: modelSchema}, function(test) {

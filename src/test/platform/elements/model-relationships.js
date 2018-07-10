@@ -70,20 +70,18 @@ suite.forPlatform('elements/models', {}, (test) => {
     };
 
     const addFieldToPutPayload = (body, field, fields) => {
-        return {
-            ...body,
+        return Object.assign(body, {
             commitMessage: 'add a field',
             modelFields: R.append(field, fields)
-        };
+        });
     };
 
     const removeFieldFromPutPayload = (body, fieldName, fields) => {
         const fieldToRemove = R.find(R.propEq('vendorName', fieldName))(fields);
-        return {
-            ...body,
+        return Object.assign(body, {
             commitMessage: 'remove a field',
             modelFields: R.without([fieldToRemove], fields)
-        };
+        });
     };
 
     const contactValidator = r => {
