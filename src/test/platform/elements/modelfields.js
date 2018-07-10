@@ -15,7 +15,6 @@ const putReadObject = (url, payload) => {
         url,
         Object.assign(r.body, {
           modelFields: [],
-          commitMessage: 'deleted things'
         }),
         modelSchema
       )

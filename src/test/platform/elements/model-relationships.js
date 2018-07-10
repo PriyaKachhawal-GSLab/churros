@@ -71,16 +71,14 @@ suite.forPlatform('elements/models', {}, (test) => {
 
     const addFieldToPutPayload = (body, field, fields) => {
         return Object.assign(body, {
-            commitMessage: 'add a field',
-            modelFields: R.append(field, fields)
+            modelFields: R.append(field, fields),
         });
     };
 
     const removeFieldFromPutPayload = (body, fieldName, fields) => {
         const fieldToRemove = R.find(R.propEq('vendorName', fieldName))(fields);
         return Object.assign(body, {
-            commitMessage: 'remove a field',
-            modelFields: R.without([fieldToRemove], fields)
+            modelFields: R.without([fieldToRemove], fields),
         });
     };
 
@@ -122,7 +120,6 @@ suite.forPlatform('elements/models', {}, (test) => {
     return cloud.post(`/elements/${elementId}/models`, contactModel)
         .then(r => {
             contactModelId = r.body.id;
-            console.log(r);
             leadModel.modelFields[0].relatedModelId = contactModelId;
         })
         .then(() => cloud.get(`/elements/${elementId}/models/${contactModelId}`, contactValidator))
