@@ -35,7 +35,7 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
   before(() => cloud.withOptions({ qs: query }).postFile(test.api, jpgFile)
     .then(r => jpgFileBody = r.body));
 
-  after(() => cloud.delete(`${test.api}/${jpgFileBody.id}`));
+ after(() => cloud.delete(`${test.api}/${jpgFileBody.id}`));
 
   it('should allow ping for googledrive', () => {
     return cloud.get(`/hubs/documents/ping`);
@@ -254,6 +254,11 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
     .withOptions({ qs: { path : '/whatever/junk/thing/is/possible.txt'}})
     .withValidation(r => expect(r).to.have.statusCode(404))
     .should.return200OnGet();
+
+  it('should allow download of cloudElementsLink', () => {
+    return cloud.get(`/files/${jpgFileBody.id}/links`)
+    .then(r => cloud.withOptions({baseUrl: null}).get(r.body.cloudElementsLink));
+  });
 
   it(`should allow POST /files/:id/thumbnails by providing folder id`, () => {
       const thumbnailFile = {
