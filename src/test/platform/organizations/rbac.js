@@ -487,6 +487,13 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
       tableHeaderForeground: '#ffffff',
       tableBodyBackground: '#ffffff',
       tableBodyForeground: '#ffffff',
+      navigationIconSize: '12px',
+      navigationLabelSize: '12px',
+      navigationWidth: '12px',
+      componentsBorderColor: '#ffffff',
+      topBarTitleColor: '#ffffff',
+      navigationItemBorderColor: '#ffffff',
+      documentationUrl: 'http://joshuawyse.com'
     };
 
     it('should restrict access to updating the organization branding information but not retrieving it with the proper privilege', () => {
@@ -535,7 +542,7 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
         .then(() => cloudWithUser().get(`/organizations/users`));
     });
 
-    it('should restrict creating, editing, and eleting a new organization user without the proper privileges', () => {
+    it('should restrict creating, editing, and deleting a new organization user without the proper privileges', () => {
       const user = { email: `churros+rbac${tools.random()}@churros.com`, firstName: 'joseph-organization', lastName: 'pulaski', password: 'Bingobango1!' };
       let userId;
       return removePrivilegeIfNecessary('addUsersOrg')
@@ -544,6 +551,7 @@ suite.forPlatform('Tests privileges restrict API access as expected', test => {
         .then(() => cloudWithUser().post(`/organizations/users`, user))
         .then(r => userId = r.body.id)
         .then(() => removePrivilegeIfNecessary('editUsersOrg'))
+        .then(() => removePrivilegeIfNecessary('editUsersAccount'))
         .then(() => cloudWithUser().patch(`/organizations/users/${userId}`, user, insufficientPrivilegesValidator))
         .then(() => addPrivilegeIfNecessary('editUsersOrg'))
         .then(() => cloudWithUser().patch(`/organizations/users/${userId}`, user))

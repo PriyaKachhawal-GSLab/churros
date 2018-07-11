@@ -47,5 +47,15 @@ suite.forElement('documents','files',(test) => {
         .then(r => cloud.delete(`/hubs/documents/files/${jpgFileBody.id}/custom-fields-templates/${tempKey}/custom-fields`));
   });
 
+  it('it should allow D for documents/files/{id}/links', () => {
+      return cloud.get(`${test.api}/${jpgFileBody.id}/links`)
+      .then(() => cloud.delete(`${test.api}/${jpgFileBody.id}/links`));
+  });
+
+  it('it should allow D for documents/files/links', () => {
+     var filePath = jpgFileBody.path;
+      return cloud.get(`${test.api}/${jpgFileBody.id}/links`)
+      .then(() => cloud.withOptions({ qs: { path: filePath  } }).delete(`${test.api}/links`));
+  });
 
 });

@@ -8,9 +8,9 @@ const R = require('ramda');
 const expect = require('chakram').expect;
 const provisioner = require('core/provisioner');
 
-const payload = require('core/tools').requirePayload(`${__dirname}/assets/vdr.json`);
-const schema = require('core/tools').requirePayload(`${__dirname}/assets/vdr.schema.json`);
-const pluralSchema = require('core/tools').requirePayload(`${__dirname}/assets/vdrs.schema.json`);
+const payload = tools.requirePayload(`${__dirname}/assets/vdr.system.json`);
+const schema = tools.requirePayload(`${__dirname}/assets/vdr.schema.json`);
+const pluralSchema = tools.requirePayload(`${__dirname}/assets/vdrs.schema.json`);
 pluralSchema.definitions.vdr = schema;
 
 // NOTE: these tests assume your organization has upgraded to v2 VDRs
@@ -134,15 +134,15 @@ suite.forPlatform('level-vdr-apis', {payload, schema}, test => {
     return cloud.post(`/organizations/objects/${payload.objectName}/definitions`, genObj('org'), validate('org'))
         .then(() => cloud.post(`/accounts/${accountId}/objects/${payload.objectName}/definitions`, genObj('acct1'), validate('acct1')))
         .then(() => cloudWithUser().post(`/accounts/${newAccount.id}/objects/${payload.objectName}/definitions`, genObj('acct2'), validate('acct2')))
-        .then(() => cloud.post(`/instances/${closeioId}/objects/${payload.objectName}/definitions`,  genObj('closeio'), validate('closeio')))
-        .then(() => cloud.post(`/instances/${stripeId}/objects/${payload.objectName}/definitions`, genObj('stripe'), validate('stripe')))
+        .then(() => cloud.post(`/instances/${closeioId}/objects/${payload.objectName}/definitions`,  genObj('instance'), validate('instance')))
+        .then(() => cloud.post(`/instances/${stripeId}/objects/${payload.objectName}/definitions`, genObj('instance'), validate('instance')))
         .then(r => cloud.get(`/organizations/objects/${payload.objectName}/definitions`, validate('org')))
         .then(r => cloud.get(`/accounts/${accountId}/objects/${payload.objectName}/definitions`, validate('acct1')))
         .then(r => cloudWithUser().get(`/accounts/${newAccount.id}/objects/${payload.objectName}/definitions`, validate('acct2')))
         .then(r => cloud.delete(`/accounts/${accountId}/objects/${payload.objectName}/definitions`))
         .then(r => cloudWithUser().get(`/accounts/${newAccount.id}/objects/${payload.objectName}/definitions`, validate('acct2')))
-        .then(() => cloud.get(`/instances/${closeioId}/objects/${payload.objectName}/definitions`, validate('closeio')))
-        .then(() => cloud.get(`/instances/${stripeId}/objects/${payload.objectName}/definitions`, validate('stripe')))
+        .then(() => cloud.get(`/instances/${closeioId}/objects/${payload.objectName}/definitions`, validate('instance')))
+        .then(() => cloud.get(`/instances/${stripeId}/objects/${payload.objectName}/definitions`, validate('instance')))
         .then(() => cloud.delete(`/instances/${closeioId}/objects/${payload.objectName}/definitions`))
         .then(() => cloud.delete(`/instances/${stripeId}/objects/${payload.objectName}/definitions`))
         .then(r => cloud.delete(`organizations/objects/${payload.objectName}/definitions`))

@@ -6,7 +6,15 @@ const cloud = require('core/cloud');
 
 suite.forElement('documents', 'search', null, (test) => {
 
-  test.should.supportNextPagePagination(1);
+  let jpgFile = __dirname + '/assets/Penguins.jpg';
+  var jpgFileBody;
+  let query = { path: `/churros.jpg` , overwrite: 'true', size: '777835'};
+  before(() => cloud.withOptions({ qs : query }).postFile('/hubs/documents/files', jpgFile)
+  .then(r => jpgFileBody = r.body.path));
+
+  after(() => cloud.withOptions({ qs: { path: `${jpgFileBody}` } }).delete('/hubs/documents/files'));
+  
+  test.withOptions({ qs: { path: `/churros.jpg` } }).should.supportNextPagePagination(1);
   it('should allow GET /hubs/documents/search ', () => {
     let UploadFile = __dirname + '/assets/Penguins.jpg',
       srcPath;
