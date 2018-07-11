@@ -16,7 +16,7 @@
         "Addr1": "666 Main Street",
         "Addr2": "Suite 1234"
     },
-    "Name": "Site12",
+    "Name": "<<name.firstName>>",
     "Contact": "Cloud Elements",
     "Phone": "1-214-555-1212",
     "IsDefaultSite": "false",

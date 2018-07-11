@@ -25,6 +25,6 @@ suite.forElement('ecommerce', 'carts', { payload: shippingInformation }, (test) 
       .then(r => cartProduct.cartItem.sku = r)
       .then(r => cloud.post(`${test.api}/${cartId}/products`, cartProduct))
       .then(r => cloud.post(`${test.api}/${cartId}/shipping-information`, shippingInformation))
-      .then(r => cloud.post(`${test.api}/${cartId}/orders`, cartOrder));
+      .then(r => cloud.post(`${test.api}/${cartId}/orders`, cartOrder)); 
   });
 });
