@@ -20,8 +20,7 @@ suite.forElement('documents', 'team-drives', { payload: payload }, (test) => {
   test.should.supportPagination();
   // Skipping below test case as it only works for 'Docs and Drive' admin privileged GSuite accounts
   test
-    .withOptions({ skip: true })
-    .withOptions({ qs: { where: `createdTime >= '${createdTime}'` } })
+    .withOptions({ skip: true, qs: { where: `createdTime >= '${createdTime}'` } })
     .withName('should support Ceql date search')
     .withValidation(r => {
       expect(r).to.statusCode(200);
