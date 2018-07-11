@@ -22,5 +22,4 @@ suite.forElement('finance', 'classes', null, (test) => {
     return cloud.withOptions({qs: {where: `active='isNotTrueOrFalse'`}})
       .get(test.api, (r) => expect(r).to.have.statusCode(400))
   });
-
 });
