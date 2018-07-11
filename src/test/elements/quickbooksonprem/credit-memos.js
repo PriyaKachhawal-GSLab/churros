@@ -29,6 +29,6 @@ suite.forElement('finance', 'credit-memos', { payload: payload }, (test) => {
   test.should.supportNextPagePagination(1);
   it(`should return an error when 'TimeModified' filter is not a proper Date`, () => {
     return cloud.withOptions({qs: {where: `TimeModified='2018'`}})
-      .get(test.api, (r) => expect(r).to.have.statusCode(400))
+      .get(test.api, (r) => expect(r).to.have.statusCode(400));
   });  
 });

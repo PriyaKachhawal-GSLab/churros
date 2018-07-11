@@ -26,15 +26,15 @@ suite.forElement('finance', 'customers', { payload: payload }, (test) => {
     return cloud.get(test.api)
       .then(r => cloud.withOptions({ qs: { where: `Name='sample''s company'`} }).get(test.api))
       .then(r => cloud.withOptions({ qs: { where: `active='true'` } }).get(test.api))
-      .then(r => cloud.withOptions({ qs: { where: `TimeModified='2018-05'` } }).get(test.api))
+      .then(r => cloud.withOptions({ qs: { where: `TimeModified='2018-05'` } }).get(test.api));
       
   });
   it(`should return an error when 'TimeModified' filter is not a proper Date`, () => {
     return cloud.withOptions({qs: {where: `TimeModified='2018'`}})
-      .get(test.api, (r) => expect(r).to.have.statusCode(400))
+      .get(test.api, (r) => expect(r).to.have.statusCode(400));
   });
   it(`should return an error when 'active' filter is not true or false`, () => {
     return cloud.withOptions({qs: {where: `active='isNotTrueOrFalse'`}})
-      .get(test.api, (r) => expect(r).to.have.statusCode(400))
+      .get(test.api, (r) => expect(r).to.have.statusCode(400));
   });
 });
