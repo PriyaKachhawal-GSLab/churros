@@ -8,7 +8,7 @@ const rocketzenelement = require('./assets/element.metadata.docs.json');
 
 suite.forPlatform('metadata-docs', {}, (test) => {
   let createdElement, instanceId;
-  before(() => cloud.post('elements', rocketzenelement)
+  before(() => cloud.post('elements', Object.assign(rocketzenelement, {objects: []}))
       .then(r => createdElement = r.body)
       .then(r => provisioner.create('rocketzen', undefined, 'elements/rocketzen/instances'))
       .then(r => instanceId = r.body.id));
