@@ -18,8 +18,9 @@ suite.forElement('documents', 'team-drives', { payload: payload }, (test) => {
   };
   test.withOptions(options).should.supportCruds();
   test.should.supportPagination();
-  // Below CEQL test will pass only if the GSuite account has 'Docs and Drive' admin privileges
+  // Skipping below test case as it only works for 'Docs and Drive' admin privileged GSuite accounts
   test
+    .withOptions({ skip: true })
     .withOptions({ qs: { where: `createdTime >= '${createdTime}'` } })
     .withName('should support Ceql date search')
     .withValidation(r => {
