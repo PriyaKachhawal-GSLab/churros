@@ -12,9 +12,11 @@ const expect = chakram.expect;
 const vdrSystem = tools.requirePayload(`${__dirname}/assets/vdr.system.json`);
 const vdrMulti = tools.requirePayload(`${__dirname}/assets/vdr.multi.json`);
 const vdrMultiAcct = tools.requirePayload(`${__dirname}/assets/vdr.multi.json`);
+const vdrMultiInst = tools.requirePayload(`${__dirname}/assets/vdr.multi.json`);
 const transformationSystem = tools.requirePayload(`${__dirname}/assets/transformation.system.json`);
 const transformationMulti = tools.requirePayload(`${__dirname}/assets/transformation.multi.json`);
 const transformationMultiAcct = tools.requirePayload(`${__dirname}/assets/transformation.multi.json`);
+const transformationMultiInst = tools.requirePayload(`${__dirname}/assets/transformation.multi.json`);
 const schema = tools.requirePayload(`${__dirname}/assets/transformation.schema.json`);
 const pluralSchema = tools.requirePayload(`${__dirname}/assets/transformations.schema.json`);
 pluralSchema.definitions.transformation = schema;
@@ -85,7 +87,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
     const cloudWithOrgUser = () => cloud.withOptions({ headers: { Authorization: `User ${orgUser.secret}, Organization ${defaults.secrets().orgSecret}` } });
     const cloudWithAcctUser = () => cloud.withOptions({ headers: { Authorization: `User ${acctUser.secret}, Organization ${defaults.secrets().orgSecret}` } });
 
-    // NOTE - you need the 'vdrAdmin' role to run these tests
+    // NOTE - you need the 'vdrAdmin' role to run this test
     it('should test CRUDS for vdr transformations', () => {
         return cloud.withOptions({churros: {updatePayloadSys}, qs: {systemOnly: true}})
             .crud(`/vdrs/${vdrSysId}/transformations`, transformationSystem, schema, chakram.put)
@@ -129,16 +131,12 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
               expect(r.response.headers['elements-error']).to.be.undefined;
             })
             .then(() => cloudWithOrgUser().get(`/vdrs/${vdrMultiId}/transformations/${transformationMultiId}`, r => expect(r).to.have.statusCode(404)))
-            .then(() => cloud.delete(`/users/${orgUser.id}/roles/org-admin`))
-            .then(() => cloud.delete(`/vdrs/${vdrMultiId}`));
+            .then(() => cloudWithOrgUser().delete(`/vdrs/${vdrMultiId}`))
+            .then(() => cloud.delete(`/users/${orgUser.id}/roles/org-admin`));
     });
 
     it('should support CRUDS for multi-level VDR transformations for user with AI privs', () => {
         let transformationMultiId, updatePayload, vdrMultiId, acctUserInstanceId, updatePayloadMulti;
-        vdrMultiAcct.fields[2].path = 'subAcctInstanceField'; 
-        vdrMultiAcct.fields[3].path = 'subAcctInstanceField2'; 
-        transformationMultiAcct.fields[2].path = 'subAcctInstanceField'; 
-        transformationMultiAcct.fields[3].path = 'subAcctInstanceField2'; 
         return cloud.put(`/users/${orgUser.id}/roles/org-admin`)
             .then(r => cloud.put(`/users/${acctUser.id}/roles/admin`))
             // set up an instance for this user to use
@@ -189,7 +187,62 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
                 expect(r.response.headers['elements-error']).to.be.undefined;
             })
             .then(() => cloudWithAcctUser().get(`/vdrs/${vdrMultiId}/transformations/${transformationMultiId}`, r => expect(r).to.have.statusCode(404)))
+            .then(() => cloudWithAcctUser().delete(`/vdrs/${vdrMultiId}`))
+            .then(() => cloudWithOrgUser().delete(`/vdrs/${vdrMultiId}`))
+            .then(() => cloudWithAcctUser().delete(`/instances/${acctUserInstanceId}`))
             .then(() => cloud.delete(`/users/${orgUser.id}/roles/org-admin`))
+            .then(() => cloud.delete(`/users/${acctUser.id}/roles/admin`));
+    });
+
+    it('should support CRUDS for multi-level VDR transformations for user with I privs', () => {
+        let transformationMultiId, updatePayload, vdrMultiId, acctUserInstanceId, updatePayloadMulti;
+        // set up the vdr and provision an instance for this user
+        return cloudWithOrgUser().post('/vdrs', vdrMulti)
+            .then(r => vdrMultiId = r.body.id)
+            .then(() => defaults.withDefaults(acctUser.secret, defaults.secrets().orgSecret, acctUser.email))
+            .then(r => provisioner.create('closeio'))   
+            .then(r => {
+                acctUserInstanceId = r.body.id;
+                vdrMultiInst.instanceId = acctUserInstanceId;
+                vdrMultiInst.fields[2].associatedId = acctUserInstanceId;
+                vdrMultiInst.fields[3].associatedId = acctUserInstanceId;
+                transformationMultiInst.script.instanceId = acctUserInstanceId;
+                transformationMultiInst.instanceId = acctUserInstanceId;
+                defaults.reset();
+            })
+            .then(r => cloudWithAcctUser().put(`/vdrs/${vdrMultiId}`, vdrMultiInst))
+            .then(r => {
+                // add the vdr field ids to each of the transformation fields
+                transformationMultiInst.fields = R.map(f => addMatchingVdrFieldId(r.body.fields, f), transformationMultiInst.fields);
+                transformationMultiInst.fields = R.filter(f => f.vdrFieldId != null && f.vdrFieldId != undefined, transformationMultiInst.fields)
+    
+                // set the update payload to change the name and remove an instance field
+                updatePayloadMulti = R.assoc('vendorName', 'updatedVendorName', transformationMultiInst);
+                updatePayloadMulti.fields = R.dropLast(1, updatePayloadMulti.fields);
+            })
+            // test transformations
+            .then(() => cloudWithAcctUser().post(`/vdrs/${vdrMultiId}/transformations`, transformationMultiInst, schema))
+            .then(r => {
+                expect(r.body.fields.length).to.equal(2);
+                expect(r.response.headers['elements-error']).to.contain('ignored');
+                transformationMultiId = r.body.id;
+            })
+            .then(() => cloudWithAcctUser().get(`/vdrs/${vdrMultiId}/transformations/${transformationMultiId}`, schema))
+            .then(r => {
+                expect(r.body.fields.length).to.equal(2);
+                expect(r.response.headers['elements-error']).to.be.undefined;
+            })
+            .then(() => cloudWithAcctUser().get(`/vdrs/${vdrMultiId}/transformations`, pluralSchema))
+            .then(() => cloudWithAcctUser().put(`/vdrs/${vdrMultiId}/transformations/${transformationMultiId}`, updatePayloadMulti, schema))
+            .then(r => {
+                expect(r.body.fields.length).to.equal(1);
+                expect(r.response.headers['elements-error']).to.contain('ignored');
+            })
+            .then(() => cloudWithAcctUser().delete(`/vdrs/${vdrMultiId}/transformations/${transformationMultiId}`))
+            .then(r => {
+                expect(r.response.headers['elements-error']).to.be.undefined;
+            })
+            .then(() => cloudWithAcctUser().get(`/vdrs/${vdrMultiId}/transformations/${transformationMultiId}`, r => expect(r).to.have.statusCode(404)))
             .then(() => cloudWithAcctUser().delete(`/vdrs/${vdrMultiId}`))
             .then(() => cloudWithAcctUser().delete(`/instances/${acctUserInstanceId}`))
     });
