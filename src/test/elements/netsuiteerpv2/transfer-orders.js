@@ -6,7 +6,7 @@ const expect = require('chakram').expect;
 
 suite.forElement('erp', 'transfer-orders', { payload: payload }, (test) => {
   test.should.supportCruds();
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
+  //test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
   test
     .withOptions({ qs: { where: `lastModifiedDate >= '2014-01-15T00:00:00.000Z'` } })
     .withName('should support Ceql date search')

@@ -5,7 +5,7 @@ const payload = require('core/tools').requirePayload(`${__dirname}/assets/accoun
 
 
 suite.forElement('erp', 'accounts', { payload: payload}, (test) => {
-  test.should.supportCruds();
+  test.should.supportCrus();
   test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.return200OnGet();
-  test.should.supportCeqlSearch('id');
+  //test.should.supportCeqlSearch('id');
 });

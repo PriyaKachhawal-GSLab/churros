@@ -4,7 +4,7 @@ const suite = require('core/suite');
 const expect = require('chakram').expect;
 const cloud = require('core/cloud');
 
-suite.forElement('erp', 'budgets', { skip: true }, (test) => {
+suite.forElement('erp', 'budgets', (test) => {
 
   it('should allow SRUD for hubs/erp/budgets and CEQL search', () => {
     let budgetId, payload = {};

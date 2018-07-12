@@ -6,5 +6,5 @@ const payload = tools.requirePayload(`${__dirname}/assets/checks.json`);
 
 suite.forElement('erp', 'checks', { payload: payload }, (test) => {
   	test.should.supportCruds();
-  	test.should.supportCeqlSearch('memo');
+  //	test.should.supportCeqlSearch('memo');
 });
