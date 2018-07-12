@@ -24,7 +24,7 @@ pluralSchema.definitions.transformation = schema;
 // Adds the correct vdrFieldId to the transformation field by matching on the path and then removes the path
 const addMatchingVdrFieldId = (vdrFields, tField) => {
     const matchingVdrField = R.find(R.propEq('path', tField.path))(vdrFields);
-    if (matchingVdrField === null) { return tField; }
+    if (matchingVdrField === null || matchingVdrField === undefined) { return tField; }
     return R.pipe(
         R.assoc('vdrFieldId', matchingVdrField.id),
         R.dissoc('path')
@@ -61,7 +61,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
           instanceId = r.body.id;
           vdrMulti.fields[2].associatedId = instanceId;
           vdrMulti.fields[3].associatedId = instanceId;
-          transformationMulti.script.instanceId = instanceId;
+          transformationMulti.script.associatedId = instanceId;
           transformationMulti.instanceId = instanceId;
         })
         .then(r => cloud.post('/vdrs?systemOnly=true', vdrSystem))
@@ -147,7 +147,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
                 vdrMultiAcct.instanceId = acctUserInstanceId;
                 vdrMultiAcct.fields[2].associatedId = acctUserInstanceId;
                 vdrMultiAcct.fields[3].associatedId = acctUserInstanceId;
-                transformationMultiAcct.script.instanceId = acctUserInstanceId;
+                transformationMultiAcct.script.associatedId = acctUserInstanceId;
                 transformationMultiAcct.instanceId = acctUserInstanceId;
                 defaults.reset();
             })
@@ -206,7 +206,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
                 vdrMultiInst.instanceId = acctUserInstanceId;
                 vdrMultiInst.fields[2].associatedId = acctUserInstanceId;
                 vdrMultiInst.fields[3].associatedId = acctUserInstanceId;
-                transformationMultiInst.script.instanceId = acctUserInstanceId;
+                transformationMultiInst.script.associatedId = acctUserInstanceId;
                 transformationMultiInst.instanceId = acctUserInstanceId;
                 defaults.reset();
             })
