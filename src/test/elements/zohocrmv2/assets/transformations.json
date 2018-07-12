@@ -1,0 +1,85 @@
+{
+  "accounts": {
+    "vendorName": "Accounts",
+    "fields": [{
+        "path": "id",
+        "vendorPath": "details.id"
+      }]
+  },
+  "campaigns": {
+    "vendorName": "Campaigns",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "details.id"
+    }]
+
+  },
+  "cases": {
+    "vendorName": "Cases",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "details.id"
+    }]
+
+  },
+  "contacts": {
+    "vendorName": "Contacts",
+    "fields": [{
+        "path": "id",
+        "vendorPath": "details.id"
+      }]
+  },
+
+  "leads": {
+    "vendorName": "Leads",
+    "fields": [{
+        "path": "id",
+        "vendorPath": "details.id"
+      }]
+  },
+  "notes": {
+    "vendorName": "Notes",
+    "fields": [{
+        "path": "id",
+        "vendorPath": "details.id"
+      }]
+  },
+
+
+  "tasks": {
+    "vendorName": "Tasks",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "details.id"
+    }]
+  },
+
+  "activities-calls": {
+    "vendorName": "Calls",
+    "fields": [{
+        "path": "id",
+        "vendorPath":  "details.id"
+      }]
+  },
+  "activities-events": {
+    "vendorName": "Events",
+    "fields": [{
+        "path": "id",
+        "vendorPath":  "details.id"
+      }]
+  },
+  "opportunities": {
+    "vendorName": "Potentials",
+    "fields": [{
+        "path": "id",
+        "vendorPath": "details.id"
+      }]
+  },
+  "products": {
+    "vendorName": "Products",
+    "fields": [{
+        "path": "id",
+        "vendorPath": "details.id"
+      }]
+  }
+}
