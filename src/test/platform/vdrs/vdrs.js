@@ -258,8 +258,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
     .then(r => cloud.get(`/vdrs/snippets/${snippetId}`, validate))
     .then(r => cloud.delete(`/vdrs/snippets/${snippetId}`))
     .catch(e => {
-      console.log('real error');
-      cloud.delete(`vdrs/snippets/${snippetId}`)
+      cloud.delete(`vdrs/snippets/${snippetId}`);
       throw new Error(e);
     });
   });
@@ -278,8 +277,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
     .then(r => cloud.get(`/vdrs/snippets/${snippetId}`, validate))
     .then(r => cloud.delete(`/vdrs/snippets/${snippetId}`))
     .catch(e => {
-      console.log('real error2');
-      cloud.delete(`vdrs/snippets/${snippetId}`)
+      cloud.delete(`vdrs/snippets/${snippetId}`);
       throw new Error(e);
     });
   });
