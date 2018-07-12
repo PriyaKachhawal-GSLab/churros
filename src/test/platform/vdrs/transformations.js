@@ -24,7 +24,7 @@ pluralSchema.definitions.transformation = schema;
 // Adds the correct vdrFieldId to the transformation field by matching on the path and then removes the path
 const addMatchingVdrFieldId = (vdrFields, tField) => {
     const matchingVdrField = R.find(R.propEq('path', tField.path))(vdrFields);
-    if (matchingVdrField == null) { return tField; }
+    if (matchingVdrField === null) { return tField; }
     return R.pipe(
         R.assoc('vdrFieldId', matchingVdrField.id),
         R.dissoc('path')
@@ -95,7 +95,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
     });
 
     it('should support CRUDS for multi-level VDR transformations for user with OAI privs', () => {
-        let transformationMultiId, updatePayload, vdrMultiId, updatePayloadMulti;
+        let transformationMultiId, vdrMultiId, updatePayloadMulti;
         return cloud.put(`/users/${orgUser.id}/roles/org-admin`)
             // set up the vdr
             .then(r => cloudWithOrgUser().post('/vdrs', vdrMulti))
@@ -136,7 +136,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
     });
 
     it('should support CRUDS for multi-level VDR transformations for user with AI privs', () => {
-        let transformationMultiId, updatePayload, vdrMultiId, acctUserInstanceId, updatePayloadMulti;
+        let transformationMultiId, vdrMultiId, acctUserInstanceId, updatePayloadMulti;
         return cloud.put(`/users/${orgUser.id}/roles/org-admin`)
             .then(r => cloud.put(`/users/${acctUser.id}/roles/admin`))
             // set up an instance for this user to use
@@ -158,7 +158,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
                 vdrMultiId = r.body.id;
                 // add the vdr field ids to each of the transformation fields
                 transformationMultiAcct.fields = R.map(f => addMatchingVdrFieldId(r.body.fields, f), transformationMultiAcct.fields);
-                transformationMultiAcct.fields = R.filter(f => f.vdrFieldId != null && f.vdrFieldId != undefined, transformationMultiAcct.fields)
+                transformationMultiAcct.fields = R.filter(f => f.vdrFieldId !== null && f.vdrFieldId !== undefined, transformationMultiAcct.fields);
     
                 // set the update payload to change the name and remove an instance field
                 updatePayloadMulti = R.assoc('vendorName', 'updatedVendorName', transformationMultiAcct);
@@ -195,7 +195,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
     });
 
     it('should support CRUDS for multi-level VDR transformations for user with I privs', () => {
-        let transformationMultiId, updatePayload, vdrMultiId, acctUserInstanceId, updatePayloadMulti;
+        let transformationMultiId, vdrMultiId, acctUserInstanceId, updatePayloadMulti;
         // set up the vdr and provision an instance for this user
         return cloudWithOrgUser().post('/vdrs', vdrMulti)
             .then(r => vdrMultiId = r.body.id)
@@ -214,7 +214,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
             .then(r => {
                 // add the vdr field ids to each of the transformation fields
                 transformationMultiInst.fields = R.map(f => addMatchingVdrFieldId(r.body.fields, f), transformationMultiInst.fields);
-                transformationMultiInst.fields = R.filter(f => f.vdrFieldId != null && f.vdrFieldId != undefined, transformationMultiInst.fields)
+                transformationMultiInst.fields = R.filter(f => f.vdrFieldId !== null && f.vdrFieldId !== undefined, transformationMultiInst.fields);
     
                 // set the update payload to change the name and remove an instance field
                 updatePayloadMulti = R.assoc('vendorName', 'updatedVendorName', transformationMultiInst);
@@ -244,7 +244,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
             })
             .then(() => cloudWithAcctUser().get(`/vdrs/${vdrMultiId}/transformations/${transformationMultiId}`, r => expect(r).to.have.statusCode(404)))
             .then(() => cloudWithAcctUser().delete(`/vdrs/${vdrMultiId}`))
-            .then(() => cloudWithAcctUser().delete(`/instances/${acctUserInstanceId}`))
+            .then(() => cloudWithAcctUser().delete(`/instances/${acctUserInstanceId}`));
     });
 
     it('should return a list of mapped element ids on a VDR when a transformation exists', () => {
@@ -262,7 +262,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
     });
 
     it('should support cloning a VDR and its transformations from the system catalog to the user\'s account', () => {
-        let accountId, transformationId;
+        let transformationId;
         const newObjectName = `myNewObjectName-${tools.randomStr('string', 6)}`;
   
         return cloud.post(`/vdrs/${vdrSysId}/transformations`, transformationSystem)
@@ -281,7 +281,6 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
       });
 
     it('should support cloning a subset of transformations by elementKey', () => {
-        let accountId;
         let transformationIds = [];
         const newObjectName = vdrSystem.objectName;
 
