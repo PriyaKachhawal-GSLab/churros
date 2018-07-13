@@ -1,0 +1,13 @@
+[
+  {
+    "op": "add",
+    "path": "/fields/System.Description",
+    "value": "Dscription of the task"
+  },
+  {
+    "op": "add",
+    "path": "/fields/System.Tags",
+    "value": "New Tag"
+  }
+  
+]

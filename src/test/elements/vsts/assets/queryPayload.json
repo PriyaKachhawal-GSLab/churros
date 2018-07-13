@@ -1,0 +1,13 @@
+{
+  "payload": {
+    "name": "Website team2",
+    "isFolder": true
+  },
+  "path": "My Queries/childQueries",
+  "updatePayload": {
+    "name": "Updated Website",
+    "isFolder": true
+                    },
+    "id" : "e00dd511-0ef4-4248-b471-baef12856434"
+
+}

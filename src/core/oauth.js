@@ -50,15 +50,15 @@ const manipulateDom = (element, browser, r, username, password, config) => {
     case 'sapbobylaunchbi':
     case 'salesforcebylaunchbi':
     case 'tableaubylaunchbi':
-    browser.get(r.body.oauthUrl);
-    browser.findElement(webdriver.By.id('username')).sendKeys(username);
-    browser.findElement(webdriver.By.id('password')).sendKeys(password);
-    browser.findElement(webdriver.By.xpath('//*[@id="loginform"]/table/tbody/tr[6]/td/input')).click();
-    browser.wait(() => browser.isElementPresent(webdriver.By.xpath('//*[@id="ui-id-2"]/table/tbody/tr[4]/td[2]/input')), 5000)
-      .thenCatch(r => true); // ignore
-    browser.findElement(webdriver.By.xpath('//*[@id="ui-id-2"]/table/tbody/tr[4]/td[2]/input'))
-      .then((element) => element.click(), (err) => {}); // ignore this
-    return browser.getCurrentUrl();
+      browser.get(r.body.oauthUrl);
+      browser.findElement(webdriver.By.id('username')).sendKeys(username);
+      browser.findElement(webdriver.By.id('password')).sendKeys(password);
+      browser.findElement(webdriver.By.xpath('//*[@id="loginform"]/table/tbody/tr[6]/td/input')).click();
+      browser.wait(() => browser.isElementPresent(webdriver.By.xpath('//*[@id="ui-id-2"]/table/tbody/tr[4]/td[2]/input')), 5000)
+        .thenCatch(r => true); // ignore
+      browser.findElement(webdriver.By.xpath('//*[@id="ui-id-2"]/table/tbody/tr[4]/td[2]/input'))
+        .then((element) => element.click(), (err) => {}); // ignore this
+      return browser.getCurrentUrl();
     case 'bullhorn--v1':
     case 'bullhorn--v2':
       browser.get(r.body.oauthUrl);
@@ -105,18 +105,18 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.name('commit')).click();
       return browser.getCurrentUrl();
     case 'economic':
-         browser.get(r.body.oauthUrl);
- 	       waitForElement(webdriver.By.id('btnRedirect'));
-         browser.findElement(webdriver.By.id('btnRedirect')).click();
-         waitForElement(webdriver.By.name('aftalenr'));
-         browser.findElement(webdriver.By.name('aftalenr')).sendKeys(config.agreementId);
-         browser.findElement(webdriver.By.name('brugernavn')).sendKeys(username);
-         browser.findElement(webdriver.By.name('password')).sendKeys(password);
-         browser.findElement(webdriver.By.id('edit-submit')).click();
-         waitForElement(webdriver.By.xpath('html/body/div[1]/div/div[2]/div/div/div[2]/button'));
-         browser.findElement(webdriver.By.xpath('html/body/div[1]/div/div[2]/div/div/div[2]/button')).click();
-         browser.sleep(2000);
-         return browser.getCurrentUrl();
+      browser.get(r.body.oauthUrl);
+      waitForElement(webdriver.By.id('btnRedirect'));
+      browser.findElement(webdriver.By.id('btnRedirect')).click();
+      waitForElement(webdriver.By.name('aftalenr'));
+      browser.findElement(webdriver.By.name('aftalenr')).sendKeys(config.agreementId);
+      browser.findElement(webdriver.By.name('brugernavn')).sendKeys(username);
+      browser.findElement(webdriver.By.name('password')).sendKeys(password);
+      browser.findElement(webdriver.By.id('edit-submit')).click();
+      waitForElement(webdriver.By.xpath('html/body/div[1]/div/div[2]/div/div/div[2]/button'));
+      browser.findElement(webdriver.By.xpath('html/body/div[1]/div/div[2]/div/div/div[2]/button')).click();
+      browser.sleep(2000);
+      return browser.getCurrentUrl();
     case 'actoneb':
     case 'acton':
       browser.get(r.body.oauthUrl);
@@ -475,13 +475,13 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('i0118')).sendKeys(password);
       waitForElement(webdriver.By.xpath('.//*[@value= "Sign in" and @type= "submit"]'));
       browser.findElement(webdriver.By.xpath('.//*[@value= "Sign in" and @type= "submit"]')).click();
-      waitForElement(webdriver.By.id('idSIButton9')).thenCatch(r => true);  //Stay signed in screen
+      waitForElement(webdriver.By.id('idSIButton9')).thenCatch(r => true); //Stay signed in screen
       browser.findElement(webdriver.By.id('idSIButton9'))
         .then((element) => element.click(), (err) => {}); // ignore this
       waitForElement(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow')).thenCatch(r => true); // ignore
       browser.findElement(webdriver.By.id('ctl00_PlaceHolderMain_BtnAllow'))
         .then((element) => element.click(), (err) => {}); // ignore this
-      browser.sleep(2000);  //plz wait for the code to show up in httpbin
+      browser.sleep(2000); //plz wait for the code to show up in httpbin
       return browser.getCurrentUrl();
     case 'paypalv2--sandbox':
       //Sandbox version has slightly different url. Will fall into regular flow after changing url
@@ -630,14 +630,14 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.className('primary'))
         .then((element) => element.click(), (err) => {});
       return browser.getCurrentUrl();
-    case  'smartrecruiters':
-       browser.get(r.body.oauthUrl);
-       browser.findElement(webdriver.By.id('email')).sendKeys(username);
-       browser.findElement(webdriver.By.id('password')).sendKeys(password);
-       browser.findElement(webdriver.By.id('sign-in-btn')).click();
-       waitForElement(webdriver.By.xpath('//*[@id="approveAccessForm"]/input[3]'));
-       browser.findElement(webdriver.By.xpath('//*[@id="approveAccessForm"]/input[3]')).click();
-       return browser.getCurrentUrl();
+    case 'smartrecruiters':
+      browser.get(r.body.oauthUrl);
+      browser.findElement(webdriver.By.id('email')).sendKeys(username);
+      browser.findElement(webdriver.By.id('password')).sendKeys(password);
+      browser.findElement(webdriver.By.id('sign-in-btn')).click();
+      waitForElement(webdriver.By.xpath('//*[@id="approveAccessForm"]/input[3]'));
+      browser.findElement(webdriver.By.xpath('//*[@id="approveAccessForm"]/input[3]')).click();
+      return browser.getCurrentUrl();
     case 'microsoftgraph':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('i0116')).sendKeys(username);
@@ -730,7 +730,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.xpath('.//*[@id="auth0-lock-container-1"]/div/div[2]/form/div/div/button')).click();
       browser.sleep(5000);
       return browser.getCurrentUrl();
-   case 'docusign':
+    case 'docusign':
       browser.get(r.body.oauthUrl);
       browser.wait(webdriver.until.elementLocated(webdriver.By.name('email'), 5000));
       browser.findElement(webdriver.By.name('email')).sendKeys(username);
@@ -754,9 +754,9 @@ const manipulateDom = (element, browser, r, username, password, config) => {
     case 'docushareflex':
       if (config['provider.version'] === '1') {
         /* For version 1 Docushare renders a popup that selenium can't handle with firefox - eg browser.switchTo().alert()
-        * There is also a firefox issue with sending the Basic credentials in the URL if you're targeting a sub-resource on a domain.
-        * To workaround we first hit the main domain with the creds in the URL then call the sub-resource (our OG auth url);
-        **/
+         * There is also a firefox issue with sending the Basic credentials in the URL if you're targeting a sub-resource on a domain.
+         * To workaround we first hit the main domain with the creds in the URL then call the sub-resource (our OG auth url);
+         **/
         let docushareOauthUrl = r.body.oauthUrl;
         let domainExtension = '.com';
         let baseUrl = docushareOauthUrl.substring(0, docushareOauthUrl.indexOf(domainExtension) + domainExtension.length);
@@ -771,17 +771,26 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       } else {
         browser.get(r.body.oauthUrl);
         return browser.wait(() => browser.isElementPresent(webdriver.By.id('xsltforms-mainform-input-username')), 5000)
-        .then(() => browser.findElement(webdriver.By.xpath('//*[@id="xsltforms-mainform-input-username"]')).sendKeys(username))
-        .then(() => browser.findElement(webdriver.By.xpath('//*[@id="password"]/span[2]/input')).sendKeys(password))
-        .then(() => browser.findElement(webdriver.By.xpath('//*[@id="xsltforms-mainform-submit-2_3_3_2_1_2_4_"]/span[1]/button')))
-        .then(r => r.click())
-        .then(() => browser.wait(() => browser.isElementPresent(webdriver.By.id('xsltforms-mainform-trigger-1_3_1_2_4_')), 5000))
-        .then(() => browser.findElement(webdriver.By.xpath('//*[@id="xsltforms-mainform-trigger-1_3_1_2_4_"]/span[1]/button')))
-        .then(r => r.click())
-        .then(() => browser.sleep(2000))
-        .then(() => browser.getCurrentUrl());
+          .then(() => browser.findElement(webdriver.By.xpath('//*[@id="xsltforms-mainform-input-username"]')).sendKeys(username))
+          .then(() => browser.findElement(webdriver.By.xpath('//*[@id="password"]/span[2]/input')).sendKeys(password))
+          .then(() => browser.findElement(webdriver.By.xpath('//*[@id="xsltforms-mainform-submit-2_3_3_2_1_2_4_"]/span[1]/button')))
+          .then(r => r.click())
+          .then(() => browser.wait(() => browser.isElementPresent(webdriver.By.id('xsltforms-mainform-trigger-1_3_1_2_4_')), 5000))
+          .then(() => browser.findElement(webdriver.By.xpath('//*[@id="xsltforms-mainform-trigger-1_3_1_2_4_"]/span[1]/button')))
+          .then(r => r.click())
+          .then(() => browser.sleep(2000))
+          .then(() => browser.getCurrentUrl());
       }
       break;
+
+    case 'vsts':
+      browser.get(r.body.oauthUrl);
+      browser.wait(webdriver.until.elementLocated(webdriver.By.name('email'), 5000));
+      browser.findElement(webdriver.By.name('email')).sendKeys(username);
+      browser.findElement(webdriver.By.xpath('/html/body/div/div/div/main/section/div[1]/div/form/div[3]/button/span')).click();
+      browser.findElement(webdriver.By.name('password')).sendKeys(password);
+      browser.findElement(webdriver.By.xpath('/html/body/div/div/div/main/section/div[1]/div/form/div[4]/button/div/span')).click();
+      return browser.getCurrentUrl();
     default:
       throw 'No OAuth function found for element ' + element + '.  Please implement function in core/oauth so ' + element + ' can be provisioned';
   }
