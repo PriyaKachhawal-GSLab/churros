@@ -15,7 +15,31 @@ const manipulateDom = (element, browser, r, username, password, config) => {
     return brow.wait(() => brow.isElementPresent(locator), timeout).then(() => brow.sleep(100));
   };
   waitForElement = waitForElement.bind(browser);
+  console.log('jlsdfhgiosahdfglkhsadfkhs', element);
   switch (element) {
+
+    case 'vsts':
+    // we need to send the scope as well in the path
+      browser.get(`${r.body.oauthUrl}&scope=${config.scope}`);
+      browser.findElement(webdriver.By.name('loginfmt')).
+      then((element) => element.sendKeys(username), (err) => console.log(err));
+      var nextButton = browser.findElement(webdriver.By.xpath("//*[@id=\"idSIButton9\"]"));
+      browser.wait(() => browser.isElementPresent(webdriver.By.xpath("//*[@id=\"idSIButton9\"]")), 3000)
+        .thenCatch(r => true);
+      nextButton.click();
+      browser.wait(() => browser.isElementPresent(webdriver.By.xpath("//*[@id=\"msaTile\"]")), 3000)
+        .thenCatch(r => true);
+      browser.findElement(webdriver.By.xpath("//*[@id=\"msaTile\"]")).
+      then((element) => element.click(), (err) => console.log(err));
+      browser.findElement(webdriver.By.name('passwd')).sendKeys(password);
+      browser.findElement(webdriver.By.xpath("//*[@id=\"idSIButton9\"]")).
+      then((element) => element.click(), (err) => console.log(err));
+      browser.findElement(webdriver.By.xpath("/html/body/div/form/div[1]/div/div[2]/div[2]/div/div/div[4]/div[2]/div/div/div[1]")).
+      then((element) => element.click(), (err) => console.log(err));
+      browser.findElement(webdriver.By.id('accept-button')).
+      then((element) => element.click(), (err) => console.log(err));
+      return browser.getCurrentUrl();
+
     case 'acuityscheduling':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('username')).sendKeys(username);
@@ -782,17 +806,6 @@ const manipulateDom = (element, browser, r, username, password, config) => {
           .then(() => browser.getCurrentUrl());
       }
       break;
-
-    case 'vsts':
-      browser.get(r.body.oauthUrl);
-      browser.wait(webdriver.until.elementLocated(webdriver.By.name('email'), 5000));
-      browser.findElement(webdriver.By.name('email')).sendKeys(username);
-      browser.findElement(webdriver.By.xpath('/html/body/div/div/div/main/section/div[1]/div/form/div[3]/button/span')).click();
-      browser.findElement(webdriver.By.name('password')).sendKeys(password);
-      browser.findElement(webdriver.By.xpath('/html/body/div/div/div/main/section/div[1]/div/form/div[4]/button/div/span')).click();
-      return browser.getCurrentUrl();
-    default:
-      throw 'No OAuth function found for element ' + element + '.  Please implement function in core/oauth so ' + element + ' can be provisioned';
   }
 };
 
