@@ -1,0 +1,25 @@
+{
+  "name": "<<random.word>>",
+  "backgroundImageFile": {
+    "xCoordinate": 0,
+    "width": 1,
+    "yCoordinate": 0
+  },
+  "colorRgb": "#5c6bc1",
+  "capabilities": {
+    "canAddChildren": true,
+    "canChangeTeamDriveBackground": true,
+    "canComment": true,
+    "canCopy": true,
+    "canDeleteTeamDrive": true,
+    "canDownload": true,
+    "canEdit": true,
+    "canListChildren": true,
+    "canManageMembers": true,
+    "canReadRevisions": true,
+    "canRemoveChildren": true,
+    "canRename": true,
+    "canRenameTeamDrive": true,
+    "canShare": true
+  }
+}
