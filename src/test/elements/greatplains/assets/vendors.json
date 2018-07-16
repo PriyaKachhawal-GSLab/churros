@@ -1,0 +1,16 @@
+{
+    "addresses": {
+      "vendorAddress": [
+        {
+          "key": {
+            "id": "primary"
+          },
+          "name": "cloudelements"
+        }
+      ]
+    },
+    "defaultAddressKey": {
+      "id": "primary"
+    },
+    "name": "<<name.firstName>>"
+  }

@@ -1,0 +1,14 @@
+{
+    "addresses": {
+      "customerAddress": [
+        {
+          "name": "customerAddrName1",
+          "state": "customerAddrState1",
+          "key": {
+            "id": "PRIMARY"
+          }
+        }
+      ]
+    },
+    "name": "<<name.firstName>>"
+  }
