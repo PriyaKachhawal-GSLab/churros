@@ -43,6 +43,7 @@ suite.forElement('collaboration', 'channels', (test) => {
     .withValidation(r => {
       expect(r).to.statusCode(200);
       const validValues = r.body.filter(obj => obj.members === undefined);
+      expect(validValues.length).to.equal(r.body.length);
     })
     .should.return200OnGet();
 
