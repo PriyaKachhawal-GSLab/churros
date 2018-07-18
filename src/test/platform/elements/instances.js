@@ -12,7 +12,7 @@ const objDefPayload = require('./assets/accountObjectDefinition');
 const sfdcSwaggerSchema = require('./assets/closeioSwagger.schema');
 const defaults = require('core/defaults');
 const logger = require('winston');
-const {filter} = require('ramda');
+const {filter, assoc} = require('ramda');
 
 const genInstance = (element, o) => ({
   name: (o.name || 'churros-instance'),
@@ -256,6 +256,28 @@ suite.forPlatform('elements/instances', opts, (test) => {
       .then(r => cloud.patch(`/instances`, { id: id, tags: ['churros-testing'] }))
       .then(r => cloud.get(`/instances/${id}`, validateTags(id, r.body.tags)))
       .then(r => provisioner.delete(id));
+  });
+
+  it('should support updating tags via put method', () => {
+    let instance;
+    return provisioner.create('closeio')
+    .then(r => instance = r.body)
+    .then(r => cloud.put(`instances/${instance.id}`, assoc('tags', ['test'], instance)))
+    .then(r => instance = r.body)
+    .then(r => expect(instance.tags).to.have.length(1))
+    .then(() => expect(instance.tags[0]).to.equal('test'))
+    .then(r => cloud.put(`instances/${instance.id}`, assoc('tags', [], instance)))
+    .then(r => cloud.get(`instances/${instance.id}`))
+    .then(r => expect(r.body.tags).to.have.length(0))
+    .then(r => provisioner.delete(instance.id))
+    .catch(e => {
+      if(instance && instance.id){
+        provisioner.delete(instance.id);
+      }
+      throw e;
+    });
+
+
   });
 
   it('should support switching an instance to the clone of an element', () => {

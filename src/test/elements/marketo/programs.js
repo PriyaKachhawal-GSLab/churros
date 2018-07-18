@@ -12,7 +12,7 @@ const updatePayload = {
   "type": "Email",
   "folder": {
     "type": "Folder",
-    "id": 33
+    "id": 2006
   }
 };
 

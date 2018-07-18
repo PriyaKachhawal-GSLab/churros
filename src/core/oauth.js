@@ -791,6 +791,13 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.xpath('.//button[@data-qa="accept"]')).click();
       browser.sleep(2000);
       return browser.getCurrentUrl();
+    case 'zohocrmv2':
+      browser.get(r.body.oauthUrl);
+      browser.wait(webdriver.until.elementLocated(webdriver.By.name('lid'), 5000));
+      browser.findElement(webdriver.By.name('lid')).sendKeys(username);
+      browser.findElement(webdriver.By.name('pwd')).sendKeys(password);
+      browser.findElement(webdriver.By.id('signin_submit')).click();
+      return browser.getCurrentUrl();
     default:
       throw 'No OAuth function found for element ' + element + '.  Please implement function in core/oauth so ' + element + ' can be provisioned';
   }

@@ -1,6 +1,7 @@
 'use strict';
 
 const expect = require('chakram').expect;
+const R = require('ramda');
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
@@ -392,7 +393,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
     const renamePayload = {
       "objectName": `${newObjectName}`
     };
-    
+
     return cloud.post(getObjectDefUrl('instances/' + sfdcId,objectName), genBaseObjectDef({}))
       .then(r => cloud.post(`instances/${sfdcId}/transformations/${objectName}`, genBaseTrans({})))
       .then(r=> cloud.patch(`instances/${sfdcId}/objects/${objectName}`, renamePayload))
@@ -428,5 +429,181 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       .then(r => cloud.delete(getTransformUrl('organizations', noFields2.name, 'closeio')))
       .then(r => cloud.delete(getTransformUrl('organizations', noFields2.name, 'zohocrm')))
       .then(r => cloud.delete(`/common-resources/${noFields2.name}`).catch(r => {}));
+  });
+
+  it('should allow try it out functionality by org level', () => {
+    let objectName = 'churros-object-' + tools.random();
+
+    let objDefUrl = getObjectDefUrl('organizations', objectName);
+    let transUrl = getTransformUrl('organizations', objectName, elementKey);
+    let payload = {
+      payload: {
+        "Id": "123",
+        "Name": "is it name?",
+        "LastModifiedDate": "mods bro"
+      },
+      elementId
+    };
+
+    return cloud.post(objDefUrl, genDefaultObjectDef({}))
+      // test normal transformation
+      .then(r => cloud.post(transUrl, genDefaultTrans({})))
+      .then(r => cloud.post(`/transformations/${objectName}/execute`, payload, r => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body).to.not.be.empty;
+        expect(r.body.churrosId).to.not.be.empty;
+        expect(r.body.churrosName).to.not.be.empty;
+        expect(r.body.churrosMod).to.not.be.empty;
+      }))
+      // test remove config
+      .then(r => cloud.put(transUrl, genTransWithRemove({})))
+      .then(r => cloud.post(`/transformations/${objectName}/execute`, payload, r => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body).to.not.be.empty;
+        expect(r.body.churrosMod).to.be.empty;
+      }))
+      // test passThrough config
+      .then(r => cloud.put(transUrl, genTransWithPassThrough({})))
+      .then(r => cloud.post(`/transformations/${objectName}/execute`, payload, r => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body).to.not.be.empty;
+        expect(r.body.churrosMod).to.be.empty;
+      }))
+      .then(r => cloud.delete(transUrl))
+      .then(r => cloud.delete(objDefUrl))
+      .catch(e => {
+        cloud.delete(transUrl);
+        cloud.delete(objDefUrl);
+        throw new Error(e);
+      });
+  });
+
+  it('should allow try it out functionality by instance level', () => {
+    let objectName = 'churros-object-' + tools.random();
+
+    let objDefUrl = `/instances/${sfdcId}/objects/${objectName}/definitions`;
+    let transUrl = `/instances/${sfdcId}/transformations/${objectName}`;
+    let payload = {
+      payload: {
+        "Id": "123",
+        "Name": "is it name?",
+        "LastModifiedDate": "mods bro"
+      },
+      instanceId: sfdcId
+    };
+    let postPayload = {
+      payload: {
+        churrosId: 'someIdzzz',
+        churrosName: 'otherName',
+        churrosMod: 'yup'
+      },
+      instanceId: sfdcId,
+      method: 'POST'
+    };
+
+    return cloud.post(objDefUrl, genDefaultObjectDef({}))
+      // test normal transformation
+      .then(r => cloud.post(transUrl, genDefaultTrans({})))
+      .then(r => cloud.post(`/transformations/${objectName}/execute`, payload, r => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body).to.not.be.empty;
+        expect(r.body.churrosId).to.not.be.empty;
+        expect(r.body.churrosName).to.not.be.empty;
+        expect(r.body.churrosMod).to.not.be.empty;
+      }))
+      // test POST
+      .then(r => cloud.post(`/transformations/${objectName}/execute`, postPayload, r => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body).to.not.be.empty;
+        expect(r.body.Id).to.not.be.empty;
+        expect(r.body.Name).to.not.be.empty;
+        expect(r.body.LastModifiedDate).to.not.be.empty;
+      }))
+      // test remove config
+      .then(r => cloud.put(transUrl, genTransWithRemove({})))
+      .then(r => cloud.post(`/transformations/${objectName}/execute`, payload, r => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body).to.not.be.empty;
+        expect(r.body.churrosMod).to.be.empty;
+      }))
+      // test passThrough config
+      .then(r => cloud.put(transUrl, genTransWithPassThrough({})))
+      .then(r => cloud.post(`/transformations/${objectName}/execute`, payload, r => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body).to.not.be.empty;
+        expect(r.body.churrosMod).to.be.empty;
+      }))
+      .then(r => cloud.delete(transUrl))
+      .then(r => cloud.delete(objDefUrl))
+      .catch(e => {
+        cloud.delete(transUrl);
+        cloud.delete(objDefUrl);
+        throw new Error(e);
+      });
+  });
+  it('should allow try it out functionality with script', () => {
+    let objectName = 'churros-object-' + tools.random();
+
+    let objDefUrl = getObjectDefUrl('organizations', objectName);
+    let transUrl = getTransformUrl('organizations', objectName, elementKey);
+    let transWithScript = Object.assign({}, genDefaultTrans({}), {script: {body: 'done(Object.assign(transformedObject, {churrosScript: "script"}))'}});
+    let payload = {
+      payload: {
+        "Id": "123",
+        "Name": "is it name?",
+        "LastModifiedDate": "mods bro"
+      },
+      elementId
+    };
+
+    return cloud.post(objDefUrl, genDefaultObjectDef({}))
+      // test normal transformation
+      .then(r => cloud.post(transUrl, transWithScript))
+      .then(r => cloud.post(`/transformations/${objectName}/execute`, payload, r => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body).to.not.be.empty;
+        expect(r.body.churrosId).to.not.be.empty;
+        expect(r.body.churrosName).to.not.be.empty;
+        expect(r.body.churrosMod).to.not.be.empty;
+        expect(r.body.churrosScript).to.not.be.empty;
+      }))
+      .then(r => cloud.delete(transUrl))
+      .then(r => cloud.delete(objDefUrl))
+      .catch(e => {
+        cloud.delete(transUrl);
+        cloud.delete(objDefUrl);
+        throw new Error(e);
+      });
+  });
+
+  it('should support instance allow nulls and remove unmapped fields on vdr', () => {
+    let config;
+    const objectName = 'churros-object-' + tools.random();
+    const transPayload =  genDefaultTrans({configuration: [{type: "passThrough", properties: {fromVendor: false, toVendor: false}}]});
+    const objDefUrl = getObjectDefUrl('organizations', objectName);
+    const transUrl = getTransformUrl('organizations', objectName, elementKey);
+    return cloud.get(`/instances/${sfdcId}/configuration`)
+      .then(r => config = R.find(R.propEq('key', 'filter.response.nulls'))(r.body))
+      .then(() => cloud.patch(`/instances/${sfdcId}/configuration/${config.id}`, Object.assign({}, config, { propertyValue: 'false' })))
+      .then(() => cloud.get(`/instances/${sfdcId}/configuration/${config.id}`, r => expect(r.body.propertyValue).to.equal('false')))
+      .then(() => cloud.post(objDefUrl, genDefaultObjectDef({})))
+      .then(r => cloud.post(transUrl, transPayload))
+      .then(r => cloud.get('hubs/crm/' + objectName))
+      .then(r => {
+        expect(r).to.have.statusCode(200);
+        expect(r.body).to.not.be.empty;
+        r.body.forEach(item => {
+          expect(item.churrosId).to.not.be.empty;
+          expect(item.churrosName).to.not.be.empty;
+          expect(item.churrosMod).to.not.be.empty;
+        });
+        const keys = Object.keys(r.body[0]);
+        return keys.filter(key => r.body[0][key] === null);
+      })
+      .then(r => expect(r.length > 0).to.equal(false))
+      // clean up
+      .then(() => cloud.patch(`/instances/${sfdcId}/configuration/${config.id}`, Object.assign({}, config, { propertyValue: 'true' })))
+      .then(() => cloud.delete(transUrl))
+      .then(() => cloud.delete(objDefUrl));
   });
 });

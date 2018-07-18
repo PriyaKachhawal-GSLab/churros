@@ -27,4 +27,14 @@ suite.forElement('documents', 'files', (test) => {
       .then(() => cloud.withOptions({ qs: query }).get(`${test.api}/revisions/${revisionId}`));
   });
 
+  it('it should allow D for documents/files/{id}/links', () => {
+       return cloud.get(`${test.api}/${jpgFileBody.id}/links`)
+       .then(() => cloud.delete(`${test.api}/${jpgFileBody.id}/links`));
+   });
+
+   it('it should allow D for documents/files/links', () => {
+       var filePath = jpgFileBody.path;
+       return cloud.get(`${test.api}/${jpgFileBody.id}/links`)
+      .then(() => cloud.withOptions({ qs: { path: filePath  } }).delete(`${test.api}/links`));
+  });
 });

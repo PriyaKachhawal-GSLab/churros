@@ -1,7 +1,7 @@
 {
     "name": "churrosContact",
     "vendorName":"churrosContact",
-	"fields": [{
+	"modelFields": [{
 			"vendorName": "churrosVendorStatusId",
 			"dataType": {
 				"jsonType": "string",
@@ -30,6 +30,5 @@
 			"sampleValue": "$churrosContactAddress",
 			"relatedModelId": "<replace-me>"
         }
-	],
-    "commitMessage": "initial commit"
+	]
 }

@@ -7,6 +7,7 @@ const expect = require('chakram').expect;
 const faker = require('faker');
 const payload = require('./assets/folders');
 const quoteFolderPayload = require('./assets/quotefolders');
+const teamDrivePayload = tools.requirePayload(`${__dirname}/assets/team-drives.json`);
 const updatePayload = {
   path: `/${tools.random()}`
 };
@@ -17,7 +18,7 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
   let jpgFile = __dirname + '/assets/Penguins.jpg';
   let pngFile = __dirname + '/assets/Dice.png';
   let textFile = __dirname + '/assets/textFile.txt';
-  let jpgFileBody, pngFileBody, textFileBody, date1, date2;
+  let jpgFileBody, pngFileBody, textFileBody, date1, date2, teamDriveId;
 
   before(() =>
     cloud.withOptions({ qs: { path: `/${directoryPath}/Penguins.jpg`, overwrite: 'true' } }).postFile(`/hubs/documents/files`, jpgFile)
@@ -27,18 +28,21 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
     .then(() => cloud.withOptions({ qs: { path: `/${directoryPath}/textFile.txt`, overwrite: 'true' } }).postFile(`/hubs/documents/files`, textFile))
     .then(r => textFileBody = r.body)
     .then(() => cloud.withOptions({ qs: { path: `/${directoryPath}` } }).get(`${test.api}/metadata`))
-    .then(r => directoryId = r.body.id));
+    .then(r => directoryId = r.body.id)
+    .then(() => cloud.post('/hubs/documents/team-drives',teamDrivePayload))
+    .then(r => teamDriveId = r.body.id));
 
-  after(() => cloud.withOptions({ qs: { path: `/${directoryPath}` } }).delete(`/hubs/documents/folders`));
+  after(() => cloud.withOptions({ qs: { path: `/${directoryPath}` } }).delete(`/hubs/documents/folders`)
+  .then(() => cloud.delete(`/hubs/documents/team-drives/${teamDriveId}`)));
 
   it('should allow CRD for hubs/documents/folders and RU for hubs/documents/folders/metadata by path', () => {
     let srcPath, destPath;
     return cloud.post(`${test.api}`, payload)
       .then(r => {
-            srcPath = r.body.path;
-            expect(r.body.properties.thumbnailLink).to.be.undefined;
-            expect(r.body.properties.mimeType).to.be.undefined;
-          })
+        srcPath = r.body.path;
+        expect(r.body.properties.thumbnailLink).to.be.undefined;
+        expect(r.body.properties.mimeType).to.be.undefined;
+      })
       .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).get(`${test.api}/contents`))
       .then(r => cloud.withOptions({ qs: { path: `${srcPath}`, page: 1, pageSize: 1 } }).get(`${test.api}/contents`))
       .then(r => cloud.withOptions({ qs: { path: `${srcPath}` } }).post(`${test.api}/copy`, updatePayload))
@@ -65,8 +69,8 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
       .then(r => cloud.withOptions({ qs: { path: `${destPath}` } }).delete(`${test.api}`));
   });
 
-  test.withApi(`${test.api}/contents`).withOptions({qs: {path :'/'}}).should.supportNextPagePagination(1);
-  
+  test.withApi(`${test.api}/contents`).withOptions({ qs: { path: '/' } }).should.supportNextPagePagination(1);
+
   it('should allow GET /folders/contents', () => {
     return cloud.withOptions({ qs: { path: `/${directoryPath}` } }).get(`${test.api}/contents`);
   });
@@ -108,15 +112,15 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
     .should.return200OnGet();
 
   test.withApi(`${test.api}/root/contents`)
-      .withName(`should allow GET for /folders/contents with orderBy createdDate desc`)
-      .withOptions({ qs: {  pageSize: 5, page: 1, orderBy: `createdDate desc`, calculateFolderPath: false } })
-      .withValidation(r => {
-        expect(r).to.have.statusCode(200);
-        date1 = new Date(r.body[0].createdDate).getTime();
-        date2 = new Date(r.body[1].createdDate).getTime();
-        expect(date1 >= date2).to.be.true;
-      })
-      .should.return200OnGet();
+    .withName(`should allow GET for /folders/contents with orderBy createdDate desc`)
+    .withOptions({ qs: { pageSize: 5, page: 1, orderBy: `createdDate desc`, calculateFolderPath: false } })
+    .withValidation(r => {
+      expect(r).to.have.statusCode(200);
+      date1 = new Date(r.body[0].createdDate).getTime();
+      date2 = new Date(r.body[1].createdDate).getTime();
+      expect(date1 >= date2).to.be.true;
+    })
+    .should.return200OnGet();
 
   test.withOptions({ qs: { path: '/' } }).withApi('/folders/contents').should.supportPagination('id');
 
@@ -127,4 +131,16 @@ suite.forElement('documents', 'folders', { payload: payload }, (test) => {
       .then(r => cloud.withOptions({ qs: { path: `${path}` } }).delete(`${test.api}`));
   });
 
+  it('should allow GET team-drive /folders/contents and /folders/{id}/contents', () => {
+    return cloud.withOptions({
+        qs: {
+          path: `/`,
+          includeTeamDrives: true,
+          teamDriveId: `${teamDriveId}`
+        }
+      }).get(`/hubs/documents/folders/contents`)
+      .then(r => expect(r).to.have.statusCode(200))
+      .then(r => cloud.withOptions({ qs: { includeTeamDrives: true } }).get(`/hubs/documents/folders/${teamDriveId}/contents`))
+      .then(r => expect(r).to.have.statusCode(200));
+  });
 });

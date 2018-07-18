@@ -2,7 +2,7 @@
 
 const suite = require('core/suite');
 const payload = require('./assets/activities');
-const id = '100005'; //using a static ID, as it will always have activites
+const id = '12'; //using a static ID, as it will always have activites
 
 suite.forElement('marketing', 'activities', { payload: payload }, (test) => {
   test.withApi('/hubs/marketing/activity-types').should.return200OnGet();

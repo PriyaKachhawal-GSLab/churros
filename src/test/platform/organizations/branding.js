@@ -46,6 +46,13 @@ suite.forPlatform('organizations/branding', test => {
     tableHeaderForeground: '#ffffff',
     tableBodyBackground: '#ffffff',
     tableBodyForeground: '#ffffff',
+    navigationIconSize: '12px',
+    navigationLabelSize: '12px',
+    navigationWidth: '12px',
+    componentsBorderColor: '#ffffff',
+    topBarTitleColor: '#ffffff',
+    navigationItemBorderColor: '#ffffff',
+    documentationUrl: 'http://joshuawyse.com'
   };
 
   it('should support upserting, retrieving and deleting branding for a company', () => {
@@ -81,7 +88,7 @@ suite.forPlatform('organizations/branding', test => {
 
     const validator = r => {
       expect(r).to.have.statusCode(400);
-      expect(r.body.message).to.contain('Branding contains invalid color field(s)');
+      expect(r.body.message).to.contain('Branding contains invalid field(s)');
     };
 
     return cloud.put('/organizations/branding', b, validator);

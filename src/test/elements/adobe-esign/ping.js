@@ -9,7 +9,7 @@ suite.forElement('esignature', 'ping', (test) => {
     .withValidation(r => {
       expect(r).to.have.statusCode(200);
       expect(r.body.endpoint).to.equal('adobe-esign');
-      expect(r.body.valid).to.equal(true);
+      expect(r.body.valid).to.equal('true');
     })
     .should.return200OnGet();
 });
