@@ -5,10 +5,15 @@ const payload = require('./assets/images');
 const cloud = require('core/cloud');
 
 suite.forElement('general', 'images', { payload: payload }, (test) => {
-  it(`should allow CR for /hubs/general/images`, () => {
+  test.should.supportCrds();
+  test.should.supportPagination();
+
+  it(`should allow GET for ${test.api}/{imageId}/background/{size} and ${test.api}/{imageId}/image/{size}`, () => {
     let imageId;
+    let size = 'mobile';
     return cloud.post(`${test.api}`, payload)
       .then(r => imageId = r.body.id)
-      .then(r => cloud.get(`${test.api}/${imageId}`));
+      .then(r => cloud.get(`${test.api}/${imageId}/background/${size}`))
+      .then(r => cloud.get(`${test.api}/${imageId}/image/${size}`));
   });
 });

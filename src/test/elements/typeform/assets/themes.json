@@ -1,0 +1,12 @@
+{
+  "colors": {
+    "answer": "#800000",
+    "background": "#FFFFFF",
+    "button": "#808080",
+    "question": "#000000"
+  },
+  "font": "Cabin",
+  "has_transparent_button": false,
+  "name": "My new theme",
+  "visibility": "private"
+}
