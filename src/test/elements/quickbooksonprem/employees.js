@@ -3,8 +3,9 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = tools.requirePayload(`${__dirname}/assets/employees.json`);
-const updatePayload = { "FirstName": tools.random() };
+const payload = require('./assets/employees-create');
+const updatePayload = require('./assets/employees-update');
+
 
 suite.forElement('finance', 'employees', { payload: payload }, (test) => {
   it('should support CRUDS and Ceql searching for /hubs/finance/employees', () => {

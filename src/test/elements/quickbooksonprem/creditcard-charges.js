@@ -1,9 +1,9 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/creditcard-charges');
+const payload = require('./assets/creditcard-charges-create');
 const cloud = require('core/cloud');
-const updatePayload = { "Subtotal": "25600.00" };
+const updatePayload = require('./assets/creditcard-charges-update');
 
 suite.forElement('finance', 'creditcard-charges', { payload: payload }, (test) => {
   it('should support CRUDS, pagination for /hubs/finance/creditcard-charges', () => {
@@ -17,4 +17,5 @@ suite.forElement('finance', 'creditcard-charges', { payload: payload }, (test) =
       .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
+  test.should.supportNextPagePagination(1);
 });

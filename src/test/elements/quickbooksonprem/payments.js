@@ -3,8 +3,8 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = tools.requirePayload(`${__dirname}/assets/payments.json`);
-const updatePayload = { "Memo": tools.random(), "TotalAmount": "136.00" };
+const payload = require('./assets/payments-create');
+const updatePayload = require('./assets/payments-update');
 
 suite.forElement('finance', 'payments', (test) => {
   before(() => cloud.get(`/invoices`)

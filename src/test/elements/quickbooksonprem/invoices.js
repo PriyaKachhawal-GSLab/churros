@@ -3,8 +3,9 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = tools.requirePayload(`${__dirname}/assets/invoices.json`);
-const updatePayload = { "Memo": tools.random() };
+const payload = require('./assets/invoices-create');
+const updatePayload = require('./assets/invoices-update');
+
 
 suite.forElement('finance', 'invoices', { payload: payload }, (test) => {
   it('should support CRUDS and Ceql searching for /hubs/finance/invoices', () => {

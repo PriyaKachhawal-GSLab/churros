@@ -1,9 +1,9 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/vendor-credit');
 const cloud = require('core/cloud');
-const updatePayload = { "Memo": "Updated"};
+const payload = require('./assets/vendor-credit-create');
+const updatePayload = require('./assets/vendor-credit-update');
 
 suite.forElement('finance', 'vendor-credits', { payload: payload }, (test) => {
   it('should support CRUDS, pagination for /hubs/finance/vendor-credits', () => {

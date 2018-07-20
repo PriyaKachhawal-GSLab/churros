@@ -3,12 +3,9 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
-const payload = tools.requirePayload(`${__dirname}/assets/bills.json`);
+const payload = tools.requirePayload(`${__dirname}/assets/bills-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/bills-update.json`);
 
-const update = (editseq, isPaid) => ({
-  "EditSequence": editseq,
-  "IsPaid": isPaid
-});
 
 suite.forElement('finance', 'bills', { payload: payload }, (test) => {
 
@@ -17,14 +14,14 @@ suite.forElement('finance', 'bills', { payload: payload }, (test) => {
     return cloud.post(test.api, payload)
       .then(r => {
         editseq = r.body.EditSequence;
-        isPaid = r.body.IsPaid;
         id = r.body.id;
+        updatePayload.EditSequence = r.body.EditSequence;
         refno = r.body.RefNumber;
       })
       .then(r => cloud.get(`${test.api}`))
       .then(r => cloud.withOptions({ qs: { where: `RefNumber='${refno}'` } }).get(test.api))
       .then(r => cloud.get(`${test.api}/${id}`))
-      .then(r => cloud.patch(`${test.api}/${id}`, update(editseq, isPaid)))
+      .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
   test.should.supportNextPagePagination(1);

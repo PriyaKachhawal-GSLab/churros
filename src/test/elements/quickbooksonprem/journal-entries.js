@@ -3,8 +3,8 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = tools.requirePayload(`${__dirname}/assets/journal-entries.json`);
-const updatePayload = { "Memo": tools.random() };
+const payload = require('./assets/journal-entries-create');
+const updatePayload = require('./assets/journal-entries-update');
 
 suite.forElement('finance', 'journal-entries', { payload: payload }, (test) => {
   it('should support CRUDS and Ceql searching for /hubs/finance/journal-entries', () => {

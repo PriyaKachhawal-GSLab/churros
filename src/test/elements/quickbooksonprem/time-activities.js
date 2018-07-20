@@ -3,7 +3,9 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = tools.requirePayload(`${__dirname}/assets/time-activities.json`);
+const payload = require('./assets/time-activities-create');
+const updatePayload2 = require('./assets/time-activities-update');
+
 const updatePayload = (editseq) => ({
   "BillableStatus": "Billable",
   "EditSequence": editseq,
@@ -20,13 +22,13 @@ suite.forElement('finance', 'time-activities', { payload: payload }, (test) => {
     let id, editseq;
     return cloud.post(test.api, payload)
       .then(r => {
-        id = r.body.TxnID;
-        editseq = r.body.EditSequence;
+        id = r.body.id;
+        updatePayload2.EditSequence = r.body.EditSequence;
       })
       .then(r => cloud.get(test.api))
       .then(r => cloud.get(`${test.api}/${id}`))
       .then(r => cloud.withOptions({ qs: { where: `TxnID='${id}'` } }).get(test.api))
-      .then(r => cloud.patch(`${test.api}/${id}`, updatePayload(editseq)))
+      .then(r => cloud.patch(`${test.api}/${id}`, updatePayload2))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
   test.should.supportPagination();

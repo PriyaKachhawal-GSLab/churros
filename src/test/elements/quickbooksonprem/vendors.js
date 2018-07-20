@@ -4,14 +4,15 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const expect = require('chakram').expect;
 const cloud = require('core/cloud');
-const payload = tools.requirePayload(`${__dirname}/assets/vendors.json`);
-const updatePayload = { "Name": tools.random() };
+
+const payload = require('./assets/vendors-create');
+const updatePayload = require('./assets/vendors-update');
 
 suite.forElement('finance', 'vendors', { payload: payload }, (test) => {
   it('should support CRUDS for /hubs/finance/vendors', () => {
     let id;
     return cloud.post(test.api, payload)
-      .then(r => id = r.body.ListID)
+      .then(r => id = r.body.id)
       .then(r => cloud.get(test.api))
       .then(r => cloud.get(`${test.api}/${id}`))
       .then(r => updatePayload.EditSequence = r.body.EditSequence)

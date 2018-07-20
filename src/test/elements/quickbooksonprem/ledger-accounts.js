@@ -8,7 +8,7 @@ suite.forElement('finance', 'ledger-accounts', null, (test) => {
   it('should support SR, pagination for /hubs/finance/ledger-accounts', () => {
     let id;
     return cloud.get(test.api)
-      .then(r => id = r.body[0].ListID)
+      .then(r => id = r.body[0].id)
       .then(r => cloud.get(`${test.api}/${id}`));
   });
   test
