@@ -2,8 +2,8 @@
     "addresses": {
       "customerAddress": [
         {
-          "name": "customerAddrName1",
-          "state": "customerAddrState1",
+          "name": "<<name.firstName>>",
+          "state": "<<address.state>>",
           "key": {
             "id": "PRIMARY"
           }

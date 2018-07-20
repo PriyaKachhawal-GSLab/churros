@@ -8,22 +8,22 @@
         }
       ]
     },
-    "benefitStartDate": "2018-06-18",
+    "benefitStartDate": "<<date.future>>",
     "defaultAddressKey": {
       "id": "primary"
     },
     "departmentKey": {
       "id": "SALE"
     },
-    "employmentStartDate": "2010-06-18",
+    "employmentStartDate": "<<date.future>>",
     "employmentType": "FULL_TIME_REGULAR",
     "name": {
-      "alternate": "afd",
-      "family": "qwe",
-      "given": "zxc",
-      "middle": "dfg",
-      "preferred": "asdf",
-      "suffix": "mr"
+      "alternate": "<<random.word>>",
+      "family": "<<name.lastname>>",
+      "given": "<<name.firstname>>",
+      "middle": "<<random.word>>",
+      "preferred": "<<name.firstname>>",
+      "suffix": "<<name.suffix>>"
     },
     "positionKey": {
       "id": "ADA"
