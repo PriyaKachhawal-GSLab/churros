@@ -9,7 +9,7 @@ suite.forElement('general', 'forms', { payload: payload }, (test) => {
   const opts = {
     churros: {
       updatePayload: {
-        "title": "New Patch Title"
+        "title": "<<random.words>>"
       }
     }
   };

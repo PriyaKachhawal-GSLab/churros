@@ -1,12 +1,12 @@
 {
-  "title": "<<random.word>>",
+  "title": "<<random.words>>",
   "fields": [
     {
       "ref": "nice_readable_date_reference",
-      "title": "Date Title",
+      "title": "<<random.words>>",
       "type": "date",
       "properties": {
-        "description": "Cool description for the date",
+        "description": "<<random.words>>",
         "structure": "DDMMYYYY",
         "separator": "-"
       },
