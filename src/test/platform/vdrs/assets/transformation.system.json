@@ -4,30 +4,35 @@
 	"script": {
 		"body": "transformedObject.foo = 'bar'; done(transformedObject);",
 		"mimeType": "application/javascript",
-    "filterEmptyResponse": false
+		"filterEmptyResponse": false,
+		"level": "system"
 	},
 	"configuration": [
 		{
 		  "properties": {
 				"bool": "true"
 		  },
-		  "type": "inherit"
+		  "type": "inherit",
+			"level": "system"
 		}
 	],
 	"fields": [{
 			"path": "email",
 			"vendorPath": "Email",
-			"vendorType": "string"
+			"vendorType": "string",
+			"level": "system"
 		},
 		{
 			"path": "id",
 			"vendorPath": "Id",
-			"vendorType": "string"
+			"vendorType": "string",
+			"level": "system"
 		},
 		{
 			"path": "name",
 			"vendorPath": "Name",
 			"vendorType": "string",
+			"level": "system",
 		  "configuration": [
 				{
 					"type": "transformDate"
@@ -38,6 +43,7 @@
 		  "path": "churrosToRemove",
 		  "vendorPath": "LastModifiedDate",
 		  "vendorType": "string",
+			"level": "system",
 		  "configuration": [
 				{
 					"type": "remove",

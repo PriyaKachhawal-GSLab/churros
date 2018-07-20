@@ -66,6 +66,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
     up.fields = fields;
     up.fields[0].path = 'anUpdateField';
     up.fields.push({type: 'string', path: 'aNewField', level: newFieldLevel, associatedId});
+    up.instanceId = associatedId;
     return up;
   };
 
