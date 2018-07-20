@@ -1,7 +1,6 @@
 'use strict';
 
 const suite = require('core/suite');
-const tools = require('core/tools');
 const cloud = require('core/cloud');
 const payload = require('./assets/customers-create');
 const updatePayload = require('./assets/customers-update');

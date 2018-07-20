@@ -2,7 +2,6 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const tools = require('core/tools');
 
 const payload = require('./assets/currencies-create');
 const updatePayload = require('./assets/currencies-update');
@@ -10,7 +9,7 @@ const updatePayload = require('./assets/currencies-update');
 
 suite.forElement('finance', 'currencies', { payload: payload }, (test) => {
   it(`should support CRUDS and Ceql searching for ${test.api}`, () => {
-    let id, editseq;
+    let id;
     return cloud.post(test.api, payload)
       .then(r => {
         updatePayload.EditSequence = r.body.EditSequence;

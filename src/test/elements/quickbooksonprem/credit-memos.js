@@ -2,7 +2,6 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const tools = require('core/tools');
 const payload = require('./assets/credit-memos-create');
 const updatePayload = require('./assets/credit-memos-update');
 

@@ -2,18 +2,17 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const tools = require('core/tools');
-const payload = tools.requirePayload(`${__dirname}/assets/bills-create.json`);
-const updatePayload = tools.requirePayload(`${__dirname}/assets/bills-update.json`);
+const payload = require('./assets/bills-create');
+const updatePayload = require('./assets/bills-update');
+
 
 
 suite.forElement('finance', 'bills', { payload: payload }, (test) => {
 
   it(`should support CRUDS and Ceql searching for ${test.api}`, () => {
-    let id, editseq, isPaid, refno;
+    let id, refno;
     return cloud.post(test.api, payload)
       .then(r => {
-        editseq = r.body.EditSequence;
         id = r.body.id;
         updatePayload.EditSequence = r.body.EditSequence;
         refno = r.body.RefNumber;
