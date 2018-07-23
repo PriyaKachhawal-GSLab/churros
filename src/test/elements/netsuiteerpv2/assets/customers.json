@@ -1,5 +1,5 @@
 {
-  "lastName":"<<name.firstName>>",
+  "lastName":"SampleChurosLastName",
   "companyName":"Churros Company",
   "isPerson":true,
   "subsidiary":{

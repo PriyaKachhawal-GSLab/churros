@@ -5,8 +5,11 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 const resources = require('./assets/objects');
+const faker = require('faker');
 
 suite.forElement('crm', 'metadata', (test) => {
+const churrosTestObject = faker.random.word();
+const churrosTestNestedObject = faker.random.word();
 
   test.withApi('/hubs/crm/objects') //using specified api
     .withValidation(r => expect(r.body).to.include('Account')) //validating the response is what we expect
@@ -85,32 +88,32 @@ suite.forElement('crm', 'metadata', (test) => {
     'should include filterable, createable, and updateable for canonical object metadata').should.return200OnGet();
 
   it('should have email property with filterable, createable, and updateable metadata for VDR', () => {
-    return cloud.post('/organizations/objects/churrosTestObject/definitions', resources.churrosTestObject, () => {})
-      .then(r => cloud.post('/organizations/elements/sfdc/transformations/churrosTestObject', resources.churrosTestObjectXform, () => {}))
-      .then(r => cloud.get('/objects/churrosTestObject/metadata'))
+    return cloud.post(`/organizations/objects/${churrosTestObject}/definitions`, resources.churrosTestObject, () => {})
+      .then(r => cloud.post(`/organizations/elements/sfdc/transformations/${churrosTestObject}`, resources.churrosTestObjectXform, () => {}))
+      .then(r => cloud.get(`/objects/${churrosTestObject}/metadata`))
       .then(r => validEmail(r))
-      .then(r => cloud.delete('/organizations/elements/sfdc/transformations/churrosTestObject'))
-      .then(r => cloud.delete('/organizations/objects/churrosTestObject/definitions'));
+      .then(r => cloud.delete(`/organizations/elements/sfdc/transformations/${churrosTestObject}`))
+      .then(r => cloud.delete(`/organizations/objects/${churrosTestObject}/definitions`));
   });
 
   it('should include only mapped fields for VDR metadata', () => {
-    return cloud.post('/organizations/objects/churrosTestObject/definitions', resources.churrosTestObject, () => {})
-      .then(r => cloud.post('/organizations/elements/sfdc/transformations/churrosTestObject', resources.churrosTestObjectXform, () => {}))
-      .then(r => cloud.get('/objects/churrosTestObject/metadata'))
+    return cloud.post(`/organizations/objects/${churrosTestObject}/definitions`, resources.churrosTestObject, () => {})
+      .then(r => cloud.post(`/organizations/elements/sfdc/transformations/${churrosTestObject}`, resources.churrosTestObjectXform, () => {}))
+      .then(r => cloud.get(`/objects/${churrosTestObject}/metadata`))
       .then(r => validVdrMetadata(r))
-      .then(r => cloud.delete('/organizations/elements/sfdc/transformations/churrosTestObject'))
-      .then(r => cloud.delete('/organizations/objects/churrosTestObject/definitions'));
+      .then(r => cloud.delete(`/organizations/elements/sfdc/transformations/${churrosTestObject}`))
+      .then(r => cloud.delete(`/organizations/objects/${churrosTestObject}/definitions`));
   });
 
   it('should support VDR metadata for nested objects', () => {
-    return cloud.post('/organizations/objects/churrosTestNestedObject/definitions', resources.churrosTestNestedObject, () => {})
-      .then(r => cloud.post('/organizations/objects/churrosTestObject/definitions', resources.churrosTestObject, () => {}))
-      .then(r => cloud.post('/organizations/elements/sfdc/transformations/churrosTestObject', resources.churrosTestObjectXform, () => {}))
-      .then(r => cloud.get('/objects/churrosTestObject/metadata'))
+    return cloud.post(`/organizations/objects/${churrosTestNestedObject}/definitions`, resources.churrosTestNestedObject, () => {})
+      .then(r => cloud.post(`/organizations/objects/${churrosTestObject}/definitions`, resources.churrosTestObject, () => {}))
+      .then(r => cloud.post(`/organizations/elements/sfdc/transformations/${churrosTestObject}`, resources.churrosTestObjectXform, () => {}))
+      .then(r => cloud.get(`/objects/${churrosTestObject}/metadata`))
       .then(r => validVdrMetadataForNestedObject(r))
-      .then(r => cloud.delete('/organizations/elements/sfdc/transformations/churrosTestObject'))
-      .then(r => cloud.delete('/organizations/objects/churrosTestObject/definitions'))
-      .then(r => cloud.delete('/organizations/objects/churrosTestNestedObject/definitions'));
+      .then(r => cloud.delete(`/organizations/elements/sfdc/transformations/${churrosTestObject}`))
+      .then(r => cloud.delete(`/organizations/objects/${churrosTestObject}/definitions`))
+      .then(r => cloud.delete(`/organizations/objects/${churrosTestNestedObject}/definitions`));
   });
 
   test.withApi('/objects/contacts/metadata').withValidation(metaValid).withName(

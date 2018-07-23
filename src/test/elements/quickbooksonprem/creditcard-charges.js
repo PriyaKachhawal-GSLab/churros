@@ -1,10 +1,15 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/creditcard-charges');
+const payload = require('./assets/creditcard-charges-create');
 const cloud = require('core/cloud');
+<<<<<<< HEAD
 const updatePayload = { "Subtotal": "25600.00" };
 const expect = require('chakram').expect;
+=======
+const updatePayload = require('./assets/creditcard-charges-update');
+
+>>>>>>> master
 suite.forElement('finance', 'creditcard-charges', { payload: payload }, (test) => {
   it('should support CRUDS, pagination for /hubs/finance/creditcard-charges', () => {
     let id;
@@ -18,8 +23,13 @@ suite.forElement('finance', 'creditcard-charges', { payload: payload }, (test) =
       .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
+<<<<<<< HEAD
   it(`should return an error when 'TimeModified' filter is not a proper Date`, () => {
     return cloud.withOptions({qs: {where: `TimeModified='2018'`}})
       .get(test.api, (r) => expect(r).to.have.statusCode(400));
   });
 });
+=======
+  test.should.supportNextPagePagination(1);
+});
+>>>>>>> master

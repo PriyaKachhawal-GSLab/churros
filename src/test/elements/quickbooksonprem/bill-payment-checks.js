@@ -2,10 +2,15 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
+<<<<<<< HEAD
 const tools = require('core/tools');
 const expect = require('chakram').expect;
 const payload = require('./assets/bill-payment-checks');
 const updatePayload = { "Memo": tools.random() };
+=======
+const payload = require('./assets/bill-payment-checks-create');
+const updatePayload = require('./assets/bill-payment-checks-update');
+>>>>>>> master
 
 
 suite.forElement('finance', 'bill-payment-checks', { payload: payload }, (test) => {

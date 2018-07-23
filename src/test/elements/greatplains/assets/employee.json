@@ -1,0 +1,32 @@
+{
+    "addresses": {
+      "employeeAddress": [
+        {
+          "key": {
+            "id": "primary"
+          }
+        }
+      ]
+    },
+    "benefitStartDate": "<<date.future>>",
+    "defaultAddressKey": {
+      "id": "primary"
+    },
+    "departmentKey": {
+      "id": "SALE"
+    },
+    "employmentStartDate": "<<date.future>>",
+    "employmentType": "FULL_TIME_REGULAR",
+    "name": {
+      "alternate": "<<random.word>>",
+      "family": "<<name.lastname>>",
+      "given": "<<name.firstname>>",
+      "middle": "<<random.word>>",
+      "preferred": "<<name.firstname>>",
+      "suffix": "<<name.suffix>>"
+    },
+    "positionKey": {
+      "id": "ADA"
+    },
+    "taxIdentifier": "qwert"
+  }

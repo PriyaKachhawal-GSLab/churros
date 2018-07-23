@@ -2,6 +2,6 @@
   "ExpenseAccountRef": {
     "FullName": "Payroll Expenses"
   },
-  "Name": "<<name.firstName>>",
+  "Name": "Churros Name",
   "WageType": "HourlyRegular"
 }

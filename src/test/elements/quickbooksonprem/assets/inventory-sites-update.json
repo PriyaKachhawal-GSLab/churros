@@ -1,0 +1,12 @@
+{
+    "Email": "qb@ce2.com",
+    "SiteAddress": {
+        "Addr1": "666 Main Street",
+        "Addr2": "Suite 1234",
+        "State": "TX",
+        "PostalCode": "75019",
+        "Country": "USA",
+        "City": "Coppell"
+    },
+    "Name": "Site12Updated"
+}

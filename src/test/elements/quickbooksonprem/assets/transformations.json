@@ -1,9 +1,30 @@
 {
+  "bill-payment-checks": {
+    "vendorName": "BillPaymentCheck",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "TxnID"
+    }]
+  },
+  "bill-payment-cards": {
+    "vendorName": "BillPaymentCreditCard",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "TxnID"
+    }]
+  },
   "bills": {
     "vendorName": "Bill",
     "fields": [{
       "path": "id",
       "vendorPath": "TxnID"
+    }]
+  },
+  "classes": {
+    "vendorName": "Class",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ListID"
     }]
   },
   "credit-memos": {
@@ -15,6 +36,27 @@
   },
   "credit-terms": {
     "vendorName": "Terms",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ListID"
+    }]
+  },
+  "creditcard-charges": {
+    "vendorName": "CreditCardCharge",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "TxnID"
+    }]
+  },
+  "creditcard-credits": {
+    "vendorName": "CreditCardCredit",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "TxnID"
+    }]
+  },
+  "currencies": {
+    "vendorName": "Currency",
     "fields": [{
       "path": "id",
       "vendorPath": "ListID"
@@ -34,8 +76,29 @@
       "vendorPath": "ListID"
     }]
   },
+  "inventory-adjustments": {
+    "vendorName": "InventoryAdjustment",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "TxnID"
+    }]
+  },
+  "inventory-sites": {
+    "vendorName": "InventorySite",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ListID"
+    }]
+  },
   "invoices": {
     "vendorName": "Invoice",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "TxnID"
+    }]
+  },
+  "item-receipts" : {
+    "vendorName": "ItemReceipt",
     "fields": [{
       "path": "id",
       "vendorPath": "TxnID"
@@ -48,6 +111,27 @@
       "vendorPath": "TxnID"
     }]
   },
+  "ledger-accounts": {
+    "vendorName": "Account",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ListID"
+    }]
+  },
+  "payment-methods": {
+    "vendorName": "PaymentMethod",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ListID"
+    }]
+  },
+  "products": {
+    "vendorName": "Item",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ListID"
+    }]
+  },
   "payments": {
     "vendorName": "ReceivePayment",
     "fields": [{
@@ -55,36 +139,57 @@
       "vendorPath": "TxnID"
     }]
   },
-  "bill-payment-checks": {
-    "vendorName": "BillPaymentCheck",
+  "purchase-orders": {
+    "vendorName": "PurchaseOrder",
     "fields": [{
       "path": "id",
       "vendorPath": "TxnID"
     }]
   },
-  "bill-payment-cards": {
-    "vendorName": "BillPaymentCreditCard",
+  "sales-orders": {
+    "vendorName": "SalesOrder",
     "fields": [{
       "path": "id",
       "vendorPath": "TxnID"
     }]
   },
-  "creditcard-charges": {
-    "vendorName": "CreditCardCharge",
+  "sales-receipts": {
+    "vendorName": "SalesReceipt",
     "fields": [{
       "path": "id",
       "vendorPath": "TxnID"
+    }]
+  },
+  "tax-codes": {
+    "vendorName": "SalesTaxCode",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ListID"
+    }]
+  },
+  "tax-rates": {
+    "vendorName": "ItemSalesTax",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ListID"
+    }]
+  },
+  "time-activities" : {
+    "vendorName": "TimeTracking",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "TxnID"
+    }]
+  },
+  "vendors": {
+    "vendorName": "Vendor",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ListID"
     }]
   },
   "vendor-credits": {
     "vendorName": "VendorCredit",
-    "fields": [{
-      "path": "id",
-      "vendorPath": "TxnID"
-    }]
-  },
-  "creditcard-credits": {
-    "vendorName": "CreditCardCredit",
     "fields": [{
       "path": "id",
       "vendorPath": "TxnID"

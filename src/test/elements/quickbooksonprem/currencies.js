@@ -2,6 +2,7 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
+<<<<<<< HEAD
 const tools = require('core/tools');
 const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/currencies.json`);
@@ -9,21 +10,27 @@ const update = (editseq) => ({
   "EditSequence": editseq,
   "Name": tools.random()
 });
+=======
+
+const payload = require('./assets/currencies-create');
+const updatePayload = require('./assets/currencies-update');
+
+>>>>>>> master
 
 suite.forElement('finance', 'currencies', { payload: payload }, (test) => {
   it(`should support CRUDS and Ceql searching for ${test.api}`, () => {
-    let id, editseq;
+    let id;
     return cloud.post(test.api, payload)
       .then(r => {
-        editseq = r.body.EditSequence;
-        id = r.body.ListID;
+        updatePayload.EditSequence = r.body.EditSequence;
+        id = r.body.id;
       })
       .then(r => cloud.get(`${test.api}`))
       .then(r => cloud.withOptions({ qs: { where: `ListID='${id}'` } }).get(test.api))
       .then(r => cloud.withOptions({ qs: { where: `active='true'` } }).get(test.api))
       .then(r => cloud.withOptions({ qs: { where: `TimeModified='2018-05'` } }).get(test.api))
       .then(r => cloud.get(`${test.api}/${id}`))
-      .then(r => cloud.patch(`${test.api}/${id}`, update(editseq)))
+      .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
   test.should.supportNextPagePagination(1);

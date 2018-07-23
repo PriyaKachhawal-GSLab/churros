@@ -1,17 +1,16 @@
 'use strict';
 
 const suite = require('core/suite');
-const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = tools.requirePayload(`${__dirname}/assets/item-receipts.json`);
-const updatePayload = { "Memo": tools.random() };
+const payload = require('./assets/item-receipts-create');
+const updatePayload = require('./assets/item-receipts-update');
 
 suite.forElement('finance', 'item-receipts', { payload: payload }, (test) => {
   it('should support CRUDS and Ceql searching for /hubs/finance/item-receipts', () => {
     let id;
     return cloud.post(test.api, payload)
       .then(r => {
-        id = r.body.TxnID;
+        id = r.body.id;
         updatePayload.EditSequence = r.body.EditSequence;
       })
       .then(r => cloud.get(test.api))
