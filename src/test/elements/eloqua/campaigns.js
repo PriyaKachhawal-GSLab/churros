@@ -5,6 +5,7 @@ const cloud = require('core/cloud');
 const tools = require('core/tools');
 const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
 const campaignsPayload = tools.requirePayload(`${__dirname}/assets/campaigns.json`);
+const campaignsActivePayload = tools.requirePayload(`${__dirname}/assets/campaignsActive.json`);
 
 suite.forElement('marketing', 'campaigns', { payload: campaignsPayload }, (test) => {
   it(`should allow CRUDS for ${test.api}, PATCH /campaigns/activate/:id and PATCH /campaigns/deactivate/:id`, () => {
@@ -16,6 +17,7 @@ suite.forElement('marketing', 'campaigns', { payload: campaignsPayload }, (test)
       .then(r => cloud.get(`${test.api}/${campaignId}`))
       .then(r => cloud.patch(`${test.api}/${campaignId}`, campaignsPayload))
       .then(r => cloud.patch(`${test.api}/${campaignId}/activate`))
+      .then(r => cloud.patch(`${test.api}/${campaignId}/activate`, campaignsActivePayload))
       .then(r => cloud.patch(`${test.api}/${campaignId}/deactivate`))
       .then(r => cloud.get(test.api))
       .then(r => cloud.withOptions({ qs: { where: `id='${campaignId}'` } }).get(`${test.api}`))
