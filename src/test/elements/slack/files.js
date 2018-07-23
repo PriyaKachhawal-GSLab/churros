@@ -2,6 +2,7 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
+const expect = require('chakram').expect;
 const commentPayload = require('./assets/comment');
 
 suite.forElement('collaboration', 'files', (test) => {
@@ -18,7 +19,17 @@ suite.forElement('collaboration', 'files', (test) => {
 
   //Test for get files
   test.withOptions({ qs: { 'where': 'types = \'images\'' } }).should.return200OnGet();
-  test.should.supportPagination('id');
+  it(`should support GET and pagination for ${test.api}`, () => {
+    return cloud.get(`${test.api}`)
+      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(`${test.api}`));
+  });
+
+  it(`should allow RETRIEVE ${test.api}/contents`, () => {
+    let fileid;
+    return cloud.get(test.api)
+      .then(r => fileid = r.body[0].id)
+      .then(r => cloud.get(`${test.api}/${fileid}/contents`));
+  });
 
   //test for CRD operations on files
   it(`should allow SR ${test.api}`, () => {
