@@ -2,20 +2,10 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-<<<<<<< HEAD
 const tools = require('core/tools');
 const expect = require('chakram').expect;
-const payload = tools.requirePayload(`${__dirname}/assets/currencies.json`);
-const update = (editseq) => ({
-  "EditSequence": editseq,
-  "Name": tools.random()
-});
-=======
-
 const payload = require('./assets/currencies-create');
 const updatePayload = require('./assets/currencies-update');
-
->>>>>>> master
 
 suite.forElement('finance', 'currencies', { payload: payload }, (test) => {
   it(`should support CRUDS and Ceql searching for ${test.api}`, () => {
