@@ -2,7 +2,6 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const expect = require('chakram').expect;
 const commentPayload = require('./assets/comment');
 
 suite.forElement('collaboration', 'files', (test) => {
