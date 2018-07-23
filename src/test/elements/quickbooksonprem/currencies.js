@@ -2,7 +2,6 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const tools = require('core/tools');
 const expect = require('chakram').expect;
 const payload = require('./assets/currencies-create');
 const updatePayload = require('./assets/currencies-update');
@@ -25,11 +24,11 @@ suite.forElement('finance', 'currencies', { payload: payload }, (test) => {
   });
   test.should.supportNextPagePagination(1);
   it(`should return an error when 'TimeModified' filter is not a proper Date`, () => {
-    return cloud.withOptions({qs: {where: `TimeModified='2018'`}})
+    return cloud.withOptions({ qs: { where: `TimeModified='2018'` } })
       .get(test.api, (r) => expect(r).to.have.statusCode(400));
   });
   it(`should return an error when 'active' filter is not true or false`, () => {
-    return cloud.withOptions({qs: {where: `active='isNotTrueOrFalse'`}})
+    return cloud.withOptions({ qs: { where: `active='isNotTrueOrFalse'` } })
       .get(test.api, (r) => expect(r).to.have.statusCode(400));
   });
 });

@@ -26,7 +26,6 @@ suite.forElement('finance', 'invoices', { payload: payload }, (test) => {
       .then(r => {
         RefNumber = r.body[10].RefNumber;
       })
-      .then(r => cloud.withOptions({ qs: { where: `RefNumber like '%${RefNumber}%'` } }).get(test.api))
-
+      .then(r => cloud.withOptions({ qs: { where: `RefNumber like '%${RefNumber}%'` } }).get(test.api));
   });
 });

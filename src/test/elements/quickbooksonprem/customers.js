@@ -26,7 +26,6 @@ suite.forElement('finance', 'customers', { payload: payload }, (test) => {
       .then(r => cloud.withOptions({ qs: { where: `Name='sample''s company'` } }).get(test.api))
       .then(r => cloud.withOptions({ qs: { where: `active='true'` } }).get(test.api))
       .then(r => cloud.withOptions({ qs: { where: `TimeModified='2018-05'` } }).get(test.api));
-
   });
   it(`should return an error when 'TimeModified' filter is not a proper Date`, () => {
     return cloud.withOptions({ qs: { where: `TimeModified='2018'` } })
