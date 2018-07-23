@@ -18,10 +18,7 @@ suite.forElement('collaboration', 'files', (test) => {
 
   //Test for get files
   test.withOptions({ qs: { 'where': 'types = \'images\'' } }).should.return200OnGet();
-  it(`should support GET and pagination for ${test.api}`, () => {
-    return cloud.get(`${test.api}`)
-      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(`${test.api}`));
-  });
+  test.should.supportPagination('id');
 
   it(`should allow RETRIEVE ${test.api}/contents`, () => {
     let fileid;
