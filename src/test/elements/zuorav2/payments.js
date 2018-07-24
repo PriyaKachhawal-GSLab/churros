@@ -17,7 +17,7 @@ suite.forElement('payment', 'payments', { payload: payload }, (test) => {
       }
     }
   };
-  let customerId, invoiceId,sId,pId;
+  let customerId, subscriptionId, invoiceId,sId,pId;
   const date = subscriptionPayload.contractEffectiveDate;
   InvoicePayload.InvoiceDate = date;
   InvoicePayload.TargetDate = date;
@@ -27,20 +27,14 @@ suite.forElement('payment', 'payments', { payload: payload }, (test) => {
   };
   const updateInvoicePayload = { "Status": "Posted" };
   before(() => {
-    return cloud.withOptions({ qs: { where: 'expand=true' } }).get(`/hubs/payment/products`)
+    return cloud.get(`/subscriptions`)
+      .then(r => subscriptionId = r.body[0].id)
+      .then(r => cloud.get(`subscriptions/${subscriptionId}`))
       .then(r => {
-        var match = r.body.filter(function(list) {
-          return list.productRatePlans.length !== 0;
-        });
-        if (match.length >= 0) {
-          let rate = match[0].productRatePlans;
-          rateId = rate[0].id;
-          charge = rate[0].productRatePlanCharges[0].id;
-          subscriptionPayload.subscribeToRatePlans[0].productRatePlanId = rateId;
-          subscriptionPayload.subscribeToRatePlans[0].chargeOverrides[0].productRatePlanChargeId = charge;
-        } else {
-          // bail
-        }
+        rateId = r.body.ratePlans[0].productRatePlanId;
+        charge = r.body.ratePlans[0].ratePlanCharges[0].productRatePlanChargeId;
+        subscriptionPayload.subscribeToRatePlans[0].productRatePlanId = rateId;
+        subscriptionPayload.subscribeToRatePlans[0].chargeOverrides[0].productRatePlanChargeId = charge;
       })
       .then(r => cloud.post(`/hubs/payment/customers`, customerPayload))
       .then(r => customerId = r.body.id ? r.body.id : r.body.accountId)
