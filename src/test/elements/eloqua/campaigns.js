@@ -5,7 +5,6 @@ const cloud = require('core/cloud');
 const tools = require('core/tools');
 const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
 const campaignsPayload = tools.requirePayload(`${__dirname}/assets/campaigns.json`);
-const campaignsActivePayload = tools.requirePayload(`${__dirname}/assets/campaignsActive.json`);
 
 suite.forElement('marketing', 'campaigns', { payload: campaignsPayload }, (test) => {
   it(`should allow CRUDS for ${test.api}, PATCH /campaigns/activate/:id and PATCH /campaigns/deactivate/:id`, () => {
