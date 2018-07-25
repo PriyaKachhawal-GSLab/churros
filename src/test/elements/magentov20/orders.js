@@ -4,6 +4,7 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
 const productPayload = require('./assets/products');
+const ordersInvoicePayload = require('./assets/ordersInvoice');
 const payload = require('./assets/orders');
 const expect = require('chakram').expect;
 
@@ -41,6 +42,7 @@ suite.forElement('ecommerce', 'orders', { payload: payload }, (test) => {
       .then(r => cloud.post(`${test.api}/${orderId}/comments`, comments))
       .then(r => cloud.get(`${test.api}/${orderId}/comments`))
       .then(r => cloud.post(`${test.api}/${orderId}/emails`, orderId))
+      .then(r => cloud.post(`${test.api}/${orderId}/invoice`, ordersInvoicePayload))
       .then(r => cloud.post(`${test.api}/${orderId}/hold`, orderId))
       .then(r => cloud.get(`${test.api}/${orderId}/statuses`))
       .then(r => cloud.post(`${test.api}/${orderId}/unhold`, orderId))
