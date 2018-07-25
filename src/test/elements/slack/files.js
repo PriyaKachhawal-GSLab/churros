@@ -20,6 +20,13 @@ suite.forElement('collaboration', 'files', (test) => {
   test.withOptions({ qs: { 'where': 'types = \'images\'' } }).should.return200OnGet();
   test.should.supportPagination('id');
 
+  it(`should allow RETRIEVE ${test.api}/contents`, () => {
+    let fileid;
+    return cloud.get(test.api)
+      .then(r => fileid = r.body[0].id)
+      .then(r => cloud.get(`${test.api}/${fileid}/contents`));
+  });
+
   //test for CRD operations on files
   it(`should allow SR ${test.api}`, () => {
     let fileid;
