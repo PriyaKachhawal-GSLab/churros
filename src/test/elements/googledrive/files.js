@@ -10,6 +10,8 @@ const folderPayload = require('./assets/folders');
 const randomInt = tools.randomInt();
 folderPayload.path += randomInt;
 folderPayload.name += randomInt;
+const permissionPayload = tools.requirePayload(`${__dirname}/assets/permission.json`);
+const permissionUpdatePayload = tools.requirePayload(`${__dirname}/assets/permissionUpdate.json`);
 const commentPayload1 = tools.requirePayload(`${__dirname}/assets/comment.json`);
 const commentPayload2 = tools.requirePayload(`${__dirname}/assets/comment.json`);
 
@@ -181,6 +183,8 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
       .then(r => cloud.delete(`${test.api}/${fileId2}`));
   });
 
+
+
   it(`should allow CRUDS for ${test.api}/:id/comments`, () => cloud.cruds(`${test.api}/${jpgFileBody.id}/comments`, commentPayload1));
 
   it(`should allow CRUDS for ${test.api}/comments by path`, () => cloud.withOptions({ qs: { path: jpgFileBody.path } }).cruds(`${test.api}/comments`, commentPayload1));
@@ -322,4 +326,29 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
       }
     }).get(test.api);
   });
+
+  it(`should aloow CRUDS for ${test.api}/permissions by ID`, () => {
+    let permissionId;
+    return cloud.post(`${test.api}/${jpgFileBody.id}/permissions`, permissionPayload)
+      .then(r => permissionId = r.body.id)
+      .then(r => cloud.get(`${test.api}/${jpgFileBody.id}/permissions`))
+      .then(r => cloud.withOptions({ qs: { pageSize: 1 } }).get(`${test.api}/${jpgFileBody.id}/permissions`))
+      .then(r => expect(r.body[0].permissions).to.have.lengthOf(1))
+      .then(r => cloud.get(`${test.api}/${jpgFileBody.id}/permissions/${permissionId}`))
+      .then(r => cloud.patch(`${test.api}/${jpgFileBody.id}/permissions/${permissionId}`, permissionUpdatePayload))
+      .then(r => cloud.delete(`${test.api}/${jpgFileBody.id}/permissions/${permissionId}`));
+  });
+
+  it(`should aloow CRUDS for ${test.api}/permissions by path`, () => {
+    let permissionId;
+    return cloud.withOptions({ qs: { path: jpgFileBody.path } }).post(`${test.api}/permissions`, permissionPayload)
+      .then(r => permissionId = r.body.id)
+      .then(r => cloud.withOptions({ qs: { path: jpgFileBody.path } }).get(`${test.api}/permissions`))
+      .then(r => cloud.withOptions({ qs: { pageSize: 1, path: jpgFileBody.path  } }).get(`${test.api}/permissions`))
+      .then(r => expect(r.body[0].permissions).to.have.lengthOf(1))
+      .then(r => cloud.withOptions({ qs: { path: jpgFileBody.path } }).get(`${test.api}/permissions/${permissionId}`))
+      .then(r => cloud.withOptions({ qs: { path: jpgFileBody.path } }).patch(`${test.api}/permissions/${permissionId}`, permissionUpdatePayload))
+      .then(r => cloud.withOptions({ qs: { path: jpgFileBody.path } }).delete(`${test.api}/permissions/${permissionId}`));
+  });
+  
 });
