@@ -116,12 +116,12 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
     });
 
     it('should support upgrade and rollback of any org\'s VDR version for a vdrAdmin', () => {
-        // create some v1 objects
         const opts = {
             qs: {
                 'orgIds[]': org.id
             }
         };
+
         return cloudWithUser().post(`/organizations/objects/${vdrSystem.objectName}/definitions`, genObj('name'), validateObject(1, ['vdrname']))
             .then(r => cloudWithUser().post(`/organizations/elements/${closeioKey}/transformations/${vdrSystem.objectName}`, genTransform('name')))
             // upgrade 
@@ -176,7 +176,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
                 .then(r => vdrId = r.body.id)
                 .then(() => cloudWithUser().get(`/organizations/elements/${closeioKey}/transformations/${vdrSystem.objectName}`))
                 .then(r => transformationId = r.body.id)
-                // todo - validate account
+                // TODO - I'm here - validate account
                 .then(() => cloudWithInstance().get(`hubs/crm/${vdrSystem.objectName}?pageSize=5`, r => {
                     expect(r).to.have.statusCode(200);
                     expect(r.body).to.not.be.empty;
