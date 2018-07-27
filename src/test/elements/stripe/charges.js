@@ -5,6 +5,7 @@ const tools = require('core/tools');
 const cloud = require('core/cloud');
 const payload = require('./assets/charges');
 const expect = require('chakram').expect;
+const capture_payload = tools.requirePayload(`${__dirname}/assets/capture.json`);
 
 const updateCharges = () => ({
   "receipt_email": tools.randomEmail()
@@ -17,7 +18,7 @@ suite.forElement('payment', 'charges', { payload: payload }, (test) => {
     return cloud.post(test.api, payload)
       .then(r => chargeId = r.body.id)
       .then(r => cloud.patch(`${test.api}/${chargeId}`, updateCharges()))
-      .then(r => cloud.post(`${test.api}/${chargeId}/capture`))
+      .then(r => cloud.post(`${test.api}/${chargeId}/capture`,capture_payload))
       .then(r => cloud.withOptions({ qs: { where: `currency='usd' and  created=1485255289` } }).get(test.api));
   });
   
