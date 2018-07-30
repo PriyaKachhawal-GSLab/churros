@@ -29,6 +29,7 @@ suite.forElement('general', 'forms', { payload: payload }, (test) => {
     return cloud.post(`${test.api}`, payload)
       .then(r => formId = r.body.id)
       .then(r => cloud.patch(`${test.api}/${formId}/messages`, msgUpdatePayload))
-      .then(r => cloud.get(`${test.api}/${formId}/messages`));
+      .then(r => cloud.get(`${test.api}/${formId}/messages`))
+      .then(r => expect(r.body['label.buttonHint.default']).to.equal(`label.buttonHint.default`));
   });
 });
