@@ -782,6 +782,15 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then(() => browser.getCurrentUrl());
       }
       break;
+    case 'typeform':
+      browser.get(r.body.oauthUrl);
+      browser.findElement(webdriver.By.id('_username')).sendKeys(username);
+      browser.findElement(webdriver.By.id('_password')).sendKeys(password);
+      browser.findElement(webdriver.By.xpath('.//button[@data-qa="login"]')).click();
+      browser.wait(webdriver.until.elementLocated(webdriver.By.xpath('.//button[@data-qa="accept"]')), 10000);
+      browser.findElement(webdriver.By.xpath('.//button[@data-qa="accept"]')).click();
+      browser.sleep(2000);
+      return browser.getCurrentUrl();
     case 'zohocrmv2':
       browser.get(r.body.oauthUrl);
       browser.wait(webdriver.until.elementLocated(webdriver.By.name('lid'), 5000));
