@@ -14,7 +14,7 @@ suite.forElement('helpdesk', 'incidentTypes', {payload:payload}, (test) => {
   let incidentTypeId;
   return cloud.post(uri, payload)
   .then(r => incidentTypeId = r.body.id)
-  .then(r => cloud.withOptions({qs:{ where: `id='${incidentTypeId}'` }}).get('/hubs/helpdesk/incident-types'))
+  .then(r => cloud.get('/hubs/helpdesk/incident-types'))
   .then(r => cloud.get(uri + "/" + incidentTypeId))
   .then(r => cloud.get(uri))
   .then(r => cloud.update(uri + '/' + incidentTypeId, updatePayload))
