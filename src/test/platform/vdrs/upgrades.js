@@ -12,11 +12,9 @@ const expect = chakram.expect;
 const signup = tools.requirePayload(`${__dirname}/assets/signup.json`);
 
 const vdrSystem = tools.requirePayload(`${__dirname}/assets/vdr.system.json`);
-const vdrMulti = tools.requirePayload(`${__dirname}/assets/vdr.multi.json`);
 const schema = tools.requirePayload(`${__dirname}/assets/vdr.schema.json`);
 const pluralSchema = tools.requirePayload(`${__dirname}/assets/vdrs.schema.json`);
 pluralSchema.definitions.vdr = schema;
-const snippets = tools.requirePayload(`${__dirname}/assets/snippets.json`);
 
 // NOTE - you will need the customerAdmin privilege to run these tests (to signup a new user with a new org)
 suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
@@ -106,13 +104,12 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
         expect(r.body.fields.length).to.equal(numFields);
         paths.forEach(path => {
             expect(r.body.fields.filter(R.propEq('path', path))).to.not.be.empty;
-        })
-        
+        });
     };
 
     const validateVdrVersion = version => r => {
         expect(r.body.vdrVersion).to.equal(version);
-    }
+    };
 
     it('should support upgrade and rollback of my VDR version multiple times', () => {
         // create some v1 objects
@@ -146,7 +143,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
             .then(r => cloud.get(`/customers/organizations/${org.id}`, validateVdrVersion('v2')))
             // roll back
             .then(r => cloud.withOptions(opts).delete(`/vdrs/upgrade/v2`))
-            .then(r => cloud.get(`/customers/organizations/${org.id}`, validateVdrVersion('v1')))
+            .then(r => cloud.get(`/customers/organizations/${org.id}`, validateVdrVersion('v1')));
     });
 
     // test upgrade/rollback for calling user's org
@@ -163,7 +160,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
                     r.body.forEach(item => {
                         expect(item.vdrname).to.not.be.undefined;
                         expect(item.name).to.be.undefined;
-                    })
+                    });
                 }));
         };
 
@@ -183,7 +180,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
             .then(r => cloudWithUser().delete(`/vdrs/upgrade/v2`))
             .then(r => cloudWithUser().get(`/organizations/me`, validateVdrVersion('v1')))
             // validate again in v1
-            .then(r => validateOrgTransformExistsAndWorks())
+            .then(r => validateOrgTransformExistsAndWorks());
         });
 
     it('should support upgrade and rollback of my VDR version with org and account level VDRs', () => {
@@ -203,7 +200,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
                         expect(item.name).to.be.undefined;
                         expect(item.vdrid).to.not.be.undefined;
                         expect(item.id).to.be.undefined;
-                    })
+                    });
                 }));
         };
     
@@ -248,7 +245,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
                         expect(item.vdrid).to.not.be.undefined;
                         expect(item.id).to.be.undefined;
                         expect(item.vdrtitle).to.be.undefined;
-                    })
+                    });
                 }))
                 // account 2
                 .then(() => cloudWithUser2().get(`/accounts/${account2.id}/objects/${vdrSystem.objectName}/definitions`, validateObject(1, ['vdrtitle'])))
@@ -262,7 +259,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
                         expect(item.vdrtitle).to.not.be.undefined;
                         expect(item.title).to.be.undefined;
                         expect(item.vdrid).to.be.undefined;
-                    })
+                    });
                 }));
         };
     
@@ -315,7 +312,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
                         expect(item.vdrphones[0].phone).to.not.be.undefined;
                         expect(item.vdrphones[0].type).to.be.undefined;
                         expect(item.phones).to.be.undefined;
-                    })
+                    });
                 }))
                 .then(() => cloudWithInstance2().get(`hubs/crm/${vdrSystem.objectName}?pageSize=5`, r => {
                     expect(r).to.have.statusCode(200);
@@ -328,7 +325,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
                         expect(item.vdrphones[0].type).to.not.be.undefined;
                         expect(item.vdrphones[0].phone).to.be.undefined;
                         expect(item.phones).to.be.undefined;
-                    })
+                    });
                 }));
         };
     
@@ -387,9 +384,9 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
             let t = genTransform(path);
             t.script = {
                 body: "transformedObject.foo = 'bar'; done(transformedObject);"
-            }
+            };
             return t;
-        }
+        };
 
         let vdrId, transformationId;
         const validateTransformExistsAndWorks = () => {
@@ -406,7 +403,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
                         expect(item.vdrname).to.not.be.undefined;
                         expect(item.name).to.be.undefined;
                         expect(item.foo).to.equal('bar');
-                    })
+                    });
                 }));
         };
 
@@ -429,6 +426,6 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
             .then(r => cloudWithUser().delete(`/vdrs/upgrade/v2`))
             .then(r => cloudWithUser().get(`/organizations/me`, validateVdrVersion('v1')))
             // validate again in v1
-            .then(r => validateTransformExistsAndWorks())
+            .then(r => validateTransformExistsAndWorks());
         });
 });
