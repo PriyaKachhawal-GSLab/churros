@@ -1,0 +1,7 @@
+{
+    "custom_template":
+        {
+            "name": "<<random.words>>",
+            "message": "This is where the custom message is..."
+        }
+}

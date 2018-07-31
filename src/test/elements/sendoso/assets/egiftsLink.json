@@ -1,0 +1,8 @@
+{
+  "send": {
+    "via": "generate_egift_links",
+    "number_of_gifts": 10,
+    "amount": 10,
+    "via_from": "Cloud Elements"
+   }
+}

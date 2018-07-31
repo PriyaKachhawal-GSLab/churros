@@ -1,0 +1,7 @@
+{
+  "group": {
+    "monthly_budget": 50,
+    "rollover": true,
+    "one_time_budget": 50
+  }
+}

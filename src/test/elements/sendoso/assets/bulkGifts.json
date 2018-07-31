@@ -1,0 +1,15 @@
+{
+  "send": {
+    "via": "bulk_email_addresses",
+    "message_from": "CSV",
+    "amount": 10,
+    "email": "cloudelements@sendoso.com",
+    "recipient_users": [
+      {
+        "first_name": "Smith",
+        "email": "test@email.com",
+        "custom_message": "Hi smith"
+      }
+    ]
+  }
+}

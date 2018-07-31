@@ -11,6 +11,18 @@
       }
     ]
   },
+  "touches": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
   "requisitions": {
     "fields": [
       {

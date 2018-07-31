@@ -1,0 +1,18 @@
+{
+  "touch": {
+    "gift_id": 29,
+    "name": "Send AcmeCo Tshirt",
+    "start_date": "01-01-2017",
+    "end_date": "12-12-2017",
+    "total_touch_budget": 50,
+    "engaged_goal": 10,
+    "no_of_gifts_sent_goal": 100,
+    "effective_rating_goal": 10,
+    "user_adoption_goal": 10,
+    "no_of_senders_goal": 10,
+    "description": "This Touch is for sending Company Swag to new customers.",
+    "starting_egift_price": 10,
+    "ending_egift_price": 10,
+    "is_default_price": false
+  }
+}
