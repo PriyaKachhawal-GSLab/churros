@@ -2,6 +2,7 @@
 
 //dependencies at the top
 const expect = require('chakram').expect;
+const all = require('chakram').all;
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
@@ -25,6 +26,10 @@ suite.forElement('crm', 'accounts', { payload: payload }, (test) => {
       .then(r => cloud.cruds(`${test.api}/${accountId}/activities`, activities))
       .then(r => cloud.delete(`${test.api}/${accountId}`));
   });
+
+  //should validate paginating with nextPage and pageSize for /hubs/crm/accounts/:id/activities
+  test.should.supportPaginationForNested('activities', () => tools.requirePayload(`${__dirname}/assets/activities.json`));
+
   it('should allow CRUDS for /hubs/crm/accounts/:id/notes', () => {
     let accountId;
     return cloud.post(test.api, payload)
@@ -32,6 +37,10 @@ suite.forElement('crm', 'accounts', { payload: payload }, (test) => {
       .then(r => cloud.cruds(`${test.api}/${accountId}/notes`, notes))
       .then(r => cloud.delete(`${test.api}/${accountId}`));
   });
+
+  //should validate paginating with nextPage and pageSize for /hubs/crm/accounts/:id/notes
+  test.should.supportPaginationForNested('notes', () => tools.requirePayload(`${__dirname}/assets/notes.json`));
+
   it('should allow CRUDS for /hubs/crm/accounts/:id/tasks', () => {
     let accountId;
     return cloud.post(test.api, payload)
@@ -39,6 +48,10 @@ suite.forElement('crm', 'accounts', { payload: payload }, (test) => {
       .then(r => cloud.cruds(`${test.api}/${accountId}/tasks`, tasks))
       .then(r => cloud.delete(`${test.api}/${accountId}`));
   });
+
+  //should validate paginating with nextPage and pageSize for /hubs/crm/accounts/:id/tasks
+  test.should.supportPaginationForNested('tasks', () => tools.requirePayload(`${__dirname}/assets/tasks.json`));
+
   it('should find account with quote in name', () => {
     let accountId;
     let accountPayload = {

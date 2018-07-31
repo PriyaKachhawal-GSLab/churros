@@ -232,6 +232,26 @@ const itPostError = (name, httpCode, api, payload, options) => {
   boomGoesTheDynamite(n, () => cloud.withOptions(options).post(api, payload, (r) => expect(r).to.have.statusCode(httpCode)), options ? options.skip : false);
 };
 
+const itPaginationForNested = (name, parentObject, parentPayload, childObject, childPayload, uniqueField, options) => {
+  const n = name || `should validate paginating with nextPage and pageSize for ${parentObject}/:id/${childObject}`;
+  const usePayloadList = Array.isArray(childPayload);
+  let parentId, childIds = [], list = usePayloadList ? childPayload : [0, 1, 2, 3];
+  return boomGoesTheDynamite(n, () => {
+    return cloud.post(parentObject, parentPayload)
+    .then(r => parentId = r.body.id)
+    .then(r => chakram.all(list.map(pay => cloud.post(`${parentObject}/${parentId}/${childObject}`,
+          usePayloadList ? pay : typeof childPayload === 'function' ? childPayload() : childPayload))))
+    .then(r => r.forEach(o => childIds.push(o.body.id)))
+    .then(r => cloud.withOptions(options).supportPagination(`${parentObject}/${parentId}/${childObject}`, uniqueField || 'id'))
+    .then(r => Promise.all(childIds.map(childId => cloud.delete(`${parentObject}/${parentId}/${childObject}/${childId}`))))
+    .then(r => cloud.delete(`${parentObject}/${parentId}`))
+    .catch(e => {
+      logger.debug(`Error while paginating`, e);
+      cloud.delete(`${parentObject}/${parentId}`)
+    });
+  }, options ? options.skip : false);
+};
+
 const itCeqlSearch = (name, api, payload, field, options) => {
   const n = name || `should support searching ${api} by ${field}`;
   boomGoesTheDynamite(n, () => {
@@ -569,6 +589,17 @@ const runTests = (api, payload, validationCb, tests, hub) => {
      * @memberof module:core/suite.test.should
      */
     supportPagination: (unique) => itPagination(name, api, options, validationCb, unique),
+     /**
+     * Validates paginating nested objects, creating 4 child objects for the parent in the process.
+     * The `childPayload` can be a function, object, or array of objects
+     * @param {string} parentObject
+     * @param {object} parentPayload
+     * @param {string} childObject
+     * @param {any} childPayload
+     * @param {string} uniqueField defaults to 'id'
+     * @memberof module:core/suite.test.should
+     */
+    supportPaginationForNested: (childObject, childPayload, uniqueField) => itPaginationForNested(name, api, payload, childObject, childPayload, uniqueField, options),
     /**
      * Validates that the given API supports `nextPageToken` type pagination.
      * @param {number} amount The number of objects to paginate through
