@@ -15,7 +15,7 @@ suite.forElement('rewards', 'orders', {payload: payload,  skip: true}, (test) =>
   return cloud.post(test.api, payload2)
    .then(r => {
     orderId = r.body.id;
-    externalRefId = r.body.externalRefID
+    externalRefId = r.body.externalRefID;
    })
   .then(r => cloud.withOptions({ qs: { where: `externalRefID='${externalRefId}'` } }).get(test.api))
    .then(r => cloud.post(`${test.api}/${orderId}/resends`));
