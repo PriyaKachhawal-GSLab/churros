@@ -1,21 +1,17 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const queryPayload = require('./assets/queryPayload.json');
-var ref='';
-const payload = queryPayload.payload;
-const path = queryPayload.path;
-const updatePayload = queryPayload.updatePayload;
-const pId = queryPayload.id;
-
+const queryUpdatePayload = require('./assets/queryUpdatePayload.json');
+const payload = require('./assets/queryPayload.json');
+var queryID = ``;
 suite.forElement('collaboration', 'queries', (test) => {
   it('should allow CRUDS for queries', () => {
-    return cloud.get(`${test.api}`)
-    .then(r => cloud.get(`${test.api}/${pId}`))
-    .then(r => cloud.withOptions({ qs: { query: path } }).post(`${test.api}`, payload))
-     .then(r => {
-       ref = r.body.id;
-    })
-      .then(r => cloud.patch(`${test.api}/${ref}`, updatePayload))
-      .then(r => cloud.delete(`${test.api}/${ref}`));
-});
+    return cloud.get(`${test.api}`).
+    then(r => cloud.post(test.api, payload.value)).
+    then(r => {
+        queryID = r.body.id;
+      })
+      .then(r => cloud.get(`${test.api}/${queryID}`)).
+    then(r => cloud.patch(`${test.api}/${queryID}`, queryUpdatePayload)).
+    then(r => cloud.delete(`${test.api}/${queryID}`));
+  });
 });

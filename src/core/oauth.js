@@ -34,7 +34,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.name('passwd')).sendKeys(password);
       browser.findElement(webdriver.By.xpath("//*[@id=\"idSIButton9\"]")).
       then((element) => element.click(), (err) => console.log(err));
-      browser.findElement(webdriver.By.xpath("/html/body/div/form/div[1]/div/div[2]/div[2]/div/div/div[4]/div[2]/div/div/div[1]")).
+      browser.wait(() => browser.findElement(webdriver.By.id("idBtn_Back")), 5000).
       then((element) => element.click(), (err) => console.log(err));
       browser.findElement(webdriver.By.id('accept-button')).
       then((element) => element.click(), (err) => console.log(err));

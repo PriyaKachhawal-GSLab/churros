@@ -1,13 +1,8 @@
 {
-  "payload": {
-    "name": "Website team2",
+  "value": {
+    "path": "My Queries/childQueries",
+    "name": "Churros",
     "isFolder": true
   },
-  "path": "My Queries/childQueries",
-  "updatePayload": {
-    "name": "Updated Website",
-    "isFolder": true
-                    },
-    "id" : "e00dd511-0ef4-4248-b471-baef12856434"
-
+  "id": "396c85c9-76c4-4ce8-8346-165ee42a5262"
 }

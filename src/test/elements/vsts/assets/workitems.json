@@ -1,8 +1,6 @@
-[
-    {
-      "op": "add",
-      "path": "/fields/System.Title",
-      "from": null,
-      "value": "Sample task through churros TDD"
-    }
-  ]
+{
+  "System.Title": "Churros Working Task test on: ",
+  "System.Tags": "Churros",
+  "System.Description": "Dscription of Churros task:",
+  "type": "task"
+}
