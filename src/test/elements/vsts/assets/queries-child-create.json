@@ -1,0 +1,6 @@
+{
+  "path": "My Queries/childQueries",
+  "name": "BugIssues",
+  "wiql": "Select [System.Id] From WorkItems Where [System.WorkItemType] = 'Bug' order by [System.Id] ASC"
+
+}

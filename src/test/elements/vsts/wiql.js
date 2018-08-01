@@ -1,10 +1,10 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-var query = {
-    "query" : "select [System.Id] from workItems where System.Id = 30"
-};
+const query = require('./assets/wiql.json');
+
+// This is a hidden API, but is worthwhile for flexible Work Item query testing
 suite.forElement('collaboration', 'wiql', (test) => {
-  it('should allow R for /wiql', () => {
+  it('should allow C for /wiql', () => {
     return cloud.post(test.api, query);
   });
 });

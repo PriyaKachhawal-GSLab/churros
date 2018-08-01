@@ -3,6 +3,8 @@ const cloud = require('core/cloud');
 
 suite.forElement('collaboration', 'users', (test) => {
   it('should allow S for users', () => {
-    return cloud.get(test.api);
+    test.should.supportS();
+    test.should.return200OnGet();
   });
+  test.should.supportPagination();
 });

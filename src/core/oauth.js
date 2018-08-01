@@ -15,31 +15,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
     return brow.wait(() => brow.isElementPresent(locator), timeout).then(() => brow.sleep(100));
   };
   waitForElement = waitForElement.bind(browser);
-  console.log('jlsdfhgiosahdfglkhsadfkhs', element);
   switch (element) {
-
-    case 'vsts':
-    // we need to send the scope as well in the path
-      browser.get(`${r.body.oauthUrl}&scope=${config.scope}`);
-      browser.findElement(webdriver.By.name('loginfmt')).
-      then((element) => element.sendKeys(username), (err) => console.log(err));
-      var nextButton = browser.findElement(webdriver.By.xpath("//*[@id=\"idSIButton9\"]"));
-      browser.wait(() => browser.isElementPresent(webdriver.By.xpath("//*[@id=\"idSIButton9\"]")), 3000)
-        .thenCatch(r => true);
-      nextButton.click();
-      browser.wait(() => browser.isElementPresent(webdriver.By.xpath("//*[@id=\"msaTile\"]")), 3000)
-        .thenCatch(r => true);
-      browser.findElement(webdriver.By.xpath("//*[@id=\"msaTile\"]")).
-      then((element) => element.click(), (err) => console.log(err));
-      browser.findElement(webdriver.By.name('passwd')).sendKeys(password);
-      browser.findElement(webdriver.By.xpath("//*[@id=\"idSIButton9\"]")).
-      then((element) => element.click(), (err) => console.log(err));
-      browser.wait(() => browser.findElement(webdriver.By.id("idBtn_Back")), 5000).
-      then((element) => element.click(), (err) => console.log(err));
-      browser.findElement(webdriver.By.id('accept-button')).
-      then((element) => element.click(), (err) => console.log(err));
-      return browser.getCurrentUrl();
-
     case 'acuityscheduling':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('username')).sendKeys(username);
@@ -806,6 +782,25 @@ const manipulateDom = (element, browser, r, username, password, config) => {
           .then(() => browser.getCurrentUrl());
       }
       break;
+    case 'vsts':
+      browser.get(r.body.oauthUrl);
+      browser.wait(() => browser.isElementPresent(webdriver.By.id('i0116')), 4000)
+        .then(r => browser.findElement(webdriver.By.id('i0116')).sendKeys(username));
+      browser.findElement(webdriver.By.id('idSIButton9')).click();
+      browser.wait(() => browser.isElementPresent(webdriver.By.id('msaTile')), 4000)
+        .then(r => browser.findElement(webdriver.By.id('msaTile')).click())
+        .thenCatch(r => true);
+      browser.wait(() => browser.isElementPresent(webdriver.By.id('i0118')), 4000)
+        .then(r => browser.findElement(webdriver.By.id('i0118')).sendKeys(password))
+        .thenCatch(r => true);
+      browser.findElement(webdriver.By.id('idSIButton9'))
+        .then((element) => element.click(), (err) => console.warn(err));
+      browser.wait(() => browser.isElementPresent(webdriver.By.id('idBtn_Back')), 4000)
+        .then(r => browser.findElement(webdriver.By.id("idBtn_Back")))
+        .then((element) => element.click(), (err) => console.warn(err));
+      browser.findElement(webdriver.By.id('accept-button'))
+        .then((element) => element.click(), (err) => console.warn(err));
+      return browser.getCurrentUrl();   
   }
 };
 
