@@ -11,6 +11,6 @@ suite.forElement('collaboration', 'queriesExecute', (test) => {
     // Executing query using created query Id    
         .then(r => cloud.get(`queries/${queryId}/execute`))
     // Deleting the query created
-        .then(r => cloud.delete(`queries/${queryId}`))
+        .then(r => cloud.delete(`queries/${queryId}`));
   });
 });

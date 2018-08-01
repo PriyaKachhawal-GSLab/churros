@@ -23,7 +23,7 @@ suite.forElement('collaboration', 'work-items', { payload: payload }, (test) => 
       .then(r => cloud.get(test.api))
       .then(r => {
         expect(r.body).to.not.be.empty;
-        let descIds = r.body.map(o => o.id).sort().reverse();
+        //let descIds = r.body.map(o => o.id).sort().reverse();
         expect(ids).to.equal(ids);
       });
   });
@@ -32,7 +32,7 @@ suite.forElement('collaboration', 'work-items', { payload: payload }, (test) => 
     return cloud.withOptions({qs: {fields : 'System.Id'}}).get(test.api)
       .then(r => expect(r.body).to.not.be.empty && expect(r.body.filter(o => {
         let keys = Object.keys(o);
-        return keys.length == 1 && keys[0] == 'id';
+        return keys.length === 1 && keys[0] === 'id';
       })).to.not.be.empty);
   }); 
 
