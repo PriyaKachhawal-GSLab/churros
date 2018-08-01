@@ -34,7 +34,7 @@ suite.forElement('rewards', 'credit-cards', {skip: true}, (test) => {
    })
    .then(r => cloud.post(`credit-cards/${id}/deposits`, creditcarddeposits))
    .then(r => {
-    depositId = r.body.id;
+    depositId = r.body.referenceDepositID;
    })
    .then(r => cloud.get(`credit-cards/deposits/${depositId}`))
    .then(r => cloud.post(`${test.api}/${id}/unregister`, payload2));
