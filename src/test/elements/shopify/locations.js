@@ -27,7 +27,6 @@ suite.forElement('ecommerce', 'locations', (test) => {
       .then(r => cloud.patch(`inventory-items/${itemId}`, updateInventoryItemPayload()))
       .then(r => cloud.patch(`${test.api}/${locationId}/inventory-items/${itemId}/inventory-levels`, updatePayload()))
       .then(r => cloud.post(`${test.api}/${locationId}/inventory-items/${itemId}/inventory-levels`, createPayload()))
-      .then(r => cloud.post(`${test.api}/${locationId}/inventory-items/${itemId}/inventory-levels`))
-      .then(r => cloud.delete(`${test.api}/${locationId}/inventory-items/${itemId}/inventory-levels`));
+      .then(r => cloud.post(`${test.api}/${locationId}/inventory-items/${itemId}/inventory-levels`));
   });
 });
