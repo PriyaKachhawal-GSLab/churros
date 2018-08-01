@@ -1,6 +1,5 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
-const expect = require('chakram').expect;
 const cloud = require('core/cloud');
 const creditcardPayload = tools.requirePayload(`${__dirname}/assets/creditcard.json`);
 const payload2 = tools.requirePayload(`${__dirname}/assets/creditcard2.json`);
@@ -10,7 +9,7 @@ const creditcarddeposits = require('core/tools').requirePayload(`${__dirname}/as
 
 //Skipping the test to POSt an credit-card we need to create customer first and customers object has limits of records to be create_discount_coupons
 suite.forElement('rewards', 'credit-cards', {skip: true}, (test) => {
- let accountId, customerId, depositId;
+ let accountId, customerId, depositId, id;
  it('should allow Csr for credit-cards and credit-cards-deposits', () => {
   return cloud.post('/customers', payloadcustomer)
    .then(r => customerId = r.body.id)
@@ -22,7 +21,7 @@ suite.forElement('rewards', 'credit-cards', {skip: true}, (test) => {
    })
    .then(r => cloud.post(`${test.api}`, creditcardPayload))
    .then(r => {
-    id = r.body.id
+    id = r.body.id;
    })
    .then(r => cloud.get(`${test.api}/${id}`))
    .then(r => {
@@ -35,9 +34,9 @@ suite.forElement('rewards', 'credit-cards', {skip: true}, (test) => {
    })
    .then(r => cloud.post(`credit-cards/${id}/deposits`, creditcarddeposits))
    .then(r => {
-    depositId = r.body.id
+    depositId = r.body.id;
    })
    .then(r => cloud.get(`credit-cards/deposits/${depositId}`))
    .then(r => cloud.post(`${test.api}/${id}/unregister`, payload2));
- })
+ });
 });
