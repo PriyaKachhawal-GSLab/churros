@@ -4,7 +4,7 @@ var query = {
     "query" : "select [System.Id] from workItems where System.Id = 30"
 };
 suite.forElement('collaboration', 'wiql', (test) => {
-  it('should allow C for /wiql', () => {
+  it('should allow R for /wiql', () => {
     return cloud.post(test.api, query);
   });
 });
