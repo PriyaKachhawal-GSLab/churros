@@ -6,6 +6,6 @@ suite.forElement('collaboration', 'work-items-types', (test) => {
     return cloud.get(test.api).
     then( r => {
       typeName = r.body[0].referenceName;
-    }). then( r => cloud.get(`${test.api}/${typeName}`))
+    }). then( r => cloud.get(`${test.api}/${typeName}`));
   });
 });

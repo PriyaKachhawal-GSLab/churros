@@ -11,7 +11,7 @@ suite.forElement('collaboration', 'work-items', { payload: payload }, (test) => 
     return cloud.get(`${test.api}`).
     then(r => cloud.withOptions({ qs: { where: `System.Id in (30,31,32)`, orderBy: `System.Title` } }).get(`${test.api}`))
       .then(r => {
-        console.log(`✓ Should support CEQL where clause & orderBy`)
+        console.log(`✓ Should support CEQL where clause & orderBy`);
       })
       .then(r => cloud.post(`${test.api}`, payload))
       .then(
@@ -21,6 +21,6 @@ suite.forElement('collaboration', 'work-items', { payload: payload }, (test) => 
       )
       .then(r => cloud.get(`${test.api}/${witId}`))
       .then(r => cloud.patch(`${test.api}/${witId}`, updatePayload))
-      .then(r => cloud.delete(`${test.api}/${witId}`))
-  })
+      .then(r => cloud.delete(`${test.api}/${witId}`));
+  });
 });

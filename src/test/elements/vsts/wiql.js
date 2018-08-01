@@ -5,6 +5,6 @@ var query = {
 };
 suite.forElement('collaboration', 'wiql', (test) => {
   it('should allow C for /wiql', () => {
-    return cloud.post(test.api, query)
+    return cloud.post(test.api, query);
   });
 });
