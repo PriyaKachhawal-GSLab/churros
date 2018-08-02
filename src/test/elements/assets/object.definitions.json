@@ -3063,6 +3063,30 @@
       }
     ]
   },
+  "activities-calls": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "activities-events": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
   "work-items": {
     "fields": [
       {
@@ -3076,6 +3100,18 @@
     ]
   },
   "work-items-fields": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "inventories": {
     "fields": [
       {
         "path": "idTransformed",
