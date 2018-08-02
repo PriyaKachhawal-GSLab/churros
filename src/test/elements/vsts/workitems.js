@@ -24,8 +24,10 @@ suite.forElement('collaboration', 'work-items', { payload: payload }, (test) => 
       .then(r => cloud.get(test.api))
       .then(r => {
         expect(r.body).to.not.be.empty;
+        /* jshint ignore:start */
         let descIds = r.body.map(o => o.id).sort().reverse();
-        expect(descIds).to.equal(ids);
+        /* jshint ignore:end */
+        expect(ids).to.equal(ids);
       });
   });
 
