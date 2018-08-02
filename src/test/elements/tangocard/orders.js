@@ -7,7 +7,7 @@ const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
 //Skipping the test since there are limits to the orders we can post and there are no delete API supported
-suite.forElement('rewards', 'orders', {payload: payload}, (test) => {
+suite.forElement('rewards', 'orders', {payload: payload, skip: true}, (test) => {
  test.should.supportCrs();
  test.should.supportPagination();
 
