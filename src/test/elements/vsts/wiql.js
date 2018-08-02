@@ -9,6 +9,6 @@ suite.forElement('collaboration', 'wiql', (test) => {
     return cloud.post(test.api, query)
     .then(r => {
       expect(r.body).to.not.be.empty;
-    })
+    });
   });
 });
