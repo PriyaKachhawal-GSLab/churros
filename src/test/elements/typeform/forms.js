@@ -1,24 +1,35 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/forms');
 const cloud = require('core/cloud');
+const expect = require('chakram').expect;
+const payload = require('./assets/forms');
 
 suite.forElement('general', 'forms', { payload: payload }, (test) => {
-  let urlsPayload;
-  it(`should allow CR for /hubs/general/forms`, () => {
+  const opts = {
+    churros: {
+      updatePayload: {
+        "title": "<<random.words>>"
+      }
+    }
+  };
+  test.withOptions(opts).should.supportCruds();
+  test.should.supportPagination();
+  test.withOptions({ qs: { where: 'search=\'typeform\'' } })
+    .withName('should support search by filter')
+    .withValidation(r => {
+      expect(r).to.statusCode(200);
+      const validValues = r.body.filter(obj => JSON.stringify(obj).toLowerCase().indexOf('typeform'));
+      expect(validValues.length).to.equal(r.body.length);
+    }).should.return200OnGet();
+
+  it(`should allow RU ${test.api}/{formId}/messages`, () => {
     let formId;
+    const msgUpdatePayload = { "label.buttonHint.default": "label.buttonHint.default" };
     return cloud.post(`${test.api}`, payload)
       .then(r => formId = r.body.id)
-      .then(r => urlsPayload = { "form_id": formId })
-      .then(r => cloud.get(`${test.api}/${formId}`));
-  });
-
-  it(`should allow CRU for /hubs/general/urls`, () => {
-    let urlId;
-    return cloud.post(`/hubs/general/urls`, urlsPayload)
-      .then(r => urlId = r.body.id)
-      .then(r => cloud.get(`/hubs/general/urls/${urlId}`))
-      .then(r => cloud.put(`/hubs/general/urls/${urlId}`, urlsPayload));
+      .then(r => cloud.patch(`${test.api}/${formId}/messages`, msgUpdatePayload))
+      .then(r => cloud.get(`${test.api}/${formId}/messages`))
+      .then(r => expect(r.body['label.buttonHint.default']).to.equal(`label.buttonHint.default`));
   });
 });

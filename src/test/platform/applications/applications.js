@@ -4,7 +4,7 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 let application = require('./assets/application');
 
-suite.forPlatform('applications', { payload: application }, (test) => {
+suite.forPlatform('applications', { skip: true, payload: application }, (test) => {
   it(`should allow CRUD for applications`, () => {
     var companyId;
     var applicationId;

@@ -5,7 +5,7 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const provisioner = require('core/provisioner');
 const oneModelElementJson = require('./assets/models/onemodel_element.json');
-const contactsMetadata = require('./assets/models/contacts_metadata.json');
+const contactsMetadata = require('./assets/models/updated_contacts_metadata.json');
 
 suite.forPlatform('element-model', {}, (test) => {
   let oneModelElement;

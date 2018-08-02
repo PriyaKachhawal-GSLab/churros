@@ -41,8 +41,7 @@
         "createdDateFormat",
         "createdDateName",
         "primaryKeyName",
-        "name",
-        "searchConfiguration"
+        "name"
     ],
     "type": "object"
 }

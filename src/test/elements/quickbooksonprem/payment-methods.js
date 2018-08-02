@@ -8,7 +8,7 @@ suite.forElement('finance', 'payment-methods', null, (test) => {
   it('should support SR and pagination for /hubs/finance/payment-methods', () => {
     let id;
     return cloud.get(test.api)
-      .then(r => id = r.body[0].ListID)
+      .then(r => id = r.body[0].id)
       .then(r => cloud.get(`${test.api}/${id}`));
   });
   test

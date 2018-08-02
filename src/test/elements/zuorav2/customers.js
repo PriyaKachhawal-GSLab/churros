@@ -22,22 +22,16 @@ suite.forElement('payment', 'customers', { payload: payload }, (test) => {
     qs: { where: 'CreatedDate>\'2017-02-22T08:21:00.000Z\'' }
   };
 
-  let customerId, rateId, charge;
+  let customerId, subscriptionId, rateId, charge;
   before(() => {
-    return cloud.withOptions({ qs: { where: 'expand=true' } }).get(`/hubs/payment/products`)
+    return cloud.get(`/subscriptions`)
+      .then(r => subscriptionId = r.body[0].id)
+      .then(r => cloud.get(`subscriptions/${subscriptionId}`))
       .then(r => {
-        var match = r.body.filter(function(list) {
-          return list.productRatePlans.length !== 0;
-        });
-        if (match.length >= 0) {
-          let rate = match[0].productRatePlans;
-          rateId = rate[0].id;
-          charge = rate[0].productRatePlanCharges[0].id;
-          subscriptionPayload.subscribeToRatePlans[0].productRatePlanId = rateId;
-          subscriptionPayload.subscribeToRatePlans[0].chargeOverrides[0].productRatePlanChargeId = charge;
-        } else {
-          // bail
-        }
+        rateId = r.body.ratePlans[0].productRatePlanId;
+        charge = r.body.ratePlans[0].ratePlanCharges[0].productRatePlanChargeId;
+        subscriptionPayload.subscribeToRatePlans[0].productRatePlanId = rateId;
+        subscriptionPayload.subscribeToRatePlans[0].chargeOverrides[0].productRatePlanChargeId = charge;
       });
   });
 

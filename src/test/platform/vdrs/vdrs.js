@@ -14,6 +14,8 @@ const vdrMulti = tools.requirePayload(`${__dirname}/assets/vdr.multi.json`);
 const schema = tools.requirePayload(`${__dirname}/assets/vdr.schema.json`);
 const pluralSchema = tools.requirePayload(`${__dirname}/assets/vdrs.schema.json`);
 pluralSchema.definitions.vdr = schema;
+const snippets = tools.requirePayload(`${__dirname}/assets/snippets.json`);
+
 
 suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
 
@@ -38,9 +40,9 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
         .then(r => {
           acctUser = r.body;
         })
-        .then(r => provisioner.create('closeio'))       
+        .then(r => provisioner.create('closeio'))
         .then(r => instance1Id = r.body.id)
-        .then(r => provisioner.create('closeio'))       
+        .then(r => provisioner.create('closeio'))
         .then(r => {
           instance2Id = r.body.id;
           vdrMulti.fields[2].associatedId = instance1Id;
@@ -64,6 +66,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
     up.fields = fields;
     up.fields[0].path = 'anUpdateField';
     up.fields.push({type: 'string', path: 'aNewField', level: newFieldLevel, associatedId});
+    up.instanceId = associatedId;
     return up;
   };
 
@@ -99,7 +102,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
           expect(r.body.objectName).to.equal(vdrSystem.objectName);
           updatePayloadSys = genUpdatePayload(vdrSystem, r.body.fields, 'system');
         })
-        
+
         .then(() => cloudWithOrgUser().get(`/vdrs/${vdrId}?systemOnly=true`, schema))
         .then(r => {
           // validate we can get just the system fields
@@ -223,7 +226,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
         }
       ]
     };
-    
+
     let vdrId, updatePayload, fieldId;
     return cloud.post('/vdrs', simpleVdr)
         .then(r => {
@@ -242,4 +245,41 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
         .then(() => cloud.delete(`/vdrs/${vdrId}`));
   });
 
+
+  it('should support snippet CRUDS', () => {
+    let snippetId;
+    const updatePayload = tools.requirePayload(`${__dirname}/assets/snippets.json`);
+    const validate = r => {
+      expect(r.body.name).to.equal(updatePayload.name);
+      expect(r.body.description).to.equal(updatePayload.description);
+    };
+    return cloud.post('/vdrs/snippets', snippets)
+    .then(r => snippetId = r.body.id)
+    .then(r => cloud.put(`/vdrs/snippets/${snippetId}`, updatePayload))
+    .then(r => cloud.get(`/vdrs/snippets/${snippetId}`, validate))
+    .then(r => cloud.delete(`/vdrs/snippets/${snippetId}`))
+    .catch(e => {
+      cloud.delete(`vdrs/snippets/${snippetId}`);
+      throw new Error(e);
+    });
+  });
+
+  // NOTE - you need the 'vdrAdmin' role to run this test
+  it('should support snippet CRUDS at system level', () => {
+    let snippetId;
+    const updatePayload = tools.requirePayload(`${__dirname}/assets/snippets.json`);
+    const validate = r => {
+      expect(r.body.name).to.equal(updatePayload.name);
+      expect(r.body.description).to.equal(updatePayload.description);
+    };
+    return cloud.post('/vdrs/snippets', Object.assign(snippets, {level: "system"}))
+    .then(r => snippetId = r.body.id)
+    .then(r => cloud.put(`/vdrs/snippets/${snippetId}`, updatePayload))
+    .then(r => cloud.get(`/vdrs/snippets/${snippetId}`, validate))
+    .then(r => cloud.delete(`/vdrs/snippets/${snippetId}`))
+    .catch(e => {
+      cloud.delete(`vdrs/snippets/${snippetId}`);
+      throw new Error(e);
+    });
+  });
 });

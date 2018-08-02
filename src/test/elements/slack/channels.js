@@ -37,6 +37,15 @@ suite.forElement('collaboration', 'channels', (test) => {
   //test for GET channels
   test.should.return200OnGet();
   test.should.supportPagination();
+  test
+    .withOptions({ qs: { where: `exclude_members = 'true'` } })
+    .withName(`should support Ceql search for ${test.api}`)
+    .withValidation(r => {
+      expect(r).to.statusCode(200);
+      const validValues = r.body.filter(obj => obj.members === undefined);
+      expect(validValues.length).to.equal(r.body.length);
+    })
+    .should.return200OnGet();
 
   //tests for /messages apis
   let timestamp;

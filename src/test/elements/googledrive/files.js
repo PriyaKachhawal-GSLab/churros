@@ -31,11 +31,17 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
     jpgFile = __dirname + '/assets/Penguins.jpg',
     textFile = __dirname + '/assets/textFile.txt';
   let query = { path: `/Penguins-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` };
+  // POST /files API is not enhanced to work with team-drives. Hence using an existing team-drive that contains an uploaded file.
+  const teamDriveName = 'DONT_DELETE';
+  let teamDriveId, values;
 
   before(() => cloud.withOptions({ qs: query }).postFile(test.api, jpgFile)
-    .then(r => jpgFileBody = r.body));
+    .then(r => jpgFileBody = r.body)
+    .then(() => cloud.get('/hubs/documents/team-drives'))
+    .then(r => values = r.body.filter(obj => obj.name === teamDriveName))
+    .then(r => teamDriveId = values[0].id));
 
-  after(() => cloud.delete(`${test.api}/${jpgFileBody.id}`));
+ after(() => cloud.delete(`${test.api}/${jpgFileBody.id}`));
 
   it('should allow ping for googledrive', () => {
     return cloud.get(`/hubs/documents/ping`);
@@ -255,6 +261,11 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
     .withValidation(r => expect(r).to.have.statusCode(404))
     .should.return200OnGet();
 
+  it('should allow download of cloudElementsLink', () => {
+    return cloud.get(`/files/${jpgFileBody.id}/links`)
+    .then(r => cloud.withOptions({baseUrl: null}).get(r.body.cloudElementsLink));
+  });
+
   it(`should allow POST /files/:id/thumbnails by providing folder id`, () => {
       const thumbnailFile = {
         "thumbnail": jpgFile
@@ -285,4 +296,30 @@ suite.forElement('documents', 'files', { payload: payload }, (test) => {
           .then(() => cloud.delete(`${test.api}/${textFileBody.id}`))
           .then(() => cloud.delete(`${test.api}/${textFileBody2.id}`));
     });
+
+  it('should allow GET team-drive /files by providing file id', () => {
+    let fileId, values;
+    return cloud.withOptions({
+        qs: {
+          path: `/`,
+          includeTeamDrives: true,
+          teamDriveId: `${teamDriveId}`
+        }
+      }).get(`/hubs/documents/folders/contents`)
+      .then(r => values = (r.body.filter(obj => obj.directory === false)))
+      .then(r => fileId = values[0].id)
+      .then(r => cloud.withOptions({ qs: { includeTeamDrives: true } }).get(`${test.api}/${fileId}`));
+  });
+
+  it('should allow GET team-drive /files by providing path', () => {
+    // Hardcoded the filePath as POST /files API is not enhanced to work with teamdrives.
+    let filePath = "/dont_delete.txt";
+    return cloud.withOptions({
+      qs: {
+        path: `${filePath}`,
+        includeTeamDrives: true,
+        teamDriveId: `${teamDriveId}`
+      }
+    }).get(test.api);
+  });
 });

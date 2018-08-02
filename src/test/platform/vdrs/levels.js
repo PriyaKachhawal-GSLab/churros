@@ -17,8 +17,13 @@ pluralSchema.definitions.vdr = schema;
 
 suite.forPlatform('level-vdr-apis', {payload, schema}, test => {
   let accountId, newAccount, newUser, closeioId, stripeId;
-  before(() => {
-      return cloud.get(`/accounts`)
+  before(function() {
+      return cloud.get(`organizations/me`)
+          .then(r => {
+            // these tests are only supported for v2
+            if (r.body.vdrVersion !== 'v2') { this.skip(); }
+          })
+          .then(() => cloud.get(`/accounts`))
           .then(r => r.body.forEach(account => accountId = (account.defaultAccount) ? accountId = account.id : accountId))
           .then(() => {
               const account = { name: `${tools.random()}churros`, externalId: `${tools.random()}@cloud-elements.com`};

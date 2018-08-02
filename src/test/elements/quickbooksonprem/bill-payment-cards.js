@@ -2,9 +2,8 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const tools = require('core/tools');
-const payload = require('./assets/bill-payment-cards');
-const updatePayload = { "Memo": tools.random() };
+const payload = require('./assets/bill-payment-cards-create');
+const updatePayload = require('./assets/bill-payment-cards-update');
 
 //Pagination is not working from Element
 suite.forElement('finance', 'bill-payment-cards', null, (test) => {

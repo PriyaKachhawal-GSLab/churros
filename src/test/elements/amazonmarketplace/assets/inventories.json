@@ -1,0 +1,1 @@
+{"Message":[{"MessageID":"1","OperationType":"Update","Inventory":{"SKU":"56789","Quantity":"8","FulfillmentLatency":"1"}},{"MessageID":"2","OperationType":"Update","Inventory":{"SKU":"13453","Quantity":"6","FulfillmentLatency":"1"}}]}
