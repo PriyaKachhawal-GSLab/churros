@@ -9,16 +9,16 @@ const uri = '/hubs/helpdesk/incident-types';
 const updatePayload = {};
 updatePayload.name = payload.name;
 
-suite.forElement('helpdesk', 'incidentTypes', {payload:payload}, (test) => {
+suite.forElement('helpdesk', 'incident-types', {payload:payload}, (test) => {
   it('should allow CRUDS for /incidents-types', () => {
-  let incidentTypeId;
-  return cloud.post(uri, payload)
-  .then(r => incidentTypeId = r.body.id)
-  .then(r => cloud.get('/hubs/helpdesk/incident-types'))
-  .then(r => cloud.withOptions({qs:{page: 1, pageSize: 1 }}).get(uri))
-  .then(r => cloud.get(uri + "/" + incidentTypeId))
-  .then(r => cloud.get(uri))
-  .then(r => cloud.update(uri + '/' + incidentTypeId, updatePayload))
-  .then(r => cloud.delete(uri + '/' + incidentTypeId));
-});
+    let incidentTypeId;
+    return cloud.post(uri, payload)
+    .then(r => incidentTypeId = r.body.id)
+    .then(r => cloud.get('/hubs/helpdesk/incident-types'))
+    .then(r => cloud.get(uri + "/" + incidentTypeId))
+    .then(r => cloud.get(uri))
+    .then(r => cloud.update(uri + '/' + incidentTypeId, updatePayload))
+    .then(r => cloud.delete(uri + '/' + incidentTypeId));
+  });
+  test.should.supportPagination('id');
 });
