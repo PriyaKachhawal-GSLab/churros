@@ -23,7 +23,7 @@ suite.forElement('collaboration', 'work-items', { payload: payload }, (test) => 
       .then(r => cloud.get(test.api))
       .then(r => {
         expect(r.body).to.not.be.empty;
-        //let descIds = r.body.map(o => o.id).sort().reverse();
+        let descIds = r.body.map(o => o.id).sort().reverse();
         expect(ids).to.equal(ids);
       });
   });
@@ -36,7 +36,7 @@ suite.forElement('collaboration', 'work-items', { payload: payload }, (test) => 
       })).to.not.be.empty);
   }); 
 
-  it('should allow SR for /work-items/{workItemId}/revisions', () => {
+  it('should allow CRDS for /work-items/{workItemId}/revisions', () => {
     let workItemId, revisionId;
     return cloud.post(test.api, payload)
       .then(r => workItemId = r.body.id)
