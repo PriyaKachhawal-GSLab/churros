@@ -1,6 +1,4 @@
 const suite = require('core/suite');
-const cloud = require('core/cloud');
-const expect = require('chakram').expect;
 const queryUpdatePayload = require('./assets/queries-update.json');
 const payload = require('./assets/queries-create.json');
 
