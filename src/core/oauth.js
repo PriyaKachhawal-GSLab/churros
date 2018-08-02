@@ -800,7 +800,8 @@ const manipulateDom = (element, browser, r, username, password, config) => {
         .then((element) => element.click(), (err) => console.warn(err));
       browser.findElement(webdriver.By.id('accept-button'))
         .then((element) => element.click(), (err) => console.warn(err));
-      return browser.getCurrentUrl();   
+        // WAIT for url with code to load as it takes some time at few cases
+      return browser.wait(() => browser.getCurrentUrl());   
   }
 };
 
