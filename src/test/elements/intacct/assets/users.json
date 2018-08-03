@@ -1,0 +1,13 @@
+{
+   "LOGINID": "<<random.word>>",
+   "CONTACTINFO": {
+      "LASTNAME": "<<name.lastName>>",
+      "FIRSTNAME": "<<name.firstName>>",
+      "EMAIL1": "<<internet.email>>"
+   },
+   "DESCRIPTION": "<<name.firstName>> <<name.lastName>>",
+   "USERTYPE": "business user",
+   "ADMIN": "false",
+   "STATUS": "active",
+   "SSO_ENABLED": "true"
+}

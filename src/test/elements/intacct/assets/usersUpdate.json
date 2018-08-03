@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "<<name.firstName>> <<name.lastName>>",
+  "USERTYPE": "business user",
+  "STATUS": "active",
+  "SSO_ENABLED": "true"
+}
