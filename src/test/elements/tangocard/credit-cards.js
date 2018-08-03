@@ -7,7 +7,7 @@ const customerpayload = tools.requirePayload(`${__dirname}/assets/customersAccou
 const payloadcustomer = tools.requirePayload(`${__dirname}/assets/customers.json`);
 const creditcarddeposits = tools.requirePayload(`${__dirname}/assets/creditcarddeposits.json`);
 
-//Skipping the test to POSt an credit-card we need to create customer first and customers object has limits of records to be create_discount_coupons
+//Skipping the test to POST an credit-card we need to create customer first and customers object has limits of records to be create_discount_coupons
 suite.forElement('rewards', 'credit-cards', { skip: true }, (test) => {
   let accountId, customerId, depositId, id;
   it('should allow Csr for credit-cards and credit-cards-deposits', () => {
