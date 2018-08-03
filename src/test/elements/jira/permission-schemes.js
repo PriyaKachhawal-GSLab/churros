@@ -1,7 +1,6 @@
 'use strict';
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const expect = require('chakram').expect;
 
 suite.forElement('helpdesk', 'permission-schemes', (test) => {
   it('should allow SR for permission-schemes', () => {
