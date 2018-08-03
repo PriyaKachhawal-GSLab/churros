@@ -18,16 +18,14 @@ suite.forElement('collaboration', 'work-items', { payload: payload }, (test) => 
 
   it('should allow orderBy for work-items', () => {
     let ids = [],
-      query = { orderBy: 'System.Id desc' };
+      query = { orderBy: 'System.Id desc', pageSize: 2000 };
     return cloud.withOptions({ qs: query }).get(test.api)
       .then(r => ids = r.body.map(o => o.id))
-      .then(r => cloud.get(test.api))
+      .then(r => cloud.withOptions({ qs: { pageSize: 2000 }}).get(test.api))
       .then(r => {
         expect(r.body).to.not.be.empty;
-        /* jshint ignore:start */
-        let descIds = r.body.map(o => o.id).sort().reverse();
-        /* jshint ignore:end */
-        expect(ids).to.equal(ids);
+        let descIds = r.body.map(o => o.id).sort((a, b) => b - a);
+        expect(descIds).to.deep.equal(ids);
       });
   });
 
