@@ -9,20 +9,20 @@ const calendarsPayload = tools.requirePayload(`${__dirname}/assets/calendars.jso
 suite.forElement('scheduling', 'calendar-list', null, (test) => {
   let calendarId;
   before(() => cloud.post(`/hubs/scheduling/calendars`, calendarsPayload)
-  .then(r => calendarId = r.body.id));
+    .then(r => calendarId = r.body.id));
 
-  it('should test CRUDS of  calendar-list', () => {
-  return cloud.cruds(test.api, { "id":calendarId });
+  after(() => cloud.delete(`/hubs/scheduling/calendars/${calendarId}`));  
+
+  test.should.supportPagination('id');
+  
+  it('should test CRUDS of calendar-list', () => {
+    return cloud.cruds(test.api, { "id": calendarId });
   });
-
-  test.should.supportNextPagePagination(1);
 
   it('should test where for calendar-list', () => {
-         return cloud.withOptions({ qs: { where : `minAccessRole='owner'` } }).get(test.api)
+    return cloud.withOptions({ qs: { where: `minAccessRole='owner'` } }).get(test.api)
       .then(r => {
-           expect(r.body.length).to.not.be.empty;
+        expect(r.body.length).to.not.be.empty;
       });
   });
- 
-  after(() => cloud.delete(`/hubs/scheduling/calendars/${calendarId}`));
 });
