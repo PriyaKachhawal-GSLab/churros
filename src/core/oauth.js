@@ -552,6 +552,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
     case 'sagelive':
     case 'sagelivev1':
     case 'sfdc':
+    case 'sfdc--tyl':
     case 'sfdcservicecloud':
     case 'sfdcmarketingcloud':
     case 'sfdcdocuments':

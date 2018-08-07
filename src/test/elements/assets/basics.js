@@ -36,10 +36,38 @@
       return cloud.get('/objects').then(r => hub === 'documents' ? null : expect(r).to.have.statusCode(200) && expect(r.body).to.not.be.empty);
     });
 
-    it.skip('docs', () => cloud.get(`/elements/${props.getForKey(element, 'elementId')}/docs`)
+    it('should support GET on all objectNames from GET /objects', () => {
+      let failures = [], objectNames = [];
+      return cloud.get('/objects')
+        .then(r => {
+          expect(r.body).to.not.be.empty;
+          objectNames = r.body;
+        })
+        .then(() => Promise.all(objectNames.map(objectName => {
+          return cloud.get(`/${objectName}`)
+            .catch(error => failures.push(({ objectName, error})))
+        })))
+        .then(() => failures.length === 0 ? null : logger.info(failures.length, 'failures', objectNames.length, 'sucesses'));
+    });
+
+    it('should support GET on all metadata from GET /objects', () => {
+      let failures = [], objectNames = [], metadata = [];
+      return cloud.get('/objects')
+        .then(r => {
+          expect(r.body).to.not.be.empty;
+          objectNames = r.body;
+        })
+        .then(() => Promise.all(objectNames.map(objectName => {
+          return cloud.get(`/objects/${objectName}/metadata`)
+            .catch(error => failures.push(({ objectName, error})))
+        })))
+        .then(() => failures.length === 0 ? null : logger.info(`${failures.length} failures, ${objectNames.length} sucesses`));
+    });
+
+    it('docs', () => cloud.get(`/elements/${props.getForKey(element, 'elementId')}/docs`)
       .then(s => new Promise((res, rej) => swaggerParser.validate(s.body, (err, api) => err ? rej(err) : res()))));
 
-    it('metadata', () => cloud.get(`elements/${props.getForKey(element, 'elementId')}/metadata`).then(r => expect(r.body).to.not.be.empty && expect(r).to.have.statusCode(200)));
+    it('should support GET metadata for element', () => cloud.get(`elements/${props.getForKey(element, 'elementId')}/metadata`).then(r => expect(r.body).to.not.be.empty && expect(r).to.have.statusCode(200)));
     it('transformations', function() {
       if (props.get('hub') === 'documents') {
         logger.debug('Skipping test as documents hub does not support transformations');
@@ -130,7 +158,7 @@
       });
     });
     // skipped for now because so many fail - remove the skip when fixed
-    it.skip('should not allow provisioning with bad credentials', () => {
+    it('should not allow provisioning with bad credentials', () => {
       const config = props.all(element);
       const type = props.getOptionalForKey(element, 'provisioning');
       const passThrough = (r) => r;
