@@ -11,6 +11,8 @@ const schema = require('./assets/transformation.schema');
 const objDefSchema = require('./assets/objectDefinition.schema');
 const noFields = tools.requirePayload(`${__dirname}/assets/nofield-definition.json`);
 const noFields2 = tools.requirePayload(`${__dirname}/assets/nofield-definition.json`);
+const arrayDefinition = require('./assets/definition-with-array.json');
+const arrayTransformation = tools.requirePayload(`${__dirname}/assets/transformation-array.json`);
 
 const getConfig = (type, from, to) => ({
   type: type,
@@ -168,15 +170,22 @@ const testTransformation = (instanceId, objectName, objDefUrl, transUrl) => test
 suite.forPlatform('transformations', { schema: schema }, (test) => {
   /** before - provision element to use throughout */
   const elementKey = 'sfdc';
-  let sfdcId, elementId;
+  let sfdcId, elementId, maximizerId;
   before(() => provisioner.create(elementKey)
     .then(r => {
       sfdcId = r.body.id;
       elementId = r.body.element.id;
-    }));
+    })
+  .then(() => provisioner.create('maximizer'))
+  .then(r => {
+    maximizerId = r.body.id
+    arrayTransformation.elementInstanceId = maximizerId;
+  }));
 
   /** after - clean up element */
-  after(() => provisioner.delete(sfdcId));
+  after(() => provisioner.delete(sfdcId)
+    .catch(() => {})
+    .then(() => provisioner.delete(maximizerId)));
 
   /** org-level */
   it('should support org-level object definition CRUD by name', () => crudObjectDefsByName('organizations', genDefaultObjectDef({}), genDefaultObjectDef({}), objDefSchema));
@@ -605,5 +614,28 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       .then(() => cloud.patch(`/instances/${sfdcId}/configuration/${config.id}`, Object.assign({}, config, { propertyValue: 'true' })))
       .then(() => cloud.delete(transUrl))
       .then(() => cloud.delete(objDefUrl));
+  });
+  it('should support mapping to arrays', () => {
+    const objName = arrayTransformation.objectName;
+    const transformationCreatedValidator = (r) => {
+      expect(r).to.have.statusCode(200);
+      return r;
+    };
+    const validatorWrapper = r => {
+      expect(r.body.length).to.be.above(0);
+      expect(r.body[0]).to.have.property('users');
+      expect(r.body[0].users).to.be.array;
+      expect(r.body[0].users.length).to.be.above(0);
+      expect(r.body[0].users[0]).to.have.property('displayNamez');
+    }
+
+    return cloud.delete(`/instances/${maximizerId}/objects/${objName}/definitions`).catch(() => {})
+      .then(r => cloud.post(`/instances/${maximizerId}/objects/${objName}/definitions`, arrayDefinition))
+      .then(r => cloud.get(`/instances/${maximizerId}/objects/${objName}/definitions`))
+      .then(r => cloud.delete(`/instances/${maximizerId}/transformations/${objName}`).catch(() => {}))
+      .then(r => cloud.put(`/transformations`, arrayTransformation, (r) => transformationCreatedValidator(r)))
+      .then(r => cloud.get(`/hubs/crm/${objName}`, validatorWrapper))
+      .then(r => cloud.delete(`/instances/${maximizerId}/transformations/${objName}?propagate=true`).catch(() => {}))
+      .then(r => cloud.delete(`/common-resources/${objName}`).catch(() => {}));
   });
 });
