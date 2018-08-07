@@ -7,10 +7,10 @@ const customerpayload = tools.requirePayload(`${__dirname}/assets/customersAccou
 const payloadcustomer = tools.requirePayload(`${__dirname}/assets/customers.json`);
 const creditcarddeposits = tools.requirePayload(`${__dirname}/assets/creditcarddeposits.json`);
 
-//Skipping the test to POST an credit-card we need to create customer first and customers object has limits of records to be create_discount_coupons
-suite.forElement('rewards', 'credit-cards', { skip: true }, (test) => {
-  let accountId, customerId, depositId, id;
+//Skipping the test since to POST a credit-card we need to create a customer first and customers object has limits of records which can be created
+suite.forElement('rewards', 'credit-cards', (test) => {
   it('should allow Csr for credit-cards and credit-cards-deposits', () => {
+     let accountId, customerId, depositId, id;
     return cloud.post('/customers', payloadcustomer)
       .then(r => customerId = r.body.id)
       .then(r => cloud.post(`customers/${customerId}/accounts`, customerpayload))
@@ -37,6 +37,7 @@ suite.forElement('rewards', 'credit-cards', { skip: true }, (test) => {
         depositId = r.body.referenceDepositID;
       })
       .then(r => cloud.get(`credit-cards-deposits/${depositId}`))
-      .then(r => cloud.withOptions({ qs: { customerId: '${customerId}', accountId: '${accountId}' } }).delete(`${test.api}/${id}/unregister`));
+     .then(r => cloud.withOptions({ qs: { customerId: creditcarddeposits.customerIdentifier, accountId: creditcarddeposits.accountIdentifier } }).delete(`${test.api}/${id}`));
   });
+ test.should.supportPagination();
 });
