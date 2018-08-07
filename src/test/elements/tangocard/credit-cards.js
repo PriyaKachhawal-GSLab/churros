@@ -8,7 +8,7 @@ const payloadcustomer = tools.requirePayload(`${__dirname}/assets/customers.json
 const creditcarddeposits = tools.requirePayload(`${__dirname}/assets/creditcarddeposits.json`);
 
 //Skipping the test since to POST a credit-card we need to create a customer first and customers object has limits of records which can be created
-suite.forElement('rewards', 'credit-cards', (test) => {
+suite.forElement('rewards', 'credit-cards', { skip: true }, (test) => {
   it('should allow Csr for credit-cards and credit-cards-deposits', () => {
      let accountId, customerId, depositId, id;
     return cloud.post('/customers', payloadcustomer)
