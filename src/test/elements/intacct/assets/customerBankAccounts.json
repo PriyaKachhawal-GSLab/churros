@@ -1,0 +1,15 @@
+{
+  "customerid": "",
+  "accountnumber": "<<random.number>>",
+  "routingnumber": "098765432",
+  "accounttype": "Business Checking Account",
+  "bankname": "UBS",
+  "accountholder": "<<name.firstName>> <<name.lastName>>",
+  "mailaddress": {
+    "address1": "<<address.streetAddress>>",
+    "address2": "<<address.secondaryAddress>>",
+    "city": "<<address.city>>",
+    "country": "<<address.county>>",
+    "isocountrycode": "<<address.countryCode>>"
+  }
+}

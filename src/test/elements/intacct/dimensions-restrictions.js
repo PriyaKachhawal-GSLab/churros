@@ -2,7 +2,7 @@
 
 const suite = require('core/suite');
 
-suite.forElement('finance', 'dimensions-relationships', (test) => {
+suite.forElement('finance', 'dimensions-restrictions', (test) => {
   test.should.return200OnGet();
-  test.should.supportNextPagePagination(2);
+  test.should.supportNextPagePagination(1);
 });

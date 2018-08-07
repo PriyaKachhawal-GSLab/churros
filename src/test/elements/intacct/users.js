@@ -12,8 +12,7 @@ suite.forElement('finance', 'users', { payload: payload }, (test) => {
   it(`should allow CRUDS for ${test.api}`, () => {
     let userId;
     return cloud.post(test.api, payload)
-      .then(r => cloud.get(test.api))
-      .then(r => userId = r.body[0].RECORDNO)
+      .then(r => id = r.body.RECORDNO)
       .then(r => cloud.get(`${test.api}/${userId}`))
       .then(r => cloud.patch(`${test.api}/${userId}`, usersUpdatePayload))
       .then(r => cloud.delete(`${test.api}/${userId}`));
