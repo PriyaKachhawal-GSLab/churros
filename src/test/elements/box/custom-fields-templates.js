@@ -18,7 +18,7 @@ suite.forElement('documents', 'custom-fields-templates', (test) => {
   });
   
   it('should support CRUS for /custom-fields-templates/templates', () => {
-    return cloud.get(`${test.api}/enterprise-templates`)
+    return cloud.get(`${test.api}/enterprise-templates`);
   });
 
 });
