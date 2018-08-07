@@ -178,7 +178,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
     })
   .then(() => provisioner.create('maximizer'))
   .then(r => {
-    maximizerId = r.body.id
+    maximizerId = r.body.id;
     arrayTransformation.elementInstanceId = maximizerId;
   }));
 
@@ -627,7 +627,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       expect(r.body[0].users).to.be.array;
       expect(r.body[0].users.length).to.be.above(0);
       expect(r.body[0].users[0]).to.have.property('displayNamez');
-    }
+    };
 
     return cloud.delete(`/instances/${maximizerId}/objects/${objName}/definitions`).catch(() => {})
       .then(r => cloud.post(`/instances/${maximizerId}/objects/${objName}/definitions`, arrayDefinition))
