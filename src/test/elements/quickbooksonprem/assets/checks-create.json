@@ -1,0 +1,44 @@
+{
+    "ExchangeRate": "1",
+    "Address": {
+      "Addr1": "5600 E. Broadway",
+      "State": "CA",
+      "PostalCode": "94326",
+      "City": "Bayshore"
+    },
+    "PayeeEntityRef": {
+      "ListID": "80000596-1484947939",
+      "FullName": "Express Delivery Service"
+    },
+    "TxnDate": "2013-12-05",
+    "AccountRef": {
+      "ListID": "80000006-1484947909",
+      "FullName": "Checking"
+    },
+    "AddressBlock": {
+      "Addr1": "5600 E. Broadway",
+      "Addr2": "Bayshore, CA 94326"
+    },
+    "ExpenseLineRet": [
+      {
+        "TxnLineID": "1E10-1484948029",
+        "ClassRef": {
+          "ListID": "80000004-1484947959",
+          "FullName": "Remodel"
+        },
+        "BillableStatus": "Billable",
+        "Amount": "25.00",
+        "AccountRef": {
+          "ListID": "8000005F-1484947910",
+          "FullName": "Job Expenses:Freight & Delivery"
+        },
+        "CustomerRef": {
+          "ListID": "800000BD-1484947914",
+          "FullName": "Ecker Designs:Office Repairs"
+        }
+      }
+    ],
+    "IsToBePrinted": "True",
+    "AmountInHomeCurrency": "=25.00"
+    
+  }
