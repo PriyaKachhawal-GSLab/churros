@@ -20,4 +20,5 @@ suite.forElement('finance', 'ledger-accounts', null, (test) => {
       expect(validValues.length).to.equal(r.body.length);
     }).should.return200OnGet();
   test.should.supportNextPagePagination(1);
+  test.should.supportPagination('id');
 });

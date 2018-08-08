@@ -17,7 +17,8 @@
     "City": "Middlefield"
   },
   "IsToBePrinted": "false",
-  "SalesReceiptLine": [{
+  "SalesReceiptLine": [
+    {
       "Desc": "jjj",
       "SalesTaxCodeRef": {
         "ListID": "80000002-1484947875",
@@ -81,11 +82,9 @@
   },
   "TxnDate": "2011-06-21",
   "RefNumber": "WEB000002",
-  "EditSequence": "1484948017",
   "Subtotal": "82.00",
   "ShipDate": "2011-06-21",
   "TotalAmount": "82.00",
-  "TxnID": "16C4-1484948017",
   "DepositToAccountRef": {
     "ListID": "80000003-1484947909",
     "FullName": "Undeposited Funds"

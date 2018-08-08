@@ -20,5 +20,5 @@ suite.forElement('finance', 'employees', { payload: payload }, (test) => {
       .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
-  test.should.supportNextPagePagination(1);
+  test.should.supportNextPagePagination(2);
 });
