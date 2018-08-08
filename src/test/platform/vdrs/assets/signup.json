@@ -1,0 +1,24 @@
+{
+    "organization": {
+      "name": "VDR upgade test org"
+    },
+    "account": {
+        "name": "VDR upgade test account",
+        "description": "VDR upgade test",
+        "externalId": 123  
+    },
+    "user": {
+      "lastName": "VDR",
+      "firstName": "Churros",
+      "email": "<<internet.email>>",
+      "password": "elements1",
+      "roles": [
+        {
+          "key": "org-admin"
+        },
+        {
+          "key": "admin"
+        }
+      ]
+    }
+  }

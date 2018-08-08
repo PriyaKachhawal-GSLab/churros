@@ -73,11 +73,12 @@ suite.forPlatform('users', { schema: schema, payload: payload }, (test) => {
   afterEach(() => { defaults.reset(); return cleanup(); });
 
   it('should support CRUDS for users', () => {
-    const validate = (r, amount, firstName, lastName) => {
+    const validate = (r, amount, firstName, lastName, email) => {
       firstName = firstName || payload.firstName;
       lastName = lastName || payload.lastName;
+      email = email || payload.email;
       expect(r.body.length).to.be.above(0);
-      expect(r.body.filter(user => user.firstName === firstName && user.lastName === lastName).length).to.equal(amount);
+      expect(r.body.filter(user => user.email === email && user.firstName === firstName && user.lastName === lastName).length).to.equal(amount);
       const today = moment().format('YYYY[-]MM[-]DD');
       const loggedInUser = r.body.find(user => user.email === props.get('user'));
       expect(loggedInUser.lastLoginDate).to.equal(today);

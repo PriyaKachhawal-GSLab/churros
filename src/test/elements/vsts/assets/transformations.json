@@ -1,0 +1,30 @@
+{
+  "queries": {
+    "vendorName": "queries",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "id"
+    }]
+  },
+  "work-items": {
+    "vendorName": "work-items",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "System.Id"
+    }]
+  },
+  "work-items-fields": {
+    "vendorName": "work-items-fields",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "name"
+    }]
+  },
+  "work-items-types": {
+    "vendorName": "work-items-types",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "referenceName"
+    }]
+  }
+}
