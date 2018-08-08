@@ -1,0 +1,3 @@
+{
+  "query": "select [System.Id] from workItems where System.Id = 30"
+}

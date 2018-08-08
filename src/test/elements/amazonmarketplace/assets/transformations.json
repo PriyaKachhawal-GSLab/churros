@@ -1,0 +1,11 @@
+{
+  "inventories": {
+    "vendorName": "inventories",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "id"
+      }
+    ]
+  }
+}

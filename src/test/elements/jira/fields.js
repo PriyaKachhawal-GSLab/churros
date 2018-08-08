@@ -9,4 +9,5 @@ suite.forElement('helpdesk', 'fields', {skip: true, payload:payload}, (test) => 
     return cloud.post("/hubs/helpdesk/fields", payload)
     .then(cloud.get("/hubs/helpdesk/fields"));
   });
+  test.should.supportPagination('id');
 });
