@@ -295,50 +295,8 @@ const cs = (api, payload, validationCb, options) => {
 };
 exports.cs = cs;
 
-exports.supportPagination = (api, unique, validationCb) => itPagination(api, unique, validationCb, null);
-
-const itPagination = (api, unique, validationCb, options) => {
-  const pageSize = options ? options.qs ? options.qs.pageSize ? options.qs.pageSize : 2 : 2 : 2;
-  const page = options ? options.qs ? options.qs.page ? options.qs.page : 1 : 1 : 1;
-  const where = options ? options.qs ? options.qs.where ? options.qs.where : null : null : null;
-  const path = options ? options.qs ? options.qs.path ? options.qs.path : null : null : null;
-  const options1 = Object.assign({}, options, { qs: { page: page, pageSize: pageSize } });
-  const options2 = Object.assign({}, options, { qs: { page: page + 1, pageSize: pageSize } });
-  const options3 = Object.assign({}, options, { qs: { page: page, pageSize: (pageSize * 2) } });
-  let result1 = { body: [] }, result2 = { body: [] }, result3 = { body: [] };
-  const getWithOptions = (option, result) => {
-    // Adding the 'where' clause if it exists
-    if (where) option.qs.where = where;
-    if (path) option.qs.path = path;
-    return withOptions(option).get(api)
-      .then((r) => {
-        if (r.body && r.body.length > 0) {
-          result.body = r.body;
-          expect(result.body.length).to.be.below(option.qs.pageSize + 1);
-          return r.response.headers['elements-next-page-token'];
-        }
-      });
-  };
-
-  return getWithOptions(options1, result1)
-    .then(nextPage => getWithOptions(nextPage ? { qs: { pageSize: pageSize, nextPage: nextPage} } : options2, result2))
-    .then(nextPage => getWithOptions(nextPage ? { qs: { pageSize: pageSize * 2 } } : options3, result3))
-    .then(() => {
-      if (unique) {
-        result3.body = tools.getKey(result3.body, unique);
-        result2.body = tools.getKey(result2.body, unique);
-        result1.body = tools.getKey(result1.body, unique);
-      }
-      if (result3.body.length === pageSize * 2 && result1.body.length === pageSize && result2.body.length === pageSize) {
-        expect(result3.body[0]).to.deep.equal(result1.body[0]);
-        expect(result3.body[result3.body.length - 1]).to.deep.equal(result2.body[result2.body.length - 1]);
-        expect(result3.body[pageSize]).to.deep.equal(result2.body[0]);
-        expect(result3.body).to.deep.equal(result1.body.concat(result2.body));
-      }
-    });
-};
-
-exports.itPagination = itPagination;
+// Satiating LINTER as we call it in withOptions
+let itPagination;
 
 /*
  * Gives you access to adding HTTP request options to any of the HTTP-related APIs
@@ -411,3 +369,48 @@ exports.createEvents = (element, replacements, eventRequest, numEvents) => {
   return chakram.all(promises);
 
 };
+
+itPagination = (api, unique, validationCb, options) => {
+  const pageSize = options ? options.qs ? options.qs.pageSize ? options.qs.pageSize : 2 : 2 : 2;
+  const page = options ? options.qs ? options.qs.page ? options.qs.page : 1 : 1 : 1;
+  const where = options ? options.qs ? options.qs.where ? options.qs.where : null : null : null;
+  const path = options ? options.qs ? options.qs.path ? options.qs.path : null : null : null;
+  const options1 = Object.assign({}, options, { qs: { page: page, pageSize: pageSize } });
+  const options2 = Object.assign({}, options, { qs: { page: page + 1, pageSize: pageSize } });
+  const options3 = Object.assign({}, options, { qs: { page: page, pageSize: (pageSize * 2) } });
+  let result1 = { body: [] }, result2 = { body: [] }, result3 = { body: [] };
+  const getWithOptions = (option, result) => {
+    // Adding the 'where' clause if it exists
+    if (where) option.qs.where = where;
+    if (path) option.qs.path = path;
+    return withOptions(option).get(api)
+      .then((r) => {
+        if (r.body && r.body.length > 0) {
+          result.body = r.body;
+          expect(result.body.length).to.be.below(option.qs.pageSize + 1);
+          return r.response.headers['elements-next-page-token'];
+        }
+      });
+  };
+
+  return getWithOptions(options1, result1)
+    .then(nextPage => getWithOptions(nextPage ? { qs: { pageSize: pageSize, nextPage: nextPage} } : options2, result2))
+    .then(nextPage => getWithOptions(nextPage ? { qs: { pageSize: pageSize * 2 } } : options3, result3))
+    .then(() => {
+      if (unique) {
+        result3.body = tools.getKey(result3.body, unique);
+        result2.body = tools.getKey(result2.body, unique);
+        result1.body = tools.getKey(result1.body, unique);
+      }
+      if (result3.body.length === pageSize * 2 && result1.body.length === pageSize && result2.body.length === pageSize) {
+        expect(result3.body[0]).to.deep.equal(result1.body[0]);
+        expect(result3.body[result3.body.length - 1]).to.deep.equal(result2.body[result2.body.length - 1]);
+        expect(result3.body[pageSize]).to.deep.equal(result2.body[0]);
+        expect(result3.body).to.deep.equal(result1.body.concat(result2.body));
+      }
+    });
+};
+
+exports.itPagination = itPagination;
+
+exports.supportPagination = (api, unique, validationCb) => itPagination(api, unique, validationCb, null);
