@@ -247,7 +247,7 @@ const itPaginationForNested = (name, parentObject, parentPayload, childObject, c
     .then(r => cloud.delete(`${parentObject}/${parentId}`))
     .catch(e => {
       logger.debug(`Error while paginating`, e);
-      cloud.delete(`${parentObject}/${parentId}`)
+      cloud.delete(`${parentObject}/${parentId}`);
     });
   }, options ? options.skip : false);
 };

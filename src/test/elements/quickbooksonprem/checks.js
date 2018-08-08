@@ -11,9 +11,8 @@ suite.forElement('finance', 'checks', { payload: payload }, (test) => {
     return cloud.post(test.api, payload)
       .then(r => { id = r.body.TxnID;
         //console.log(id)
-        refno = r.body.RefNumber; })   
-      return cloud.get(test.api)
-      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(test.api))
+        refno = r.body.RefNumber; })  
+      .then(r => cloud.get(test.api))
       .then(r => cloud.withOptions({ qs: { where: `RefNumber='${refno}'` } }).get(test.api))
       .then(r => expect(r.body.filter(o => o.RefNumber === `${refno}`)).to.not.be.empty)
       .then(r => cloud.withOptions({ qs: { where: `TimeModified='2018-01'` } }).get(test.api))

@@ -7,7 +7,7 @@ suite.forElement('finance', 'item-discounts', (test) => {
   it('should support SR, pagination and Ceql searching for ${test.api}', () => {
     let id ;    
     return cloud.get(test.api)
-    .then(r => {id = r.body[0].ListID})  
+    .then(r => id = r.body[0].ListID)  
       .then(r => cloud.withOptions({ qs: { where: `TimeModified>='2016-01'` } }).get(test.api))
       .then(r => cloud.withOptions({ qs: { where: `ListID='${id}'` } }).get(test.api))
       .then(r => cloud.get(`${test.api}/${id}`)); 

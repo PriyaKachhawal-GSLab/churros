@@ -5,7 +5,7 @@ const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 suite.forElement('finance', 'classes', null, (test) => {
   it('should support SR and Ceql search for /hubs/finance/classes', () => {
-    let id,data;
+    let id;
     
     return cloud.get(test.api)
       .then(r => id = r.body[0].id)

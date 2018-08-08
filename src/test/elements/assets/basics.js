@@ -51,14 +51,14 @@
             ), Promise.resolve(null))) : 
             Promise.all(objectNames.map(objectName => {
               return cloud.get(`/${objectName}`)
-                .catch(error => failures.push(({ objectName, error})))
+                .catch(error => failures.push(({ objectName, error})));
             }))
         )
         .then(() => failures.length === 0 ? null : logger.info(failures.length, 'failures', objectNames.length, 'total'));
     });
 
     it('should support GET on all metadata from GET /objects', () => {
-      let failures = [], objectNames = [], metadata = [];
+      let failures = [], objectNames = [];
       return cloud.get('/objects')
         .then(r => {
           expect(r.body).to.not.be.empty;
@@ -66,7 +66,7 @@
         })
         .then(() => Promise.all(objectNames.map(objectName => {
           return cloud.get(`/objects/${objectName}/metadata`)
-            .catch(error => failures.push(({ objectName, error})))
+            .catch(error => failures.push(({ objectName, error})));
         })))
         .then(() => failures.length === 0 ? null : logger.info(`${failures.length} failures, ${objectNames.length} sucesses`));
     });
