@@ -5,7 +5,7 @@ const cloud = require('core/cloud');
 suite.forElement('helpdesk', 'permission-schemes', (test) => {
   it('should allow SR for permission-schemes', () => {
     let permissionschemes;
-    return cloud.get('/hubs/helpdesk/permission-schemes')
+    return cloud.get(test.api)
       .then(r => permissionschemes = r.body[0].id)
       .then(r => cloud.get(`${test.api}/${permissionschemes}`));
   });
