@@ -7,6 +7,10 @@
     {
       "type":"string",
       "path":"users[*].displayNamez"
+    },
+    {
+      "type":"array",
+      "path":"anotherUser"
     }
   ]
 }

@@ -624,6 +624,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
     const validatorWrapper = r => {
       expect(r.body.length).to.be.above(0);
       expect(r.body[0]).to.have.property('users');
+      expect(r.body[0]).to.have.property('anotherUser');
       expect(r.body[0].users).to.be.array;
       expect(r.body[0].users.length).to.be.above(0);
       expect(r.body[0].users[0]).to.have.property('displayNamez');

@@ -11,6 +11,12 @@
       "path":"users[*].displayNamez",
       "vendorPath":"Users[*].DisplayName",
       "associatedLevel":"organization"
+    },
+    {
+      "type":"array",
+      "path":"anotherUser[*]",
+      "vendorPath":"Users[*]",
+      "associatedLevel":"organization"
     }
   ],
   "level":"instance",
