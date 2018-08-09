@@ -11,7 +11,7 @@ suite.forElement('helpdesk', 'projects', { payload: payload }, (test) => {
   test.withOptions({ qs: { where :`expand='lead'` }}).should.return200OnGet();
   it('should allow R for projects/{id}/avatars', () => {
     let projectid;
-    return cloud.get('/hubs/helpdesk/projects')
+    return cloud.get(test.api)
       .then(r => projectid = r.body[0].id)
       .then(r => cloud.get(`${test.api}/${projectid}/avatars`));
   });
