@@ -8,7 +8,7 @@ const productsPayload = build({ ProductName: tools.random(), ProductCode: tools.
 
 suite.forElement('ecommerce', 'products', { payload: productsPayload }, (test) => {
   const updatePayload = {
-        "ProductDescription": tools.random()
+        "StockStatus": tools.randomInt()
   };
 
   test.withOptions({ churros: { updatePayload: updatePayload } }).should.supportCruds();
