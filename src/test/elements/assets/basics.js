@@ -9,6 +9,8 @@
   const _ = require('lodash');
   const argv = require('optimist').argv;
 
+  const isSync = (element) => argv.sync || ['netsuite', 'quickbooksonprem'].filter(e => element.includes(e)).length > 0;
+
   const createAll = (urlTemplate, list) => {
     return Object.keys(list).sort()
       .reduce((p, key) => p.then(() => {
@@ -43,15 +45,20 @@
           expect(r.body).to.not.be.empty;
           objectNames = r.body;
         })
-        .then(() => Promise.all(objectNames.map(objectName => {
-          return cloud.get(`/${objectName}`)
-            .catch(error => failures.push(({ objectName, error})))
-        })))
-        .then(() => failures.length === 0 ? null : logger.info(failures.length, 'failures', objectNames.length, 'sucesses'));
+        .then(() => isSync(element) ? (objectNames.reduce((acc, objectName) => (
+            acc.then(() => cloud.get(`/${objectName}`))
+                .catch(error => failures.push(({ objectName, error})))
+            ), Promise.resolve(null))) : 
+            Promise.all(objectNames.map(objectName => {
+              return cloud.get(`/${objectName}`)
+                .catch(error => failures.push(({ objectName, error})));
+            }))
+        )
+        .then(() => failures.length === 0 ? null : logger.info(failures.length, 'failures', objectNames.length, 'total'));
     });
 
     it('should support GET on all metadata from GET /objects', () => {
-      let failures = [], objectNames = [], metadata = [];
+      let failures = [], objectNames = [];
       return cloud.get('/objects')
         .then(r => {
           expect(r.body).to.not.be.empty;
@@ -59,7 +66,7 @@
         })
         .then(() => Promise.all(objectNames.map(objectName => {
           return cloud.get(`/objects/${objectName}/metadata`)
-            .catch(error => failures.push(({ objectName, error})))
+            .catch(error => failures.push(({ objectName, error})));
         })))
         .then(() => failures.length === 0 ? null : logger.info(`${failures.length} failures, ${objectNames.length} sucesses`));
     });
@@ -74,7 +81,6 @@
         return Promise.resolve(null);
       }
       argv.transform ? this.skip() : null; //no need to do this twice
-      let isSync = argv.sync || ['netsuite', 'quickbooksonprem'].filter(e => element.includes(e)).length > 0;
       let error;
       // clear current transformations
       return cloud.delete(`/instances/${instanceId}/transformations`).catch(() => {})
@@ -99,7 +105,7 @@
 
           //create the transformations and validating they work
           return createAll(`/instances/${instanceId}/transformations/%s`, transformations)
-          .then(() => isSync ? //Making synchronous calls
+          .then(() => isSync(element) ? //Making synchronous calls
           Object.keys(transformations).reduce((acc, key) => acc.then(() => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length))), Promise.resolve(null))
           : Promise.all(Object.keys(transformations).map(key => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length)))));
         } else {
@@ -132,7 +138,7 @@
               }));
             })
             //validates the transformations are working
-            .then(() => isSync ? //Making synchronous calls
+            .then(() => isSync(element) ? //Making synchronous calls
             Object.keys(transDefs).reduce((acc, key) => acc.then(() => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length))), Promise.resolve(null))
             : Promise.all(Object.keys(transDefs).map(key => cloud.get(`/hubs/${hub}/${key}`).catch(() => ({body: []})).then(r => expect(r.body.length).to.equal(r.body.filter(t => t.idTransformed).length)))));
           });

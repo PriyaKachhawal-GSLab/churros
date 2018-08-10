@@ -9,6 +9,8 @@ suite.forElement('finance', 'payment-methods', null, (test) => {
     let id;
     return cloud.get(test.api)
       .then(r => id = r.body[0].id)
+      .then(r => cloud.withOptions({ qs: { where: `isactive='true'` } }).get(test.api))
+      .then(r => expect(r.body.filter(o => o.IsActive === `true`)).to.not.be.empty)
       .then(r => cloud.get(`${test.api}/${id}`));
   });
   test
@@ -19,5 +21,5 @@ suite.forElement('finance', 'payment-methods', null, (test) => {
       const validValues = r.body.filter(obj => obj.Name === `05jvatrmfgb6dhrggb9`);
       expect(validValues.length).to.equal(r.body.length);
     }).should.return200OnGet();
-  test.should.supportPagination();
+  test.should.supportPagination('id');
 });

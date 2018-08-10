@@ -1,4 +1,5 @@
 {
-  "Name": "Churros Updated",
+  "Name": "Churros Updated", 
+  "IsActive": "false",
   "ItemType": "ItemInventory"
 }

@@ -1,85 +1,53 @@
 {
     "CurrencyRef": {
-        "ListID": "80000096-1484947879",
-        "FullName": "US Dollar"
+      "ListID": "80000096-1484947879",
+      "FullName": "US Dollar"
     },
     "ExchangeRate": "1",
     "TxnDate": "2018-05-14",
     "CreditAmount": "389.00",
-    "ItemGroupLineRet": [
-    {
-        "Desc": "Sample Group Item",
-        "TxnLineID": "4AB8-1526330681",
-        "ItemGroupRef": {
-            "ListID": "8000021C-1526331278",
-            "FullName": "SampleGroup"
-        },
-        "TotalAmount": "0.00",
-        "ItemLineRet": [
-            {
-                "TxnLineID": "4AB9-1526330681",
-                "Amount": "0.00",
-                "Quantity": "2",
-                "ItemRef": {
-                    "ListID": "80000177-1484947957",
-                    "FullName": "test 1 line"
-                },
-                "Cost": "0.00"
-            },
-            {
-                "TxnLineID": "4ABA-1526330681",
-                "Amount": "0.00",
-                "Quantity": "2",
-                "ItemRef": {
-                    "ListID": "80000178-1484947957",
-                    "FullName": "test 2 line"
-                },
-                "Cost": "0.00"
-            }
-        ]
-    }],
     "APAccountRef": {
-        "ListID": "8000001C-1484947909",
-        "FullName": "Accounts Payable"
+      "ListID": "8000001C-1484947909",
+      "FullName": "Accounts Payable"
     },
     "CreditAmountInHomeCurrency": "389.00",
     "ExpenseLineRet": [
-        {
-            "TxnLineID": "4ABC-1526330681",
-            "BillableStatus": "Billable",
-            "Amount": "189.00",
-            "AccountRef": {
-                "ListID": "8000007C-1484947910",
-                "FullName": "Office Supplies"
-            },
-            "CustomerRef": {
-                "ListID": "80000014-1484947911",
-                "FullName": "ACME Lumber"
-            },
-            "Memo": "TEst Expense"
-        }
+      {
+        "TxnLineID": "4ABC-1526330681",
+        "BillableStatus": "Billable",
+        "Amount": "189.00",
+        "AccountRef": {
+          "ListID": "8000007C-1484947910",
+          "FullName": "Office Supplies"
+        },
+        "CustomerRef": {
+          "ListID": "80000014-1484947911",
+          "FullName": "ACME Lumber"
+        },
+        "Memo": "TEst Expense"
+      }
     ],
     "ItemLineRet": [
-        {
-            "Desc": "Sample Line Item",
-            "TxnLineID": "4AB7-1526330681",
-            "BillableStatus": "Billable",
-            "Amount": "200.00",
-            "ItemRef": {
-                "ListID": "800000E1-1484947955",
-                "FullName": "Line Item1"
-            },
-            "CustomerRef": {
-                "ListID": "8000000F-1484947911",
-                "FullName": "Abercrombie, Kristy:Kitchen"
-            },
-            "Cost": "200.00"
-        }
+      {
+        "Desc": "Sample Line Item",
+        "TxnLineID": "4AB7-1526330681",
+        "BillableStatus": "Billable",
+        "Amount": "200.00",
+        "ItemRef": {
+          "ListID": "800000E1-1484947955",
+          "FullName": "Line Item1"
+        },
+        "CustomerRef": {
+          "ListID": "8000000F-1484947911",
+          "FullName": "Abercrombie, Kristy:Kitchen"
+        },
+        "Cost": "200.00"
+      }
     ],
     "VendorRef": {
-        "ListID": "80000446-1484947933",
-        "FullName": "A Cheung Limited"
+      "ListID": "80000446-1484947933",
+      "FullName": "A Cheung Limited"
     },
     "TxnNumber": "2889",
     "OpenAmount": "-17.00"
-}
+  }
