@@ -5,6 +5,7 @@ const tools = require('core/tools');
 const cloud = require('core/cloud');
 const customer = require('./assets/customers');
 const paymentMethod = require('./assets/payment-methods');
+const paymentMethodUpdate = require('./assets/models_customers_payment_method_patch_id');
 
 const updatePaymentMethod = () => ({
   "name": tools.random()
@@ -24,7 +25,7 @@ suite.forElement('payment', 'payment-methods', (test) => {
     return cloud.post(`/hubs/payment/customers/${customerId}/payment-methods`, paymentMethod)
       .then(r => paymentId = r.body.id)
       .then(r => cloud.get(`/hubs/payment/customers/${customerId}/payment-methods/${paymentId}`))
-      .then(r => cloud.patch(`/hubs/payment/customers/${customerId}/payment-methods/${paymentId}`, updatePaymentMethod()))
+      .then(r => cloud.patch(`/hubs/payment/customers/${customerId}/payment-methods/${paymentId}`, paymentMethodUpdate))
       .then(r => cloud.delete(`/hubs/payment/customers/${customerId}/payment-methods/${paymentId}`));
   });
   after(() => cloud.delete(`/hubs/payment/customers/${customerId}`));
