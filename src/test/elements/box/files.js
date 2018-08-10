@@ -158,7 +158,8 @@ suite.forElement('documents', 'files', (test) => {
 
   it('should allow RUD for /files/{id}/custom-fields-templates/{templateKeyId}/custom-fields', () => {
       return cloud.withOptions({ qs: { scope: "enterprise" } }).get(`/hubs/documents/files/${id}/custom-fields-templates/${templateKey}/custom-fields`)
-      .then(r => cloud.patch(`/hubs/documents/files/${id}/custom-fields-templates/${templateKey}/custom-fields`, templateKeyPayload));
+      .then(r => cloud.patch(`/hubs/documents/files/${id}/custom-fields-templates/${templateKey}/custom-fields`, templateKeyPayload))
+      .then(r => cloud.withOptions({ qs: { scope: "enterprise" } }).delete(`/hubs/documents/files/${id}/custom-fields-templates/${templateKey}/custom-fields`));
   });
 
 
