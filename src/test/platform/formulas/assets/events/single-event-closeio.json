@@ -23,5 +23,16 @@
         "contacts": []
       }
     ],
+    "events": [
+      {
+        "objectType": "accounts",
+        "objectId": "lead_BW9v0Uf82ZZyJh2Jhi7YcDEYhGQw6naCg8KhYA7Ffus",
+        "date": "2018-07-31T19:39:46Z",
+        "pollDate": "2018-07-31T19:40:36Z",
+        "eventType": "CREATED",
+        "elementKey": "closeio",
+        "hubKey": "crm"
+      }
+    ],
     "objectType": "accounts"
 }
