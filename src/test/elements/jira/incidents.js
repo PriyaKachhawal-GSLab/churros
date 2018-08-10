@@ -17,12 +17,12 @@ suite.forElement('helpdesk', 'incidents', { payload: payload }, (test) => {
   test.should.supportPagination();
   test.should.supportCeqlSearch('id');
   it(`Should support S for ${test.api} with fields: query`, () => {
-    return cloud.withOptions({ qs: { fields: 'fixVersions,priority' } }).get(test.api)
+    return cloud.withOptions({ qs: { fields: 'fixVersions,summary' } }).get(test.api)
     .then(r => {
       r.body.forEach(incident => {
         let keys = Object.keys(incident.fields);
-        if (expect(keys.length).to.be.below(3)) {
-          expect(incident.fields).to.contain.key('fixVersions') || expect(keys).to.contain.key('priority');
+        if (expect(keys.length).to.be.above(0) && expect(keys.length).to.be.below(3)) {
+          expect(incident.fields).to.contain.key('fixVersions') || expect(keys).to.contain.key('summary');
         }
       });
     });
