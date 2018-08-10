@@ -1,0 +1,15 @@
+{
+"placement": {
+            "id": 71
+        },
+"dateBegin" : 1533094848000,
+         "requestStatus": "Approved",
+        "employmentType" : "Permanent",
+
+          "requestType": "Billing Change",
+           "requestingUser" :  {
+            "id": 1
+        },
+           "salary" : 0,
+             "status" : "Placed"
+}
