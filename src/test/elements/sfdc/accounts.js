@@ -2,7 +2,6 @@
 
 //dependencies at the top
 const expect = require('chakram').expect;
-const all = require('chakram').all;
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');

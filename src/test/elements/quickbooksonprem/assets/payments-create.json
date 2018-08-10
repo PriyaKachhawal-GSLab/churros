@@ -1,9 +1,9 @@
 {
   "AppliedToTxn": [
-      {
-          "TxnID": "xxxxx",
-          "TxnType": "Invoice"
-      }
+    {
+      "TxnID": "16D1-1484948017",
+      "TxnType": "Invoice"
+    }
   ],
   "TxnDate": "2011-06-17",
   "RefNumber": "WEB00033",
@@ -12,6 +12,6 @@
     "FullName": "Accounts Receivable"
   },
   "CustomerRef": {
-    "ListID": "xxxxx"
+    "ListID": "80000031-1484947912"
   }
 }

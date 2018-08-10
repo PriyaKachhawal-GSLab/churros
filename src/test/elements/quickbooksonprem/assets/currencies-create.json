@@ -1,5 +1,5 @@
 {
-  "CurrencyCode": "aYa",
+  "CurrencyCode": "qYq",
   "CurrencyFormat": {
     "DecimalPlaces": "2",
     "DecimalSeparator": "Period",
@@ -8,5 +8,5 @@
   },
   "IsUserDefinedCurrency": "true",
   "IsActive": "true",
-  "Name": "Churros"
+  "Name": "Churros Sample Test"
 }
