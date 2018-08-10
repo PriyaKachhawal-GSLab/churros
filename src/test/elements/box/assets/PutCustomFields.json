@@ -1,6 +1,6 @@
 {
- "template": "customer",
- "path": "/" ,
+ "template": "",
+ "path": "" ,
  "value": "madhuri",
  "scope": "enterprise"
 }
