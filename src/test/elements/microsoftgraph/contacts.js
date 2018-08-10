@@ -8,8 +8,8 @@ const expect = require('chakram').expect;
 suite.forElement('general', 'contacts', { payload: payload }, (test) => {
   test.should.supportCruds();
   test.should.supportPagination();
-  // the CEQL values are hard coded in do to a problem with microsoft api's that don't allow you to create a calendar, query, and delete it
-    test.withName(`should support searching ${test.api} by name`)
+  test.withName(`should support searching ${test.api} by name`)
+
     .withOptions({ qs: { where: `DisplayName ='Churros Name'` } })
     .withValidation((r) => {
       expect(r).to.have.statusCode(200);
