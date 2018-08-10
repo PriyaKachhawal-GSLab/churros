@@ -7,9 +7,6 @@ const customer = require('./assets/customers');
 const paymentMethod = require('./assets/payment-methods');
 const paymentMethodUpdate = require('./assets/models_customers_payment_method_patch_id');
 
-const updatePaymentMethod = () => ({
-  "name": tools.random()
-});
 
 suite.forElement('payment', 'payment-methods', (test) => {
   let customerId;
