@@ -9,7 +9,6 @@ suite.forElement('general', 'contacts', { payload: payload }, (test) => {
   test.should.supportCruds();
   test.should.supportPagination();
   test.withName(`should support searching ${test.api} by name`)
-
     .withOptions({ qs: { where: `DisplayName ='Churros Name'` } })
     .withValidation((r) => {
       expect(r).to.have.statusCode(200);
