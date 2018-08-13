@@ -1,11 +1,20 @@
 {
 	"contacts": {
-    "vendorName": "contacts",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "Id"
-      }
-    ]
-  }
+    	"vendorName": "contacts",
+	    "fields": [
+	      {
+	        "path": "id",
+	        "vendorPath": "Id"
+	      }
+	    ]
+  	},
+  	"messages": {
+    	"vendorName": "messages",
+	    "fields": [
+	      {
+	        "path": "id",
+	        "vendorPath": "Id"
+	      }
+	    ]
+  	},
 }

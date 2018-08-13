@@ -21,7 +21,6 @@ suite.forElement('general', 'contacts', { payload: payload }, (test) => {
     .withName('Should support orderBy for date')
     .withValidation(r => {
       expect(r).to.statusCode(200);
-      expect(r.body.length).to.be.at.least(2);
       const success = new Date(r.body[0].lastModifiedDateTime).getTime() > new Date(r.body[1].lastModifiedDateTime).getTime();
       expect(success).to.be.true;
     })
