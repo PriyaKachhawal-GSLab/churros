@@ -7,14 +7,5 @@
 	        "vendorPath": "Id"
 	      }
 	    ]
-  	},
-  	"messages": {
-    	"vendorName": "messages",
-	    "fields": [
-	      {
-	        "path": "id",
-	        "vendorPath": "Id"
-	      }
-	    ]
-  	},
+  	}
 }
