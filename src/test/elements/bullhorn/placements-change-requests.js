@@ -10,7 +10,7 @@ const payload = tools.requirePayload(`${__dirname}/assets/placements-change-requ
 suite.forElement('crm', 'placements-change-requests', { payload: payload }, (test) => {
   test.should.supportCruds();
   test.should.supportPagination();
- test.withOptions({ qs: { where: 'status=\'Interview Scheduled\'' } })
+  test.withOptions({ qs: { where: 'status=\'Interview Scheduled\'' } })
     .withName('should support search by filter')
     .withValidation(r => {
       expect(r).to.statusCode(200);
@@ -18,16 +18,16 @@ suite.forElement('crm', 'placements-change-requests', { payload: payload }, (tes
       expect(validValues.length).to.equal(r.body.length);
     })
     .should.return200OnGet();
-    it('should support search by fields for placements-change-requests', () => {
-      let placementRequestId;
-      return cloud.get(`${test.api}`)
-        .then(r => placementRequestId = r.body[0].id)
-        .then(r => cloud.get(`${test.api}/${placementRequestId}`))
-        .then(r => cloud.withOptions({ qs: { fields: 'status,dateAdded' } }).get(`${test.api}/${placementRequestId}`)
-          .then(r => {
-            expect(r.body).to.contain.key('status');
-            expect(r.body).to.contain.key('dateAdded');
-          }));
-    });
+  it('should support search by fields for placements-change-requests', () => {
+    let placementRequestId;
+    return cloud.get(`${test.api}`)
+      .then(r => placementRequestId = r.body[0].id)
+      .then(r => cloud.get(`${test.api}/${placementRequestId}`))
+      .then(r => cloud.withOptions({ qs: { fields: 'status,dateAdded' } }).get(`${test.api}/${placementRequestId}`)
+        .then(r => {
+          expect(r.body).to.contain.key('status');
+          expect(r.body).to.contain.key('dateAdded');
+        }));
+  });
 
 });
