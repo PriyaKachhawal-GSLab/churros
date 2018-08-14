@@ -1,0 +1,14 @@
+{
+  "name": "<<lorem.words>>",
+  "datefrom": {
+    "year": "1993",
+    "month": "05",
+    "day": "17"
+  },
+  "dateto": {
+    "year": "2025",
+    "month": "05",
+    "day": "17"
+  },
+  "status": "active"
+}
