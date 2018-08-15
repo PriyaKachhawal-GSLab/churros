@@ -114,7 +114,7 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
   /**
    * Handles the basic formula execution test for a formula that is triggered by an event
    */
-  const eventTriggerTest = (fName, numEvents, numSevs, validator, executionStatus, numSes, eventFileName, triggerCb) => {
+  const eventTriggerTest = (fName, numEvents, numSevs, validator, executionStatus, numSes, eventFileName, triggerCb, numExecutions) => {
     const f = require(`./assets/formulas/${fName}`);
     let fi = require(`./assets/formulas/basic-formula-instance`);
     if (fs.existsSync(`./assets/formulas/${fName}-instance`)) fi = require(`./assets/formulas/${fName}-instance`);
@@ -141,7 +141,7 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
       triggerCb = (fId, fiId) => generateXSingleSfdcPollingEvents(closeioId, numEvents, eventFileName);
     }
     numSes = numSes || f.steps.length + 1; // defaults to steps + trigger but for loop cases, that won't work
-    return testWrapper(triggerCb, f, fi, numEvents, numSes, numSevs, validatorWrapper, executionStatus);
+    return testWrapper(triggerCb, f, fi, numExecutions ? numExecutions : numEvents, numSes, numSevs, validatorWrapper, executionStatus);
   };
 
   /**
@@ -233,7 +233,7 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
       if (typeof validator === 'function') validator(executions);
     };
 
-    const triggerCb = triggerCall === null ? () => logger.debug('No trigger CB for scheduled formulas') : triggerCall;
+    const triggerCb = (triggerCall === null || triggerCall === undefined) ? () => logger.debug('No trigger CB for scheduled formulas') : triggerCall;
 
     const setupCron = (r) => {
       return {
@@ -254,7 +254,7 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
 
   it('should successfully execute a simple formula triggered by a triple event', () => eventTriggerTest('simple-successful-formula', 3, 2));
 
-  it('should successfully execute a simple formula triggered by one event containing 3 objects', () => eventTriggerTest('simple-successful-formula', 1, 2, null, null, null, 'triple-event-closeio'));
+  it('should successfully execute a simple formula triggered by one event containing 3 objects', () => eventTriggerTest('simple-successful-formula', 1, 2, null, null, null, 'triple-event-closeio', null, 3));
 
   it('should successfully execute a formula and properly handle context between steps', () => {
     const validator = (executions) => {
