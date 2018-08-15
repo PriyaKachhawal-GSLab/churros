@@ -148,6 +148,10 @@
       {
         "path": "id",
         "type": "string"
+      },
+      {
+        "path": "budgetId",
+        "type": "string"
       }
     ]
   },
@@ -3146,5 +3150,22 @@
         "type": "string"
       }
     ]
-  }
+  },
+    "ad-group-ads": {
+      "vendorName": "ad-group-ads",
+      "fields": [
+        {
+          "path": "idTransformed",
+          "type": "string"
+        },
+        {
+          "path": "id",
+          "type": "string"
+        },
+        {
+          "path": "adGroupId",
+          "type": "string"
+        }
+      ]
+    }
 }

@@ -1,0 +1,10 @@
+{
+    "biddingStrategyConfiguration": {
+      "biddingStrategyType": "TARGET_SPEND"
+    },
+    "advertisingChannelType": "SEARCH",
+    "name": "<<random.word>>",
+    "budget": {
+      "budgetId": "you should get this from budgets api"
+    }
+  }

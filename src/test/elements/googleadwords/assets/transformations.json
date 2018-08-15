@@ -1,0 +1,20 @@
+{
+  "budgets": {
+    "vendorName": "budgets",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "budgetId"
+      }
+    ]
+  },
+  "ad-group-ads": {
+    "vendorName": "ad-group-ads",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "adGroupId"
+      }
+    ]
+  }
+}
