@@ -43,7 +43,7 @@ suite.forElement('scheduling', 'calendars', { payload: payload }, (test) => {
         expect(r.body).to.not.be.empty;
         let filteredBody = bodyWithDeleted.filter(o => o.status !== 'cancelled');
         expect(filteredBody).to.not.be.empty;
-        expect(filteredBody).to.deep.equal(r.body)
+        expect(filteredBody).to.deep.equal(r.body);
       })
       .then(r => cloud.delete(`${test.api}/${calendarId}/events/${eventId}`));
   });
