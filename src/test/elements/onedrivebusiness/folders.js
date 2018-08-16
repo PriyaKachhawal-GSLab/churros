@@ -144,7 +144,7 @@ suite.forElement('documents', 'folders', (test) => {
         .then(r =>
           updatedFolder3 = r.body)
         .then(r => cloud.get(`/hubs/documents/folders/${updatedFolder3.id}/metadata`))
-        .then(r => cloud.patch(`/hubs/documents/folders/${updatedFolder3.id}/metadata`, folder))
+        .then(r => cloud.patch(`/hubs/documents/folders/${updatedFolder3.id}/metadata`, folder));
     };
     return folderWrapHash(cb);
   });
