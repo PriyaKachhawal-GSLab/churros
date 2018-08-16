@@ -246,8 +246,8 @@ const itPaginationForNested = (name, parentObject, parentPayload, childObject, c
     .then(r => Promise.all(childIds.map(childId => cloud.delete(`${parentObject}/${parentId}/${childObject}/${childId}`))))
     .then(r => cloud.delete(`${parentObject}/${parentId}`))
     .catch(e => {
+      logger.debug(`Error while paginating`, e);
       cloud.delete(`${parentObject}/${parentId}`);
-      throw new Error(e);
     });
   }, options ? options.skip : false);
 };

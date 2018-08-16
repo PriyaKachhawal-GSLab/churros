@@ -14,10 +14,11 @@ suite.forElement('finance', 'inventory-adjustments', { payload: payload }, (test
         updatePayload.EditSequence = r.body.EditSequence;
       })
       .then(r => cloud.get(test.api))
-      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(test.api))
+      .then(r => cloud.withOptions({ qs: { where: `TxnID='${id}'` } }).get(test.api))
       .then(r => cloud.get(`${test.api}/${id}`))
       .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
-  test.should.supportNextPagePagination(1);
+  test.should.supportNextPagePagination(2);
+  test.should.supportPagination('id');
 });

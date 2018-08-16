@@ -1,0 +1,22 @@
+{
+  "accountIdentifier": "cloud-elements",
+  "billingAddress": {
+    "addressLine1": "123 Street",
+    "addressLine2": "Apt 24",
+    "city": "Seattle",
+    "country": "US",
+    "emailAddress": "brian.crowley@tangocard.com",
+    "firstName": "Brian",
+    "lastName": "Crowley",
+    "postalCode": "12345",
+    "state": "WA"
+  },
+  "creditCard": {
+    "expiration": "2025-12",
+    "number": "5555555555554444",
+    "verificationNumber": "123"
+  },
+  "customerIdentifier": "cloud-elements",
+  "ipAddress": "209.210.187.156",
+  "label": "Test Card"
+}

@@ -1,0 +1,39 @@
+{
+  "credit-cards": {
+    "vendorName": "credit-cards",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "token"
+      }
+    ]
+  },
+"accounts": {
+    "vendorName": "accounts",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "accountIdentifier"
+      }
+    ]
+  },
+  "customers": {
+    "vendorName": "customers",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "customerIdentifier"
+      }
+    ]
+  },
+  "orders": {
+    "vendorName": "orders",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "referenceOrderID"
+      }
+    ]
+  }
+
+}

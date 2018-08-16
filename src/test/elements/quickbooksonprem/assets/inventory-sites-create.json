@@ -1,24 +1,24 @@
 {
-    "Email": "qb@ce.com",
+    "Email": "sqb@ce.com",
     "SiteAddress": {
-        "Addr1": "666 Main Street",
-        "Addr2": "Suite 1234",
-        "State": "TX",
-        "PostalCode": "75019",
-        "Country": "USA",
-        "City": "Coppell"
+      "Addr1": "6246 Main Street",
+      "Addr2": "Suite 1534",
+      "State": "MN",
+      "PostalCode": "55446",
+      "Country": "USA",
+      "City": "Plymouth"
     },
-    "IsActive": "true",
+    "IsActive": "false",
     "SiteDesc": "SampleSite2",
     "SiteAddressBlock": {
-        "Addr3": "Coppell, TX 75019",
-        "Addr4": "USA",
-        "Addr1": "666 Main Street",
-        "Addr2": "Suite 1234"
+      "Addr3": "Coppell, TX 75019",
+      "Addr4": "USA",
+      "Addr1": "666 Main Street",
+      "Addr2": "Suite 1234"
     },
-    "Name": "Site12",
+    "Name": "Site121112",
     "Contact": "Cloud Elements",
     "Phone": "1-214-555-1212",
     "IsDefaultSite": "false",
     "Fax": "1-214-555-1313"
-}
+  }

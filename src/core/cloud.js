@@ -295,6 +295,9 @@ const cs = (api, payload, validationCb, options) => {
 };
 exports.cs = cs;
 
+// Satiating LINTER as we call it in withOptions
+let itPagination;
+
 /*
  * Gives you access to adding HTTP request options to any of the HTTP-related APIs
  */
@@ -367,9 +370,7 @@ exports.createEvents = (element, replacements, eventRequest, numEvents) => {
 
 };
 
-exports.supportPagination = (api, unique, validationCb) => itPagination(api, unique, validationCb, null);
-
-const itPagination = (api, unique, validationCb, options) => {
+itPagination = (api, unique, validationCb, options) => {
   const pageSize = options ? options.qs ? options.qs.pageSize ? options.qs.pageSize : 2 : 2 : 2;
   const page = options ? options.qs ? options.qs.page ? options.qs.page : 1 : 1 : 1;
   const where = options ? options.qs ? options.qs.where ? options.qs.where : null : null : null;
@@ -411,3 +412,5 @@ const itPagination = (api, unique, validationCb, options) => {
 };
 
 exports.itPagination = itPagination;
+
+exports.supportPagination = (api, unique, validationCb) => itPagination(api, unique, validationCb, null);
