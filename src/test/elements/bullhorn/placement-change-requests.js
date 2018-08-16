@@ -6,7 +6,6 @@ const expect = require('chakram').expect;
 const cloud = require('core/cloud');
 const payload = tools.requirePayload(`${__dirname}/assets/placement-change-requests.json`);
 
-
 suite.forElement('crm', 'placement-change-requests', { payload: payload }, (test) => {
   test.should.supportCruds();
   test.should.supportPagination();
