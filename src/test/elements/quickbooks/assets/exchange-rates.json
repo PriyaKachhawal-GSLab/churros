@@ -1,0 +1,8 @@
+{
+  "SourceCurrencyCode": "USD",
+  "AsOfDate": "2018-08-17",
+  "sparse": false,
+  "Rate": 1,
+  "domain": "QBO",
+  "TargetCurrencyCode": "USD"
+}
