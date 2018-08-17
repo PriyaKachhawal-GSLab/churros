@@ -3151,21 +3151,44 @@
       }
     ]
   },
-    "ad-group-ads": {
-      "vendorName": "ad-group-ads",
-      "fields": [
-        {
-          "path": "idTransformed",
-          "type": "string"
-        },
-        {
-          "path": "id",
-          "type": "string"
-        },
-        {
-          "path": "adGroupId",
-          "type": "string"
-        }
-      ]
-    }
+  "ad-group-ads": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      },
+      {
+        "path": "adGroupId",
+        "type": "string"
+      }
+    ]
+  },
+  "ads": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "customersAdGroupsAds": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  }
 }
