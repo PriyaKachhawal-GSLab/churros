@@ -8,18 +8,18 @@ const payload = tools.requirePayload(`${__dirname}/assets/allocations.json`);
 
 suite.forElement('finance', 'allocations', { payload: payload }, (test) => {
   const modifiedDate = '08/14/2018 06:25:04';
-  it(`should allow CRUDS for ${test.api}`, () => {
-    let id;
-    return cloud.post(test.api, payload)
-      .then(r => cloud.get(test.api))
-      .then(r => {
-        id = r.body[0].RECORDNO;
-        delete payload.ALLOCATIONID;
-      })
-      .then(r => cloud.get(`${test.api}/${id}`))
-      .then(r => cloud.patch(`${test.api}/${id}`, payload))
-      .then(r => cloud.delete(`${test.api}/${id}`));
-  });
+  const options = {
+    churros: {
+      updatePayload: {
+        "ALLOCATIONENTRIES": {
+          "lineitem": [{
+            "VALUE": "100"
+          }]
+        }
+      }
+    }
+  };
+  test.withOptions(options).should.supportCruds();
   test.should.supportNextPagePagination(2);
   test.withOptions({ qs: { where: `WHENMODIFIED ='${modifiedDate}'` } })
     .withName('should support Ceql WHENMODIFIED search')

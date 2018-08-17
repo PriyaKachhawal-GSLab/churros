@@ -6,12 +6,7 @@ const expect = require('chakram').expect;
 
 suite.forElement('finance', 'item-gl-groups', (test) => {
   const modifiedDate = '05/02/2018 12:08:54';
-  it(`should allow SR for ${test.api}`, () => {
-    let id;
-    return cloud.get(test.api)
-      .then(r => id = r.body[0].RECORDNO)
-      .then(r => cloud.get(`${test.api}/${id}`));
-  });
+  test.should.supportSr();
   test.should.supportNextPagePagination(2);
   test.withOptions({ qs: { where: `WHENMODIFIED ='${modifiedDate}'` } })
     .withName('should support Ceql WHENMODIFIED search')
