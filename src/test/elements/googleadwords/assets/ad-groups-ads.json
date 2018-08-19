@@ -1,6 +1,6 @@
 {
     "adGroupId": "you should get this from ad-group api",
     "ad": {
-      "id": "you should get this from ads api"
+      "adId": "you should get this from ads api"
     }
   }

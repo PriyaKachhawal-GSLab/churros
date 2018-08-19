@@ -26,7 +26,7 @@ const adGroupAdPayload = tools.requirePayload(`${__dirname}/assets/ad-groups-ads
  * This test account details are not available through /customers API. So that i hardcoded this value as customerId = 4087110117
  */
 suite.forElement('general', 'customers', (test) => {
-  let customersId, globalBudgetId, globalCampaignId, globalAdGroupId, globalLabelId, globalCampaignGroupId, globalAdGroupAdId, adGroupAdId, adId;
+  let customersId, globalBudgetId, globalCampaignId, globalAdGroupId, globalLabelId, globalCampaignGroupId, globalAdGroupAdId, adId;
 
   before(() => cloud.get(test.api)
     .then(r => customersId = r.body[0].customerId)
@@ -45,14 +45,15 @@ suite.forElement('general', 'customers', (test) => {
     .then(r => cloud.post(`${test.api}/${customerId}/ad-groups`, globalAdGroupPayload))
     .then(r => {
       globalAdGroupId = r.body.id;
-      globalAdGroupAdPayload.ad.id = adId;
-      globalAdGroupAdPayload.adGroupId = globalAdGroupId;
+      globalAdGroupAdPayload.ad.adId = adId;
+      globalAdGroupAdPayload.adGroupId = r.body.id;
+      globalAdGroupAdId = r.body.id;
     })
     .then(r => cloud.post(`${test.api}/${customerId}/labels`, globalLabelPayload))
     .then(r => globalLabelId = r.body.id)
     .then(r => cloud.post(`${test.api}/${customerId}/campaign-groups`, globalCampaignGroupPayload))
     .then(r => globalCampaignGroupId = r.body.id)
-    .then(r => cloud.post(`${test.api}/${customerId}/ad-groups/${globalAdGroupAdPayload.adGroupId}/ads`, globalAdGroupAdPayload))
+    .then(r => cloud.post(`${test.api}/${customerId}/ad-groups/${globalAdGroupAdId}/ads`, globalAdGroupAdPayload))
     .then(r => globalAdGroupAdId = r.body.id)
   );
 
@@ -66,7 +67,7 @@ suite.forElement('general', 'customers', (test) => {
   test.should.supportPagination();
 
   it('should allow CRUDS for /customers/{customerId}/labels', () => {
-    return cloud.crds(`${test.api}/${customerId}/labels`, labelPayload);
+    return cloud.cruds(`${test.api}/${customerId}/labels`, labelPayload);
   });
 
 
@@ -76,7 +77,7 @@ suite.forElement('general', 'customers', (test) => {
   });
 
   it('should allow CRUDS for /customers/{customerId}/budgets', () => {
-    return cloud.crds(`${test.api}/${customerId}/budgets`, budgetPayload);
+    return cloud.cruds(`${test.api}/${customerId}/budgets`, budgetPayload);
   });
 
   it(`should allow GET for /customers/${customerId}/budgets with BudgetName = ${globalBudgetPayload.name}`, () => {
@@ -85,7 +86,7 @@ suite.forElement('general', 'customers', (test) => {
   });
 
   it('should allow CRUDS for /customers/{customerId}/campaign-groups', () => {
-    return cloud.crds(`${test.api}/${customerId}/campaign-groups`, campaignGroupPayload);
+    return cloud.cruds(`${test.api}/${customerId}/campaign-groups`, campaignGroupPayload);
   });
 
   it(`should allow GET for /customers/${customerId}/campaign-groups with Name = ${globalCampaignGroupPayload.name}`, () => {
@@ -95,7 +96,7 @@ suite.forElement('general', 'customers', (test) => {
 
   it('should allow CRUDS for /customers/{customerId}/campaigns', () => {
     campaignPayload.budget.budgetId = globalBudgetId;
-    return cloud.crds(`${test.api}/${customerId}/campaigns`, campaignPayload);
+    return cloud.cruds(`${test.api}/${customerId}/campaigns`, campaignPayload);
   });
 
   it(`should allow GET for /customers/${customerId}/campaigns with Name = ${globalCampaignPayload.name}`, () => {
@@ -105,7 +106,7 @@ suite.forElement('general', 'customers', (test) => {
 
   it('should allow CRUDS for /customers/{customerId}/ad-groups', () => {
     adGroupPayload.campaignId = globalCampaignId;
-    return cloud.crds(`${test.api}/${customerId}/ad-groups`, adGroupPayload);
+    return cloud.cruds(`${test.api}/${customerId}/ad-groups`, adGroupPayload);
   });
 
   it(`should allow GET for /customers/${customerId}/ad-groups with Name = ${globalAdGroupPayload.name}`, () => {
@@ -117,7 +118,7 @@ suite.forElement('general', 'customers', (test) => {
     let adGroupAdsId, adsId;
     return cloud.post(`${test.api}/${customerId}/ad-groups`, adGroupPayload)
       .then(r => {
-        adGroupAdPayload.ad.id = adId;
+        adGroupAdPayload.ad.adId = adId;
         adGroupAdPayload.adGroupId = r.body.id;
       })
       .then(r => cloud.post(`${test.api}/${customerId}/ad-groups/${adGroupAdPayload.adGroupId}/ads`, adGroupAdPayload))
@@ -125,15 +126,14 @@ suite.forElement('general', 'customers', (test) => {
         adGroupAdsId = r.body.adGroupId;
         adsId = r.body.ad.id;
       })
-      //.then(r => cloud.patch(`${test.api}/${customerId}/ad-groups/${adGroupAdsId}/ads/${adsId}`, adGroupAdPayload))
       .then(r => cloud.get(`${test.api}/${customerId}/ad-groups/${adGroupAdsId}/ads/${adsId}`))
       .then(r => cloud.delete(`${test.api}/${customerId}/ad-groups/${adGroupAdsId}/ads/${adsId}`))
       .then(r => cloud.delete(`${test.api}/${customerId}/ad-groups/${adGroupAdPayload.adGroupId}`));
   });
 
-  it(`should allow GET for /customers/${customerId}/ad-groups/${globalAdGroupAdPayload.adGroupId}/ads with BaseAdGroupId = ${globalAdGroupAdPayload.adGroupId}`, () => {
-    return cloud.withOptions({ qs: { where: `BaseAdGroupId = '${globalAdGroupAdPayload.adGroupId}'` } }).get(`${test.api}/${customerId}/ad-group-ads`)
-      .then(r => expect(r.body.filter(obj => obj.id === `${globalAdGroupAdPayload.adGroupId}`)).to.not.be.empty);
+  it(`should allow GET for /customers/${customerId}/ad-group-ads with Status = 'ENABLED'`, () => {
+    return cloud.withOptions({ qs: { where: `Status = 'ENABLED'` } }).get(`${test.api}/${customerId}/ad-group-ads`)
+      .then(r => expect(r.body.filter(obj => obj.status === `ENABLED`)).to.not.be.empty);
   });
 
 });

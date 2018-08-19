@@ -7,27 +7,5 @@
         "vendorPath": "budgetId"
       }
     ]
-  },
-  "ad-group-ads": {
-    "vendorName": "ad-group-ads",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "adGroupId"
-      }
-    ]
-  },
-  "customersAdGroupsAds": {
-    "vendorName": "ads",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "id"
-      },
-      {
-        "path": "id",
-        "vendorPath": "ad.id"
-      }
-    ]
   }
 }
