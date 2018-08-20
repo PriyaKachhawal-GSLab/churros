@@ -25,9 +25,8 @@ suite.forElement('scheduling', 'calendars', { payload }, (test) => {
   });
 
   it(`should allow paginating for ${test.api}/:id/access-control-list`, () => {
-    const genPayload = () => payload;
     let aclIds = [];
-    return all([0, 1, 2, 3].map(o => cloud.post(`${test.api}/${calendarId}/access-control-list`, genPayload())))
+    return all([0, 1, 2, 3].map(o => cloud.post(`${test.api}/${calendarId}/access-control-list`, payload)))
       .then(r => r.forEach(o => aclIds.push(o.body.id)))
       .then(r => cloud.supportPagination(`${test.api}/${calendarId}/access-control-list`, 'id'))
       .then(r => all(aclIds.map(id => cloud.delete(`${test.api}/${calendarId}/access-control-list/${id}`))));
