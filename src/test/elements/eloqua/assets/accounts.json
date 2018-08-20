@@ -1,5 +1,5 @@
 {
-  "name": "Robot Test",
+  "name": "Churros Test",
   "address1": "3001 Brighton Blvd",
   "address2": "Suite",
   "address3": "153",
@@ -7,5 +7,6 @@
   "country": "US",
   "province": "CO",
   "postalCode": "80212",
-  "businessPhone": "303-123-4567"
+  "businessPhone": "303-123-4567",
+  "M_Churros_Account_Field1": "custom account field"
 }

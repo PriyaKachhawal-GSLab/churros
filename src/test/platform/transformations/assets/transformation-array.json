@@ -1,0 +1,27 @@
+{
+  "fields":[
+    {
+      "type":"array",
+      "path":"users",
+      "vendorPath":"Users[*]",
+      "associatedLevel":"organization"
+    },
+    {
+      "type":"string",
+      "path":"users[*].displayNamez",
+      "vendorPath":"Users[*].DisplayName",
+      "associatedLevel":"organization"
+    },
+    {
+      "type":"array",
+      "path":"anotherUser[*]",
+      "vendorPath":"Users[*]",
+      "associatedLevel":"organization"
+    }
+  ],
+  "level":"instance",
+  "objectName": "c<<random.alphaNumeric##6>>",
+  "vendorName": "appointments",
+  "elementInstanceId": "REPLACE_ME",
+  "configuration":[{"type":"inherit"}]
+}
