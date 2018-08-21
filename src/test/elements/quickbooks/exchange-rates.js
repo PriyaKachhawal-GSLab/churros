@@ -6,7 +6,7 @@ const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/exchange-rates.json`);
 
-suite.forElement('finance', 'entitlements', { payload: payload }, (test) => {
+suite.forElement('finance', 'exchange-rates', { payload: payload }, (test) => {
   it(`Should support RU on ${test.api}`, () => {
     cloud.get(`${test.api}/USD`)
       .then(r => expect(r).to.statusCode(200));
