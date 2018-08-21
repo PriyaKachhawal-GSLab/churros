@@ -12,8 +12,7 @@ const expect = require('chakram').expect;
 
 suite.forElement('documents', 'folders', (test) => {
   const folderWrap = (cb) => {
-    let folder;
-    let random = `${tools.random()}`;
+    let folder, random = `${tools.random()}`;
     folderPayload.path += `/${random}`;
     folderPayload.name += `-${random}`;
 
@@ -27,8 +26,7 @@ suite.forElement('documents', 'folders', (test) => {
   };
 
   const folderWrapHash = (cb) => {
-    let folder;
-    let random = `${tools.random()}#${tools.random()}`;
+    let folder, random = `${tools.random()}#${tools.random()}`;
     folderPayload.path += `/${random}`;
     folderPayload.name += `-${random}`;
 
@@ -70,17 +68,7 @@ suite.forElement('documents', 'folders', (test) => {
       .then(r => folder2 = r.body)
       .then(r => cloud.delete(`/hubs/documents/folders/${folder2.id}`));
   });
-
-  it('should allow C /folders and DELETE /folders/:id with hash path', () => {
-    let folder2;
-    folderPayload.path += `-${tools.random()}#${tools.random()}`;
-    folderPayload.name += `-${tools.random()}#${tools.random()}`;
-    return cloud.post('/hubs/documents/folders', folderPayload)
-      .then(r => folder2 = r.body)
-      .then(r => cloud.delete(`/hubs/documents/folders/${folder2.id}`));
-  });
-
-
+  test.withApi(`${test.api}/contents`).withOptions({ qs: { path: '/' } }).should.supportNextPagePagination(1);
   it('should allow GET /folders/contents and GET /folders/:id/contents', () => {
     const cb = (folder) => {
       return cloud.withOptions({ qs: { path: folder.path } }).get('/hubs/documents/folders/contents')
@@ -90,16 +78,13 @@ suite.forElement('documents', 'folders', (test) => {
     return folderWrap(cb);
   });
 
-  it('should allow GET /folders/contents and GET /folders/:id/contents with hash path', () => {
+  it('should allow GET /folders/contents with hash path', () => {
     const cb = (folder) => {
-      return cloud.withOptions({ qs: { path: folder.path } }).get('/hubs/documents/folders/contents')
-        .then(r => cloud.get(`/hubs/documents/folders/${folder.id}/contents`));
+      return cloud.withOptions({ qs: { path: folder.path } }).get('/hubs/documents/folders/contents');
     };
 
     return folderWrapHash(cb);
   });
-
-  test.withApi(`${test.api}/contents`).withOptions({ qs: { path: '/' } }).should.supportNextPagePagination(1);
 
   it('should allow RU /folders/metadata and RU /folders/:id/metadata', () => {
     const cb = (folder) => {
@@ -133,22 +118,20 @@ suite.forElement('documents', 'folders', (test) => {
     return folderWrap(cb);
   });
 
-  it('should allow RU /folders/metadata and RU /folders/:id/metadata with hash path', () => {
+  it('should allow RU /folders/metadata with hash path', () => {
     const cb = (folder) => {
-      let updatedFolder3;
-      let folderTemp3 = {
-        path: `/${tools.randomStr(5)}/a-${folder.name}#${tools.random()}`
+      let updatedHashFolder;
+      let folderTemp = {
+        path: `/b-${tools.randomStr(5)}/a-${folder.name}`
       };
       return cloud.withOptions({ qs: { path: folder.path } }).get('/hubs/documents/folders/metadata')
-        .then(r => cloud.withOptions({ qs: { path: folder.path } }).patch('/hubs/documents/folders/metadata', folderTemp3))
-        .then(r =>
-          updatedFolder3 = r.body)
-        .then(r => cloud.get(`/hubs/documents/folders/${updatedFolder3.id}/metadata`))
-        .then(r => cloud.patch(`/hubs/documents/folders/${updatedFolder3.id}/metadata`, folder));
+        .then(r => cloud.withOptions({ qs: { path: folder.path } }).patch('/hubs/documents/folders/metadata', folderTemp))
+        .then(r => { updatedHashFolder = r.body })
+        .then(r => cloud.withOptions({ qs: { path: updatedHashFolder.path } }).patch('/hubs/documents/folders/metadata', folder))
     };
+
     return folderWrapHash(cb);
   });
-
   /* before(() => cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
         .then(r => folderId = r.body.filter(obj => obj.name === "dontdelete_folder_churros")[0].id));
 

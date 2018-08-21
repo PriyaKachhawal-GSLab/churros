@@ -39,15 +39,8 @@ suite.forElement('documents', 'files', (test) => {
 
   let query1 = { path: `/a-${tools.randomStr(5)}/brady-${tools.random()}.jpg` };
   let id;
-  it('should allowpost file with implicit path', () => {
+  it('should allow POST file with implicit path', () => {
     return cloud.withOptions({ qs: query1 }).postFile('/hubs/documents/files', path)
-      .then(r => id = r.body.id)
-      .then(r => cloud.delete(`/hubs/documents/files/${id}`));
-  });
-
-  let hashQueryPath = { path: `/a-${tools.randomStr(5)}/brady#${tools.random()}.jpg` };
-  it('should allowpost file with hash path', () => {
-    return cloud.withOptions({ qs: hashQueryPath }).postFile('/hubs/documents/files', path)
       .then(r => id = r.body.id)
       .then(r => cloud.delete(`/hubs/documents/files/${id}`));
   });
@@ -65,14 +58,9 @@ suite.forElement('documents', 'files', (test) => {
       .then(r => cloud.withOptions({ qs: { path: file.path } }).delete('/hubs/documents/files'));
   });
 
-  it('should allow CRD /files and RD /files/:id with hash path', () => {
-    const cb = (file) => {
-      return cloud.get(`/hubs/documents/files/${file.id}`);
-    };
-
+  it('should allow CRD /files with hash path', () => {
     let file;
-    return hashFileWrap(cb)
-      .then(() => cloud.withOptions({ qs: query }).postFile('/hubs/documents/files', path))
+    return cloud.withOptions({ qs: hashQuery }).postFile('/hubs/documents/files', path)
       .then(r => file = r.body)
       .then(() => cloud.withOptions({ qs: { path: file.path } }).get('/hubs/documents/files'))
       .then(r => cloud.withOptions({ qs: { path: file.path } }).delete('/hubs/documents/files'));
@@ -110,19 +98,17 @@ suite.forElement('documents', 'files', (test) => {
     return fileWrap(cb);
   });
 
-  it('should allow RU /files/metadata and RU /files/:id/metadata with hash path', () => {
+  it('should allow RU /files/metadata with hash path', () => {
     const cb = (file) => {
       let updatedFile;
       let fileTemp = {
-        path: `/a-${tools.randomStr(5)}/a-${file.name}`
+        path: `/a-${tools.randomStr(5)}/a#${file.name}`
       };
       return cloud.withOptions({ qs: { path: file.path } }).get('/hubs/documents/files/metadata')
         .then(r => cloud.withOptions({ qs: { path: file.path } }).patch('/hubs/documents/folders/metadata', fileTemp))
         .then(r => updatedFile = r.body)
-        .then(r => cloud.patch(`/hubs/documents/files/${updatedFile.id}/metadata`, file))
-        .then(r => cloud.get(`/hubs/documents/files/${file.id}/metadata`));
+        .then(r => cloud.withOptions({ qs: { path: updatedFile.path } }).patch('/hubs/documents/folders/metadata', file))
     };
-
     return hashFileWrap(cb);
   });
 
@@ -134,10 +120,9 @@ suite.forElement('documents', 'files', (test) => {
     return fileWrap(cb);
   });
 
-  it('should allow R /files/links and R /files/:id/links with hash path', () => {
+  it('should allow R /files/links with hash path', () => {
     const cb = (file) => {
-      return cloud.withOptions({ qs: { path: file.path } }).get('/hubs/documents/files/links')
-        .then(r => cloud.get(`/hubs/documents/files/${file.id}/links`));
+      return cloud.withOptions({ qs: { path: file.path } }).get('/hubs/documents/files/links');
     };
     return hashFileWrap(cb);
   });
@@ -145,23 +130,6 @@ suite.forElement('documents', 'files', (test) => {
   it('should allow POST /files/copy and POST /files/:id/copy', () => {
     const copy1 = { path: '/churrosCopy' + tools.randomStr("abcdeiouABCDEIOU", 6) };
     const copy2 = { path: '/churrosCopy' + tools.randomStr("abcdeiouABCDEIOU", 6) };
-
-    const cb = (file) => {
-      let fileCopy1, fileCopy2;
-      return cloud.withOptions({ qs: { path: file.path } }).post('/hubs/documents/files/copy', copy1)
-        .then(r => fileCopy1 = r.body)
-        .then(() => cloud.withOptions({ qs: { path: file.path } }).post('/hubs/documents/files/copy', copy2))
-        .then(r => fileCopy2 = r.body)
-        .then(() => cloud.delete(`/hubs/documents/files/${fileCopy1.id}`))
-        .then(() => cloud.delete(`/hubs/documents/files/${fileCopy2.id}`));
-    };
-
-    return fileWrap(cb);
-  });
-
-  it('should allow POST /files/copy and POST /files/:id/copy with hash path', () => {
-    const copy1 = { path: '/churrosCopy' + tools.randomStr("abcdeiouABCDEIOU", 6) };
-    const copy2 = { path: '/churrosCopy' + '#' + tools.randomStr("abcdeiouABCDEIOU", 6) };
 
     const cb = (file) => {
       let fileCopy1, fileCopy2;
@@ -200,6 +168,14 @@ suite.forElement('documents', 'files', (test) => {
 
   after(() => cloud.delete(`${test.api}/${fileId}`));
 
+  before(() => cloud.withOptions({ qs: { path: `/brady#${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` } }).postFile(test.api, path)
+    .then(r => {
+      hashFileId = r.body.id;
+      hashFilePath = r.body.path;
+    }));
+
+  after(() => cloud.delete(`${test.api}/${hashFileId}`));
+
   it('it should allow RS for documents/files/:id/revisions', () => {
     return cloud.get(`${test.api}/${fileId}/revisions`)
       .then(r => revisionId = r.body[0].id)
@@ -210,20 +186,6 @@ suite.forElement('documents', 'files', (test) => {
     return cloud.withOptions({ qs: { path: `${filePath}` } }).get(`${test.api}/revisions`)
       .then(r => revisionId = r.body[0].id)
       .then(() => cloud.withOptions({ qs: { path: `${filePath}` } }).get(`${test.api}/revisions/${revisionId}`));
-  });
-
-  before(() => cloud.withOptions({ qs: { path: `/brady#${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` } }).postFile(test.api, path)
-    .then(r => {
-      hashFileId = r.body.id;
-      hashFilePath = r.body.path;
-    }));
-
-  after(() => cloud.delete(`${test.api}/${hashFileId}`));
-
-  it('it should allow RS for documents/files/:id/revisions with hash path', () => {
-    return cloud.get(`${test.api}/${hashFileId}/revisions`)
-      .then(r => revisionId = r.body[0].id)
-      .then(() => cloud.get(`${test.api}/${hashFileId}/revisions/${revisionId}`));
   });
 
   it('it should allow RS for documents/files/revisions by hash path', () => {
