@@ -126,8 +126,8 @@ suite.forElement('documents', 'folders', (test) => {
       };
       return cloud.withOptions({ qs: { path: folder.path } }).get('/hubs/documents/folders/metadata')
         .then(r => cloud.withOptions({ qs: { path: folder.path } }).patch('/hubs/documents/folders/metadata', folderTemp))
-        .then(r => { updatedHashFolder = r.body })
-        .then(r => cloud.withOptions({ qs: { path: updatedHashFolder.path } }).patch('/hubs/documents/folders/metadata', folder))
+        .then(r => { updatedHashFolder = r.body; })
+        .then(r => cloud.withOptions({ qs: { path: updatedHashFolder.path } }).patch('/hubs/documents/folders/metadata', folder));
     };
 
     return folderWrapHash(cb);

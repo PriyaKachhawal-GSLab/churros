@@ -107,7 +107,7 @@ suite.forElement('documents', 'files', (test) => {
       return cloud.withOptions({ qs: { path: file.path } }).get('/hubs/documents/files/metadata')
         .then(r => cloud.withOptions({ qs: { path: file.path } }).patch('/hubs/documents/folders/metadata', fileTemp))
         .then(r => updatedFile = r.body)
-        .then(r => cloud.withOptions({ qs: { path: updatedFile.path } }).patch('/hubs/documents/folders/metadata', file))
+        .then(r => cloud.withOptions({ qs: { path: updatedFile.path } }).patch('/hubs/documents/folders/metadata', file));
     };
     return hashFileWrap(cb);
   });
