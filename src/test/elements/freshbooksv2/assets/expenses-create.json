@@ -1,0 +1,29 @@
+{
+        "date": "2011-11-24",
+        "ext_invoiceid": 0,
+
+        "amount": {
+          "amount": "20",
+          "code": "USD"
+        },
+        "clientid": 0,
+        "notes": "<<random.word>>",
+        "vis_state": 0,
+        "isduplicate": false,
+        "compounded_tax": false,
+
+        "markup_percent": "0",
+        "include_receipt": false,
+        "ext_systemid": 0,
+        "expenseid": 15045666,
+        "account_name": "Churros test account",
+         "transactionid"  : 23323,
+        "bank_name": "<<random.word>>",
+        "is_cogs": false,
+        "id": 15045025,
+        "projectid": 0,
+        "categoryid": 3729837,
+        "staffid": 1,
+        "status": 0,
+        "has_receipt": false
+      }
