@@ -10,9 +10,11 @@ suite.forElement('finance', 'classes', null, (test) => {
     return cloud.get(test.api)
       .then(r => id = r.body[0].id)
       .then(r => cloud.withOptions({ qs: { where: `Name='Expense'` } }).get(test.api))
+      .then(r => expect(r.body.filter(o => o.Name === `Expense`)).to.not.be.empty)
       .then(r => cloud.withOptions({ qs: { where: `isactive='true'` } }).get(test.api))
       .then(r => expect(r.body.filter(o => o.IsActive === `true`)).to.not.be.empty)
-      .then(r => cloud.withOptions({ qs: { where: `TimeModified='2018-01'` } }).get(test.api))
+      .then(r => cloud.withOptions({ qs: { where: `TimeModified>='2015-05-01'` } }).get(test.api))
+      .then(r => expect(r.body.filter(o => o.TimeModified >= `2015-05-01`)).to.not.be.empty)
       .then(r => cloud.get(`${test.api}/${id}`));
   });  
   it(`should return an error when 'TimeModified' filter is not a proper Date`, () => {

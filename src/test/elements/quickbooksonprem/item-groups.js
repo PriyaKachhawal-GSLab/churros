@@ -8,8 +8,10 @@ suite.forElement('finance', 'item-groups', (test) => {
     let id ;    
     return cloud.get(test.api)
     .then(r => id = r.body[0].ListID)  
-      .then(r => cloud.withOptions({ qs: { where: `TimeModified>='2016-01'` } }).get(test.api))
+      .then(r => cloud.withOptions({ qs: { where: `TimeModified>='2016-01-05'` } }).get(test.api))
+      .then(r => expect(r.body.filter(o => o.TimeModified >= `2016-01-05`)).to.not.be.empty)
       .then(r => cloud.withOptions({ qs: { where: `ListID='${id}'` } }).get(test.api))
+      .then(r => expect(r.body.filter(o => o.ListID === `${id}`)).to.not.be.empty)
       .then(r => cloud.get(`${test.api}/${id}`)); 
 });
   test.should.supportNextPagePagination(1);

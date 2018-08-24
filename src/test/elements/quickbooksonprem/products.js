@@ -2,6 +2,7 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
+const expect = require('chakram').expect;
 const updatePayload = require('./assets/products-update');
 const payload = require('./assets/products-create');
 
@@ -12,7 +13,8 @@ suite.forElement('finance', 'products', { payload: payload }, (test) => {
       .then(r => id = r.body.id)
       .then(r => cloud.get(test.api))
       .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(test.api))
-      .then(r => cloud.withOptions({ qs: { where: `ListID='${id}'` } }).get(test.api))
+      .then(r => cloud.withOptions({ qs: { where: `TimeModified>='2016-01-05'` } }).get(test.api))
+      .then(r => expect(r.body.filter(o => o.TimeModified >= `2016-01-05`)).to.not.be.empty)
       .then(r => cloud.get(`${test.api}/${id}`))
       .then(r => updatePayload.EditSequence = r.body.EditSequence)
       .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
