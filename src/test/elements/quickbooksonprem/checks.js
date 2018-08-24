@@ -7,7 +7,7 @@ const payload = require('./assets/checks-create');
 const updatePayload = require('./assets/checks-update');
 suite.forElement('finance', 'checks', { payload: payload }, (test) => {
   it('should support CRUDS, pagination and Ceql searching for ${test.api}', () => {
-    let id, refno;
+    let id;
     return cloud.post(test.api, payload)
       .then(r => { id = r.body.TxnID;})  
       .then(r => cloud.get(test.api))
