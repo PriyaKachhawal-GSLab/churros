@@ -144,7 +144,7 @@ suite.forElement('general', 'customers', (test) => {
     return cloud.post(`/hubs/general/campaigns/${globalCampaignId}/campaign-criterions`, campaignCriterionPayload)
     .then(r => localCampaignCriterionId = r.body.criterion.id)
     .then(() => cloud.get(`/hubs/general/campaigns/${globalCampaignId}/campaign-criterions/${localCampaignCriterionId}`))
-    .then(() => cloud.delete(`/hubs/general/campaigns/${globalCampaignId}/campaign-criterions/${localCampaignCriterionId}`))
+    .then(() => cloud.delete(`/hubs/general/campaigns/${globalCampaignId}/campaign-criterions/${localCampaignCriterionId}`));
   });
 
   it(`should allow GET for /campaigns/${globalCampaignCriterionPayload.campaignId}/campaign-criterions with CriteriaType = ${globalCampaignCriterionPayload.criterion.type}`, () => {
@@ -157,7 +157,7 @@ suite.forElement('general', 'customers', (test) => {
     return cloud.post(`/hubs/general/campaigns/${globalCampaignId}/campaign-criterions`, campaignCriterionPayload)
     .then(r => localCampaignCriterionId = r.body.criterion.id)
     .then(() => cloud.get(`/hubs/general/campaigns/${globalCampaignId}/campaign-criterions/${localCampaignCriterionId}`))
-    .then(() => cloud.delete(`/hubs/general/campaigns/${globalCampaignId}/campaign-criterions/${localCampaignCriterionId}`))
+    .then(() => cloud.delete(`/hubs/general/campaigns/${globalCampaignId}/campaign-criterions/${localCampaignCriterionId}`));
   });
 
   it(`should allow GET for /campaigns/${globalCampaignCriterionPayload.campaignId}/campaign-criterions with CriteriaType = ${globalCampaignCriterionPayload.criterion.type}`, () => {
@@ -170,7 +170,7 @@ suite.forElement('general', 'customers', (test) => {
     return cloud.post(`/hubs/general/adgroups/${globalAdGroupId}/adgroup-criterions`, adgroupCriterionPayload)
     .then(r => localadGroupCriterionId = r.body.criterion.id)
     .then(() => cloud.get(`/hubs/general/adgroups/${globalAdGroupId}/adgroup-criterions/${localadGroupCriterionId}`))
-    .then(() => cloud.delete(`/hubs/general/adgroups/${globalAdGroupId}/adgroup-criterions/${localadGroupCriterionId}`))
+    .then(() => cloud.delete(`/hubs/general/adgroups/${globalAdGroupId}/adgroup-criterions/${localadGroupCriterionId}`));
   });
 
   it(`should allow GET for /adgroups/${globalAdgroupCriterionPayload.adGroupId}/adgroup-criterions with CriteriaType = ${globalAdgroupCriterionPayload.criterion.type}`, () => {
