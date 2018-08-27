@@ -1,0 +1,61 @@
+{
+  "acctName": "AccSample50",
+  "acctNumber": "acc00050",
+  "acctType": {
+    "value": "_creditCard"
+  },
+  "parent": {
+    "internalId": "2",
+    "name": "1000 Checking"
+  },
+  "isInactive": false,
+  "includeChildren": true,
+  "generalRate": {
+    "value": "_current"
+  },
+  "description": "ledger account description03",
+  "inventory": false,
+  "revalue": false,
+  "curDocNum": 10003,
+  "cashFlowRate": {
+    "value": "_current"
+  },
+  "currency": {
+    "internalId": "3",
+    "name": "USA"
+  },
+  "location": {
+    "internalId": "5410",
+    "name": "Addison"
+  },
+  "_class": {
+    "internalId": "2320",
+    "name": "Accessories : demo"
+  },
+  "department": {
+    "internalId": "2112",
+    "name": "Admin : erp"
+  },
+  "subsidiaryList": {
+    "recordRef": [
+      {
+        "internalId": "3",
+        "name": "Honeycomb Holdings Inc."
+      }
+    ]
+  },
+  "translationsList": {
+    "replaceAll": true
+  },
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "3140",
+        "scriptId": "custcol_pfc_pfconfigurator",
+        "value": false
+      }
+    ]
+  },
+  "openingBalance": 3456.7,
+  "tranDate": "2018-07-12T07:00:00Z"
+}

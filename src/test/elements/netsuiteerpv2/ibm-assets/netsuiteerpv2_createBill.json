@@ -1,0 +1,108 @@
+{
+  "tranId": "ref00002",
+  "landedCostsList": {
+    "landedCost": [
+      {
+        "category": {
+          "internalId": "1"
+        }
+      },
+      {
+        "category": {
+          "internalId": "2"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "dueDate": "2018-08-22T07:00:00Z",
+  "memo": "Test Memo..!!!",
+  "paymentHold": false,  "currencyName": "USA",
+  "exchangeRate": 1,
+  "billAddressList": {
+    "internalId": "244836",
+    "name": "2001 Michigan Ave"
+  },
+  "currency": {
+    "internalId": "1",
+    "name": "USA"
+  },
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "196",
+        "value": 3,
+        "scriptId": "custbody9"
+      },
+      {
+        "internalId": "223",
+        "value": false,
+        "scriptId": "custbody_powf_se_ok"
+      },
+      {
+        "internalId": "220",
+        "value": false,
+        "scriptId": "custbody_powf_ctrl_ok"
+      },
+      {
+        "internalId": "700",
+        "value": false,
+        "scriptId": "custbody11"
+      }
+    ]
+  },
+  "approvalStatus": {
+    "internalId": "2",
+    "name": "Approved"
+  },
+  "landedCostPerLine": false,
+  "landedCostMethod": {
+    "value": "_weight"
+  },
+  "userTotal": 12500,
+  "customForm": {
+    "internalId": "50",
+    "name": "Standard Vendor Bill"
+  },
+
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg."
+  },
+
+  "postingPeriod": {
+    "internalId": "301",
+    "name": "Aug 2018"
+  },
+  "tranDate": "2018-08-22T07:00:00Z",
+  "itemList": {
+    "item": [
+      {
+        "item": {
+          "internalId": "715",
+          "name": "MAT00001"
+        },
+        "amount": 12500,
+        "quantity": 1.25,
+        "rate": "10000.00",
+        "line": 1,
+        "description": "Material",
+        "location": {
+          "internalId": "2",
+          "name": "01: San Francisco"
+        },
+        "isBillable": false
+      }
+    ],
+    "replaceAll": false
+  },
+  "account": {
+    "internalId": "25",
+    "name": "2000 Accounts Payable"
+  },
+  "entity": {
+    "internalId": "1305",
+    "name": "AL Systems Ltd"
+  },
+  "status": "Open"
+ }

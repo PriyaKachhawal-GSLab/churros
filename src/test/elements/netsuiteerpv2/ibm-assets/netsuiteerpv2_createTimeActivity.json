@@ -1,0 +1,134 @@
+{
+  "_class": {
+    "internalId": "10",
+    "name": "Accessories",
+    "externalId": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "string",
+        "scriptId": "string",
+        "value": true
+      }
+    ]
+  },
+  "caseTaskEvent": {
+    "externalId": "string",
+    "internalId": "254110",
+    "name": "Case # CAS00000877",
+    "type": {
+      "value": "account"
+    }
+  },
+  "customForm": {
+    "internalId": "94",
+    "name": "Ramsey Time Tracking Form - Admin",
+    "externalId": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "customer": {
+    "internalId": "111668",
+    "name": "1504891827appcone8yvi14styuh6i6hia4i",
+    "externalId": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "department": {
+    "internalId": "9512",
+    "name": "Admin : erp",
+    "externalId": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "employee": {
+    "internalId": "30",
+    "name": "Inger H Wyman",
+    "externalId": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "externalId": "maddssdhhussdddddffvrffi",
+  "hours": {
+    "unit": {
+      "value": "hour"
+    },
+    "timeSpan": 8
+  },
+  "isBillable": true,
+  "item": {
+    "internalId": "23508",
+    "name": "appcon00kwecmywzu8hz392j4i",
+    "externalId": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "location": {
+    "internalId": "4",
+    "name": "01: San Francisco : Receiving, Insp.",
+    "externalId": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "memo": "memo",
+  "overrideRate": false,
+  "paidExternally": true,
+  "payrollItem": {
+    "internalId": "1",
+    "name": "Hourly Wages",
+    "externalId": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg.",
+    "externalId": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "supervisorApproval": true,
+  "temporaryLocalJurisdiction": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg.",
+    "externalId": "ffs2",
+    "type": {
+      "value": "account"
+    }
+  },
+  "temporaryStateJurisdiction": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg.",
+    "externalId": "fbfs2",
+    "type": {
+      "value": "account"
+    }
+  },
+  "timeType": {
+    "value": "_actualTime"
+  },
+  "nullFieldList": [
+    "string"
+  ],
+  "tranDate": "2015-11-01T12:30:00+05:30",
+  "workplace": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg.",
+    "externalId": "ffs2",
+    "type": {
+      "value": "account"
+    }
+  }
+}

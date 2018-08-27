@@ -1,0 +1,56 @@
+{
+  "acctName": "AccSample60",
+  "acctNumber": "acc0060",
+  "acctType": {
+    "value": "_bank"
+  },
+  "parent": {
+    "internalId": "1",
+    "name": "1000 Checking"
+  },
+  "isInactive": true,
+  "includeChildren": false,
+  "generalRate": {
+    "value": "_current"
+  },
+  "description": "ledger account description",
+  "inventory": false,
+  "revalue": true,
+  "curDocNum": 10001,
+  "cashFlowRate": {
+    "value": "_average"
+  },
+  "location": {
+    "internalId": "7",
+    "name": "Addison"
+  },
+  "_class": {
+    "internalId": "9120",
+    "name": "Accessories : demo"
+  },
+  "department": {
+    "internalId": "9512",
+    "name": "Admin : erp"
+  },
+  "subsidiaryList": {
+    "recordRef": [
+      {
+        "internalId": "3",
+        "name": "Honeycomb Holdings Inc."
+      }
+    ]
+  },
+  "translationsList": {
+    "replaceAll": false
+  },
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "3140",
+        "scriptId": "custcol_pfc_pfconfigurator",
+        "value": false
+      }
+    ]
+  },
+  "tranDate": "2018-06-09T07:00:00Z"
+}

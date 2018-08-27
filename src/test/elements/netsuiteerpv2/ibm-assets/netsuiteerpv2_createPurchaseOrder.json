@@ -1,0 +1,300 @@
+{
+  "approvalStatus": {
+    "internalId": "7",
+    "name": "Approval",
+    "externalId": "97",
+    "type": {
+      "value": "account"
+    }
+  },
+  "availableVendorCredit": 15.287,
+  "billAddressList": {
+    "internalId": "42",
+    "name": "Billing Address",
+    "externalId": "87",
+    "type": null
+  },
+  "billingAddress": {
+    "zip": "98108-1226",
+    "country": {
+      "value": "_unitedStates"
+    },
+    "addressee": "Amazon",
+    "addr1": "PO Box 81226",
+    "city": "Seattle",
+    "state": "WA",
+    "override": false,
+    "addrText": "Amazon\nPO Box 81226\nSeattle WA 98108-1226\nUnited States"
+  },
+  "createdFrom": {
+    "internalId": "1",
+    "name": "Bill Connors",
+    "externalId": "187",
+    "type": null
+  },
+  "currencyName": "USA",
+  "currency": {
+    "internalId": "1",
+    "name": "USA",
+    "externalId": null,
+    "type": null
+  },
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "220",
+        "scriptId": "custbody_powf_ctrl_ok",
+        "value": false
+      }
+    ]
+  },
+  "customForm": {
+    "internalId": "182",
+    "name": "Z - HM PO Form",
+    "externalId": "76"
+  },
+  "dueDate": "2018-07-15T07:00:00Z",
+  "email": "americancomp@christyscatering.com",
+  "entity": {
+    "internalId": "1552",
+    "name": "Amazon-test",
+    "externalId": "76"
+  },
+  "exchangeRate": 1,
+  "expenseList": {
+    "expense": [
+      {
+        "_class": {
+          "externalId": "7",
+          "internalId": "2",
+          "name": "test",
+          "type": {
+            "value": "account"
+          }
+        },
+        "account": {
+          "externalId": "2",
+          "internalId": "3",
+          "name": "testaccount",
+          "type": {
+            "value": "account"
+          }
+        },
+        "amount": 0,
+        "category": {
+          "externalId": "2",
+          "internalId": "4",
+          "name": "testCategory",
+          "type": {
+            "value": "account"
+          }
+        },
+        "createdFrom": {
+          "externalId": "3",
+          "internalId": "2",
+          "name": "testCreated",
+          "type": {
+            "value": "account"
+          }
+        },
+        "customFieldList": {
+          "customField": [
+            {
+              "internalId": "2",
+              "scriptId": "testScritpt",
+              "value": true
+            }
+          ]
+        },
+        "customer": {
+          "externalId": "2",
+          "internalId": "3",
+          "name": "testCustomer",
+          "type": {
+            "value": "account"
+          }
+        },
+        "department": {
+          "externalId": "3",
+          "internalId": "5",
+          "name": "testdepartment",
+          "type": {
+            "value": "account"
+          }
+        },
+        "grossAmt": 18.2,
+        "isBillable": true,
+        "isClosed": true,
+        "line": 2.3,
+        "linkedOrderList": {
+          "recordRef": [
+            {
+              "externalId": "4",
+              "internalId": "2",
+              "name": "testLinkedOrder",
+              "type": {
+                "value": "account"
+              }
+            }
+          ]
+        },
+        "location": {
+          "externalId": "3",
+          "internalId": "4",
+          "name": "locationX",
+          "type": {
+            "value": "account"
+          }
+        },
+        "memo": "to:the head of department",
+        "tax1Amt": 203.4,
+        "taxCode": {
+          "externalId": "78",
+          "internalId": "9",
+          "name": "tax75",
+          "type": {
+            "value": "account"
+          }
+        },
+        "taxRate1": 8.2,
+        "taxRate2": 218.8
+      }
+    ],
+    "replaceAll": true
+  },
+  "externalId": "7584",
+  "fax": "415-555-5750",
+  "fob": "Afghanistan",
+  "intercoStatus": "_paired",
+  "intercoTransaction": {
+    "externalId": "3",
+    "internalId": "2",
+    "name": "intercoTransaction",
+    "type": {
+      "value": "account"
+    }
+  },
+  "internalId": "308232",
+  "itemList": {
+    "item": [
+      {
+        "amount": 100,
+        "createdFrom": {
+          "internalId": "18",
+          "name": "Internal : billsStatus",
+          "externalId": null,
+          "type": null
+        },
+        "customFieldList": {
+          "customField": {
+            "internalId": "6",
+            "scriptId": "6"
+          }
+        },
+        "customer": {
+          "internalId": "1220",
+          "name": "Graber & Assoc",
+          "externalId": null,
+          "type": null
+        },
+        "department": {
+          "internalId": "2",
+          "name": "Sales",
+          "externalId": null,
+          "type": null
+        },
+        "description": "50 Button Digial Console",
+        "expectedReceiptDate": 1428994800000,
+        "grossAmt": 62.3,
+        "isClosed": false,
+        "item": {
+          "internalId": "507",
+          "name": "ACC00007"
+        },
+        "line": 1,
+        "matchBillToReceipt": false,
+        "quantity": 1,
+        "rate": "100.00",
+        "units": {
+          "internalId": "1",
+          "name": "Ea"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "location": {
+    "internalId": "5",
+    "name": "01: San Francisco : QA Hold",
+    "externalId": "67",
+    "type": null
+  },
+  "memo": "To: Department Chairs From: Dr. Kerns, CEO",
+  "message": "CMA CGM Antoine de Saint Exupery",
+  "nextApprover": {
+    "internalId": "5",
+    "name": "Bill Connors",
+    "externalId": null,
+    "type": null
+  },
+  "nullFieldList": {},
+  "orderStatus": "_pendingReceipt",
+  "otherRefNum": "109-WE-4973",
+  "purchaseContract": {
+    "internalId": "5",
+    "name": "Contract33",
+    "externalId": null,
+    "type": null
+  },
+  "shipAddressList": {
+    "internalId": "254974",
+    "name": "amar",
+    "externalId": null,
+    "type": null
+  },
+  "shipIsResidential": false,
+  "shipMethod": {
+    "internalId": "2",
+    "name": "Pick-up at store",
+    "externalId": null,
+    "type": null
+  },
+  "shippingAddress": {
+    "zip": "94403",
+    "country": {
+      "value": "_unitedStates"
+    },
+    "addressee": "01: San Francisco",
+    "addr1": "1500 3rd St",
+    "city": "San Mateo",
+    "attention": "Ramsey Inc.",
+    "state": "CA",
+    "override": false,
+    "addrText": "Ramsey Inc.\nSan Francisco\n1500 3rd St\nSan Mateo CA 94403\nUnited States",
+    "addrPhone": "(650) 627-1000"
+  },
+  "source": "75hg",
+  "status": "Approved by Supervisor/Pending Receipt",
+  "subTotal": 892.23,
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg.",
+    "externalId": "67",
+    "type": null
+  },
+  "supervisorApproval": true,
+  "tax2Total": 46.76,
+  "taxTotal": 64.89,
+  "terms": {
+    "internalId": "3",
+    "name": "Net 60",
+    "externalId": "65",
+    "type": null
+  },
+  "toBeEmailed": false,
+  "toBeFaxed": false,
+  "toBePrinted": false,
+  "tranDate": "2018-07-18T07:00:00Z",
+  "tranId": "PUR00001664",
+  "vatRegNum": "8757"
+}
