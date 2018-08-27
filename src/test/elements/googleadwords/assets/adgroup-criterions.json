@@ -1,0 +1,10 @@
+{
+  "criterion": {
+    "matchType": "BROAD",
+    "text": "<<random.word>>",
+    "type": "KEYWORD",
+    "CriterionType": "Keyword"
+  },
+  "AdGroupCriterionType": "BiddableAdGroupCriterion",
+  "adGroupId": "you should get this from ad-group api"
+}

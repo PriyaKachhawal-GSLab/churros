@@ -7,5 +7,14 @@
         "vendorPath": "budgetId"
       }
     ]
+  },
+  "ads": {
+    "vendorName": "ads",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "ad.id"
+      }
+    ]
   }
 }

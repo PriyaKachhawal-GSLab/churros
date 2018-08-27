@@ -1,0 +1,12 @@
+{
+    "isNegative": false,
+    "criterion": {
+      "code": "hi",
+      "name": "Hindi",
+      "id": 1023,
+      "type": "LANGUAGE",
+      "CriterionType": "Language"
+    },
+    "campaignId": "you should get this from campaign api",
+    "CampaignCriterionType": "CampaignCriterion"
+  }
