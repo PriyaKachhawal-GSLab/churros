@@ -3,56 +3,16 @@
     "assignee": {
       "name": "vineet"
     },
-    "attachment": [
-      {}
-    ],
-    "comment": [
-      {}
-    ],
-    "components": [],
     "description": "appconqp06d9l52uwzmw019k9",
-    "duedate": "2018-06-18T15:49:13.160Z",
-    "fixVersions": [
-      {}
-    ],
-    "issuelinks": [
-      {}
-    ],
-    "issuetype": {
-      "avatarId": 10315,
-      "name": "Story",
-      "description": "A user story. Created by JIRA Software - do not edit or delete.",
-      "self": "https://cloud-elements-dev.atlassian.net/rest/api/2/issuetype/10001",
-      "iconUrl": "https://cloud-elements-dev.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10315&avatarType=issuetype",
-      "id": "10001",
-      "subtask": false
-    },
     "labels": [
       "appcontyj3s7ds23m54msa714i"
     ],
-    "priority": {},
+    "issuetype": {
+      "id": "10001"
+    },
     "project": {
-      "avatarUrls": {
-        "48x48": "https://cloud-elements-dev.atlassian.net/secure/projectavatar?pid=10900&avatarId=10011",
-        "24x24": "https://cloud-elements-dev.atlassian.net/secure/projectavatar?size=small&pid=10900&avatarId=10011",
-        "16x16": "https://cloud-elements-dev.atlassian.net/secure/projectavatar?size=xsmall&pid=10900&avatarId=10011",
-        "32x32": "https://cloud-elements-dev.atlassian.net/secure/projectavatar?size=medium&pid=10900&avatarId=10011"
-      },
-      "name": "ZenDesk",
-      "self": "https://cloud-elements-dev.atlassian.net/rest/api/2/project/10900",
-      "id": "10900",
-      "projectTypeKey": "software",
       "key": "ZEN"
     },
-    "reporter": {},
-    "summary": "appconczjtfesc6dzohfytx1or",
-    "timetracking": {},
-    "watcher": {},
-    "worklog": [
-      {}
-    ]
-  },
-  "id": "appcongt55njc3jecwb5w89f6r",
-  "key": "appcon2jrmms018dmkhvndn29",
-  "self": "appconofahu41rd57c71dr6bt9"
+    "summary": "appconczjtfesc6dzohfytx1or"
+  }
 }
