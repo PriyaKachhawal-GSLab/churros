@@ -15,14 +15,14 @@ const biddingStrategyPayload = tools.requirePayload(`${__dirname}/assets/bidding
 const globalBiddingStrategyPayload = tools.requirePayload(`${__dirname}/assets/bidding-strategies.json`);
 const campaignPayload = tools.requirePayload(`${__dirname}/assets/campaigns.json`);
 const globalCampaignPayload = tools.requirePayload(`${__dirname}/assets/campaigns.json`);
-const adgroupPayload = tools.requirePayload(`${__dirname}/assets/adgroups.json`);
-const globalAdgroupPayload = tools.requirePayload(`${__dirname}/assets/adgroups.json`);
-const adgroupAdsPayload = tools.requirePayload(`${__dirname}/assets/adgroups-ads.json`);
-const globalAdgroupAdsPayload = tools.requirePayload(`${__dirname}/assets/adgroups-ads.json`);
+const adgroupPayload = tools.requirePayload(`${__dirname}/assets/ad-groups.json`);
+const globalAdgroupPayload = tools.requirePayload(`${__dirname}/assets/ad-groups.json`);
+const adgroupAdsPayload = tools.requirePayload(`${__dirname}/assets/ad-groups-ads.json`);
+const globalAdgroupAdsPayload = tools.requirePayload(`${__dirname}/assets/ad-groups-ads.json`);
 const campaignCriterionPayload = tools.requirePayload(`${__dirname}/assets/campaign-criterions-en.json`);
 const globalCampaignCriterionPayload = tools.requirePayload(`${__dirname}/assets/campaign-criterions.json`);
-const adgroupCriterionPayload = tools.requirePayload(`${__dirname}/assets/adgroup-criterions.json`);
-const globalAdgroupCriterionPayload = tools.requirePayload(`${__dirname}/assets/adgroup-criterions.json`);
+const adgroupCriterionPayload = tools.requirePayload(`${__dirname}/assets/ad-group-criterions.json`);
+const globalAdgroupCriterionPayload = tools.requirePayload(`${__dirname}/assets/ad-group-criterions.json`);
 
 suite.forElement('general', 'customers', (test) => {
   let globalLabelId, globalBudgetId, globalCampaignGroupId, globalBiddingStrategyId, globalCampaignId, globalAdGroupId, globalAdgroupAdId, globalCampaignCriterionId, globalAdgroupCriterionId;
@@ -47,7 +47,7 @@ suite.forElement('general', 'customers', (test) => {
     campaignCriterionPayload.campaignId = globalCampaignId;
     globalCampaignCriterionPayload.campaignId = globalCampaignId;
   })
-  .then(() => cloud.post(`/hubs/general/adgroups`, globalAdgroupPayload))
+  .then(() => cloud.post(`/hubs/general/ad-groups`, globalAdgroupPayload))
   .then(r => {
     globalAdGroupId = r.body.id;
     adgroupAdsPayload.adGroupId = globalAdGroupId;
@@ -55,21 +55,21 @@ suite.forElement('general', 'customers', (test) => {
     adgroupCriterionPayload.adGroupId = globalAdGroupId;
     globalAdgroupCriterionPayload.adGroupId = globalAdGroupId;
   })
-  .then(() => cloud.post(`/hubs/general/adgroups/${globalAdGroupId}/ads`, globalAdgroupAdsPayload))
+  .then(() => cloud.post(`/hubs/general/ad-groups/${globalAdGroupId}/ads`, globalAdgroupAdsPayload))
   .then(r => globalAdgroupAdId = r.body.id)
   .then(() => cloud.post(`/hubs/general/campaigns/${globalCampaignId}/campaign-criterions`, globalCampaignCriterionPayload))
   .then(r => globalCampaignCriterionId = r.body.criterion.id)
-  .then(() => cloud.post(`/hubs/general/adgroups/${globalAdGroupId}/adgroup-criterions`, globalAdgroupCriterionPayload))
+  .then(() => cloud.post(`/hubs/general/ad-groups/${globalAdGroupId}/ad-group-criterions`, globalAdgroupCriterionPayload))
   .then(r => globalAdgroupCriterionId = r.body.criterion.id)
   );
 
   after(() => cloud.delete(`/hubs/general/labels/${globalLabelId}`)
   .then(() => cloud.delete(`/hubs/general/campaign-groups/${globalCampaignGroupId}`))
   .then(() => cloud.delete(`/hubs/general/bidding-strategies/${globalBiddingStrategyId}`))
-  .then(() => cloud.delete(`/hubs/general/adgroups/${globalAdGroupId}/adgroup-criterions/${globalAdgroupCriterionId}`))
+  .then(() => cloud.delete(`/hubs/general/ad-groups/${globalAdGroupId}/ad-group-criterions/${globalAdgroupCriterionId}`))
   .then(() => cloud.delete(`/hubs/general/campaigns/${globalCampaignId}/campaign-criterions/${globalCampaignCriterionId}`))
-  .then(() => cloud.delete(`/hubs/general/adgroups/${globalAdGroupId}/ads/${globalAdgroupAdId}`))
-  .then(() => cloud.delete(`/hubs/general/adgroups/${globalAdGroupId}`))
+  .then(() => cloud.delete(`/hubs/general/ad-groups/${globalAdGroupId}/ads/${globalAdgroupAdId}`))
+  .then(() => cloud.delete(`/hubs/general/ad-groups/${globalAdGroupId}`))
   .then(() => cloud.delete(`/hubs/general/campaigns/${globalCampaignId}`))
   .then(() => cloud.delete(`/hubs/general/budgets/${globalBudgetId}`))
   );
@@ -121,21 +121,21 @@ suite.forElement('general', 'customers', (test) => {
       .then(r => expect(r.body.filter(obj => obj.name === `${globalCampaignPayload.name}`)).to.not.be.empty);
   });
 
-  it('should allow CRUDS for adgroups', () => {
-    return cloud.crds(`/hubs/general/adgroups`, adgroupPayload);
+  it('should allow CRUDS for ad-groups', () => {
+    return cloud.crds(`/hubs/general/ad-groups`, adgroupPayload);
   });
 
-  it(`should allow GET for adgroups with Name = ${globalAdgroupPayload.name}`, () => {
-    return cloud.withOptions({ qs: { where: `Name = '${globalAdgroupPayload.name}'` } }).get(`/hubs/general/adgroups`)
+  it(`should allow GET for ad-groups with Name = ${globalAdgroupPayload.name}`, () => {
+    return cloud.withOptions({ qs: { where: `Name = '${globalAdgroupPayload.name}'` } }).get(`/hubs/general/ad-groups`)
       .then(r => expect(r.body.filter(obj => obj.name === `${globalAdgroupPayload.name}`)).to.not.be.empty);
   });
 
-  it(`should allow CRDS for /adgroups/${globalAdgroupAdsPayload.adGroupId}/ads`, () => {
-    return cloud.crds(`/hubs/general/adgroups/${globalAdGroupId}/ads`, adgroupAdsPayload);
+  it(`should allow CRDS for /ad-groups/${globalAdgroupAdsPayload.adGroupId}/ads`, () => {
+    return cloud.crds(`/hubs/general/ad-groups/${globalAdGroupId}/ads`, adgroupAdsPayload);
   });
 
-  it(`should allow GET for /adgroups/${globalAdgroupAdsPayload.adGroupId}/ads with Description = ${globalAdgroupAdsPayload.ad.description}`, () => {
-    return cloud.withOptions({ qs: { where: `Description = '${globalAdgroupAdsPayload.ad.description}'` } }).get(`/hubs/general/adgroups/${globalAdGroupId}/ads`)
+  it(`should allow GET for /ad-groups/${globalAdgroupAdsPayload.adGroupId}/ads with Description = ${globalAdgroupAdsPayload.ad.description}`, () => {
+    return cloud.withOptions({ qs: { where: `Description = '${globalAdgroupAdsPayload.ad.description}'` } }).get(`/hubs/general/ad-groups/${globalAdGroupId}/ads`)
       .then(r => expect(r.body.filter(obj => obj.ad.description === `${globalAdgroupAdsPayload.ad.description}`)).to.not.be.empty);
   });
 
@@ -165,16 +165,16 @@ suite.forElement('general', 'customers', (test) => {
       .then(r => expect(r.body.filter(obj => obj.criterion.type === `${globalCampaignCriterionPayload.criterion.type}`)).to.not.be.empty);
   });
 
-  it(`should allow CRD for /adgroups/${globalAdgroupCriterionPayload.adGroupId}/adgroup-criterions`, () => {
+  it(`should allow CRD for /ad-groups/${globalAdgroupCriterionPayload.adGroupId}/ad-group-criterions`, () => {
     let localadGroupCriterionId;
-    return cloud.post(`/hubs/general/adgroups/${globalAdGroupId}/adgroup-criterions`, adgroupCriterionPayload)
+    return cloud.post(`/hubs/general/ad-groups/${globalAdGroupId}/ad-group-criterions`, adgroupCriterionPayload)
     .then(r => localadGroupCriterionId = r.body.criterion.id)
-    .then(() => cloud.get(`/hubs/general/adgroups/${globalAdGroupId}/adgroup-criterions/${localadGroupCriterionId}`))
-    .then(() => cloud.delete(`/hubs/general/adgroups/${globalAdGroupId}/adgroup-criterions/${localadGroupCriterionId}`));
+    .then(() => cloud.get(`/hubs/general/ad-groups/${globalAdGroupId}/ad-group-criterions/${localadGroupCriterionId}`))
+    .then(() => cloud.delete(`/hubs/general/ad-groups/${globalAdGroupId}/ad-group-criterions/${localadGroupCriterionId}`));
   });
 
-  it(`should allow GET for /adgroups/${globalAdgroupCriterionPayload.adGroupId}/adgroup-criterions with CriteriaType = ${globalAdgroupCriterionPayload.criterion.type}`, () => {
-    return cloud.withOptions({ qs: { where: `CriteriaType = '${globalAdgroupCriterionPayload.criterion.type}'` } }).get(`/adgroups/${globalAdgroupCriterionPayload.adGroupId}/adgroup-criterions`)
+  it(`should allow GET for /ad-groups/${globalAdgroupCriterionPayload.adGroupId}/ad-group-criterions with CriteriaType = ${globalAdgroupCriterionPayload.criterion.type}`, () => {
+    return cloud.withOptions({ qs: { where: `CriteriaType = '${globalAdgroupCriterionPayload.criterion.type}'` } }).get(`/ad-groups/${globalAdgroupCriterionPayload.adGroupId}/ad-group-criterions`)
       .then(r => expect(r.body.filter(obj => obj.criterion.type === `${globalAdgroupCriterionPayload.criterion.type}`)).to.not.be.empty);
   });
 
