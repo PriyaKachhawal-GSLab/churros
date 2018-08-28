@@ -1,15 +1,18 @@
 'use strict';
 
 const suite = require('core/suite');
+const tools = require('core/tools');
 const cloud = require('core/cloud');
+const payload = tools.requirePayload(`${__dirname}/assets/agents.json`);
 
 suite.forElement('helpdesk', 'agents', (test) => {
-  let agentId;
-  it('should allow get for /agents', () => {
-//"jiradev" is hardcoded as get all api has "username" constraint".
-    return cloud.withOptions({qs:{where:`username='jiradev'`}}).get('/hubs/helpdesk/agents')
-    .then(r => cloud.withOptions({qs:{where:`username='jiradev'`, page: 1, pageSize: 1 }}).get('/hubs/helpdesk/agents'))
-   .then(r => agentId = r.body[0].key)
-    .then(r => cloud.get("/hubs/helpdesk/agents/" + agentId));
-  });
+  it(`should allow CRDS for ${test.api} with Ceql search`, () => {
+    let agentId;
+    return cloud.post(test.api, payload)
+      .then(r => agentId = r.body.key)
+      .then(r => cloud.get(`${test.api}/${agentId}`))
+      .then(r => cloud.withOptions({ qs: {where:`username='jiradev'`}}).get(test.api))
+      .then(r => cloud.delete(`${test.api}/${agentId}`));
+   });
+test.withOptions({ qs: {where:`username='jiradev'`}}).should.supportPagination();
 });
