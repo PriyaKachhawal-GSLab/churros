@@ -17,10 +17,12 @@ suite.forElement('finance', 'bill-payment-cards', null, (test) => {
         refno = r.body.RefNumber;
         updatePayload.EditSequence = r.body.EditSequence;
       })
-      .then(r => cloud.get(test.api))
+      .then(r => cloud.get(test.api))      
+      .then(r => refno = r.body[0].RefNumber)  
       .then(r => cloud.withOptions({ qs: { where: `RefNumber='${refno}'` } }).get(test.api))
       .then(r => expect(r.body.filter(o => o.RefNumber === `${refno}`)).to.not.be.empty)
-      .then(r => cloud.withOptions({ qs: { where: `TimeModified='2018-05'` } }).get(test.api))
+      .then(r => cloud.withOptions({ qs: { where: `TimeModified>='2017-05-01'` } }).get(test.api))
+      .then(r => expect(r.body.filter(o => o.TimeModified >= `2017-05-01`)).to.not.be.empty)
       .then(r => cloud.get(`${test.api}/${id}`))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });

@@ -12,7 +12,8 @@ suite.forElement('finance', 'creditcard-charges', { payload: payload }, (test) =
       .then(r => id = r.body.id)
       .then(r => cloud.get(test.api))
       .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(test.api))
-      .then(r => cloud.withOptions({ qs: { where: `TimeModified='2018-01'` } }).get(test.api))
+      .then(r => cloud.withOptions({ qs: { where: `TimeModified>='2017-01-05'` } }).get(test.api))
+      .then(r => expect(r.body.filter(o => o.TimeModified >= `2017-01-05`)).to.not.be.empty)
       .then(r => cloud.get(`${test.api}/${id}`))
       .then(r => updatePayload.EditSequence = r.body.EditSequence)
       .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
@@ -22,6 +23,6 @@ suite.forElement('finance', 'creditcard-charges', { payload: payload }, (test) =
     return cloud.withOptions({ qs: { where: `TimeModified='2018'` } })
       .get(test.api, (r) => expect(r).to.have.statusCode(400));
   });
-  test.should.supportNextPagePagination(3);
+  test.should.supportNextPagePagination(1);
   test.should.supportPagination('id');
 });

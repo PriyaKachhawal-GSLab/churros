@@ -8,11 +8,13 @@ suite.forElement('finance', 'deposits', (test) => {
     let id ;    
     return cloud.get(test.api)
       .then(r => id = r.body[0].TxnID)  
-      .then(r => cloud.withOptions({ qs: { where: `TimeModified>='2017-01'` } }).get(test.api))
+      .then(r => cloud.withOptions({ qs: { where: `TimeModified>='2017-05-01'` } }).get(test.api))
+      .then(r => expect(r.body.filter(o => o.TimeModified >= `2017-05-01`)).to.not.be.empty)
       .then(r => cloud.withOptions({ qs: { where: `TxnID='${id}'` } }).get(test.api))
+      .then(r => expect(r.body.filter(o => o.TxnID === `${id}`)).to.not.be.empty)
       .then(r => cloud.get(`${test.api}/${id}`)); 
 });
-  test.should.supportNextPagePagination(2);
+  test.should.supportNextPagePagination(1);
   it(`should return an error when 'TimeModified' filter is not a proper Date`, () => {
     return cloud.withOptions({ qs: { where: `TimeModified='2018'` } })
       .get(test.api, (r) => expect(r).to.have.statusCode(400));

@@ -19,12 +19,13 @@ suite.forElement('finance', 'bills', { payload: payload }, (test) => {
       .then(r => cloud.get(`${test.api}`))
       .then(r => cloud.withOptions({ qs: { where: `RefNumber='${refno}'` } }).get(test.api))
       .then(r => expect(r.body.filter(o => o.RefNumber === `${refno}`)).to.not.be.empty)
-      .then(r => cloud.withOptions({ qs: { where: `TimeModified='2018-05'` } }).get(test.api))
+      .then(r => cloud.withOptions({ qs: { where: `TimeModified>='2017-05-01'` } }).get(test.api))
+      .then(r => expect(r.body.filter(o => o.TimeModified >= `2017-05-01`)).to.not.be.empty)
       .then(r => cloud.get(`${test.api}/${id}`))
       .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
-  test.should.supportNextPagePagination(3);
+  test.should.supportNextPagePagination(1);
   test.should.supportPagination('id');
   it(`should return an error when 'TimeModified' filter is not a proper Date`, () => {
     return cloud.withOptions({ qs: { where: `TimeModified='2018'` } })
