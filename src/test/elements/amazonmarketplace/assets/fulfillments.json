@@ -1,0 +1,24 @@
+{
+    "Items": {
+        "member": {
+            "1": {
+                "SellerFulfillmentOrderItemId": "SFOI54545751245",
+                "Quantity": 1,
+                "SellerSKU": "1234567890"
+            }
+        }
+    },
+    "DestinationAddress": {
+        "CountryCode": "US",
+        "Line1": "1776 BROADWAY APT 1807",
+        "Line2": "Denver",
+        "Name": "Kelly Gold",
+        "PostalCode": "80202-3949",
+        "StateOrProvinceCode": "CO"
+    },
+    "ShippingSpeedCategory": "Standard",
+    "DisplayableOrderComment": "First fulfillment",
+    "DisplayableOrderId": "FO12345454545",
+    "SellerFulfillmentOrderId": "FO12345454545",
+    "DisplayableOrderDateTime": "2018-08-25T16:15:28.182Z"
+}

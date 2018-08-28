@@ -1,0 +1,44 @@
+{
+
+  "ShipmentRequestDetails": {
+    "MustArriveByDate": "2018-09-10T07:00:00Z",
+    "ShipDate": "2018-08-26T07:00:00Z",
+    "AmazonOrderId": "112-1579657-8445846",
+    "ItemList": {
+      "Item": {
+        "1": {
+          "OrderItemId": "39771486773570",
+          "Quantity": 1
+        }
+      }
+    },
+    "ShipFromAddress": {
+      "AddressLine1": "15950 Dallas",
+      "City": "Dallas",
+      "CountryCode": "US",
+      "Name": "Chinna",
+      "Phone": "8974563210",
+      "PostalCode": "75048",
+      "StateOrProvinceCode": "TX",
+      "Email": "cb@gmail.com"
+    },
+    "ShippingServiceOptions": {
+      "CarrierWillPickUp": false,
+      "DeclaredValue": {
+        "Amount": 5.24,
+        "CurrencyCode": "USD"
+      },
+      "DeliveryExperience": "DeliveryConfirmationWithoutSignature"
+    },
+    "Weight": {
+      "Unit": "oz",
+      "Value": 2
+    },
+    "PackageDimensions": {
+      "Height": 3,
+      "Length": 10,
+      "Unit": "inches",
+      "Width": 6
+    }
+  }
+}

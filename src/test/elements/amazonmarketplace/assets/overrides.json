@@ -1,0 +1,12 @@
+{
+    "SKU": "1245637890",
+    "ShippingOverride": {
+        "IsShippingRestricted": false,
+        "ShipAmount": {
+            "currency": "USD",
+            "text": 20.25
+        },
+        "ShipOption": "<<random.word>>",
+        "Type": "Exclusive"
+    }
+}
