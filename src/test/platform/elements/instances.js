@@ -318,7 +318,7 @@ suite.forPlatform('elements/instances', opts, (test) => {
       .then(r => provisioner.delete(instanceId, '/instances'))
       .catch(e => {
         if (instanceId) {
-          provisioner.delete(instance.id, 'elements/closeio/instances');
+          provisioner.delete(instanceId, 'elements/closeio/instances');
         }
         throw new Error(e);
       });
@@ -339,7 +339,7 @@ suite.forPlatform('elements/instances', opts, (test) => {
       .then(r => provisioner.delete(instanceId, '/instances'))
       .catch(e => {
         if (instanceId) {
-          provisioner.delete(instance.id, 'elements/closeio/instances');
+          provisioner.delete(instanceId, 'elements/closeio/instances');
         }
         throw new Error(e);
       });
