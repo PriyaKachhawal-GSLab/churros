@@ -306,15 +306,11 @@ suite.forPlatform('elements/instances', opts, (test) => {
   });
 
   it('should have createdDate in the /elements/{key}/instances response', () => {
-    if (props.get('user') === 'system') {
-      logger.warn('Unable to test element clone as system user. Skipping.');
-      return;
-    }
     let instanceId;
     return provisioner.create('closeio')
       .then(r => instanceId = r.body.id)
       .then(r => cloud.get(`/elements/closeio/instances`)
-        .then(r => { expect(r.body).to.contain.key('createdDate'); }))
+        .then(r => expect(r).to.have.statusCode(200) && expect(r.body).to.not.be.null && expect(r.body).to.be.a('array') && expect(r.body).to.have.length.above(0) && expect(r.body[0]).to.contain.key('createdDate')))
       .then(r => provisioner.delete(instanceId, '/instances'))
       .catch(e => {
         if (instanceId) {
@@ -325,17 +321,13 @@ suite.forPlatform('elements/instances', opts, (test) => {
   });
 
   it('should have createdDate in the /elements/{id}/instances response', () => {
-    if (props.get('user') === 'system') {
-      logger.warn('Unable to test element clone as system user. Skipping.');
-      return;
-    }
     let instanceId, elementId;
     return provisioner.create('closeio')
       .then(r => instanceId = r.body.id)
       .then(r => cloud.get(`/elements/closeio`))
       .then(r => elementId = r.body.id)
       .then(r => cloud.get(`/elements/${elementId}/instances`)
-        .then(r => { expect(r.body).to.contain.key('createdDate'); }))
+        .then(r => expect(r).to.have.statusCode(200) && expect(r.body).to.not.be.null && expect(r.body).to.be.a('array') && expect(r.body).to.have.length.above(0) && expect(r.body[0]).to.contain.key('createdDate')))
       .then(r => provisioner.delete(instanceId, '/instances'))
       .catch(e => {
         if (instanceId) {
