@@ -13,7 +13,7 @@ suite.forElement('finance', 'exchange-rates', { payload: payload }, (test) => {
   });
   //PUT only works with account having multicurrency enabled. Hence need to skip
   it.skip(`Should support U on ${test.api}`, () => {
-    return cloud.put(`${test.api}/USD`, payload)
+    return cloud.put(`${test.api}/USD`, payload);
       //.then(r => cloud.withOptions({ skip: true }).put(`${test.api}/USD`, payload));
   });
 });
