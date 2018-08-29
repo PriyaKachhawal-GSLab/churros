@@ -1,5 +1,6 @@
 {
 		"name": "<<random.word>>",
 		"body": "done(funStuff)",
-		"description": "<<random.words>>"
+		"description": "<<random.words>>",
+		"snippetType": "mapping"
 }
