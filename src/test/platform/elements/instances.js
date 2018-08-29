@@ -12,7 +12,7 @@ const objDefPayload = require('./assets/accountObjectDefinition');
 const sfdcSwaggerSchema = require('./assets/closeioSwagger.schema');
 const defaults = require('core/defaults');
 const logger = require('winston');
-const {filter, assoc} = require('ramda');
+const { filter, assoc } = require('ramda');
 
 const genInstance = (element, o) => ({
   name: (o.name || 'churros-instance'),
@@ -92,7 +92,7 @@ const updateInstanceWithReprovision = (baseUrl, schema) => {
     .catch(e => {
       if (ids.length > 0) {
         return Promise.all(ids.map(d => provisioner.delete(d, baseUrl)))
-        .catch(err => {}).then(() => { throw new Error(e); });
+          .catch(err => {}).then(() => { throw new Error(e); });
       } else {
         throw new Error(e);
       }
@@ -191,7 +191,7 @@ suite.forPlatform('elements/instances', opts, (test) => {
       .get('instances')
       .then(r => {
         r.body.map(s => expect(s.name.includes('churros')).to.equal(true) &&
-                        expect(s.tags.includes('churros-instance')).to.equal(true));
+          expect(s.tags.includes('churros-instance')).to.equal(true));
       });
   });
 
@@ -261,21 +261,21 @@ suite.forPlatform('elements/instances', opts, (test) => {
   it('should support updating tags via put method', () => {
     let instance;
     return provisioner.create('closeio')
-    .then(r => instance = r.body)
-    .then(r => cloud.put(`instances/${instance.id}`, assoc('tags', ['test'], instance)))
-    .then(r => instance = r.body)
-    .then(r => expect(instance.tags).to.have.length(1))
-    .then(() => expect(instance.tags[0]).to.equal('test'))
-    .then(r => cloud.put(`instances/${instance.id}`, assoc('tags', [], instance)))
-    .then(r => cloud.get(`instances/${instance.id}`))
-    .then(r => expect(r.body.tags).to.have.length(0))
-    .then(r => provisioner.delete(instance.id))
-    .catch(e => {
-      if(instance && instance.id){
-        provisioner.delete(instance.id);
-      }
-      throw e;
-    });
+      .then(r => instance = r.body)
+      .then(r => cloud.put(`instances/${instance.id}`, assoc('tags', ['test'], instance)))
+      .then(r => instance = r.body)
+      .then(r => expect(instance.tags).to.have.length(1))
+      .then(() => expect(instance.tags[0]).to.equal('test'))
+      .then(r => cloud.put(`instances/${instance.id}`, assoc('tags', [], instance)))
+      .then(r => cloud.get(`instances/${instance.id}`))
+      .then(r => expect(r.body.tags).to.have.length(0))
+      .then(r => provisioner.delete(instance.id))
+      .catch(e => {
+        if (instance && instance.id) {
+          provisioner.delete(instance.id);
+        }
+        throw e;
+      });
 
 
   });
@@ -298,8 +298,40 @@ suite.forPlatform('elements/instances', opts, (test) => {
       .then(r => cloud.delete(`elements/${clone.key}`))
       .catch(e => {
         if (instance && clone) {
-          provisioner.delete(instance.id, 'elements/shopify/instances');
+          provisioner.delete(instance.id, 'elements/closeio/instances');
           cloud.delete(`elements/${clone.key}`);
+        }
+        throw new Error(e);
+      });
+  });
+
+  it('should have createdDate in the /elements/{key}/instances response', () => {
+    let instanceId;
+    return provisioner.create('closeio')
+      .then(r => instanceId = r.body.id)
+      .then(r => cloud.get(`/elements/closeio/instances`)
+        .then(r => expect(r).to.have.statusCode(200) && expect(r.body).to.not.be.null && expect(r.body).to.be.a('array') && expect(r.body).to.have.length.above(0) && expect(r.body[0]).to.contain.key('createdDate')))
+      .then(r => provisioner.delete(instanceId, '/instances'))
+      .catch(e => {
+        if (instanceId) {
+          provisioner.delete(instanceId, 'elements/closeio/instances');
+        }
+        throw new Error(e);
+      });
+  });
+
+  it('should have createdDate in the /elements/{id}/instances response', () => {
+    let instanceId, elementId;
+    return provisioner.create('closeio')
+      .then(r => instanceId = r.body.id)
+      .then(r => cloud.get(`/elements/closeio`))
+      .then(r => elementId = r.body.id)
+      .then(r => cloud.get(`/elements/${elementId}/instances`)
+        .then(r => expect(r).to.have.statusCode(200) && expect(r.body).to.not.be.null && expect(r.body).to.be.a('array') && expect(r.body).to.have.length.above(0) && expect(r.body[0]).to.contain.key('createdDate')))
+      .then(r => provisioner.delete(instanceId, '/instances'))
+      .catch(e => {
+        if (instanceId) {
+          provisioner.delete(instanceId, 'elements/closeio/instances');
         }
         throw new Error(e);
       });
@@ -375,10 +407,10 @@ suite.forPlatform('elements/instances', opts, (test) => {
       expect(body[0]).to.haveOwnProperty('type');
       expect(filter(n => n.type === "vendor").length, body).to.be.gt(0);
       expect(filter(n => n.type === "ceCanonical", body).length).to.be.gt(0);
-      expect(filter(n => !["vendor","ceCanonical", "vdr"].includes(n.type), body).length).to.be.eq(0);
+      expect(filter(n => !["vendor", "ceCanonical", "vdr"].includes(n.type), body).length).to.be.eq(0);
     };
     defaults.token(closeioInstance.token);
-    return cloud.withOptions({headers:{'Elements-Version': 'Helium'}}).get(`/objects`, validate);
+    return cloud.withOptions({ headers: { 'Elements-Version': 'Helium' } }).get(`/objects`, validate);
   });
 
   it('should allow disabling and enabling  an instance', () => {
@@ -389,7 +421,7 @@ suite.forPlatform('elements/instances', opts, (test) => {
       .then(() => cloud.delete(`instances/${instanceId}/enabled`))
       .then(() => cloud.get(`/incidents`, r => expect(r).to.have.statusCode(403)))
       .then(() => cloud.get(`/objects`))
-      .then(() =>cloud.put(`instances/${instanceId}/enabled`))
+      .then(() => cloud.put(`instances/${instanceId}/enabled`))
       .then(() => cloud.get(`/incidents`))
       .then(() => provisioner.delete(instanceId));
   });

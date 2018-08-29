@@ -280,6 +280,26 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
             .then(() => cloud.delete(`/vdrs/${vdrSysId}/transformations/${transformationId}`));
       });
 
+    it('testy should support cloning a VDR and its transformations from the system catalog to the user\'s organization', () => {
+    let transformationId;
+    const newObjectName = `myNewObjectName-${tools.randomStr('string', 6)}`;
+
+    return cloud.post(`/vdrs/${vdrSysId}/transformations`, transformationSystem)
+        .then(r => transformationId = r.body.id)
+        // test a basic clone
+        .then(() => cloud.post(`/vdrs/${vdrSysId}/clone?level=organization`, {}))
+        .then(() => cloud.get(`/organizations/objects/${vdrSystem.objectName}/definitions`))
+        // test cloning with a new objectName and including transformations
+        .then(() => cloud.post(`/vdrs/${vdrSysId}/clone?cloneAllTransformations=true&level=organization`, {objectName: newObjectName}))
+        .then(() => cloud.get(`/organizations/objects/${newObjectName}/definitions`))
+        .then(() => cloud.get(`/organizations/elements/${transformationSystem.elementKey}/transformations/${newObjectName}`))
+        // clean up
+        .then(() => cloud.delete(`/organizations/elements/${transformationSystem.elementKey}/transformations/${newObjectName}`))
+        .then(() => cloud.delete(`/organizations/objects/${vdrSystem.objectName}/definitions`))
+        .then(() => cloud.delete(`/organizations/objects/${newObjectName}/definitions`))
+        .then(() => cloud.delete(`/vdrs/${vdrSysId}/transformations/${transformationId}`));
+    });
+
     it('should support cloning a subset of transformations by elementKey', () => {
         let transformationIds = [];
         const newObjectName = vdrSystem.objectName;
