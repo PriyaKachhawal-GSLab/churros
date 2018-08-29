@@ -18,6 +18,13 @@
 			"level": "organization"
 		}
 	],
+	"references": [
+		{
+			"name": "churrosMultiLevelTransformLead",
+			"url": "/leads/${leadId}",
+			"level": "organization"
+		}
+	],
 	"fields": [{
 			"path": "orgField",
 			"vendorPath": "ORG",

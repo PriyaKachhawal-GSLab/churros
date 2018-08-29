@@ -88,7 +88,7 @@ suite.forPlatform('vdrs/{id}/transformations', {schema}, test => {
     const cloudWithAcctUser = () => cloud.withOptions({ headers: { Authorization: `User ${acctUser.secret}, Organization ${defaults.secrets().orgSecret}` } });
 
     // NOTE - you need the 'vdrAdmin' role to run this test
-    it('should test CRUDS for vdr transformations', () => {
+    it('should test CRUDS for system vdr transformations', () => {
         return cloud.withOptions({churros: {updatePayloadSys}, qs: {systemOnly: true}})
             .crud(`/vdrs/${vdrSysId}/transformations`, transformationSystem, schema, chakram.put)
             .then(r => cloud.get(`/vdrs/${vdrSysId}/transformations?systemOnly=true`, pluralSchema));

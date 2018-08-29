@@ -7,6 +7,13 @@
 		"filterEmptyResponse": false,
 		"level": "system"
 	},
+	"references": [
+		{
+			"name": "churrosContactTransformLead",
+			"url": "/leads/${leadId}",
+			"level": "system"
+		}
+	],
 	"configuration": [
 		{
 		  "properties": {
