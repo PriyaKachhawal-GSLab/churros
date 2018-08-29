@@ -2,7 +2,6 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const cloud = require('core/cloud');
 const payload = tools.requirePayload(`${__dirname}/assets/agents.json`);
 
 suite.forElement('helpdesk', 'agents',{payload:payload}, (test) => {
