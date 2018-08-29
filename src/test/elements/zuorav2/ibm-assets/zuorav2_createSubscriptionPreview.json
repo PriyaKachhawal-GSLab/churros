@@ -1,0 +1,45 @@
+{
+  "accountKey": "2c92c0fb6078ce850160959703b60c8a",
+  "contractEffectiveDate": "2018-03-20",
+  "customerAcceptanceDate": "2018-03-27",
+  "includeExistingDraftDocItems": true,
+  "initialTermPeriodType": "Month",
+  "invoiceOwnerAccountKey": "2c92c0fb6078ce850160959703b60c8a",
+  "serviceActivationDate": "2018-03-23",
+  "subscribeToRatePlans": [
+    {
+      "chargeOverrides": [
+        {
+          "billCycleDay": 3,
+          "billCycleType": "SpecificDayofMonth",
+          "billingPeriod": "Month",
+          "billingPeriodAlignment": "AlignToCharge",
+          "billingTiming": "IN_ADVANCE",
+          "description": "ven-test",
+          "endDateCondition": "Fixed_Period",
+          "listPriceBase": "Per_Billing_Period",
+          "number": "456734591",
+          "productRatePlanChargeId": "2c92c0f863f7f040016416c118566c65",
+          "quantity": 0,
+          "tiers": [
+            {
+              "endingUnit": 0,
+              "price": "9864",
+              "priceFormat": "FlatFee",
+              "startingUnit": 0,
+              "tier": 1
+            }
+          ],
+          "triggerDate": "2018-03-28",
+          "triggerEvent": "USD",
+          "upToPeriods": 9,
+          "upToPeriodsType": "Months"
+        }
+      ],
+      "productRatePlanId": "2c92c0f963f800a9016416bc6bba0bb7"
+    }
+  ],
+  "targetDate": "2018-12-31",
+  "termStartDate": "2018-10-20",
+  "termType": "EVERGREEN"
+}

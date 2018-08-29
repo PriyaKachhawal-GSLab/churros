@@ -1,0 +1,22 @@
+{
+  "AdditionalEmailAddresses": "ventest2@gmail.com",
+  "AllowInvoiceEdit": true,
+  "AutoPay": false,
+  "BcdSettingOption": "ManualSet",
+  "BillCycleDay": 1,
+  "Currency": "USD",
+  "CustomerServiceRepName": "ven",
+  "InvoiceDeliveryPrefsEmail": true,
+  "InvoiceDeliveryPrefsPrint": true,
+  "Name": "Ven2",
+  "Notes": "note2",
+  "PurchaseOrderNumber": "string",
+  "SalesRepName": "string",
+  "TaxExemptDescription": "string",
+  "TaxExemptCertificateID": "string",
+  "TaxExemptEffectiveDate": "2018-12-20",
+  "TaxExemptExpirationDate": "2018-12-20",
+  "TaxExemptIssuingJurisdiction": "string",
+  "TaxExemptStatus": "Yes",
+  "VATId": "string"
+}

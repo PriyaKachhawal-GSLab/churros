@@ -1,0 +1,43 @@
+{
+  "termType": "EVERGREEN",
+  "contractEffectiveDate": "2016-02-01",
+  "autoRenew": true,
+  "renewalTerm": 3,
+  "accountKey": "2c92c0fb6078ce850160959703b60c8a",
+  "subscribeToRatePlans": [
+    {
+      "chargeOverrides": [
+        {
+          "billCycleDay": 3,
+          "billCycleType": "SpecificDayofMonth",
+          "billingPeriod": "Month",
+          "billingPeriodAlignment": "AlignToCharge",
+          "billingTiming": "IN_ADVANCE",
+          "description": "ven-test",
+          "endDateCondition": "Fixed_Period",
+          "listPriceBase": "Per_Billing_Period",
+          "number": "234565001",
+          "productRatePlanChargeId": "2c92c0f863f7f040016416c118566c65",
+          "quantity": 0,
+          "tiers": [
+            {
+              "endingUnit": 0,
+              "price": "9864",
+              "priceFormat": "FlatFee",
+              "startingUnit": 0,
+              "tier": 1
+            }
+          ],
+          "triggerDate": "2016-02-02",
+          "triggerEvent": "USD",
+          "upToPeriods": 9,
+          "upToPeriodsType": "Months"
+        }
+      ],
+      "productRatePlanId": "2c92c0f963f800a9016416bc6bba0bb7"
+    }
+  ],
+  "initialTermPeriodType": "Month",
+  "notes": "Test POST subscription from z-ruby-sdk",
+  "renewalTermPeriodType": "Week"
+}
