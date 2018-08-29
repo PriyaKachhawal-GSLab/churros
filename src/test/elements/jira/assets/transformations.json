@@ -7,5 +7,14 @@
         "vendorPath": "id"
       }
     ]
+  },
+  "agents": {
+    "vendorName": "user",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "key"
+      }
+    ]
   }
 }
