@@ -1,0 +1,20 @@
+{
+    "service": "amazon",
+    "line_items": [
+        {
+            "id": 1273912033363,
+            "quantity": 1
+        }
+    ],
+    "notify_customer": false,
+    "tracking_company": "4PX",
+    "tracking_number": "3243434",
+    "tracking_numbers": [
+        "3243434",
+        "3243436"
+    ],
+    "tracking_urls": [
+        "https://shipping.xyz/track.php?num=07986",
+        "https://anothershipper.corp/track.php?code=nbj"
+    ]
+}

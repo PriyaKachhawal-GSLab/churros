@@ -1,0 +1,20 @@
+{
+    "accepts_marketing": true,
+    "email": "qqq1yk113@gmail.com",
+    "metafield": [
+        {
+            "description": "Test Description of metafield",
+            "key": "test1",
+            "namespace": "global",
+            "owner_resource": "test",
+            "value": "newvalue",
+            "value_type": "string"
+        }
+    ],
+    "first_name": "Abhayy2",
+    "last_name": "Porre2",
+    "note": "Test PATCH Customer ..!!!",
+    "phone": "+19028811188",
+    "tax_exempt": true,
+    "tags": "loyal, VIP"
+}

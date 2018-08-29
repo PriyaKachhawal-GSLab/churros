@@ -1,0 +1,63 @@
+{
+    "accepts_marketing": true,
+    "addresses": [
+        {
+            "address1": "Amar Arma",
+            "address2": "Baner Rd",
+            "city": "Pune",
+            "name": "Y P",
+            "company": "GSLab",
+            "country": "India",
+            "country_code": "IN",
+            "first_name": "Yogesh L",
+            "last_name": "Patil1",
+            "phone": "9028844551",
+            "province": "Maharashtra",
+            "province_code": "MH",
+            "zip": "411045",
+            "default": false,
+            "country_name": "India"
+        },
+        {
+            "address1": "Lenyadri",
+            "address2": "Pashan Rd",
+            "city": "Pune",
+            "name": "P Y",
+            "company": "GSL",
+            "country": "India",
+            "country_code": "IN",
+            "first_name": "Yogeshh",
+            "last_name": "PatilL",
+            "phone": "9922221234",
+            "province": "Maharashtra",
+            "province_code": "MH",
+            "zip": "411021",
+            "default": true,
+            "country_name": "India"
+        }
+    ],
+    "email": "mritYK123@gslab.com",
+    "metafield": [
+        {
+            "description": "Test Description of metafield",
+            "id": 11,
+            "key": "test-yp",
+            "namespace": "global",
+            "owner_id": 11,
+            "owner_resource": "test",
+            "value": "newvalue",
+            "value_type": "string"
+        }
+    ],
+    "first_name": "Yoges",
+    "last_name": "Pat",
+    "note": "Test POST Customer ..!!!",
+    "multipass_identifier": "yppatil",
+    "phone": "9028811177",
+    "tax_exempt": true,
+    "tags": "Test,POST",
+    "password": "newpass",
+    "password_confirmation": "newpass",
+    "send_email_welcome": true,
+    "send_email_invite": true
+}

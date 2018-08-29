@@ -1,0 +1,18 @@
+{
+    "amount": "1.22",
+    "currency": "USD",
+    "error_code": "invalid_cvc",
+    "gateway": "shopify_payments",
+    "kind": "capture",
+    "payment_details": {
+        "avs_result_code": "M",
+        "credit_card_bin": "Y",
+        "credit_card_company": "me me",
+        "credit_card_number": "4242424242424242",
+        "cvv_result_code": "M"
+    },
+    "status": "pending",
+    "test": true,
+    "authorization": "ch_1AtJu6CktlpKSclI4zjeQb2t",
+    "device_id": 2
+}

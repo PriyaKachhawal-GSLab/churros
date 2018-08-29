@@ -1,0 +1,36 @@
+{
+    "note": "Item was damaged",
+    "restock": true,
+    "transactions": [
+        {
+            "amount": "0",
+            "authorization": "authorization-key",
+            "currency": "USD",
+            "gateway": "cash",
+            "kind": "refund",
+            "device_id": 4,
+            "payment_details": {
+                "avs_result_code": "M",
+                "credit_card_bin": "Y",
+                "credit_card_company": "me me",
+                "credit_card_number": "4242424242424242",
+                "cvv_result_code": "M"
+            },
+            "status": "pending",
+            "test": true
+        }
+    ],
+    "processed_at": "2007-01-10T11:00:00-05:00",
+    "refund_line_items": [
+        {
+            "line_item_id": 1568362922029,
+            "quantity": 1,
+            "restock_type": "return",
+"location_id": "1"
+        }
+    ],
+    "shipping": {
+        "amount": "0",
+        "full_refund": false
+    }
+}
