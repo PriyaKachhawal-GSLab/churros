@@ -80,8 +80,7 @@ suite.forElement('general', 'accounts', {
     });
 
     it('should allow CRUS for /accounts/{id}/web-properties/${webPropertiesId}/custom-dimensions', () => {
-        return cloud.crus(`${test.api}/${accountId}/web-properties/${webPropertiesId}/custom-dimensions`, customdimensionsPayload, chakram.put)
-
+        return cloud.crus(`${test.api}/${accountId}/web-properties/${webPropertiesId}/custom-dimensions`, customdimensionsPayload, chakram.put);
     });
     it('should allow CRUDS for /accounts/{id}/web-properties/${webPropertiesId}/user-links', () => {
         let entityUserLinksId = -1;
