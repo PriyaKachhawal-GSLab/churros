@@ -2,5 +2,5 @@
 		"name": "<<random.word>>",
 		"body": "done(funStuff)",
 		"description": "<<random.words>>",
-		"snippetType": "mapping"
+		"snippetType": "transformation"
 }
