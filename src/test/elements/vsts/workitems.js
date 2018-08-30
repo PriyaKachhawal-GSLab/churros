@@ -13,7 +13,8 @@ suite.forElement('collaboration', 'work-items', { payload: payload }, (test) => 
   };
 
   test.withOptions(update).should.supportCruds();
-  test.should.supportNextPagePagination(1);
+  test.should.supportPagination();
+  test.should.supportNextPagePagination(3, false);
   test.should.supportCeqlSearch('System.Title');
 
   it('should allow fields for work-items', () => {
