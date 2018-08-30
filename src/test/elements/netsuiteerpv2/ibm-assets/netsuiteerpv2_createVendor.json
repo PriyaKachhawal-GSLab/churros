@@ -1,0 +1,249 @@
+{
+  "addressbookList": {
+    "addressbook": [
+      {
+        "addressbookAddress": {
+          "zip": "string",
+          "country": {
+            "value": "_afghanistan"
+          },
+          "addr2": "string",
+          "addr1": "string",
+          "city": "string",
+          "addr3": "string",
+          "addrText": "string",
+          "addrPhone": "string",
+          "internalId": "string",
+          "addressee": "string",
+          "attention": "string",
+          "override": true,
+          "state": "string",
+          "nullFieldList": {
+            "name": [
+              "string"
+            ]
+          },
+          "customFieldList": {
+            "customField": [
+              {
+                "internalId": "string",
+                "scriptId": "string",
+                "value": "string"
+              }
+            ]
+          }
+        },
+        "defaultBilling": true,
+        "defaultShipping": true,
+        "internalId": "string",
+        "label": "string"
+      }
+    ],
+    "replaceAll": true
+  },
+  "altName": "string",
+  "billPay": false,
+  "category": {
+    "externalId": "string",
+    "internalId": "string",
+    "name": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "comments": "string",
+  "companyName": "string",
+  "creditLimit": 0,
+  "currency": {
+    "externalId": "string",
+    "internalId": "string",
+    "name": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "currencyList": {
+    "replaceAll": true,
+    "vendorCurrency": [
+      {
+        "currency": {
+          "externalId": "string",
+          "internalId": "string",
+          "name": "string",
+          "type": {
+            "value": "account"
+          }
+        }
+      }
+    ]
+  },
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "string",
+        "scriptId": "string"
+      }
+    ]
+  },
+  "customForm": {
+    "externalId": "string",
+    "internalId": "string",
+    "name": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "eligibleForCommission": true,
+  "email": "string",
+  "emailPreference": {
+    "value": "_default"
+  },
+  "emailTransactions": true,
+  "entityId": "string",
+  "expenseAccount": {
+    "externalId": "string",
+    "internalId": "string",
+    "name": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "externalId": "string",
+  "fax": "string",
+  "faxTransactions": true,
+  "firstName": "string",
+  "giveAccess": false,
+  "incoterm": {
+    "externalId": "string",
+    "internalId": "string",
+    "name": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "is1099Eligible": false,
+  "isAccountant": true,
+  "isInactive": false,
+  "isJobResourceVend": false,
+  "isPerson": true,
+  "laborCost": 0,
+  "lastName": "string",
+  "legalName": "string",
+  "middleName": "string",
+  "nullFieldList": {
+    "name": [
+      "string"
+    ]
+  },
+  "openingBalance": 0,
+  "openingBalanceAccount": {
+    "externalId": "string",
+    "internalId": "string",
+    "name": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "openingBalanceDate": "2018-08-30T05:24:55.663Z",
+  "password": "string",
+  "password2": "string",
+  "payablesAccount": {
+    "externalId": "string",
+    "internalId": "string",
+    "name": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "phone": "string",
+  "phoneticName": "string",
+  "pricingScheduleList": {
+    "pricingSchedule": [
+      {
+        "scheduleName": "string"
+      }
+    ],
+    "replaceAll": true
+  },
+  "printTransactions": true,
+  "purchaseOrderAmount": 0,
+  "purchaseOrderQuantity": 0,
+  "purchaseOrderQuantityDiff": 0,
+  "receiptAmount": 0,
+  "receiptQuantity": 0,
+  "receiptQuantityDiff": 0,
+  "representingSubsidiary": {
+    "externalId": "string",
+    "internalId": "string",
+    "name": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "requirePwdChange": false,
+  "rolesList": {
+    "roles": [
+      {
+        "selectedRole": {
+          "externalId": "string",
+          "internalId": "string",
+          "name": "string",
+          "type": {
+            "value": "account"
+          }
+        }
+      }
+    ],
+    "replaceAll": true
+  },
+  "subscriptionsList": {
+    "replaceAll": true,
+    "subscriptions": [
+      {
+        "subscribed": true,
+        "subscription": {
+          "externalId": "string",
+          "internalId": "string",
+          "name": "string",
+          "type": {
+            "value": "account"
+          }
+        }
+      }
+    ]
+  },
+  "subsidiary": {
+    "externalId": "string",
+    "internalId": "string",
+    "name": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "taxIdNum": "string",
+  "taxItem": {
+    "externalId": "string",
+    "internalId": "string",
+    "name": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "terms": {
+    "externalId": "string",
+    "internalId": "string",
+    "name": "string",
+    "type": {
+      "value": "account"
+    }
+  },
+  "url": "string",
+  "workCalendar": {
+    "externalId": "string",
+    "internalId": "string",
+    "name": "string",
+    "type": {
+      "value": "account"
+    }
+  }
+}
