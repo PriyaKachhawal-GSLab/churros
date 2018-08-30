@@ -25,7 +25,7 @@ suite.forElement('general', 'accounts', {
     let accountId = -1;
     let webPropertiesId = -1;
     let profileId = -1;
-    let customDataSourcesId = -1
+    
     it('should allow GET /accounts', () => {
         return cloud.get(test.api)
             .then(r => {
@@ -34,8 +34,10 @@ suite.forElement('general', 'accounts', {
 
     });
     it('should allow GET /accounts/account-summaries', () => {
-        return cloud.get(`${test.api}/account-summaries`)
-        expect(r.body.length).to.not.be.empty;
+        return cloud.get(`${test.api}/account-summaries`);
+			.then(r => {
+				expect(r.body.length).to.not.be.empty;
+			});
     });
     it('should allow CRUDS for /accounts/{id}/filters', () => {
         return cloud.get(test.api)
@@ -62,13 +64,15 @@ suite.forElement('general', 'accounts', {
             .then(r => cloud.cruds(`${test.api}/${accountId}/web-properties/${webPropertiesId}/adwords-links`, adwordsLinkPayload, chakram.put));
     });
     it('should allow GET /accounts/{id}/web-properties/{webPropertiesId}/custom-data-sources', () => {
-        return cloud.get(`${test.api}/${accountId}/web-properties/${webPropertiesId}/custom-data-sources`)
-        expect(r.body.length).to.not.be.empty;
+        return cloud.get(`${test.api}/${accountId}/web-properties/${webPropertiesId}/custom-data-sources`);
+        .then(r => {
+				expect(r.body.length).to.not.be.empty;
+			});
     });
 
     it('should allow RDS for /accounts/{id}/web-properties/${webPropertiesId}/custom-data-sources/{customDataSourcesId}/uploads', () => {
-        let customDataSourcesId = -1;
-        let uploadId = -1;
+
+		let uploadId = -1;
         return cloud.get(`${test.api}/${accountId}/web-properties/${webPropertiesId}/custom-data-sources/cKVHMm9NS8SmROqRTCyexw/uploads`)
             .then(r => uploadId = r.body[0].id)
             .then(r => cloud.get(`${test.api}/${accountId}/web-properties/${webPropertiesId}/custom-data-sources/cKVHMm9NS8SmROqRTCyexw/uploads/${uploadId}`))
@@ -89,7 +93,7 @@ suite.forElement('general', 'accounts', {
             .then(r => cloud.delete(`${test.api}/${accountId}/web-properties/${webPropertiesId}/entity-user-links/${entityUserLinksId}`));
     });
     it('should allow CRUDS for /accounts/{id}/web-properties/${webPropertiesId}/profiles', () => {
-        return cloud.cruds(`${test.api}/${accountId}/web-properties/${webPropertiesId}/profiles`, profilesPayload, chakram.put)
+        return cloud.cruds(`${test.api}/${accountId}/web-properties/${webPropertiesId}/profiles`, profilesPayload, chakram.put);
     });
     it('should allow CRUDS for /accounts/{id}/web-properties/${webPropertiesId}/profiles/${profileId}/entity-user-links', () => {
         let profileEntityUserLinksId = -1;
@@ -103,15 +107,15 @@ suite.forElement('general', 'accounts', {
             .then(r => cloud.delete(`${test.api}/${accountId}/web-properties/${webPropertiesId}/profiles/${profileId}/entity-user-links/${profileEntityUserLinksId}`));
     });
     it('should allow CRUS for /accounts/{id}/web-properties/${webPropertiesId}/profiles/${profileId}/experiments', () => {
-        return cloud.cruds(`${test.api}/${accountId}/web-properties/${webPropertiesId}/profiles/${profileId}/experiments`, experimentsPayload, chakram.put)
+        return cloud.cruds(`${test.api}/${accountId}/web-properties/${webPropertiesId}/profiles/${profileId}/experiments`, experimentsPayload, chakram.put);
     });
     it('should allow CRUS for /accounts/{id}/web-properties/${webPropertiesId}/profiles/${profileId}/goals', () => {
-        return cloud.crus(`${test.api}/${accountId}/web-properties/${webPropertiesId}/profiles/${profileId}/goals`, goalsPayload, chakram.put)
+        return cloud.crus(`${test.api}/${accountId}/web-properties/${webPropertiesId}/profiles/${profileId}/goals`, goalsPayload, chakram.put);
     });
     it('should allow CRUDS for /accounts/{id}/web-properties/${webPropertiesId}/profiles/${profileId}/profile-filter-links', () => {
-        return cloud.cruds(`${test.api}/${accountId}/web-properties/${webPropertiesId}/profiles/${profileId}/profile-filter-links`, profileFilterPayload, chakram.put)
+        return cloud.cruds(`${test.api}/${accountId}/web-properties/${webPropertiesId}/profiles/${profileId}/profile-filter-links`, profileFilterPayload, chakram.put);
     });
     it('should allow CRUDS for /accounts/{id}/web-properties/${webPropertiesId}/profiles/${profileId}/remarketing-audiences', () => {
-        return cloud.cruds(`${test.api}/${accountId}/web-properties/${webPropertiesId}/remarketing-audiences`, remarketingPayload, chakram.put)
+        return cloud.cruds(`${test.api}/${accountId}/web-properties/${webPropertiesId}/remarketing-audiences`, remarketingPayload, chakram.put);
     });
 });
