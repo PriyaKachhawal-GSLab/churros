@@ -1,4 +1,4 @@
 {
-    "name": "<<random.word>>",
+    "name": "<<random.uuid>>",
     "campaignId" : "you should get this from campaigns api"
 }

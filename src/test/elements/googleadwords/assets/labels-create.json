@@ -1,4 +1,4 @@
 {
     "LabelType": "TextLabel",
-    "name": "<<random.word>>"
+    "name": "<<random.uuid>>"
 }

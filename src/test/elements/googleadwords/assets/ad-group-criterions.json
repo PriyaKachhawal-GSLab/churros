@@ -1,7 +1,7 @@
 {
   "criterion": {
     "matchType": "BROAD",
-    "text": "<<random.word>>",
+    "text": "<<random.uuid>>",
     "type": "KEYWORD",
     "CriterionType": "Keyword"
   },

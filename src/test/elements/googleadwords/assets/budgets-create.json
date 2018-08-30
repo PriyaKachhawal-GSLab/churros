@@ -3,5 +3,5 @@
       "microAmount": 1000000,
       "ComparableValue.Type": "Money"
     },
-    "name": "<<random.word>>"
+    "name": "<<random.uuid>>"
   }
