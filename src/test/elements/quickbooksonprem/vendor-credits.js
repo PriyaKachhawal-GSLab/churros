@@ -2,8 +2,8 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const payload = require('./assets/vendor-credit-create');
-const updatePayload = require('./assets/vendor-credit-update');
+const payload = require('./assets/vendor-credits-create');
+const updatePayload = require('./assets/vendor-credits-update');
 
 suite.forElement('finance', 'vendor-credits', { payload: payload }, (test) => {
   it('should support CRUDS, pagination for /hubs/finance/vendor-credits', () => {
