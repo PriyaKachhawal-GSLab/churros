@@ -94,12 +94,12 @@
     }
   },
   "eligibleForCommission": true,
-  "email": "string",
+  "email": "string@gmail.com",
   "emailPreference": {
     "value": "_default"
   },
   "emailTransactions": true,
-  "entityId": "string",
+  "entityId": "string1",
   "expenseAccount": {
     "externalId": "string",
     "internalId": "string",
@@ -108,7 +108,7 @@
       "value": "account"
     }
   },
-  "externalId": "string",
+  "externalId": "string11",
   "fax": "string",
   "faxTransactions": true,
   "firstName": "string",

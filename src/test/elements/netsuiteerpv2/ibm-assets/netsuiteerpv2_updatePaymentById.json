@@ -1,176 +1,120 @@
 {
-  "tranId": "Jrnl Ent 402",
-  "memo": "journal ent 402",
-  "currency": {
-    "internalId": "2",
-    "name": "USA"
+  "tranId": "PAY000060011",
+  "memo": "cust memo 6001",
+  "debitCardIssueNo": "",
+  "ccSecurityCodeMatch": {
+    "value": "_x"
   },
-  "department": {
-    "internalId": "4",
-    "name": "Service"
+  "ccAvsZipMatch": {
+    "value": "_x"
   },
-  "accountingBook": {
-    "internalId": "1",
-    "name": "acc book"
+  "validFrom": null,
+  "ccName": "Aaron Abbottt",
+  "pnRefNum": "PINREF006797",
+  "arAcct": {
+    "internalId": "3",
+    "name": "Ar Acct"
   },
   "accountingBookDetailList": {
     "accountingBookDetail": [
       {
         "accountingBook": {
           "internalId": "2",
-          "name": "account book123"
+          "name": "account book345"
         },
         "currency": {
-          "internalId": "3",
+          "internalId": "2",
           "name": "USA"
         },
-        "exchangeRate": 6.56873
+        "exchangeRate": 2.36873
       }
     ]
   },
+  "ccNumber": "5555555555554444",
+  "payment": 14,
   "customFieldList": {
     "customField": [
       {
-        "internalId": "2140",
+        "internalId": "3140",
         "scriptId": "custcol_pfc_pfconfigurator",
         "value": false
       }
     ]
   },
-  "reversalDefer": false,
-  "reversalDate": "2018-07-20T07:00:00Z",
-  "customForm":{
-	"internalId":"222",
-	"name":"HM Journal Entry"
-  },
-  "lineList": {
-    "line": [
-      {
-        "account": {
-          "internalId": "78",
-          "name": "6100 Insurance Expense"
-        },
-        "debit": 100.45,
-        "startDate": "2018-07-21T07:00:00Z",
-        "endDate": "2018-07-28T07:00:00Z",
-        "memo": "memo detail03",
-        "taxCode": {
-          "internalId": "1",
-          "name": "tx cd012"
-        },
-        "eliminate": false,
-        "residual": "2.37322",
-        "tax1Acct": {
-          "internalId": "1",
-          "name": "tx acct022"
-        },
-        "tax1Amt": 54.45623,
-        "schedule": {
-          "internalId": "1",
-          "name": "schedule 022"
-        },
-        "scheduleNum": null,
-        "location": null,
-        "_class": {
-          "internalId": "12",
-          "name": "Consumer Goods"
-        },
-        "grossAmt": 24.45623,
-        "revenueRecognitionRule": {
-          "internalId": "10",
-          "name": "Consumer Goods"
-        },
-        "credit": null,
-        "taxRate1": 3.34523,
-        "entity": null,
-        "department": {
-          "internalId": "5",
-          "name": "dept 05"
-        },
-        "customFieldList": {
-          "customField": [
-            {
-              "internalId": "2140",
-              "scriptId": "custcol_pfc_pfconfigurator",
-              "value": false
-            }
-          ]
-        }
-      },
-      {
-        "account": {
-          "internalId": "78",
-          "name": "6100 Insurance Expense"
-        },
-        "credit": 100.45,
-        "startDate": "2018-07-22T07:00:00Z",
-        "endDate": "2018-07-29T07:00:00Z",
-        "memo": "memo detail04",
-        "taxCode": {
-          "internalId": "1",
-          "name": "tx cd022"
-        },
-        "eliminate": false,
-        "residual": "23.34231",
-        "tax1Acct": {
-          "internalId": "1",
-          "name": "tx acct022"
-        },
-        "tax1Amt": 14.45623,
-        "schedule": {
-          "internalId": "1",
-          "name": "schedule 012"
-        },
-        "location": null,
-        "_class": {
-          "internalId": "11",
-          "name": "Consumer Goods"
-        },
-        "grossAmt": 42.45623,
-        "revenueRecognitionRule": {
-          "internalId": "11",
-          "name": "Consumer Goods"
-        },
-        "taxRate1": 13.34523,
-        "entity": null,
-        "department": {
-          "internalId": "2",
-          "name": "dept 21"
-        },
-        "customFieldList": {
-          "customField": [
-            {
-              "internalId": "1140",
-              "scriptId": "custcol_pfc_pfconfigurator",
-              "value": false
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "externalId": "ext4002",
-  "subsidiary": {
-    "internalId": "6",
-    "name": "Honeycomb Metal Services"
-  },
-  "toSubsidiary": {
-    "internalId": "3",
-    "name": "Sub sidery 3"
-  },
+  "autoApply": false,
+  "ccSecurityCode": "sec_CD_459",
   "postingPeriod": {
     "internalId": "200",
     "name": "Jul 2018"
   },
-  "location": {
-    "internalId": "45",
-    "name": "loca457"
+  "paymentMethod": {
+    "internalId": "4",
+    "name": "Visa"
   },
+  "tranDate": "2018-07-27T07:00:00Z",
   "_class": {
-    "internalId": "17",
+    "internalId": "11",
     "name": "Consumer Goods"
   },
-  "nullFieldList": ["nullfield3","nullfield4"],
-  "reversalEntry": "rev entry123",
-  "tranDate": "2018-07-23T07:00:00Z"
+  "nullFieldList": [
+    "nullfield3",
+    "nullfield4"
+  ],
+  "ccExpireDate": "2022-06-04T07:00:00Z",
+  "creditCardProcessor": {
+    "internalId": "2",
+    "name": "Test Name2"
+  },
+  "checkNum": "CHK000459",
+  "isRecurringPayment": false,
+  "ccStreet": "15 Broadway123",
+  "currency": {
+    "internalId": "1",
+    "name": "USA"
+  },
+  "ignoreAvs": true,
+  "department": {
+    "internalId": "4",
+    "name": "Production : Assembly"
+  },
+  "ccZipCode": "80245",
+  "depositList": {
+    "deposit": [
+      {}
+    ]
+  },
+  "authCode": "AUTHCD00899",
+  "chargeIt": false,
+  "customForm": {
+    "internalId": "149",
+    "name": "HM Customer Payment"
+  },
+  "applyList": null,
+  "externalId": "ext60011",
+  "ccApproved": true,
+  "undepFunds": false,
+  "creditList": {
+    "credit": [
+      {}
+    ]
+  },
+  "ccAvsStreetMatch": {
+    "value": "_n"
+  },
+  "location": {
+    "internalId": "4",
+    "name": "01: San Francisco : QA Hold"
+  },
+  "creditCard": {
+    "internalId": "148",
+    "name": "cc card2"
+  },
+  "account": {
+    "internalId": "3",
+    "name": "1008 Cash on Hand"
+  },
+  "customer": {
+    "internalId": "77",
+    "name": "Aaron Abbott"
+  }
 }

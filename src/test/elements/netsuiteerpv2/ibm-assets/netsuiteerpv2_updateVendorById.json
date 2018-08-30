@@ -34,8 +34,7 @@
     ],
     "replaceAll": false
   },
-  "altName": "TestName-3",
-  "balancePrimary": 64.37,
+  "altName": "TestName-2",
   "billPay": false,
   "category": {
     "externalId": "7851",
@@ -43,24 +42,13 @@
     "type": "nexus"
   },
   "comments": "This company is in loss",
-  "companyName": "vene-test-max5",
+  "companyName": "vene-test-max",
   "creditLimit": 108.86,
-  "currency": {
-    "internalId": "2",
-    "name": "USA",
-    "externalId": "896",
-    "type": {
-      "value": "currency"
-    }
-  },
   "currencyList": {
     "vendorCurrency": [
       {
-        "balance": 10.89,
-        "unbilledOrders": 72.19,
         "currency": {
           "internalId": "3",
-          "name": "USA",
           "externalId": "581",
           "type": "bin"
         }
@@ -87,16 +75,15 @@
   "email": "ven-test@gmail.com",
   "emailPreference": "_default",
   "emailTransactions": false,
-  "entityId": "vene-python-4",
+  "entityId": "vene-test-upda2te",
   "expenseAccount": {
     "externalId": "87521",
     "internalId": "10",
     "type": "bin"
   },
-  "externalId": "4t873h181",
+  "externalId": "4t873452",
   "fax": "857-y918-t",
   "faxTransactions": false,
-  "firstName": "Ven first",
   "giveAccess": false,
   "incoterm": {
     "externalId": "9827",
@@ -109,10 +96,7 @@
   "isJobResourceVend": false,
   "isPerson": false,
   "laborCost": 62.34,
-  "lastName": "Connors",
   "legalName": "vene-test78",
-  "middleName": "Billy",
-  "mobilePhone": "716-378-878",
   "nullFieldList": null,
   "openingBalance": 387.38,
   "openingBalanceDate": "2016-01-24T08:00:00Z",
@@ -127,9 +111,7 @@
   "phoneticName": "BillsC",
   "pricingScheduleList": {
     "pricingSchedule": [
-      {
-        "scheduleName": "test-schedule"
-      }
+      {}
     ]
   },
   "printTransactions": false,
@@ -226,8 +208,6 @@
     "externalId": "896",
     "type": "check"
   },
-  "unbilledOrders": 73.123,
-  "unbilledOrdersPrimary": 56786.27,
   "url": "http://www.test-url.com",
   "workCalendar": {
     "internalId": "1",
