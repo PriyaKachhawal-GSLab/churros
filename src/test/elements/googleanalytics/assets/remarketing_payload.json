@@ -1,0 +1,40 @@
+{
+  "kind": "analytics#remarketingAudience",
+      "name": "<<random.word>>",
+    "linkedAdAccounts": [
+    {
+      "kind": "analytics#linkedForeignAccount",
+      "type":"ADWORDS_LINKS",
+      "linkedAccountId":"408-711-0117",
+      
+        "eligibleForSearch": true
+    }
+  ],
+  "linkedViews": [
+    "179530550"
+  ],
+  "audienceType": "STATE_BASED",
+  "audienceDefinition": {
+    "includeConditions": {
+      "kind": "analytics#includeConditions",
+      "isSmartList": false,
+      "segment": "",
+      "membershipDurationDays": 2,
+      "daysToLookBack": 2
+    }
+  },
+  "stateBasedAudienceDefinition": {
+    "includeConditions": {
+      "kind": "analytics#includeConditions",
+      "isSmartList": false,
+      "segment": "",
+      "membershipDurationDays": 30,
+      "daysToLookBack": 30
+    },
+    "excludeConditions": {
+      "segment": "sessions::condition::ga:city==London",
+      "exclusionDuration": "TEMPORARY"
+    }
+  }
+
+}

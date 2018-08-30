@@ -1,0 +1,13 @@
+{
+  "kind": "analytics#experiment",
+  "name": "test",
+  "description": "test",
+  "status":"DRAFT",
+  "variations": [
+    {
+      "name": "test",
+      "url": "indexB.html"
+      }
+  ],
+  "editableInGaUi": true
+}

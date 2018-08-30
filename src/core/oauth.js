@@ -308,6 +308,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       return browser.getCurrentUrl();
     case 'gmail':
     case 'googlesuite':
+	case 'googleanalytics':
     case 'googlesheets':
     case 'googledrive':
     case 'googlesheetsv4':

@@ -1,0 +1,11 @@
+{
+  "userRef": {
+    "email": "abhay.pore@gslab.com"
+  },
+  "permissions": {
+    "local": [
+      "EDIT",
+      "MANAGE_USERS"
+    ]
+  }
+}

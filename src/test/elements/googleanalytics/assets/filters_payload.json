@@ -1,0 +1,12 @@
+{
+  "name": "myown",
+  "type": "INCLUDE",
+  "includeDetails": {
+    "caseSensitive": false,
+    "field": "PAGE_REQUEST_URI",
+    "expressionValue": "$",
+    "fieldIndex": 0,
+    "kind": "analytics#filterExpression",
+    "matchType": "BEGINS_WITH"
+  }
+}
