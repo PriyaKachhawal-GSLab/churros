@@ -34,7 +34,7 @@ suite.forElement('general', 'accounts', {
 
     });
     it('should allow GET /accounts/account-summaries', () => {
-        return cloud.get(`${test.api}/account-summaries`);
+        return cloud.get(`${test.api}/account-summaries`)
 			.then(r => {
 				expect(r.body.length).to.not.be.empty;
 			});
@@ -64,7 +64,7 @@ suite.forElement('general', 'accounts', {
             .then(r => cloud.cruds(`${test.api}/${accountId}/web-properties/${webPropertiesId}/adwords-links`, adwordsLinkPayload, chakram.put));
     });
     it('should allow GET /accounts/{id}/web-properties/{webPropertiesId}/custom-data-sources', () => {
-        return cloud.get(`${test.api}/${accountId}/web-properties/${webPropertiesId}/custom-data-sources`);
+        return cloud.get(`${test.api}/${accountId}/web-properties/${webPropertiesId}/custom-data-sources`)
         .then(r => {
 				expect(r.body.length).to.not.be.empty;
 			});
