@@ -68,7 +68,7 @@ suite.forElement('documents', 'folders', (test) => {
       .then(r => folder2 = r.body)
       .then(r => cloud.delete(`/hubs/documents/folders/${folder2.id}`));
   });
-  test.withApi(`${test.api}/contents`).withOptions({ qs: { path: '/' } }).should.supportNextPagePagination(1);
+  test.withApi(`${test.api}/contents`).withOptions({ qs: { path: '/' } }).should.supportNextPagePagination(3, false);
   it('should allow GET /folders/contents and GET /folders/:id/contents', () => {
     const cb = (folder) => {
       return cloud.withOptions({ qs: { path: folder.path } }).get('/hubs/documents/folders/contents')

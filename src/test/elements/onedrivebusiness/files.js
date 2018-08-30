@@ -37,6 +37,22 @@ suite.forElement('documents', 'files', (test) => {
       .then(r => cloud.delete(`/hubs/documents/files/${file.id}`));
   };
 
+
+  before(() => cloud.withOptions({ qs: { path: `/brady-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` } }).postFile(test.api, path)
+    .then(r => {
+      fileId = r.body.id;
+      filePath = r.body.path;
+    })
+    .then(() => cloud.withOptions({ qs: { path: `/brady#${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` } }).postFile(test.api, path)
+      .then(r => {
+        hashFileId = r.body.id;
+        hashFilePath = r.body.path;
+      }))
+  );
+
+  after(() => cloud.delete(`${test.api}/${fileId}`)
+    .then(() => cloud.delete(`${test.api}/${hashFileId}`)));
+
   let query1 = { path: `/a-${tools.randomStr(5)}/brady-${tools.random()}.jpg` };
   let id;
   it('should allow POST file with implicit path', () => {
@@ -159,22 +175,6 @@ suite.forElement('documents', 'files', (test) => {
     };
     return fileWrap(cb);
   });
-
-  before(() => cloud.withOptions({ qs: { path: `/brady-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` } }).postFile(test.api, path)
-    .then(r => {
-      fileId = r.body.id;
-      filePath = r.body.path;
-    }));
-
-  after(() => cloud.delete(`${test.api}/${fileId}`));
-
-  before(() => cloud.withOptions({ qs: { path: `/brady#${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` } }).postFile(test.api, path)
-    .then(r => {
-      hashFileId = r.body.id;
-      hashFilePath = r.body.path;
-    }));
-
-  after(() => cloud.delete(`${test.api}/${hashFileId}`));
 
   it('it should allow RS for documents/files/:id/revisions', () => {
     return cloud.get(`${test.api}/${fileId}/revisions`)
