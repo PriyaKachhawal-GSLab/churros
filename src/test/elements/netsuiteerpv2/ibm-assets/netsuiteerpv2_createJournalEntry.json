@@ -1,5 +1,5 @@
 {
-  "tranId": "JrnlEnt302",
+  "tranId": "JrnlEnt3021",
   "memo": "Jrnl Ent 302",
   "approved": true,
   "currency": {
@@ -40,9 +40,9 @@
   },
   "reversalDefer": true,
   "reversalDate": "2018-07-17T07:00:00Z",
-  "customForm":{
-	"internalId":"222",
-	"name":"HM Journal Entry"
+  "customForm": {
+    "internalId": "222",
+    "name": "HM Journal Entry"
   },
   "lineList": {
     "line": [
@@ -150,7 +150,7 @@
       }
     ]
   },
-  "externalId": "ext1001",
+  "externalId": "ext10011",
   "subsidiary": {
     "internalId": "6",
     "name": "Honeycomb Metal Services"
@@ -171,7 +171,10 @@
     "internalId": "13",
     "name": "Consumer Goods"
   },
-  "nullFieldList": ["nullfield1","nullfield2"],
+  "nullFieldList": [
+    "nullfield1",
+    "nullfield2"
+  ],
   "reversalEntry": "rev entry",
   "tranDate": "2018-07-12T07:00:00Z"
 }

@@ -3,8 +3,8 @@
     "internalId": "-2",
     "name": "Standard Customer Form"
   },
-  "entityId": "Test-PATCH-prospects",
-  "externalId": "prospect002",
+  "entityId": "Test-PATCH-prospect",
+  "externalId": "prospect001",
   "isPerson": true,
   "salutation": "Dr",
   "firstName": "FUpdate",
@@ -259,6 +259,5 @@
   "printTransactions": false,
   "category": {
     "internalId": "13"
-  },
-  "url": "http://www.testpatch.com"
+  }
 }

@@ -1,6 +1,6 @@
 {
-  "acctName": "AccSample60",
-  "acctNumber": "acc0060",
+  "acctName": "AccSample510",
+  "acctNumber": "acc000501",
   "acctType": {
     "value": "_bank"
   },
@@ -39,9 +39,6 @@
         "name": "Honeycomb Holdings Inc."
       }
     ]
-  },
-  "translationsList": {
-    "replaceAll": false
   },
   "customFieldList": {
     "customField": [

@@ -26,8 +26,6 @@
     "override": false,
     "addrText": "Amazon\nPO Box 81226\nSeattle WA 98108-1226\nUnited States"
   },
-
-
   "currencyName": "USA",
   "currency": {
     "internalId": "1",
@@ -158,7 +156,7 @@
     ],
     "replaceAll": true
   },
-  "externalId": "7515",
+  "externalId": "75151",
   "fax": "415-555-5750",
   "fob": "Afghanistan",
   "intercoStatus": "_paired",
@@ -269,8 +267,6 @@
     "addrText": "Ramsey Inc.\nSan Francisco\n1500 3rd St\nSan Mateo CA 94403\nUnited States",
     "addrPhone": "(650) 627-1000"
   },
-  
- 
   "subTotal": 892.23,
   "subsidiary": {
     "internalId": "1",

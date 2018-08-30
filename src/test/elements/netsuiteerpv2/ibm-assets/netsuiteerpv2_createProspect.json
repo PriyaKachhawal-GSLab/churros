@@ -258,6 +258,5 @@
   "printTransactions": true,
   "category": {
     "internalId": "1"
-  },
-  "url": "http://www.testpost.com"
+  }
 }

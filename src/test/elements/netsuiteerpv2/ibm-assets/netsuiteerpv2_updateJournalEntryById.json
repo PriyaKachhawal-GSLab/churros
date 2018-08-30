@@ -1,70 +1,71 @@
 {
-  "tranId": "Jrnl Ent 402",
-  "memo": "journal ent 402",
+  "tranId": "JrnlEnt3021",
+  "memo": "Jrnl Ent 302",
+  "approved": true,
   "currency": {
-    "internalId": "2",
+    "internalId": "1",
     "name": "USA"
   },
   "department": {
-    "internalId": "4",
+    "internalId": "3",
     "name": "Service"
   },
   "accountingBook": {
     "internalId": "1",
-    "name": "acc book"
+    "name": "Service"
   },
   "accountingBookDetailList": {
     "accountingBookDetail": [
       {
         "accountingBook": {
-          "internalId": "2",
+          "internalId": "3",
           "name": "account book123"
         },
         "currency": {
-          "internalId": "3",
+          "internalId": "1",
           "name": "USA"
         },
-        "exchangeRate": 6.56873
+        "exchangeRate": 4.56873
       }
     ]
   },
   "customFieldList": {
     "customField": [
       {
-        "internalId": "2140",
+        "internalId": "3140",
         "scriptId": "custcol_pfc_pfconfigurator",
         "value": false
       }
     ]
   },
-  "reversalDefer": false,
-  "reversalDate": "2018-07-20T07:00:00Z",
-  "customForm":{
-	"internalId":"222",
-	"name":"HM Journal Entry"
+  "reversalDefer": true,
+  "reversalDate": "2018-07-17T07:00:00Z",
+  "customForm": {
+    "internalId": "222",
+    "name": "HM Journal Entry"
   },
   "lineList": {
     "line": [
       {
         "account": {
-          "internalId": "78",
+          "internalId": "77",
           "name": "6100 Insurance Expense"
         },
-        "debit": 100.45,
-        "startDate": "2018-07-21T07:00:00Z",
-        "endDate": "2018-07-28T07:00:00Z",
-        "memo": "memo detail03",
+        "debit": 200,
+        "startDate": "2018-07-17T07:00:00Z",
+        "endDate": "2018-07-26T07:00:00Z",
+        "memo": "memo detail02",
         "taxCode": {
           "internalId": "1",
           "name": "tx cd012"
         },
-        "eliminate": false,
-        "residual": "2.37322",
+        "eliminate": true,
+        "residual": "4.34523",
         "tax1Acct": {
           "internalId": "1",
           "name": "tx acct022"
         },
-        "tax1Amt": 54.45623,
+        "tax1Amt": 34.45623,
         "schedule": {
           "internalId": "1",
           "name": "schedule 022"
@@ -72,25 +73,25 @@
         "scheduleNum": null,
         "location": null,
         "_class": {
-          "internalId": "12",
+          "internalId": "14",
           "name": "Consumer Goods"
         },
-        "grossAmt": 24.45623,
+        "grossAmt": 34.45623,
         "revenueRecognitionRule": {
-          "internalId": "10",
+          "internalId": "14",
           "name": "Consumer Goods"
         },
         "credit": null,
-        "taxRate1": 3.34523,
+        "taxRate1": 23.34523,
         "entity": null,
         "department": {
-          "internalId": "5",
-          "name": "dept 05"
+          "internalId": "4",
+          "name": "dept 03"
         },
         "customFieldList": {
           "customField": [
             {
-              "internalId": "2140",
+              "internalId": "3140",
               "scriptId": "custcol_pfc_pfconfigurator",
               "value": false
             }
@@ -99,48 +100,48 @@
       },
       {
         "account": {
-          "internalId": "78",
+          "internalId": "77",
           "name": "6100 Insurance Expense"
         },
-        "credit": 100.45,
-        "startDate": "2018-07-22T07:00:00Z",
-        "endDate": "2018-07-29T07:00:00Z",
-        "memo": "memo detail04",
+        "credit": 200,
+        "startDate": "2018-07-18T07:00:00Z",
+        "endDate": "2018-07-27T07:00:00Z",
+        "memo": "memo detail03",
         "taxCode": {
-          "internalId": "1",
+          "internalId": "2",
           "name": "tx cd022"
         },
-        "eliminate": false,
-        "residual": "23.34231",
+        "eliminate": true,
+        "residual": "3.34523",
         "tax1Acct": {
           "internalId": "1",
           "name": "tx acct022"
         },
-        "tax1Amt": 14.45623,
+        "tax1Amt": 24.45623,
         "schedule": {
           "internalId": "1",
           "name": "schedule 012"
         },
         "location": null,
         "_class": {
-          "internalId": "11",
+          "internalId": "14",
           "name": "Consumer Goods"
         },
-        "grossAmt": 42.45623,
+        "grossAmt": 44.45623,
         "revenueRecognitionRule": {
-          "internalId": "11",
+          "internalId": "14",
           "name": "Consumer Goods"
         },
-        "taxRate1": 13.34523,
+        "taxRate1": 33.34523,
         "entity": null,
         "department": {
-          "internalId": "2",
-          "name": "dept 21"
+          "internalId": "4",
+          "name": "dept 01"
         },
         "customFieldList": {
           "customField": [
             {
-              "internalId": "1140",
+              "internalId": "3140",
               "scriptId": "custcol_pfc_pfconfigurator",
               "value": false
             }
@@ -149,28 +150,31 @@
       }
     ]
   },
-  "externalId": "ext4002",
+  "externalId": "ext10011",
   "subsidiary": {
     "internalId": "6",
     "name": "Honeycomb Metal Services"
   },
   "toSubsidiary": {
-    "internalId": "3",
-    "name": "Sub sidery 3"
+    "internalId": "4",
+    "name": "Honeycomb Metal Services"
   },
   "postingPeriod": {
-    "internalId": "200",
+    "internalId": "300",
     "name": "Jul 2018"
   },
   "location": {
-    "internalId": "45",
+    "internalId": "46",
     "name": "loca457"
   },
   "_class": {
-    "internalId": "17",
+    "internalId": "13",
     "name": "Consumer Goods"
   },
-  "nullFieldList": ["nullfield3","nullfield4"],
-  "reversalEntry": "rev entry123",
-  "tranDate": "2018-07-23T07:00:00Z"
+  "nullFieldList": [
+    "nullfield1",
+    "nullfield2"
+  ],
+  "reversalEntry": "rev entry",
+  "tranDate": "2018-07-12T07:00:00Z"
 }

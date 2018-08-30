@@ -72,10 +72,10 @@
     "internalId": "-2",
     "name": "Standard Customer Form"
   },
-  "entityId": "TEST-POST-IBM",
+  "entityId": "TEST-POST-IBM-Pass1",
   "accountNumber": "22334455",
   "middleName": "M",
-  "externalId": "ext00011",
+  "externalId": "ext00022",
   "isPerson": true,
   "companyName": "GSLAB",
   "parent": {
@@ -258,6 +258,5 @@
   "printTransactions": true,
   "category": {
     "internalId": "1"
-  },
-  "url": "http://www.gslab.com"
+  }
 }

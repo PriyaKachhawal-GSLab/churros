@@ -57,7 +57,6 @@
     ],
     "replaceAll": true
   },
-  "internalId": "306831",
   "exchangeRate": 1,
   "recurMonthly": 0,
   "fax": "(815) 389-2098",
@@ -141,7 +140,7 @@
   "tranDate": "2017-07-20T12:30:00+05:30",
   "shipIsResidential": false,
   "status": "Open",
-  "tranId": "QUO00001047",
+  "tranId": "QUO000010471",
   "includeInForecast": false,
   "recurQuarterly": 0,
   "partnersList": {
@@ -237,7 +236,7 @@
     "type": null
   },
   "isTaxable": false,
-  "externalId": "fpssoawaoddddddtfpoddduelyhjy",
+  "externalId": "fpssoawaoddddddtfpoddduelyhjy2",
   "itemList": {
     "item": [
       {

@@ -162,7 +162,7 @@
     ],
     "replaceAll": true
   },
-  "externalId": "7584",
+  "externalId": "75841",
   "fax": "415-555-5750",
   "fob": "Afghanistan",
   "intercoStatus": "_paired",
@@ -174,7 +174,6 @@
       "value": "account"
     }
   },
-  "internalId": "308232",
   "itemList": {
     "item": [
       {
@@ -273,7 +272,7 @@
     "addrText": "Ramsey Inc.\nSan Francisco\n1500 3rd St\nSan Mateo CA 94403\nUnited States",
     "addrPhone": "(650) 627-1000"
   },
-  "source": "75hg",
+  "source": "75hg1",
   "status": "Approved by Supervisor/Pending Receipt",
   "subTotal": 892.23,
   "subsidiary": {
@@ -295,6 +294,6 @@
   "toBeFaxed": false,
   "toBePrinted": false,
   "tranDate": "2018-07-18T07:00:00Z",
-  "tranId": "PUR00001664",
+  "tranId": "PUR000016641",
   "vatRegNum": "8757"
 }

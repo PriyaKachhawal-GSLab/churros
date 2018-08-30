@@ -21,7 +21,6 @@
   },
   "fax": "1 (866) 830-5779",
   "giveAccess": true,
-  "homePhone": "1 (866) 830-5568",
   "subsidiary": {
     "internalId": "1",
     "name": "Honeycomb Mfg."
@@ -32,9 +31,7 @@
   "globalSubscriptionStatus": {
     "value": "_softOptIn"
   },
-  "salutation": "Mr",
   "lastName": "LPOST",
-  "title": "CEO",
   "billPay": false,
   "sendEmail": true,
   "currency": {
@@ -72,10 +69,10 @@
     "internalId": "-2",
     "name": "Standard Customer Form"
   },
-  "entityId": "TEST-POST-IBM",
-  "accountNumber": "22334455",
+  "entityId": "TEST-POST-IBM-2",
+  "accountNumber": "21122334455",
   "middleName": "M",
-  "externalId": "ext00011",
+  "externalId": "ext120111",
   "isPerson": true,
   "companyName": "GSLAB",
   "parent": {
@@ -88,7 +85,6 @@
     "internalId": "23"
   },
   "defaultOrderPriority": 9,
-  "altEmail": "individuall@gmail.com",
   "altPhone": "1 (866) 830-5566",
   "currencyList": {
     "currency": [

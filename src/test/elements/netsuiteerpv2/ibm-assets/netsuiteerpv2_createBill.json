@@ -64,12 +64,10 @@
     "internalId": "50",
     "name": "Standard Vendor Bill"
   },
-
   "subsidiary": {
     "internalId": "1",
     "name": "Honeycomb Mfg."
   },
-
   "postingPeriod": {
     "internalId": "301",
     "name": "Aug 2018"

@@ -3,8 +3,8 @@
     "internalId": "-2",
     "name": "Standard Customer Form"
   },
-  "entityId": "Test-PATCh-iBM",
-  "externalId":"extp00022",
+  "entityId": "Test-PATCh-iBM-1",
+  "externalId": "ext000132",
   "isPerson": true,
   "salutation": "Dr",
   "firstName": "FUpdate",
@@ -34,7 +34,6 @@
     "internalId": "1",
     "name": "Honeycomb Mfg."
   },
-   "url": "http://www.ukpoint.com",
   "addressbookList": {
     "addressbook": [
       {
