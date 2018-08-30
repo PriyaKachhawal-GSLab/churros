@@ -45,12 +45,12 @@ suite.forElement('general', 'ad-group-criterions', (test) => {
 
   it(`should allow GET with where CriteriaType= ${globalAdGroupCriterionPayload.criterion.type}`, () => {
     return cloud.withOptions({ qs: { where: `CriteriaType = '${globalAdGroupCriterionPayload.criterion.type}'` } }).get(`/hubs/general/ad-groups/${globalAdGroupId}/ad-group-criterions`)
-      .then(r => expect(r.body.filter(obj => obj.criterion.type === `${globalAdGroupCriterionPayload.criterion.type}`)).to.not.be.empty)
+      .then(r => expect(r.body.filter(obj => obj.criterion.type === `${globalAdGroupCriterionPayload.criterion.type}`)).to.not.be.empty);
   });
 
   it(`should allow CRDS for /hubs/general/ad-groups/${globalAdGroupId}/ad-group-criterions`, () => {
-    return cloud.crds(`/hubs/general/ad-groups/${globalAdGroupId}/ad-group-criterions`, adGroupCriterionPayload)
-  })
+    return cloud.crds(`/hubs/general/ad-groups/${globalAdGroupId}/ad-group-criterions`, adGroupCriterionPayload);
+  });
 
   it(`should allow pagination for adgroup-criterions`, () => {
     let adGroupCriterionId, page1, page2;

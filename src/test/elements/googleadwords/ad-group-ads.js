@@ -45,12 +45,12 @@ suite.forElement('general', 'ad-group-ads', (test) => {
 
   it(`should allow GET with where Id= ${globalAdId}`, () => {
     return cloud.withOptions({ qs: { where: `Id = '${globalAdId}'` } }).get(`/hubs/general/ad-groups/${globalAdGroupId}/ads`)
-      .then(r => expect(r.body.filter(obj => obj.id === `${globalAdId}`)).to.not.be.empty)
+      .then(r => expect(r.body.filter(obj => obj.id === `${globalAdId}`)).to.not.be.empty);
   });
 
   it(`should allow CRDS for /hubs/general/ad-groups/${globalAdGroupId}/ads`, () => {
-    return cloud.crds(`/hubs/general/ad-groups/${globalAdGroupId}/ads`, adPayload)
-  })
+    return cloud.crds(`/hubs/general/ad-groups/${globalAdGroupId}/ads`, adPayload);
+  });
 
   it(`should allow pagination for ads`, () => {
     let adId, page1, page2;

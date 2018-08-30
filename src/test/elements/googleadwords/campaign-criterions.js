@@ -35,11 +35,11 @@ suite.forElement('general', 'campaign-criterions', (test) => {
 
   it(`should allow GET with where CriteriaType= ${globalCampaignCriterionPayload.criterion.type}`, () => {
     return cloud.withOptions({ qs: { where: `CriteriaType = '${globalCampaignCriterionPayload.criterion.type}'` } }).get(`/campaigns/${globalCampaignCriterionPayload.campaignId}/campaign-criterions`)
-      .then(r => expect(r.body.filter(obj => obj.criterion.type === `${globalCampaignCriterionPayload.criterion.type}`)).to.not.be.empty)
+      .then(r => expect(r.body.filter(obj => obj.criterion.type === `${globalCampaignCriterionPayload.criterion.type}`)).to.not.be.empty);
   });
 
   it(`should allow CRDS for campaign-criterions`, () => {
-    return cloud.crds(`/campaigns/${globalCampaignId}/campaign-criterions`, campaignCriterionPayload)
+    return cloud.crds(`/campaigns/${globalCampaignId}/campaign-criterions`, campaignCriterionPayload);
   });
 
   it(`should allow pagination for campaign-criterions`, () => {
