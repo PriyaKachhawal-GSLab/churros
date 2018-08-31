@@ -1,0 +1,18 @@
+{
+  "AccountId": "2c92c0fb6078ce850160959703b60c8a",
+  "AutoRenew": false,
+  "ContractAcceptanceDate": "2018-03-12",
+  "ContractEffectiveDate": "2018-03-12",
+  "CpqBundleJsonId__QT": "qt val2",
+  "InitialTermPeriodType": "Month",
+  "IsInvoiceSeparate": false,
+  "Notes": "test-ven notes1",
+  "OpportunityCloseDate__QT": "2018-03-12",
+  "OpportunityName__QT": "QT valname",
+  "QuoteBusinessType__QT": "New",
+  "QuoteNumber__QT": "QT-name",
+  "QuoteType__QT": "New",
+  "RenewalSetting": "RENEW_WITH_SPECIFIC_TERM",
+  "ServiceActivationDate": "2018-03-12",
+  "TermType": "EVERGREEN"
+}

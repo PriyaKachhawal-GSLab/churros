@@ -1,0 +1,12 @@
+{
+    "Status": "Processed",
+    "AccountId": "8f12a6d205cc9c986cd7395fb07f0752",
+    "AccountingCode": "Credit Card",
+    "PaymentMethodId": "8f12a6d2d9d47bcc7a4df4aa26a2efd5",
+    "Amount": 101,
+    "AppliedCreditBalanceAmount": 101,
+    "Type": "Electronic",
+    "ReferenceId": "6444602.832957139",
+    "Gateway": "Test Gateway",
+    "EffectiveDate": "2017-12-21"
+}
