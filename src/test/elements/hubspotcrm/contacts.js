@@ -32,6 +32,11 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
       .then(r => cloud.delete(`${test.api}/${contactId}`));
   });
 
+  //Need to skip as a valid user token is not available for testing	
+  it.skip('should allow GET on contacts/{userToken}/profile using user token', () => {
+      return => cloud.get(`${test.api}/75e08573d958018c7dce928bd8f5c8cb/profile`);
+  });
+
   it('should test contacts poller url', () => {
     let id;
     let objects;
