@@ -1,0 +1,128 @@
+{
+  "method": "GET",
+  "nextResource": "",
+  "description": "getThresholdAndUsageInfo",
+  "type": "api",
+  "vendorPath": "https://na35.salesforce.com/services/data/",
+  "nextPageKey": "",
+  "path": "/getThresholdAndUsageInfo",
+  "paginationType": "VENDOR_SUPPORTED",
+  "vendorMethod": "GET",
+  "response": {
+    "contentType": "application/json"
+  },
+  "ownerAccountId": 2,
+  "model": {
+    "transform": false,
+    "name": "getThresholdAndUsageInfo",
+    "swagger": {
+      "getThresholdAndUsageInfo": {
+        "id": "getThresholdAndUsageInfo",
+        "properties": {
+          "soap:Envelope": {
+            "type": "soap:Envelope"
+          }
+        }
+      },
+      "getThresholdAndUsageInfoResponse": {
+        "id": "getThresholdAndUsageInfoResponse",
+        "properties": {
+          "getThresholdAndUsageInfoResult": {
+            "type": "getThresholdAndUsageInfoResult"
+          }
+        }
+      },
+      "getThresholdAndUsageInfoResult": {
+        "id": "getThresholdAndUsageInfoResult",
+        "properties": {
+          "ReturnCode": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "EntityReturnInfoResults": {
+            "type": "EntityReturnInfoResults"
+          }
+        }
+      },
+      "DuplicateStatus": {
+        "id": "DuplicateStatus",
+        "properties": {
+          "Found": {
+            "type": "boolean"
+          },
+          "Ignored": {
+            "type": "boolean"
+          }
+        }
+      },
+      "soap:Envelope": {
+        "id": "soap:Envelope",
+        "properties": {
+          "soap:Body": {
+            "type": "soap:Body"
+          }
+        }
+      },
+      "EntityReturnInfo": {
+        "id": "EntityReturnInfo",
+        "properties": {
+          "DatabaseAction": {
+            "type": "string"
+          },
+          "EntityId": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "DuplicateStatus": {
+            "type": "DuplicateStatus"
+          },
+          "Message": {
+            "type": "string"
+          }
+        }
+      },
+      "EntityReturnInfoResults": {
+        "id": "EntityReturnInfoResults",
+        "properties": {
+          "EntityReturnInfo": {
+            "type": "EntityReturnInfo"
+          }
+        }
+      },
+      "soap:Body": {
+        "id": "soap:Body",
+        "properties": {
+          "getThresholdAndUsageInfoResponse": {
+            "type": "getThresholdAndUsageInfoResponse"
+          }
+        }
+      }
+    }
+  },
+  "hooks": [],
+  "parameters": [
+    {
+      "vendorType": "form",
+      "dataType": "ResourcePutRequest",
+      "name": "body",
+      "description": "The object body",
+      "vendorDataType": "accounts",
+      "source": "request",
+      "type": "body",
+      "vendorName": "body",
+      "required": false
+    },
+    {
+      "vendorType": "header",
+      "dataType": "string",
+      "name": "http://autotask.net/ATWS/v1_5/getThresholdAndUsageInfo",
+      "description": "Content-Type",
+      "vendorDataType": "string",
+      "source": "request",
+      "type": "value",
+      "vendorName": "Content-Type",
+      "required": false
+    }
+  ],
+  "rootKey": ""
+}
