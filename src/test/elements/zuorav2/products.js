@@ -20,10 +20,10 @@ suite.forElement('payment', 'products', { payload: accountsPayload }, (test) => 
   test.should.supportNextPagePagination(2);
   test.should.supportCeqlSearch('id');
 
-  it('should allow S for /hubs/payment/products/{id}/product-rate-plans', () => {
+  it('should allow S for /hubs/payment/products/{id}/rate-plans', () => {
     let productId = -1;
     return cloud.get(test.api)
       .then(r => productId = r.body[0].id)
-      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(`${test.api}/${productId}/product-rate-plans`));
+      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(`${test.api}/${productId}/rate-plans`));
   });
 });
