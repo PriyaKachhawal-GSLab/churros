@@ -1,0 +1,134 @@
+{
+    "metafields": [
+        {
+            "description": "string",
+            "id": 0,
+            "key": "string",
+            "namespace": "string",
+            "owner_id": 0,
+            "owner_resource": "string",
+            "value": "string",
+            "value_type": "string"
+        }
+    ],
+    "metafields_global_description_tag": "string",
+    "metafields_global_title_tag": "string",
+    "image": {
+        "src": "https://cdn.shopify.com/s/files/1/0655/4311/products/Koala.jpg?v=1525672331",
+        "alt": "hi",
+        "variant_ids": [
+            808950810
+        ],
+        "position": 1,
+        "attachment": "R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\n",
+        "id": 3686244286547
+    },
+    "body_html": "Good Tshirt",
+    "images": [
+        {
+            "src": "https://cdn.shopify.com/s/files/1/0655/4311/products/Koala.jpg?v=1525672331",
+            "alt": "hello",
+            "variant_ids": [
+                808950810
+            ],
+            "position": 1,
+            "attachment": "R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\n",
+            "id": 3686244286547
+        }
+    ],
+    "handle": "tshirt1",
+    "published": false,
+    "variants": [
+        {
+            "inventory_management": "shopify",
+            "old_inventory_quantity": 10,
+            "metafields": [
+                {
+                    "description": "string",
+                    "id": 0,
+                    "key": "string",
+                    "namespace": "string",
+                    "owner_id": 0,
+                    "owner_resource": "string",
+                    "value": "string",
+                    "value_type": "string"
+                }
+            ],
+            "requires_shipping": true,
+            "title": "l / red / linen",
+            "price": "1.21",
+            "option3": "linen",
+            "option1": "l",
+            "id": 12292095770707,
+            "option2": "red",
+            "sku": "qwe123m-1",
+            "grams": 0,
+            "barcode": "qwe12",
+            "inventory_quantity": 10,
+            "inventory_quantity_adjustment": 2,
+            "compare_at_price": "1.25",
+            "fulfillment_service": "manual",
+            "taxable": true,
+            "weight": 0,
+            "inventory_policy": "deny",
+            "weight_unit": "lb",
+            "position": 1,
+            "image_id": null
+        },
+        {
+            "inventory_management": "shopify",
+            "inventory_quantity_adjustment": 2,
+            "old_inventory_quantity": 0,
+            "requires_shipping": true,
+            "title": "xl / red / linen",
+            "price": "1.21",
+            "option3": "linen",
+            "option1": "xl",
+            "id": 12292095803475,
+            "option2": "red",
+            "sku": "qwe123m-2",
+            "grams": 0,
+            "barcode": "",
+            "inventory_quantity": 0,
+            "compare_at_price": "1.24",
+            "fulfillment_service": "manual",
+            "taxable": true,
+            "weight": 0,
+            "inventory_policy": "deny",
+            "weight_unit": "lb",
+            "position": 2,
+            "image_id": null
+        }
+    ],
+    "title": "Tshirt12",
+    "tags": "cotton, summer",
+    "published_scope": "web",
+    "product_type": "Tshirt",
+    "template_suffix": "string",
+    "vendor": "apple12345",
+    "options": [
+        {
+            "values": [
+                "l",
+                "xl"
+            ],
+            "name": "Size",
+            "id": 1777735368787
+        },
+        {
+            "values": [
+                "red"
+            ],
+            "name": "Color",
+            "id": 1777735401555
+        },
+        {
+            "values": [
+                "linen"
+            ],
+            "name": "Material",
+            "id": 1777735434323
+        }
+    ],
+    "id": 1330200772691
+}

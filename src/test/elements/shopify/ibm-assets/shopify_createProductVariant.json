@@ -1,0 +1,35 @@
+{
+    "barcode": "qwe12",
+    "compare_at_price": "1.25",
+    "fulfillment_service": "manual",
+    "grams": 0,
+    "id": 12292095770707,
+    
+    "inventory_management": "shopify",
+    "inventory_policy": "deny",
+    "inventory_quantity": 10,
+    "inventory_quantity_adjustment": 2,
+    "metafields": [
+        {
+            "value_type": "string",
+            "owner_id": 6554311,
+            "namespace": "stringraj12",
+            "description": "string",
+            "value": "string1",
+            "owner_resource": "shop",
+            "key": "raj1233345"
+        }
+    ],
+    "old_inventory_quantity": 10,
+    "option1": "lsda",
+    "option2": "red",
+    "option3": "linen",
+    "position": 1,
+    "price": "1.21",
+    "requires_shipping": true,
+    "sku": "qwe123m-1",
+    "taxable": true,
+    "title": "l / white / linen",
+    "weight": 0,
+    "weight_unit": "lb"
+}

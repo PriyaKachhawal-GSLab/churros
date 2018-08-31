@@ -1,0 +1,14 @@
+{
+    "service": "amazon",
+    "notify_customer": true,
+    "tracking_company": "USPS",
+    "tracking_number": "3243435",
+    "tracking_numbers": [
+        "3243435",
+        "3243436"
+    ],
+    "tracking_urls": [
+        "https://shipping.xyz/track.php?num=079861",
+        "https://anothershipper.corp/track.php?code=nbjk"
+    ]
+}

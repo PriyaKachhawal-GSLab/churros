@@ -1,0 +1,9 @@
+{
+    "cause_cancel": true,
+    "display": true,
+    "message": "me1",
+    "merchant_message": "string",
+    "recommendation": "cancel",
+    "score": "0.3",
+    "source": "Gateway"
+}
