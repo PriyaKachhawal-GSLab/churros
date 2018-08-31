@@ -1,0 +1,24 @@
+{
+"paymentMethodRef": {
+      "value": "3"
+    },
+	 "customerRef": {
+      "name": "Blue Partner Client",
+      "value": "1"
+    },
+	"txnDate": "2018-08-31T00:00:00+05:30",
+"paymentRefNum": "4232",
+"depositToAccountRef": {
+      "value": "4"
+    },
+	 "line": [
+      { "amount": 1,
+ "linkedTxn": [
+          {
+            "txnType": "Payment",
+            "txnId": "30"
+          }
+        ]	  }
+    ],
+	"totalAmt": 1
+}
