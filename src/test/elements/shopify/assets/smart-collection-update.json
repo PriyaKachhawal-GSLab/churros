@@ -1,0 +1,10 @@
+{
+  "title": "MyCollection",
+  "rules": [
+    {
+      "column": "variant_price",
+      "relation": "less_than",
+      "condition": "20"
+    }
+  ]
+}

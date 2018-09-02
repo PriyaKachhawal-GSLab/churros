@@ -3,9 +3,9 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
-const inventoryItemPayload = require('./assets/inventory-items.json');
-const inventorylevelPayload = require('./assets/inventory-levels.json');
-const updateInventoryLevelpayload = require('./assets/updateInventoryLevels.json');
+const inventoryItemPayload = require('./assets/inventory-items-update.json');
+const inventorylevelPayload = require('./assets/inventory-levels-create.json');
+const updateInventoryLevelpayload = require('./assets/inventory-levels-update.json');
 
 suite.forElement('ecommerce', 'locations', (test) => {
   let locationId, itemId;

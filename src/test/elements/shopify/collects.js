@@ -3,6 +3,7 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
+const collects = require('./assets/collections-create.json');
 
 const products = () => ({
   "title": tools.random(),
@@ -11,10 +12,7 @@ const products = () => ({
 const customCollections = () => ({
   "title": tools.random()
 });
-const collects = (productId, customCollectId) => ({
-  "product_id": productId,
-  "collection_id": customCollectId
-});
+
 
 suite.forElement('ecommerce', 'collects', (test) => {
   let productId, customCollectId;

@@ -3,7 +3,7 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
-const payload = require('./assets/price-rules.json');
+const payload = require('./assets/price-rules-create.json');
 const tools = require('core/tools');
 const discountPayload = tools.requirePayload(`${__dirname}/assets/discount-codes.json`);
 

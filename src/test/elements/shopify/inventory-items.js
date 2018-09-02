@@ -2,7 +2,7 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const payload = require('./assets/inventory-items.json');
+const payload = require('./assets/inventory-items-update.json');
 
 suite.forElement('ecommerce', 'inventory-items', (test) => {
   it('should allow Get and Patch for /hubs/marketing/inventory-items', () => {

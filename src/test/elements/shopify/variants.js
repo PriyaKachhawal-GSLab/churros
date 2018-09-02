@@ -3,8 +3,9 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const payload = require('./assets/products.json');
-const variantPayload = require('./assets/variants.json');
-const variantUpdate = { "price": "2.00" };
+const variantPayload = require('./assets/variants-create.json');
+const variantUpdate = require('./assets/variants-update.json');
+
 
 suite.forElement('ecommerce', 'variants', { payload: payload }, (test) => {
 

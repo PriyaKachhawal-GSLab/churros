@@ -3,8 +3,8 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const refund = require('./assets/paymentRefund.json');
-const capture = require('./assets/paymentCapture.json');
+const refund = require('./assets/payments-refund-create.json');
+const capture = require('./assets/payments-create.json');
 
 const order = () => ({
   "line_items": [{

@@ -4,18 +4,22 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 
+const createAddress= require('./assets/address-create.json');
+const createAddress= require('./assets/address-update.json');
+
 const customer = () => ({
   "first_name": tools.random(),
   "last_name": tools.random(),
   "email": tools.randomEmail()
 });
-const createAddress = () => ({
-  "zip": tools.random()
-});
-const updateAddress = (addressId) => ({
+/*const createAddress = () => ({
+ // "zip": tools.random()
+});*/
+
+/*const updateAddress = (addressId) => ({
   "id": addressId,
   "zip": tools.random()
-});
+});*/
 
 suite.forElement('ecommerce', 'addresses', (test) => {
   let customerId;

@@ -3,7 +3,8 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const riskCreate = require('./assets/riskCreate.json');
+const riskCreate = require('./assets/risk-create.json');
+const riskUpdate = require('./assets/risk-update.json');
 
 const order = () => ({
   "line_items": [{
@@ -16,14 +17,14 @@ const order = () => ({
     "amount": tools.randomInt()
   }]
 });
-const riskUpdate = (riskId) => ({
+/*const riskUpdate = (riskId) => ({
   "id": riskId,
   "message": tools.random(),
   "recommendation": "accept",
   "source": "External",
   "cause_cancel": false,
   "score": 0.0
-});
+});*/
 
 suite.forElement('ecommerce', 'risks', (test) => {
   let orderId;

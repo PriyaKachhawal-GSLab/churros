@@ -4,17 +4,10 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 
-const payload = () => ({
-  "namespace": tools.randomStr("aAeEiIoOuU", 8),
-  "key": tools.randomStr("aAeEidsfdsoOuU", 4),
-  "value": tools.randomInt(),
-  "value_type": "integer"
-});
-const updatePayload = (metafieldId) => ({
-  "id": metafieldId,
-  "value": tools.random(),
-  "value_type": "string"
-});
+const payload=require('./assets/metafields-create');
+const UpdatePayload=require('./assets/metafields-update');
+
+
 const order = () => ({
   line_items: [{
     title: tools.random(),

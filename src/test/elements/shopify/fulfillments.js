@@ -4,26 +4,17 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 
+const createFulfillment = require('./assets/fulfillments-create');
+const updateFulfillment = require('./assets/fulfillments-update');
+
 const order = () => ({
   line_items: [{
     title: tools.random(),
     price: tools.randomInt()
   }]
 });
-const createFulfillment = (lineId) => ({
-  
-    "tracking_number": tools.random(),
-    "line_items": [{
-      "id": lineId
-    }]
-  
-});
-const updateFulfillment = (fulfillmentId) => ({
-  "fulfillment": {
-    "tracking_number": tools.random(),
-    "id": fulfillmentId
-  }
-});
+
+
 suite.forElement('ecommerce', 'fulfillments', { payload: createFulfillment({}) }, (test) => {
   let orderId, lineId, fulfillmentId;
   before(() => cloud.post(`/hubs/ecommerce/orders`, order())

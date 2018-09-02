@@ -3,7 +3,7 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const payload = require('./assets/products.json');
-const variantPayload = require('./assets/variants.json');
+const variantPayload = require('./assets/variants-create.json');
 const imageUpdate = { "src": "http://petsfans.com/wp-content/uploads/2014/11/edfsaf.jpg" };
 
 suite.forElement('ecommerce', 'images', { payload: payload }, (test) => {

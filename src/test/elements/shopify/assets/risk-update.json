@@ -1,0 +1,8 @@
+{
+  "id": "<< valid risk Id >>",
+  "message":"<< random string >>",
+  "recommendation": "accept",
+  "source": "External",
+  "cause_cancel": false,
+  "score": 0.0
+}
