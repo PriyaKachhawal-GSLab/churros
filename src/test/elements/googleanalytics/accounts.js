@@ -30,7 +30,7 @@ suite.forElement('general', 'accounts', {
         return cloud.get(test.api).should.return200OnGet();
     });
     it('should allow GET /accounts/account-summaries', () => {
-        return cloud.get(`${test.api}/account-summaries`).should.return200OnGet()
+        return cloud.get(`${test.api}/account-summaries`).should.return200OnGet();
     });
     it('should allow CRUDS for /accounts/{id}/filters', () => {
         return cloud.get(test.api)
