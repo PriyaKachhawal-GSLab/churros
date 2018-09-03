@@ -3,9 +3,10 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const capture = require('./assets/payment-create.json');
+const capture = require('./assets/payments-create.json');
+const order = require('./assets/orders-create.json');
 
-const order = () => ({
+/*const order = () => ({
   "line_items": [
     {
       "title": tools.random(),
@@ -31,7 +32,7 @@ const order = () => ({
   ],
   "total_tax": tools.randomInt(),
   "currency": "EUR"
-});
+});*/
 const calculateRefund = (lineId) => ({
   "refund": {
     "shipping": {
@@ -71,7 +72,7 @@ const refund = (lineId, parentId) => (
 
 suite.forElement('ecommerce', 'refunds', {skip: false}, (test) => {
   let orderId, lineId;
-  before(() => cloud.post(`/hubs/ecommerce/orders`, order())
+  before(() => cloud.post(`/hubs/ecommerce/orders`, order)
     .then(r => orderId = r.body.id)
     .then(r => cloud.get(`/hubs/ecommerce/orders/${orderId}`))
     .then(r => lineId = r.body.line_items[0].id)

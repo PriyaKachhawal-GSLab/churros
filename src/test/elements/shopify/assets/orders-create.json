@@ -1,6 +1,27 @@
 {
-	"line_items": [{
-		"title": "<< random Value >>",
-		"price": "<< random Int >>"
-	}]
+  "line_items": [
+    {
+      "title": "gi",
+      "price":"20.0",
+      "grams": "1300",
+      "quantity": 3,
+      "requires_shipping": true,
+      "tax_lines": [
+        {
+          "price": "20",
+          "rate": "20",
+          "title": "asasas"
+        }
+      ]
+    }
+  ],
+  "transactions": [
+    {
+      "kind": "authorization",
+      "status": "success",
+      "amount": "13"
+    }
+  ],
+  "total_tax": "8",
+  "currency": "EUR"
 }

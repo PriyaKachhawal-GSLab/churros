@@ -3,11 +3,23 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 
-const customCollection = () => ({
-  "title": tools.random()
-});
+const customCollection =  require('./assets/custom-collections-create');
+const updatePayload =  require('./assets/custom-collections-update');
 
-suite.forElement('ecommerce', 'custom-collections', { payload: customCollection({}) }, (test) => {
+/*const customCollection = () => ({
+  "title": tools.random()
+});*/
+
+suite.forElement('ecommerce', 'custom-collections', { payload: customCollection }, (test) => {
+
+
+const options = {
+churros: {
+updatePayload: updatePayload
+}
+};
+
+
   test.should.supportCruds();
   test.withApi(`/hubs/ecommerce/custom-collections-count`).should.return200OnGet();
 });

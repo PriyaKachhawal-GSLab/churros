@@ -5,22 +5,23 @@ const tools = require('core/tools');
 const cloud = require('core/cloud');
 const payload = require('./assets/fulfillment-events.json');
 const createFulfillment=require('./assets/fulfillments-create.json');
+const order = require('./assets/orders-create.json');
 
-const order = () => ({
+/*onst order = () => ({
   line_items: [{
     title: tools.random(),
     price: tools.randomInt()
   }]
-});
+});*/
 
 
 suite.forElement('ecommerce', 'fulfillment-events', { payload: payload }, (test) => {
   let orderId, lineId, fulfillmentId, eventId;
-  before(() => cloud.post(`/hubs/ecommerce/orders`, order())
+  before(() => cloud.post(`/hubs/ecommerce/orders`, order)
     .then(r => orderId = r.body.id)
     .then(r => cloud.get(`/hubs/ecommerce/orders/${orderId}`))
     .then(r => lineId = r.body.line_items[0].id)
-    .then(r => cloud.post(`/hubs/ecommerce/orders/${orderId}/fulfillments`, createFulfillment(lineId)))
+    .then(r => cloud.post(`/hubs/ecommerce/orders/${orderId}/fulfillments`, createFulfillment))
     .then(r => fulfillmentId = r.body.id)
     .then(r => cloud.post(`/hubs/ecommerce/orders/${orderId}/fulfillments/${fulfillmentId}/fulfillment-events`, payload))
     .then(r => eventId = r.body.id)
