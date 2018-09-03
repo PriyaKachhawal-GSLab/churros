@@ -19,6 +19,9 @@ suite.forElement('crm', 'contacts', { payload: contactsPayload }, (test) => {
       expect(validValues.length).to.equal(r.body.length);
     })
     .should.return200OnGet();
+	
+	
+	
 
 it('should allow CRUDS for contacts/{id}/notes', () => {
     let contactId = -1;
