@@ -4,14 +4,15 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const expect = require('chakram').expect;
 const cloud = require('core/cloud');
-const payload = tools.requirePayload(`${__dirname}/assets/allocations-create.json`);
-const updatePayload = tools.requirePayload(`${__dirname}/assets/allocations-update.json`);
+const payload = tools.requirePayload(`${__dirname}/assets/accountGroups.json`);
 
-suite.forElement('finance', 'allocations', { payload: payload }, (test) => {
-  const modifiedDate = '08/14/2018 06:25:04';
+suite.forElement('finance', 'account-groups', { payload: payload }, (test) => {
+  const modifiedDate = '08/21/2018 07:35:34';
   const options = {
     churros: {
-      updatePayload: updatePayload
+      updatePayload: {
+        "TITLE": "CASH"
+      }
     }
   };
   test.withOptions(options).should.supportCruds();

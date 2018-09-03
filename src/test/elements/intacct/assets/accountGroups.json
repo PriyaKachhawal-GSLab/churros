@@ -1,0 +1,10 @@
+{
+  "NAME": "<<finance.accountName>><<random.word>>",
+  "TITLE": "Cash1",
+  "TOTALTITLE": "Total Casdh",
+  "NORMAL_BALANCE": "debit",
+  "ISKPI": true,
+  "MEMBERTYPE": "Accounts",
+  "ASOF": "P",
+  "DBCR": "Both"
+}

@@ -1,4 +1,151 @@
 {
+  "charge-card-accounts": {
+    "vendorName": "charge-card-accounts",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "recurring-order-entry-transactions": {
+    "vendorName": "recurring-order-entry-transactions",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "SORECURDOCUMENTid"
+    }]
+  },
+  "recurring-bills": {
+    "vendorName": "account-groups",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "APRECURBILLid"
+    }]
+  },
+  "recurring-invoices": {
+    "vendorName": "account-groups",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ARRECURINVOICEid"
+    }]
+  },
+  "account-groups": {
+    "vendorName": "account-groups",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "recordno"
+    }]
+  },
+  "ap-account-labels": {
+    "vendorName": "ap-account-labels",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "recordno"
+    }]
+  },
+  "ar-account-labels": {
+    "vendorName": "ar-account-labels",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "recordno"
+    }]
+  },
+  "users": {
+    "vendorName": "users",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "recordno"
+    }]
+  },
+  "inventory-control-price-lists": {
+    "vendorName": "inventory-control-price-lists",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "customer-types": {
+    "vendorName": "customer-types",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "class-groups": {
+    "vendorName": "class-groups",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "department-groups": {
+    "vendorName": "department-groups",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "location-groups": {
+    "vendorName": "location-groups",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "item-groups": {
+    "vendorName": "item-groups",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "item-gl-groups": {
+    "vendorName": "item-gl-groups",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "order-entry-transaction-definitions": {
+    "vendorName": "order-entry-transaction-definitions",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "purchasing-transaction-definitions": {
+    "vendorName": "purchasing-transaction-definitions",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "unit-of-measures": {
+    "vendorName": "unit-of-measures",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "user-groups": {
+    "vendorName": "user-groups",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "vendor-types": {
+    "vendorName": "vendor-types",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
+  },
+  "allocations": {
+    "vendorName": "allocations",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "recordno"
+    }]
+  },
   "contacts": {
     "vendorName": "contacts",
     "fields": [{
@@ -195,47 +342,39 @@
       "vendorPath": "ID"
     }]
   },
-   "contracts": {
+  "contracts": {
     "vendorName": "contracts",
     "fields": [{
       "path": "id",
       "vendorPath": "RECORDNO"
     }]
   },
-    "credit-memos": {
+  "credit-memos": {
     "vendorName": "",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "aradjustmentid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "aradjustmentid"
+    }]
   },
   "debit-memos": {
     "vendorName": "",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "apadjustmentid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "apadjustmentid"
+    }]
   },
   "sales-receipts": {
     "vendorName": "",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "OTHERRECEIPTSid"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "OTHERRECEIPTSid"
+    }]
   },
   "deposits": {
     "vendorName": "",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "RECORDNO"
-      }
-    ]
+    "fields": [{
+      "path": "id",
+      "vendorPath": "RECORDNO"
+    }]
   }
 }

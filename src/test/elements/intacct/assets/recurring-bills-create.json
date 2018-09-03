@@ -1,0 +1,25 @@
+{
+  "vendorid": "",
+  "datecreated": {
+    "year": "2018",
+    "month": "04",
+    "day": "10"
+  },
+  "recordid": "ARIN",
+  "termname": "N30",
+  "currency": "USD",
+  "exchratetype": "Intacct Daily Rate",
+  "startdate": {
+    "year": "2018",
+    "month": "04",
+    "day": "10"
+  },
+  "recurbillitems": {
+    "lineitem": [
+      {
+        "accountlabel": "AA",
+        "amount": 349.99
+      }
+    ]
+  }
+}
