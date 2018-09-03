@@ -1,0 +1,31 @@
+{
+  "billAddr": {},
+  "billEmail": {},
+  "billEmailBcc": {},
+  "billEmailCc": {},
+  "classRef": {},
+  "currencyRef": {},
+  "customerMemo": {},
+  "customerRef": {
+    "value": "85"
+  },
+  "departmentRef": {},
+  "depositToAccountRef": {},
+  "line": [
+    {
+      "amount": "100",
+      "detailType": "SUB_TOTAL_LINE_DETAIL",
+      "salesItemLineDetail":{"unitPrice":"0.5"}
+    },
+      {
+      "amount": "100",
+      "detailType": "SALES_ITEM_LINE_DETAIL",
+      "salesItemLineDetail":{"unitPrice":"0.5"}
+    } 
+  ],
+  "metaData": {},
+  "salesTermRef": {},
+  "shipAddr": {},
+  "shipMethodRef": {},
+  "txnTaxDetail": {}
+}
