@@ -26,11 +26,11 @@ suite.forElement('general', 'accounts', {
     let webPropertiesId = -1;
     let profileId = -1;
     
-    it('should allow GET /accounts', () => {
-        return cloud.get(test.api).should.return200OnGet();
+      it('should allow GET /accounts', () => {
+        return test.should.return200OnGet();
     });
     it('should allow GET /accounts/account-summaries', () => {
-        return cloud.get(`${test.api}/account-summaries`).should.return200OnGet();
+        return test.withApi(`${test.api}/account-summaries`).should.return200OnGet();
     });
     it('should allow CRUDS for /accounts/{id}/filters', () => {
         return cloud.get(test.api)
