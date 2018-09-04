@@ -1,0 +1,12 @@
+{
+  "company": "<<company.companyName>>",
+  "annualRevenue": "114",
+  "billingCity": "<<address.city>>",
+  "externalCompanyId": "116",
+  "billingCountry": "<<address.country>>",
+  "billingPostalCode": "<<address.zipCode>>",
+  "billingState": "<<address.state>>",
+  "companyNotes": "ss15",
+  "industry": "dd3",
+  "mainPhone": "123456"
+}

@@ -4,19 +4,21 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 
-const contactPayload = {
+const contactPayload = require('./assets/contacts-create');
+const listContactPayload= require('./assets/list-create');
+/*const contactPayload ={
   "person": {
     "lastName": tools.randomStr(),
     "firstName": tools.randomStr(),
     "email": tools.randomEmail()
   }
-};
+};*/
 
-const listContactPayload = [{
+/*const listContactPayload = [{
   "person": {
     "id": tools.randomInt()
   }
-}];
+}];*/
 
 suite.forElement('marketing', 'lists', null, (test) => {
   it('should allow SR for /lists and CRDS for /contacts', () => {

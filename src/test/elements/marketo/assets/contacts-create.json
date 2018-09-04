@@ -1,0 +1,7 @@
+{
+  "person": {
+    "lastName": "<<name.lastName>>",
+    "firstName": "<<name.firstName>>",
+    "email": "abc@cvvv.com"
+  }
+}

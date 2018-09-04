@@ -1,12 +1,13 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/programs');
+const payload = require('./assets/programs-create');
+const updatePayload = require('./assets/programs-update');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
-const updatePayload = {
+/*const updatePayload = {
   "name": "Name for Program Test" + tools.random(),
   "channel": "Email Send",
   "type": "Email",
@@ -14,7 +15,7 @@ const updatePayload = {
     "type": "Folder",
     "id": 2006
   }
-};
+};*/
 
 suite.forElement('marketing', 'programs', { payload: payload }, (test) => {
   payload.name += tools.random();

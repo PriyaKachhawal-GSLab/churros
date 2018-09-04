@@ -4,8 +4,8 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
-const payload = tools.requirePayload(`${__dirname}/assets/custom-objects.json`);
-
+const payload = tools.requirePayload(`${__dirname}/assets/custom-objects-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/custom-objects-update.json`);
 suite.forElement('marketing', 'custom-objects', { payload: payload }, (test) => {
 	let customObjectName = 'afrinCustom_c', id;
 	it('should allow R for /custom-objects', () => {
@@ -28,16 +28,16 @@ suite.forElement('marketing', 'custom-objects', { payload: payload }, (test) => 
 		.then(r => expect(r.body[0].marketoGUID).to.not.be.equal(id));
 	});
 	it('should allow CRUD for /custom-objects/{customObjectName}/custom-fields', () =>{
-		const updatePayload = () => ({
+		/*const updatePayload = () => ({
 			"input" : [{
 			"afrinchaks" : tools.random()
 			}]
-		});
+		});*/
 
 		return cloud.post(`${test.api}/${customObjectName}/custom-fields`, payload)
 		.then(r => id = r.body[0].marketoGUID)
 		.then(r => cloud.get(`${test.api}/${customObjectName}/custom-fields/${id}`))
-		.then(r => cloud.patch(`${test.api}/${customObjectName}/custom-fields/${id}`, updatePayload()))
+		.then(r => cloud.patch(`${test.api}/${customObjectName}/custom-fields/${id}`, updatePayload))
 		.then(r => cloud.delete(`${test.api}/${customObjectName}/custom-fields/${id}`));
 	});
 	it('should allow R for /custom-fields-templates', () =>{

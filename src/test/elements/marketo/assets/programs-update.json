@@ -1,0 +1,9 @@
+{
+  "name": "Name for Program Test + <<tools.random()>>",
+  "channel": "Email Send",
+  "type": "Email",
+  "folder": {
+    "type": "Folder",
+    "id": 2006
+  }
+}

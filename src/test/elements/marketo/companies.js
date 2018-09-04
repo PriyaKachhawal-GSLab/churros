@@ -2,13 +2,13 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const payload = tools.requirePayload(`${__dirname}/assets/companies.json`);
+const payload = require('./assets/companies-create.json');
 const cloud = require('core/cloud');
 
 suite.forElement('marketing', 'companies', { payload: payload }, (test) => {
   it('should allow CRUDS for /companies', () => {
     let id, value;
-    const updatedPayload = tools.requirePayload(`${__dirname}/assets/companies.json`);
+    const updatedPayload = require('./assets/companies-update.json');
     delete updatedPayload.externalCompanyId; //Can't update this
     return cloud.post(test.api, payload)
       .then(r => id = r.body.id)

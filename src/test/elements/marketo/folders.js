@@ -2,15 +2,17 @@
 
 const tools = require('core/tools');
 const suite = require('core/suite');
-const payload = require('./assets/folders');
+const payload = require('./assets/folders-create');
+const updatePayload  = require('./assets/folders-update');
 const cloud = require('core/cloud');
-const updatePayload = {
+/*const updatePayload = {
   "name": "Test Folder Updated" + tools.random(),
   "description": tools.random()
 };
-
+*/
 suite.forElement('marketing', 'folders', { payload: payload }, (test) => {
   payload.name += tools.random();
+  updatePayload.name += tools.random();
   it('It should perform CRUS for /folders', () => {
     let id;
     return cloud.post(test.api, payload)

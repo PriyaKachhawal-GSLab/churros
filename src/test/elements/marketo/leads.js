@@ -5,8 +5,8 @@ const chakram = require('chakram');
 const expect = chakram.expect;
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = tools.requirePayload(`${__dirname}/assets/leads.json`);
-const updatedPayload = tools.requirePayload(`${__dirname}/assets/leads.json`);
+const payload = require('./assets/leads-create');
+const updatedPayload = require('./assets/leads-update');
 const interactionPayload = {
   "id": tools.randomInt(),
   "token": tools.randomInt()

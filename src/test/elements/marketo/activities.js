@@ -1,7 +1,7 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/activities');
+const payload = require('./assets/activities-create');
 const id = '12'; //using a static ID, as it will always have activites
 
 suite.forElement('marketing', 'activities', { payload: payload }, (test) => {

@@ -5,7 +5,7 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const fs = require('fs');
 const expect = require('chakram').expect;
-const programPayload = require('./assets/programs');
+const programPayload = require('./assets/programs-create');
 const buildProgram = (overrides) => Object.assign({}, programPayload, overrides);
 
 suite.forElement('marketing', 'programsLeads', () => {

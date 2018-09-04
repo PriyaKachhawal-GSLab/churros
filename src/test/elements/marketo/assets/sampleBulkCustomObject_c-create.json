@@ -1,6 +1,6 @@
 {
    "myAddress":"<<address.streetAddress>>",
    "myCity":"<<address.city>>",
-   "myExternalId":"<<random.number>>",
+   "myExternalId":"12146535",
    "myName":"<<name.firstName>> Object"
 }
