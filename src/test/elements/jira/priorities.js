@@ -11,4 +11,5 @@ let priorityId;
     .then(r => priorityId = r.body[0].id)
     .then(r => cloud.get(uri + '/' + priorityId));
   });
+  test.should.supportPagination('id');
 });

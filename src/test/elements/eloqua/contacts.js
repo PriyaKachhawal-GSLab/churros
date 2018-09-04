@@ -4,15 +4,13 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
 const payload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
+const updatePayload = require(`./assets/contacts-update`);
+const expect = require('chakram').expect;
 
 suite.forElement('marketing', 'contacts', { payload: payload }, (test) => {
   const opts = {
     churros: {
-      updatePayload: {
-        firstName: tools.random(),
-        lastName: tools.random(),
-        emailAddress: tools.randomEmail()
-      }
+      updatePayload
     }
   };
   test.withOptions(opts).should.supportCruds();
@@ -40,5 +38,17 @@ suite.forElement('marketing', 'contacts', { payload: payload }, (test) => {
       .then(r => cloud.get(`${test.api}/${contactId}/membership`))
       .then(r => cloud.withOptions({ qs: { where: `startAt='1417556990' AND endAt='1447567663' AND type='emailOpen'` } }).get(`${test.api}/${contactId}/activities`))
       .then(r => cloud.withOptions({ qs: { where: `startAt='1417556990' AND endAt='1447567663' AND type='emailOpen'`, page: 1, pageSize: 1 } }).get(`${test.api}/${contactId}/activities`));
+  });
+
+  it(`should allow CUD for /contacts with Eloqua field names`, () => {
+    let id;
+    return cloud.post(test.api, payload)
+      .then(r => id = r.body.id)
+      .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
+      .then(r => {
+        expect(r.body).to.not.be.empty;
+        expect(Object.keys(updatePayload).every(key => r.body[key] === updatePayload[key])).to.be.true;
+      })
+      .then(r => cloud.delete(`${test.api}/${id}`));
   });
 });

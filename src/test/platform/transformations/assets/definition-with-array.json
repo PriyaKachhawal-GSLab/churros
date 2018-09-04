@@ -1,0 +1,16 @@
+{
+  "fields":[
+    {
+      "type":"array",
+      "path":"users"
+    },
+    {
+      "type":"string",
+      "path":"users[*].displayNamez"
+    },
+    {
+      "type":"array",
+      "path":"anotherUser[*]"
+    }
+  ]
+}

@@ -2587,6 +2587,18 @@
       }
     ]
   },
+  "credit-cards": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
   "data-extensions": {
     "fields": [{
         "path": "idTransformed",
@@ -3038,6 +3050,18 @@
       }
     ]
   },
+  "queries": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
   "activities-calls": {
     "fields": [{
         "path": "idTransformed",
@@ -3060,7 +3084,43 @@
       }
     ]
   },
-  "notes": {
+  "work-items": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "work-items-fields": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "inventories": {
+    "fields": [
+      {
+        "path": "idTransformed",
+        "type": "string"
+      },
+      {
+        "path": "id",
+        "type": "string"
+      }
+    ]
+  },
+  "work-items-types": {
     "fields": [{
         "path": "idTransformed",
         "type": "string"

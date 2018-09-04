@@ -11,4 +11,5 @@ let statusId;
     .then(r => statusId = r.body[0].id)
     .then(r => cloud.get(uri + '/' + statusId));
   });
+  test.should.supportPagination('id');
 });

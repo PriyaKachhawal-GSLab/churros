@@ -1,0 +1,23 @@
+{
+  "accountIdentifier": "cloud-elements",
+  "amount": 0.01,
+  "campaign": "ss",
+  "customerIdentifier": "cloud-elements",
+  "emailSubject": "testing purpose2",
+  "etid": "E000000",
+  "externalRefID": "234ref",
+  "message": "test message",
+  "notes": "This is my notes",
+  "recipient": {
+    "email": "soni.sonali@sdk.com",
+    "firstName": "sonali",
+    "lastName": "soni"
+  },
+  "sendEmail": true,
+  "sender": {
+    "email": "soni.sonali@sdk.com",
+    "firstName": "sonali",
+    "lastName": "soni"
+  },
+  "utid": "U666425"
+}
