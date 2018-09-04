@@ -4,8 +4,6 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const expect = require('chakram').expect;
 const cloud = require('core/cloud');
-var createPayload = {}; //= tools.requirePayload(`${__dirname}/assets/timeActivitiesCreate.json`);
-var updatePayload = {};// = tools.requirePayload(`${__dirname}/assets/timeActivitiesUpdate.json`);
 const createProjectPayload = tools.requirePayload(`${__dirname}/assets/projectsCreate.json`);
 
 
@@ -13,10 +11,9 @@ const insertProjectId = (payload, projectId) => {
     payload.project_id = projectId;
     payload.started_at = new Date();
     return payload;
-}
+};
 
-
-suite.forElement('finance', 'time-activities', { payload: createPayload }, (test) => {
+suite.forElement('finance', 'time-activities', null, (test) => {
 
     var createPayload, updatePayload, projectId;
 
