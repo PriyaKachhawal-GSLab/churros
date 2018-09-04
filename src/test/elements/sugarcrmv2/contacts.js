@@ -4,7 +4,6 @@ const suite = require('core/suite');
 const payload = require('./assets/contacts-create.json');
 const updatePayload = require('./assets/contacts-update.json');
 const cloud = require('core/cloud');
-const tools = require('core/tools');
 const activityCreate = require('./assets/contactsActivities-create.json');
 const noteCreate = require('./assets/contactsNotes-create.json');
 const noteUpdate = require('./assets/contactsNotes-update.json');
@@ -16,7 +15,7 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
       updatePayload: updatePayload
     }
   };
-  test.should.supportCruds();
+  test.withOptions(options).should.supportCruds();
   test.should.supportPagination();
   let contactId, noteId;
   it('should support CRUDS for contacts/notes', () => {

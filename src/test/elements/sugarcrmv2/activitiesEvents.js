@@ -11,6 +11,6 @@ suite.forElement('crm', 'activitiesEvents', { payload: payload }, (test) => {
       updatePayload: updatePayload
     }
   };
-  test.should.supportCruds();
+  test.withOptions(options).should.supportCruds();
   test.should.supportPagination();
 });

@@ -10,6 +10,6 @@ suite.forElement('crm', 'activitiesEmails', { payload: payload }, (test) => {
       updatePayload: updatePayload
     }
   };
-  test.should.supportCruds();
+  test.withOptions(options).should.supportCruds();
   test.should.supportPagination();
 });

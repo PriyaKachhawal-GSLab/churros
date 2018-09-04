@@ -13,7 +13,7 @@ suite.forElement('crm', 'opportunities', { payload: payload }, (test) => {
       updatePayload: updatePayload
     }
   };
-  test.should.supportCruds();
+  test.withOptions(options).should.supportCruds();
   test.should.supportPagination();
   let opportunityId, noteId;
   it('should support CRUDS for opportunities/notes', () => {

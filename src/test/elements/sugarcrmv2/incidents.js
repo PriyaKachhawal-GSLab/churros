@@ -14,7 +14,7 @@ suite.forElement('crm', 'incidents', { payload: payload }, (test) => {
       updatePayload: updatePayload
     }
   };
-  test.should.supportCruds();
+  test.withOptions(options).should.supportCruds();
   test.should.supportPagination();
   let incidentId, noteId;
   it('should support CRUDS for incidents/notes', () => {
