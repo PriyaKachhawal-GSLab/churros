@@ -1,0 +1,10 @@
+{
+   "achbankid": "BOFI1234",
+   "destinationid": "DEST",
+   "destinationname": "",
+   "originid": "12345",
+   "originname": "",
+   "referencecode": "",
+   "status": "active",
+   "eofmarker": true
+}
