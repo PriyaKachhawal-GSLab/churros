@@ -2,7 +2,8 @@
 
 const suite = require('core/suite');
 
-suite.forElement('finance', 'dimensions-restrictions', (test) => {
+// Skipping this test data for dimensions-restrictions cannot be generated
+suite.forElement('finance', 'dimensions-restrictions', { skip: true }, (test) => {
   test.should.return200OnGet();
   test.should.supportNextPagePagination(1);
 });

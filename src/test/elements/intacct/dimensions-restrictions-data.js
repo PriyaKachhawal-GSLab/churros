@@ -4,7 +4,8 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
-suite.forElement('finance', 'dimensions', (test) => {
+// Skipping this test as restrictions-data cannot be generated
+suite.forElement('finance', 'dimensions', { skip: true }, (test) => {
   let originalDimension, restrictionDimension, options;
 
   before(() => cloud.get('/hubs/finance/dimensions-relationships')
