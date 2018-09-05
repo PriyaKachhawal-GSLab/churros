@@ -3,7 +3,7 @@
 const expect = require('chakram').expect;
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const newResource = require('./assets/extended-resource-create.json');
+const newResource = require('./assets/extendedResource-create.json');
 
 // Test for extending zendesk and invoking the extended resource
 suite.forElement('helpdesk', 'extended-resource', {}, (test) => {
