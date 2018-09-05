@@ -15,7 +15,7 @@ const insertProjectId = (payload, projectId) => {
 
 suite.forElement('finance', 'time-activities', null, (test) => {
 
-    var createPayload, updatePayload, projectId;
+    let createPayload, updatePayload, projectId;
 
     before(() => cloud.post(`hubs/finance/projects`, createProjectPayload)
         .then(r => {
