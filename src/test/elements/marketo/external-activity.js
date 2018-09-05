@@ -1,7 +1,6 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/external-activity-create');
 const attributePayload = require('./assets/attributes-create');
 const activityPayload =require('./assets/external-activity-update');
 const cloud = require('core/cloud');
