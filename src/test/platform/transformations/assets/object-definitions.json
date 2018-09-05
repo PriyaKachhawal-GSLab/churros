@@ -1,6 +1,12 @@
 {
-  "fields": [{
-    "path": "id",
-    "type": "string"
-  }]
+  "fields": [
+    {
+      "path": "id",
+      "type": "string"
+    },
+    {
+      "path": "coolBool",
+      "type": "boolean"
+    }
+  ]
 }

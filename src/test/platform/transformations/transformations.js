@@ -9,6 +9,8 @@ const provisioner = require('core/provisioner');
 const defaults = require('core/defaults');
 const schema = require('./assets/transformation.schema');
 const objDefSchema = require('./assets/objectDefinition.schema');
+const objDef = require('./assets/object-definitions.json');
+const defaultValueTransformation = tools.requirePayload(`${__dirname}/assets/defaultValue-transformation.json`);
 const noFields = tools.requirePayload(`${__dirname}/assets/nofield-definition.json`);
 const noFields2 = tools.requirePayload(`${__dirname}/assets/nofield-definition.json`);
 const arrayDefinition = require('./assets/definition-with-array.json');
@@ -180,6 +182,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
   .then(r => {
     maximizerId = r.body.id;
     arrayTransformation.elementInstanceId = maximizerId;
+    defaultValueTransformation.elementInstanceId = maximizerId;
   }));
 
   /** after - clean up element */
@@ -635,6 +638,27 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       .then(r => cloud.get(`/instances/${maximizerId}/objects/${objName}/definitions`))
       .then(r => cloud.delete(`/instances/${maximizerId}/transformations/${objName}`).catch(() => {}))
       .then(r => cloud.put(`/transformations`, arrayTransformation, (r) => transformationCreatedValidator(r)))
+      .then(r => cloud.get(`/hubs/crm/${objName}`, validatorWrapper))
+      .then(r => cloud.delete(`/instances/${maximizerId}/transformations/${objName}?propagate=true`).catch(() => {}))
+      .then(r => cloud.delete(`/common-resources/${objName}`).catch(() => {}));
+  });
+  it('should support defaultValue types', () => {
+    const objName = defaultValueTransformation.objectName;
+    const transformationCreatedValidator = (r) => {
+      expect(r).to.have.statusCode(200);
+      return r;
+    };
+    const validatorWrapper = r => {
+      expect(r.body.length).to.be.above(0);
+      expect(r.body[0]).to.have.property('coolBool');
+      expect(r.body[0].coolBool).to.be.true;
+    };
+
+    return cloud.delete(`/instances/${maximizerId}/objects/${objName}/definitions`).catch(() => {})
+      .then(r => cloud.post(`/instances/${maximizerId}/objects/${objName}/definitions`, objDef))
+      .then(r => cloud.get(`/instances/${maximizerId}/objects/${objName}/definitions`))
+      .then(r => cloud.delete(`/instances/${maximizerId}/transformations/${objName}`).catch(() => {}))
+      .then(r => cloud.put(`/transformations`, defaultValueTransformation, (r) => transformationCreatedValidator(r)))
       .then(r => cloud.get(`/hubs/crm/${objName}`, validatorWrapper))
       .then(r => cloud.delete(`/instances/${maximizerId}/transformations/${objName}?propagate=true`).catch(() => {}))
       .then(r => cloud.delete(`/common-resources/${objName}`).catch(() => {}));

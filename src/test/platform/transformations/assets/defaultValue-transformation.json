@@ -1,0 +1,24 @@
+{
+  "level":"instance",
+  "objectName": "c<<random.alphaNumeric##6>>",
+  "vendorName": "appointments",
+  "elementInstanceId": "REPLACE_ME",
+  "configuration":[{"type":"inherit"}],
+  "fields": [
+    {
+      "path": "coolBool",
+      "associatedLevel": "instance",
+      "vendorPath": "notThereShouldDefault",
+      "type": "boolean",
+      "configuration": [
+        {
+          "type": "defaultValue",
+          "properties": {
+              "fromVendor": "true",
+              "toVendor": ""
+          }
+        }
+      ]
+    }
+  ]
+}
