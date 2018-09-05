@@ -1,178 +1,57 @@
 {
-    "SKU": "2314321233",
+    "SKU": "5978495985497",
     "StandardProductID": {
-        "Type": "ASIN",
-        "Value": "054745322Z"
+      "Type": "ASIN",
+      "Value": "B01M70VT8X"
     },
-    "GtinExemptionReason": "bundle",
-    "ProductTaxCode": "PTAX",
-    "LaunchDate": "2018-08-28T12:00:00",
-    "DiscontinueDate": "2018-12-28T12:00:00",
-    "ReleaseDate": "2018-09-01T12:00:00",
-    "ExternalProductUrl": "http://tempuri.org",
-    "Condition": {
-        "ConditionType": "New"
-    },
-    "Rebate": {
-        "RebateStartDate": "2018-09-28T12:00:00",
-        "RebateEndDate": "2018-10-28T12:00:00",
-        "RebateMessage": "RebateMessage",
-        "RebateName": "RebateName"
-    },
-    "ItemPackageQuantity": "1",
-    "NumberOfItems": "10",
-    "LiquidVolume": {
-        "unitOfMeasure": "cubic-cm",
-        "text": "30.47"
-    },
+    "ProductTaxCode": "A_GEN_TAX",
+    "LaunchDate": "2005-07-26T00:00:01",
     "DescriptionData": {
-        "Title": "This is Chinna's first product",
-        "Brand": "CB's",
-        "Designer": "Chinna",
-        "Description": "Description",
-        "BulletPoint": "BulletPoint",
-        "ItemDimensions": {
-            "Length": {
-                "unitOfMeasure": "MM",
-                "text": "2.0"
-            },
-            "Width": {
-                "unitOfMeasure": "MM",
-                "text": "2.0"
-            },
-            "Height": {
-                "unitOfMeasure": "MM",
-                "text": "2.0"
-            },
-            "Weight": {
-                "unitOfMeasure": "GR",
-                "text": "2.0"
-            }
-        },
-        "PackageDimensions": {
-            "Length": {
-                "unitOfMeasure": "MM",
-                "text": "3.0"
-            },
-            "Width": {
-                "unitOfMeasure": "MM",
-                "text": "3.0"
-            },
-            "Height": {
-                "unitOfMeasure": "MM",
-                "text": "3.0"
-            },
-            "Weight": {
-                "unitOfMeasure": "GR",
-                "text": "3.0"
-            }
-        },
-        "ShippingWeight": {
-            "unitOfMeasure": "GR",
-            "text": "11.0"
-        },
-        "MerchantCatalogNumber": "3737373373737373737373737373737373737373",
-        "MSRP": {
-            "currency": "USD",
-            "text": "50.0"
-        },
-        "MaxOrderQuantity": "1"
+      "Title": "Some x",
+      "Brand": "Peacock Alley",
+      "Description": "Lyric sheeting by Peacock Alley is the epitome of simple and classic elegance. The flat sheets\nand pillowcases feature a double row of hemstitching. The fitted sheets fit mattresses up to 21 inches deep.\nThe sheets are shown at left with tone on tone monogramming, please call for monogramming details and prices.\nPlease note, gift wrapping and overnight shipping are not available for this style.",
+      "BulletPoint": [
+        "made in Italy",
+        "500 thread count",
+        "plain weave (percale)",
+        "100% Egyptian cotton"
+      ],
+      "Manufacturer": "Peacock Alley",
+      "SearchTerms": [
+        "bedding",
+        "Sheets"
+      ],
+      "ItemType": "flat-sheets",
+      "IsGiftWrapAvailable": "false",
+      "IsGiftMessageAvailable": "false",
+      "RecommendedBrowseNode": [
+        "60583031",
+        "60576021"
+      ]
     },
     "ProductData": {
-        "CameraPhoto": {
-            "ProductType": {
-                "FilmCamera": {
-                    "CameraType": "point-and-shoot",
-                    "Durability": "Durability",
-                    "Features": "Features",
-                    "FilmFormat": "aps",
-                    "FilmManagementFeatures": "auto_film_advance",
-                    "FixedFocalLength": {
-                        "unitOfMeasure": "MM",
-                        "text": "0.5"
-                    },
-                    "FocusType": "auto-focus",
-                    "LensThread": {
-                        "unitOfMeasure": "MM",
-                        "text": "0.8"
-                    },
-                    "LensType": "fixed",
-                    "OpticalZoomRange": {
-                        "unitOfMeasure": "MM",
-                        "text": "0.9"
-                    },
-                    "MacroFocus": {
-                        "unitOfMeasure": "MM",
-                        "text": "0.8"
-                    },
-                    "MinFocalLength": {
-                        "unitOfMeasure": "MM",
-                        "text": "0.1"
-                    },
-                    "MaxFocalLength": {
-                        "unitOfMeasure": "MM",
-                        "text": "0.5"
-                    },
-                    "MinAperture": {
-                        "unitOfMeasure": "f",
-                        "text": "0.5"
-                    },
-                    "MaxAperture": {
-                        "unitOfMeasure": "f",
-                        "text": "0.0"
-                    },
-                    "MinShutterSpeed": "0.0",
-                    "MaxShutterSpeed": "0.0",
-                    "MeteringMethods": "MeteringMethods",
-                    "ISORange": "ISORange",
-                    "FlashType": "automatic",
-                    "FlashModes": "FlashModes",
-                    "HotShoe": true,
-                    "FlashSynchronization": true,
-                    "Red-EyeReduction": true,
-                    "DiopterAdjustment": true,
-                    "Viewfinder": "Viewfinder",
-                    "LCD": true,
-                    "DateImprint": true,
-                    "MidrollChange": true,
-                    "MidrollRewind": true,
-                    "AutoRewind": true,
-                    "AutoFilmAdvance": true,
-                    "AutoFilmLoad": true,
-                    "SelfTimer": {
-                        "unitOfMeasure": "sec",
-                        "text": "0.2"
-                    },
-                    "RemoteIncluded": true,
-                    "ContinuousShooting": {
-                        "unitOfMeasure": "frames",
-                        "text": "1"
-                    },
-                    "BatteryType": "BatteryType",
-                    "BatteryIncluded": true,
-                    "ExposureControl": "manual",
-                    "Size": "compact",
-                    "PackageType": "body-only",
-                    "Remote": "Remote",
-                    "WaterResistanceDepth": {
-                        "unitOfMeasure": "MM",
-                        "text": "0.0"
-                    },
-                    "WaterResistanceLevel": "not_water_resistant",
-                    "WeightLimit": {
-                        "unitOfMeasure": "GR",
-                        "text": "10.0"
-                    },
-                    "ImageStabilization": "ImageStabilization",
-                    "WirelessTechnology": "WirelessTechnology",
-                    "IncludedFeatures": "IncludedFeatures"
-                }
-            },
-            "BatteryCellType": "NiCAD",
-            "CountryOfOrigin": "unknown",
-            "Manufacturer": "Manufacturer",
-            "ModelName": "ModelName",
-            "Color": "Color"
+      "Home": {
+        "Parentage": "parent",
+        "VariationData": {
+          "Color": "Red",
+          "Size": "XL",
+          "VariationTheme": "Size-Color"
+        },
+        "Material": "cotton",
+        "ThreadCount": "500",
+        "ProductType": {
+          "Fabric": {
+            "Shape": "square",
+            "VariationData": {
+              "Color": "Red",
+              "Size": "XL",
+              "VariationTheme": "Size-Color",
+              "Scent": "mild",
+              "StyleName": "MStyle",
+              "CustomerPackageType": "CortonBox"
+            }
+          }
         }
+      }
     }
-}
+  }

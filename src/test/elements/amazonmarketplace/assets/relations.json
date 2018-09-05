@@ -1,11 +1,4 @@
 {
-    "ParentSKU": "1245637890",
-    "Relation": {
-        "ChildDetailPageDisplay": "display_only_on_parent",
-        "ComponentNumber": "545",
-        "Quantity": "2",
-        "SKU": "1023456789",
-        "SortHeuristic": "55",
-        "Type": "Collection"
-    }
+    "SKU": "test",
+    "Type": "Complements"
 }

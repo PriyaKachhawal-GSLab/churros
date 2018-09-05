@@ -1,6 +1,6 @@
 {
-  "EndDate": "2019-06-26T18:12:21",
+  "StartDate": "2018-07-01T18:12:21",
+  "EndDate": "2018-08-30T18:12:21",
   "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
-  "StartDate": "2018-01-03T18:12:21",
   "ReportOptions": "custom=true"
 }
