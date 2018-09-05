@@ -3,8 +3,8 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 
-const emailFootersCreatePayload =  tools.requirePayload(`${__dirname}/assets/email-footers-create.json`);
-const emailFootersUpdatePayload =  tools.requirePayload(`${__dirname}/assets/email-footers-update.json`);
+const emailFootersCreatePayload =  tools.requirePayload(`${__dirname}/assets/emailFooters-create.json`);
+const emailFootersUpdatePayload =  tools.requirePayload(`${__dirname}/assets/emailFooters-update.json`);
 
 suite.forElement('marketing', 'email-footers', { payload: emailFootersCreatePayload }, (test) => {
   const opts = {
