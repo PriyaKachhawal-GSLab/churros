@@ -8,7 +8,6 @@
   "ccAvsZipMatch": {
     "value": "_x"
   },
-  "validFrom": null,
   "ccName": "Aaron Abbottt",
   "pnRefNum": "PINREF006797",
   "arAcct": {
@@ -35,9 +34,9 @@
   "customFieldList": {
     "customField": [
       {
-        "internalId": "3140",
-        "scriptId": "custcol_pfc_pfconfigurator",
-        "value": false
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
       }
     ]
   },
@@ -89,7 +88,6 @@
     "internalId": "149",
     "name": "HM Customer Payment"
   },
-  "applyList": null,
   "externalId": "ext60011",
   "ccApproved": true,
   "undepFunds": false,

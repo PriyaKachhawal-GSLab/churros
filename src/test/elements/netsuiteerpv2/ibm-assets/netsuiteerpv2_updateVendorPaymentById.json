@@ -5,31 +5,14 @@
   },
   "customForm": {
     "internalId": "154",
-    "name": "Z - Bill Payment",
-    "externalId": null,
-    "type": null
+    "name": "Z - Bill Payment"
   },
   "customFieldList": {
     "customField": [
       {
-        "internalId": "4563",
-        "scriptId": "custbody_cust_priority",
-        "value": 50
-      },
-      {
-        "internalId": "196",
-        "scriptId": "custbody9",
-        "value": 5
-      },
-      {
-        "internalId": "3148",
-        "scriptId": "custbody14",
-        "value": "bobford@christyscatering.com"
-      },
-      {
-        "internalId": "700",
-        "scriptId": "custbody11",
-        "value": false
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
       }
     ]
   },

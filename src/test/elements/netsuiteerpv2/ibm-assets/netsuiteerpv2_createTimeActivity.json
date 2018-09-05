@@ -7,15 +7,6 @@
       "value": "account"
     }
   },
-  "customFieldList": {
-    "customField": [
-      {
-        "internalId": "string",
-        "scriptId": "string",
-        "value": true
-      }
-    ]
-  },
   "caseTaskEvent": {
     "externalId": "string",
     "internalId": "254110",

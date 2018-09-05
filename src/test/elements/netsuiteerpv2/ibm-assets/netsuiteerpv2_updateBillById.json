@@ -17,7 +17,7 @@
   },
   "dueDate": "2018-08-22T07:00:00Z",
   "memo": "Test Memo..!!!",
-  "paymentHold": false,  "currencyName": "USA",
+  "paymentHold": false,
   "exchangeRate": 1,
   "billAddressList": {
     "internalId": "244836",
@@ -30,24 +30,9 @@
   "customFieldList": {
     "customField": [
       {
-        "internalId": "196",
-        "value": 3,
-        "scriptId": "custbody9"
-      },
-      {
-        "internalId": "223",
-        "value": false,
-        "scriptId": "custbody_powf_se_ok"
-      },
-      {
-        "internalId": "220",
-        "value": false,
-        "scriptId": "custbody_powf_ctrl_ok"
-      },
-      {
-        "internalId": "700",
-        "value": false,
-        "scriptId": "custbody11"
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
       }
     ]
   },
@@ -56,10 +41,7 @@
     "name": "Approved"
   },
   "landedCostPerLine": false,
-  "landedCostMethod": {
-    "value": "_weight"
-  },
-  "userTotal": 12500,
+
   "customForm": {
     "internalId": "50",
     "name": "Standard Vendor Bill"
@@ -90,8 +72,7 @@
         "location": {
           "internalId": "2",
           "name": "01: San Francisco"
-        },
-        "isBillable": false
+        }
       }
     ],
     "replaceAll": false
@@ -103,6 +84,5 @@
   "entity": {
     "internalId": "1305",
     "name": "AL Systems Ltd"
-  },
-  "status": "Open"
+  }
  }

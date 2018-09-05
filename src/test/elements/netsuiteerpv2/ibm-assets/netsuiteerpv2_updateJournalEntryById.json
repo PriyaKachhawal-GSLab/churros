@@ -32,9 +32,9 @@
   "customFieldList": {
     "customField": [
       {
-        "internalId": "3140",
-        "scriptId": "custcol_pfc_pfconfigurator",
-        "value": false
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
       }
     ]
   },
@@ -43,112 +43,6 @@
   "customForm": {
     "internalId": "222",
     "name": "HM Journal Entry"
-  },
-  "lineList": {
-    "line": [
-      {
-        "account": {
-          "internalId": "77",
-          "name": "6100 Insurance Expense"
-        },
-        "debit": 200,
-        "startDate": "2018-07-17T07:00:00Z",
-        "endDate": "2018-07-26T07:00:00Z",
-        "memo": "memo detail02",
-        "taxCode": {
-          "internalId": "1",
-          "name": "tx cd012"
-        },
-        "eliminate": true,
-        "residual": "4.34523",
-        "tax1Acct": {
-          "internalId": "1",
-          "name": "tx acct022"
-        },
-        "tax1Amt": 34.45623,
-        "schedule": {
-          "internalId": "1",
-          "name": "schedule 022"
-        },
-        "scheduleNum": null,
-        "location": null,
-        "_class": {
-          "internalId": "14",
-          "name": "Consumer Goods"
-        },
-        "grossAmt": 34.45623,
-        "revenueRecognitionRule": {
-          "internalId": "14",
-          "name": "Consumer Goods"
-        },
-        "credit": null,
-        "taxRate1": 23.34523,
-        "entity": null,
-        "department": {
-          "internalId": "4",
-          "name": "dept 03"
-        },
-        "customFieldList": {
-          "customField": [
-            {
-              "internalId": "3140",
-              "scriptId": "custcol_pfc_pfconfigurator",
-              "value": false
-            }
-          ]
-        }
-      },
-      {
-        "account": {
-          "internalId": "77",
-          "name": "6100 Insurance Expense"
-        },
-        "credit": 200,
-        "startDate": "2018-07-18T07:00:00Z",
-        "endDate": "2018-07-27T07:00:00Z",
-        "memo": "memo detail03",
-        "taxCode": {
-          "internalId": "2",
-          "name": "tx cd022"
-        },
-        "eliminate": true,
-        "residual": "3.34523",
-        "tax1Acct": {
-          "internalId": "1",
-          "name": "tx acct022"
-        },
-        "tax1Amt": 24.45623,
-        "schedule": {
-          "internalId": "1",
-          "name": "schedule 012"
-        },
-        "location": null,
-        "_class": {
-          "internalId": "14",
-          "name": "Consumer Goods"
-        },
-        "grossAmt": 44.45623,
-        "revenueRecognitionRule": {
-          "internalId": "14",
-          "name": "Consumer Goods"
-        },
-        "taxRate1": 33.34523,
-        "entity": null,
-        "department": {
-          "internalId": "4",
-          "name": "dept 01"
-        },
-        "customFieldList": {
-          "customField": [
-            {
-              "internalId": "3140",
-              "scriptId": "custcol_pfc_pfconfigurator",
-              "value": false
-            }
-          ]
-        }
-      }
-    ]
   },
   "externalId": "ext10011",
   "subsidiary": {

@@ -35,14 +35,7 @@
   "projectedEndDate": "2018-07-14T07:00:00Z",
   "phoneticName": "ashksd",
   
-  "parent": {
-    "internalId": "1491",
-    "name": "Alpart"
-  },
-  "subsidiary": {
-    "internalId": "1",
-    "name": "Honeycomb Mfg."
-  },
+
   "allocatePayrollExpenses": true,
   "allowAllResourcesForTasks": false,
   "allowExpenses": true,

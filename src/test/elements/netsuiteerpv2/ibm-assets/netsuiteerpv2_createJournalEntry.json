@@ -1,15 +1,44 @@
 {
-  "tranId": "JrnlEnt3021",
-  "memo": "Jrnl Ent 302",
-  "approved": true,
-  "currency": {
-    "internalId": "1",
-    "name": "USA"
+  "customForm": {
+    "internalId": "222",
+    "name": "HM Journal Entry"
+  },
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
+      }
+    ]
   },
   "department": {
     "internalId": "3",
     "name": "Service"
   },
+  "_class": {
+    "internalId": "13",
+    "name": "Consumer Goods"
+  },
+  "memo": "Jrnl Ent 302",
+  "location": {
+    "internalId": "46",
+    "name": "loca457"
+  },
+  "postingPeriod": {
+    "internalId": "300",
+    "name": "Jul 2018"
+  },
+  "currency": {
+    "internalId": "1",
+    "name": "USA"
+  },
+  "subsidiary": {
+    "internalId": "6",
+    "name": "Honeycomb Metal Services"
+  },
+  "tranId": "JrnlEnt3021",
+  "approved": true,
   "accountingBook": {
     "internalId": "1",
     "name": "Service"
@@ -29,21 +58,8 @@
       }
     ]
   },
-  "customFieldList": {
-    "customField": [
-      {
-        "internalId": "3140",
-        "scriptId": "custcol_pfc_pfconfigurator",
-        "value": false
-      }
-    ]
-  },
   "reversalDefer": true,
   "reversalDate": "2018-07-17T07:00:00Z",
-  "customForm": {
-    "internalId": "222",
-    "name": "HM Journal Entry"
-  },
   "lineList": {
     "line": [
       {
@@ -70,8 +86,6 @@
           "internalId": "1",
           "name": "schedule 022"
         },
-        "scheduleNum": null,
-        "location": null,
         "_class": {
           "internalId": "14",
           "name": "Consumer Goods"
@@ -81,9 +95,7 @@
           "internalId": "14",
           "name": "Consumer Goods"
         },
-        "credit": null,
         "taxRate1": 23.34523,
-        "entity": null,
         "department": {
           "internalId": "4",
           "name": "dept 03"
@@ -91,59 +103,9 @@
         "customFieldList": {
           "customField": [
             {
-              "internalId": "3140",
-              "scriptId": "custcol_pfc_pfconfigurator",
-              "value": false
-            }
-          ]
-        }
-      },
-      {
-        "account": {
-          "internalId": "77",
-          "name": "6100 Insurance Expense"
-        },
-        "credit": 200,
-        "startDate": "2018-07-18T07:00:00Z",
-        "endDate": "2018-07-27T07:00:00Z",
-        "memo": "memo detail03",
-        "taxCode": {
-          "internalId": "2",
-          "name": "tx cd022"
-        },
-        "eliminate": true,
-        "residual": "3.34523",
-        "tax1Acct": {
-          "internalId": "1",
-          "name": "tx acct022"
-        },
-        "tax1Amt": 24.45623,
-        "schedule": {
-          "internalId": "1",
-          "name": "schedule 012"
-        },
-        "location": null,
-        "_class": {
-          "internalId": "14",
-          "name": "Consumer Goods"
-        },
-        "grossAmt": 44.45623,
-        "revenueRecognitionRule": {
-          "internalId": "14",
-          "name": "Consumer Goods"
-        },
-        "taxRate1": 33.34523,
-        "entity": null,
-        "department": {
-          "internalId": "4",
-          "name": "dept 01"
-        },
-        "customFieldList": {
-          "customField": [
-            {
-              "internalId": "3140",
-              "scriptId": "custcol_pfc_pfconfigurator",
-              "value": false
+              "internalId": "29",
+              "value": "Shiuppong asjsjd",
+              "scriptId": "custentity4"
             }
           ]
         }
@@ -151,25 +113,9 @@
     ]
   },
   "externalId": "ext10011",
-  "subsidiary": {
-    "internalId": "6",
-    "name": "Honeycomb Metal Services"
-  },
   "toSubsidiary": {
     "internalId": "4",
     "name": "Honeycomb Metal Services"
-  },
-  "postingPeriod": {
-    "internalId": "300",
-    "name": "Jul 2018"
-  },
-  "location": {
-    "internalId": "46",
-    "name": "loca457"
-  },
-  "_class": {
-    "internalId": "13",
-    "name": "Consumer Goods"
   },
   "nullFieldList": [
     "nullfield1",

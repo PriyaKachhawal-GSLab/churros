@@ -13,8 +13,6 @@
     "internalId": "2",
     "name": "Medium"
   },
-  "internalOnly": true,
-  "isInactive": true,
   "escalateToList": {
     "escalateTo": [
       {
@@ -48,8 +46,6 @@
     "internalId": "1",
     "name": "Honeycomb Mfg."
   },
-  "emailForm": false,
-  "endDate": "2018-06-26T12:55:31Z",
   "startDate": "2014-12-15T18:40:00Z",
   "status": {
     "internalId": "3",

@@ -14,51 +14,7 @@
     "internalId": "112868",
     "name": "1504939920appconnpo4wklnyju7r6swcdi"
   },
-  "subscriptionsList": {
-    "subscriptions": [
-      {
-        "subscribed": true,
-        "lastModifiedDate": "2018-08-24T10:03:25+05:30",
-        "subscription": {
-          "internalId": "2",
-          "name": "Billing Communication"
-        }
-      },
-      {
-        "subscribed": true,
-        "lastModifiedDate": "2018-08-24T10:03:25+05:30",
-        "subscription": {
-          "internalId": "1",
-          "name": "Marketing"
-        }
-      },
-      {
-        "subscribed": true,
-        "lastModifiedDate": "2018-08-24T10:03:25+05:30",
-        "subscription": {
-          "internalId": "4",
-          "name": "Newsletters"
-        }
-      },
-      {
-        "subscribed": true,
-        "lastModifiedDate": "2018-08-24T10:03:25+05:30",
-        "subscription": {
-          "internalId": "5",
-          "name": "Product Updates"
-        }
-      },
-      {
-        "subscribed": true,
-        "lastModifiedDate": "2018-08-24T10:03:25+05:30",
-        "subscription": {
-          "internalId": "3",
-          "name": "Surveys"
-        }
-      }
-    ],
-    "replaceAll": false
-  },
+
   "fax": "94949833839",
   "email": "afrin@ce.com",
   "image": {

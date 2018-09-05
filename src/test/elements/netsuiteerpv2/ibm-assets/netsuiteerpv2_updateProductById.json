@@ -165,7 +165,6 @@
     "internalId": "144",
     "name": "Custom Inventory Part Form"
   },
-  "costingMethodDisplay": "Standard",
   "isDropShipItem": false,
   "safetyStockLevelUnits": "Bx",
   "availableToPartners": false,

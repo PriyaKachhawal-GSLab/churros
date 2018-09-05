@@ -11,8 +11,7 @@
   "billAddressList": {
     "internalId": "42",
     "name": "Billing Address",
-    "externalId": "87",
-    "type": null
+    "externalId": "87"
   },
   "billingAddress": {
     "zip": "98108-1226",
@@ -29,16 +28,14 @@
   "currencyName": "USA",
   "currency": {
     "internalId": "1",
-    "name": "USA",
-    "externalId": null,
-    "type": null
+    "name": "USA"
   },
   "customFieldList": {
     "customField": [
       {
-        "internalId": "220",
-        "scriptId": "custbody_powf_ctrl_ok",
-        "value": false
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
       }
     ]
   },
@@ -94,9 +91,9 @@
         "customFieldList": {
           "customField": [
             {
-              "internalId": "2",
-              "scriptId": "testScritpt",
-              "value": true
+              "internalId": "29",
+              "value": "Shiuppong asjsjd",
+              "scriptId": "custentity4"
             }
           ]
         },
@@ -119,7 +116,6 @@
         "grossAmt": 18.2,
         "isBillable": true,
         "isClosed": true,
-        "line": 2.3,
         "linkedOrderList": {
           "recordRef": [
             {
@@ -159,7 +155,6 @@
   "externalId": "75151",
   "fax": "415-555-5750",
   "fob": "Afghanistan",
-  "intercoStatus": "_paired",
   "intercoTransaction": {
     "externalId": "3",
     "internalId": "2",
@@ -168,37 +163,23 @@
       "value": "account"
     }
   },
-  "internalId": "308232",
   "itemList": {
     "item": [
       {
         "amount": 100,
         "createdFrom": {
           "internalId": "18",
-          "name": "Internal : billsStatus",
-          "externalId": null,
-          "type": null
-        },
-        "customFieldList": {
-          "customField": {
-            "internalId": "6",
-            "scriptId": "6"
-          }
+          "name": "Internal : billsStatus"
         },
         "customer": {
           "internalId": "1220",
-          "name": "Graber & Assoc",
-          "externalId": null,
-          "type": null
+          "name": "Graber & Assoc"
         },
         "department": {
           "internalId": "2",
-          "name": "Sales",
-          "externalId": null,
-          "type": null
+          "name": "Sales"
         },
         "description": "50 Button Digial Console",
-        "expectedReceiptDate": 1428994800000,
         "grossAmt": 62.3,
         "isClosed": false,
         "item": {
@@ -208,7 +189,6 @@
         "line": 1,
         "matchBillToReceipt": false,
         "quantity": 1,
-        "rate": "100.00",
         "units": {
           "internalId": "1",
           "name": "Ea"
@@ -220,38 +200,28 @@
   "location": {
     "internalId": "5",
     "name": "01: San Francisco : QA Hold",
-    "externalId": "67",
-    "type": null
+    "externalId": "67"
   },
   "memo": "To: Department Chairs From: Dr. Kerns, CEO",
   "message": "CMA CGM Antoine de Saint Exupery",
   "nextApprover": {
     "internalId": "5",
-    "name": "Bill Connors",
-    "externalId": null,
-    "type": null
+    "name": "Bill Connors"
   },
   "nullFieldList": {},
-  "orderStatus": "_pendingReceipt",
   "otherRefNum": "109-WE-4973",
   "purchaseContract": {
     "internalId": "5",
-    "name": "Contract33",
-    "externalId": null,
-    "type": null
+    "name": "Contract33"
   },
   "shipAddressList": {
     "internalId": "254974",
-    "name": "amar",
-    "externalId": null,
-    "type": null
+    "name": "amar"
   },
   "shipIsResidential": false,
   "shipMethod": {
     "internalId": "2",
-    "name": "Pick-up at store",
-    "externalId": null,
-    "type": null
+    "name": "Pick-up at store"
   },
   "shippingAddress": {
     "zip": "94403",
@@ -271,8 +241,7 @@
   "subsidiary": {
     "internalId": "1",
     "name": "Honeycomb Mfg.",
-    "externalId": "67",
-    "type": null
+    "externalId": "67"
   },
   "supervisorApproval": true,
   "tax2Total": 46.76,
@@ -280,8 +249,7 @@
   "terms": {
     "internalId": "3",
     "name": "Net 60",
-    "externalId": "65",
-    "type": null
+    "externalId": "65"
   },
   "toBeEmailed": false,
   "toBeFaxed": false,

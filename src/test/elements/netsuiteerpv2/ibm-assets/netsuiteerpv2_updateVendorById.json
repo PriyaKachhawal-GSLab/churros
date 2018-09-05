@@ -23,9 +23,9 @@
           "customFieldList": {
             "customField": [
               {
-                "internalId": "3992",
-                "scriptId": "custentity_2663_payment_method",
-                "value": true
+                "internalId": "29",
+                "value": "Shiuppong asjsjd",
+                "scriptId": "custentity4"
               }
             ]
           }
@@ -38,8 +38,7 @@
   "billPay": false,
   "category": {
     "externalId": "7851",
-    "internalId": "10",
-    "type": "nexus"
+    "internalId": "10"
   },
   "comments": "This company is in loss",
   "companyName": "vene-test-max",
@@ -49,8 +48,8 @@
       {
         "currency": {
           "internalId": "3",
-          "externalId": "581",
-          "type": "bin"
+          "externalId": "581"
+
         }
       }
     ],
@@ -59,27 +58,24 @@
   "customFieldList": {
     "customField": [
       {
-        "internalId": "3992",
-        "scriptId": "custentity_2663_payment_method",
-        "value": false
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
       }
     ]
   },
   "customForm": {
     "internalId": "4",
     "name": "GB Vendor Form",
-    "externalId": "8236",
-    "type": "cashSale"
+    "externalId": "8236"
   },
   "eligibleForCommission": false,
   "email": "ven-test@gmail.com",
-  "emailPreference": "_default",
   "emailTransactions": false,
   "entityId": "vene-test-upda2te",
   "expenseAccount": {
     "externalId": "87521",
-    "internalId": "10",
-    "type": "bin"
+    "internalId": "10"
   },
   "externalId": "4t873452",
   "fax": "857-y918-t",
@@ -87,8 +83,7 @@
   "giveAccess": false,
   "incoterm": {
     "externalId": "9827",
-    "internalId": "1",
-    "type": "file"
+    "internalId": "1"
   },
   "is1099Eligible": false,
   "isAccountant": false,
@@ -97,15 +92,14 @@
   "isPerson": false,
   "laborCost": 62.34,
   "legalName": "vene-test78",
-  "nullFieldList": null,
   "openingBalance": 387.38,
   "openingBalanceDate": "2016-01-24T08:00:00Z",
   "password": "pass1",
   "password2": "pass2",
   "payablesAccount": {
     "externalId": "861",
-    "internalId": "176",
-    "type": "bin"
+    "internalId": "176"
+
   },
   "phone": "86-329-739",
   "phoneticName": "BillsC",
@@ -123,8 +117,7 @@
   "receiptQuantityDiff": 7.68,
   "representingSubsidiary": {
     "externalId": "860",
-    "internalId": "3",
-    "type": "check"
+    "internalId": "3"
   },
   "requirePwdChange": false,
   "rolesList": {
@@ -132,64 +125,47 @@
       {
         "selectedRole": {
           "externalId": "860",
-          "internalId": "3",
-          "type": "check"
+          "internalId": "3"
         }
       }
     ],
     "replaceAll": false
   },
-  "sendEmail": false,
   "subscriptionsList": {
     "subscriptions": [
       {
         "subscribed": true,
-        "lastModifiedDate": "2018-07-12T11:33:05Z",
         "subscription": {
           "internalId": "2",
-          "name": "Billing Communication",
-          "externalId": null,
-          "type": null
+          "name": "Billing Communication"
         }
       },
       {
         "subscribed": true,
-        "lastModifiedDate": "2018-07-12T11:33:05Z",
         "subscription": {
           "internalId": "1",
-          "name": "Marketing",
-          "externalId": null,
-          "type": null
+          "name": "Marketing"
         }
       },
       {
         "subscribed": true,
-        "lastModifiedDate": "2018-07-12T11:33:05Z",
         "subscription": {
           "internalId": "4",
-          "name": "Newsletters",
-          "externalId": null,
-          "type": null
+          "name": "Newsletters"
         }
       },
       {
         "subscribed": true,
-        "lastModifiedDate": "2018-07-12T11:33:05Z",
         "subscription": {
           "internalId": "5",
-          "name": "Product Updates",
-          "externalId": null,
-          "type": null
+          "name": "Product Updates"
         }
       },
       {
         "subscribed": true,
-        "lastModifiedDate": "2018-07-12T11:33:05Z",
         "subscription": {
           "internalId": "3",
-          "name": "Surveys",
-          "externalId": null,
-          "type": null
+          "name": "Surveys"
         }
       }
     ],
@@ -198,21 +174,18 @@
   "subsidiary": {
     "internalId": "1",
     "name": "Honeycomb Mfg.",
-    "externalId": "896",
-    "type": "check"
+    "externalId": "896"
   },
   "taxIdNum": "98712",
   "terms": {
     "internalId": "1",
     "name": "Honeycomb Mfg.",
-    "externalId": "896",
-    "type": "check"
+    "externalId": "896"
   },
   "url": "http://www.test-url.com",
   "workCalendar": {
     "internalId": "1",
     "name": "Default Work Calendar",
-    "externalId": "907",
-    "type": "check"
+    "externalId": "907"
   }
 }

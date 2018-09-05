@@ -8,7 +8,6 @@
   "ccAvsZipMatch": {
     "value": "_y"
   },
-  "validFrom": null,
   "ccName": "Aaron Abbott",
   "pnRefNum": "PINREF006784",
   "arAcct": {
@@ -35,9 +34,9 @@
   "customFieldList": {
     "customField": [
       {
-        "internalId": "4569",
-        "scriptId": "custbody77",
-        "value": "2.34321"
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
       }
     ]
   },

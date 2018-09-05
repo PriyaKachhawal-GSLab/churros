@@ -47,9 +47,9 @@
   "customFieldList": {
     "customField": [
       {
-        "internalId": "3140",
-        "scriptId": "custcol_pfc_pfconfigurator",
-        "value": false
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
       }
     ]
   },

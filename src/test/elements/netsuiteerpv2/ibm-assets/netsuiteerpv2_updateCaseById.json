@@ -7,14 +7,11 @@
     "internalId": "27",
     "name": "Brad M Sparling"
   },
-  "email": "williamsww@christyscatering.com",
   "title": "Sample Test Case - Churros",
   "priority": {
     "internalId": "2",
     "name": "Medium"
   },
-  "internalOnly": true,
-  "isInactive": true,
   "escalateToList": {
     "escalateTo": [
       {
@@ -48,13 +45,11 @@
     "internalId": "1",
     "name": "Honeycomb Mfg."
   },
-  "emailForm": false,
   "startDate": "2014-12-15T18:40:00Z",
   "status": {
     "internalId": "3",
     "name": "Escalated"
   },
-  "phone": "090909090000",
   "incomingMessage": "I received my entire order in small pieces.",
   "issue": {
     "internalId": "5",

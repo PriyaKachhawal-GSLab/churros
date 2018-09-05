@@ -43,7 +43,6 @@
     "replaceAll": false
   },
   "estimatedBudget": 2342,
-  "memo": null,
   "source": "UI",
   "syncPartnerTeams": true,
   "competitorsList": {
@@ -70,9 +69,9 @@
   "customFieldList": {
     "customField": [
       {
-        "internalId": "3140",
-        "scriptId": "custcol_pfc_pfconfigurator",
-        "value": false
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
       }
     ]
   },
@@ -113,7 +112,6 @@
     }
   },
   "tranDate": "2015-07-15T07:00:00Z",
-  "_class": null,
   "job": {
     "internalId": "510792",
     "name": "Another Killer Product1",
@@ -239,7 +237,6 @@
     "city": "pune",
     "addrText": "testqa\nAbsolute Location Support\namar\nbaner\npune maharashtraa 411045\nIndia",
     "addrPhone": "(124) 456-7890",
-    "internalId": "",
     "addressee": "Absolute Location Support",
     "attention": "testqawq",
     "state": "maharashtra",
@@ -247,9 +244,9 @@
     "customFieldList": {
       "customField": [
         {
-          "internalId": "3140",
-          "scriptId": "custcol_pfc_pfconfigurator",
-          "value": false
+          "internalId": "29",
+          "value": "Shiuppong asjsjd",
+          "scriptId": "custentity4"
         }
       ]
     }
@@ -298,9 +295,9 @@
         "options": {
           "customField": [
             {
-              "internalId": "3140",
-              "scriptId": "custcol_pfc_pfconfigurator",
-              "value": false
+              "internalId": "29",
+              "value": "Shiuppong asjsjd",
+              "scriptId": "custentity4"
             }
           ]
         },
@@ -317,9 +314,9 @@
         "customFieldList": {
           "customField": [
             {
-              "internalId": "3140",
-              "scriptId": "custcol_pfc_pfconfigurator",
-              "value": false
+              "internalId": "29",
+              "value": "Shiuppong asjsjd",
+              "scriptId": "custentity4"
             }
           ]
         },
@@ -333,7 +330,7 @@
         },
         "amount": 105000,
         "quantity": 310,
-        "costEstimateType": null,
+  
         "taxCode": {
           "internalId": "37",
           "name": "new tax code",
@@ -342,8 +339,8 @@
             "value": "taxAcct"
           }
         },
-        "revRecTermInMonths": null,
-        "costEstimate": null,
+        
+        
         "grossAmt": 42.5,
         "location": {
           "internalId": "1",
@@ -404,9 +401,9 @@
         "options": {
           "customField": [
             {
-              "internalId": "3140",
-              "scriptId": "custcol_pfc_pfconfigurator",
-              "value": false
+              "internalId": "29",
+              "value": "Shiuppong asjsjd",
+              "scriptId": "custentity4"
             }
           ]
         },
@@ -423,9 +420,9 @@
         "customFieldList": {
           "customField": [
             {
-              "internalId": "3140",
-              "scriptId": "custcol_pfc_pfconfigurator",
-              "value": false
+              "internalId": "29",
+              "value": "Shiuppong asjsjd",
+              "scriptId": "custentity4"
             }
           ]
         },
@@ -439,7 +436,8 @@
         },
         "amount": 120,
         "quantity": 100,
-        "costEstimateType": null,
+      
+      
         "taxCode": {
           "internalId": "37",
           "name": "new tax code",
@@ -448,8 +446,7 @@
             "value": "taxAcct"
           }
         },
-        "revRecTermInMonths": null,
-        "costEstimate": null,
+       
         "grossAmt": 230,
         "location": {
           "internalId": "1",
@@ -494,16 +491,7 @@
     "addressee": "Absolute Location Support",
     "attention": "testqaw",
     "state": "maharashtra",
-    "override": false,
-    "customFieldList": {
-      "customField": [
-        {
-          "internalId": "3140",
-          "scriptId": "custcol_pfc_pfconfigurator",
-          "value": false
-        }
-      ]
-    }
+    "override": false
   },
   "entity": {
     "internalId": "1178",

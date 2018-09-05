@@ -128,7 +128,6 @@
   "taxItem": {
     "internalId": "-118"
   },
-  "openingBalance": "4400.00",
   "openingBalanceDate": "2018-07-22T10:32:52.527Z",
   "thirdPartyAcct": "11221122",
   "thirdPartyZipcode": "411045",
@@ -146,9 +145,6 @@
   },
   "alcoholRecipientType": {
     "value": "_consumer"
-  },
-  "creditHoldOverride": {
-    "value": "_on"
   },
   "prefCCProcessor": {
     "internalId": "2"

@@ -1,11 +1,8 @@
 {
   "salesRep": {
     "internalId": "23",
-    "name": "Clark Koozer",
-    "externalId": null,
-    "type": null
+    "name": "Clark Koozer"
   },
-  "vatRegNum": null,
   "salesTeamList": {
     "replaceAll": true,
     "salesTeam": [
@@ -64,44 +61,9 @@
   "customFieldList": {
     "customField": [
       {
-        "internalId": "167",
-        "scriptId": "custbody_fmt_senior_exec_declined",
-        "value": false
-      },
-      {
-        "internalId": "179",
-        "scriptId": "custbody_fmt_finance_app",
-        "value": false
-      },
-      {
-        "internalId": "168",
-        "scriptId": "custbody_fmt_senior_executive_app",
-        "value": false
-      },
-      {
-        "internalId": "169",
-        "scriptId": "custbody_fmt_sales_manager_app",
-        "value": false
-      },
-      {
-        "internalId": "171",
-        "scriptId": "custbody_fmt_sales_manager_declined",
-        "value": false
-      },
-      {
-        "internalId": "174",
-        "scriptId": "custbody_fmt_req_sales_manager_app",
-        "value": false
-      },
-      {
-        "internalId": "180",
-        "scriptId": "custbody_fmt_req_financial_app",
-        "value": false
-      },
-      {
-        "internalId": "181",
-        "scriptId": "custbody_fmt_finance_declined",
-        "value": false
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
       }
     ]
   },
@@ -109,37 +71,32 @@
   "probability": 50,
   "leadSource": {
     "internalId": "99995",
-    "name": "Distribution Monthly Mailer",
-    "externalId": null,
-    "type": null
+    "name": "Distribution Monthly Mailer"
+
   },
-  "contribPct": "null",
+
   "subsidiary": {
     "internalId": "1",
-    "name": "Honeycomb Mfg.",
-    "externalId": null,
-    "type": null
+    "name": "Honeycomb Mfg."
+
   },
   "recurAnnually": 0,
   "taxRate": 0,
   "shippingTaxCode": {
     "internalId": "-9",
-    "name": "Other 4 Sales Tax",
-    "externalId": null,
-    "type": null
+    "name": "Other 4 Sales Tax"
+
   },
   "visibleToCustomer": true,
   "shipMethod": {
     "internalId": "92",
-    "name": "UPS Ground",
-    "externalId": null,
-    "type": null
+    "name": "UPS Ground"
+
   },
   "toBeEmailed": false,
-  "fob": "null",
+
   "tranDate": "2017-07-20T12:30:00+05:30",
   "shipIsResidential": false,
-  "status": "Open",
   "tranId": "QUO000010471",
   "includeInForecast": false,
   "recurQuarterly": 0,
@@ -185,7 +142,6 @@
     }
   },
   "expectedCloseDate": "2017-07-20T12:30:00+05:30",
-  "currencyName": "USA",
   "handlingTaxCode": {
     "internalId": "13708",
     "name": "1505826814appconcvf51rjy5q46aa2rcnmi",
@@ -194,31 +150,20 @@
       "value": "partner"
     }
   },
-  "billAddressList": {
-    "internalId": "",
-    "name": "",
-    "externalId": "",
-    "type": {
-      "value": "partner"
-    }
-  },
   "handlingCost": 20,
   "currency": {
     "internalId": "1",
-    "name": "USA",
-    "externalId": null,
-    "type": null
+    "name": "USA"
   },
   "promoCode": {
     "internalId": "10",
-    "name": "CMWI05",
-    "externalId": null,
-    "type": null
+    "name": "CMWI05"
+
   },
   "email": "info@everett.com",
-  "linkedTrackingNumbers": "null",
+
   "recurWeekly": 0,
-  "otherRefNum": "null",
+
   "toBePrinted": false,
   "billingSchedule": {
     "internalId": "1",
@@ -231,69 +176,44 @@
   "oneTime":1,
   "customForm": {
     "internalId": "175",
-    "name": "Z - HM Quote Form",
-    "externalId": null,
-    "type": null
+    "name": "Z - HM Quote Form"
+
   },
   "isTaxable": false,
   "externalId": "fpssoawaoddddddtfpoddduelyhjy2",
   "itemList": {
     "item": [
       {
-        "shipGroup": null,
+
         "line": 1,
-        "expectedShipDate": null,
-        "chargeType": null,
+
+
         "description": "Merlin display phone for support calls Estimate Craeted",
-        "tax1Amt": null,
-        "units": null,
-        "subscription": null,
-        "itemIsFulfilled": null,
+
         "rate": "175.00",
-        "isEstimate": null,
+
         "price": {
           "internalId": "1",
-          "name": "List Price",
-          "externalId": null,
-          "type": null
+          "name": "List Price"
+
         },
-        "altSalesAmt": null,
-        "options": null,
-        "department": null,
-        "taxRate2": null,
-        "taxRate1": null,
-        "customFieldList": null,
-        "fromJob": null,
+
         "item": {
           "internalId": "502",
-          "name": "ACC00003",
-          "externalId": null,
-          "type": null
+          "name": "ACC00003"
+
         },
         "amount": 175,
         "quantity": 1,
-        "costEstimateType": null,
-        "serialNumbers": null,
-        "excludeFromRateRequest": null,
-        "isTaxable": null,
-        "expandItemGroup": false,
-        "taxCode": null,
-        "shipAddress": null,
-        "revRecTermInMonths": null,
-        "costEstimate": null,
-        "grossAmt": null,
-        "shipMethod": null,
-        "location": null,
-        "_class": null,
-        "job": null
+        "expandItemGroup": false
+
       }
     ],
     "replaceAll": false
   },
   "entity": {
     "internalId": "970",
-    "name": "Everett Fine Wines",
-    "externalId": null,
-    "type": null
+    "name": "Everett Fine Wines"
+
   }
 }

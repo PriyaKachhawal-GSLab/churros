@@ -10,14 +10,9 @@
   "customFieldList": {
     "customField": [
       {
-        "internalId": "3992",
-        "value": false,
-        "scriptId": "custentity_2663_payment_method"
-      },
-      {
-        "internalId": "696",
-        "value": true,
-        "scriptId": "custentity2"
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
       }
     ]
   },

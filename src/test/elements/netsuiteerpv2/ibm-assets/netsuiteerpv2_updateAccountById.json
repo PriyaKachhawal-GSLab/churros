@@ -22,44 +22,16 @@
     "internalId": "2",
     "name": "10% Discount Level"
   },
-  "isPerson": false,
   "defaultOrderPriority": 9,
-  "creditCardsList": {
-    "creditCards": [
-      {
-        "ccExpireDate": "2019-08-01T07:00:00Z",
-        "internalId": "2049",
-        "ccNumber": "************1111",
-        "ccDefault": true,
-        "paymentMethod": {
-          "internalId": "5",
-          "name": "Visa"
-        },
-        "cardState": {
-          "internalId": "UNKNOWN",
-          "name": "Unknown"
-        },
-        "validfrom": "2012-08-01T07:00:00Z",
-        "ccName": "Yoges Patil",
-        "debitcardIssueNo": "1212",
-        "ccMemo": "Tets",
-        "stateFrom": "2018-08-30T00:58:16Z"
-      }
-    ],
-    "replaceAll": false
-  },
   "prefCCProcessor": {
     "internalId": "2",
     "name": "Test Name"
   },
-  "consolAging2": 28380,
-  "consolAging3": 0,
-  "internalId": "577362",
+
   "campaignCategory": {
     "internalId": "3",
     "name": "Newsletters"
   },
-  "consolAging4": 10800,
   "terms": {
     "internalId": "2",
     "name": "Net 30"
@@ -69,13 +41,11 @@
     "internalId": "14",
     "name": "Customer Center"
   },
-  "consolAging1": 0,
   "creditLimit": 1212,
   "subscriptionsList": {
     "subscriptions": [
       {
         "subscribed": true,
-        "lastModifiedDate": "2018-08-30T00:58:17Z",
         "subscription": {
           "internalId": "2",
           "name": "Billing Communication"
@@ -83,7 +53,6 @@
       },
       {
         "subscribed": true,
-        "lastModifiedDate": "2018-08-30T00:58:17Z",
         "subscription": {
           "internalId": "1",
           "name": "Marketing"
@@ -91,7 +60,6 @@
       },
       {
         "subscribed": true,
-        "lastModifiedDate": "2018-08-30T00:58:17Z",
         "subscription": {
           "internalId": "4",
           "name": "Newsletters"
@@ -99,7 +67,6 @@
       },
       {
         "subscribed": true,
-        "lastModifiedDate": "2018-08-30T00:58:17Z",
         "subscription": {
           "internalId": "5",
           "name": "Product Updates"
@@ -107,7 +74,6 @@
       },
       {
         "subscribed": true,
-        "lastModifiedDate": "2018-08-30T00:58:17Z",
         "subscription": {
           "internalId": "3",
           "name": "Surveys"
@@ -124,37 +90,9 @@
   "customFieldList": {
     "customField": [
       {
-        "internalId": "3993",
-        "value": false,
-        "scriptId": "custentity_2663_direct_debit"
-      },
-      {
-        "internalId": "201",
-        "value": false,
-        "scriptId": "custentity_fmt_customer_credit_on_hold"
-      },
-      {
-        "internalId": "24",
-        "value": false,
-        "scriptId": "custentity18"
-      },
-      {
-        "internalId": "4565",
-        "value": 50,
-        "scriptId": "custentity_cust_priority"
-      },
-      {
-        "internalId": "3994",
-        "value": false,
-        "scriptId": "custentity_2663_customer_refund"
-      },
-      {
-        "value": "<script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['orgchart'], callback:drawChart});function drawChart() {var data = new google.visualization.DataTable();data.addColumn('string', 'Name');data.addColumn('string', 'Manager');data.addColumn('string', 'ToolTip');data.addRows([[{v:'',f:'<div style=\"color:red; font-style:italic\"></div>'}, '', '']]);var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));chart.draw(data, {allowHtml:true});}</script><body><div id='chart_div'></div></body>"
-      },
-      {
-        "internalId": "183",
-        "value": false,
-        "scriptId": "custentity_fmt_cust_credit_on_hold"
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
       }
     ]
   },
@@ -196,7 +134,6 @@
     "internalId": "1",
     "name": "Honeycomb Mfg."
   },
-  "mobilePhone": "(646) 886-5190",
   "creditHoldOverride": {
     "value": "_auto"
   },
@@ -206,7 +143,6 @@
   "globalSubscriptionStatus": {
     "value": "_softOptIn"
   },
-  "webLead": "No",
   "altPhone": "1 (866) 830-5566",
   "thirdPartyZipcode": "75248",
   "startDate": "2018-07-23T07:00:00Z",
@@ -214,26 +150,21 @@
     "value": "_licensee"
   },
   "isBudgetApproved": true,
-  "consolDaysOverdue": 515,
   "taxItem": {
     "internalId": "-149",
     "name": "CA-COLUSA"
   },
   "billPay": false,
   "sendEmail": false,
-  "dateCreated": "2018-08-30T00:58:16Z",
   "numberFormat": {
     "value": "_spaceAsDigitGroupSeparatorAndDecimalComma"
   },
-  "aging2": 6600,
-  "aging3": 0,
-  "aging1": 0,
+
   "emailTransactions": true,
   "currency": {
     "internalId": "1",
     "name": "USA"
   },
-  "aging4": 0,
   "shippingItem": {
     "internalId": "830",
     "name": "FedEx 2Day®"
@@ -274,7 +205,6 @@
           "attention": "Mr Yogesh P Patil",
           "state": "TX",
           "override": true,
-          "addrText": "Mr Yogesh P Patil\nMr Yogesh P Patil\nTollway Plaza\n15950 Dallas Parkway Suite 525 Dallas\nDallas  \nUnited States",
           "addrPhone": "(646) 886-5168"
         }
       }
@@ -326,16 +256,12 @@
     "internalId": "1305",
     "name": "AL Systems Ltd"
   },
-  "stage": {
-    "value": "_customer"
-  },
   "reminderDays": 5,
   "entityStatus": {
     "internalId": "13",
     "name": "CUSTOMER-Closed Won"
   },
-  "consolAging": 0,
-  "aging": 0,
+
   "category": {
     "internalId": "1",
     "name": "Corporate"
