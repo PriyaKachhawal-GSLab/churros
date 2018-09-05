@@ -2,10 +2,10 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const accountsPayload = tools.requirePayload(`${__dirname}/assets/accounts.json`);
-const agentsPayload = tools.requirePayload(`${__dirname}/assets/agents.json`);
-const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
-const incidentsPayload = require('./assets/incidents');
+const accountsPayload = tools.requirePayload(`${__dirname}/assets/accounts-create.json`);
+const agentsPayload = tools.requirePayload(`${__dirname}/assets/agents-create.json`);
+const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
+const incidentsPayload = tools.requirePayload(`${__dirname}/assets/incidents-create.json`);
 
 suite.forElement('crm', 'polling', null, (test) => {
   test.withApi('/hubs/crm/accounts').should.supportPolling(accountsPayload, 'accounts');

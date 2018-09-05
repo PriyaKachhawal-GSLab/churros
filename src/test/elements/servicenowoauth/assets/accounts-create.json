@@ -1,8 +1,8 @@
 {
   "phone": "1 (900) 635-8346",
-  "street": "123 Test Street",
-  "state": "CO",
-  "city": "Denver",
+  "street": "<<address.streetName>>",
+  "state": "<<address.state>>",
+  "city": "<<address.city>>",
   "website": "www.cloud-elements.com",
   "num_employees": "4000",
   "revenue_per_year": "22010000000",
