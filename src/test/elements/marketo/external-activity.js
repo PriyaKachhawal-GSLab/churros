@@ -5,8 +5,7 @@ const payload = require('./assets/external-activity-create');
 const attributePayload = require('./assets/attributes-create');
 const activityPayload =require('./assets/external-activity-update');
 const cloud = require('core/cloud');
-//const tools = require('core/tools');
-//const build = (overrides) => Object.assign({}, payload, overrides);
+
 /*const activityPayload = build({
   apiName: tools.random(),
   triggerName: tools.random(),

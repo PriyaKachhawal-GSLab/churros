@@ -1,7 +1,7 @@
 'use strict';
 
 const suite = require('core/suite');
-//const tools = require('core/tools');
+
 const payload = require('./assets/companies-create.json');
 const cloud = require('core/cloud');
 
