@@ -2,17 +2,17 @@
 
 const tools = require('core/tools');
 const suite = require('core/suite');
-const payload = tools.requirePayload(`${__dirname}/assets/slaPolicies.json`);
+
+const slaPoliciesCreatePayload = tools.requirePayload(`${__dirname}/assets/slaPolicies-create.json`);
+const slaPoliciesUpdatePayload = tools.requirePayload(`${__dirname}/assets/slaPolicies-update.json`);
 
 const options = {
  churros: {
-   updatePayload: {
-     "title": "20Sep2017zz"
-   }
+   updatePayload: slaPoliciesUpdatePayload
  }
 };
 
-suite.forElement('helpdesk', 'slaPolicies', { payload: payload, skip: false }, (test) => {
+suite.forElement('helpdesk', 'slaPolicies', { payload: slaPoliciesCreatePayload, skip: false }, (test) => {
  test.withOptions(options).should.supportCruds();
  test.should.supportPagination();
 });

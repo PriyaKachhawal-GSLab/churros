@@ -3,8 +3,8 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 
-const usersPayload = tools.requirePayload(`${__dirname}/assets/users.json`);
+const usersCreatePayload = tools.requirePayload(`${__dirname}/assets/users-create.json`);
 
 suite.forElement('helpdesk', 'polling', null, (test) => {
-  test.withApi('/hubs/helpdesk/users').should.supportPolling(usersPayload, 'users');
+  test.withApi('/hubs/helpdesk/users').should.supportPolling(usersCreatePayload, 'users');
 });

@@ -1,10 +1,18 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/organizations');
-const options = { payload: payload };
+const tools = require('core/tools');
 
-suite.forElement('helpdesk', 'organizations', options, (test) => {
-  test.should.supportCruds();
+const organizationsCreatePayload = tools.requirePayload(`${__dirname}/assets/organizations-create.json`);
+const organizationsUpdatePayload = tools.requirePayload(`${__dirname}/assets/organizations-update.json`);
+
+const options = {
+  churros: {
+    updatePayload: organizationsUpdatePayload
+  }
+};
+
+suite.forElement('helpdesk', 'organizations', {payload : organizationsCreatePayload}, (test) => {
   test.should.supportPagination();
+  test.withOptions(options).should.supportCruds();
 });
