@@ -8,6 +8,8 @@ const activityCreate = require('./assets/accountsActivities-create.json');
 const activityUpdate = require('./assets/accountsActivities-update.json');
 const noteCreate = tools.requirePayload(`${__dirname}/assets/accountsNotes-create.json`);
 const noteUpdate = tools.requirePayload(`${__dirname}/assets/accountsNotes-update.json`);
+const pagination = tools.requirePayload(`${__dirname}/assets/accountsActivities-queryPaginationTest.json`);
+const calling = tools.requirePayload(`${__dirname}/assets/accountsActivities-queryTypeTest.json`);
 const cloud = require('core/cloud');
 suite.forElement('crm', 'accounts', { payload: payload }, (test) => {
   const options = {
@@ -34,12 +36,12 @@ suite.forElement('crm', 'accounts', { payload: payload }, (test) => {
   it('should support CRUDS and pagination for accounts/activities', () => {
     return cloud.post(test.api, payload)
       .then(r => accountId = r.body.id)
-      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(`${test.api}/${accountId}/activities`))
-      .then(r => cloud.withOptions({ qs: { type: 'Call' } }).post(`${test.api}/${accountId}/activities`, activityCreate))
+      .then(r => cloud.withOptions({ qs: pagination }).get(`${test.api}/${accountId}/activities`))
+      .then(r => cloud.withOptions({ qs: calling }).post(`${test.api}/${accountId}/activities`, activityCreate))
       .then(r => activityId = r.body.id)
-      .then(r => cloud.withOptions({ qs: { type: 'Call' } }).get(`${test.api}/${accountId}/activities/${activityId}`))
-      .then(r => cloud.withOptions({ qs: { type: 'Call' } }).put(`${test.api}/${accountId}/activities/${activityId}`, activityUpdate))
-      .then(r => cloud.withOptions({ qs: { type: 'Call' } }).delete(`${test.api}/${accountId}/activities/${activityId}`))
+      .then(r => cloud.withOptions({ qs: calling }).get(`${test.api}/${accountId}/activities/${activityId}`))
+      .then(r => cloud.withOptions({ qs: calling }).put(`${test.api}/${accountId}/activities/${activityId}`, activityUpdate))
+      .then(r => cloud.withOptions({ qs: calling }).delete(`${test.api}/${accountId}/activities/${activityId}`))
       .then(r => cloud.delete(`${test.api}/${accountId}`));
   });
 });
