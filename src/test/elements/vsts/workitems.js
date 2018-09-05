@@ -14,20 +14,8 @@ suite.forElement('collaboration', 'work-items', { payload: payload }, (test) => 
 
   test.withOptions(update).should.supportCruds();
   test.should.supportPagination();
+  test.should.supportNextPagePagination(3, false);
   test.should.supportCeqlSearch('System.Title');
-
-  it('should allow orderBy for work-items', () => {
-    let ids = [],
-      query = { orderBy: 'System.Id desc', pageSize: 2000 };
-    return cloud.withOptions({ qs: query }).get(test.api)
-      .then(r => ids = r.body.map(o => o.id))
-      .then(r => cloud.withOptions({ qs: { pageSize: 2000 }}).get(test.api))
-      .then(r => {
-        expect(r.body).to.not.be.empty;
-        let descIds = r.body.map(o => o.id).sort((a, b) => b - a);
-        expect(descIds).to.deep.equal(ids);
-      });
-  });
 
   it('should allow fields for work-items', () => {
     return cloud.withOptions({ qs: { fields: 'System.Id' } }).get(test.api)
