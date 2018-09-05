@@ -31,7 +31,7 @@ const addObjDefField = (objDef, path, type) => objDef.fields.push(getObjDefField
 const genBaseObjectDef = (opts) => ({
   fields: (opts.fields) || [{
     path: 'churrosId',
-    type: 'number'
+    type: 'string'
   }]
 });
 
@@ -47,27 +47,27 @@ const getTransField = (path, type, vendorPath, vendorType, configuration) => ({ 
 const addTransField = (trans, path, type, vendorPath, vendorType, configuration) => trans.fields.push(getTransField(path, type, vendorPath, vendorType, configuration));
 
 const genBaseTrans = (opts) => ({
-  vendorName: (opts.vendorName || 'Account'),
+  vendorName: (opts.vendorName || 'appointments'),
   configuration: (opts.configuration || null),
   fields: (opts.fields) || [{
     path: 'churrosId',
-    type: 'number',
-    vendorPath: 'Id',
+    type: 'string',
+    vendorPath: 'Key.Id',
     vendorType: 'string'
   }]
 });
 
 const genDefaultTrans = (opts) => {
   let trans = genBaseTrans(opts);
-  addTransField(trans, 'churrosName', 'string', 'Name', 'string');
-  addTransField(trans, 'churrosMod', 'string', 'LastModifiedDate', 'string');
+  addTransField(trans, 'churrosName', 'string', 'Key.Value', 'string');
+  addTransField(trans, 'churrosMod', 'string', 'StartDate', 'string');
   return trans;
 };
 
 const genTransWithRemove = (opts) => {
   let trans = genBaseTrans(opts);
-  addTransField(trans, 'churrosName', 'string', 'Name', 'string');
-  addTransField(trans, 'churrosMod', 'string', 'LastModifiedDate', 'string', [{
+  addTransField(trans, 'churrosName', 'string', 'Key.Value', 'string');
+  addTransField(trans, 'churrosMod', 'string', 'StartDate', 'string', [{
     type: 'remove',
     properties: {
       fromVendor: true,
@@ -79,8 +79,8 @@ const genTransWithRemove = (opts) => {
 
 const genTransWithPassThrough = (opts) => {
   let trans = genBaseTrans(opts);
-  addTransField(trans, 'churrosName', 'string', 'Name', 'string');
-  addTransField(trans, 'churrosMod', 'string', 'LastModifiedDate', 'string', [{
+  addTransField(trans, 'churrosName', 'string', 'Key.Value', 'string');
+  addTransField(trans, 'churrosMod', 'string', 'StartDate', 'string', [{
     type: 'passThrough',
     properties: {
       fromVendor: false,
@@ -171,24 +171,19 @@ const testTransformation = (instanceId, objectName, objDefUrl, transUrl) => test
 
 suite.forPlatform('transformations', { schema: schema }, (test) => {
   /** before - provision element to use throughout */
-  const elementKey = 'sfdc';
-  let sfdcId, elementId, maximizerId;
+  const elementKey = 'maximizer';
+  let elementId, maximizerId;
   before(() => provisioner.create(elementKey)
-    .then(r => {
-      sfdcId = r.body.id;
-      elementId = r.body.element.id;
-    })
-  .then(() => provisioner.create('maximizer'))
   .then(r => {
     maximizerId = r.body.id;
+    elementId = r.body.element.id;
     arrayTransformation.elementInstanceId = maximizerId;
     defaultValueTransformation.elementInstanceId = maximizerId;
   }));
 
   /** after - clean up element */
-  after(() => provisioner.delete(sfdcId)
-    .catch(() => {})
-    .then(() => provisioner.delete(maximizerId)));
+  after(() => provisioner.delete(maximizerId)
+    .catch(() => {}));
 
   /** org-level */
   it('should support org-level object definition CRUD by name', () => crudObjectDefsByName('organizations', genDefaultObjectDef({}), genDefaultObjectDef({}), objDefSchema));
@@ -196,7 +191,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
   it('should support org-level transformation CRUD by name and element ID', () => crudTransformsByName('organizations', elementId, genDefaultTrans({}), genDefaultTrans({}), schema));
   it('should support org-level transformations', () => {
     let objectName = 'churros-object-' + tools.random();
-    return testTransformation(sfdcId, objectName, getObjectDefUrl('organizations', objectName), getTransformUrl('organizations', objectName, elementKey));
+    return testTransformation(maximizerId, objectName, getObjectDefUrl('organizations', objectName), getTransformUrl('organizations', objectName, elementKey));
   });
 
   /** account-level */
@@ -233,19 +228,19 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
     return getPlatformAccounts()
       .then(r => r.body.forEach(account => accountId = (account.defaultAccount) ? accountId = account.id : accountId))
       .then(r => level = 'accounts/' + accountId)
-      .then(r => testTransformation(sfdcId, objectName, getObjectDefUrl(level, objectName), getTransformUrl(level, objectName, elementKey)));
+      .then(r => testTransformation(maximizerId, objectName, getObjectDefUrl(level, objectName), getTransformUrl(level, objectName, elementKey)));
   });
 
   /** instance-level */
   it('should support instance-level object definition CRUD by name', () => {
-    return crudObjectDefsByName(`instances/${sfdcId}`, genDefaultObjectDef({}), genDefaultObjectDef({}), objDefSchema);
+    return crudObjectDefsByName(`instances/${maximizerId}`, genDefaultObjectDef({}), genDefaultObjectDef({}), objDefSchema);
   });
   it('should support instance-level transformation CRUD by name', () => {
-    return crudTransformsByName(`instances/${sfdcId}`, undefined, genDefaultTrans({}), genDefaultTrans({}), schema);
+    return crudTransformsByName(`instances/${maximizerId}`, undefined, genDefaultTrans({}), genDefaultTrans({}), schema);
   });
   it('should support instance-level transformations', () => {
     let objectName = 'churros-object-' + tools.random();
-    let level = `instances/${sfdcId}`;
+    let level = `instances/${maximizerId}`;
     return testTransformationForInstance(objectName, getObjectDefUrl(level, objectName), getTransformUrl(level, objectName));
   });
 
@@ -271,7 +266,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
         return cloud.post(getObjectDefUrl('accounts/' + accountId, objectName), objDef);
       })
       .then(r => {
-        let trans = genBaseTrans({ fields: [getTransField('churrosName', 'string', 'Name', 'string')], configuration: [getConfig('inherit', true, true)] });
+        let trans = genBaseTrans({ fields: [getTransField('churrosName', 'string', 'Key.Value', 'string')], configuration: [getConfig('inherit', true, true)] });
         return cloud.post(getTransformUrl('accounts/' + accountId, objectName, elementKey), trans);
       })
       .then(r => cloud.get(`accounts/${accountId}/elements/${elementKey}/transformations/${objectName}`, r => {
@@ -298,13 +293,13 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       // create instance-level obj def and trans for mod field
       .then(r => {
         let objDef = genBaseObjectDef({ fields: [getObjDefField('churrosMod', 'string')] });
-        return cloud.post(getObjectDefUrl('instances/' + sfdcId, objectName), objDef);
+        return cloud.post(getObjectDefUrl('instances/' + maximizerId, objectName), objDef);
       })
       .then(r => {
-        let trans = genBaseTrans({ fields: [getTransField('churrosMod', 'string', 'LastModifiedDate', 'string')], configuration: [getConfig('inherit', true, true)] });
-        return cloud.post(getTransformUrl('instances/' + sfdcId, objectName), trans);
+        let trans = genBaseTrans({ fields: [getTransField('churrosMod', 'string', 'StartDate', 'string')], configuration: [getConfig('inherit', true, true)] });
+        return cloud.post(getTransformUrl('instances/' + maximizerId, objectName), trans);
       })
-      .then(r => cloud.get(`instances/${sfdcId}/transformations/${objectName}`, r => {
+      .then(r => cloud.get(`instances/${maximizerId}/transformations/${objectName}`, r => {
         expect(r).to.have.statusCode(200);
         expect(r.body).to.not.be.null;
         let foundId = false,
@@ -329,17 +324,17 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
         });
       }))
       // clean up!
-      .then(r => cloud.delete(getTransformUrl('instances/' + sfdcId, objectName)))
-      .then(r => cloud.delete(getObjectDefUrl('instances/' + sfdcId, objectName)))
+      .then(r => cloud.delete(getTransformUrl('instances/' + maximizerId, objectName)))
+      .then(r => cloud.delete(getObjectDefUrl('instances/' + maximizerId, objectName)))
       .then(r => cloud.delete(getTransformUrl('accounts/' + accountId, objectName, elementKey)))
       .then(r => cloud.delete(getObjectDefUrl('accounts/' + accountId, objectName)))
       .then(r => cloud.delete(getTransformUrl('organizations', objectName, elementKey)))
       .then(r => cloud.delete(getObjectDefUrl('organizations', objectName)))
       //clean up if there is a failure
       .catch(e => {
-        if (sfdcId && objectName && accountId && elementKey) {
-          cloud.delete(getTransformUrl('instances/' + sfdcId, objectName));
-          cloud.delete(getObjectDefUrl('instances/' + sfdcId, objectName));
+        if (maximizerId && objectName && accountId && elementKey) {
+          cloud.delete(getTransformUrl('instances/' + maximizerId, objectName));
+          cloud.delete(getObjectDefUrl('instances/' + maximizerId, objectName));
           cloud.delete(getTransformUrl('accounts/' + accountId, objectName, elementKey));
           cloud.delete(getObjectDefUrl('accounts/' + accountId, objectName));
           cloud.delete(getTransformUrl('organizations', objectName, elementKey));
@@ -355,14 +350,14 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       "configuration":[],
       "script":{"body":"console.log('Hey there')"},
       "objectName": noFields.name,
-      "vendorName":"Lead",
-      "elementInstanceId": sfdcId
+      "vendorName":"appointments",
+      "elementInstanceId": maximizerId
     };
 
-    return cloud.put('/common-resources', noFields)
-      .then(r => cloud.post(`/instances/${sfdcId}/transformations/${noFields.name}`, {vendorName: "Lead"}))
+    return cloud.put('/common-resources', noFields, r => expect(r).to.have.statusCode(201))
+      .then(r => cloud.post(`/instances/${maximizerId}/transformations/${noFields.name}`, {vendorName: "appointments"}))
       .then(r => cloud.put('/transformations', noFieldV2Payload))
-      .then(r => cloud.delete(`/instances/${sfdcId}/transformations/${noFields.name}`))
+      .then(r => cloud.delete(`/instances/${maximizerId}/transformations/${noFields.name}`))
       .then(r => cloud.delete(`/common-resources/${noFields.name}`).catch(r => {}));
   });
 
@@ -406,13 +401,13 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       "objectName": `${newObjectName}`
     };
 
-    return cloud.post(getObjectDefUrl('instances/' + sfdcId,objectName), genBaseObjectDef({}))
-      .then(r => cloud.post(`instances/${sfdcId}/transformations/${objectName}`, genBaseTrans({})))
-      .then(r=> cloud.patch(`instances/${sfdcId}/objects/${objectName}`, renamePayload))
-      .then(r=> cloud.get(getObjectDefUrl('instances/' + sfdcId, newObjectName)))
-      .then(r=> cloud.get(`instances/${sfdcId}/transformations/${newObjectName}`))
-      .then(r => cloud.delete(`instances/${sfdcId}/transformations/${newObjectName}`))
-      .then(r => cloud.delete(getObjectDefUrl('instances/' + sfdcId, newObjectName)));
+    return cloud.post(getObjectDefUrl('instances/' + maximizerId,objectName), genBaseObjectDef({}))
+      .then(r => cloud.post(`instances/${maximizerId}/transformations/${objectName}`, genBaseTrans({})))
+      .then(r=> cloud.patch(`instances/${maximizerId}/objects/${objectName}`, renamePayload))
+      .then(r=> cloud.get(getObjectDefUrl('instances/' + maximizerId, newObjectName)))
+      .then(r=> cloud.get(`instances/${maximizerId}/transformations/${newObjectName}`))
+      .then(r => cloud.delete(`instances/${maximizerId}/transformations/${newObjectName}`))
+      .then(r => cloud.delete(getObjectDefUrl('instances/' + maximizerId, newObjectName)));
   });
 
   it('should return a list of mapped element ids when retrieving common-resources', () => {
@@ -424,14 +419,14 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       "script":{"body":"console.log('Hey there')"},
       "objectName": noFields2.name,
       "vendorName":"Lead",
-      "elementInstanceId": sfdcId
+      "elementInstanceId": maximizerId
     };
 
     const validator = r => {
       expect(r.body.mappedElementIds).to.have.length(3);
     };
 
-    return cloud.put('/common-resources', noFields2)
+    return cloud.put('/common-resources', noFields2, r => expect(r).to.have.statusCode(201))
       .then(r => crName = r.body.name)
       .then(r => cloud.post(getTransformUrl('organizations', noFields2.name, 'sfdc'), simpleTransform))
       .then(r => cloud.post(getTransformUrl('organizations', noFields2.name, 'closeio'), simpleTransform))
@@ -450,9 +445,11 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
     let transUrl = getTransformUrl('organizations', objectName, elementKey);
     let payload = {
       payload: {
-        "Id": "123",
-        "Name": "is it name?",
-        "LastModifiedDate": "mods bro"
+        Key: {
+          Value: "is it name?",
+          Id: "123"
+        },
+        StartDate: "mods bro"
       },
       elementId
     };
@@ -493,15 +490,17 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
   it('should allow try it out functionality by instance level', () => {
     let objectName = 'churros-object-' + tools.random();
 
-    let objDefUrl = `/instances/${sfdcId}/objects/${objectName}/definitions`;
-    let transUrl = `/instances/${sfdcId}/transformations/${objectName}`;
+    let objDefUrl = `/instances/${maximizerId}/objects/${objectName}/definitions`;
+    let transUrl = `/instances/${maximizerId}/transformations/${objectName}`;
     let payload = {
       payload: {
-        "Id": "123",
-        "Name": "is it name?",
-        "LastModifiedDate": "mods bro"
+        Key: {
+          Value: "is it name?",
+          Id: "123"
+        },
+        StartDate: "mods bro"
       },
-      instanceId: sfdcId
+      instanceId: maximizerId
     };
     let postPayload = {
       payload: {
@@ -509,7 +508,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
         churrosName: 'otherName',
         churrosMod: 'yup'
       },
-      instanceId: sfdcId,
+      instanceId: maximizerId,
       method: 'POST'
     };
 
@@ -527,9 +526,9 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       .then(r => cloud.post(`/transformations/${objectName}/execute`, postPayload, r => {
         expect(r).to.have.statusCode(200);
         expect(r.body).to.not.be.empty;
-        expect(r.body.Id).to.not.be.empty;
-        expect(r.body.Name).to.not.be.empty;
-        expect(r.body.LastModifiedDate).to.not.be.empty;
+        expect(r.body.Key.Id).to.not.be.empty;
+        expect(r.body.Key.Value).to.not.be.empty;
+        expect(r.body.StartDate).to.not.be.empty;
       }))
       // test remove config
       .then(r => cloud.put(transUrl, genTransWithRemove({})))
@@ -561,9 +560,11 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
     let transWithScript = Object.assign({}, genDefaultTrans({}), {script: {body: 'done(Object.assign(transformedObject, {churrosScript: "script"}))'}});
     let payload = {
       payload: {
-        "Id": "123",
-        "Name": "is it name?",
-        "LastModifiedDate": "mods bro"
+        Key: {
+          Value: "is it name?",
+          Id: "123"
+        },
+        StartDate: "mods bro"
       },
       elementId
     };
@@ -594,10 +595,10 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
     const transPayload =  genDefaultTrans({configuration: [{type: "passThrough", properties: {fromVendor: false, toVendor: false}}]});
     const objDefUrl = getObjectDefUrl('organizations', objectName);
     const transUrl = getTransformUrl('organizations', objectName, elementKey);
-    return cloud.get(`/instances/${sfdcId}/configuration`)
+    return cloud.get(`/instances/${maximizerId}/configuration`)
       .then(r => config = R.find(R.propEq('key', 'filter.response.nulls'))(r.body))
-      .then(() => cloud.patch(`/instances/${sfdcId}/configuration/${config.id}`, Object.assign({}, config, { propertyValue: 'false' })))
-      .then(() => cloud.get(`/instances/${sfdcId}/configuration/${config.id}`, r => expect(r.body.propertyValue).to.equal('false')))
+      .then(() => cloud.patch(`/instances/${maximizerId}/configuration/${config.id}`, Object.assign({}, config, { propertyValue: 'false' })))
+      .then(() => cloud.get(`/instances/${maximizerId}/configuration/${config.id}`, r => expect(r.body.propertyValue).to.equal('false')))
       .then(() => cloud.post(objDefUrl, genDefaultObjectDef({})))
       .then(r => cloud.post(transUrl, transPayload))
       .then(r => cloud.get('hubs/crm/' + objectName))
@@ -614,7 +615,7 @@ suite.forPlatform('transformations', { schema: schema }, (test) => {
       })
       .then(r => expect(r.length > 0).to.equal(false))
       // clean up
-      .then(() => cloud.patch(`/instances/${sfdcId}/configuration/${config.id}`, Object.assign({}, config, { propertyValue: 'true' })))
+      .then(() => cloud.patch(`/instances/${maximizerId}/configuration/${config.id}`, Object.assign({}, config, { propertyValue: 'true' })))
       .then(() => cloud.delete(transUrl))
       .then(() => cloud.delete(objDefUrl));
   });

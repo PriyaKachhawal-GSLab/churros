@@ -70,7 +70,7 @@ suite.forPlatform('common-resources', {}, () => {
   });
 
   it('should support PUT, GET, DELETE common resources with no fields', () => {
-    return cloud.put(api, noFields)
+    return cloud.put(api, noFields, r => expect(r).to.have.statusCode(201))
       .then(r => cloud.get(`${api}/${noFields.name}`))
       .then(r => cloud.delete(`${api}/${noFields.name}`));
   });
@@ -119,7 +119,7 @@ suite.forPlatform('common-resources', {}, () => {
   it('should support PUT with changed fields', () => {
     const overRidden = {name: simpleDefinition.name, elementInstanceIds: [closeioId], mappedElementIds: [elementId]};
     const transformations = Object.assign({}, basicTransformation, overRidden, {objectName: simpleDefinition.name, elementInstanceId: closeioId});
-    return cloud.put(api, simpleDefinition)
+    return cloud.put(api, simpleDefinition, r => expect(r).to.have.statusCode(201))
       .then(r => cloud.put('/transformations', transformations))
       .then(r => cloud.put(api, updateFields(Object.assign({}, changedFields, overRidden), 'fields')))
       .then(r => cloud.get(`${api}/${simpleDefinition.name}`))
