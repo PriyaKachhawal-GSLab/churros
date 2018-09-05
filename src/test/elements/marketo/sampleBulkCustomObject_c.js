@@ -1,7 +1,7 @@
 'use strict';
 
 const suite = require('core/suite');
-const tools = require('core/tools');
+//const tools = require('core/tools');
 const payload = require('./assets/sampleBulkCustomObject_c-create');
 const updatePayload = require('./assets/sampleBulkCustomObject_c-update');
 
