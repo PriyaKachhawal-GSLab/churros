@@ -1,0 +1,22 @@
+{
+  "contactKey": "cvb.wer@uty.com",
+  "attributeSets": [
+    {
+      "name": "MobileConnect Demographics",
+      "items": [
+        {
+          "values": [
+            {
+              "name": "Mobile Number",
+              "value": "317-531-5558"
+            },
+            {
+              "name": "Locale",
+              "value": "US"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

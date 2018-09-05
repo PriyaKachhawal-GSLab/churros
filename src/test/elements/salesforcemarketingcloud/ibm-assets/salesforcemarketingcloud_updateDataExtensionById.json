@@ -1,0 +1,33 @@
+{
+  "PartnerKey":"prtnr4006",
+  "Name": "dt ext 4006",
+  "CustomerKey": "Viviane rob 4006",
+  "Description": "this is a sample data extension updated",
+  "IsTestable": false,
+  "DataRetentionPeriodLength": 4,
+  "DataRetentionPeriod": "Weeks",
+  "ResetRetentionPeriodOnImport": false,
+  "DeleteAtEndOfRetentionPeriod": false,
+  "Fields": [
+    {
+      "Name": "amount",
+      "Description": "amount",
+      "MaxLength": 100,
+      "IsPrimaryKey": false,
+      "IsNillable": false,
+      "IsRequired": false,
+      "FieldType": "EmailAddress"
+    },
+    {
+      "CustomerKey": "cust_key",
+      "Name": "model",
+      "DataType": "Text",
+      "Label": "model",
+      "Description": "name field",
+      "MaxLength": 1000,
+      "IsNillable": true,
+      "IsPrimaryKey": false,
+      "FieldType": "Text"
+    }    
+  ]
+}

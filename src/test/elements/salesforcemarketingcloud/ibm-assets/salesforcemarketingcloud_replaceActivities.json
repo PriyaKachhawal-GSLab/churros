@@ -1,0 +1,63 @@
+{
+  "key": "a-key-that-is-unique-for-MID010",
+  "name": "Journey update 001",
+  "description": "This is a description of update journey.",
+  "workflowApiVersion": 1,
+  "triggers": [
+    {
+      "key": "event-key078",
+      "name": "update point for the journey67",
+      "type": "Event",
+      "eventDefinitionKey": "my-entry-event-key0012",
+      "arguments": {},
+      "configurationArguments": {},
+      "metaData": {}
+    }
+  ],
+  "defaults": {
+    "email": [
+      "{{Event.event-key.EmailAddress1}}",
+      "{{Contact.Default.Email1}}"
+    ]
+  },
+  "activities": [
+    {
+      "key": "call-web-service1",
+      "name": "Call web service to get email002",
+      "type": "Rest",
+      "metaData": {},
+      "configurationArguments": {},
+      "arguments": {}
+    },
+    {
+      "key": "send-welcome-email3",
+      "name": "Welcome email3",
+      "type": "Email",
+      "metaData": {},
+      "configurationArguments": {},
+      "outcomes": [
+        {
+          "key": "sent-welcome-email-then-random-split1",
+          "next": "random-split2"
+        }
+      ]
+    },
+    {
+      "key": "random-split2",
+      "name": "Random split2",
+      "type": "RandomSplit2"
+    }
+  ],
+  "goals": [
+    {
+      "key": "goal-key1",
+      "name": "Our success metric1",
+      "description": "This goal determines the success of the journey1",
+      "type": "Event",
+      "arguments": {},
+      "metaData": {}
+    }
+  ],
+  "modifiedDate": "2018-09-04T11:46:07.923",
+  "version": 1
+}

@@ -1,0 +1,65 @@
+{
+  "ModifiedDate":"2017-08-12T09:32:43.657",
+  "IsPlatformObject": false,
+  "CorrelationID":"crl1004",
+  "PartnerKey":"prtner3006",
+  "Name": "dt ext 30006",
+  "CustomerKey": "Viviane rob 30006",
+  "Description": "this is a sample data extension generated",
+  "IsSendable": true,
+  "SendableDataExtensionField": {
+    "CustomerKey": "3455db",
+    "Name": "Member ID",
+    "FieldType": "Number"
+  },
+  "SendableSubscriberField": {
+    "Name": "Subscriber ID",
+    "Value": 443545
+  },
+  "IsTestable": true,
+  "DataRetentionPeriodLength": 48,
+  "DataRetentionPeriod": "Days",
+  "RowBasedRetention": false,
+  "ResetRetentionPeriodOnImport": true,
+  "DeleteAtEndOfRetentionPeriod": true,
+  "Fields": [
+    {
+      "IsAccountProperty": true,
+      "Name": "email",
+      "Description": "Email Address",
+      "MaxLength": 100,
+      "IsPrimaryKey": false,
+      "IsNillable": false,
+      "IsRequired": false,
+      "FieldType": "EmailAddress"
+    },
+    {
+      "CustomerKey": "url",
+      "Name": "url",
+      "DataType": "Text",
+      "Label": "url",
+      "Description": "text field",
+      "MaxLength": 1000,
+      "IsNillable": true,
+      "IsPrimaryKey": false,
+      "FieldType": "Text"
+    },
+    {
+      "CustomerKey": "mem sdf",
+      "Name": "Member ID",
+      "DataType": "Number",
+      "FieldType": "Number",
+      "Description": "number field",
+      "IsRequired": true
+    },
+    {
+      "CustomerKey": "sub sdf",
+      "Name": "Subscriber ID",
+      "Description": "number field",
+      "FieldType": "Decimal",
+      "IsRequired": true,
+      "Precision": 19,
+      "Scale": 2
+    }
+  ]
+}

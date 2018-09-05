@@ -1,0 +1,22 @@
+{
+  "contactKey": "abc.xuz@cdf.com",
+  "attributeSets": [
+    {
+      "name": "MobileConnect Demographics",
+      "items": [
+        {
+          "values": [
+            {
+              "name": "Mobile Number",
+              "value": "317-531-5555"
+            },
+            {
+              "name": "Locale",
+              "value": "US"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

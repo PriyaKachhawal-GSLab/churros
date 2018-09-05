@@ -1,0 +1,56 @@
+{
+  "key": "a-key-that-is-unique-for-MID010",
+  "name": "My journey0010",
+  "description": "This is a description of journey",
+  "workflowApiVersion": 1,
+  "triggers": [
+    {
+      "key": "event-key",
+      "name": "Starting point for the journey",
+      "type": "Event",
+      "eventDefinitionKey": "my-entry-event-key",
+      "arguments": {},
+      "configurationArguments": {},
+      "metaData": {}
+    }
+  ],
+  "defaults": {
+    "email": [
+      "{{Event.event-key.EmailAddress}}",
+      "{{Contact.Default.Email}}"
+    ]
+  },
+  "activities": [
+    {
+      "key": "call-web-service",
+      "name": "Call web service to get email",
+      "type": "Rest",
+      "metaData": {},
+      "outcomes": [
+        {
+          "key": "call-web-service-then-send-welcome-email",
+          "next": "send-welcome-email"
+        }
+      ],
+      "configurationArguments": {},
+      "arguments": {}
+    },
+    {
+      "key": "send-welcome-email",
+      "name": "Welcome email",
+      "type": "Email",
+      "metaData": {},
+      "configurationArguments": {}
+    }
+  ],
+  "goals": [
+    {
+      "key": "goal-key",
+      "name": "Our success metric",
+      "description": "This goal determines the success of the journey",
+      "type": "Event",
+      "arguments": {},
+      "metaData": {}
+    }
+  ]
+}
