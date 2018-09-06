@@ -1,16 +1,16 @@
 {
   "line_items": [
     {
-      "title": "gi",
-      "price":"20.0",
-      "grams": "1300",
-      "quantity": 3,
+      "title": "<<name.title>>",
+      "price": "<<random.number>>",
+      "grams": "<<random.number>>",
+      "quantity": "<<random.number>>",
       "requires_shipping": true,
       "tax_lines": [
         {
-          "price": "20",
-          "rate": "20",
-          "title": "asasas"
+          "price": "<<random.number>>",
+          "rate": "<<random.number>>",
+          "title": "<<name.title>>"
         }
       ]
     }
@@ -19,9 +19,9 @@
     {
       "kind": "authorization",
       "status": "success",
-      "amount": "13"
+      "amount": "<<random.number>>"
     }
   ],
-  "total_tax": "8",
+  "total_tax": "<<random.number>>",
   "currency": "EUR"
 }

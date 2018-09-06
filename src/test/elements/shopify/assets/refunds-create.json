@@ -1,0 +1,21 @@
+{
+  "restock": true,
+  "note": "<<random.number",
+  "shipping": {
+    "full_refund": true
+  },
+  "refund_line_items": [
+    {
+      "line_item_id": "",
+      "quantity": 3
+    }
+  ],
+  "transactions": [
+    {
+      "parent_id": "",
+      "amount": 10,
+      "kind": "refund",
+      "gateway": "bogus"
+    }
+  ]
+}

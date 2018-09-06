@@ -3,22 +3,9 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const refund = require('./assets/payments-refund-create.json');
-const capture = require('./assets/payments-create.json');
-const order = require('./assets/orders-create.json');
-
-
-/*const order = () => ({
-  "line_items": [{
-    "title": tools.random(),
-    "price": tools.randomInt()
-  }],
-  "transactions": [{
-    "kind": "authorization",
-    "status": "success",
-    "amount": tools.randomInt()
-  }]
-});*/
+const refund = tools.requirePayload(`${__dirname}/assets/paymentsRefund-create.json`);
+const capture = tools.requirePayload(`${__dirname}/assets/payments-create.json`);
+const order = tools.requirePayload(`${__dirname}/assets/orders-create.json`);
 
 suite.forElement('ecommerce', 'payments', (test) => {
   let orderId;

@@ -1,10 +1,6 @@
 
 {
-
-"code":"1212",
-"discount_type":"percentage",
-"usage_limit":5,
-"value":100
-
+  "code":"<<random.alphaNumeric>>",
+  "discount_type":"percentage",
+  "usage_limit":5,"value":100
 }
-

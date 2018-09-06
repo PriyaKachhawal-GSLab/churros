@@ -1,7 +1,5 @@
 {
-"first_name":"sas",
-"last_name":"asas",
-"email":"aa@gmail.com"
-
+  "first_name":"<<name.firstName>>",
+  "last_name":"<<name.lastName>>",
+  "email":"<<internet.email>>"
 }
-

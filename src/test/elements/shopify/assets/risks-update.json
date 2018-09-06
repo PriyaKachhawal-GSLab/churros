@@ -1,8 +1,8 @@
 {
-  "id": "1902478164051",
-  "message":"<< random string >>",
+  "id": "",
+  "message": "<<random.word>>",
   "recommendation": "accept",
   "source": "External",
   "cause_cancel": false,
-  "score": 0.0
+  "score": 0
 }

@@ -1,27 +1,22 @@
 'use strict';
 
 const suite = require('core/suite');
+const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = require('./assets/products.json');
-const variantPayload = require('./assets/variants-create.json');
-const imageUpdate = { "src": "http://petsfans.com/wp-content/uploads/2014/11/edfsaf.jpg" };
+const payload = tools.requirePayload(`${__dirname}/assets/products-create.json`);
+const variantPayload = tools.requirePayload(`${__dirname}/assets/variants-create.json`);
+const imagePayload = tools.requirePayload(`${__dirname}/assets/images-create.json`);
+const imageUpdate = tools.requirePayload(`${__dirname}/assets/images-update.json`);
 
 suite.forElement('ecommerce', 'images', { payload: payload }, (test) => {
-
   it('should allow CRUDS for /products/:id/images', () => {
-    let productId, imageId, imagePayload, variantId;
+    let productId, imageId, variantId;
     return cloud.post('/hubs/ecommerce/products', payload)
       .then(r => productId = r.body.id)
+      .then(r => imagePayload.product_id = productId)
       .then(r => cloud.post('/hubs/ecommerce/products/' + productId + '/variants', variantPayload))
       .then(r => variantId = r.body.id)
-      .then(r => imagePayload = {
-        "src": "https://cdn.shopify.com/s/files/1/0655/4311/products/maxresdefault_f2cd1654-dc20-4c33-8be8-03b157763958.jpeg?v=1457997527",
-        "product_id": productId,
-        "variant_ids": [
-          variantId
-        ],
-        "position": 1
-      })
+      .then(r => imagePayload.variant_ids[0] = variantId)
       .then(r => cloud.post('/hubs/ecommerce/products/' + productId + '/images', imagePayload))
       .then(r => imageId = r.body.id)
       .then(r => cloud.get('/hubs/ecommerce/products/' + productId + '/images'))

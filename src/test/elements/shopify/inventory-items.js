@@ -1,8 +1,9 @@
 'use strict';
 
 const suite = require('core/suite');
+const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = require('./assets/inventory-items-update.json');
+const payload = tools.requirePayload(`${__dirname}/assets/inventoryItems-update.json`);
 
 suite.forElement('ecommerce', 'inventory-items', (test) => {
   it('should allow Get and Patch for /hubs/marketing/inventory-items', () => {

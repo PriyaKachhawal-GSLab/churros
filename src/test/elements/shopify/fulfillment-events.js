@@ -3,17 +3,9 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = require('./assets/fulfillment-events.json');
-const createFulfillment=require('./assets/fulfillments-create.json');
-const order = require('./assets/orders-create.json');
-
-/*onst order = () => ({
-  line_items: [{
-    title: tools.random(),
-    price: tools.randomInt()
-  }]
-});*/
-
+const payload = tools.requirePayload(`${__dirname}/assets/fulfillmentEvents-status.json`);
+const createFulfillment = tools.requirePayload(`${__dirname}/assets/fulfillments-create.json`);
+const order = tools.requirePayload(`${__dirname}/assets/orders-create.json`);
 
 suite.forElement('ecommerce', 'fulfillment-events', { payload: payload }, (test) => {
   let orderId, lineId, fulfillmentId, eventId;
