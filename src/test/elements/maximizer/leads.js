@@ -1,8 +1,6 @@
 'use strict';
 
 const suite = require('core/suite');
-const tools = require('core/tools');
-const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
 suite.forElement('crm', 'leads', (test) => {
@@ -15,6 +13,6 @@ suite.forElement('crm', 'leads', (test) => {
       .withValidation(r => {
          expect(r.body.filter(obj => obj.FirstName === `${FirstName}`));
          expect(Object.keys(r.body[0]).length).to.equal(2);})
-      .should.return200OnGet();;
+      .should.return200OnGet();
 });
 
