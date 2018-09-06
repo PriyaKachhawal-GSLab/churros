@@ -1,6 +1,7 @@
 'use strict';
 
 const expect = require('chakram').expect;
+const tools = require('core/tools');
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const newResource = tools.requirePayload(`${__dirname}/assets/extendedResource-create.json`);

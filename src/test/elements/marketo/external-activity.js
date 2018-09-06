@@ -1,6 +1,7 @@
 'use strict';
 
 const suite = require('core/suite');
+const tools = require('core/tools');
 const attributePayload = tools.requirePayload(`${__dirname}/assets/attributes-create.json`);
 const activityPayload = tools.requirePayload(`${__dirname}/assets/externalActivity-update.json`);
 const cloud = require('core/cloud');
