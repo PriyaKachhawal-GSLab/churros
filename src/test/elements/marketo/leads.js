@@ -5,12 +5,9 @@ const chakram = require('chakram');
 const expect = chakram.expect;
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = require('./assets/leads-create');
-const updatedPayload = require('./assets/leads-update');
-const interactionPayload = {
-  "id": tools.randomInt(),
-  "token": tools.randomInt()
-};
+const payload = tools.requirePayload(`${__dirname}/assets/leads-create`);
+const updatedPayload = tools.requirePayload(`${__dirname}/assets/leads-update`);
+const interactionPayload = tools.requirePayload(`${__dirname}/assets/interactions-create`);
 
 suite.forElement('marketing', 'leads', { payload: payload }, (test) => {
   it('should allow CRUDS for /leads', () => {
@@ -23,7 +20,6 @@ suite.forElement('marketing', 'leads', { payload: payload }, (test) => {
       .then(r => expect(r.body).to.have.lengthOf(1) && expect(r.body[0].person.id).to.equal(id))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
-
   it('should allow POST /leads/:id/merge and POST /leads/:id/interactions', () => {
     let id, id2;
     return cloud.post(test.api, payload)

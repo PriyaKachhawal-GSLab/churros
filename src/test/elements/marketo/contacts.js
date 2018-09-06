@@ -6,11 +6,7 @@ const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
 const updatedPayload = tools.requirePayload(`${__dirname}/assets/contacts-update.json`);
-const interactionPayload=require('./assets/interactions-create.json');
-/*const interactionPayload = {
-  "id": tools.randomInt(),
-  "token": tools.randomInt()
-};*/
+const interactionPayload = tools.requirePayload(`${__dirname}/assets/interactions-create.json`);
 
 suite.forElement('marketing', 'contacts', { payload: payload }, (test) => {
   it('should allow CRUDS for /contacts', () => {
@@ -22,7 +18,6 @@ suite.forElement('marketing', 'contacts', { payload: payload }, (test) => {
       .then(r => cloud.withOptions({ qs: { where: `id in ( ${id} )` } }).get(test.api))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
-
   it('should allow POST /contacts/:id/merge and POST /contacts/:id/interactions', () => {
     let id, id2;
     return cloud.post(test.api, payload)
@@ -33,7 +28,6 @@ suite.forElement('marketing', 'contacts', { payload: payload }, (test) => {
       .then(r => cloud.post(`${test.api}/${id}/merge`, { leadIds: [id2] }))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
-
   test
     .withApi('/changed-contacts')
     .withName('should support sinceDate query on GET /changed-contacts')

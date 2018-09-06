@@ -1,12 +1,12 @@
 {
   "company": "<<company.companyName>>",
-  "annualRevenue": "114",
+  "annualRevenue": "<<random.singleNumber##4>>",
   "billingCity": "<<address.city>>",
-  "externalCompanyId": "116",
+  "externalCompanyId": "<<random.singleNumber##6>>",
   "billingCountry": "<<address.country>>",
   "billingPostalCode": "<<address.zipCode>>",
   "billingState": "<<address.state>>",
-  "companyNotes": "ss15",
-  "industry": "dd3",
-  "mainPhone": "123456"
+  "companyNotes": "<<random.alphaNumeric##15>>",
+  "industry": "<<random.letter##3>>",
+  "mainPhone": "<<phone.phoneNumber>>"
 }

@@ -3,7 +3,7 @@
 const expect = require('chakram').expect;
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const newResource = require('./assets/resource-create.json');
+const newResource = tools.requirePayload(`${__dirname}/assets/extendedResource-create.json`);
 const _ = require('lodash');
 
 // Test for extending hubspot crm and invoking the extended resource

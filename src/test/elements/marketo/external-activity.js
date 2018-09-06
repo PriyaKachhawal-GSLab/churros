@@ -1,16 +1,10 @@
 'use strict';
 
 const suite = require('core/suite');
-const attributePayload = require('./assets/attributes-create');
-const activityPayload =require('./assets/external-activity-update');
+const attributePayload = tools.requirePayload(`${__dirname}/assets/attributes-create.json`);
+const activityPayload = tools.requirePayload(`${__dirname}/assets/externalActivity-update.json`);
 const cloud = require('core/cloud');
 
-/*const activityPayload = build({
-  apiName: tools.random(),
-  triggerName: tools.random(),
-  filterName: tools.random(),
-  name: tools.random()
-});*/
 /*
 Need different permissions for external-activities (ready-talk's sandbox)
     "username": "developer@cloud-elements.com",
@@ -18,6 +12,7 @@ Need different permissions for external-activities (ready-talk's sandbox)
     "marketo.identity.url": "https://338-ZRW-745.mktorest.com/identity",
     "base.url": "https://338-ZRW-745.mktorest.com/rest",
 */
+
 suite.forElement('marketing', 'external-activity', { payload: activityPayload, skip: true }, (test) => {
   it('should allow CS external-activity/types, PATCH external-activity/type/{apiName}/approve and PATCH external-activity/type/{apiName}/attributes ', () => {
     let apiName;

@@ -1,5 +1,7 @@
-[{
-  "person": {
-    "id": 20
+[
+  {
+    "person": {
+      "id": "<<random.number>>"
+    }
   }
-}]
+]

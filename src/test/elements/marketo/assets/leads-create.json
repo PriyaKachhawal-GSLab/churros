@@ -2,6 +2,6 @@
   "person": {
     "lastName": "<<name.lastName>>",
     "firstName": "<<name.firstName>>",
-    "email": "afgfgaf@aa.com"
+    "email": "<<internet.email>>"
   }
 }
