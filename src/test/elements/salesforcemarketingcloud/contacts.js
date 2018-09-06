@@ -28,11 +28,12 @@ const updatedPayload = {
 suite.forElement('marketing', 'contacts', { payload: contactsPayload }, (test) => {
   it('should allow CUD for /contacts', () => {
     let id;
+    let options = {};
     return cloud.post(test.api, contactsPayload)
       .then(r => id = r.body.id)
       .then(r => cloud.patch(`${test.api}/${id}`, updatedPayload))
-      .then(r => cloud.delete(`${test.api}/${id}`));
-  //    .then(r => cloud.get(test.api), { qs: { key: 'Email Addresses', value: '${tools.randomStr()}' } });
+      .then(r => cloud.delete(`${test.api}/${id}`))
+      .then(r => cloud.withOptions(options).get(test.api), { qs: { key: 'Email Addresses', value: '${tools.randomStr()}' } },  options ? options.skip : true);
   });
-//  test.should.supportPagination();
+  test.withOptions({skip : true}).should.supportPagination();
 });
