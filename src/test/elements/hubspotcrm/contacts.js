@@ -2,24 +2,23 @@
 
 const expect = require('chakram').expect;
 const suite = require('core/suite');
-const payload = require('./assets/contacts');
 const resources = require('./assets/objects');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const moment = require('moment');
+const payload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/contacts-update.json`);
+const paginationPayload = tools.requirePayload(`${__dirname}/assets/contactsActivities-queryPaginationType.json`);
+const nextPagePaginationPayload = tools.requirePayload(`${__dirname}/assets/contacts-queryAll.json`);
+const searchTest = tools.requirePayload(`${__dirname}/assets/contacts-searchTest.json`);
 
 suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
   test.should.supportNextPagePagination(2);
-  test.withName('should allow pagination for all contacts with page and nextPage').withOptions({ qs: { all: true } }).should.supportNextPagePagination(2);
+  test.withName('should allow pagination for all contacts with page and nextPage').withOptions({ qs: nextPagePaginationPayload }).should.supportNextPagePagination(2);
 
   it('should test CRUD for /contacts and GET /contacts/{id}/activities', () => {
-    const updatePayload = {
-      "properties": {
-        "lastName": tools.random()
-      }
-    };
     let contactId;
-    const options = { qs: { pageSize: 1 } };
+    const options = { qs: paginationPayload };
     return cloud.post(test.api, payload)
       .then(r => contactId = r.body.id)
       .then(r => cloud.get(`${test.api}/${contactId}`))
@@ -35,23 +34,17 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
   it('should test contacts poller url', () => {
     let id;
     let objects;
-    const createPayload = {
-      "properties": {
-        "firstName": tools.random(),
-        "lastName": tools.random(),
-        "email": tools.random() + "-churros@delete.me"
-      }
-    };
-    const options = { qs: { where: "lastmodifieddate='" + moment().subtract(5, 'seconds').format() + "'" } };
+    const options = { qs: searchTest  };
     const checkLength = (objects) => {
       return (objects.length > 0);
     };
     const checkId = (postedId, polledId) => {
       return (postedId === polledId);
     };
-    return cloud.post(test.api, createPayload)
+    return cloud.post(test.api, payload)
       .then(r => id = r.body.id)
       .then(r => tools.sleep(10))
+      .then(r => searchTest.where = "lastmodifieddate=\'" + moment().subtract(10, 'seconds').format() + "\'")
       .then(r => cloud.withOptions(options).get(test.api))
       .then(r => objects = r.body)
       .then(r => checkLength(objects))
@@ -64,17 +57,9 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
 
   it('should test get for xformed contact', () => {
     let id;
-    const email = tools.random() + "-churros@delete.me";
-    const createPayload = {
-      "properties": {
-        "firstName": tools.random(),
-        "lastName": tools.random(),
-        "email": email
-      }
-    };
     return cloud.post('/organizations/objects/churrosTestObject/definitions', resources.churrosTestObject, () => {})
       .then(r => cloud.post('/organizations/elements/hubspotcrm/transformations/churrosTestObject', resources.churrosTestObjectXform, () => {}))
-      .then(r => cloud.post(test.api, createPayload))
+      .then(r => cloud.post(test.api, payload))
       .then(r => id = r.body.id)
       .then(r => cloud.get('/hubs/crm/churrosTestObject/' + id))
       .then(r => expect(r.body).to.contain.key('email') && expect(r.body).to.contain.key('id') && expect(r.body).to.contain.key('name'))

@@ -1,0 +1,7 @@
+{
+  "properties": {
+    "firstName": "<<name.firstName>>",
+    "lastName": "<<name.firstName>>",
+    "email": "<<internet.email>>"
+  }
+}

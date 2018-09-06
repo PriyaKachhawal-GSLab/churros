@@ -3,18 +3,12 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = tools.requirePayload(`${__dirname}/assets/pipelines.json`);
+const payload = tools.requirePayload(`${__dirname}/assets/pipelines-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/pipelines-update.json`);
 
 suite.forElement('crm', 'pipelines', { payload: payload }, (test) => {
 
   it(`should allow CRUDS for ${test.api}`, () => {
-    const updatePayload = {
-      "label": "test123PipeLbl",
-      "displayOrder": 10,
-      "stages": [{
-        "label": "test123Pipe"
-      }]
-    };
     let pipelineId;
 
     return cloud.get(test.api)

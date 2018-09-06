@@ -1,0 +1,11 @@
+{
+  "engagement": {
+    "active": true,
+    "ownerId": 1,
+    "type": "NOTE",
+    "timestamp": 1409172644778
+  },
+  "metadata": {
+    "body": "note body"
+  }
+}

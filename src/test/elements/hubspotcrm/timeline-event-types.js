@@ -5,9 +5,10 @@ const cloud = require('core/cloud');
 const tools = require('core/tools');
 const expect = require('chakram').expect;
 const faker = require('faker');
-const payload = tools.requirePayload(`${__dirname}/assets/timelineeventtypes.json`);
-const propertiesPayload = tools.requirePayload(`${__dirname}/assets/timelineeventproperties.json`);
-const eventsPayload = tools.requirePayload(`${__dirname}/assets/timelineevents.json`);
+const payload = tools.requirePayload(`${__dirname}/assets/timelineEventTypes-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/timelineEventTypes-update.json`);
+const propertiesPayload = tools.requirePayload(`${__dirname}/assets/timelineEventpTypesProperties-create.json`);
+const eventsPayload = tools.requirePayload(`${__dirname}/assets/timelineEventTypesEvents-create.json`);
 
 suite.forElement('crm', 'timeline-event-types', {payload: payload}, (test) => {
 
@@ -17,7 +18,7 @@ suite.forElement('crm', 'timeline-event-types', {payload: payload}, (test) => {
       let createdId = null;
       return cloud.post(test.api, payload)
         .then(r => createdId = r.body.id)
-        .then(() => cloud.patch(`${test.api}/${createdId}`, payload))
+        .then(() => cloud.patch(`${test.api}/${createdId}`, updatePayload))
         .then(() => cloud.delete(`${test.api}/${createdId}`))
         .then(() => cloud.get(test.api));
     });

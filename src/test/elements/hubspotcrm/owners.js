@@ -2,13 +2,14 @@
 
 const suite = require('core/suite');
 const expect = require('chakram').expect;
+const tools = require('core/tools');
+const queryPayload = tools.requirePayload(`${__dirname}/assets/owners-queryType.json`);
 
 suite.forElement('crm', 'owners', (test) => {
   test.should.supportS();
-
   test.should.supportPagination();
   test
-    .withOptions({ qs: { where: `email = 'email@address.com'` } })
+    .withOptions({ qs: queryPayload })
     .withName('should support email search')
     .withValidation(r => {
       expect(r).to.statusCode(200);

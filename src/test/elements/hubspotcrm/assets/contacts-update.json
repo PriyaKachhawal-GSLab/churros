@@ -1,0 +1,5 @@
+{
+  "properties": {
+    "lastName": "<<name.lastName>>"
+  }
+}
