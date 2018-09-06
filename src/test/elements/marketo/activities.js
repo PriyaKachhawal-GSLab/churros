@@ -1,6 +1,7 @@
 'use strict';
 
 const suite = require('core/suite');
+const tools = require('core/tools');
 const payload = tools.requirePayload(`${__dirname}/assets/activities-create.json`);
 
 const id = '12'; //using a static ID, as it will always have activites
