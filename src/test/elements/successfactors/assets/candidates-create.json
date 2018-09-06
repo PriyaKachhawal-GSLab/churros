@@ -2,6 +2,6 @@
   "firstName" : "<<random.word>>",
   "lastName" : "<<random.word>>",
   "country" : "US",
-  "primaryEmail" : "nkjk@acffgt.com",
+  "primaryEmail" : "<<internet.email>>",
   "cellPhone": "<<random.singleNumber##20>>"
 }
