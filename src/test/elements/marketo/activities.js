@@ -1,7 +1,8 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/activities-create');
+const payload = tools.requirePayload(`${__dirname}/assets/activities-create.json`);
+const payload = tools.requirePayload(`${__dirname}/assets/activities-searchTest.json`);
 const id = '12'; //using a static ID, as it will always have activites
 
 suite.forElement('marketing', 'activities', { payload: payload }, (test) => {
