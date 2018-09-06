@@ -1,6 +1,6 @@
 {
-  "apiName": "<<name.word>>",
-  "triggerName": "<<name.word>>",
-  "filterName": "<<name.word>>",
-  "name": "<<name.word>>"
+  "apiName": "<<random.word>>",
+  "triggerName": "<<random.word>>",
+  "filterName": "<<random.word>>",
+  "name": "<<random.word>>"
 }

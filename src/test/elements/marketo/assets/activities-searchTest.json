@@ -1,1 +1,1 @@
-{ where: `activityTypeIds in (12) and fromDate = '2016-12-25T11:39:58Z'` }
+{ "where": "`activityTypeIds in (12) and fromDate = '2016-12-25T11:39:58Z'`" }
