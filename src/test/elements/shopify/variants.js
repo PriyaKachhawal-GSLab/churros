@@ -4,8 +4,8 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const payload = tools.requirePayload(`${__dirname}/assets/products.json`);
-const variantPayload = tools.requirePayload(`${__dirname}/assets/variants-create.json`);
-const variantUpdate = tools.requirePayload(`${__dirname}/assets/variants-update.json`);
+const variantPayload = tools.requirePayload(`${__dirname}/assets/productsVariants-create.json`);
+const variantUpdate = tools.requirePayload(`${__dirname}/assets/productsVariants-update.json`);
 
 suite.forElement('ecommerce', 'variants', { payload: payload }, (test) => {
   it('should allow CRUDS for /products/:id/variants', () => {

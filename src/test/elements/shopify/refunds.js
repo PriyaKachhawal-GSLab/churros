@@ -3,10 +3,10 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const capture = tools.requirePayload(`${__dirname}/assets/payments-create.json`);
+const capture = tools.requirePayload(`${__dirname}/assets/OrdersPayments-create.json`);
 const order = tools.requirePayload(`${__dirname}/assets/orders-create.json`);
-const calculateRefund = tools.requirePayload(`${__dirname}/assets/refundsCaculate-create.json`);
-const refund = tools.requirePayload(`${__dirname}/assets/refunds-create.json`);
+const calculateRefund = tools.requirePayload(`${__dirname}/assets/ordersRefundsCaculate-create.json`);
+const refund = tools.requirePayload(`${__dirname}/assets/ordersRefunds-create.json`);
 
 suite.forElement('ecommerce', 'refunds', { skip: false }, (test) => {
   let orderId, lineId;

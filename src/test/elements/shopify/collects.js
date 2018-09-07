@@ -3,7 +3,7 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const collects = tools.requirePayload(`${__dirname}/assets/collections-create.json`);
+const collects = tools.requirePayload(`${__dirname}/assets/collects-create.json`);
 const customCollections = tools.requirePayload(`${__dirname}/assets/customCollections-create.json`);
 const products = tools.requirePayload(`${__dirname}/assets/products-create.json`);
 

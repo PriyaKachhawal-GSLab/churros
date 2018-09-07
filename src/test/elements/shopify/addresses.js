@@ -4,10 +4,10 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const customer = tools.requirePayload(`${__dirname}/assets/customers-create.json`);
-const createAddress = tools.requirePayload(`${__dirname}/assets/address-create.json`);
-const createAddress2 = tools.requirePayload(`${__dirname}/assets/address-create.json`);
-const createAddress3 = tools.requirePayload(`${__dirname}/assets/address-create.json`);
-const updateAddress = tools.requirePayload(`${__dirname}/assets/address-update.json`);
+const createAddress = tools.requirePayload(`${__dirname}/assets/customersAddresses-create.json`);
+const createAddress2 = tools.requirePayload(`${__dirname}/assets/customersAddresses-create.json`);
+const createAddress3 = tools.requirePayload(`${__dirname}/assets/customersAddresses-create.json`);
+const updateAddress = tools.requirePayload(`${__dirname}/assets/customersAddresses-update.json`);
 
 
 suite.forElement('ecommerce', 'addresses', (test) => {

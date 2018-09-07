@@ -1,6 +1,6 @@
 {
   "restock": true,
-  "note": "<<random.number",
+  "note": "<<random.number>>",
   "shipping": {
     "full_refund": true
   },

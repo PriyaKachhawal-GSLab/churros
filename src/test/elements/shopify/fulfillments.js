@@ -3,8 +3,8 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const createFulfillment = tools.requirePayload(`${__dirname}/assets/fulfillments-create.josn`);
-const updateFulfillment = tools.requirePayload(`${__dirname}/assets/fulfillments-update.json`);
+const createFulfillment = tools.requirePayload(`${__dirname}/assets/OrdersFulfillments-create.josn`);
+const updateFulfillment = tools.requirePayload(`${__dirname}/assets/OrfersFulfillments-update.json`);
 const order = tools.requirePayload(`${__dirname}/assets/orders-create.json`);
 
 suite.forElement('ecommerce', 'fulfillments', { payload: createFulfillment }, (test) => {

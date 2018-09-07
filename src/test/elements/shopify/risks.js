@@ -3,8 +3,8 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const riskCreate = tools.requirePayload(`${__dirname}/assets/risks-create.json`);
-const riskUpdate = tools.requirePayload(`${__dirname}/assets/risks-update.json`);
+const riskCreate = tools.requirePayload(`${__dirname}/assets/ordersRisks-create.json`);
+const riskUpdate = tools.requirePayload(`${__dirname}/assets/ordersRisks-update.json`);
 const order = tools.requirePayload(`${__dirname}/assets/orders-create.json`);
 
 suite.forElement('ecommerce', 'risks', (test) => {
