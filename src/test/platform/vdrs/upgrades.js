@@ -297,8 +297,8 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
                 .then(r => transformationId = r.body.id)
                 .then(() => cloudWithUser().get(`/accounts/${account.id}/objects/${vdrSystem.objectName}/definitions`, validateObject(1, ['vdrid'])))
                 .then(() => cloudWithUser().get(`/accounts/${account.id}/elements/${closeioKey}/transformations/${vdrSystem.objectName}`))
-                .then(() => cloudWithUser().get(`/instances/${instance1.id}/objects/${vdrSystem.objectName}/definitions`, validateObject(1, ['vdrphones[*].phone'])))
-                .then(() => cloudWithUser().get(`/instances/${instance2.id}/objects/${vdrSystem.objectName}/definitions`, validateObject(1, ['vdrphones[*].type'])))
+                .then(() => cloudWithUser().get(`/instances/${instance1.id}/objects/${vdrSystem.objectName}/definitions`, validateObject(1, ['vdremails[*].email'])))
+                .then(() => cloudWithUser().get(`/instances/${instance2.id}/objects/${vdrSystem.objectName}/definitions`, validateObject(1, ['vdremails[*].type'])))
                 .then(() => cloudWithUser().get(`/instances/${instance1.id}/transformations/${vdrSystem.objectName}`))
                 .then(() => cloudWithUser().get(`/instances/${instance2.id}/transformations/${vdrSystem.objectName}`))
                 .then(() => cloudWithInstance().get(`hubs/crm/${vdrSystem.objectName}?pageSize=5`, r => {
@@ -309,9 +309,9 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
                         expect(item.name).to.be.undefined;
                         expect(item.vdrid).to.not.be.undefined;
                         expect(item.id).to.be.undefined;
-                        expect(item.vdrphones[0].phone).to.not.be.undefined;
-                        expect(item.vdrphones[0].type).to.be.undefined;
-                        expect(item.phones).to.be.undefined;
+                        expect(item.vdremails[0].email).to.not.be.undefined;
+                        expect(item.vdremails[0].type).to.be.undefined;
+                        expect(item.emails).to.be.undefined;
                     });
                 }))
                 .then(() => cloudWithInstance2().get(`hubs/crm/${vdrSystem.objectName}?pageSize=5`, r => {
@@ -322,9 +322,9 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
                         expect(item.name).to.be.undefined;
                         expect(item.vdrid).to.not.be.undefined;
                         expect(item.id).to.be.undefined;
-                        expect(item.vdrphones[0].type).to.not.be.undefined;
-                        expect(item.vdrphones[0].phone).to.be.undefined;
-                        expect(item.phones).to.be.undefined;
+                        expect(item.vdremails[0].type).to.not.be.undefined;
+                        expect(item.vdremails[0].email).to.be.undefined;
+                        expect(item.emails).to.be.undefined;
                     });
                 }));
         };
@@ -336,10 +336,10 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
             .then(() => cloudWithUser().post(`/accounts/${account.id}/objects/${vdrSystem.objectName}/definitions`, genObj('id'), validateObject(1, ['vdrid'])))
             .then(r => cloudWithUser().post(`/accounts/${account.id}/elements/${closeioKey}/transformations/${vdrSystem.objectName}`, genTransform('id')))
             // create some v1 objects (instances)
-            .then(() => cloudWithUser().post(`/instances/${instance1.id}/objects/${vdrSystem.objectName}/definitions`, genObj('phones[*].phone'), validateObject(1, ['vdrphones[*].phone'])))
-            .then(() => cloudWithUser().post(`/instances/${instance2.id}/objects/${vdrSystem.objectName}/definitions`, genObj('phones[*].type'), validateObject(1, ['vdrphones[*].type'])))
-            .then(() => cloudWithUser().post(`/instances/${instance1.id}/transformations/${vdrSystem.objectName}`, genTransform('phones[*].phone')))
-            .then(() => cloudWithUser().post(`/instances/${instance2.id}/transformations/${vdrSystem.objectName}`, genTransform('phones[*].type')))
+            .then(() => cloudWithUser().post(`/instances/${instance1.id}/objects/${vdrSystem.objectName}/definitions`, genObj('emails[*].email'), validateObject(1, ['vdremails[*].email'])))
+            .then(() => cloudWithUser().post(`/instances/${instance2.id}/objects/${vdrSystem.objectName}/definitions`, genObj('emails[*].type'), validateObject(1, ['vdremails[*].type'])))
+            .then(() => cloudWithUser().post(`/instances/${instance1.id}/transformations/${vdrSystem.objectName}`, genTransform('emails[*].email')))
+            .then(() => cloudWithUser().post(`/instances/${instance2.id}/transformations/${vdrSystem.objectName}`, genTransform('emails[*].type')))
 
             // validate
             .then(r => validateOAITransformExistsAndWorks())
@@ -349,26 +349,26 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
             .then(r => cloudWithUser().get(`/organizations/me`, validateVdrVersion('v2')))
             // validate everything in v2
             .then(r => validateOAITransformExistsAndWorks())
-            .then(r => cloudWithUser().get(`/vdrs/${vdrId}`, validateObject(4, ['vdrname', 'vdrid', 'vdrphones[*].phone', 'vdrphones[*].type'])))
+            .then(r => cloudWithUser().get(`/vdrs/${vdrId}`, validateObject(4, ['vdrname', 'vdrid', 'vdremails[*].email', 'vdremails[*].type'])))
             .then(r => cloudWithUser().get(`/vdrs/${vdrId}/transformations/${transformationId}?instanceId=${instance1.id}`, r => {
                 expect(r).to.have.statusCode(200);
                 expect(r.body.fields.length).to.equal(3);
                 expect(r.body.fields.filter(R.propEq('path', 'vdrname'))).to.not.be.empty;
                 expect(r.body.fields.filter(R.propEq('path', 'vdrid'))).to.not.be.empty;
-                expect(r.body.fields.filter(R.propEq('path', 'vdrphones[*].phone'))).to.not.be.empty;
+                expect(r.body.fields.filter(R.propEq('path', 'vdremails[*].email'))).to.not.be.empty;
                 expect(r.body.fields.filter(R.propEq('vendorPath', 'name'))).to.not.be.empty;
                 expect(r.body.fields.filter(R.propEq('vendorPath', 'id'))).to.not.be.empty;
-                expect(r.body.fields.filter(R.propEq('vendorPath', 'phones[*].phone'))).to.not.be.empty;
+                expect(r.body.fields.filter(R.propEq('vendorPath', 'emails[*].email'))).to.not.be.empty;
             }))
             .then(r => cloudWithUser().get(`/vdrs/${vdrId}/transformations/${transformationId}?instanceId=${instance2.id}`, r => {
                 expect(r).to.have.statusCode(200);
                 expect(r.body.fields.length).to.equal(3);
                 expect(r.body.fields.filter(R.propEq('path', 'vdrname'))).to.not.be.empty;
                 expect(r.body.fields.filter(R.propEq('path', 'vdrid'))).to.not.be.empty;
-                expect(r.body.fields.filter(R.propEq('path', 'vdrphones[*].type'))).to.not.be.empty;
+                expect(r.body.fields.filter(R.propEq('path', 'vdremails[*].type'))).to.not.be.empty;
                 expect(r.body.fields.filter(R.propEq('vendorPath', 'name'))).to.not.be.empty;
                 expect(r.body.fields.filter(R.propEq('vendorPath', 'id'))).to.not.be.empty;
-                expect(r.body.fields.filter(R.propEq('vendorPath', 'phones[*].type'))).to.not.be.empty; 
+                expect(r.body.fields.filter(R.propEq('vendorPath', 'emails[*].type'))).to.not.be.empty; 
             }))
     
             // roll back

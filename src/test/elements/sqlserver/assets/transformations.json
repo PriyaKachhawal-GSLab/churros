@@ -1,22 +1,13 @@
 {
   "contacts": {
-    "vendorName": "Contact",
+    "vendorName": "contacts",
     "fields": [
       {
         "path": "id",
-        "vendorPath": "ContactId"
+        "vendorPath": "id"
       }
     ]
-  },
-   "contactS":{
-    "vendorName": "ContactS",
-    "fields": [
-      {
-        "path": "id",
-        "vendorPath": "contact_id"
-      }
-    ]
-  },
+  },   
   "company":{
    "vendorName": "Company",
    "fields": [

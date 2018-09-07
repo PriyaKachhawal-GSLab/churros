@@ -114,7 +114,7 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
   /**
    * Handles the basic formula execution test for a formula that is triggered by an event
    */
-  const eventTriggerTest = (fName, numEvents, numSevs, validator, executionStatus, numSes, eventFileName, triggerCb) => {
+  const eventTriggerTest = (fName, numEvents, numSevs, validator, executionStatus, numSes, eventFileName, triggerCb, numExecutions) => {
     const f = require(`./assets/formulas/${fName}`);
     let fi = require(`./assets/formulas/basic-formula-instance`);
     if (fs.existsSync(`./assets/formulas/${fName}-instance`)) fi = require(`./assets/formulas/${fName}-instance`);
@@ -141,7 +141,7 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
       triggerCb = (fId, fiId) => generateXSingleSfdcPollingEvents(closeioId, numEvents, eventFileName);
     }
     numSes = numSes || f.steps.length + 1; // defaults to steps + trigger but for loop cases, that won't work
-    return testWrapper(triggerCb, f, fi, numEvents, numSes, numSevs, validatorWrapper, executionStatus);
+    return testWrapper(triggerCb, f, fi, numExecutions ? numExecutions : numEvents, numSes, numSevs, validatorWrapper, executionStatus);
   };
 
   /**
@@ -218,7 +218,7 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
   /**
    * Handles the basic formula execution test for a formula that has a scheduled trigger type
    */
-  const scheduleTriggerTest = (fName, numSevs, validator, executionStatus) => {
+  const scheduleTriggerTest = (fName, numSevs, validator, executionStatus, triggerCall) => {
     const f = require(`./assets/formulas/${fName}`);
 
     f.engine = engine;
@@ -233,7 +233,7 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
       if (typeof validator === 'function') validator(executions);
     };
 
-    const triggerCb = () => logger.debug('No trigger CB for scheduled formulas');
+    const triggerCb = (triggerCall === null || triggerCall === undefined) ? () => logger.debug('No trigger CB for scheduled formulas') : triggerCall;
 
     const setupCron = (r) => {
       return {
@@ -253,6 +253,8 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
   it('should successfully execute a simple formula triggered by a single event', () => eventTriggerTest('simple-successful-formula', 1, 2));
 
   it('should successfully execute a simple formula triggered by a triple event', () => eventTriggerTest('simple-successful-formula', 3, 2));
+
+  it('should successfully execute a simple formula triggered by one event containing 3 objects', () => eventTriggerTest('simple-successful-formula', 1, 2, null, null, null, 'triple-event-closeio', null, 3));
 
   it('should successfully execute a formula and properly handle context between steps', () => {
     const validator = (executions) => {
@@ -432,6 +434,11 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
 
   it('should successfully execute a simple formula triggered by schedule', () => scheduleTriggerTest('simple-successful-scheduled-trigger-formula', 2));
 
+  it('should successfully execute a simple schedule trigger formula triggered manually', () => {
+    let triggerCb = (fId, fiId) => cloud.post(`/formulas/${fId}/instances/${fiId}/executions`, {});
+    return scheduleTriggerTest('simple-successful-scheduled-trigger-formula', 2, null, 'success', triggerCb);
+  });
+
   it('should successfully execute a simple loop formula triggered by a single event', () => {
     const validator = (executions) => {
       executions.map(e => {
@@ -522,6 +529,30 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
     const numberOfSteps = isBodenstein ? 5 : 3;
     const status = isBodenstein ? 'failed' : 'retry';
     return manualTriggerTest('simple-retry-execution-formula', null, {}, numberOfSteps, validator, status, numberOfSteps);
+  });
+
+  it('should successfully retry an execution via the PUT /retries API', () => {
+    let event = require('./assets/events/triple-event-closeio.json');
+    const eventBody = {
+      message: {
+        instance_id: closeioId,
+        events: event.events,
+        raw: event
+      }
+    };
+
+
+    let triggerCb = (fId, fiId) => {
+      let executionId;
+      return cloud.post(`/formulas/${fId}/instances/${fiId}/executions`, eventBody)
+        .then(r => executionId = r.body[0].id)
+        .then(() => tools.wait.upTo(120000).for(common.allExecutionsCompleted(fId, fiId, 1, 2)))
+        .then(() => cloud.put(`/formulas/instances/executions/${executionId}/retries`, {}));
+    };
+
+    const f = require('./assets/formulas/manual-trigger');
+    const fi = { name: 'churros-manual-formula-instance' };
+    return testWrapper(triggerCb, f, fi, 2, 2, 2);
   });
 
   it('should successfully execute an element request formula with a configured api field', () => {
@@ -687,7 +718,8 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
     const eventBody = {
       message: {
         instance_id: closeioId,
-        events: [event]
+        events: event.events,
+        raw: event
       }
     };
 
@@ -695,6 +727,33 @@ suite.forPlatform('formulas', { name: 'formula executions' }, (test) => {
     return eventTriggerTest('simple-successful-formula', 1, 2, null, 'success', null, null, triggerCb);
   });
 
+  it('should successfully execute a simple event trigger formula triggered manually with an event containing 3 objects', () => {
+    let event = require('./assets/events/triple-event-closeio.json');
+    const eventBody = {
+      message: {
+        instance_id: closeioId,
+        events: event.events,
+        raw: event
+      }
+    };
+
+    const validator = (executions) => {
+      // validate that each objectId exists once somewhere in the step execution values
+      const events = require('./assets/events/triple-event-closeio');
+      const all = [];
+      executions.forEach(e => {
+        const debugStep = e.stepExecutions.filter((se) => se.stepName === 'trigger')[0];
+        const triggerEventSEV = debugStep.stepExecutionValues.filter((sev) => sev.key === 'trigger.event')[0];
+        all.push(JSON.parse(triggerEventSEV.value).objectId);
+      });
+      events.accounts.forEach(account => expect(all.indexOf(account.id)).to.be.above(-1));
+    };
+
+    let triggerCb = (fId, fiId) => cloud.post(`/formulas/${fId}/instances/${fiId}/executions`, eventBody);
+    const f = require('./assets/formulas/simple-successful-formula');
+    const fi = require('./assets/formulas/basic-formula-instance');
+    return testWrapper(triggerCb, f, fi, 3, 2, 2, validator);
+  });
 
   it('should successfully stream a bulk file using an elementRequestStream step in a formula', () => {
 
