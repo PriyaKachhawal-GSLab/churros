@@ -10,10 +10,10 @@ suite.forElement('documents', 'search', null, (test) => {
     setTimeout(done, 2500);
   });
 
+  test.withOptions({qs: {text:'test', path: '/'}}).should.return200OnGet();
   test.should.supportNextPagePagination(1);
-
   it('should support template filtering for GET /search', () => {
-    let folderPath = '/TestFolderDoNoDelete';
+    let folderPath = '/TestFolderDoNotDelete';
     let searchWhereClause =  `path = '${folderPath}' and template_templateKey= 'customer' and template_scope = 'enterprise' and template_category1234 = 'saucyChurros'`;
     
     return cloud.withOptions({qs: {path :folderPath}}).get(`/folders/contents`)
