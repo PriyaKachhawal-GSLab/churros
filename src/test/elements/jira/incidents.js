@@ -17,17 +17,16 @@ suite.forElement('helpdesk', 'incidents', { payload: payload }, (test) => {
   test.should.supportPagination();
   test.should.supportCeqlSearch('id');
   it(`Should support S for ${test.api} with fields: query`, () => {
-    return cloud.withOptions({ qs: { fields: 'fixVersions,summary' } }).get(test.api)
-    .then(r => {
-      r.body.forEach(incident => {
-        let keys = Object.keys(incident.fields);
-        if (expect(keys.length).to.be.above(0) && expect(keys.length).to.be.below(3)) {
-          expect(incident.fields).to.contain.key('fixVersions') || expect(keys).to.contain.key('summary');
-        }
+    return cloud.withOptions({ qs: { fields: 'fixVersions, summary' } }).get(test.api)
+      .then(r => {
+        r.body.forEach(incident => {
+          let keys = Object.keys(incident.fields);
+          expect(keys.length).to.be.above(0) && expect(keys.length).to.be.below(3);
+          expect(keys).to.include.members(['summary', 'fixVersions']);
+        });
       });
-    });
   });
-  
+
   it('should allow CRUDS for /incidents/:id/comments', () => {
     let incidentId;
     return cloud.post('/hubs/helpdesk/incidents', payload)
