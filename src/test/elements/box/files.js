@@ -40,8 +40,8 @@ suite.forElement('documents', 'files', (test) => {
         templateKey = r.body.templateKey;
         payload.template = r.body.templateKey;
         updatePayload.template= r.body.templateKey;
-        updatePayload.path = "/" + r.body.fields[0].key;
-        templateKeyPayload.path= "/" + r.body.fields[0].key;
+        updatePayload.path =`/${r.body.fields[0].key}`;
+        templateKeyPayload.path= `/${r.body.fields[0].key}`;
           })
           .then(r => done());
   });
@@ -168,7 +168,7 @@ suite.forElement('documents', 'files', (test) => {
    * While we don't offer the POST /revisions endpoint we'll need to hardcode the file data
    */
   it('should allow RS for documents/files/:id/revisions', () => {
-    const fileId = 310815318732;
+    const fileId = require('core/props').getForKey('box', 'fileRevisionsId');
     let revisionId;
     return cloud.get(`${test.api}/${fileId}/revisions`)
       .then(r => revisionId = r.body[0].id)
