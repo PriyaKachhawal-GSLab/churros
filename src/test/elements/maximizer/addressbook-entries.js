@@ -21,6 +21,43 @@ suite.forElement('crm', 'addressbook-entries', { payload: addressbookentryPayloa
   test.should.supportCruds();
 
   test.withApi(test.api)
+      .withName(`should support nested search i.e.,  filter by where='Address.Country'`)
+      .withOptions({ qs: { where: `Address.Country='${addressbookentryPayload.Address.Country}'` } })
+      .withValidation(r => {
+        expect(r.body.filter(obj => obj.Address.Country === `${addressbookentryPayload.Address.Country}`));
+      })
+      .should.return200OnGet();
+
+      test.withApi(test.api)
+      .withName(`should support nested search i.e.,  filter by where with multiple options using and`)
+      .withOptions({ qs: { where: `Address.Country='${addressbookentryPayload.Address.Country}' and CompanyName='${addressbookentryPayload.CompanyName}'` } })
+      .withValidation(r => {
+        expect(r.body.filter(obj => obj.Address.Country === `${addressbookentryPayload.Address.Country}`));
+        expect(r.body.filter(obj => obj.CompanyName === `${addressbookentryPayload.CompanyName}`));
+      })
+      .should.return200OnGet();
+
+      test.withApi(test.api)
+      .withName(`should support nested search i.e.,  filter by where with multiple options using or`)
+      .withOptions({ qs: { where: `Address.Country='${addressbookentryPayload.Address.Country}' or CompanyName='${addressbookentryPayload.CompanyName}'` } })
+      .withValidation(r => {
+        expect(r.body.filter(obj => obj.Address.Country === `${addressbookentryPayload.Address.Country}`));
+        expect(r.body.filter(obj => obj.CompanyName === `${addressbookentryPayload.CompanyName}`));
+        
+      })
+      .should.return200OnGet();
+
+      test.withApi(test.api)
+      .withName(`should support nested search with IN operator`)
+      .withOptions({ qs: { where: `Address.Country in ('India', 'USA') ` } })
+      .withValidation(r => {
+        expect(r.body.filter(obj => obj.Address.Country === `India`));
+        //expect(r.body.filter(obj => obj.CompanyName === `${addressbookentryPayload.CompanyName}`));
+        
+      })
+      .should.return200OnGet();
+
+      test.withApi(test.api)
       .withOptions({ qs: { where: `CompanyName='${addressbookentryPayload.CompanyName}'`, fields: `CompanyName,FullName` } })
       .withValidation(r => {
         expect(r.body.filter(obj => obj.CompanyName === addressbookentryPayload.CompanyName).length).to.equal(r.body.length);

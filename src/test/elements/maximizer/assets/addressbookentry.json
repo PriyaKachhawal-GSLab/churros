@@ -1,4 +1,10 @@
 {
   "CompanyName": "<<random.word>>",
-  "Type": "Company"
+  "Type": "Company",
+  "Address": {
+    "City": "<<address.city>>",
+    "StateProvince": "<<address.state>>",
+    "Country":"<<address.country>>",
+    "ZipCode":"<<address.zipCode>>"
+  }
 }

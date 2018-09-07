@@ -18,6 +18,15 @@ suite.forElement('crm', 'companies', { payload : companyPayload }, (test) => {
   after(() => cloud.delete(`${test.api}/${companyId}`));
 
   test.withApi(test.api)
+  .withName(`should support nested search i.e.,  filter by where with multiple options using and`)
+  .withOptions({ qs: { where: `CompanyName='3BLASIUS COMPANY' and Address.City='Denver'` } })
+  .withValidation(r => {
+    expect(r.body.filter(obj => obj.Address.City === `Denver`));
+    expect(r.body.filter(obj => obj.CompanyName === `3BLASIUS COMPANY`));
+  })
+  .should.return200OnGet();
+
+  test.withApi(test.api)
       .withOptions({ qs: { where: `CompanyName='${companyPayload.CompanyName}'`, fields: `CompanyName,FullName` } })
       .withValidation(r => {
          expect(r.body.filter(obj => obj.CompanyName === companyPayload.CompanyName).length).to.equal(r.body.length);
@@ -25,4 +34,5 @@ suite.forElement('crm', 'companies', { payload : companyPayload }, (test) => {
       })
       .withName('should allow GET with options /companies')
       .should.return200OnGet();
+  
 });
