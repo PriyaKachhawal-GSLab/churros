@@ -1,9 +1,10 @@
 {
   "termType": "EVERGREEN",
-  "contractEffectiveDate": "2016-02-01",
+  "contractEffectiveDate": "2018-09-01",
+  "runBilling": false,
   "autoRenew": true,
   "renewalTerm": 3,
-  "accountKey": "2c92c0fb6078ce850160959703b60c8a",
+  "accountKey": "2c92c0fa65b2e9f10165b95ed41a269d",
   "subscribeToRatePlans": [
     {
       "chargeOverrides": [
@@ -16,8 +17,7 @@
           "description": "ven-test",
           "endDateCondition": "Fixed_Period",
           "listPriceBase": "Per_Billing_Period",
-          "number": "234565001",
-          "productRatePlanChargeId": "2c92c0f863f7f040016416c118566c65",
+          "productRatePlanChargeId": "2c92c0f86565f40101656b19cc9f313e",
           "quantity": 0,
           "tiers": [
             {
@@ -34,7 +34,7 @@
           "upToPeriodsType": "Months"
         }
       ],
-      "productRatePlanId": "2c92c0f963f800a9016416bc6bba0bb7"
+      "productRatePlanId": "2c92c0f86565f40b01656b16a2001f51"
     }
   ],
   "initialTermPeriodType": "Month",

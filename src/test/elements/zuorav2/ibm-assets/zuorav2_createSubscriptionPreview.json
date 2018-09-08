@@ -1,11 +1,10 @@
 {
-  "accountKey": "2c92c0fb6078ce850160959703b60c8a",
-  "contractEffectiveDate": "2018-03-20",
-  "customerAcceptanceDate": "2018-03-27",
+  "accountKey": "2c92c0fa65b2e9f10165b95ed41a269d",
+  "contractEffectiveDate": "2018-09-01",
+  "customerAcceptanceDate": "2019-04-29",
   "includeExistingDraftDocItems": true,
   "initialTermPeriodType": "Month",
-  "invoiceOwnerAccountKey": "2c92c0fb6078ce850160959703b60c8a",
-  "serviceActivationDate": "2018-03-23",
+  "serviceActivationDate": "2018-09-20",
   "subscribeToRatePlans": [
     {
       "chargeOverrides": [
@@ -19,24 +18,24 @@
           "endDateCondition": "Fixed_Period",
           "listPriceBase": "Per_Billing_Period",
           "number": "456734591",
-          "productRatePlanChargeId": "2c92c0f863f7f040016416c118566c65",
-          "quantity": 0,
+          "productRatePlanChargeId": "2c92c0f86565f40101656b19cc9f313e",
+          "quantity": 2,
           "tiers": [
             {
-              "endingUnit": 0,
+              "endingUnit": 2,
               "price": "9864",
               "priceFormat": "FlatFee",
-              "startingUnit": 0,
+              "startingUnit": 1,
               "tier": 1
             }
           ],
-          "triggerDate": "2018-03-28",
+          "triggerDate": "2018-09-28",
           "triggerEvent": "USD",
           "upToPeriods": 9,
           "upToPeriodsType": "Months"
         }
       ],
-      "productRatePlanId": "2c92c0f963f800a9016416bc6bba0bb7"
+      "productRatePlanId": "2c92c0f86565f40b01656b16a2001f51"
     }
   ],
   "targetDate": "2018-12-31",
