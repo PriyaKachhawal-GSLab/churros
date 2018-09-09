@@ -1,0 +1,38 @@
+{
+  "journalid": "you should get this from journal api",
+  "datecreated": {
+    "year": "2020",
+    "month": "03",
+    "day": "07"
+  },
+  "reversedate": {
+    "year": "2030",
+    "month": "01",
+    "day": "30"
+  },
+  "description": "<<random.words>>",
+  "referenceno": "9876",
+  "gltransactionentries": {
+    "glentry": [{
+        "trtype": "credit",
+        "amount": "9876",
+        "glaccountno": "1400",
+        "datecreated": {
+          "year": "2011",
+          "month": "03",
+          "day": "07"
+        }
+      },
+      {
+        "trtype": "debit",
+        "amount": "9876",
+        "glaccountno": "1400",
+        "datecreated": {
+          "year": "2011",
+          "month": "03",
+          "day": "07"
+        }
+      }
+    ]
+  }
+}

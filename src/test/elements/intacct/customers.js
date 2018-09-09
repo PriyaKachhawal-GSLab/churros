@@ -2,10 +2,18 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const payload = tools.requirePayload(`${__dirname}/assets/customers.json`);
 
-suite.forElement('finance', 'customers', { payload: payload }, (test) => {
-  test.should.supportCruds();
+const customersCreatePayload = tools.requirePayload(`${__dirname}/assets/customers-create.json`);
+const customersUpdatePayload = tools.requirePayload(`${__dirname}/assets/customers-update.json`);
+
+const options = {
+  churros: {
+    updatePayload: customersUpdatePayload
+  }
+};
+
+suite.forElement('finance', 'customers', { payload: customersCreatePayload }, (test) => {
   test.should.supportPagination();
-  test.withName('should support updated > {date} Ceql search').withOptions({ qs: { where: 'whenmodified>\'08/13/2016 05:26:37\'' } }).should.return200OnGet();
+  test.withOptions(options).should.supportCruds();
+  test.should.supportCeqlSearchForMultipleRecords('name');
 });

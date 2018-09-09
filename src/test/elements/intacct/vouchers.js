@@ -4,44 +4,31 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 
-const payload = (vendorId) => ({
-  "vendorid": vendorId,
-  "datecreated": {
-    "year": "2018",
-    "month": "03",
-    "day": "31"
-  },
-  "dateposted": {
-    "year": "2018",
-    "month": "03",
-    "day": "31"
-  },
-  "adjustmentno": tools.random(),
-  "action": "Draft",
-  "billno": "100",
-  "description": tools.random(),
-  "basecurr": "USD",
-  "currency": "USD",
-  "exchratetype": "Intacct Daily Rate",
-  "apadjustmentitems": {
-    "lineitem": [{
-      "glaccountno": "2000",
-      "amount": "-94.63",
-      "memo": "History bill payment 100"
-    }]
+const vendorsCreatePayload = tools.requirePayload(`${__dirname}/assets/vendors-create.json`);
+const vouchersCreatePayload = tools.requirePayload(`${__dirname}/assets/vouchers-create.json`);
+const vouchersUpdatePayload = tools.requirePayload(`${__dirname}/assets/vouchers-update.json`);
+
+const options = {
+  churros: {
+    updatePayload: vouchersUpdatePayload
   }
-});
+};
 
-const vendor = tools.requirePayload(`${__dirname}/assets/vendor.json`);
+//for this resorces we need some specail permissions for doing CUD and account we are using in churros does not have that permissions hence APIs are failing for permission issue.  
+suite.forElement('finance', 'vouchers', { payload: vouchersCreatePayload }, (test) => {
+  let vendorlId;
 
-suite.forElement('finance', 'vouchers', { payload: payload() }, (test) => {
-  it(`should allow CRDS for ${test.api}`, () => {
-    let vendorId;
-    return cloud.post(`/hubs/finance/vendors`, vendor)
-      .then(r => vendorId = r.body.id)
-      .then(r => cloud.cruds(test.api, payload(vendorId)))
-      .then(r => cloud.delete(`/hubs/finance/vendors/${vendorId}`));
-  });
-  test.should.supportPagination();
+  before(() => cloud.post(`hubs/finance/vendors`, vendorsCreatePayload)
+    .then(r => {
+      vendorlId = r.body.id;
+      vouchersCreatePayload.vendorid = vendorlId;
+      vouchersUpdatePayload.vendorid = vendorlId;
+    }));
+
+  after(() => cloud.delete(`hubs/finance/vendors/${vendorlId}`));
+
+  test.should.supportPagination('id');
+  test.withOptions(options).should.supportSr();
+  // test.withOptions(options).should.supportCruds();
   test.withName('should support updated > {date} Ceql search').withOptions({ qs: { where: 'whenmodified>\'08/13/2016 05:26:37\'' } }).should.return200OnGet();
 });

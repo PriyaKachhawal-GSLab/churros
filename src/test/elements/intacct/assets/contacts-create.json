@@ -1,0 +1,26 @@
+{
+    "contactname": "<<random.alphaNumeric##8>>",
+    "printas": "<<random.word>>",
+    "companyname": "<<random.word>>",
+    "prefix": "Mr.",
+    "firstname": "<<random.word>>",
+    "lastname": "<<random.word>>",
+    "initial": "V.",
+    "phone1": "(212) 445-4554",
+    "phone2": "(212) 632-7151",
+    "cellphone": "(212) 734-1612",
+    "pager": "(212) 632-7151",
+    "fax": "(212) 641-7937",
+    "email1": "AVB1@illustrate.com",
+    "email2": "AVB1@illustrate.org",
+    "url1": "http://www.illustrate.com",
+    "url2": "http://www.illustrate.org",
+    "mailaddress": {
+      "address1": "368 Outskirts Rd",
+      "address2": ", Apt 19",
+      "city": "Bronx",
+      "state": "NY",
+      "zip": "10400",
+      "country": "United States"
+    }
+  }

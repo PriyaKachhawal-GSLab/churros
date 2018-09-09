@@ -1,6 +1,6 @@
 {
   "glaccountno": "<<random.alphaNumeric##4>>",
-  "title": "<<random.word>>",
+  "title": "<<random.alphaNumeric##8>>",
   "normalbalance": "debit",
   "accounttype": "balancesheet",
   "closingtype": "non-closing account",

@@ -1,0 +1,21 @@
+{
+  "name": "<<random.word>>",
+  "description": "<<random.words>>",
+  "due": {
+    "dueday": "30",
+    "duefrom": "from invoice/bill date"
+  },
+  "discount": {
+    "discday": "10",
+    "discfrom": "from invoice/bill date",
+    "discamount": "2",
+    "discpercamn": "%",
+    "discgracedays" : "1"
+  },
+  "disccalcon": "Line items total",
+  "penalty": {
+    "pen_type": "Weekly",
+    "penamount": "1",
+    "penpercamn": "%"
+  }
+}

@@ -2,14 +2,14 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const customersPayload = tools.requirePayload(`${__dirname}/assets/customers.json`);
-const employeesPayload = tools.requirePayload(`${__dirname}/assets/employees.json`);
-const invoicesPayload = tools.requirePayload(`${__dirname}/assets/invoices.json`);
-const itemsPayload = tools.requirePayload(`${__dirname}/assets/items.json`);
-const journalsPayload = tools.requirePayload(`${__dirname}/assets/journals.json`);
-const ledgerAccountsPayload = tools.requirePayload(`${__dirname}/assets/ledger-accounts.json`);
-const paymentsPayload = tools.requirePayload(`${__dirname}/assets/payments.json`);
-const vendorsPayload = tools.requirePayload(`${__dirname}/assets/vendor.json`);
+const customersPayload = tools.requirePayload(`${__dirname}/assets/customers-create.json`);
+const employeesPayload = tools.requirePayload(`${__dirname}/assets/employees-create.json`);
+const invoicesPayload = tools.requirePayload(`${__dirname}/assets/invoices-create.json`);
+const itemsPayload = tools.requirePayload(`${__dirname}/assets/items-create.json`);
+const journalsPayload = tools.requirePayload(`${__dirname}/assets/journals-create.json`);
+const ledgerAccountsPayload = tools.requirePayload(`${__dirname}/assets/ledger-accounts-create.json`);
+const paymentsPayload = tools.requirePayload(`${__dirname}/assets/payments-create.json`);
+const vendorsPayload = tools.requirePayload(`${__dirname}/assets/vendors-create.json`);
 
 suite.forElement('finance', 'polling', null, (test) => {
   test.withApi('/hubs/finance/customers').should.supportPolling(customersPayload, 'customers');

@@ -1,0 +1,55 @@
+{
+  "vendorid": "V1234",
+  "datecreated": {
+    "year": "2015",
+    "month": "06",
+    "day": "30"
+  },
+  "dateposted": {
+    "year": "2015",
+    "month": "06",
+    "day": "30"
+  },
+  "adjustmentno": "234",
+  "action": "Submit",
+  "billno": "234235",
+  "description": "Some description",
+  "basecurr": "USD",
+  "currency": "USD",
+  "exchratedate": {
+    "year": "2015",
+    "month": "06",
+    "day": "30"
+  },
+  "exchratetype": "Intacct Daily Rate",
+  "nogl": "false",
+  "customfields": {
+    "customfield": {
+      "customfieldname": "customfield1",
+      "customfieldvalue": "customvalue1"
+    }
+  },
+  "apadjustmentitems": {
+    "lineitem": [{
+      "glaccountno": "2000",
+      "offsetglaccountno": "2020",
+      "amount": "76343.43",
+      "memo": "Just another memo",
+      "locationid": "Location1",
+      "departmentid": "Department1",
+      "customfields": {
+        "customfield": {
+          "customfieldname": "customfield1",
+          "customfieldvalue": "customvalue1"
+        }
+      },
+      "projectid": "Project1",
+      "customerid": "Customer1",
+      "vendorid": "Vendor1",
+      "employeeid": "Employee1",
+      "itemid": "Item1",
+      "classid": "Class1",
+      "warehouseid": "Warehouse1"
+    }]
+  }
+}

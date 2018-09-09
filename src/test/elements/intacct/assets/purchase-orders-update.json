@@ -1,0 +1,48 @@
+{
+  "datedue": {
+    "month": "08",
+    "year": 2010,
+    "day": 26
+  },
+  "transactionstate": "Pending",
+  "vendorid": "5f6vshi2t0",
+  "basecurr": "USD",
+  "potransitems": {
+    "potransitem": [
+      {
+        "itemid": 905,
+        "itemdesc": "AP5131 Access Point",
+        "unit": "Each",
+        "quantity": 2,
+        "totalamount": 400,
+        "warehouseid": "WH1",
+        "price": 200,
+        "retailprice": 0,
+        "key": 882
+      }
+    ]
+  },
+  "datecreated": {
+    "month": "08",
+    "year": 2010,
+    "day": 26
+  },
+  "transactiontype": "Purchase Requisition",
+  "transactionid": "Purchase Requisition-REQ0047",
+  "termname": "N30",
+  "whenmodified": "09/07/2018 19:11:54",
+  "exchratedate": {
+    "month": "08",
+    "year": 2010,
+    "day": 26
+  },
+  "returnto": {
+    "contactname": "600 MetroNorth Corporate Center, LLC"
+  },
+  "exchrate": 1,
+  "paymentstatus": "Open",
+  "currency": "USD",
+  "payto": {
+    "contactname": "600 MetroNorth Corporate Center, LLC"
+  }
+}

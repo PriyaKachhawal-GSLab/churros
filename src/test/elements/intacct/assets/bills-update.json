@@ -1,0 +1,57 @@
+{
+  "vendorid": "you get this from vendors api",
+  "datecreated": {
+    "year": "2018",
+    "month": "10",
+    "day": "13"
+  },
+  "dateposted": {
+    "year": "2018",
+    "month": "10",
+    "day": "13"
+  },
+  "datedue": {
+    "year": "2018",
+    "month": "10",
+    "day": "26"
+  },
+  "termname": "N30",
+  "action": "Draft",
+  "billno": "you get this from createPayload",
+  "ponumber": "222",
+  "onhold": false,
+  "description": "Description of bill",
+  "basecurr": "USD",
+  "currency": "USD",
+  "exchrate": "0.875",
+  "nogl": "F",
+  "customfields": {
+    "customfield": [{
+        "customfieldname": "TESTDATE",
+        "customfieldvalue": "12/10/2009"
+      },
+      {
+        "customfieldname": "TESTTEXT",
+        "customfieldvalue": "CustomFieldText"
+      }
+    ]
+  },
+  "billitems": {
+    "lineitem": [{
+      "glaccountno": "2000",
+      "amount": "1234.56",
+      "customfields": {
+        "customfield": [{
+            "customfieldname": "TESTDATE",
+            "customfieldvalue": "12/10/2009"
+          },
+          {
+            "customfieldname": "TESTTEXT",
+            "customfieldvalue": "CustomFieldText"
+          }
+        ]
+      },
+      "billable": "false"
+    }]
+  }
+}

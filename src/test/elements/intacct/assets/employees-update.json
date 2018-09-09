@@ -1,0 +1,35 @@
+{
+  "title": "<<random.alphaNumeric##8>>",
+  "locationid": "100",
+  "departmentid": "10",
+  "supervisorid": "1",
+  "birthdate": {
+    "year": "1999",
+    "month": "10",
+    "day": 20
+  },
+  "startdate": {
+    "year": 2000,
+    "month": "12",
+    "day": "3"
+  },
+  "enddate": {
+    "year": 2016,
+    "month": "12",
+    "day": "20"
+  },
+  "terminationtype": "voluntary",
+  "employeetype": "Full Time",
+  "gender": "male",
+  "status": "active",
+  "currency": "USD",
+  "personalinfo": {
+    "contactname" : "a1b2c3d4"
+  },
+  "contactlist": {
+    "contactitem": {
+      "category": "PRIMARY ADDRESS",
+      "contactname": "John Pearce"
+    }
+  }
+}

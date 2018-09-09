@@ -1,0 +1,20 @@
+{
+  "name": "<<random.word>>",
+  "startdate": {
+    "year": "2010",
+    "month": "12",
+    "day": "1"
+  },
+  "enddate": {
+    "year": "2011",
+    "month": "12",
+    "day": "1"
+  },
+  "status": "active",
+  "primary": {
+    "contactname": "Ecommera"
+  },
+  "shipto": {
+    "contactname": "Ecommera"
+  }
+}

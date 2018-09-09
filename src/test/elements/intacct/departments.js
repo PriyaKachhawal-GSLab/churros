@@ -2,18 +2,18 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const cloud = require('core/cloud');
 
-const payload = () => ({
-  "departmentid": tools.randomStr("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz", 15),
-  "title": tools.random(),
-  "parentid": "10",
-  "status": "active"
-});
-suite.forElement('finance', 'departments', { payload: payload() }, (test) => {
-  it(`should allow CRUDS for ${test.api}`, () => {
-    return cloud.cruds(test.api, payload());
-  });
+const departmentsCreatePayload = tools.requirePayload(`${__dirname}/assets/departments-create.json`);
+const departmentsUpdatePayload = tools.requirePayload(`${__dirname}/assets/departments-update.json`);
+
+const options = {
+  churros: {
+    updatePayload: departmentsUpdatePayload
+  }
+};
+
+suite.forElement('finance', 'departments', { payload: departmentsCreatePayload }, (test) => {
   test.should.supportPagination();
-  test.withName('should support updated > {date} Ceql search').withOptions({ qs: { where: 'whenmodified>\'08/13/2016 05:26:37\'' } }).should.return200OnGet();
+  test.withOptions(options).should.supportCruds();
+  test.should.supportCeqlSearchForMultipleRecords('title');
 });

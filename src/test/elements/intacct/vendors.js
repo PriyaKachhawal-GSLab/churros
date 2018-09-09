@@ -2,22 +2,18 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const cloud = require('core/cloud');
-const expect = require('chakram').expect;
 
-const payload = tools.requirePayload(`${__dirname}/assets/vendor.json`);
+const vendorsCreatePayload = tools.requirePayload(`${__dirname}/assets/vendors-create.json`);
+const vendorsUpdatePayload = tools.requirePayload(`${__dirname}/assets/vendors-update.json`);
 
-suite.forElement('finance', 'vendors', { payload: payload }, (test) => {
-  it(`should allow CRDS for ${test.api}`, () => {
-    return cloud.crds(test.api, payload);
-  });
+const options = {
+  churros: {
+    updatePayload: vendorsUpdatePayload
+  }
+};
+
+suite.forElement('finance', 'vendors', { payload: vendorsCreatePayload }, (test) => {
   test.should.supportPagination();
-  test.withName('should support updated > {date} Ceql search').withOptions({ qs: { where: 'whenmodified>\'08/13/2016 05:26:37\'' } }).should.return200OnGet();
-
-  // Pre-DE586, Intacct returned whatever was requested for pageSize if above maxPage. Now, we should return substantially less...
-  test
-    .withName('should support paginated search and return less than requested')
-    .withOptions({ qs: { pageSize: 1000 } })
-    .withValidation(r => expect(r.body.length).to.be.below(1000))
-    .should.return200OnGet();
+  test.withOptions(options).should.supportCruds();
+  test.should.supportCeqlSearchForMultipleRecords('name');
 });

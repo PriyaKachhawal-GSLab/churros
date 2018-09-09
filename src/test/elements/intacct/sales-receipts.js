@@ -4,9 +4,9 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const expect = require('chakram').expect;
 
-const payload = tools.requirePayload(`${__dirname}/assets/salesReceipts.json`);
+const salesReceiptsCreatePayload = tools.requirePayload(`${__dirname}/assets/sales-receipts-create.json`);
 
-suite.forElement('finance', 'sales-receipts', { payload: payload }, (test) => {
+suite.forElement('finance', 'sales-receipts', { payload: salesReceiptsCreatePayload }, (test) => {
   test.should.supportCrs();
   test.should.supportNextPagePagination(2,false);
   test.withOptions({ qs: { where: `WHENMODIFIED ='08/13/2016 05:26:37'` } })

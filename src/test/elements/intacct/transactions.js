@@ -1,55 +1,25 @@
 'use strict';
 
 const suite = require('core/suite');
+const tools = require('core/tools');
 const cloud = require('core/cloud');
 
-const payload = (journalid) => ({
-  "journalid": journalid,
-  "datecreated": {
-    "year": "2011",
-    "month": "03",
-    "day": "07"
-  },
-  "reversedate": {
-    "year": "2016",
-    "month": "01",
-    "day": "30"
-  },
-  "description": "From XML API",
-  "referenceno": "9876",
-  "gltransactionentries": {
-    "glentry": [{
-        "trtype": "credit",
-        "amount": "9876",
-        "glaccountno": "1400",
-        "datecreated": {
-          "year": "2011",
-          "month": "03",
-          "day": "07"
-        }
-      },
-      {
-        "trtype": "debit",
-        "amount": "9876",
-        "glaccountno": "1400",
-        "datecreated": {
-          "year": "2011",
-          "month": "03",
-          "day": "07"
-        }
-      }
-    ]
-  }
-});
+const journalsCreatePayload = tools.requirePayload(`${__dirname}/assets/journals-create.json`);
+const transactionsCreatePayload = tools.requirePayload(`${__dirname}/assets/transactions-create.json`);
 
-suite.forElement('finance', 'transactions', { payload: payload(), skip: true }, (test) => {
-  it(`should allow CRDS for ${test.api}`, () => {
-    let journalid;
-    return cloud.get(test.api)
-      .then(r => journalid = r.body[0].journalid)
-      .then(r => cloud.crds(test.api, payload(journalid)));
-  });
-  test.withApi(`/hubs/finance/transactions-entries`).should.return200OnGet();
-  test.should.supportPagination();
-  test.withName('should support updated > {date} Ceql search').withOptions({ qs: { where: 'whenmodified>\'08/13/2016 05:26:37\'' } }).should.return200OnGet();
+
+suite.forElement('finance', 'transactions', { payload: transactionsCreatePayload }, (test) => {
+  let journalId;
+
+  before(() => cloud.post(`hubs/finance/journals`, journalsCreatePayload)
+    .then(r => {
+      journalId = r.body.id;
+      transactionsCreatePayload.journalid = journalId;
+    }));
+
+  after(() => cloud.delete(`hubs/finance/journals/${journalId}`));
+
+  test.should.supportPagination('id');
+  test.should.supportCrds();
+  test.should.supportCeqlSearchForMultipleRecords('description');
 });

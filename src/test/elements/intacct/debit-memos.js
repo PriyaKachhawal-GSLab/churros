@@ -4,9 +4,9 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const expect = require('chakram').expect;
 
-const payload = tools.requirePayload(`${__dirname}/assets/debitMemos.json`);
+const debitMemosCreatePayload = tools.requirePayload(`${__dirname}/assets/debit-memos-create.json`);
 
-suite.forElement('finance', 'debit-memos', { payload: payload }, (test) => {
+suite.forElement('finance', 'debit-memos', { payload: debitMemosCreatePayload }, (test) => {
   test.should.supportCrs();
   test.should.supportPagination();
   test.withName('should support vendorid= V102 Ceql search')

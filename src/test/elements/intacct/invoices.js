@@ -4,12 +4,17 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 
-const payload = tools.requirePayload(`${__dirname}/assets/invoices.json`);
+const invoicesCreatePayload = tools.requirePayload(`${__dirname}/assets/invoices-create.json`);
+const invoicesUpdatePayload = tools.requirePayload(`${__dirname}/assets/invoices-update.json`);
 
-suite.forElement('finance', 'invoices', { payload: payload }, (test) => {
-  it(`should allow CRUDS for ${test.api}`, () => {
-    return cloud.cruds(test.api, payload);
-  });
+const options = {
+  churros: {
+    updatePayload: invoicesUpdatePayload
+  }
+};
+
+suite.forElement('finance', 'invoices', { payload: invoicesCreatePayload }, (test) => {
   test.should.supportPagination();
-  test.withName('should support updated > {date} Ceql search').withOptions({ qs: { where: 'whenmodified>\'08/13/2016 05:26:37\'' } }).should.return200OnGet();
+  test.withOptions(options).should.supportCruds();
+  test.should.supportCeqlSearchForMultipleRecords('description');
 });

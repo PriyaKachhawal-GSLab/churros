@@ -2,14 +2,18 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const cloud = require('core/cloud');
 
-const payload = tools.requirePayload(`${__dirname}/assets/ledger-accounts.json`);
+const ledgerAccountsCreatePayload = tools.requirePayload(`${__dirname}/assets/ledger-accounts-create.json`);
+const ledgerAccountsUpdatePayload = tools.requirePayload(`${__dirname}/assets/ledger-accounts-update.json`);
 
-suite.forElement('finance', 'ledger-accounts', { payload: payload }, (test) => {
-  it(`should allow CRUDS for ${test.api}`, () => {
-    return cloud.cruds(test.api, payload);
-  });
+const options = {
+  churros: {
+    updatePayload: ledgerAccountsUpdatePayload
+  }
+};
+
+suite.forElement('finance', 'ledger-accounts', { payload: ledgerAccountsCreatePayload }, (test) => {
   test.should.supportPagination();
-  test.withName('should support updated > {date} Ceql search').withOptions({ qs: { where: 'whenmodified>\'08/13/2016 05:26:37\'' } }).should.return200OnGet();
+  test.withOptions(options).should.supportCruds();
+  test.should.supportCeqlSearchForMultipleRecords('title');
 });
