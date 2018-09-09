@@ -5,11 +5,11 @@ const tools = require('core/tools');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
-const userAccountsCreatePayload = tools.requirePayload(`${__dirname}/assets/userAccounts-create.json`);
+const userAccountsCreatePayload = tools.requirePayload(`${__dirname}/assets/user-accounts-create.json`);
 const employeesCreatePayload = tools.requirePayload(`${__dirname}/assets/employees-create.json`);
-const employeesEmploymentCreatePayload = tools.requirePayload(`${__dirname}/assets/employeesEmployment-create.json`);
-const employeesJobCreatePayload = tools.requirePayload(`${__dirname}/assets/employeesJob-create.json`);
-const employeesPersonalPayload = tools.requirePayload(`${__dirname}/assets/employeesPersonal-create.json`);
+const employeesEmploymentCreatePayload = tools.requirePayload(`${__dirname}/assets/employees-employments-create.json`);
+const employeesJobCreatePayload = tools.requirePayload(`${__dirname}/assets/employees-jobs-create.json`);
+const employeesPersonalPayload = tools.requirePayload(`${__dirname}/assets/employees-personalDetails-create.json`);
 
 
 suite.forElement('Humancapital', 'employees', { payload: employeesCreatePayload }, (test) => {

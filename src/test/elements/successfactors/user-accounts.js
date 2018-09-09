@@ -5,8 +5,8 @@ const tools = require('core/tools');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
-const userAccountsCreatePayload = tools.requirePayload(`${__dirname}/assets/userAccounts-create.json`);
-const userAccountsUpdatePayload = tools.requirePayload(`${__dirname}/assets/userAccounts-update.json`);
+const userAccountsCreatePayload = tools.requirePayload(`${__dirname}/assets/user-accounts-create.json`);
+const userAccountsUpdatePayload = tools.requirePayload(`${__dirname}/assets/user-accounts-update.json`);
 
 suite.forElement('Humancapital', 'user-accounts', null, (test) => {
   let id;
