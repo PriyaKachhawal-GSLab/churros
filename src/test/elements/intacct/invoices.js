@@ -2,7 +2,6 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const cloud = require('core/cloud');
 
 const invoicesCreatePayload = tools.requirePayload(`${__dirname}/assets/invoices-create.json`);
 const invoicesUpdatePayload = tools.requirePayload(`${__dirname}/assets/invoices-update.json`);
