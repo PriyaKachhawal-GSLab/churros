@@ -3,8 +3,8 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 
-const landingPagesCreatePayload =  tools.requirePayload(`${__dirname}/assets/landingPages-create.json`);
-const landingPagesUpdatePayload =  tools.requirePayload(`${__dirname}/assets/landingPages-update.json`);
+const landingPagesCreatePayload =  tools.requirePayload(`${__dirname}/assets/landing-pages-create.json`);
+const landingPagesUpdatePayload =  tools.requirePayload(`${__dirname}/assets/landing-pages-update.json`);
 
 
 suite.forElement('marketing', 'landing-pages', { payload: landingPagesCreatePayload }, (test) => {
