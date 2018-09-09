@@ -8,6 +8,7 @@ const contactsCreatePayload = tools.requirePayload(`${__dirname}/assets/contacts
 const campaignsCreatePayload = tools.requirePayload(`${__dirname}/assets/campaigns-create.json`);
 const campaignsUpdatePayload = tools.requirePayload(`${__dirname}/assets/campaigns-update.json`);
 const campaignsActivatePayload = tools.requirePayload(`${__dirname}/assets/campaignsActivate-update.json`);
+const campaignsContactsCreatePayload = tools.requirePayload(`${__dirname}/assets/campaignsContacts-create.json`)
 
 suite.forElement('marketing', 'campaigns', { payload: campaignsCreatePayload }, (test) => {
   it(`should allow CRUDS for ${test.api}, PATCH /campaigns/activate/:id and PATCH /campaigns/deactivate/:id`, () => {
@@ -27,11 +28,11 @@ suite.forElement('marketing', 'campaigns', { payload: campaignsCreatePayload }, 
   });
 
   it('should allow UD for /hubs/marketing/campaigns/:id/contacts', () => {
-    let contactId, contactPostPayload, id = 18;
+    let contactId, id = 18;
     return cloud.post(`/hubs/marketing/contacts`, contactsCreatePayload)
       .then(r => contactId = r.body.id)
-      .then(r => contactPostPayload = [{ "id": contactId }])
-      .then(r => cloud.put(`${test.api}/${id}/contacts`, contactPostPayload))
+      .then(r => campaignsContactsCreatePayload[0].id = contactId)
+      .then(r => cloud.put(`${test.api}/${id}/contacts`, campaignsContactsCreatePayload))
       .then(r => cloud.delete(`${test.api}/${id}/contacts/${contactId}`))
       .then(r => cloud.delete(`/hubs/marketing/contacts/${contactId}`));
   });
