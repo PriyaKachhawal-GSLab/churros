@@ -33,7 +33,7 @@ suite.forElement('general', 'ad-groups', { payload: adgroupCreatePayload }, (tes
     }
   };
 
-  test.withOptions(options).should.supportCrds();
+  test.withOptions(options).should.supportCruds();
   test.should.supportPagination();
   test.should.supportCeqlSearch('id');
 });

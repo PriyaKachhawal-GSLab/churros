@@ -14,7 +14,7 @@ suite.forElement('general', 'bidding-strategies', { payload: biddingStrategyCrea
     }
   };
 
-  test.withOptions(options).should.supportCrds();
+  test.withOptions(options).should.supportCruds();
   test.should.supportPagination();
   test.should.supportCeqlSearch('id');
 });

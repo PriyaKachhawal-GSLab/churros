@@ -14,7 +14,7 @@ suite.forElement('general', 'budgets', { payload: budgetCreatePayload }, (test) 
     }
   };
 
-  test.withOptions(options).should.supportCrds();
+  test.withOptions(options).should.supportCruds();
   test.should.supportPagination();
   test.should.supportCeqlSearch('id');
 });
