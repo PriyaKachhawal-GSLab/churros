@@ -13,7 +13,7 @@ const options = {
 };
 
 suite.forElement('finance', 'employees', { payload: employeesCreatePayload }, (test) => {
-  employeesUpdatePayload.personalinfo.contactname = employeesCreatePayload.personalinfo.contact.contactname
+  employeesUpdatePayload.personalinfo.contactname = employeesCreatePayload.personalinfo.contact.contactname;
   test.should.supportPagination();
   test.withOptions(options).should.supportCruds();
   test.withName('should support updated > {date} Ceql search').withOptions({ qs: { where: 'whenmodified>\'08/13/2016 05:26:37\'' } }).should.return200OnGet();
