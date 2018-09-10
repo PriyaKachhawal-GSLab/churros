@@ -120,9 +120,8 @@ suite.forElement('documents', 'folders', (test) => {
    });
 
    it('should allow for GET folder contents and folder metadata for teamspace folders', () => {
-   let teamfolder;
+   let teamfolder, teamspaceId;
    const folder = { path: `/teams-${random}` };
-   let path = `/teams${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg`;
    return cloud.get(`/namespaces`)
      .then(r => teamspaceId = r.body[0].namespace_id)
      .then(r => cloud.withOptions({ qs: { includeTeamSpaces: 'true', teamSpaceId: `${teamspaceId}` }, headers: { "Elements-As-Team-Member": memberId } }).post(`${test.api}`, folder))
