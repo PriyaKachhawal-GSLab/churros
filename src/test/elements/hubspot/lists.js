@@ -2,12 +2,11 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const payload = tools.requirePayload(`${__dirname}/assets/lists.json`);
+const payload = tools.requirePayload(`${__dirname}/assets/lists-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/lists-update.json`);
 const options = {
   churros: {
-    updatePayload: {
-      "name": tools.random()
-    }
+    updatePayload: updatePayload
   }
 };
 suite.forElement('marketing', 'lists', { payload: payload }, (test) => {

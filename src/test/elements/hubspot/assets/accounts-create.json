@@ -1,8 +1,8 @@
 {
   "name": "<<name.firstName>>",
-  "description": "<<lorem.sentence>>",
+  "description": "<<lorem.words>>",
   "properties": {
-    "description": "<<lorem.sentence>>",
+    "description": "<<lorem.words>>",
     "name": "<<name.firstName>>"
   }
 }

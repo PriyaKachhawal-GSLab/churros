@@ -3,12 +3,9 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
-
+const fieldsUpdate = tools.requirePayload(`${__dirname}/assets/files-update.json`);
 suite.forElement('marketing', 'files', (test) => {
   it('should allow CRUD for hubs/marketing/files', () => {
-    const fieldsUpdate = {
-      "name": tools.randomStr('abcdefghijklmnopqrstuvwxyz', 10)
-    };
     let path = __dirname + `/assets/test.txt`;
     let id;
     return cloud.withOptions({ qs: { path: `/${tools.random()}` } }).postFile(test.api, path)

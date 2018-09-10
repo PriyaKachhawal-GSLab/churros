@@ -4,9 +4,12 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
-const payload = tools.requirePayload(`${__dirname}/assets/accounts.json`);
-const propertiesPayload = tools.requirePayload(`${__dirname}/assets/accountsProperties.json`);
-const propertygroups = tools.requirePayload(`${__dirname}/assets/accountsPropertygroups.json`);
+const payload = tools.requirePayload(`${__dirname}/assets/accounts-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/accounts-update.json`);
+const propertiesPayload = tools.requirePayload(`${__dirname}/assets/accountsProperties-create.json`);
+const fieldsUpdate = tools.requirePayload(`${__dirname}/assets/accountsProperties-update.json`);
+const propertygroups = tools.requirePayload(`${__dirname}/assets/accountsPropertygroups-create.json`);
+const updatePropertygroups = tools.requirePayload(`${__dirname}/assets/accountsPropertygroups-update.json`);
 
 suite.forElement('marketing', 'accounts', { payload: payload }, (test) => {
   let propertyGroupName;
@@ -16,9 +19,7 @@ suite.forElement('marketing', 'accounts', { payload: payload }, (test) => {
 
   const options = {
     churros: {
-      updatePayload: {
-        "name": tools.random()
-      }
+      updatePayload: updatePayload
     }
   };
   test.withOptions(options).should.supportCruds();
@@ -27,10 +28,6 @@ suite.forElement('marketing', 'accounts', { payload: payload }, (test) => {
   it('should allow CRUDS for hubs/marketing/accounts/properties', () => {
     propertiesPayload.name = propertiesPayload.name.toLowerCase();
     let id;
-    const fieldsUpdate = {
-      "groupName": propertyGroupName,
-      "type": "string"
-    };
     return cloud.post(`${test.api}/properties`, propertiesPayload)
       .then(r => {
         id = r.body.name;
@@ -47,12 +44,8 @@ suite.forElement('marketing', 'accounts', { payload: payload }, (test) => {
 
   it('should allow CUDS for hubs/marketing/accounts/propertygroups', () => {
     propertygroups.name = propertygroups.name.toLowerCase();
+    updatePropertygroups.name = updatePropertygroups.name.toLowerCase();
     let id;
-    const updatePropertygroups = {
-      "displayName": "test_churros1",
-      "displayOrder": 0,
-      "name": tools.random()
-    };
     return cloud.post(`${test.api}/propertygroups`, propertygroups)
       .then(r => {
         id = r.body.name;
