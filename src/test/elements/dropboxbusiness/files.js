@@ -8,11 +8,16 @@ const tools = require('core/tools');
 suite.forElement('documents', 'files', (test) => {
 
   let jpgFile = __dirname + '/assets/brady.jpg';
-  var jpgFileBody,revisionId;
+  var jpgFileBody, revisionId, teamspaceId,jpgTeamFileBody;
   let memberId = props.getForKey('dropboxbusiness', 'username');
+  let path =  `/team${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg`;
   let query = { path: `/brady-${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg` };
 
-  before(() => cloud.withOptions({ qs : query , headers: { "Elements-As-Team-Member": memberId }}).postFile(test.api, jpgFile)
+  before(() => cloud.get(`/namespaces`)
+  .then(r => teamspaceId = r.body[0].namespace_id)
+  .then(() =>  cloud.withOptions({qs: {path: `${path}`, includeTeamSpaces: 'true', teamSpaceId: `${teamspaceId}` }, headers: { "Elements-As-Team-Member": memberId }}).postFile(test.api, jpgFile))
+  .then(r => jpgTeamFileBody = r.body)
+  .then(() =>  cloud.withOptions({ qs : query , headers: { "Elements-As-Team-Member": memberId }}).postFile(test.api, jpgFile))
   .then(r => jpgFileBody = r.body));
 
   after(() => cloud.withOptions({ headers: { "Elements-As-Team-Member": memberId } }).delete(`${test.api}/${jpgFileBody.id}`));
@@ -20,13 +25,19 @@ suite.forElement('documents', 'files', (test) => {
   it('it should allow RS for documents/files/:id/revisions', () => {
       return cloud.withOptions({ headers: { "Elements-As-Team-Member": memberId } }).get(`${test.api}/${jpgFileBody.id}/revisions`)
       .then(r => revisionId = r.body[0].id)
-      .then(() => cloud.withOptions({ headers: { "Elements-As-Team-Member": memberId } }).get(`${test.api}/${jpgFileBody.id}/revisions/${revisionId}`));
+      .then(() => cloud.withOptions({ headers: { "Elements-As-Team-Member": memberId } }).get(`${test.api}/${jpgFileBody.id}/revisions/${revisionId}`))
+      .then(r => cloud.withOptions({ qs: { includeTeamSpaces: 'true', teamSpaceId: `${teamspaceId}`},headers: { "Elements-As-Team-Member": memberId } }).get(`${test.api}/${jpgTeamFileBody.id}/revisions`))
+      .then(r => revisionId = r.body[0].id)
+      .then(() => cloud.withOptions({ qs: { includeTeamSpaces: 'true', teamSpaceId: `${teamspaceId}`},headers: { "Elements-As-Team-Member": memberId } }).get(`${test.api}/${jpgTeamFileBody.id}/revisions/${revisionId}`));
   });
 
   it('it should allow RS for documents/files/revisions by path', () => {
       return cloud.withOptions({ qs: query , headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/revisions`)
       .then(r => revisionId = r.body[0].id)
-      .then(() => cloud.withOptions({ qs: query , headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/revisions/${revisionId}`));
+      .then(() => cloud.withOptions({ qs: query , headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/revisions/${revisionId}`))
+      .then(r =>cloud.withOptions({qs: {path: `${path}`, includeTeamSpaces: 'true', teamSpaceId: `${teamspaceId}` }, headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/revisions`))
+      .then(r => revisionId = r.body[0].id)
+      .then(() => cloud.withOptions({qs:  {path: `${path}`, includeTeamSpaces: 'true', teamSpaceId: `${teamspaceId}` }, headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/revisions/${revisionId}`));
   });
 
 });

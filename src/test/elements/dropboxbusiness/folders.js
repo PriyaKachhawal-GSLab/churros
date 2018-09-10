@@ -90,17 +90,19 @@ suite.forElement('documents', 'folders', (test) => {
    });
 
    test.withApi(`${test.api}/contents`).withOptions({qs: {path :'/'}}).should.supportNextPagePagination(1);
-   
+
    it('should allow GET /folders/contents', () => {
      return cloud.withOptions({qs: { path: `/` } , headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
          .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.directory === true || obj.directory === false).length));
      });
 
+  //skipping since there is no where clause supported
    it.skip('should allow GET /folders/contents with name', () => {
      return cloud.withOptions({qs: { path: `/`, where: "name='dontdelete.jpg'" }, headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
        .then(r => expect(r.body[0].name).to.contain('dontdelete'));
    });
 
+  //skipping since there is no where clause supported
    it.skip('should allow GET /folders/contents with extension', () => {
      return cloud.withOptions({qs: { path: `/`, where: "extension='.csv'" }, headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
        .then(r => expect(r.body[0].name).to.contain('.csv'));
@@ -111,10 +113,24 @@ suite.forElement('documents', 'folders', (test) => {
          .then(r => expect(r.body.parentFolderId).to.not.equal(null));
    });
 
-   it('should allow GET /folders/contents with directory', () => {
+  //skipping since there is no where clause supported
+   it.skip('should allow GET /folders/contents with directory', () => {
      return cloud.withOptions({qs: { path: `/`, where: "directory='true'" }, headers: { "Elements-As-Team-Member": memberId }}).get(`${test.api}/contents`)
       .then(r => expect(r.body[0].directory).to.equal(true));
    });
 
-
+   it('should allow for GET folder contents and folder metadata for teamspace folders', () => {
+   let teamfolder;
+   const folder = { path: `/teams-${random}` };
+   let path = `/teams${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 10)}.jpg`;
+   return cloud.get(`/namespaces`)
+     .then(r => teamspaceId = r.body[0].namespace_id)
+     .then(r => cloud.withOptions({ qs: { includeTeamSpaces: 'true', teamSpaceId: `${teamspaceId}` }, headers: { "Elements-As-Team-Member": memberId } }).post(`${test.api}`, folder))
+     .then(r => teamfolder = r.body)
+     .then(r => cloud.withOptions({ qs: { path: `${teamfolder.path}`, includeTeamSpaces: 'true', teamSpaceId: `${teamspaceId}` }, headers: { "Elements-As-Team-Member": memberId } }).get(`${test.api}/metadata`))
+     .then(r => cloud.withOptions({ qs: { includeTeamSpaces: 'true', teamSpaceId: `${teamspaceId}` }, headers: { "Elements-As-Team-Member": memberId } }).get(`${test.api}/${teamfolder.id}/metadata`))
+     .then(r => cloud.withOptions({ qs: { path: `${teamfolder.path}`, includeTeamSpaces: 'true', teamSpaceId: `${teamspaceId}` }, headers: { "Elements-As-Team-Member": memberId } }).get(`${test.api}/metadata`))
+     .then(r => cloud.withOptions({ qs: { includeTeamSpaces: 'true', teamSpaceId: `${teamspaceId}` }, headers: { "Elements-As-Team-Member": memberId } }).get(`${test.api}/${teamfolder.refId}/metadata`))
+     .then(r => cloud.withOptions({ qs: { includeTeamSpaces: 'true', teamSpaceId: `${teamspaceId}` }, headers: { "Elements-As-Team-Member": memberId } }).delete(`/hubs/documents/folders/${teamfolder.refId}`));
+ });
 });
