@@ -1,15 +1,13 @@
 'use strict';
 
 const suite = require('core/suite');
+const cloud = require('core/cloud');
 const payload = require('./assets/contacts-create.json');
 const updatePayload = require('./assets/contacts-update.json');
-const cloud = require('core/cloud');
 const activityCreate = require('./assets/contactsActivities-create.json');
 const noteCreate = require('./assets/contactsNotes-create.json');
 const noteUpdate = require('./assets/contactsNotes-update.json');
 const activitiesUpdate = require('./assets/contactsActivities-update.json');
-const pagination = require('./assets/contactsActivities-queryPaginationTest.json');
-const calling = require('./assets/contactsActivities-queryTypeTest.json');
 
 suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
   const options = {
@@ -35,12 +33,12 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
   it('should support CRUDS and pagination for contact/activities', () => {
     return cloud.post(test.api, payload)
       .then(r => contactId = r.body.id)
-      .then(r => cloud.withOptions({ qs: pagination }).get(`${test.api}/${contactId}/activities`))
-      .then(r => cloud.withOptions({ qs: calling }).post(`${test.api}/${contactId}/activities`, activityCreate))
+      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(`${test.api}/${contactId}/activities`))
+      .then(r => cloud.withOptions({ qs: { type: 'Call' } }).post(`${test.api}/${contactId}/activities`, activityCreate))
       .then(r => activityId = r.body.id)
-      .then(r => cloud.withOptions({ qs: calling }).get(`${test.api}/${contactId}/activities/${activityId}`))
-      .then(r => cloud.withOptions({ qs: calling }).put(`${test.api}/${contactId}/activities/${activityId}`, activitiesUpdate))
-      .then(r => cloud.withOptions({ qs: calling }).delete(`${test.api}/${contactId}/activities/${activityId}`))
+      .then(r => cloud.withOptions({ qs: { type: 'Call' } }).get(`${test.api}/${contactId}/activities/${activityId}`))
+      .then(r => cloud.withOptions({ qs: { type: 'Call' } }).put(`${test.api}/${contactId}/activities/${activityId}`, activitiesUpdate))
+      .then(r => cloud.withOptions({ qs: { type: 'Call' } }).delete(`${test.api}/${contactId}/activities/${activityId}`))
       .then(r => cloud.delete(`${test.api}/${contactId}`));
   });
 });

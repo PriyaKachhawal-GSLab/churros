@@ -3,7 +3,6 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 const objects = require('./assets/metadata');
-const customfields = require('./assets/objectsMetadata-customfieldsTests.json');
 
 suite.forElement('crm', `objects`, (test) => {
   return Promise.all(objects.map(obj => {
@@ -15,7 +14,7 @@ suite.forElement('crm', `objects`, (test) => {
     test
       .withName(`should support GET ${test.api}/${obj}/metadata customFieldsOnly parameter`)
       .withApi(`${test.api}/${obj}/metadata`)
-      .withOptions({ qs: customfields })
+      .withOptions({ qs: { customFieldsOnly: true } })
       .withValidation((r) => {
         expect(r).to.have.statusCode(200);
         const validValues = r.body.fields.filter(field => (field.vendorPath.endsWith("_c") && field.custom === true));
