@@ -1,0 +1,273 @@
+{
+  "parent": {
+    "internalId": "1194",
+    "name": "ACM Group"
+  },
+  "salesRep": {
+    "internalId": "23",
+    "name": "Clark Koozer"
+  },
+  "endDate": "2018-10-22T07:00:00Z",
+  "isInactive": false,
+  "companyName": "GSLAB",
+  "estimatedBudget": 9999,
+  "receivablesAccount": {
+    "internalId": "-10",
+    "name": "Use System Preference"
+  },
+  "language": {
+    "value": "_englishUS"
+  },
+  "priceLevel": {
+    "internalId": "2",
+    "name": "10% Discount Level"
+  },
+  "defaultOrderPriority": 9,
+  "prefCCProcessor": {
+    "internalId": "2",
+    "name": "Test Name"
+  },
+
+  "campaignCategory": {
+    "internalId": "3",
+    "name": "Newsletters"
+  },
+  "terms": {
+    "internalId": "2",
+    "name": "Net 30"
+  },
+  "printTransactions": true,
+  "accessRole": {
+    "internalId": "14",
+    "name": "Customer Center"
+  },
+  "creditLimit": 1212,
+  "subscriptionsList": {
+    "subscriptions": [
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "2",
+          "name": "Billing Communication"
+        }
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "1",
+          "name": "Marketing"
+        }
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "4",
+          "name": "Newsletters"
+        }
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "5",
+          "name": "Product Updates"
+        }
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "3",
+          "name": "Surveys"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "fax": "1 (866) 830-5779",
+  "thirdPartyCountry": {
+    "value": "_unitedStates"
+  },
+  "giveAccess": true,
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
+      }
+    ]
+  },
+  "taxExempt": true,
+  "taxable": false,
+  "leadSource": {
+    "internalId": "100141",
+    "name": "November Newsletter"
+  },
+  "vatRegNumber": "QWER0001Q",
+  "currencyList": {
+    "currency": [
+      {
+        "displaySymbol": "€",
+        "overrideCurrencyFormat": true,
+        "symbolPlacement": {
+          "value": "_afterNumber"
+        },
+        "currency": {
+          "internalId": "4",
+          "name": "Euro"
+        }
+      },
+      {
+        "displaySymbol": "$",
+        "overrideCurrencyFormat": true,
+        "symbolPlacement": {
+          "value": "_afterNumber"
+        },
+        "currency": {
+          "internalId": "1",
+          "name": "USA"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg."
+  },
+  "creditHoldOverride": {
+    "value": "_auto"
+  },
+  "phone": "1 (866) 830-5568",
+  "resaleNumber": "76585",
+  "faxTransactions": true,
+  "globalSubscriptionStatus": {
+    "value": "_softOptIn"
+  },
+  "altPhone": "1 (866) 830-5566",
+  "thirdPartyZipcode": "75248",
+  "startDate": "2018-07-23T07:00:00Z",
+  "alcoholRecipientType": {
+    "value": "_licensee"
+  },
+  "isBudgetApproved": true,
+  "taxItem": {
+    "internalId": "-149",
+    "name": "CA-COLUSA"
+  },
+  "billPay": false,
+  "sendEmail": false,
+  "numberFormat": {
+    "value": "_spaceAsDigitGroupSeparatorAndDecimalComma"
+  },
+
+  "emailTransactions": true,
+  "currency": {
+    "internalId": "1",
+    "name": "USA"
+  },
+  "shippingItem": {
+    "internalId": "830",
+    "name": "FedEx 2Day®"
+  },
+  "emailPreference": {
+    "value": "_hTML"
+  },
+  "buyingReason": {
+    "internalId": "2",
+    "name": "Replace Existing"
+  },
+  "buyingTimeFrame": {
+    "internalId": "2",
+    "name": "1 - 3 months"
+  },
+  "email": "individual@gslab.com",
+  "negativeNumberFormat": {
+    "value": "_bracketSurrounded"
+  },
+  "comments": "Test POST PayyloAd..!!!",
+  "addressbookList": {
+    "addressbook": [
+      {
+        "internalId": "263690",
+        "defaultBilling": true,
+        "label": "Tollway Plaza",
+        "defaultShipping": true,
+        "isResidential": false,
+        "addressbookAddress": {
+          "zip": "75248",
+          "country": {
+            "value": "_unitedStates"
+          },
+          "addressee": "Mr Yogesh P Patil",
+          "addr2": "15950 Dallas Parkway Suite 525 Dallas",
+          "addr1": "Tollway Plaza",
+          "city": "Dallas",
+          "attention": "Mr Yogesh P Patil",
+          "state": "TX",
+          "override": true,
+          "addrPhone": "(646) 886-5168"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "thirdPartyAcct": "88778877",
+  "customForm": {
+    "internalId": "-2",
+    "name": "Standard Customer Form"
+  },
+  "itemPricingList": {
+    "itemPricing": [
+      {
+        "level": {
+          "internalId": "1",
+          "name": "List Price"
+        },
+        "item": {
+          "internalId": "501",
+          "name": "ACC00002"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "externalId": "ext120111",
+  "entityId": "TEST-POST-IBM-2",
+  "groupPricingList": {
+    "groupPricing": [
+      {
+        "level": {
+          "internalId": "1",
+          "name": "List Price"
+        },
+        "group": {
+          "internalId": "4",
+          "name": "Textiles"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "accountNumber": "2112334455",
+  "url": "http://www.gslab.com",
+  "printOnCheckAs": "TEST",
+  "shipComplete": true,
+  "partner": {
+    "internalId": "1305",
+    "name": "AL Systems Ltd"
+  },
+  "reminderDays": 5,
+  "entityStatus": {
+    "internalId": "13",
+    "name": "CUSTOMER-Closed Won"
+  },
+
+  "category": {
+    "internalId": "1",
+    "name": "Corporate"
+  },
+  "territory": {
+    "internalId": "1",
+    "name": "New Registration Promotion"
+  }
+}

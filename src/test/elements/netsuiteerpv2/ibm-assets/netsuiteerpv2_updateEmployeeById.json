@@ -1,0 +1,131 @@
+{
+  "eligibleForCommission": true,
+  "isInactive": false,
+  "purchaseOrderLimit": 80,
+  "expenseLimit": 100,
+  "isSalesRep": true,
+  "officePhone": "(902) 884-4442",
+  "fax": "(902) 884-4449",
+  "giveAccess": false,
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
+      }
+    ]
+  },
+  "initials": "YPP",
+  "homePhone": "(902) 884-4445",
+  "workCalendar": {
+    "internalId": "1",
+    "name": "Default Work Calendar"
+  },
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg."
+  },
+  "firstName": "Yodgesh",
+  "mobilePhone": "(902) 884-4443",
+  "phone": "(902) 884-4441",
+  "lastReviewDate": "2018-09-20T07:00:00Z",
+  "globalSubscriptionStatus": {
+    "value": "_softOptIn"
+  },
+  "purchaseOrderApprovalLimit": 1000,
+  "laborCost": 10,
+  "jobDescription": "Test Job Desc..!!",
+  "salutation": "Mr",
+  "_class": {
+    "internalId": "10",
+    "name": "Accessories"
+  },
+  "supervisor": {
+    "internalId": "-5",
+    "name": "Alex Wolfe"
+  },
+  "maritalStatus": {
+    "internalId": "2",
+    "name": "Married"
+  },
+  "lastName": "Patil",
+  "ethnicity": {
+    "internalId": "4",
+    "name": "Asian/Pacific Islander"
+  },
+  "gender": {
+    "value": "_male"
+  },
+  "socialSecurityNumber": "123-45-6789",
+  "approvalLimit": 100,
+  "isSupportRep": true,
+  "title": "asd",
+  "employeeStatus": {
+    "internalId": "1",
+    "name": "Fixed Term - Full Time"
+  },
+  "billPay": false,
+  "sendEmail": false,
+  "nextReviewDate": "2018-10-20T07:00:00Z",
+  "isJobResource": true,
+  "currency": {
+    "internalId": "1",
+    "name": "USA"
+  },
+  "department": {
+    "internalId": "2",
+    "name": "Sales"
+  },
+  "requirePwdChange": false,
+  "email": "ypp@gslab.com",
+  "approver": {
+    "internalId": "-5",
+    "name": "Alex Wolfe"
+  },
+  "hireDate": "2018-08-20T07:00:00Z",
+  "comments": "Test ..",
+  "addressbookList": {
+    "addressbook": [
+      {
+        "internalId": "254404",
+        "defaultBilling": true,
+        "label": "add2",
+        "defaultShipping": true,
+        "addressbookAddress": {
+          "zip": "80205",
+          "country": {
+            "value": "_unitedStates"
+          },
+          "addressee": "Mr Yogesh P Patil",
+          "addr2": "add2",
+          "addr1": "add2",
+          "city": "Denver",
+          "attention": "GSL : YP",
+          "state": "CO",
+          "override": true,
+          "addrText": "GSL : YP\nMr Yogesh P Patil\nadd2\nadd2\nDenver TX 80205\nUnited States",
+          "addrPhone": "(902) 884-4112"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "releaseDate": "2018-08-20T07:00:00Z",
+  "customForm": {
+    "internalId": "115",
+    "name": "Ramseys Employee Form"
+  },
+  "entityId": "Enttitismsy Random Update",
+  "purchaseOrderApprover": {
+    "internalId": "-5",
+    "name": "Alex Wolfe"
+  },
+  "accountNumber": "423423423",
+  "birthDate": "2000-03-01T08:00:00Z",
+  "employeeType": {
+    "internalId": "3",
+    "name": "Exempt Part Time"
+  },
+  "middleName": "P"
+}

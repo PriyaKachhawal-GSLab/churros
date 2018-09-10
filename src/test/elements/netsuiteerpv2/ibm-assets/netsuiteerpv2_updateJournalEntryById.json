@@ -1,0 +1,74 @@
+{
+  "tranId": "JrnlEnt3021",
+  "memo": "Jrnl Ent 302",
+  "approved": true,
+  "currency": {
+    "internalId": "1",
+    "name": "USA"
+  },
+  "department": {
+    "internalId": "3",
+    "name": "Service"
+  },
+  "accountingBook": {
+    "internalId": "1",
+    "name": "Service"
+  },
+  "accountingBookDetailList": {
+    "accountingBookDetail": [
+      {
+        "accountingBook": {
+          "internalId": "3",
+          "name": "account book123"
+        },
+        "currency": {
+          "internalId": "1",
+          "name": "USA"
+        },
+        "exchangeRate": 4.56873
+      }
+    ]
+  },
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
+      }
+    ]
+  },
+  "reversalDefer": true,
+  "reversalDate": "2018-07-17T07:00:00Z",
+  "customForm": {
+    "internalId": "222",
+    "name": "HM Journal Entry"
+  },
+  "externalId": "ext10011",
+  "subsidiary": {
+    "internalId": "6",
+    "name": "Honeycomb Metal Services"
+  },
+  "toSubsidiary": {
+    "internalId": "4",
+    "name": "Honeycomb Metal Services"
+  },
+  "postingPeriod": {
+    "internalId": "300",
+    "name": "Jul 2018"
+  },
+  "location": {
+    "internalId": "46",
+    "name": "loca457"
+  },
+  "_class": {
+    "internalId": "13",
+    "name": "Consumer Goods"
+  },
+  "nullFieldList": [
+    "nullfield1",
+    "nullfield2"
+  ],
+  "reversalEntry": "rev entry",
+  "tranDate": "2018-07-12T07:00:00Z"
+}

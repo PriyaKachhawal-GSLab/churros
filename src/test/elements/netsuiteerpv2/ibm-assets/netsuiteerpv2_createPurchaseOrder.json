@@ -1,0 +1,270 @@
+{
+  "approvalStatus": {
+    "internalId": "7",
+    "name": "Approval",
+    "externalId": "97",
+    "type": {
+      "value": "account"
+    }
+  },
+  "availableVendorCredit": 15.287,
+  "billAddressList": {
+    "internalId": "42",
+    "name": "Billing Address",
+    "externalId": "87"
+    
+  },
+  "billingAddress": {
+    "zip": "98108-1226",
+    "country": {
+      "value": "_unitedStates"
+    },
+    "addressee": "Amazon",
+    "addr1": "PO Box 81226",
+    "city": "Seattle",
+    "state": "WA",
+    "override": false,
+    "addrText": "Amazon\nPO Box 81226\nSeattle WA 98108-1226\nUnited States"
+  },
+  "createdFrom": {
+    "internalId": "1",
+    "name": "Bill Connors",
+    "externalId": "187"
+   
+  },
+  "currencyName": "USA",
+  "currency": {
+    "internalId": "1",
+    "name": "USA"
+  
+  },
+  "customForm": {
+    "internalId": "182",
+    "name": "Z - HM PO Form",
+    "externalId": "76"
+  },
+  "dueDate": "2018-07-15T07:00:00Z",
+  "email": "americancomp@christyscatering.com",
+  "entity": {
+    "internalId": "1552",
+    "name": "Amazon-test",
+    "externalId": "76"
+  },
+  "exchangeRate": 1,
+  "expenseList": {
+    "expense": [
+      {
+        "_class": {
+          "externalId": "7",
+          "internalId": "2",
+          "name": "test",
+          "type": {
+            "value": "account"
+          }
+        },
+        "account": {
+          "externalId": "2",
+          "internalId": "3",
+          "name": "testaccount",
+          "type": {
+            "value": "account"
+          }
+        },
+        "amount": 0,
+        "category": {
+          "externalId": "2",
+          "internalId": "4",
+          "name": "testCategory",
+          "type": {
+            "value": "account"
+          }
+        },
+        "createdFrom": {
+          "externalId": "3",
+          "internalId": "2",
+          "name": "testCreated",
+          "type": {
+            "value": "account"
+          }
+        },
+        "customFieldList": {
+          "customField": [
+            {
+              "internalId": "29",
+              "value": "Shiuppong asjsjd",
+              "scriptId": "custentity4"
+            }
+          ]
+        },
+        "customer": {
+          "externalId": "2",
+          "internalId": "3",
+          "name": "testCustomer",
+          "type": {
+            "value": "account"
+          }
+        },
+        "department": {
+          "externalId": "3",
+          "internalId": "5",
+          "name": "testdepartment",
+          "type": {
+            "value": "account"
+          }
+        },
+        "grossAmt": 18.2,
+        "isBillable": true,
+        "isClosed": true,
+        "linkedOrderList": {
+          "recordRef": [
+            {
+              "externalId": "4",
+              "internalId": "2",
+              "name": "testLinkedOrder",
+              "type": {
+                "value": "account"
+              }
+            }
+          ]
+        },
+        "location": {
+          "externalId": "3",
+          "internalId": "4",
+          "name": "locationX",
+          "type": {
+            "value": "account"
+          }
+        },
+        "memo": "to:the head of department",
+        "tax1Amt": 203.4,
+        "taxCode": {
+          "externalId": "78",
+          "internalId": "9",
+          "name": "tax75",
+          "type": {
+            "value": "account"
+          }
+        },
+        "taxRate1": 8.2,
+        "taxRate2": 218.8
+      }
+    ],
+    "replaceAll": true
+  },
+  "externalId": "75841",
+  "fax": "415-555-5750",
+  "fob": "Afghanistan",
+  "intercoTransaction": {
+    "externalId": "3",
+    "internalId": "2",
+    "name": "intercoTransaction",
+    "type": {
+      "value": "account"
+    }
+  },
+  "itemList": {
+    "item": [
+      {
+        "amount": 100,
+        "createdFrom": {
+          "internalId": "18",
+          "name": "Internal : billsStatus"
+          
+        },
+        "customer": {
+          "internalId": "1220",
+          "name": "Graber & Assoc"
+         
+        },
+        "department": {
+          "internalId": "2",
+          "name": "Sales"
+          
+        },
+        "description": "50 Button Digial Console",
+        "grossAmt": 62.3,
+        "isClosed": false,
+        "item": {
+          "internalId": "507",
+          "name": "ACC00007"
+        },
+        "line": 1,
+        "matchBillToReceipt": false,
+        "quantity": 1,
+        "units": {
+          "internalId": "1",
+          "name": "Ea"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "location": {
+    "internalId": "5",
+    "name": "01: San Francisco : QA Hold",
+    "externalId": "67"
+    
+  },
+  "memo": "To: Department Chairs From: Dr. Kerns, CEO",
+  "message": "CMA CGM Antoine de Saint Exupery",
+  "nextApprover": {
+    "internalId": "5",
+    "name": "Bill Connors"
+    
+  },
+  "nullFieldList": {},
+  "otherRefNum": "109-WE-4973",
+  "purchaseContract": {
+    "internalId": "5",
+    "name": "Contract33"
+   
+  },
+  "shipAddressList": {
+    "internalId": "254974",
+    "name": "amar"
+   
+  },
+  "shipIsResidential": false,
+  "shipMethod": {
+    "internalId": "2",
+    "name": "Pick-up at store"
+    
+  },
+  "shippingAddress": {
+    "zip": "94403",
+    "country": {
+      "value": "_unitedStates"
+    },
+    "addressee": "01: San Francisco",
+    "addr1": "1500 3rd St",
+    "city": "San Mateo",
+    "attention": "Ramsey Inc.",
+    "state": "CA",
+    "override": false,
+    "addrText": "Ramsey Inc.\nSan Francisco\n1500 3rd St\nSan Mateo CA 94403\nUnited States",
+    "addrPhone": "(650) 627-1000"
+  },
+  "source": "75hg1",
+  "subTotal": 892.23,
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg.",
+    "externalId": "67"
+   
+  },
+  "supervisorApproval": true,
+  "tax2Total": 46.76,
+  "taxTotal": 64.89,
+  "terms": {
+    "internalId": "3",
+    "name": "Net 60",
+    "externalId": "65"
+   
+  },
+  "toBeEmailed": false,
+  "toBeFaxed": false,
+  "toBePrinted": false,
+  "tranDate": "2018-07-18T07:00:00Z",
+  "tranId": "PUR000016641",
+  "vatRegNum": "8757"
+}

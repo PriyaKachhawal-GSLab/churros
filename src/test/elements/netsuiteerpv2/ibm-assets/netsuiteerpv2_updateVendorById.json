@@ -1,0 +1,191 @@
+{
+  "addressbookList": {
+    "addressbook": [
+      {
+        "internalId": "256283",
+        "defaultBilling": true,
+        "label": "main office address",
+        "defaultShipping": true,
+        "addressbookAddress": {
+          "zip": "06795",
+          "country": {
+            "value": "_unitedStates"
+          },
+          "addressee": "Vene-company1",
+          "addr2": "Thomaston Rd",
+          "addr1": "1039-667",
+          "city": "Watertown",
+          "attention": "street -101",
+          "state": "CT",
+          "override": false,
+          "internalId": "862u8996",
+          "addrPhone": "69-b280-70921",
+          "customFieldList": {
+            "customField": [
+              {
+                "internalId": "29",
+                "value": "Shiuppong asjsjd",
+                "scriptId": "custentity4"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "altName": "TestName-2",
+  "billPay": false,
+  "category": {
+    "externalId": "7851",
+    "internalId": "10"
+  },
+  "comments": "This company is in loss",
+  "companyName": "vene-test-max",
+  "creditLimit": 108.86,
+  "currencyList": {
+    "vendorCurrency": [
+      {
+        "currency": {
+          "internalId": "3",
+          "externalId": "581"
+
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
+      }
+    ]
+  },
+  "customForm": {
+    "internalId": "4",
+    "name": "GB Vendor Form",
+    "externalId": "8236"
+  },
+  "eligibleForCommission": false,
+  "email": "ven-test@gmail.com",
+  "emailTransactions": false,
+  "entityId": "vene-test-upda2te",
+  "expenseAccount": {
+    "externalId": "87521",
+    "internalId": "10"
+  },
+  "externalId": "4t873452",
+  "fax": "857-y918-t",
+  "faxTransactions": false,
+  "giveAccess": false,
+  "incoterm": {
+    "externalId": "9827",
+    "internalId": "1"
+  },
+  "is1099Eligible": false,
+  "isAccountant": false,
+  "isInactive": false,
+  "isJobResourceVend": false,
+  "isPerson": false,
+  "laborCost": 62.34,
+  "legalName": "vene-test78",
+  "openingBalance": 387.38,
+  "openingBalanceDate": "2016-01-24T08:00:00Z",
+  "password": "pass1",
+  "password2": "pass2",
+  "payablesAccount": {
+    "externalId": "861",
+    "internalId": "176"
+
+  },
+  "phone": "86-329-739",
+  "phoneticName": "BillsC",
+  "pricingScheduleList": {
+    "pricingSchedule": [
+      {}
+    ]
+  },
+  "printTransactions": false,
+  "purchaseOrderAmount": 57.21,
+  "purchaseOrderQuantity": 33.85,
+  "purchaseOrderQuantityDiff": 3.75,
+  "receiptAmount": 357.85,
+  "receiptQuantity": 35.875,
+  "receiptQuantityDiff": 7.68,
+  "representingSubsidiary": {
+    "externalId": "860",
+    "internalId": "3"
+  },
+  "requirePwdChange": false,
+  "rolesList": {
+    "roles": [
+      {
+        "selectedRole": {
+          "externalId": "860",
+          "internalId": "3"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "subscriptionsList": {
+    "subscriptions": [
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "2",
+          "name": "Billing Communication"
+        }
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "1",
+          "name": "Marketing"
+        }
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "4",
+          "name": "Newsletters"
+        }
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "5",
+          "name": "Product Updates"
+        }
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "3",
+          "name": "Surveys"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg.",
+    "externalId": "896"
+  },
+  "taxIdNum": "98712",
+  "terms": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg.",
+    "externalId": "896"
+  },
+  "url": "http://www.test-url.com",
+  "workCalendar": {
+    "internalId": "1",
+    "name": "Default Work Calendar",
+    "externalId": "907"
+  }
+}

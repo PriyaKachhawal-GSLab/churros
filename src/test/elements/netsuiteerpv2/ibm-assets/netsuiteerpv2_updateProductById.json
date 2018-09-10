@@ -1,0 +1,232 @@
+{
+  "parent": {
+    "internalId": "10508",
+    "name": "1505364718appcon0n9lt3a8ll5t3k1n61or"
+  },
+  "assetAccount": {
+    "internalId": "120",
+    "name": "Inventory Asset"
+  },
+  "pageTitle": "Test UI Max",
+  "salesDescription": "TEst Sales Desc..!!",
+  "pricingGroup": {
+    "internalId": "2",
+    "name": "Hard Goods"
+  },
+  "autoPreferredStockLevel": true,
+  "saleUnit": {
+    "internalId": "7",
+    "name": "Boxes"
+  },
+  "billPriceVarianceAcct": {
+    "internalId": "151",
+    "name": "5096 Bill Price Variance"
+  },
+  "pricingMatrix": {
+    "replaceAll": false,
+    "pricing": [
+      {
+        "discount": -10,
+        "currency": {
+          "internalId": "1",
+          "name": "USA"
+        },
+        "priceLevel": {
+          "internalId": "2",
+          "name": "10% Discount Level"
+        },
+        "priceList": {
+          "price": [
+            {
+              "value": 3,
+              "quantity": 0
+            },
+            {
+              "value": 4,
+              "quantity": 1
+            },
+            {
+              "value": 5,
+              "quantity": 2
+            },
+            {
+              "value": 6,
+              "quantity": 3
+            },
+            {
+              "value": 7,
+              "quantity": 4
+            }
+          ]
+        }
+      },
+      {
+        "discount": -10,
+        "currency": {
+          "internalId": "2",
+          "name": "British pound"
+        },
+        "priceLevel": {
+          "internalId": "2",
+          "name": "10% Discount Level"
+        },
+        "priceList": {
+          "price": [
+            {
+              "value": 2,
+              "quantity": 0
+            },
+            {
+              "value": 3,
+              "quantity": 1
+            },
+            {
+              "value": 4,
+              "quantity": 2
+            },
+            {
+              "value": 5,
+              "quantity": 3
+            },
+            {
+              "value": 6,
+              "quantity": 4
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "roundUpAsComponent": false,
+  "isSpecialOrderItem": false,
+  "subsidiaryList": {
+    "recordRef": [
+      {
+        "name": "Honeycomb Holdings Inc.",
+        "internalId": "3"
+      }
+    ]
+  },
+  "includeChildren": false,
+  "incomeAccount": {
+    "internalId": "55",
+    "name": "4000 Sales"
+  },
+  "mpn": "mpn",
+  "stockUnit": {
+    "internalId": "7",
+    "name": "Boxes"
+  },
+  "shipPackage": {
+    "internalId": "2",
+    "name": "Small Box"
+  },
+  "purchaseUnit": {
+    "internalId": "7",
+    "name": "Boxes"
+  },
+  "itemId": "test1",
+  "onSpecial": true,
+  "purchaseDescription": "Test Desc..!!!",
+  "weightUnit": {
+    "value": "_g"
+  },
+  "transferPrice": 5,
+  "matchBillToReceipt": false,
+  "displayName": "Pixel-2",
+  "overallQuantityPricingType": {
+    "value": "_byLineQuantity"
+  },
+  "manufacturer": "Google",
+  "receiptAmount": 5,
+  "demandModifier": 60,
+  "costCategory": {
+    "internalId": "3",
+    "name": "Default"
+  },
+  "useBins": false,
+  "dontShowPrice": true,
+  "handlingCost": 3,
+  "outOfStockMessage": "OUT OF STOCK.!!!!",
+  "deferRevRec": false,
+  "minimumQuantity": 1,
+  "shipIndividually": true,
+  "supplyReplenishmentMethod": {
+    "internalId": "REORDER_POINT",
+    "name": "Reorder Point"
+  },
+  "purchaseOrderQuantity": 3,
+  "billingSchedule": {
+    "internalId": "1",
+    "name": "Monthly -- 1 Year"
+  },
+  "purchaseOrderAmount": 6,
+  "customForm": {
+    "internalId": "144",
+    "name": "Custom Inventory Part Form"
+  },
+  "isDropShipItem": false,
+  "safetyStockLevelUnits": "Bx",
+  "availableToPartners": false,
+  "isInactive": false,
+  "excludeFromSitemap": false,
+  "deferredRevenueAccount": {
+    "internalId": "171",
+    "name": "Deferred Revenue"
+  },
+  "offerSupport": false,
+  "billExchRateVarianceAcct": {
+    "internalId": "152",
+    "name": "5097 Bill Exchange Rate Variance"
+  },
+  "enforceMinQtyInternally": true,
+  "reorderMultiple": 1,
+  "useMarginalRates": false,
+  "weightUnits": "per Bx",
+  "autoReorderPoint": true,
+  "shippingCost": 4,
+  "costEstimateType": {
+    "value": "_averageCost"
+  },
+  "purchasePriceVarianceAcct": {
+    "internalId": "164",
+    "name": "5092 Purchase Price Variance"
+  },
+  "countryOfManufacture": {
+    "value": "_india"
+  },
+  "weight": 100,
+  "copyDescription": false,
+  "taxSchedule": {
+    "internalId": "1",
+    "name": "S1"
+  },
+  "vendorName": "Google",
+  "unitsType": {
+    "internalId": "4",
+    "name": "Box"
+  },
+  "stockDescription": "New",
+  "safetyStockLevelDays": 5,
+  "receiptQuantityDiff": 8,
+  "isDonationItem": false,
+  "costEstimateUnits": "per Bx",
+  "_class": {
+    "internalId": "10",
+    "name": "Accessories"
+  },
+  "autoLeadTime": true,
+  "receiptQuantity": 7,
+  "isOnline": false,
+  "handlingCostUnits": "per Bx",
+  "purchaseOrderQuantityDiff": 4,
+  "noPriceMessage": "Coming Soon..!!!!",
+  "department": {
+    "internalId": "1",
+    "name": "Admin"
+  },
+  "outOfStockBehavior": {
+    "value": "_disallowBackOrdersButDisplayOutOfStockMessage"
+  },
+  "upcCode": "upc0001"
+}

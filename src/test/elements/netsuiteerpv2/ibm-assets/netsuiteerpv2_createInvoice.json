@@ -1,0 +1,199 @@
+{
+  "tranId": "INV00001027",
+  "tranDate": "2017-06-10T07:00:00Z",
+  "trackingNumbers": "ajhdsmd",
+  "toBePrinted": true,
+  "toBeFaxed": true,
+  "toBeEmailed": true,
+  "timeDiscPrint": true,
+  "shippingCost": 390,
+  "status": "Open",
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg."
+  },
+  "taxRate": 8.51,
+  "taxItem": {
+    "internalId": "-153",
+    "name": "CA-SAN FRANCISCO"
+  },
+  "shipMethod": {
+    "internalId": "3",
+    "name": "Truck"
+  },
+  "terms": {
+    "internalId": "2",
+    "name": "Net 30"
+  },
+  "timeDiscTaxable": false,
+  "timeDiscRate": "21.2",
+  "entity": {
+    "internalId": "127"
+  },
+  "shipAddressList": {
+    "internalId": "121667",
+    "name": "Billing Address"
+  },
+  "shipGroupList": {
+    "shipGroup": [
+      {
+        "shippingTaxCode": {
+          "internalId": "-7",
+          "name": "-Not Taxable-"
+        },
+        "shippingTax2Rate": "jk",
+        "shippingTax2Amt": 0,
+        "shippingRate": 0,
+        "handlingTax2Amt": 0,
+        "handlingTaxCode": {
+          "internalId": "-7",
+          "name": "-Not Taxable-"
+        },
+        "id": 1
+      }
+    ],
+    "replaceAll": false
+  },
+  "shipDate": "2018-07-28T07:00:00Z",
+  "message": "message app",
+  "otherRefNum": "3212",
+  "postingPeriod": {
+    "internalId": "300",
+    "name": "Jul 2018"
+  },
+  "promoCode": {
+    "internalId": "10",
+    "name": "CMWI05"
+    
+  },
+  "recognizedRevenue": 77040,
+  "onCreditHold": "holdingOn",
+  "itemList": {
+    "item": [
+      {
+        "item": {
+          "internalId": "502",
+          "name": "ACC00003"
+        },
+        "line": 1,
+        "tax1Amt": 0,
+        "taxRate2": 0,
+        "vsoeAllocation": 0,
+        "vsoeAmount": 0,
+        "vsoeDeferral": {
+          "value": "_deferBundleUntilDelivered"
+        },
+        "vsoeDelivered": true,
+        "vsoeIsEstimate": true,
+        "vsoePermitDiscount": {
+          "value": "_asAllowed"
+        },
+        "vsoePrice": 0,
+        "vsoeSopGroup": {
+          "value": "_normal"
+        },
+        "_class": {
+          "internalId": "3",
+          "name": "Furniture : Office"
+        },
+        "job": {
+          "internalId": "550022"
+        },
+        "amount": 157.5,
+        "quantity": 1,
+        "description": "Merlin display phone for support calls",
+        "taxCode": {
+          "internalId": "-153",
+          "name": "CA-SAN FRANCISCO"
+        },
+        "price": {
+          "internalId": "2",
+          "name": "10% Discount Level"
+        },
+        "location": {
+          "internalId": "4",
+          "name": "01: San Francisco : Receiving Insp."
+        },
+        "taxRate1": 8.5,
+        "customFieldList": {
+          "customField": [
+            {
+              "internalId": "29",
+              "value": "Shiuppong asjsjd",
+              "scriptId": "custentity4"
+            }
+          ]
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "isTaxable": true,
+  "handlingTaxCode": {
+    "internalId": "-7",
+    "name": "-Not Taxable-"
+  },
+  "salesRep": {
+    "internalId": "17",
+    "name": "Krista Barton"
+  },
+  "dueDate": "2017-06-01T07:00:00Z",
+  "email": "yippeeinc@christyscatering.com",
+  "exchangeRate": 2,
+  "expCostDiscPrint": false,
+  "expCostDiscTaxable": false,
+  "fax": "0909a9090909090909",
+  "fob": "fobfobfob",
+  "giftCertApplied": 0.4,
+  "department": {
+    "internalId": "7"
+  },
+  "customForm": {
+    "internalId": "178",
+    "name": "Z -HM Invoice Form"
+  },
+  "deferredRevenue": 0,
+  "billAddressList": {
+    "internalId": "121667"
+  },
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
+      }
+    ]
+  },
+  "currencyName": "USA",
+  "currency": {
+    "internalId": "1",
+    "name": "USA"
+  },
+  "createdFrom": {
+    "internalId": "241",
+    "name": "Quote #QUO00001002"
+  },
+  "_class": {
+    "internalId": "3",
+    "name": "Furniture : Office"
+  },
+  "billingAddress": {
+    "country": {
+      "value": "_unitedStates"
+    },
+    "addressee": "B-Sharp Music",
+    "addr1": "1015 Hastings St",
+    "addr2": "1016 Hastings St",
+    "addr3": "1016 Hastings St",
+    "city": "San Francisco",
+    "state": "CA",
+    "override": false,
+    "attention": "atensoin",
+    "addrText": "B-Sharp Music\n1015 Hastings St\n1016 Hastings St\n1017 Hastings St\nSan Francisco CA US",
+    "addrPhone": "800-555-4681"
+  },
+  "account": {
+    "internalId": "75"
+  }
+}

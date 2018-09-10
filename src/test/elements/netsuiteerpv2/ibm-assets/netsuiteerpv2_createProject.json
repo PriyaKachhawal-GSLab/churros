@@ -1,0 +1,116 @@
+{
+  "companyName": "papyload_for_the_best",
+  "entityId": "Random_customers",
+  "startDate": "2018-07-09T07:00:00Z",
+  "projectExpenseType": {
+    "internalId": "-2",
+    "name": "Regular"
+  },
+  "plStatementList": {
+    "jobPlStatement": [
+      {
+        "costCategory": "string",
+        "margin": 0,
+        "revenue": 0,
+        "cost": 0,
+        "profit": 0
+      }
+    ],
+    "replaceAll": true
+  },
+  "addressbookList": {
+    "addressbook": [
+      {
+        "internalId": "404452",
+        "defaultBilling": true,
+        "isResidential": false,
+        "label": "213sadsad",
+        "defaultShipping": true,
+        "addressbookAddress": {
+          "zip": "12321321",
+          "country": {
+            "value": "_unitedStates"
+          },
+          "addr2": "1sdasad",
+          "addr1": "213sadsad",
+          "city": "Pune",
+          "addrPhone": "123123123",
+          "addressee": "MR Mayur D Pirlo",
+          "attention": "Dasd",
+          "state": "CA",
+          "override": false
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "projectedEndDate": "2018-07-14T07:00:00Z",
+  "phoneticName": "ashksd",
+  "parent": {
+    "internalId": "1491",
+    "name": "Alpart"
+  },
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg."
+  },
+  "allocatePayrollExpenses": true,
+  "allowAllResourcesForTasks": false,
+  "allowExpenses": true,
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "29",
+        "scriptId": "custentity4",
+        "value": "Shiuppong asjsjd"
+      }
+    ]
+  },
+  "language": {
+    "internalId": "en_US",
+    "name": "English (U.S.)"
+  },
+  "limitTimeToAssignees": true,
+  "materializeTime": true,
+  "openingBalanceDate": "2018-07-10T07:00:00Z",
+  "jobResourcesList": {
+    "jobResources": [
+      {
+        "role": {
+          "internalId": "-3",
+          "name": "Staff"
+        },
+        "jobResource": {
+          "internalId": "912",
+          "name": "Brandy Dickens"
+        },
+        "email": "bdickens@ramsey.com"
+      }
+    ],
+    "replaceAll": false
+  },
+  "isExemptTime": true,
+  "isInactive": true,
+  "isProductiveTime": false,
+  "isUtilizedTime": false,
+  "jobBillingType": {
+    "value": "_none"
+  },
+  "currency": {
+    "internalId": "1",
+    "name": "USA"
+  },
+  "customForm": {
+    "internalId": "92",
+    "name": "Ramsey Job Form"
+  },
+  "entityStatus": {
+    "internalId": "2",
+    "name": "In Progress"
+  },
+  "globalSubscriptionStatus": {
+    "value": "_softOptIn"
+  },
+  "phone": "0909102",
+  "includeCrmTasksInTotals": true
+}

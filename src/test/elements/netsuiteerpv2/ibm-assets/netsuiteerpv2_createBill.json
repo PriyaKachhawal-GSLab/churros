@@ -1,0 +1,88 @@
+{
+  "tranId": "ref11112",
+  "landedCostsList": {
+    "landedCost": [
+      {
+        "category": {
+          "internalId": "1"
+        }
+      },
+      {
+        "category": {
+          "internalId": "2"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "dueDate": "2018-08-22T07:00:00Z",
+  "memo": "Test Memo..!!!",
+  "paymentHold": false,
+  "exchangeRate": 1,
+  "billAddressList": {
+    "internalId": "244836",
+    "name": "2001 Michigan Ave"
+  },
+  "currency": {
+    "internalId": "1",
+    "name": "USA"
+  },
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
+      }
+    ]
+  },
+  "approvalStatus": {
+    "internalId": "2",
+    "name": "Approved"
+  },
+  "landedCostPerLine": false,
+  "landedCostMethod": {
+    "value": "_weight"
+  },
+  "customForm": {
+    "internalId": "50",
+    "name": "Standard Vendor Bill"
+  },
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg."
+  },
+  "postingPeriod": {
+    "internalId": "301",
+    "name": "Aug 2018"
+  },
+  "tranDate": "2018-08-22T07:00:00Z",
+  "itemList": {
+    "item": [
+      {
+        "item": {
+          "internalId": "715",
+          "name": "MAT00001"
+        },
+        "amount": 12500,
+        "quantity": 1.25,
+        "rate": "10000.00",
+        "line": 1,
+        "description": "Material",
+        "location": {
+          "internalId": "2",
+          "name": "01: San Francisco"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "account": {
+    "internalId": "25",
+    "name": "2000 Accounts Payable"
+  },
+  "entity": {
+    "internalId": "1305",
+    "name": "AL Systems Ltd"
+  }
+}

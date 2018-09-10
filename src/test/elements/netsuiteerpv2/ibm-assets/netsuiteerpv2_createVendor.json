@@ -1,0 +1,210 @@
+{
+  "customForm": {
+    "internalId": "4",
+    "name": "GB Vendor Form",
+    "externalId": "82306"
+  },
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg.",
+    "externalId": "896"
+  },
+  "externalId": "4t8698673h8",
+  "addressbookList": {
+    "addressbook": [
+      {
+        "internalId": "256283",
+        "defaultBilling": true,
+        "label": "main office address",
+        "defaultShipping": true,
+        "addressbookAddress": {
+          "zip": "06795",
+          "country": {
+            "value": "_unitedStates"
+          },
+          "addressee": "Vene-company1",
+          "addr2": "Thomaston Rd",
+          "addr1": "1039-667",
+          "city": "Watertown",
+          "attention": "street -101",
+          "state": "CT",
+          "override": false,
+          "internalId": "862u8996",
+          "addrPhone": "69-b280-70921",
+          "customFieldList": {
+            "customField": [
+              {
+                "internalId": "29",
+                "value": "Shiuppong asjsjd",
+                "scriptId": "custentity4"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "altName": "TestNamkhe-3",
+  "balancePrimary": 64.37,
+  "billPay": false,
+  "category": {
+    "externalId": "7851",
+    "internalId": "10"
+  },
+  "comments": "This compahkny is in loss",
+  "companyName": "vene-testhk-max5",
+  "creditLimit": 108.86,
+  "currency": {
+    "internalId": "2",
+    "name": "USA",
+    "externalId": "8906",
+    "type": {
+      "value": "currency"
+    }
+  },
+  "currencyList": {
+    "vendorCurrency": [
+      {
+        "balance": 10.89,
+        "unbilledOrders": 72.19,
+        "currency": {
+          "internalId": "3",
+          "name": "USA",
+          "externalId": "581"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
+      }
+    ]
+  },
+  "eligibleForCommission": false,
+  "email": "ven-testkj@gmail.com",
+  "emailTransactions": false,
+  "entityId": "vene-python-hjg",
+  "expenseAccount": {
+    "externalId": "87521",
+    "internalId": "10"
+  },
+  "fax": "857-y918-t",
+  "faxTransactions": false,
+  "firstName": "Ven firkhst",
+  "giveAccess": false,
+  "incoterm": {
+    "externalId": "9827",
+    "internalId": "1"
+  },
+  "is1099Eligible": false,
+  "isAccountant": false,
+  "isInactive": false,
+  "isJobResourceVend": false,
+  "isPerson": false,
+  "laborCost": 62.34,
+  "lastName": "Connorlhs",
+  "legalName": "vene-test78",
+  "middleName": "Billy",
+  "mobilePhone": "716-378-878",
+  "openingBalance": 387.38,
+  "openingBalanceDate": "2016-01-24T08:00:00Z",
+  "password": "pass1",
+  "password2": "pass2",
+  "payablesAccount": {
+    "externalId": "861",
+    "internalId": "176"
+  },
+  "phone": "86-329-739",
+  "phoneticName": "BillsC",
+  "pricingScheduleList": {
+    "pricingSchedule": [
+      {
+        "scheduleName": "test-schedule"
+      }
+    ]
+  },
+  "printTransactions": false,
+  "purchaseOrderAmount": 57.21,
+  "purchaseOrderQuantity": 33.85,
+  "purchaseOrderQuantityDiff": 3.75,
+  "receiptAmount": 357.85,
+  "receiptQuantity": 35.875,
+  "receiptQuantityDiff": 7.68,
+  "representingSubsidiary": {
+    "externalId": "860",
+    "internalId": "3"
+  },
+  "requirePwdChange": false,
+  "rolesList": {
+    "roles": [
+      {
+        "selectedRole": {
+          "externalId": "860",
+          "internalId": "3"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "sendEmail": false,
+  "subscriptionsList": {
+    "subscriptions": [
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "2",
+          "name": "Billing Communication"
+        }
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "1",
+          "name": "Marketing"
+        }
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "4",
+          "name": "Newsletters"
+        }
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "5",
+          "name": "Product Updates"
+        }
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "3",
+          "name": "Surveys"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "taxIdNum": "98712",
+  "terms": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg.",
+    "externalId": "896"
+  },
+  "unbilledOrders": 73.123,
+  "unbilledOrdersPrimary": 56786.27,
+  "url": "http://www.test-url.com",
+  "workCalendar": {
+    "internalId": "1",
+    "name": "Default Work Calendar",
+    "externalId": "907"
+  }
+}

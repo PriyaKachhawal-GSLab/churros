@@ -1,0 +1,119 @@
+{
+  "tranId": "PAY000050011",
+  "memo": "cust memo 5001",
+  "debitCardIssueNo": "",
+  "ccSecurityCodeMatch": {
+    "value": "_y"
+  },
+  "ccAvsZipMatch": {
+    "value": "_y"
+  },
+  "ccName": "Aaron Abbott",
+  "pnRefNum": "PINREF006784",
+  "arAcct": {
+    "internalId": "2",
+    "name": "Ar Acct"
+  },
+  "accountingBookDetailList": {
+    "accountingBookDetail": [
+      {
+        "accountingBook": {
+          "internalId": "3",
+          "name": "account book123"
+        },
+        "currency": {
+          "internalId": "1",
+          "name": "USA"
+        },
+        "exchangeRate": 4.56873
+      }
+    ]
+  },
+  "ccNumber": "4111111111111111",
+  "payment": 1.45321,
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
+      }
+    ]
+  },
+  "autoApply": true,
+  "ccSecurityCode": "sec_CD_453",
+  "postingPeriod": {
+    "internalId": "300",
+    "name": "Jul 2018"
+  },
+  "paymentMethod": {
+    "internalId": "5",
+    "name": "Visa"
+  },
+  "tranDate": "2018-07-23T07:00:00Z",
+  "_class": {
+    "internalId": "13",
+    "name": "Consumer Goods"
+  },
+  "nullFieldList": [
+    "nullfield1",
+    "nullfield2"
+  ],
+  "ccExpireDate": "2021-06-01T07:00:00Z",
+  "creditCardProcessor": {
+    "internalId": "1",
+    "name": "Test Name"
+  },
+  "checkNum": "CHK000456",
+  "isRecurringPayment": true,
+  "ccStreet": "1500 Broadway",
+  "currency": {
+    "internalId": "1",
+    "name": "USA"
+  },
+  "ignoreAvs": false,
+  "department": {
+    "internalId": "7",
+    "name": "Production : Assembly"
+  },
+  "ccZipCode": "80202",
+  "depositList": {
+    "deposit": [
+      {}
+    ]
+  },
+  "authCode": "AUTHCD00897",
+  "chargeIt": false,
+  "customForm": {
+    "internalId": "149",
+    "name": "HM Customer Payment"
+  },
+  "externalId": "ext5001",
+  "ccApproved": true,
+  "undepFunds": false,
+  "creditList": {
+    "credit": [
+      {}
+    ]
+  },
+  "ccAvsStreetMatch": {
+    "value": "_y"
+  },
+  "location": {
+    "internalId": "5",
+    "name": "01: San Francisco : QA Hold"
+  },
+  "ccProcessAsPurchaseCard": false,
+  "creditCard": {
+    "internalId": "48",
+    "name": "cc card"
+  },
+  "account": {
+    "internalId": "5",
+    "name": "1008 Cash on Hand"
+  },
+  "customer": {
+    "internalId": "1542",
+    "name": "Aaron Abbott"
+  }
+}

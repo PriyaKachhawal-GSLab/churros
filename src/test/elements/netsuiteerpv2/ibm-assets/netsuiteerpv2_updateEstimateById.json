@@ -1,0 +1,219 @@
+{
+  "salesRep": {
+    "internalId": "23",
+    "name": "Clark Koozer"
+  },
+  "salesTeamList": {
+    "replaceAll": true,
+    "salesTeam": [
+      {
+        "contribution": 0,
+        "isPrimary": false,
+        "salesRole": {
+          "internalId": "string",
+          "name": "string",
+          "externalId": "string",
+          "type": {
+            "value": "account"
+          }
+        },
+        "employee": {
+          "internalId": "-5",
+          "name": "string",
+          "externalId": "string",
+          "type": {
+            "value": "account"
+          }
+        }
+      }
+    ]
+  },
+  "taxTotal": 0,
+  "source": "Web Services",
+  "syncPartnerTeams": true,
+  "promotionsList": {
+    "promotions": [
+      {
+        "promoCode": {
+          "internalId": "5",
+          "name": "string",
+          "externalId": "string",
+          "type": {
+            "value": "account"
+          }
+        },
+        "couponCode": {
+          "internalId": "25% discount",
+          "name": "25% discount",
+          "externalId": "25% discount",
+          "type": {
+            "value": "account"
+          }
+        }
+      }
+    ],
+    "replaceAll": true
+  },
+  "exchangeRate": 1,
+  "recurMonthly": 0,
+  "fax": "(815) 389-2098",
+  "toBeFaxed": false,
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
+      }
+    ]
+  },
+  "shippingCost": 400,
+  "probability": 50,
+  "leadSource": {
+    "internalId": "99995",
+    "name": "Distribution Monthly Mailer"
+
+  },
+
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg."
+
+  },
+  "recurAnnually": 0,
+  "taxRate": 0,
+  "shippingTaxCode": {
+    "internalId": "-9",
+    "name": "Other 4 Sales Tax"
+
+  },
+  "visibleToCustomer": true,
+  "shipMethod": {
+    "internalId": "92",
+    "name": "UPS Ground"
+
+  },
+  "toBeEmailed": false,
+
+  "tranDate": "2017-07-20T12:30:00+05:30",
+  "shipIsResidential": false,
+  "tranId": "QUO000010471",
+  "includeInForecast": false,
+  "recurQuarterly": 0,
+  "partnersList": {
+    "partners": [
+      {
+        "contribution": 2,
+        "partner": {
+          "internalId": "1305",
+          "name": "AL Systems Ltd",
+          "externalId": "",
+          "type": {
+            "value": "partner"
+          }
+        },
+        "isPrimary": true,
+        "partnerRole": {
+          "internalId": "1305",
+          "name": "AL Systems Ltd",
+          "externalId": "",
+          "type": {
+            "value": "partner"
+          }
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "taxItem": {
+    "internalId": "13708",
+    "name": "1505826814appconcvf51rjy5q46aa2rcnmi",
+    "externalId": "",
+    "type": {
+      "value": "partner"
+    }
+  },
+  "salesGroup": {
+    "internalId": "202",
+    "name": "Contacts of All Prospects",
+    "externalId": "",
+    "type": {
+      "value": "partner"
+    }
+  },
+  "expectedCloseDate": "2017-07-20T12:30:00+05:30",
+  "handlingTaxCode": {
+    "internalId": "13708",
+    "name": "1505826814appconcvf51rjy5q46aa2rcnmi",
+    "externalId": "",
+    "type": {
+      "value": "partner"
+    }
+  },
+  "handlingCost": 20,
+  "currency": {
+    "internalId": "1",
+    "name": "USA"
+  },
+  "promoCode": {
+    "internalId": "10",
+    "name": "CMWI05"
+
+  },
+  "email": "info@everett.com",
+
+  "recurWeekly": 0,
+
+  "toBePrinted": false,
+  "billingSchedule": {
+    "internalId": "1",
+    "name": "hi",
+    "externalId": "",
+    "type": {
+      "value": "department"
+    }
+  },
+  "oneTime":1,
+  "customForm": {
+    "internalId": "175",
+    "name": "Z - HM Quote Form"
+
+  },
+  "isTaxable": false,
+  "externalId": "fpssoawaoddddddtfpoddduelyhjy2",
+  "itemList": {
+    "item": [
+      {
+
+        "line": 1,
+
+
+        "description": "Merlin display phone for support calls Estimate Craeted",
+
+        "rate": "175.00",
+
+        "price": {
+          "internalId": "1",
+          "name": "List Price"
+
+        },
+
+        "item": {
+          "internalId": "502",
+          "name": "ACC00003"
+
+        },
+        "amount": 175,
+        "quantity": 1,
+        "expandItemGroup": false
+
+      }
+    ],
+    "replaceAll": false
+  },
+  "entity": {
+    "internalId": "970",
+    "name": "Everett Fine Wines"
+
+  }
+}

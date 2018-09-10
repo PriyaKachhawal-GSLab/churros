@@ -1,0 +1,257 @@
+{
+  "customForm": {
+    "internalId": "-2",
+    "name": "Standard Customer Form"
+  },
+  "isPerson": true,
+  "salutation": "Mr",
+  "firstName": "FName",
+  "middleName": "M",
+  "lastName": "LName",
+  "title": "CEO",
+  "companyName": "GSLab",
+  "parent": {
+    "internalId": "1194"
+  },
+  "entityStatus": {
+    "internalId": "8"
+  },
+  "salesRep": {
+    "internalId": "23"
+  },
+  "defaultOrderPriority": 5,
+  "comments": "Test Prospect PayloAd..!!!",
+  "email": "prospects@gslab.com",
+  "altEmail": "prospects@gmail.com",
+  "phone": "1 (866) 830-1111",
+  "altPhone": "1 (866) 830-1112",
+  "mobilePhone": "(646) 886-1113",
+  "homePhone": "1 (866) 830-11114",
+  "fax": "1 (866) 830-1110",
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg."
+  },
+  "addressbookList": {
+    "addressbook": [
+      {
+        "defaultBilling": true,
+        "isResidential": false,
+        "label": "Tollway Plaza",
+        "defaultShipping": true,
+        "addressbookAddress": {
+          "zip": "75248",
+          "country": {
+            "value": "_unitedStates"
+          },
+          "addr2": "15950 Dallas Parkway Suite 525 Dallas",
+          "addr1": "Tollway Plaza",
+          "city": "Dallas",
+          "addrPhone": "(646) 886-5168",
+          "addressee": "Mr Yogesh P Patil",
+          "attention": "Mr Yogesh P Patil",
+          "state": "TX",
+          "override": true
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "currency": {
+    "internalId": "1"
+  },
+  "currencyList": {
+    "currency": [
+      {
+        "displaySymbol": "€",
+        "overrideCurrencyFormat": true,
+        "symbolPlacement": {
+          "value": "_afterNumber"
+        },
+        "currency": {
+          "internalId": "4",
+          "name": "Euro"
+        }
+      },
+      {
+        "displaySymbol": "$",
+        "overrideCurrencyFormat": true,
+        "symbolPlacement": {
+          "value": "_afterNumber"
+        },
+        "currency": {
+          "internalId": "1",
+          "name": "USA"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "leadSource": {
+    "internalId": "100141"
+  },
+  "globalSubscriptionStatus": {
+    "value": "_softOptIn"
+  },
+  "subscriptionsList": {
+    "subscriptions": [
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "5",
+          "name": "Product Updates"
+        }
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "internalId": "3",
+          "name": "Surveys"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "billPay": false,
+  "priceLevel": {
+    "internalId": "2"
+  },
+  "startDate": "2018-07-23T07:00:00Z",
+  "terms": {
+    "internalId": "2"
+  },
+  "creditLimit": 1212,
+  "vatRegNumber": "QWER0001Q",
+  "taxItem": {
+    "internalId": "-149"
+  },
+  "openingBalanceDate": "2018-07-23T10:32:52.527Z",
+  "thirdPartyAcct": "88778877",
+  "thirdPartyZipcode": "75248",
+  "thirdPartyCountry": {
+    "value": "_unitedStates"
+  },
+  "language": {
+    "value": "_englishUS"
+  },
+  "numberFormat": {
+    "value": "_spaceAsDigitGroupSeparatorAndDecimalComma"
+  },
+  "negativeNumberFormat": {
+    "value": "_bracketSurrounded"
+  },
+  "alcoholRecipientType": {
+    "value": "_licensee"
+  },
+
+  "isInactive": false,
+  "giveAccess": true,
+  "accessRole": {
+    "internalId": "14"
+  },
+  "sendEmail": true,
+  "password": "password@123",
+  "password2": "password@123",
+  "creditCardsList": {
+    "creditCards": [
+      {
+        "cardState": {
+          "name": "Honeycomb Ltc"
+        },
+        "ccDefault": true,
+        "ccExpireDate": "2019-08-01T07:00:00Z",
+        "ccMemo": "Tets",
+        "ccName": "Yoges Patil",
+        "ccNumber": "4111111111111111",
+        "debitcardIssueNo": "1212",
+        "paymentMethod": {
+          "internalId": "5",
+          "name": "Visa"
+        },
+        "validfrom": "2012-08-01T07:00:00Z"
+      }
+    ],
+    "replaceAll": true
+  },
+  "partner": {
+    "internalId": "1305"
+  },
+  "requirePwdChange": true,
+  "shippingItem": {
+    "internalId": "830"
+  },
+  "shipComplete": true,
+  "groupPricingList": {
+    "groupPricing": [
+      {
+        "level": {
+          "internalId": "1"
+        },
+        "group": {
+          "internalId": "1"
+        }
+      }
+    ],
+    "replaceAll": true
+  },
+  "itemPricingList": {
+    "itemPricing": [
+      {
+        "item": {
+          "internalId": "501"
+        },
+        "level": {
+          "internalId": "1"
+        },
+        "currency": {
+          "internalId": "1"
+        }
+      }
+    ],
+    "replaceAll": true
+  },
+  "salesGroup": {
+    "internalId": "1358"
+  },
+  "altName": "TEst-MAxx",
+  "openingBalanceAccount": {
+    "internalId": "7"
+  },
+  "syncPartnerTeams": true,
+  "taxable": false,
+  "territory": {
+    "internalId": "1"
+  },
+  "salesReadiness": {
+    "name": "Hot"
+  },
+  "accountNumber": "22334455",
+  "buyingReason": {
+    "internalId": "2",
+    "name": "Replace Existing"
+  },
+  "buyingTimeFrame": {
+    "internalId": "2"
+  },
+  "campaignCategory": {
+    "internalId": "3"
+  },
+  "emailPreference": {
+    "value": "_hTML"
+  },
+  "emailTransactions": true,
+  "endDate": "2018-10-22T07:00:00Z",
+  "resaleNumber": "76585",
+  "estimatedBudget": 9999,
+  "faxTransactions": true,
+  "reminderDays": 5,
+  "isBudgetApproved": true,
+  "prefCCProcessor": {
+    "internalId": "2"
+  },
+  "printOnCheckAs": "TEST",
+  "printTransactions": true,
+  "category": {
+    "internalId": "1"
+  }
+}

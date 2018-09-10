@@ -1,0 +1,74 @@
+{
+  "entity": {
+    "internalId": "36",
+    "name": "Bob Ford, CPA"
+  },
+  "customForm": {
+    "internalId": "154",
+    "name": "Z - Bill Payment"
+  },
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
+      }
+    ]
+  },
+  "department": {
+    "internalId": "1",
+    "name": "hi",
+    "externalId": "",
+    "type": {
+      "value": "department"
+    }
+  },
+  "_class": {
+    "internalId": "3",
+    "name": "Furniture : Office"
+  },
+  "account": {
+    "internalId": "2",
+    "name": "1000 Checking"
+  },
+  "toAch": false,
+  "memo": "sakdj",
+  "location": {
+    "internalId": "2",
+    "name": "01: San Francisco"
+  },
+  "postingPeriod": {
+    "internalId": "284",
+    "name": "Jul 2017"
+  },
+  "exchangeRate": 2,
+  "currency": {
+    "internalId": "1",
+    "name": "USA"
+  },
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg."
+  },
+  "printVoucher": true,
+  "tranId": "sdms",
+  "toBePrinted": true,
+  "applyList": {
+    "apply": [
+      {
+        "total": 250,
+        "amount": 1,
+        "refNum": "2991",
+        "apply": true,
+        "due": 205,
+        "line": 0,
+        "doc": 128413,
+        "currency": "USA",
+        "applyDate": "2017-12-08T08:00:00Z",
+        "type": "Bill"
+      }
+    ],
+    "replaceAll": false
+  }
+}

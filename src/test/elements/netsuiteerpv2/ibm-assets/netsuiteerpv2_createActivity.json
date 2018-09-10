@@ -1,0 +1,25 @@
+{
+  "owner": {
+    "internalId": "-5",
+    "name": "Alex Wolfe"
+  },
+  "accessLevel": false,
+  "endDate": "2018-08-20T07:00:00Z",
+  "dueDate": "2018-08-20T07:00:00Z",
+
+  "title": "To be Decided",
+  "priority": {
+    "value": "_medium"
+  },
+  "message": "Hello",
+  "sendEmail": false,
+  "timedEvent": false,
+  "assigned": {
+    "internalId": "-5",
+    "name": "Alex Wolfe"
+  },
+  "startDate": "2018-08-20T07:00:00Z",
+  "status": {
+    "value": "_notStarted"
+  }
+}

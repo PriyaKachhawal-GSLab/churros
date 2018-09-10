@@ -1,0 +1,68 @@
+{
+  "customForm": {
+    "internalId": "28",
+    "name": "Ramsey Case Form"
+  },
+  "assigned": {
+    "internalId": "27",
+    "name": "Brad M Sparling"
+  },
+  "email": "williamsww@christyscatering.com",
+  "title": "Sample Test Case - Churros",
+  "priority": {
+    "internalId": "2",
+    "name": "Medium"
+  },
+  "escalateToList": {
+    "escalateTo": [
+      {
+        "phone": "650-555-9788",
+        "escalatee": {
+          "internalId": "-5",
+          "name": "Alex Wolfe"
+        },
+        "email": "bluepartnerlogin@cloud-elements.com"
+      }
+    ],
+    "replaceAll": false
+  },
+  "category": {
+    "internalId": "1",
+    "name": "Question"
+  },
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg."
+  },
+  "contact": {
+    "internalId": "109",
+    "name": "Williams Wireless World : Derek Williams"
+  },
+  "company": {
+    "internalId": "93",
+    "name": "Williams Wireless World"
+  },
+  "profile": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg."
+  },
+  "startDate": "2014-12-15T18:40:00Z",
+  "status": {
+    "internalId": "3",
+    "name": "Escalated"
+  },
+  "phone": "090909090000",
+  "incomingMessage": "I received my entire order in small pieces.",
+  "issue": {
+    "internalId": "5",
+    "name": "Billing Question"
+  },
+  "item": {
+    "internalId": "501",
+    "name": "ACC00002"
+  },
+  "origin": {
+    "internalId": "1",
+    "name": "E-mail"
+  }
+}

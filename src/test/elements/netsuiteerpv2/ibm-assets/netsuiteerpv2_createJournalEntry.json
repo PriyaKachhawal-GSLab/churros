@@ -1,0 +1,126 @@
+{
+  "customForm": {
+    "internalId": "222",
+    "name": "HM Journal Entry"
+  },
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
+      }
+    ]
+  },
+  "department": {
+    "internalId": "3",
+    "name": "Service"
+  },
+  "_class": {
+    "internalId": "13",
+    "name": "Consumer Goods"
+  },
+  "memo": "Jrnl Ent 302",
+  "location": {
+    "internalId": "46",
+    "name": "loca457"
+  },
+  "postingPeriod": {
+    "internalId": "300",
+    "name": "Jul 2018"
+  },
+  "currency": {
+    "internalId": "1",
+    "name": "USA"
+  },
+  "subsidiary": {
+    "internalId": "6",
+    "name": "Honeycomb Metal Services"
+  },
+  "tranId": "JrnlEnt3021",
+  "approved": true,
+  "accountingBook": {
+    "internalId": "1",
+    "name": "Service"
+  },
+  "accountingBookDetailList": {
+    "accountingBookDetail": [
+      {
+        "accountingBook": {
+          "internalId": "3",
+          "name": "account book123"
+        },
+        "currency": {
+          "internalId": "1",
+          "name": "USA"
+        },
+        "exchangeRate": 4.56873
+      }
+    ]
+  },
+  "reversalDefer": true,
+  "reversalDate": "2018-07-17T07:00:00Z",
+  "lineList": {
+    "line": [
+      {
+        "account": {
+          "internalId": "77",
+          "name": "6100 Insurance Expense"
+        },
+        "debit": 200,
+        "startDate": "2018-07-17T07:00:00Z",
+        "endDate": "2018-07-26T07:00:00Z",
+        "memo": "memo detail02",
+        "taxCode": {
+          "internalId": "1",
+          "name": "tx cd012"
+        },
+        "eliminate": true,
+        "residual": "4.34523",
+        "tax1Acct": {
+          "internalId": "1",
+          "name": "tx acct022"
+        },
+        "tax1Amt": 34.45623,
+        "schedule": {
+          "internalId": "1",
+          "name": "schedule 022"
+        },
+        "_class": {
+          "internalId": "14",
+          "name": "Consumer Goods"
+        },
+        "grossAmt": 34.45623,
+        "revenueRecognitionRule": {
+          "internalId": "14",
+          "name": "Consumer Goods"
+        },
+        "taxRate1": 23.34523,
+        "department": {
+          "internalId": "4",
+          "name": "dept 03"
+        },
+        "customFieldList": {
+          "customField": [
+            {
+              "internalId": "29",
+              "value": "Shiuppong asjsjd",
+              "scriptId": "custentity4"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "externalId": "ext10011",
+  "toSubsidiary": {
+    "internalId": "4",
+    "name": "Honeycomb Metal Services"
+  },
+  "nullFieldList": [
+    "nullfield1",
+    "nullfield2"
+  ],
+  "reversalEntry": "rev entry",
+  "tranDate": "2018-07-12T07:00:00Z"
+}

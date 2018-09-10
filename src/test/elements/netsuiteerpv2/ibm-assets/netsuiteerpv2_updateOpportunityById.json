@@ -1,0 +1,506 @@
+{
+  "salesRep": {
+    "internalId": "1311",
+    "name": "Mary Higgins",
+    "externalId": "",
+    "type": {
+      "value": "opportunity"
+    }
+  },
+  "winLossReason": {
+    "internalId": "",
+    "externalId": "",
+    "name": "New Requirement",
+    "type": {
+      "value": "winLossReason"
+    }
+  },
+  "taxTotal": 1567.8,
+  "vatRegNum": "1234",
+  "salesTeamList": {
+    "salesTeam": [
+      {
+        "contribution": 3,
+        "isPrimary": true,
+        "salesRole": {
+          "internalId": "1",
+          "externalId": "",
+          "name": "new role",
+          "type": {
+            "value": "employee"
+          }
+        },
+        "employee": {
+          "internalId": "504989",
+          "externalId": "",
+          "name": "new employee",
+          "type": {
+            "value": "employee"
+          }
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "estimatedBudget": 2342,
+  "syncPartnerTeams": true,
+  "competitorsList": {
+    "competitors": [
+      {
+        "notes": "hi bye",
+        "winner": true,
+        "competitor": {
+          "internalId": "1",
+          "name": "Best Deal Inc.",
+          "externalId": "",
+          "type": {
+            "value": "opportunity"
+          }
+        },
+        "strategy": "testing",
+        "url": ""
+      }
+    ],
+    "replaceAll": false
+  },
+  "exchangeRate": 1,
+  "recurMonthly": 6,
+  "customFieldList": {
+    "customField": [
+      {
+        "internalId": "29",
+        "value": "Shiuppong asjsjd",
+        "scriptId": "custentity4"
+      }
+    ]
+  },
+  "leadSource": {
+    "internalId": "100279",
+    "name": "B2C Lead Nurturing",
+    "externalId": "",
+    "type": {
+      "value": "campaign"
+    }
+  },
+  "probability": 20,
+  "contribPct": "abcd",
+  "recurAnnually": 1,
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg.",
+    "externalId": "",
+    "type": {
+      "value": "subsidiary"
+    }
+  },
+  "salesReadiness": {
+    "internalId": "1",
+    "name": "Cold",
+    "externalId": "",
+    "type": {
+      "value": "opportunity"
+    }
+  },
+  "projAltSalesAmt": 31,
+  "shipAddressList": {
+    "internalId": "254974",
+    "name": "ship Address1",
+    "externalId": "",
+    "type": {
+      "value": "customer"
+    }
+  },
+  "tranDate": "2015-07-15T07:00:00Z",
+  "job": {
+    "internalId": "510792",
+    "name": "Another Killer Product1",
+    "externalId": "",
+    "type": {
+      "value": "job"
+    }
+  },
+  "shipIsResidential": true,
+  "isBudgetApproved": false,
+  "tranId": "OPP00000135",
+  "rangeLow": 2,
+  "recurQuarterly": 4,
+  "partnersList": {
+    "partners": [
+      {
+        "contribution": 2,
+        "isPrimary": true,
+        "partner": {
+          "internalId": "1305",
+          "name": "AL Systems Ltd",
+          "externalId": "",
+          "type": {
+            "value": "partner"
+          }
+        },
+        "partnerRole": {
+          "internalId": "1305",
+          "name": "AL Systems Ltd",
+          "externalId": "",
+          "type": {
+            "value": "partner"
+          }
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "salesGroup": {
+    "internalId": "111",
+    "name": "sales group",
+    "externalId": "",
+    "type": {
+      "value": "employee"
+    }
+  },
+  "title": "tot test",
+  "projectedTotal": 105130,
+  "expectedCloseDate": "2019-03-05T08:00:00Z",
+  "rangeHigh": 20,
+  "currencyName": "USA",
+  "billAddressList": {
+    "externalId": "",
+    "internalId": "254974",
+    "name": "pune",
+    "type": {
+      "value": "customer"
+    }
+  },
+  "currency": {
+    "internalId": "1",
+    "name": "USA",
+    "externalId": "",
+    "type": {
+      "value": "currency"
+    }
+  },
+  "buyingTimeFrame": {
+    "internalId": "3",
+    "name": "4 - 6 months",
+    "externalId": "",
+    "type": {
+      "value": "customer"
+    }
+  },
+  "buyingReason": {
+    "internalId": "1",
+    "name": "New Requirement",
+    "externalId": "",
+    "type": {
+      "value": "customer"
+    }
+  },
+  "recurWeekly": 2,
+  "altSalesRangeLow": 20000,
+  "customForm": {
+    "internalId": "172",
+    "name": "HM Opp Form with Configurator",
+    "externalId": "",
+    "type": {
+      "value": "opportunity"
+    }
+  },
+  "daysOpen": 3,
+  "externalId": "madhddddddddurii",
+  "forecastType": {
+    "internalId": "1",
+    "name": "hi",
+    "externalId": "",
+    "type": {
+      "value": "opportunity"
+    }
+  },
+  "oneTime": 500,
+  "syncSalesTeams": true,
+  "partner": {
+    "internalId": "1305",
+    "name": "AL Systems Ltd",
+    "externalId": "",
+    "type": {
+      "value": "partner"
+    }
+  },
+  "altSalesRangeHigh": 500000,
+  "shippingAddress": {
+    "zip": "411021",
+    "country": {
+      "value": "_india"
+    },
+    "addr2": "pashan",
+    "addr1": "sai chowk",
+    "city": "pune",
+    "addrText": "testqa\nAbsolute Location Support\namar\nbaner\npune maharashtraa 411045\nIndia",
+    "addrPhone": "(124) 456-7890",
+    "internalId": "",
+    "addressee": "Absolute Location Support",
+    "attention": "testqawq",
+    "state": "maharashtra",
+    "override": false,
+    "customFieldList": {
+      "customField": [
+        {
+          "internalId": "29",
+          "value": "Shiuppong asjsjd",
+          "scriptId": "custentity4"
+        }
+      ]
+    }
+  },
+  "location": {
+    "internalId": "1",
+    "name": "02: Boston",
+    "externalId": "",
+    "type": {
+      "value": "location"
+    }
+  },
+  "itemList": {
+    "item": [
+      {
+        "line": 2,
+        "expectedShipDate": "2018-05-05T08:00:00Z",
+        "description": "test",
+        "tax1Amt": 4.5,
+        "units": {
+          "internalId": "1",
+          "name": "HR",
+          "externalId": "",
+          "type": {
+            "value": "unitsType"
+          }
+        },
+        "subscription": {
+          "internalId": "1",
+          "name": "new sub",
+          "externalId": "",
+          "type": {
+            "value": "opportunity"
+          }
+        },
+        "rate": "",
+        "price": {
+          "internalId": "1",
+          "name": "List Price",
+          "externalId": "",
+          "type": {
+            "value": "priceLevel"
+          }
+        },
+        "altSalesAmt": 2.5,
+        "options": {
+          "customField": [
+            {
+              "internalId": "29",
+              "value": "Shiuppong asjsjd",
+              "scriptId": "custentity4"
+            }
+          ]
+        },
+        "department": {
+          "internalId": "1",
+          "name": "hi",
+          "externalId": "",
+          "type": {
+            "value": "department"
+          }
+        },
+        "taxRate2": 4.6,
+        "taxRate1": 2.4,
+        "customFieldList": {
+          "customField": [
+            {
+              "internalId": "29",
+              "value": "Shiuppong asjsjd",
+              "scriptId": "custentity4"
+            }
+          ]
+        },
+        "item": {
+          "internalId": "703",
+          "name": "BEN00001®",
+          "externalId": "",
+          "type": {
+            "value": "itemGroup"
+          }
+        },
+        "amount": 105000,
+        "quantity": 310,
+        "taxCode": {
+          "internalId": "37",
+          "name": "new tax code",
+          "externalId": "",
+          "type": {
+            "value": "taxAcct"
+          }
+        },
+        "grossAmt": 42.5,
+        "location": {
+          "internalId": "1",
+          "name": "02: Boston",
+          "externalId": "",
+          "type": {
+            "value": "location"
+          }
+        },
+        "_class": {
+          "internalId": "2",
+          "name": "Furniture",
+          "externalId": "",
+          "type": {
+            "value": "opportunity"
+          }
+        },
+        "job": {
+          "internalId": "1",
+          "name": "new job",
+          "externalId": "",
+          "type": {
+            "value": "job"
+          }
+        }
+      },
+      {
+        "line": 5,
+        "expectedShipDate": "2018-05-05T10:00:00Z",
+        "description": "test",
+        "tax1Amt": 3.2,
+        "units": {
+          "internalId": "14",
+          "name": "HR",
+          "externalId": "",
+          "type": {
+            "value": "unitsType"
+          }
+        },
+        "subscription": {
+          "internalId": "1",
+          "name": "new sub",
+          "externalId": "",
+          "type": {
+            "value": "opportunity"
+          }
+        },
+        "rate": "",
+        "price": {
+          "internalId": "",
+          "name": "List Price",
+          "externalId": "",
+          "type": {
+            "value": "priceLevel"
+          }
+        },
+        "altSalesAmt": 2.5,
+        "options": {
+          "customField": [
+            {
+              "internalId": "29",
+              "value": "Shiuppong asjsjd",
+              "scriptId": "custentity4"
+            }
+          ]
+        },
+        "department": {
+          "internalId": "1",
+          "name": "hi",
+          "externalId": "",
+          "type": {
+            "value": "department"
+          }
+        },
+        "taxRate2": 5.9,
+        "taxRate1": 3.4,
+        "customFieldList": {
+          "customField": [
+            {
+              "internalId": "29",
+              "value": "Shiuppong asjsjd",
+              "scriptId": "custentity4"
+            }
+          ]
+        },
+        "item": {
+          "internalId": "736",
+          "name": "BUR00001",
+          "externalId": "",
+          "type": {
+            "value": "itemGroup"
+          }
+        },
+        "amount": 120,
+        "quantity": 100,
+        "taxCode": {
+          "internalId": "37",
+          "name": "new tax code",
+          "externalId": "",
+          "type": {
+            "value": "taxAcct"
+          }
+        },
+        "grossAmt": 230,
+        "location": {
+          "internalId": "1",
+          "name": "02: Boston",
+          "externalId": "",
+          "type": {
+            "value": "location"
+          }
+        },
+        "_class": {
+          "internalId": "14",
+          "name": "Services",
+          "externalId": "",
+          "type": {
+            "value": "opportunity"
+          }
+        },
+        "job": {
+          "internalId": "1",
+          "name": "new job",
+          "externalId": "",
+          "type": {
+            "value": "job"
+          }
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "tax2Total": 45.3,
+  "billingAddress": {
+    "zip": "411045",
+    "country": {
+      "value": "_india"
+    },
+    "addr2": "baner",
+    "addr1": "amar",
+    "city": "pune",
+    "addrText": "testqa\nAbsolute Location Support\namar\nbaner\npune maharashtraa 411045\nIndia",
+    "addrPhone": "(124) 456-7890",
+    "internalId": "",
+    "addressee": "Absolute Location Support",
+    "attention": "testqaw",
+    "state": "maharashtra",
+    "override": false,
+    "customFieldList": {
+      "customField": [
+        {
+          "internalId": "29",
+          "value": "Shiuppong asjsjd",
+          "scriptId": "custentity4"
+        }
+      ]
+    }
+  },
+  "entity": {
+    "internalId": "1178",
+    "name": "Absolute Location Support",
+    "externalId": "",
+    "type": {
+      "value": "customer"
+    }
+  }
+}

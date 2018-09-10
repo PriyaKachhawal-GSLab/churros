@@ -1,0 +1,259 @@
+{
+  "customForm": {
+    "internalId": "-2",
+    "name": "Standard Customer Form"
+  },
+  "entityId": "Test-PATCH-lead",
+  "externalId": "lead00099",
+  "isPerson": true,
+  "salutation": "Dr",
+  "firstName": "FUpdate",
+  "middleName": "U",
+  "lastName": "LUpdate",
+  "title": "COO",
+  "companyName": "KPoint",
+  "parent": {
+    "internalId": "1344"
+  },
+  "entityStatus": {
+    "internalId": "18"
+  },
+  "salesRep": {
+    "internalId": "17"
+  },
+  "defaultOrderPriority": 5,
+  "comments": "Test Update PayyloAd..!!!",
+  "email": "update@kpoint.com",
+  "altEmail": "update@gmail.com",
+  "phone": "1 (866) 830-8888",
+  "altPhone": "1 (866) 830-8889",
+  "mobilePhone": "(646) 886-8888",
+  "homePhone": "1 (866) 830-8887",
+  "fax": "1 (866) 830-8885",
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg."
+  },
+  "addressbookList": {
+    "addressbook": [
+      {
+        "internalId": "252302",
+        "defaultBilling": false,
+        "isResidential": true,
+        "label": "Baner Rd",
+        "defaultShipping": false,
+        "addressbookAddress": {
+          "zip": "411045",
+          "country": {
+            "value": "_india"
+          },
+          "addr2": "Baner",
+          "addr1": "Baner Rd",
+          "city": "Pune",
+          "addrPhone": "02046711100",
+          "addressee": "Dr UpdateF U UpdateL",
+          "attention": "Update :: Kpint",
+          "state": "Maharashtra",
+          "override": false
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "currency": {
+    "internalId": "1"
+  },
+  "currencyList": {
+    "currency": [
+      {
+        "displaySymbol": "€",
+        "overrideCurrencyFormat": true,
+        "symbolPlacement": {
+          "value": "_beforeNumber"
+        },
+        "currency": {
+          "internalId": "4",
+          "name": "Euro"
+        }
+      },
+      {
+        "displaySymbol": "$",
+        "overrideCurrencyFormat": true,
+        "symbolPlacement": {
+          "value": "_beforeNumber"
+        },
+        "currency": {
+          "internalId": "1",
+          "name": "USA"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "leadSource": {
+    "internalId": "100144"
+  },
+  "globalSubscriptionStatus": {
+    "value": "_softOptOut"
+  },
+  "subscriptionsList": {
+    "subscriptions": [
+      {
+        "subscribed": false,
+        "subscription": {
+          "internalId": "5",
+          "name": "Product Updates"
+        }
+      },
+      {
+        "subscribed": false,
+        "subscription": {
+          "internalId": "3",
+          "name": "Surveys"
+        }
+      }
+    ],
+    "replaceAll": false
+  },
+  "billPay": true,
+  "priceLevel": {
+    "internalId": "1"
+  },
+  "startDate": "2018-07-22T07:00:00Z",
+  "terms": {
+    "internalId": "1"
+  },
+  "creditLimit": 1212,
+  "vatRegNumber": "QWER0001Q",
+  "taxItem": {
+    "internalId": "-118"
+  },
+  "openingBalanceDate": "2018-07-22T10:32:52.527Z",
+  "thirdPartyAcct": "11221122",
+  "thirdPartyZipcode": "411045",
+  "thirdPartyCountry": {
+    "value": "_india"
+  },
+  "language": {
+    "value": "_frenchFrance"
+  },
+  "numberFormat": {
+    "value": "_spaceAsDigitGroupSeparatorAndDecimalComma"
+  },
+  "negativeNumberFormat": {
+    "value": "_bracketSurrounded"
+  },
+  "alcoholRecipientType": {
+    "value": "_consumer"
+  },
+  "prefCCProcessor": {
+    "internalId": "2"
+  },
+  "isInactive": false,
+  "giveAccess": false,
+  "accessRole": {
+    "internalId": "1055"
+  },
+  "sendEmail": false,
+  "password": "password@1234",
+  "password2": "password@1234",
+  "creditCardsList": {
+    "creditCards": [
+      {
+        "cardState": {
+          "name": "Update"
+        },
+        "ccDefault": true,
+        "ccExpireDate": "2019-08-01T07:00:00Z",
+        "ccMemo": "UpdateT",
+        "ccName": "Update U",
+        "ccNumber": "6011111111111117",
+        "debitcardIssueNo": "4545",
+        "paymentMethod": {
+          "internalId": "3",
+          "name": "Discover"
+        },
+        "validfrom": "2014-08-01T07:00:00Z"
+      }
+    ],
+    "replaceAll": true
+  },
+  "partner": {
+    "internalId": "169"
+  },
+  "requirePwdChange": true,
+  "shippingItem": {
+    "internalId": "831"
+  },
+  "shipComplete": false,
+  "groupPricingList": {
+    "groupPricing": [
+      {
+        "level": {
+          "internalId": "6"
+        },
+        "group": {
+          "internalId": "7"
+        }
+      }
+    ],
+    "replaceAll": true
+  },
+  "itemPricingList": {
+    "itemPricing": [
+      {
+        "item": {
+          "internalId": "694"
+        },
+        "level": {
+          "internalId": "3"
+        },
+        "currency": {
+          "internalId": "1"
+        }
+      }
+    ],
+    "replaceAll": true
+  },
+  "salesGroup": {
+    "internalId": "1358"
+  },
+  "altName": "TEst-UPpdate",
+  "openingBalanceAccount": {
+    "internalId": "7"
+  },
+  "syncPartnerTeams": false,
+  "taxable": false,
+  "territory": {
+    "internalId": "8"
+  },
+  "salesReadiness": {
+    "name": "Cold"
+  },
+  "accountNumber": "1122111",
+  "buyingReason": {
+    "internalId": "3",
+    "name": "Other"
+  },
+  "buyingTimeFrame": {
+    "internalId": "5"
+  },
+  "campaignCategory": {
+    "internalId": "2"
+  },
+  "emailPreference": {
+    "value": "_pDF"
+  },
+  "emailTransactions": false,
+  "endDate": "2018-11-22T07:00:00Z",
+  "resaleNumber": "76585",
+  "estimatedBudget": 9999,
+  "faxTransactions": false,
+  "reminderDays": 5,
+  "isBudgetApproved": false,
+  "printOnCheckAs": "TEST",
+  "printTransactions": false,
+  "category": {
+    "internalId": "13"
+  }
+}
