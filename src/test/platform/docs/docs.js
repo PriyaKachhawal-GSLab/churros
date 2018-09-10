@@ -71,4 +71,12 @@ suite.forPlatform('docs', {skip: false}, () => {
         expect(r.body.schemes).to.contain('https');
       });
   });
+
+
+  it('should return proper swagger json for a given version for the element ', () => {
+    let version;
+    return cloud.get(`/elements/${elements[0].id}/versions`)
+      .then(r => version = r.body[0].version)
+      .then(() => cloud.withOptions({ qs: { 'version': `${version}` } }).get(`/elements/${elements[0].id}/docs`));
+  });
 });
