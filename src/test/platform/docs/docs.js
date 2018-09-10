@@ -5,7 +5,7 @@ const cloud = require('core/cloud');
 const swaggerParser = require('swagger-parser');
 const expect = require('chakram').expect;
 
-suite.forPlatform('docs', {skip: true}, () => {
+suite.forPlatform('docs', {skip: false}, () => {
   let hubs, elements;
 
   before(() => cloud.get('/elements')
@@ -34,7 +34,7 @@ suite.forPlatform('docs', {skip: true}, () => {
     }));
   });
 
-  it('should return proper swagger json for elements', () => {
+  it.skip('should return proper swagger json for elements', () => {
     let failures = [];
     return Promise.all(elements.map(element => {
       return cloud.get(`/elements/${element.id}/docs`)
@@ -60,6 +60,15 @@ suite.forPlatform('docs', {skip: true}, () => {
         expect(r.body.paths['/accounts'].get.parameters[1].name).to.equal('x-api-key');
         expect(r.body.host).to.equal('aws-api.cloud-elements.com');
         expect(r.body.basePath).to.not.have.string('/elements/api-v2');
+      });
+  });
+
+  it('should return proper swagger json with the provided base URL', () => {
+    return cloud.withOptions({ qs: { baseUrl: 'https://foo.bar' } }).get(`/docs/crm`)
+      .then(r => {
+        expect(r.body).to.not.be.empty;
+        expect(r.body.host).to.equal('foo.bar');
+        expect(r.body.schemes).to.contain('https');
       });
   });
 });
