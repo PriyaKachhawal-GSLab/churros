@@ -2,14 +2,18 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const payload = require('core/tools').requirePayload(`${__dirname}/assets/classifications.json`);
-const payloadPost = require('core/tools').requirePayload(`${__dirname}/assets/classifications.json`);
 
-payload.name = tools.random();
-payloadPost.name = tools.random();
+const classificationsCreatePayload = tools.requirePayload(`${__dirname}/assets/classifications-create.json`);
+const classificationsUpdatePayload = tools.requirePayload(`${__dirname}/assets/classifications-update.json`);
 
-suite.forElement('erp', 'classifications', { payload: payload }, (test) => {
-  	test.should.supportCruds();
-	test.withOptions({ qs: { page: 1, pageSize: 5}}).should.supportPagination();
-  	test.should.supportCeqlSearch('name',payloadPost);
+const options = {
+  churros: {
+    updatePayload: classificationsUpdatePayload
+  }
+};
+
+suite.forElement('erp', 'classifications', { payload : classificationsCreatePayload }, (test) => {
+  test.withOptions(options).should.supportCruds();
+  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination('id');
+  test.should.supportCeqlSearch('id');
 });

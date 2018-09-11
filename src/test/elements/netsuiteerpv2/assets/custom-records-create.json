@@ -1,0 +1,14 @@
+{
+  "recType": {
+    "internalId": "476"
+  },
+  "name": "<<random.alphaNumeric##8>>",
+  "customFieldList": {
+    "customField": [
+      {
+        "scriptId": "custrecordsamplefield",
+        "value": "This is a Sample Churros Record"
+      }
+    ]
+  }
+}

@@ -2,22 +2,22 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const customersPayload = tools.requirePayload(`${__dirname}/assets/customers.json`);
-const employeesPayload = tools.requirePayload(`${__dirname}/assets/employees.json`);
-const estimatesPayload = require('./assets/estimates');
-const invoicesPayload = require('./assets/invoices');
-const paymentsPayload = require('./assets/payments');
-const journalEntriesPayload = require('./assets/journal-entries');
-const productsPayload = tools.requirePayload(`${__dirname}/assets/products.json`);
-const purchaseOrdersPayload = require('./assets/purchase-orders');
-const vendorPaymentsPayload = require('./assets/vendor-payments');
-const vendorsPayload = tools.requirePayload(`${__dirname}/assets/vendors.json`);
-const accountsPayload = tools.requirePayload(`${__dirname}/assets/accounts.json`);
-const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
-const leadsPayload = tools.requirePayload(`${__dirname}/assets/leads.json`);
-const activitiesPayload = require('./assets/activities');
-const opportunitiesPayload = require('./assets/opportunities');
-const timeActivitiesPayload = require('./assets/time-activities');
+const customersPayload = tools.requirePayload(`${__dirname}/assets/customers-create.json`);
+const employeesPayload = tools.requirePayload(`${__dirname}/assets/employees-create.json`);
+const estimatesPayload = tools.requirePayload(`${__dirname}/assets/estimates-create.json`);
+const invoicesPayload = tools.requirePayload(`${__dirname}/assets/invoices-create.json`);;
+const paymentsPayload = tools.requirePayload(`${__dirname}/assets/payments-create.json`);
+const journalEntriesPayload = tools.requirePayload(`${__dirname}/assets/journal-entries-create.json`);
+const productsPayload = tools.requirePayload(`${__dirname}/assets/products-create.json`);
+const purchaseOrdersPayload = tools.requirePayload(`${__dirname}/assets/purchase-orders-create.json`);
+const vendorPaymentsPayload = tools.requirePayload(`${__dirname}/assets/vendor-payments-create.json`);
+const vendorsPayload = tools.requirePayload(`${__dirname}/assets/vendors-create.json`);
+const accountsPayload = tools.requirePayload(`${__dirname}/assets/accounts-create.json`);
+const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
+const leadsPayload = tools.requirePayload(`${__dirname}/assets/leads-create.json`);
+const activitiesPayload = tools.requirePayload(`${__dirname}/assets/activities-create.json`);
+const opportunitiesPayload = tools.requirePayload(`${__dirname}/assets/opportunities-create.json`);
+const timeActivitiesPayload = tools.requirePayload(`${__dirname}/assets/time-activities-create.json`);
 
 //netsuite isn't polling correctly, unskip when it works
 suite.forElement('erp', 'polling', { skip: false }, (test) => {

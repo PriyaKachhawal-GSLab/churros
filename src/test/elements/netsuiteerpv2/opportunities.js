@@ -1,10 +1,18 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/opportunities');
+const tools = require('core/tools');
 
-suite.forElement('erp', 'opportunities', { payload: payload }, (test) => {
-  test.should.supportCruds();
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.return200OnGet();
+const opportunitiesCreatePayload = tools.requirePayload(`${__dirname}/assets/opportunities-create.json`);
+const opportunitiesUpdatePayload = tools.requirePayload(`${__dirname}/assets/opportunities-update.json`);
+
+const options = {
+  churros: {
+    updatePayload: opportunitiesUpdatePayload
+  }
+};
+
+suite.forElement('erp', 'opportunities', { payload : opportunitiesCreatePayload }, (test) => {
+  test.withOptions(options).should.supportCruds();
   test.should.supportCeqlSearch('id');
 });

@@ -1,33 +1,35 @@
 'use strict';
 
 const suite = require('core/suite');
+const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = require('./assets/item-receipts');
-const purchaseOrder = require('./assets/purchase-orders');
-const expect = require('chakram').expect;
 
-suite.forElement('erp', 'item-receipts', { payload: payload }, (test) => {
-  it('should allow CUD for hubs/erp/item-receipts', () => {
-    let purchaseOrderId;
-	let itemReceiptId;
-    return cloud.post('hubs/erp/purchase-orders', purchaseOrder)
-      .then(r => purchaseOrderId = r.body.id)
-      .then(r => payload.createdFrom.internalId = purchaseOrderId)
-      .then(r => cloud.post(`${test.api}`, payload))
-      .then(r => itemReceiptId = r.body.id)
-      .then(r => cloud.patch(`${test.api}/${itemReceiptId}`, payload))
-      .then(r => cloud.delete(`${test.api}/${itemReceiptId}`))
-      .then(r => cloud.delete(`hubs/erp/purchase-orders/${purchaseOrderId}`));
-  });
-  test.should.supportSr();
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
-  test
-    .withOptions({ qs: { where: `lastModifiedDate >= '2014-01-15T00:00:00.000Z'` } })
-    .withName('should support Ceql date search')
-    .withValidation(r => {
-      expect(r).to.statusCode(200);
-      const validValues = r.body.filter(obj => new Date(obj.lastModifiedDate).getTime() >= 1389744000000); //2014-01-15T00:00:00.000Z7 is equivalent to 1389744000000
-      expect(validValues.length).to.equal(r.body.length);
+const itemReceiptsCreatePayload = tools.requirePayload(`${__dirname}/assets/item-receipts-create.json`);
+const itemReceiptsUpdatePayload = tools.requirePayload(`${__dirname}/assets/item-receipts-update.json`);
+const purchaseOrdersCreatePayload = tools.requirePayload(`${__dirname}/assets/purchase-orders-create.json`);
+
+
+const options = {
+  churros: {
+    updatePayload: itemReceiptsUpdatePayload
+  }
+};
+
+suite.forElement('erp', 'item-receipts', { payload: itemReceiptsCreatePayload }, (test) => {
+  let purchaseOrderId;
+
+  before(() => cloud.post(`/hubs/erp/purchase-orders`, purchaseOrdersCreatePayload)
+    .then(r => {
+      purchaseOrderId = r.body.id;
     })
-    .should.return200OnGet();
+  );
+
+  after(() => cloud.delete(`/hubs/erp/purchase-orders/${purchaseOrderId}`));
+
+  it(`should allow CRUDS for ${test.api}`, () => {
+    itemReceiptsCreatePayload.createdFrom.internalId = purchaseOrderId;
+    itemReceiptsUpdatePayload.createdFrom.internalId = purchaseOrderId;
+    return cloud.withOptions(options).cruds(`${test.api}`, itemReceiptsCreatePayload);
+  });
+
 });

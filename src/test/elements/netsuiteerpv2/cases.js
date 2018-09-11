@@ -1,12 +1,21 @@
 'use strict';
 
 const suite = require('core/suite');
+const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = require('./assets/cases');
 
-suite.forElement('erp', 'cases', { payload: payload }, (test) => {
-  test.should.supportCruds();
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.return200OnGet();
+const casesCreatePayload = tools.requirePayload(`${__dirname}/assets/cases-create.json`);
+const casesUpdatePayload = tools.requirePayload(`${__dirname}/assets/cases-update.json`);
+
+const options = {
+  churros: {
+    updatePayload: casesUpdatePayload
+  }
+};
+
+suite.forElement('erp', 'cases', { payload: casesCreatePayload }, (test) => {
+  test.withOptions(options).should.supportCruds();
+  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination('id');
   test.should.supportCeqlSearch('id');
 
   it('should allow GET /hubs/erp/cases/:id/messages ', () => {
@@ -19,3 +28,5 @@ suite.forElement('erp', 'cases', { payload: payload }, (test) => {
       .then(r => cloud.withOptions({ qs: { where: `internalId ='${messageId}'` } }).get(`${test.api}/${caseId}/messages`));
   });
 });
+
+

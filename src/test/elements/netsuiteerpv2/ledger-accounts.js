@@ -1,13 +1,19 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/ledger-accounts');
 const tools = require('core/tools');
 
-payload.acctName = tools.random();
+const ledgerAccountsCreatePayload = tools.requirePayload(`${__dirname}/assets/ledger-accounts-create.json`);
+const ledgerAccountsUpdatePayload = tools.requirePayload(`${__dirname}/assets/ledger-accounts-update.json`);
 
-suite.forElement('erp', 'ledger-accounts',{ payload: payload }, (test) => {
-  test.should.supportCruds();
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.return200OnGet();
-  test.withOptions({ qs: { where: 'isInactive = \'false\'' } }).should.return200OnGet();
+const options = {
+  churros: {
+    updatePayload: ledgerAccountsUpdatePayload
+  }
+};
+
+suite.forElement('erp', 'ledger-accounts', { payload : ledgerAccountsCreatePayload }, (test) => {
+  test.withOptions(options).should.supportCruds();
+  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination('id');
+  test.should.supportCeqlSearch('id');
 });

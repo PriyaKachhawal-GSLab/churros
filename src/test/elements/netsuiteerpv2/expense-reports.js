@@ -1,19 +1,19 @@
 'use strict';
 
 const suite = require('core/suite');
-const cloud = require('core/cloud');
-const expenseReportsPayload = require('./assets/expense-reports');
+const tools = require('core/tools');
 
+const expenseReportsCreatePayload = tools.requirePayload(`${__dirname}/assets/expense-reports-create.json`);
+const expenseReportsUpdatePayload = tools.requirePayload(`${__dirname}/assets/expense-reports-update.json`);
 
-suite.forElement('erp', 'expense-reports', (test) => {
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
-  it('should allow CRUDS /hubs/erp/expense-reports', () => {
-    let internalId;
-    return cloud.post(test.api, expenseReportsPayload)
-      .then(r => internalId = r.body.id)
-      .then(r => cloud.get(test.api))
-      .then(r => cloud.get(`${test.api}/${internalId}`))
-      .then(r => cloud.patch(`${test.api}/${internalId}`, {}))
-      .then(r => cloud.delete(`${test.api}/${internalId}`));
-  });
+const options = {
+  churros: {
+    updatePayload: expenseReportsUpdatePayload
+  }
+};
+
+suite.forElement('erp', 'expense-reports', { payload : expenseReportsCreatePayload, skip : true }, (test) => {
+  test.withOptions(options).should.supportCruds();
+  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination('id');
+  test.should.supportCeqlSearch('id');
 });

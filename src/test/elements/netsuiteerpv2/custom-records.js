@@ -1,7 +1,7 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/custom-records');
+const payload = require('./assets/custom-records-create');
 //custom-record-types/{476}/custom-records
 //custom-record-types/{476}/custom-records/{id}
 

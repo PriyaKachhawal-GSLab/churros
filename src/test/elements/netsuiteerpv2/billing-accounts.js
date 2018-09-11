@@ -1,18 +1,20 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/billing-accounts');
-const expect = require('chakram').expect;
+const tools = require('core/tools');
 
-suite.forElement('erp', 'billing-accounts', { payload: payload }, (test) => {
-  test.should.supportCruds();
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
-  test
-    .withOptions({ qs: { where: `startDate >= '2014-01-15T00:00:00.000Z'` } })
-    .withName('should support Ceql date search')
-    .withValidation(r => {
-      expect(r).to.statusCode(200);
-      const validValues = r.body.filter(obj => new Date(obj.startDate).getTime() >= 1389744000000);
-      expect(validValues.length).to.equal(r.body.length);
-    });
+const billingAccountsCreatePayload = tools.requirePayload(`${__dirname}/assets/billing-accounts-create.json`);
+const billingAccountsUpdatePayload = tools.requirePayload(`${__dirname}/assets/billing-accounts-update.json`);
+
+const options = {
+  churros: {
+    updatePayload: billingAccountsUpdatePayload
+  }
+};
+
+// Due to permission issues we are unable to test this api ... getting The 'Billing Accounts feature is not enabled in your NetSuite account.
+suite.forElement('erp', 'billing-accounts', { payload : billingAccountsCreatePayload, skip : true }, (test) => {
+  test.withOptions(options).should.supportCruds();
+  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination('id');
+  test.should.supportCeqlSearch('id');
 });

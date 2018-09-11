@@ -1,19 +1,19 @@
 'use strict';
 
 const suite = require('core/suite');
-const expect = require('chakram').expect;
-const phoneCallsPayload = require('./assets/phone-calls');
+const tools = require('core/tools');
 
-suite.forElement('erp', 'phone-calls', { payload: phoneCallsPayload }, (test) => {
-  test.should.supportCruds();
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
-  
-  test
-    .withName(`should support searching ${test.api} by title`)
-    .withOptions({ qs: { where: "title = 'PC10'" } })
-    .withValidation((r) => {
-      expect(r).to.have.statusCode(200);
-      const validValues = r.body.filter(obj => obj.title === 'PC10');
-      expect(validValues.length).to.equal(r.body.length);
-    }).should.return200OnGet();
+const phoneCallsCreatePayload = tools.requirePayload(`${__dirname}/assets/phone-calls-create.json`);
+const phoneCallsUpdatePayload = tools.requirePayload(`${__dirname}/assets/phone-calls-update.json`);
+
+const options = {
+  churros: {
+    updatePayload: phoneCallsUpdatePayload
+  }
+};
+
+suite.forElement('erp', 'phone-calls', { payload : phoneCallsCreatePayload }, (test) => {
+  test.withOptions(options).should.supportCruds();
+  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination('id');
+  test.should.supportCeqlSearch('id');
 });

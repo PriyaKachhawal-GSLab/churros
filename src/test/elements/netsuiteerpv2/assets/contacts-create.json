@@ -1,0 +1,19 @@
+{
+  "customForm": {
+    "internalId": "220",
+    "name": "Custom Contact Form"
+  },
+  "lastName": "<<name.lastName>>",
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg."
+  },
+  "firstName": "<<name.firstName>>",
+  "phone": "650-555-9788",
+  "altEmail": "chu@cloud-elements.com",
+  "email": "<<internet.email>>",
+  "supervisor": {
+    "internalId": "1302",
+    "name": "Mark Jones"
+  }
+}

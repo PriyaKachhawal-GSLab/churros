@@ -1,0 +1,9 @@
+{
+  "shippingAddress": {
+    "addressee": "<<address.streetAddress>>",
+    "addr1": "<<address.secondaryAddress>>",
+    "city": "<<address.city>>",
+    "attention": "Ramsey Inc.",
+    "state": "<<address.state>>"
+  }
+}

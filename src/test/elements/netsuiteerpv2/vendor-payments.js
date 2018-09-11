@@ -1,10 +1,19 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/vendor-payments');
+const tools = require('core/tools');
 
-suite.forElement('erp', 'vendor-payments', { payload: payload }, (test) => {
-  test.should.supportCruds();
+const vendorPaymentsCreatePayload = tools.requirePayload(`${__dirname}/assets/vendor-payments-create.json`);
+const vendorPaymentsUpdatePayload = tools.requirePayload(`${__dirname}/assets/vendor-payments-update.json`);
+
+const options = {
+  churros: {
+    updatePayload: vendorPaymentsUpdatePayload
+  }
+};
+
+suite.forElement('erp', 'vendor-payments', { payload : vendorPaymentsCreatePayload }, (test) => {
+  test.withOptions(options).should.supportCruds();
   test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination('id');
   test.should.supportCeqlSearch('id');
 });

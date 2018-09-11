@@ -2,10 +2,18 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const payload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
 
-suite.forElement('erp', 'contacts', { payload: payload }, (test) => {
-  test.should.supportCruds();
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.return200OnGet();
+const contactsCreatePayload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
+const contactsUpdatePayload = tools.requirePayload(`${__dirname}/assets/contacts-update.json`);
+
+const options = {
+  churros: {
+    updatePayload: contactsUpdatePayload
+  }
+};
+
+suite.forElement('erp', 'contacts', { payload : contactsCreatePayload }, (test) => {
+  test.withOptions(options).should.supportCruds();
+  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination('id');
   test.should.supportCeqlSearch('id');
 });

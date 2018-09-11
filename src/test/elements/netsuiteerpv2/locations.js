@@ -1,10 +1,19 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('core/tools').requirePayload(`${__dirname}/assets/locations.json`);
+const tools = require('core/tools');
 
-suite.forElement('erp', 'locations', { payload: payload }, (test) => {
-  	test.should.supportCruds();
-	test.withOptions({ qs: { page: 1, pageSize: 5}}).should.supportPagination();
-  	test.should.supportCeqlSearch('name');
+const locationsCreatePayload = tools.requirePayload(`${__dirname}/assets/locations-create.json`);
+const locationsUpdatePayload = tools.requirePayload(`${__dirname}/assets/locations-update.json`);
+
+const options = {
+  churros: {
+    updatePayload: locationsUpdatePayload
+  }
+};
+
+suite.forElement('erp', 'locations', { payload : locationsCreatePayload }, (test) => {
+  test.withOptions(options).should.supportCruds();
+  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination('id');
+  test.should.supportCeqlSearch('id');
 });

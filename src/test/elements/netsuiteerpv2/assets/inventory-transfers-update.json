@@ -1,0 +1,27 @@
+{
+  "inventoryList": {
+    "inventory": [
+      {
+        "item": {
+          "internalId": "541",
+          "name": "OFF00007"
+        },
+        "line": 1,
+        "description": "Scotch Tape Desktop Dispenser - Two-Tone",
+        "adjustQtyBy": 50
+      }
+    ]
+  },
+  "location": {
+    "internalId": "4",
+    "name": "01: San Francisco : Receiving Insp."
+  },
+  "transferLocation": {
+    "internalId": "2",
+    "name": "01: San Francisco"
+  },
+  "subsidiary": {
+    "internalId": "1",
+    "name": "Honeycomb Mfg."
+  }
+}

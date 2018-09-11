@@ -1,10 +1,19 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/purchase-orders');
+const tools = require('core/tools');
 
-suite.forElement('erp', 'purchase-orders', { payload: payload }, (test) => {
-  test.should.supportCruds();
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.return200OnGet();
+const purchaseOrdersCreatePayload = tools.requirePayload(`${__dirname}/assets/purchase-orders-create.json`);
+const purchaseOrdersUpdatePayload = tools.requirePayload(`${__dirname}/assets/purchase-orders-update.json`);
+
+const options = {
+  churros: {
+    updatePayload: purchaseOrdersUpdatePayload
+  }
+};
+
+suite.forElement('erp', 'purchase-orders', { payload: purchaseOrdersCreatePayload }, (test) => {
+  test.withOptions(options).should.supportCruds();
+  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination('id');
   test.should.supportCeqlSearch('id');
 });

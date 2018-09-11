@@ -1,0 +1,25 @@
+{
+  "lastName":"<<name.lastName>>",
+  "companyName":"<<company.companyName>>",
+  "isPerson":true,
+  "subsidiary":{
+    "internalId":"1",
+    "name":"Honeycomb Mfg."
+  },
+  "firstName":"<<name.firstName>>",
+  "entityStatus":{
+    "internalId":"13",
+    "name":"CUSTOMER-Closed Won"
+  },
+  "customFieldList": {
+    "customField": [
+      {
+        "scriptId": "custentity7",
+        "ce_type": "SelectCustomFieldRef",
+        "value": {
+          "internalId": "1"
+        }
+      }
+    ]
+  }
+}
