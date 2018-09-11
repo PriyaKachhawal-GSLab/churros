@@ -8,17 +8,14 @@ const cloud = require('core/cloud');
 const moment = require('moment');
 const payload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
 const updatePayload = tools.requirePayload(`${__dirname}/assets/contacts-update.json`);
-const paginationPayload = tools.requirePayload(`${__dirname}/assets/contactsActivities-queryPaginationType.json`);
-const nextPagePaginationPayload = tools.requirePayload(`${__dirname}/assets/contacts-queryAll.json`);
-const searchTest = tools.requirePayload(`${__dirname}/assets/contacts-searchTest.json`);
 
 suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
   test.should.supportNextPagePagination(2);
-  test.withName('should allow pagination for all contacts with page and nextPage').withOptions({ qs: nextPagePaginationPayload }).should.supportNextPagePagination(2);
+  test.withName('should allow pagination for all contacts with page and nextPage').withOptions({ qs: { all: true } }).should.supportNextPagePagination(2);
 
   it('should test CRUD for /contacts and GET /contacts/{id}/activities', () => {
     let contactId;
-    const options = { qs: paginationPayload };
+    const options = { qs: { pageSize: 1 } };
     return cloud.post(test.api, payload)
       .then(r => contactId = r.body.id)
       .then(r => cloud.get(`${test.api}/${contactId}`))
@@ -34,7 +31,7 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
   it('should test contacts poller url', () => {
     let id;
     let objects;
-    const options = { qs: searchTest  };
+    const options = { qs: { where: "lastmodifieddate='" + moment().subtract(5, 'seconds').format() + "'" } };
     const checkLength = (objects) => {
       return (objects.length > 0);
     };
@@ -44,7 +41,6 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
     return cloud.post(test.api, payload)
       .then(r => id = r.body.id)
       .then(r => tools.sleep(10))
-      .then(r => searchTest.where = "lastmodifieddate=\'" + moment().subtract(10, 'seconds').format() + "\'")
       .then(r => cloud.withOptions(options).get(test.api))
       .then(r => objects = r.body)
       .then(r => checkLength(objects))
@@ -56,7 +52,8 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
   });
 
   it('should test get for xformed contact', () => {
-    let id;
+        let id;
+    const email = tools.random() + "-churros@delete.me";
     return cloud.post('/organizations/objects/churrosTestObject/definitions', resources.churrosTestObject, () => {})
       .then(r => cloud.post('/organizations/elements/hubspotcrm/transformations/churrosTestObject', resources.churrosTestObjectXform, () => {}))
       .then(r => cloud.post(test.api, payload))

@@ -5,10 +5,10 @@ const cloud = require('core/cloud');
 const tools = require('core/tools');
 const expect = require('chakram').expect;
 const faker = require('faker');
-const payload = tools.requirePayload(`${__dirname}/assets/timelineEventTypes-create.json`);
-const updatePayload = tools.requirePayload(`${__dirname}/assets/timelineEventTypes-update.json`);
-const propertiesPayload = tools.requirePayload(`${__dirname}/assets/timelineEventpTypesProperties-create.json`);
-const eventsPayload = tools.requirePayload(`${__dirname}/assets/timelineEventTypesEvents-create.json`);
+const payload = tools.requirePayload(`${__dirname}/assets/timeline-event-types-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/timeline-event-types-update.json`);
+const propertiesPayload = tools.requirePayload(`${__dirname}/assets/timeline-event-typesProperties-create.json`);
+const eventsPayload = tools.requirePayload(`${__dirname}/assets/timeline-event-typesEvents-create.json`);
 
 suite.forElement('crm', 'timeline-event-types', {payload: payload}, (test) => {
 

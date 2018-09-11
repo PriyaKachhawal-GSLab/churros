@@ -7,7 +7,6 @@ const cloud = require('core/cloud');
 const moment = require('moment');
 const updatePayload = tools.requirePayload(`${__dirname}/assets/opportunities-update.json`);
 const payload = tools.requirePayload(`${__dirname}/assets/opportunities-create.json`);
-const searchTest = tools.requirePayload(`${__dirname}/assets/opportunities-searchTest.json`);
 
 suite.forElement('crm', 'opportunities', { payload: payload }, (test) => {
   const options = {
@@ -22,7 +21,7 @@ suite.forElement('crm', 'opportunities', { payload: payload }, (test) => {
   it('should test opportunities poller url', () => {
     let id;
     let objects;
-    const options = { qs: searchTest };
+    const options = { qs: { where: "lastmodifieddate='" + moment().subtract(5, 'seconds').format() + "'" } };
     const checkLength = (objects) => {
       return (objects.length > 0);
     };
@@ -30,9 +29,8 @@ suite.forElement('crm', 'opportunities', { payload: payload }, (test) => {
       return (postedId === polledId);
     };
     return cloud.post(test.api, payload)
-      .then(r => id = r.body.id )
+      .then(r => id = r.body.id)
       .then(r => tools.sleep(10))
-      .then(r => searchTest.where = "lastmodifieddate=\'" + moment().subtract(10, 'seconds').format() + "\'")
       .then(r => cloud.withOptions(options).get(test.api))
       .then(r => objects = r.body)
       .then(r => checkLength(objects))
