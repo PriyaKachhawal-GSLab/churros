@@ -14,7 +14,7 @@ suite.forElement('finance', 'time-activities', { payload: payload }, (test) => {
     return cloud.post(test.api, payload)
     .then(r => {
       id = r.body.id;
-       temp = id
+       temp = id;
        Id = temp.split("|");
        ID = Id[0];
       

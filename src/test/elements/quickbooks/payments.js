@@ -1,10 +1,10 @@
 'use strict';
-
+const cloud = require('core/cloud');
 const suite = require('core/suite');
 const tools = require('core/tools');
-
-const CreatePayload = tools.requirePayload(`${__dirname}/assets/bills-create.json`);
-const UpdatePayload = tools.requirePayload(`${__dirname}/assets/bills-update.json`);
+const expect = chakram.expect;
+const CreatePayload = tools.requirePayload(`${__dirname}/assets/payments-create.json`);
+const UpdatePayload = tools.requirePayload(`${__dirname}/assets/payments-update.json`);
 
 const options = {
   churros: {

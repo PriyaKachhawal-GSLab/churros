@@ -20,7 +20,7 @@ suite.forElement('finance', 'tax-agencies', { payload: payload }, (test) => {
     .then(r => cloud.get(test.api))
     .then(r => cloud.withOptions({ qs: { where: `id = '${id}'` } }).get(test.api))
     .then(r => expect(r.body.filter(o => o.id === `${id}`)).to.not.be.empty)
-    .then(r => cloud.get(`${test.api}/${id}`))
+    .then(r => cloud.get(`${test.api}/${id}`));
     
   });
   test.should.supportPagination('id');

@@ -18,7 +18,7 @@ suite.forElement('finance', 'vendor-credits', { payload: payload }, (test) => {
     })
     .then(r => cloud.get(test.api))
     .then(r => cloud.withOptions({ qs: { where: `totalAmt = '${totalamt}'` } }).get(test.api))
-    .then(r => expect(r.body.filter(o => o.totalAmt == `${totalamt}`)).to.not.be.empty)
+    .then(r => expect(r.body.filter(o => o.totalAmt === `${totalamt}`)).to.not.be.empty)
     .then(r => cloud.get(`${test.api}/${id}`))
     .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
     .then(r => cloud.delete(`${test.api}/${id}`));

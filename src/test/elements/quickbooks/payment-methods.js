@@ -3,17 +3,15 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const payload = require('./assets/payment-methods-create');
-const updatePayload = require('./assets/payment-methods-update');
 const chakram = require('chakram');
 const expect = chakram.expect;
 
 suite.forElement('finance', 'payment-methods', { payload: payload }, (test) => {
   it('should support CRUDS and Ceql searching for /hubs/finance/payment-methods', () => {
-    let id, totalamt;
+    let id;
     return cloud.post(test.api, payload)
     .then(r => {
       id = r.body.id;
-      nam = r.body.name;
     })
     .then(r => cloud.get(test.api))
     .then(r => cloud.withOptions({ qs: { where: `active = 'true'` } }).get(test.api))
