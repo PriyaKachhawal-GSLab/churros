@@ -6,11 +6,11 @@ const tools = require('core/tools');
 const expect = require('chakram').expect;
 
 
-const commentsCreatePayload = tools.requirePayload(`${__dirname}/assets/comments-create.json`);
-const commentsUpdatePayload = tools.requirePayload(`${__dirname}/assets/comments-update.json`);
-const incidentsCreatePayload = tools.requirePayload(`${__dirname}/assets/incidents-create.json`);
-const incidentsUpdatePayload = tools.requirePayload(`${__dirname}/assets/incidents-update.json`);
-const attachmentsRequiredParamsForCreatePayload = tools.requirePayload(`${__dirname}/assets/attachments-requiredQueryParam-c.json`) 
+const commentsCreatePayload = tools.requirePayload(`${__dirname}/assets/ServiceRequestCollectionServiceRequestDescription-create.json`);
+const commentsUpdatePayload = tools.requirePayload(`${__dirname}/assets/ServiceRequestCollectionServiceRequestDescription-update.json`);
+const incidentsCreatePayload = tools.requirePayload(`${__dirname}/assets/ServiceRequestCollection-create.json`);
+const incidentsUpdatePayload = tools.requirePayload(`${__dirname}/assets/ServiceRequestCollection-update.json`);
+const attachmentsRequiredParamsForCreatePayload = tools.requirePayload(`${__dirname}/assets/ServiceRequestCollectionServiceRequestAttachmentFolderAttachments-requiredQueryParam-c.json`) 
 
 const incidentsOptions = {
   churros: {
@@ -48,7 +48,7 @@ suite.forElement('helpdesk', 'ServiceRequestCollection', { payload: incidentsCre
     };
     return cloud.post(test.api, incidentsCreatePayload)
       .then(r => incidentId = r.body.id)
-      .then(r => cloud.withOptions(metadataOptions).postFile(`${test.api}/${incidentId}/ServiceRequestAttachmentFolder/attachments`, __dirname + '/assets/attachments-create.jpg'))
+      .then(r => cloud.withOptions(metadataOptions).postFile(`${test.api}/${incidentId}/ServiceRequestAttachmentFolder/attachments`, __dirname + '/assets/ServiceRequestCollectionServiceRequestAttachmentFolderAttachments-create.jpg'))
       .then(r => attachmentId = r.body.id)
       .then(r => cloud.get(`${test.api}/${incidentId}/ServiceRequestAttachmentFolder/${attachmentId}`))
       .then(r => cloud.get(`${test.api}/${incidentId}/ServiceRequestAttachmentFolder`))
