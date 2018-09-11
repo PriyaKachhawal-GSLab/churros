@@ -6,7 +6,7 @@ const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
 const updatedPayload = tools.requirePayload(`${__dirname}/assets/contacts-update.json`);
-const interactionPayload = tools.requirePayload(`${__dirname}/assets/interactions-create.json`);
+const interactionPayload = tools.requirePayload(`${__dirname}/assets/contactsInteractions-create.json`);
 
 suite.forElement('marketing', 'contacts', { payload: payload }, (test) => {
   it('should allow CRUDS for /contacts', () => {

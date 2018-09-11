@@ -4,8 +4,8 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
-const payload = tools.requirePayload(`${__dirname}/assets/customObjects-create.json`);
-const updatePayload = tools.requirePayload(`${__dirname}/assets/customObjects-update.json`);
+const payload = tools.requirePayload(`${__dirname}/assets/custom-objectsCustomFields-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/custom-objectsCustomFields-update.json`);
 
 suite.forElement('marketing', 'custom-objects', { payload: payload }, (test) => {
   let customObjectName = 'afrinCustom_c',

@@ -2,8 +2,8 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const attributePayload = tools.requirePayload(`${__dirname}/assets/externalActivityAttributes-create.json`);
-const activityPayload = tools.requirePayload(`${__dirname}/assets/externalActivity-create.json`);
+const attributePayload = tools.requirePayload(`${__dirname}/assets/external-activityAttributes-update.json`);
+const activityPayload = tools.requirePayload(`${__dirname}/assets/external-activityType-create.json`);
 const cloud = require('core/cloud');
 /*
 Need different permissions for external-activities (ready-talk's sandbox)

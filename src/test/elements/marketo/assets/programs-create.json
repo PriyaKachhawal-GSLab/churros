@@ -1,5 +1,5 @@
 {
-  "name": "Texas Test Program 29",
+  "name": "<<name.firstName>>",
   "channel": "Email Send",
   "type": "Email",
   "folder": {
