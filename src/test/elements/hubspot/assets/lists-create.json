@@ -1,6 +1,6 @@
 {
   "name": "<<internet.userName>>",
-  "dynamic": true,
+  "dynamic": false,
   "portalId": 62515,
   "filters": [
     [{

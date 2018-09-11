@@ -5,8 +5,8 @@ const cloud = require('core/cloud');
 const tools = require('core/tools');
 const contactsApi = '/hubs/marketing/contacts';
 const payload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
-const createPayload = tools.requirePayload(`${__dirname}/assets/listsContacts-create.json`);
-const propertyPayload = tools.requirePayload(`${__dirname}/assets/listsContactsContacts-create.json`);
+const createPayload = tools.requirePayload(`${__dirname}/assets/lists-create.json`);
+const propertyPayload = tools.requirePayload(`${__dirname}/assets/listsContacts-create.json`);
 
 suite.forElement('marketing', 'lists', null, (test) => {
   it(`should support CD for ${test.api} and ${contactsApi}, then CS ${test.api}/:listId/contacts`, () => {

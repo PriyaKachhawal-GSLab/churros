@@ -8,6 +8,7 @@ const faker = require('faker');
 const payload = tools.requirePayload(`${__dirname}/assets/timeline-event-types-create.json`);
 const propertiesPayload = tools.requirePayload(`${__dirname}/assets/timeline-event-typesTimelineEventTypesProperties-create.json`);
 const eventsPayload = tools.requirePayload(`${__dirname}/assets/timeline-events-typesEvents-create.json`);
+const eventsUpdatePayload = tools.requirePayload(`${__dirname}/assets/timeline-event-typesEvents-update.json`);
 
 suite.forElement('marketing', 'timeline-event-types', { payload: payload }, (test) => {
 
@@ -48,17 +49,14 @@ suite.forElement('marketing', 'timeline-event-types', { payload: payload }, (tes
 
   it('it should allow CRU for /timeline-event-types/:id/events', () => {
     const cb = (eventTypes) => {
-      let events;
       return cloud.post(`${test.api}/${eventTypes.id}/events`, eventsPayload)
         .then(r => expect(r.body).to.be.empty)
         .then(r => cloud.get(`${test.api}/${eventTypes.id}/events/${eventsPayload.id}`))
         .then(r => {
           expect(r.body).to.contain.key('email');
           expect(r.body).to.have.property('id', `${eventsPayload.id}`);
-          events = r.body;
-          events.email = faker.internet.email();
         })
-        .then(r => cloud.patch(`${test.api}/${eventTypes.id}/events/${eventsPayload.id}`, events))
+        .then(r => cloud.patch(`${test.api}/${eventTypes.id}/events/${eventsPayload.id}`, eventsUpdatePayload))
         .then(r => expect(r.body).to.be.empty);
     };
     return eventTypesWrap(cb);

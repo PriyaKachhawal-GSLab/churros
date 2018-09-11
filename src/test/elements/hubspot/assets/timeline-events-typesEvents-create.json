@@ -1,4 +1,4 @@
 {
-  "id":"<<random.word>>",
-  "email":"<<internet.email>>"
+  "id": "<<name.firstName>>",
+  "email": "<<internet.email>>"
 }

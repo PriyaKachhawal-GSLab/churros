@@ -1,3 +1,4 @@
 {
-  "name": "tools.randomStr('abcdefghijklmnopqrstuvwxyz', 10)"
+  "firstName": "<<name.firstName>>",
+  "lastName": "<<name.lastName>>"
 }
