@@ -2,7 +2,6 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const expect = require('chakram').expect;
 
 const customerRefundsCreatePayload = tools.requirePayload(`${__dirname}/assets/customer-refunds-create.json`);
 const customerRefundsUpdatePayload = tools.requirePayload(`${__dirname}/assets/customer-refunds-update.json`);
