@@ -1,38 +1,36 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/incidents');
-const commentsPayload = require('./assets/comments');
 const cloud = require('core/cloud');
+const tools = require('core/tools');
 const expect = require('chakram').expect;
 
-let options = {
+
+const commentsCreatePayload = tools.requirePayload(`${__dirname}/assets/comments-create.json`);
+const commentsUpdatePayload = tools.requirePayload(`${__dirname}/assets/comments-update.json`);
+const incidentsCreatePayload = tools.requirePayload(`${__dirname}/assets/incidents-create.json`);
+const incidentsUpdatePayload = tools.requirePayload(`${__dirname}/assets/incidents-update.json`);
+const attachmentsRequiredParamsForCreatePayload = tools.requirePayload(`${__dirname}/assets/attachments-requiredQueryParam-c.json`) 
+
+const incidentsOptions = {
   churros: {
-    updatePayload: {
-      "ServicePriorityCode": "3",
-      "Name": {
-        "content": "De-prioritized ticket to normal"
-      }
-    }
+    updatePayload: incidentsUpdatePayload
   }
 };
+
 // Calling the incidents endpoint (ServiceRequestCollection) directly to test {objectName} APIs
-suite.forElement('helpdesk', 'ServiceRequestCollection', { payload: payload }, (test) => {
-  test.withOptions(options).should.supportCruds();
+suite.forElement('helpdesk', 'ServiceRequestCollection', { payload: incidentsCreatePayload }, (test) => {
+  test.withOptions(incidentsOptions).should.supportCruds();
   test.should.supportCeqlSearch('id');
   test.should.supportPagination();
   it(`should allow CRUDS for ${test.api}/:id/ServiceRequestDescription`, () => {
     let id, commentId;
-    let updatePayload = {
-      'Text': 'Got the sauce, thanks for your patience',
-      'TypeCode': '10007'
-    };
-    return cloud.post(test.api, payload)
+    return cloud.post(test.api, incidentsCreatePayload)
       .then(r => id = r.body.id)
-      .then(r => cloud.post(`${test.api}/${id}/ServiceRequestDescription`, commentsPayload))
+      .then(r => cloud.post(`${test.api}/${id}/ServiceRequestDescription`, commentsCreatePayload))
       .then(r => commentId = r.body.id)
       .then(r => cloud.get(`${test.api}/${id}/ServiceRequestDescription/${commentId}`))
-      .then(r => cloud.patch(`/ServiceRequestDescriptionCollection/${commentId}`, updatePayload))
+      .then(r => cloud.patch(`/ServiceRequestDescriptionCollection/${commentId}`, commentsUpdatePayload))
       .then(r => cloud.get(`${test.api}/${id}/ServiceRequestDescription`))
       .then(r => cloud.withOptions({ qs: { pageSize: 1 }}).get(`${test.api}/${id}/ServiceRequestDescription`))
       .then(r => expect(r.body.length).to.equal(1))
@@ -41,20 +39,16 @@ suite.forElement('helpdesk', 'ServiceRequestCollection', { payload: payload }, (
   });
 
   it(`should allow CRDS for ${test.api}/:id/ServiceRequestAttachmentFolder`, () => {
-    let metadata = {
-      "CategoryCode": "2",
-      "TypeCode": "10001",
-      "FileName": "churrosFileName"
-    };
+    let metadata = attachmentsRequiredParamsForCreatePayload;
     let incidentId, attachmentId;
     let metadataOptions = {
       formData: {
         metadata: JSON.stringify(metadata)
       }
     };
-    return cloud.post(test.api, payload)
+    return cloud.post(test.api, incidentsCreatePayload)
       .then(r => incidentId = r.body.id)
-      .then(r => cloud.withOptions(metadataOptions).postFile(`${test.api}/${incidentId}/ServiceRequestAttachmentFolder/attachments`, __dirname + '/assets/brady.jpg'))
+      .then(r => cloud.withOptions(metadataOptions).postFile(`${test.api}/${incidentId}/ServiceRequestAttachmentFolder/attachments`, __dirname + '/assets/attachments-create.jpg'))
       .then(r => attachmentId = r.body.id)
       .then(r => cloud.get(`${test.api}/${incidentId}/ServiceRequestAttachmentFolder/${attachmentId}`))
       .then(r => cloud.get(`${test.api}/${incidentId}/ServiceRequestAttachmentFolder`))

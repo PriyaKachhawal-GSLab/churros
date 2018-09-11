@@ -2,10 +2,10 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const accountsPayload = tools.requirePayload(`${__dirname}/assets/accounts.json`);
-const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
-const leadsPayload = tools.requirePayload(`${__dirname}/assets/leads.json`);
-const opportunitiesPayload = require('./assets/opportunities');
+const accountsPayload = tools.requirePayload(`${__dirname}/assets/accounts-create.json`);
+const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
+const leadsPayload = tools.requirePayload(`${__dirname}/assets/leads-create.json`);
+const opportunitiesPayload = tools.requirePayload(`${__dirname}/assets/opportunities-create.json`);
 
 // Issue with sap so am skippinf for now
 suite.forElement('crm', 'polling', { skip:true }, (test) => {

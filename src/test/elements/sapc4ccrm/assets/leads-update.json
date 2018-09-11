@@ -1,0 +1,6 @@
+{
+  "Name": "<<random.word>>",
+  "Company": "<<company.companyName>>",
+  "ContactFirstName": "<<name.firstName>>",
+  "ContactLastName": "<<name.lastName>>"
+}

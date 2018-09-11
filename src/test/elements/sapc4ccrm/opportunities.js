@@ -1,21 +1,19 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/opportunities');
+const tools = require('core/tools');
 
-let options = {
+const opportunitiesCreatePayload = tools.requirePayload(`${__dirname}/assets/opportunities-create.json`);
+const opportunitiesUpdatePayload = tools.requirePayload(`${__dirname}/assets/opportunities-update.json`);
+
+const options = {
   churros: {
-    updatePayload: {
-      "CategoryCode": "0023",
-      "DocumentTypeCode": "OPPT",
-      "SalesCycleCode": "001",
-      "AccountID": "1001720"
-    }
+    updatePayload: opportunitiesUpdatePayload
   }
 };
 
-suite.forElement('crm', 'opportunities', { payload: payload }, (test) => {
+suite.forElement('crm', 'opportunities', { payload : opportunitiesCreatePayload }, (test) => {
   test.withOptions(options).should.supportCruds();
+  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination('id');
   test.should.supportCeqlSearch('id');
-  test.should.supportPagination();
 });
