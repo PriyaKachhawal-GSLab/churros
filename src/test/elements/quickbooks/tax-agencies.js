@@ -2,22 +2,27 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
+const cloud = require('core/cloud');
+const payload = tools.requirePayload(`${__dirname}/assets/tax-agencies-create.json`);
 const chakram = require('chakram');
 const expect = chakram.expect;
-const payload= require('./assets/tax-agencies');
-const build = (overrides) => Object.assign({}, payload, overrides);
-const agencyPayload = build({"displayName": tools.random()});
 
-suite.forElement('finance', 'tax-agencies', { payload: agencyPayload}, (test) => {
-  test.should.supportSr();
-  test.withOptions({skip:true}).should.return200OnPost();
-  test.withName(`should support searching ${test.api} by Id`)
-    .withOptions({ qs: { where: `id ='1234'`, returnCount: true } })
-    .withValidation((r) => {
-      expect(r).to.have.statusCode(200);
-      const validValues = r.body.filter(obj => obj.id = '1234');
-      expect(validValues.length).to.equal(r.body.length);
-      expect(r.response.headers['elements-total-count']).to.exist;
-    }).should.return200OnGet();
+suite.forElement('finance', 'tax-agencies', { payload: payload }, (test) => {
+  it('should support CRUDS and Ceql searching for /hubs/finance/tax-agencies', () => {
+    let id;
+    return cloud.post(test.api, payload)
+    .then(r => {
+      id = r.body.id;
+      var Id = id.split("|");
+      id = Id[0];
+      
+    })
+    .then(r => cloud.get(test.api))
+    .then(r => cloud.withOptions({ qs: { where: `id = '${id}'` } }).get(test.api))
+    .then(r => expect(r.body.filter(o => o.id === `${id}`)).to.not.be.empty)
+    .then(r => cloud.get(`${test.api}/${id}`))
+    
+  });
+  test.should.supportPagination('id');
 
 });

@@ -1,18 +1,19 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/bill-payments');
-const chakram = require('chakram');
-const expect = chakram.expect;
+const tools = require('core/tools');
 
-suite.forElement('finance', 'bill-payments', { payload: payload }, (test) => {
-  test.should.supportCrds();
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.return200OnGet();
-  test.withOptions({ qs: { where: 'totalAmt = \'1\'', page: 1, pageSize: 1, returnCount: true } })
-  	.withName('Test for search on totalAmt and returnCount in response')
-  	.withValidation(r => {
-      expect(r).to.statusCode(200);
-      expect(r.response.headers['elements-total-count']).to.exist;
-    })
-  .should.return200OnGet();
+const billPaymentsCreatePayload = tools.requirePayload(`${__dirname}/assets/bill-payments-create.json`);
+const billPaymentsUpdatePayload = tools.requirePayload(`${__dirname}/assets/bill-payments-update.json`);
+
+const options = {
+  churros: {
+    updatePayload: billPaymentsUpdatePayload
+  }
+};
+
+suite.forElement('finance', 'bill-payments', { payload: billPaymentsCreatePayload }, (test) => {
+  test.should.supportPagination();
+  test.withOptions(options).should.supportCruds();
+  test.should.supportCeqlSearchForMultipleRecords('totalAmt');
 });

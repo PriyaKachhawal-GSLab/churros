@@ -2,23 +2,23 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const billPaymentsPayload = require('./assets/bill-payments');
-const billsPayload = require('./assets/bills');
-const creditMemosPayload = require('./assets/credit-memos');
+const billPaymentsPayload = require('./assets/bill-payments-create.json');
+const billsPayload = require('./assets/bills-create.json');
+const creditMemosPayload = require('./assets/credit-memos-create.json');
 const creditTermsPayload = tools.requirePayload(`${__dirname}/assets/credit-terms.json`);
-const customersPayload = tools.requirePayload(`${__dirname}/assets/customers.json`);
-const employeesPayload = tools.requirePayload(`${__dirname}/assets/employees.json`);
-const invoicesPayload = tools.requirePayload(`${__dirname}/assets/invoices.json`);
-const journalEntriesPayload = tools.requirePayload(`${__dirname}/assets/journal-entries.json`);
+const customersPayload = tools.requirePayload(`${__dirname}/assets/customers-create.json`);
+const employeesPayload = tools.requirePayload(`${__dirname}/assets/employees-create.json`);
+const invoicesPayload = tools.requirePayload(`${__dirname}/assets/invoices-create.json`);
+const journalEntriesPayload = tools.requirePayload(`${__dirname}/assets/journal-entries-create.json`);
 const ledgerAccountsPayload = tools.requirePayload(`${__dirname}/assets/ledger-accounts.json`);
-const paymentMethodsPayload = tools.requirePayload(`${__dirname}/assets/payment-methods.json`);
-const paymentsPayload = require('./assets/payments');
-const productsPayload = tools.requirePayload(`${__dirname}/assets/products.json`);
-const purchaseOrdersPayload = require('./assets/purchase-orders');
-const salesReceiptsPayload = require('./assets/sales-receipts');
-const timeActivitiesPayload = require('./assets/time-activities');
-const vendorCreditsPayload = require('./assets/vendor-credits');
-const vendorPayload = tools.requirePayload(`${__dirname}/assets/vendor.json`);
+const paymentMethodsPayload = tools.requirePayload(`${__dirname}/assets/payment-methods-create.json`);
+const paymentsPayload = require('./assets/payments-create.json');
+const productsPayload = tools.requirePayload(`${__dirname}/assets/products-create.json`);
+const purchaseOrdersPayload = require('./assets/purchase-orders-create.json');
+const salesReceiptsPayload = require('./assets/sales-receipts-create.json');
+const timeActivitiesPayload = require('./assets/time-activities-create.json');
+const vendorCreditsPayload = require('./assets/vendor-credits-create.json');
+const vendorPayload = tools.requirePayload(`${__dirname}/assets/vendor-create.json`);
 
 suite.forElement('finance', 'polling', null, (test) => {
   test.withApi('/hubs/finance/bill-payments').should.supportPolling(billPaymentsPayload, 'bill-payments');

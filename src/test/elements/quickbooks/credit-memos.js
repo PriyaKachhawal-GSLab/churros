@@ -1,19 +1,27 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/credit-memos');
+const cloud = require('core/cloud');
+const payload = require('./assets/credit-memos-create');
+const updatePayload = require('./assets/credit-memos-update');
 const chakram = require('chakram');
 const expect = chakram.expect;
 
 suite.forElement('finance', 'credit-memos', { payload: payload }, (test) => {
-  test.should.supportCruds();
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.return200OnGet();
-  test.withOptions({ qs: { where: 'totalAmt = \'1\'', page: 1, pageSize: 1, returnCount: true } })
-    .withName('Test for search on totalAmt and returnCount in response')
-    .withValidation((r) => {
-      expect(r).to.have.statusCode(200);
-      const validValues = r.body.filter(obj => obj.totalAmt = '1');
-      expect(validValues.length).to.equal(r.body.length);
-      expect(r.response.headers['elements-total-count']).to.exist;
-    }).should.return200OnGet();
+  it('should support CRUDS and Ceql searching for /hubs/finance/credit-memos', () => {
+    let id, totalamt;
+    return cloud.post(test.api, payload)
+    .then(r => {
+      id = r.body.id;
+      totalamt = r.body.totalAmt;
+    })
+    .then(r => cloud.get(test.api))
+    .then(r => cloud.withOptions({ qs: { where: `totalAmt = '${totalamt}'` } }).get(test.api))
+    .then(r => expect(r.body.filter(o => o.totalAmt == `${totalamt}`)).to.not.be.empty)
+    .then(r => cloud.get(`${test.api}/${id}`))
+    .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
+    .then(r => cloud.delete(`${test.api}/${id}`));
+  });
+  test.should.supportPagination('id');
+
 });

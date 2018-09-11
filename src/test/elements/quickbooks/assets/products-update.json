@@ -1,0 +1,4 @@
+{
+    "sku": "<<random.alphaNumeric##15>>",
+    "name": "<<name.firstName>>"
+  }

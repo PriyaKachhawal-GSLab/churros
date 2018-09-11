@@ -1,24 +1,25 @@
 'use strict';
 
 const suite = require('core/suite');
-const tools = require('core/tools');
+const cloud = require('core/cloud');
+const payload = require('./assets/payment-methods-create');
+const updatePayload = require('./assets/payment-methods-update');
 const chakram = require('chakram');
 const expect = chakram.expect;
-const payload = tools.requirePayload(`${__dirname}/assets/payment-methods.json`);
 
-//Need to skip as there is no delete API
 suite.forElement('finance', 'payment-methods', { payload: payload }, (test) => {
-  test.should.supportSr();
-  test.withOptions({skip:true}).should.return200OnPost();
-  test.withOptions({ qs: { page: 1, pageSize: 1 } }).should.return200OnGet();
-  test.withName(`should support searching ${test.api} by Id and returnCount in response`)
-    .withOptions({ qs: { where: `id ='1234'`, returnCount: true } })
-    .withValidation((r) => {
-      expect(r).to.have.statusCode(200);
-      const validValues = r.body.filter(obj => obj.id = '1234');
-      expect(validValues.length).to.equal(r.body.length);
-      expect(r.response.headers['elements-total-count']).to.exist;
-    }).should.return200OnGet();
-
+  it('should support CRUDS and Ceql searching for /hubs/finance/payment-methods', () => {
+    let id, totalamt;
+    return cloud.post(test.api, payload)
+    .then(r => {
+      id = r.body.id;
+      nam = r.body.name;
+    })
+    .then(r => cloud.get(test.api))
+    .then(r => cloud.withOptions({ qs: { where: `active = 'true'` } }).get(test.api))
+    .then(r => expect(r.body.filter(o => o.active === true)).to.not.be.empty)
+    .then(r => cloud.get(`${test.api}/${id}`));
+  });
+  test.should.supportPagination('id');
 
 });

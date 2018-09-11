@@ -1,0 +1,4 @@
+{
+    "familyName": "<<name.lastName>>",
+    "givenName": "<<name.firstName>>"
+  }

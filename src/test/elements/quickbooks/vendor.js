@@ -1,30 +1,27 @@
 'use strict';
 
 const suite = require('core/suite');
+const cloud = require('core/cloud');
 const tools = require('core/tools');
+const payload = tools.requirePayload(`${__dirname}/assets/vendor-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/vendor-update.json`);
 const chakram = require('chakram');
 const expect = chakram.expect;
-const payload = tools.requirePayload(`${__dirname}/assets/vendor.json`);
+
 
 suite.forElement('finance', 'vendor', { payload: payload }, (test) => {
-  const options = {
-    churros: {
-      updatePayload: {
-        "familyName": tools.random(),
-        "givenName": tools.random(),
-        "displayName": tools.random()
-      }
-    }
-  };
-  test.withOptions(options).should.supportCruds();
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.return200OnGet();
-  test.withName(`should support searching ${test.api} by Id`)
-    .withOptions({ qs: { where: `id ='1234'`, returnCount: true } })
-    .withName('Test for search on id and returnCount in response')
-    .withValidation((r) => {
-      expect(r).to.have.statusCode(200);
-      const validValues = r.body.filter(obj => obj.id = '1234');
-      expect(validValues.length).to.equal(r.body.length);
-      expect(r.response.headers['elements-total-count']).to.exist;
-    }).should.return200OnGet();
+  it('should support CRUDS and Ceql searching for /hubs/finance/vendor', () => {
+    let id;
+    return cloud.post(test.api, payload)
+    .then(r => {
+      id = r.body.id;
+    })
+    .then(r => cloud.get(test.api))
+    .then(r => cloud.withOptions({ qs: { where: `active='true'` } }).get(test.api))
+    .then(r => expect(r.body.filter(o => o.active === true)).to.not.be.empty)
+    .then(r => cloud.get(`${test.api}/${id}`))
+    .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
+    .then(r => cloud.delete(`${test.api}/${id}`));
+  });
+  test.should.supportPagination('id');
 });

@@ -2,40 +2,27 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
+const payload = tools.requirePayload(`${__dirname}/assets/invoices-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/invoices-update.json`);
+const chakram = require('chakram');
 const cloud = require('core/cloud');
-const expect = require('chakram').expect;
-const payload = tools.requirePayload(`${__dirname}/assets/invoices.json`);
-
+const expect = chakram.expect;
 
 suite.forElement('finance', 'invoices', { payload: payload }, (test) => {
-  const options = {
-    churros: {
-      updatePayload: {
-        "docNumber": tools.random()
-      }
-    }
-  };
-  test.withOptions(options).should.supportCruds();
-  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
-  test.withOptions({ qs: { where: 'totalAmt = \'1\'', page: 1, pageSize: 1, returnCount: true } })
-    .withName('Test for search on totalAmt and returnCount in response')
-    .withValidation((r) => {
-      expect(r).to.have.statusCode(200);
-      const validValues = r.body.filter(obj => obj.totalAmt = '1');
-      expect(validValues.length).to.equal(r.body.length);
-      expect(r.response.headers['elements-total-count']).to.exist;
-    }).should.return200OnGet();
-
-  it('should allow pdf download for /invoices', () => {
-    let invoiceId;
-    return cloud.post('/invoices', payload)
-      .then(r => invoiceId = r.body.id)
-      .then(r => cloud.withOptions({ headers: { accept: 'application/pdf' } }).get(`/invoices/${invoiceId}`))
-      .then(r => {
-        expect(r).to.have.statusCode(200);
-        expect(r.body).to.contain('PDF');
-        expect(r.response.headers['content-disposition']).to.contain('.pdf');
-      })
-      .then(r => cloud.delete(`/invoices/${invoiceId}`));
+  it('should support CRUDS and Ceql searching for /hubs/finance/invoices', () => {
+    let id, totalamt;
+    return cloud.post(test.api, payload)
+    .then(r => {
+      id = r.body.id;
+      totalamt=r.body.totalAmt;
+    })
+    .then(r => cloud.get(test.api))
+    .then(r => cloud.withOptions({ qs: { where: `totalAmt = '${totalamt}'` } }).get(test.api))
+    .then(r => expect(r.body.filter(o => o.totalAmt == `${totalamt}`)).to.not.be.empty)
+    .then(r => cloud.get(`${test.api}/${id}`))
+    .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
+    .then(r => cloud.delete(`${test.api}/${id}`));
   });
+  test.should.supportPagination('id');
 });
+
