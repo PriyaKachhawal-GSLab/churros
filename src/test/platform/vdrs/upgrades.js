@@ -20,7 +20,7 @@ pluralSchema.definitions.vdr = schema;
 suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
     let cloudWithUser, user, account, org, user2, account2, instance1, instance2, instance3;
     const closeioKey = 'closeio';
-    beforeEach(() => {
+    beforeEach(function() {
         return cloud.post(`/customers/signup`, signup)
             .then(r => {
                 user = r.body.user;
@@ -51,7 +51,10 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
             .then(r => provisioner.create(closeioKey))
             .then(r => instance3 = r.body)
             .then(() => defaults.reset())
-            .catch(() => defaults.reset());
+            .catch(() => {
+              this.skip();
+              defaults.reset();
+            });
     });
 
     afterEach(() => {
@@ -115,7 +118,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
         // create some v1 objects
         return cloudWithUser().post(`/organizations/objects/${vdrSystem.objectName}/definitions`, genObj('name'), validateObject(1, ['vdrname']))
             .then(r => cloudWithUser().post(`/organizations/elements/${closeioKey}/transformations/${vdrSystem.objectName}`, genTransform('name')))
-            // upgrade 
+            // upgrade
             .then(r => cloudWithUser().put(`/vdrs/upgrade/v2`, {}))
             .then(r => cloudWithUser().get(`/organizations/me`, validateVdrVersion('v2')))
             // roll back
@@ -138,7 +141,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
 
         return cloudWithUser().post(`/organizations/objects/${vdrSystem.objectName}/definitions`, genObj('name'), validateObject(1, ['vdrname']))
             .then(r => cloudWithUser().post(`/organizations/elements/${closeioKey}/transformations/${vdrSystem.objectName}`, genTransform('name')))
-            // upgrade 
+            // upgrade
             .then(r => cloud.withOptions(opts).put(`/vdrs/upgrade/v2`, {}))
             .then(r => cloud.get(`/customers/organizations/${org.id}`, validateVdrVersion('v2')))
             // roll back
@@ -203,7 +206,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
                     });
                 }));
         };
-    
+
         // create some v1 objects (org)
         return cloudWithUser().post(`/organizations/objects/${vdrSystem.objectName}/definitions`, genObj('name'), validateObject(1, ['vdrname']))
             .then(r => cloudWithUser().post(`/organizations/elements/${closeioKey}/transformations/${vdrSystem.objectName}`, genTransform('name')))
@@ -262,7 +265,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
                     });
                 }));
         };
-    
+
         // create some v1 objects (org)
         return cloudWithUser().post(`/organizations/objects/${vdrSystem.objectName}/definitions`, genObj('name'), validateObject(1, ['vdrname']))
             .then(r => cloudWithUser().post(`/organizations/elements/${closeioKey}/transformations/${vdrSystem.objectName}`, genTransform('name')))
@@ -328,7 +331,7 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
                     });
                 }));
         };
-    
+
         // create some v1 objects (org)
         return cloudWithUser().post(`/organizations/objects/${vdrSystem.objectName}/definitions`, genObj('name'), validateObject(1, ['vdrname']))
             .then(r => cloudWithUser().post(`/organizations/elements/${closeioKey}/transformations/${vdrSystem.objectName}`, genTransform('name')))
@@ -368,13 +371,13 @@ suite.forPlatform('vdrs', {payload: vdrSystem, schema}, test => {
                 expect(r.body.fields.filter(R.propEq('path', 'vdremails[*].type'))).to.not.be.empty;
                 expect(r.body.fields.filter(R.propEq('vendorPath', 'name'))).to.not.be.empty;
                 expect(r.body.fields.filter(R.propEq('vendorPath', 'id'))).to.not.be.empty;
-                expect(r.body.fields.filter(R.propEq('vendorPath', 'emails[*].type'))).to.not.be.empty; 
+                expect(r.body.fields.filter(R.propEq('vendorPath', 'emails[*].type'))).to.not.be.empty;
             }))
-    
+
             // roll back
             .then(r => cloudWithUser().delete(`/vdrs/upgrade/v2`))
             .then(r => cloudWithUser().get(`/organizations/me`, validateVdrVersion('v1')))
-    
+
             // validate back in v1
             .then(r => validateOAITransformExistsAndWorks());
     });

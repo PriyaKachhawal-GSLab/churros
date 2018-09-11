@@ -3,7 +3,7 @@
 const expect = require('chakram').expect;
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const newResource = require('./assets/newResource.json');
+const newResource = require('./assets/new-resource.json');
 
 // Test for extending eloqua and invoking the extended resource
 suite.forElement('marketing', 'extended-resource', {}, (test) => {
