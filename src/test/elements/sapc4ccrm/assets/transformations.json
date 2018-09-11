@@ -61,5 +61,12 @@
       "path": "id",
       "vendorPath": "ObjectID"
     }]
+  },
+  "incidents": {
+    "vendorName": "incidents",
+    "fields": [{
+      "path": "id",
+      "vendorPath": "ObjectID"
+    }]
   }
 }

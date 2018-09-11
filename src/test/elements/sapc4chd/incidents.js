@@ -3,82 +3,77 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = require('./assets/incidents');
-const nestedTestPayload = tools.requirePayload(`${__dirname}/assets/nested-incident.json`);
-const commentsPayload = require('./assets/comments');
 const expect = require('chakram').expect;
 
-let options = {
+const incidentsCreatePayload = tools.requirePayload(`${__dirname}/assets/incidents-create.json`);
+const incidentsUpdatePayload = tools.requirePayload(`${__dirname}/assets/incidents-update.json`);
+const incidentsCommentsCreatePayload = tools.requirePayload(`${__dirname}/assets/incidentsComments-create.json`);
+const incidentsCommentsUpdatePayload = tools.requirePayload(`${__dirname}/assets/incidentsComments-update.json`);
+const incidentsAttachmentsQueryParamPayload = tools.requirePayload(`${__dirname}/assets/incidentsAttachments-requiredQueryParam-c.json`);
+
+const incidentsOptions = {
   churros: {
-    updatePayload: {
-      "ServicePriorityCode": "3",
-      "Name": {
-        "content": "De-prioritized ticket to normal"
-      }
-    }
+    updatePayload: incidentsUpdatePayload
   }
 };
 
-suite.forElement('helpdesk', 'incidents', { payload: payload }, (test) => {
-  test.withOptions(options).should.supportCruds();
-  test.should.supportCeqlSearch('id');
+const incidentCommentsOptions = {
+  churros: {
+    updatePayload: incidentsCommentsUpdatePayload
+  }
+};
+
+suite.forElement('helpdesk', 'incidents', { payload: incidentsCreatePayload }, (test) => {
+  let incidentId;
+
+  before(() => cloud.post(test.api, incidentsCreatePayload)
+    .then(r => incidentId = r.body.id));
+
+  after(() => cloud.delete(`${test.api}/${incidentId}`));
+
+  test.withOptions(incidentsOptions).should.supportCruds();
   test.should.supportPagination();
-  it(`should allow CRUDS for ${test.api}/:id/comments`, () => {
-    let id;
-    return cloud.post(test.api, payload)
-      .then(r => {
-        id = r.body.id;
-        options.churros.updatePayload = { 'Text': 'Got the sauce, thanks for your patience', 'TypeCode': '10007' };
-      })
-      .then(r => cloud.withOptions(options).cruds(`${test.api}/${id}/comments`, commentsPayload));
-  });
+  test.should.supportCeqlSearch('id');
 
   it(`should allow nested Ceql search for ${test.api}`, () => {
-    let id;
-    return cloud.post(test.api, nestedTestPayload)
-      .then(r => id = r.body.id)
-      .then(r => cloud.withOptions({ qs: { where: `Name.content = '${nestedTestPayload.Name.content}'` } }).get(test.api))
+    return cloud.withOptions({ qs: { where: `Name.content = '${incidentsCreatePayload.Name.content}'` } }).get(test.api)
       .then(r => {
         expect(r.body).to.not.be.empty;
-        expect(r.body[0].id).to.equal(id);
-      })
-      .then(r => cloud.delete(`${test.api}/${id}`));
+        expect(r.body[0].Name.content).to.equal(incidentsCreatePayload.Name.content);
+      });
+  });
+
+  it(`should allow CRUDSS for /hubs/helpdesk/incidents/{id}/comments`, () => {
+    return cloud.withOptions(incidentCommentsOptions).cruds(`/hubs/helpdesk/incidents/${incidentId}/comments`, incidentsCommentsCreatePayload);
   });
 
   it(`should allow paginating for ${test.api}/:id/comments`, () => {
-    let id;
-    return cloud.post(test.api, payload)
-      .then(r => id = r.body.id)
-      .then(r => cloud.post(`${test.api}/${id}/comments`, commentsPayload))
-      .then(r => cloud.withOptions({ qs: { pageSize: 1 } }).get(`${test.api}/${id}/comments`))
+    let incidentCommentId1, incidentCommentId2;
+    return cloud.post(`${test.api}/${incidentId}/comments`, incidentsCommentsCreatePayload)
+      .then(r => incidentCommentId1 = r.body.id)
+      .then(r => cloud.withOptions({ qs: { pageSize: 1 } }).get(`${test.api}/${incidentId}/comments`))
       .then(r => expect(r.body.length).to.equal(1))
-      .then(r => cloud.post(`${test.api}/${id}/comments`, commentsPayload))
-      .then(r => cloud.withOptions({ qs: { pageSize: 2 } }).get(`${test.api}/${id}/comments`))
+      .then(r => cloud.post(`${test.api}/${incidentId}/comments`, incidentsCommentsCreatePayload))
+      .then(r => incidentCommentId2 = r.body.id)
+      .then(r => cloud.withOptions({ qs: { pageSize: 2 } }).get(`${test.api}/${incidentId}/comments`))
       .then(r => expect(r.body.length).to.equal(2))
-      .then(r => cloud.delete(`${test.api}/${id}`));
+      .then(r => cloud.delete(`${test.api}/${incidentId}/comments/${incidentCommentId1}`))
+      .then(r => cloud.delete(`${test.api}/${incidentId}/comments/${incidentCommentId2}`));
   });
 
   it(`should allow CRDS for ${test.api}/:id/attachments`, () => {
-    let metadata = {
-      "CategoryCode": "2",
-      "TypeCode": "10001",
-      "FileName": "churrosFileName"
-    };
-    let incidentId, attachmentId;
+    let attachmentId;
     let metadataOptions = {
       formData: {
-        metadata: JSON.stringify(metadata)
+        metadata: JSON.stringify(incidentsAttachmentsQueryParamPayload)
       }
     };
-    return cloud.post(test.api, payload)
-      .then(r => incidentId = r.body.id)
-      .then(r => cloud.withOptions(metadataOptions).postFile(`${test.api}/${incidentId}/attachments`, __dirname + '/assets/brady.jpg'))
+    return cloud.withOptions(metadataOptions).postFile(`${test.api}/${incidentId}/attachments`, __dirname + '/assets/incidentsAttachments-create.jpg')
       .then(r => attachmentId = r.body.id)
       .then(r => cloud.get(`${test.api}/${incidentId}/attachments/${attachmentId}`))
       .then(r => cloud.get(`${test.api}/${incidentId}/attachments`))
       .then(r => cloud.withOptions({ qs: { pageSize: 1 } }).get(`${test.api}/${incidentId}/attachments`))
       .then(r => expect(r.body.length).to.equal(1))
-      .then(r => cloud.delete(`${test.api}/${incidentId}/attachments/${attachmentId}`))
-      .then(r => cloud.delete(`${test.api}/${incidentId}`));
+      .then(r => cloud.delete(`${test.api}/${incidentId}/attachments/${attachmentId}`));
   });
 });

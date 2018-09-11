@@ -2,9 +2,9 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const accountsPayload = tools.requirePayload(`${__dirname}/assets/accounts.json`);
-const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
-const incidentsPayload = tools.requirePayload(`${__dirname}/assets/incidents.json`);
+const accountsPayload = tools.requirePayload(`${__dirname}/assets/accounts-create.json`);
+const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
+const incidentsPayload = tools.requirePayload(`${__dirname}/assets/incidents-create.json`);
 
 // Issue with sap so am skippinf for now
 suite.forElement('helpdesk', 'polling', { skip:true }, (test) => {

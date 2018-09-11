@@ -1,18 +1,19 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('core/tools').requirePayload(`${__dirname}/assets/accounts.json`);
+const tools = require('core/tools');
 
-let options = {
-  churros : {
-    updatePayload: {
-      "AccountName": "Update"
-    }
+const accountsCreatePayload = tools.requirePayload(`${__dirname}/assets/accounts-create.json`);
+const accountsUpdatePayload = tools.requirePayload(`${__dirname}/assets/accounts-update.json`);
+
+const options = {
+  churros: {
+    updatePayload: accountsUpdatePayload
   }
 };
 
-suite.forElement('helpdesk', 'accounts', { payload: payload }, (test) => {
+suite.forElement('crm', 'accounts', { payload : accountsCreatePayload }, (test) => {
   test.withOptions(options).should.supportCruds();
+  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination('id');
   test.should.supportCeqlSearch('id');
-  test.should.supportPagination();
 });
