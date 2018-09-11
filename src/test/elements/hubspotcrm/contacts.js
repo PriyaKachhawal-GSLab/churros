@@ -53,7 +53,6 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
 
   it('should test get for xformed contact', () => {
         let id;
-    const email = tools.random() + "-churros@delete.me";
     return cloud.post('/organizations/objects/churrosTestObject/definitions', resources.churrosTestObject, () => {})
       .then(r => cloud.post('/organizations/elements/hubspotcrm/transformations/churrosTestObject', resources.churrosTestObjectXform, () => {}))
       .then(r => cloud.post(test.api, payload))

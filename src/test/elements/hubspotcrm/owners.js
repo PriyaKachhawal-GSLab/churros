@@ -2,7 +2,6 @@
 
 const suite = require('core/suite');
 const expect = require('chakram').expect;
-const tools = require('core/tools');
 
 suite.forElement('crm', 'owners', (test) => {
   test.should.supportS();
