@@ -6,10 +6,10 @@ const expect = chakram.expect;
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const payload = tools.requirePayload(`${__dirname}/assets/leads-create.json`);
-const updatedPayload = tools.requirePayload(`${__dirname}/assets/leads-update.json`);
+const secondLeadPayload = tools.requirePayload(`${__dirname}/assets/leads-create.json`);
 const interactionPayload = tools.requirePayload(`${__dirname}/assets/leadsInteractions-create.json`);
 const mergePayload = tools.requirePayload(`${__dirname}/assets/leadsMerge-create.json`);
-const queryType = tools.requirePayload(`${__dirname}/assets/leadsQueryTest.json`);
+const queryType = tools.requirePayload(`${__dirname}/assets/leads-queryTest.json`);
 
 suite.forElement('marketing', 'leads', { payload: payload }, (test) => {
   it('should allow CRUDS for /leads', () => {
@@ -28,8 +28,8 @@ suite.forElement('marketing', 'leads', { payload: payload }, (test) => {
     return cloud.post(test.api, payload)
       .then(r => id = r.body.person.id)
       .then(r => cloud.post(`${test.api}/${id}/interactions`, interactionPayload))
-      .then(r => cloud.post(test.api, updatedPayload))
-      .then(r => mergePayload.leadIds = r.body.person.id)
+      .then(r => cloud.post(test.api, secondLeadPayload))
+      .then(r => mergePayload.leadIds.push(r.body.person.id))
       .then(r => cloud.post(`${test.api}/${id}/merge`, mergePayload))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
