@@ -1,0 +1,9 @@
+{
+  "firstName": "<<name.firstName>>",
+  "lastName": "<<name.lastName>>",
+  "email": "<<internet.email>>",
+  "attributes" : {
+    "address1_city" : "",
+    "address1_latitude" : 4.4
+  }
+}

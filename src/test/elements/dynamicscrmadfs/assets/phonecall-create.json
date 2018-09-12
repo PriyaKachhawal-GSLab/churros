@@ -4,7 +4,7 @@
     "phonenumber": "222-333-5555",
     "prioritycode": 1,
     "actualdurationminutes": 30,
-    "description": "Sample Phone Call Activity Churros Again",
+    "description": "<<random.words>>",
     "statecode": 0,
     "statuscode": 1,
     "leftvoicemail": false,

@@ -1,32 +1,31 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/phonecall');
 const tools = require('core/tools');
-const build = (overrides) => Object.assign({}, payload, overrides);
-const phonecallPayload = build({ name: tools.random() });
-const chakram = require('chakram');
 const cloud = require('core/cloud');
-const expect = chakram.expect;
+const expect = require('chakram').expect;
 
+const phonecallCreatePayload = tools.requirePayload(`${__dirname}/assets/phonecall-create.json`);
+const phonecallUpdatePayload = tools.requirePayload(`${__dirname}/assets/phonecall-update.json`);
 
-suite.forElement('crm', 'phonecall', { payload: phonecallPayload }, (test) => {
-  var phonecallUpdate = {
-    attributes : {
-      "description": "Sample Phone Call Activity Churros Updated"
-    }
-  };
-  it('Update Test for /hubs/crm/phonecall', () => {
-      var activityId = null;
-      return cloud.post(test.api, phonecallPayload)
-        .then(r => activityId = r.body.id)
-        .then(() => cloud.patch(`${test.api}/${activityId}`, phonecallUpdate,(r) => {
-          expect(r.body.attributes.description).to.equal("Sample Phone Call Activity Churros Updated");
-          })
-        )
-        .then(r => cloud.delete(`${test.api}/${activityId}`));
-      });
-  test.should.supportCruds();
-  test.should.supportPagination();
+const options = {
+  churros: {
+    updatePayload: phonecallUpdatePayload
+  }
+};
+
+suite.forElement('crm', 'phonecall', { payload: phonecallCreatePayload }, (test) => {
+  test.withOptions(options).should.supportCruds();
+  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination('id');
   test.should.supportCeqlSearch('id');
+
+  it('description Update Test for /hubs/crm/phonecall', () => {
+    var accountId = null;
+    return cloud.post(test.api, phonecallCreatePayload)
+      .then(r => accountId = r.body.id)
+      .then(() => cloud.patch(`${test.api}/${accountId}`, phonecallUpdatePayload, (r) => {
+        expect(r.body.attributes.description).to.equal(phonecallUpdatePayload.attributes.description);
+      }))
+      .then(r => cloud.delete(`${test.api}/${accountId}`));
+  });
 });

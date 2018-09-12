@@ -1,12 +1,13 @@
 'use strict';
 
 const suite = require('core/suite');
-const listPayload = require('./assets/listLead');
-const leadPayload = require('./assets/leads');
 const chakram = require('chakram');
 const cloud = require('core/cloud');
+const tools = require('core/tools');
 const expect = chakram.expect;
 
+const listPayload = tools.requirePayload(`${__dirname}/assets/listsLeads-create.json`);
+const contactPayload = tools.requirePayload(`${__dirname}/assets/leads-create.json`);
 
 suite.forElement('crm', 'lists/{id}/leads', { payload: listPayload }, (test) => {
 
@@ -15,7 +16,7 @@ suite.forElement('crm', 'lists/{id}/leads', { payload: listPayload }, (test) => 
       var leadId = null;
       return cloud.post(test.api, listPayload)
         .then(r => listId = r.body.id)
-        .then(r => cloud.post(`/leads`,leadPayload))
+        .then(r => cloud.post(`/leads`,contactPayload))
         .then(r => leadId = r.body.id)
         .then(() => cloud.patch(`/lists/${listId}/leads/${leadId}`))
         .then(() => cloud.withOptions({ qs: { where: `entityid='${leadId}'`}}).get(`/lists/${listId}/leads`, (r) => {

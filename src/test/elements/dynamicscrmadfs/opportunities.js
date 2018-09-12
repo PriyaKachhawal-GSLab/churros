@@ -1,43 +1,32 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/opportunities');
 const tools = require('core/tools');
-const build = (overrides) => Object.assign({}, payload, overrides);
-const opportunitiesPayload = build({ name: tools.random() });
-const chakram = require('chakram');
 const cloud = require('core/cloud');
-const expect = chakram.expect;
+const expect = require('chakram').expect;
 
-suite.forElement('crm', 'opportunities', { payload: opportunitiesPayload }, (test) => {
-  const options = {
-    churros: {
-      updatePayload: {
-        "name": tools.random()
-      }
-    }
-  };
+const opportunitiesCreatePayload = tools.requirePayload(`${__dirname}/assets/opportunities-create.json`);
+const opportunitiesUpdatePayload = tools.requirePayload(`${__dirname}/assets/opportunities-update.json`);
 
-  var opportunityFloatUpdate = {
-    attributes : {
-      int_forecast : 3000,
-      proposedsolution : ""
-    }
-  };
-  it('Float And Null Update Test for /hubs/crm/opportunities', () => {
-      var id = null;
-      return cloud.post(test.api, opportunitiesPayload)
-        .then(r => id = r.body.id)
-        .then(() => cloud.patch(`${test.api}/${id}`, opportunityFloatUpdate,(r) => {
-          expect(r.body.attributes.int_forecast).to.equal(3000);
-          expect(r.body.attributes.proposedsolution).to.equal(undefined);
-          })
-        )
-        .then(r => cloud.delete(`${test.api}/${id}`));
-  });
+const options = {
+  churros: {
+    updatePayload: opportunitiesUpdatePayload
+  }
+};
 
-
+suite.forElement('crm', 'opportunities', { payload: opportunitiesCreatePayload }, (test) => {
   test.withOptions(options).should.supportCruds();
-  test.should.supportPagination();
+  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination('id');
   test.should.supportCeqlSearch('id');
+
+  it('int_forecast And proposedsolution Update Test for /hubs/crm/opportunities', () => {
+    var accountId = null;
+    return cloud.post(test.api, opportunitiesCreatePayload)
+      .then(r => accountId = r.body.id)
+      .then(() => cloud.patch(`${test.api}/${accountId}`, opportunitiesUpdatePayload, (r) => {
+        expect(r.body.attributes.int_forecast).to.equal(opportunitiesUpdatePayload.attributes.int_forecast);
+        expect(r.body.attributes.proposedsolution).to.equal(undefined);
+      }))
+      .then(r => cloud.delete(`${test.api}/${accountId}`));
+  });
 });

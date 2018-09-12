@@ -1,0 +1,7 @@
+{
+  "name": "<<random.alphaNumeric##8>>",
+  "attributes" : {
+    "address1_city" : "",
+    "address1_latitude" : 4.4
+  }
+}

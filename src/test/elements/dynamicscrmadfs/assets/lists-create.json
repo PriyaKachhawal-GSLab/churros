@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "listname": "Sample Churros List",
+        "listname": "<<name.firstName>>",
         "type": false,
         "createdfromcode" : 2,
         "lockstatus": false

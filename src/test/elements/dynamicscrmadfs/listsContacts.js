@@ -1,12 +1,13 @@
 'use strict';
 
 const suite = require('core/suite');
-const listPayload = require('./assets/lists');
-const contactPayload = require('./assets/contacts');
 const chakram = require('chakram');
 const cloud = require('core/cloud');
+const tools = require('core/tools');
 const expect = chakram.expect;
 
+const listPayload = tools.requirePayload(`${__dirname}/assets/lists-create.json`);
+const contactPayload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
 
 suite.forElement('crm', 'lists/{id}/contacts', { payload: listPayload }, (test) => {
 

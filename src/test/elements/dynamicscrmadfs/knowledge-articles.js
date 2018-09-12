@@ -1,22 +1,19 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/knowledge-articles');
 const tools = require('core/tools');
-const build = (overrides) => Object.assign({}, payload, overrides);
-const artilesPayload = build({ title: tools.random() });
 
-suite.forElement('crm', 'knowledge-articles', { payload: artilesPayload }, (test) => {
-  const options = {
-    churros: {
-      updatePayload: {
-        attributes: {
-          "title": tools.random()
-        }
-      }
-    }
-  };
+const knowledgeArticlesCreatePayload = tools.requirePayload(`${__dirname}/assets/knowledge-articles-create.json`);
+const knowledgeArticlesUpdatePayload = tools.requirePayload(`${__dirname}/assets/knowledge-articles-update.json`);
+
+const options = {
+  churros: {
+    updatePayload: knowledgeArticlesUpdatePayload
+  }
+};
+
+suite.forElement('crm', 'knowledge-articles', { payload : knowledgeArticlesCreatePayload }, (test) => {
   test.withOptions(options).should.supportCruds();
-  test.should.supportPagination();
+  test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination('id');
   test.should.supportCeqlSearch('id');
 });

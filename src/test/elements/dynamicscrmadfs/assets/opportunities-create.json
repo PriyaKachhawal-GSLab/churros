@@ -1,0 +1,7 @@
+{
+  "name": "<<random.alphaNumeric##8>>",
+  "attributes" : {
+    "int_forecast" : 3000,
+    "proposedsolution" : "<<random.words>>"
+  }
+}
