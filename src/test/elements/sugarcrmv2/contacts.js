@@ -8,6 +8,7 @@ const activityCreate = require('./assets/contactsActivities-create.json');
 const noteCreate = require('./assets/contactsNotes-create.json');
 const noteUpdate = require('./assets/contactsNotes-update.json');
 const activitiesUpdate = require('./assets/contactsActivities-update.json');
+const queryPayload = require('./assets/contactsActivitiesQueryTest.json');
 
 suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
   const options = {
@@ -34,11 +35,11 @@ suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
     return cloud.post(test.api, payload)
       .then(r => contactId = r.body.id)
       .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(`${test.api}/${contactId}/activities`))
-      .then(r => cloud.withOptions({ qs: { type: 'Call' } }).post(`${test.api}/${contactId}/activities`, activityCreate))
+      .then(r => cloud.withOptions({ qs: queryPayload }).post(`${test.api}/${contactId}/activities`, activityCreate))
       .then(r => activityId = r.body.id)
-      .then(r => cloud.withOptions({ qs: { type: 'Call' } }).get(`${test.api}/${contactId}/activities/${activityId}`))
-      .then(r => cloud.withOptions({ qs: { type: 'Call' } }).put(`${test.api}/${contactId}/activities/${activityId}`, activitiesUpdate))
-      .then(r => cloud.withOptions({ qs: { type: 'Call' } }).delete(`${test.api}/${contactId}/activities/${activityId}`))
+      .then(r => cloud.withOptions({ qs: queryPayload }).get(`${test.api}/${contactId}/activities/${activityId}`))
+      .then(r => cloud.withOptions({ qs: queryPayload }).put(`${test.api}/${contactId}/activities/${activityId}`, activitiesUpdate))
+      .then(r => cloud.withOptions({ qs: queryPayload }).delete(`${test.api}/${contactId}/activities/${activityId}`))
       .then(r => cloud.delete(`${test.api}/${contactId}`));
   });
 });
