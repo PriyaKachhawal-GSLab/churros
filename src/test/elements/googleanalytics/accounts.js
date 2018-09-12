@@ -1,7 +1,6 @@
 'use strict';
 
 const suite = require('core/suite');
-const chakram = require('chakram');
 
 suite.forElement('general', 'accounts', (test) => {
     it('should allow GET /accounts', () => {
