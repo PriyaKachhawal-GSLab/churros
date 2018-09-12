@@ -6,6 +6,7 @@ const expect = chakram.expect;
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const payload = tools.requirePayload(`${__dirname}/assets/leads-create.json`);
+const updatedPayload = tools.requirePayload(`${__dirname}/assets/leads-update.json`);
 const secondLeadPayload = tools.requirePayload(`${__dirname}/assets/leads-create.json`);
 const interactionPayload = tools.requirePayload(`${__dirname}/assets/leadsInteractions-create.json`);
 const mergePayload = tools.requirePayload(`${__dirname}/assets/leadsMerge-create.json`);
