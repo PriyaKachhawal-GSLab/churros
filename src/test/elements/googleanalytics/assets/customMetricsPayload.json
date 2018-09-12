@@ -1,0 +1,7 @@
+{
+  "active": false,
+  "id": "Level Completions",
+  "name": "HIT",
+  "scope": "HIT",
+  "type": "INTEGER"
+}
