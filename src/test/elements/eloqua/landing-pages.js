@@ -2,18 +2,19 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const payload =  {
-    "name": tools.randomStr('abcdefghijklmnopqrstuvwxyz11234567890', 10),
-    "htmlContent": {
-        "type": "RawHtmlContent",
-        "html": "<html><body><div>Here is some sample text for Churros.</div></body></html>",
-        "metaTags": []
-    }
-};
+
+const landingPagesCreatePayload =  tools.requirePayload(`${__dirname}/assets/landing-pages-create.json`);
+const landingPagesUpdatePayload =  tools.requirePayload(`${__dirname}/assets/landing-pages-update.json`);
 
 
-suite.forElement('marketing', 'landing-pages', { payload: payload }, (test) => {
-  test.should.supportCruds();
+suite.forElement('marketing', 'landing-pages', { payload: landingPagesCreatePayload }, (test) => {
+const opts = {
+    churros: {
+      updatePayload : landingPagesUpdatePayload
+   }
+  };
+      
+  test.withOptions(opts).should.supportCruds();
   test.should.supportPagination();
   test.should.supportCeqlSearchForMultipleRecords('name');
 });

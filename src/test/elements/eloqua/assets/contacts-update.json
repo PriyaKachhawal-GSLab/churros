@@ -1,5 +1,5 @@
 {
-  "C_EmailAddress": "update@this.com",
+  "C_EmailAddress": "<<internet.email>>",
   "C_FirstName": "updater",  
   "C_Churros_Contact_Field1": "custom update contact field"
 }

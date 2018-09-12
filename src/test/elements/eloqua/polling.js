@@ -2,10 +2,9 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
-const customObjectsPayload =  {
-    "name": tools.randomStr('abcdefghijklmnopqrstuvwxyz11234567890', 10)
-};
+
+const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
+const customObjectsPayload =  tools.requirePayload(`${__dirname}/assets/custom-objects-create.json`);
 
 
 suite.forElement('marketing', 'polling', null, (test) => {
