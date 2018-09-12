@@ -3,14 +3,12 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
-const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
-
+const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/contacts-update.json`);
 suite.forElement('marketing', 'contacts', { payload: contactsPayload }, (test) => {
   const options = {
     churros: {
-      updatePayload: {
-        "email": tools.randomEmail()
-      }
+      updatePayload: updatePayload
     }
   };
   test.withOptions(options).should.supportCruds();

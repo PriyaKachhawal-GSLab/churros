@@ -4,8 +4,8 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
 const payload = tools.requirePayload(`${__dirname}/assets/campaigns.json`);
-const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
-const leadsPayload = require('./assets/leads');
+const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
+const leadsPayload = tools.requirePayload(`${__dirname}/assets/leads-create.json`);
 
 suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
   test.should.supportCrus();

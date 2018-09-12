@@ -3,8 +3,8 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 
-const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
-const leadsPayload = tools.requirePayload(`${__dirname}/assets/leads.json`);
+const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
+const leadsPayload = tools.requirePayload(`${__dirname}/assets/leads-create.json`);
 
 suite.forElement('marketing', 'polling', null, (test) => {
   test.withApi('/hubs/marketing/contacts').should.supportPolling(contactsPayload, 'contacts');
