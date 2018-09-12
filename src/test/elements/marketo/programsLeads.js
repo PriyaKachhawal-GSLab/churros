@@ -5,8 +5,6 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const fs = require('fs');
 const expect = require('chakram').expect;
-const programPayload = require('./assets/programs-create');
-const buildProgram = (overrides) => Object.assign({}, programPayload, overrides);
 const namePayload = tools.requirePayload(`${__dirname}/assets/programs-create.json`);
 const bulkPayload = tools.requirePayload(`${__dirname}/assets/programLeads-bulkCsv.json`);
 const bulkJsonPayload = tools.requirePayload(`${__dirname}/assets/programLeads-bulkJson.json`);
@@ -15,8 +13,7 @@ suite.forElement('marketing', 'programsLeads', () => {
   let programId, programName;
 
   before(() => {
-    let payload = buildProgram(namePayload);
-    return cloud.post(`/hubs/marketing/programs`, payload)
+    return cloud.post(`/hubs/marketing/programs`, namePayload)
       .then(r => {
         programId = r.body.id;
         programName = r.body.name;

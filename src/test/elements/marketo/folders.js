@@ -8,7 +8,6 @@ const updatePayload = tools.requirePayload(`${__dirname}/assets/folders-update.j
 
 suite.forElement('marketing', 'folders', { payload: payload }, (test) => {
   payload.name += tools.random();
-  updatePayload.name += tools.random();
   it('It should perform CRUS for /folders', () => {
     let id;
     return cloud.post(test.api, payload)

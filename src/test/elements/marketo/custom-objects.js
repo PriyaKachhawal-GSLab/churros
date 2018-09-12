@@ -6,16 +6,16 @@ const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/custom-objectsCustomFields-create.json`);
 const updatePayload = tools.requirePayload(`${__dirname}/assets/custom-objectsCustomFields-update.json`);
+const queryPayload = tools.requirePayload(`${__dirname}/assets/custom-objectsQueryType.json`);
 
 suite.forElement('marketing', 'custom-objects', { payload: payload }, (test) => {
-  let customObjectName = 'afrinCustom_c',
-    id;
+  let customObjectName = 'afrinCustom_c', id;
   it('should allow R for /custom-objects', () => {
     const options = { qs: { where: `names='leadActivities_c'` } };
     return cloud.withOptions(options).get(test.api);
   });
   it('should allow S for /custom-objects/{customObjectName}/custom-fields', () => {
-    const options = { qs: { where: `marketoGUID='c244523c-0a21-4c56-aa71-a845af615d4c,dab80af7-849f-47da-97af-cb3160867892, a3305990-a7e6-46f4-9a5b-9f81ae5db16c'` } };
+    const options = { qs: queryPayload };
     return cloud.withOptions(options).get(`${test.api}/${customObjectName}/custom-fields`);
   });
   it('should allow paginating with page and nextPage /custom-objects/{customObjectName}/custom-fields', () => {
