@@ -19,4 +19,4 @@ suite.forElement('general', 'user-links', {payload: payload}, (test) => {
             .then(r => cloud.delete(`${test.api}/${userLinksId}`));
     });
     test.should.supportPagination();
-})
+});

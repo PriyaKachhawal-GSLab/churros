@@ -10,7 +10,6 @@ const payload = tools.requirePayload(`${__dirname}/assets/webproperties_payload.
 const adwordsLinkPayload = tools.requirePayload(`${__dirname}/assets/adwords_payload.json`);
 const customdimensionsPayload = tools.requirePayload(`${__dirname}/assets/customdimensions_payload.json`);
 const customMetricsPayload = tools.requirePayload(`${__dirname}/assets/customMetricsPayload.json`);
-const entityUserLinksPayload = tools.requirePayload(`${__dirname}/assets/entityUserLinks_payload.json`);
 const profilesPayload = tools.requirePayload(`${__dirname}/assets/profiles_payload.json`);
 const profileentityUserLinksPayload = tools.requirePayload(`${__dirname}/assets/profilesEntityUserLinks_payload.json`);
 const experimentsPayload = tools.requirePayload(`${__dirname}/assets/experiments_Payload.json`);
@@ -23,7 +22,7 @@ suite.forElement('general', 'web-properties', {payload: payload, skip: true}, (t
 	test.should.supportCrus(chakram.put);
     test.should.supportCrus();
     test.should.supportPagination();
-})
+});
 
 suite.forElement('general', 'web-properties', (test) => {
     let webPropertiesId = -1;
@@ -93,4 +92,4 @@ suite.forElement('general', 'web-properties', (test) => {
     it.skip('should allow CRUDS for /web-properties/${webPropertiesId}/profiles/${profileId}/remarketing-audiences', () => {
         return cloud.cruds(`${test.api}/${webPropertiesId}/remarketing-audiences`, remarketingPayload, chakram.put);
     });
-})
+});
