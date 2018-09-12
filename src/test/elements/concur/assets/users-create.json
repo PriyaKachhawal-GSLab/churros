@@ -1,0 +1,18 @@
+{
+    "EmpId": "<<random.alphaNumeric>>",
+    "FeedRecordNumber": "<<random.number>>",
+    "LoginId": "<<internet.email>>",
+    "Password": "<<random.word>>",
+    "LedgerKey": "Default",
+    "ExpenseUser": "Y",
+    "FirstName": "<<name.firstName>>",
+    "ExpenseApprover": "N",
+    "CtryCode": "US",
+    "LocaleName": "en_US",
+    "LastName": "<<name.lastName>>",
+    "Custom21": "US",
+    "CrnKey": "USD",
+    "Active": "Y",
+    "EmailAddress": "<<internet.email>>",
+    "Mi": "Z"
+  }
