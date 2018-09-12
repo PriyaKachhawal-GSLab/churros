@@ -8,7 +8,7 @@ const activityCreate = require('./assets/contactsActivities-create.json');
 const noteCreate = require('./assets/contactsNotes-create.json');
 const noteUpdate = require('./assets/contactsNotes-update.json');
 const activitiesUpdate = require('./assets/contactsActivities-update.json');
-const queryPayload = require('./assets/contactsActivitiesQueryTest.json');
+const queryPayload = require('./assets/contactsActivities-QueryTest.json');
 
 suite.forElement('crm', 'contacts', { payload: payload }, (test) => {
   const options = {

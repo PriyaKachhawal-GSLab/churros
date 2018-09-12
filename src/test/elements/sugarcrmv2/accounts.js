@@ -8,7 +8,7 @@ const activityCreate = require('./assets/accountsActivities-create.json');
 const activityUpdate = require('./assets/accountsActivities-update.json');
 const noteCreate = tools.requirePayload(`${__dirname}/assets/accountsNotes-create.json`);
 const noteUpdate = tools.requirePayload(`${__dirname}/assets/accountsNotes-update.json`);
-const queryTypePayload = tools.requirePayload(`${__dirname}/assets/accountsActivitiesQueryTest.json`);
+const queryTypePayload = tools.requirePayload(`${__dirname}/assets/accountsActivities-QueryTest.json`);
 
 const cloud = require('core/cloud');
 suite.forElement('crm', 'accounts', { payload: payload }, (test) => {
