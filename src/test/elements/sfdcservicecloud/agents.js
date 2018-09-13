@@ -3,7 +3,6 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const build = (overrides) => Object.assign({}, payload, overrides);
 const agentsPayload = tools.requirePayload(`${__dirname}/assets/agents-create.json`);
 const agentsUpdatePayload = tools.requirePayload(`${__dirname}/assets/agents-update.json`);
 
