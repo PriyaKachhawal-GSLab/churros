@@ -1,5 +1,5 @@
 {
-  "description": "RobotTestDescription",
+  "description": "<<random.word>>",
   "type": "Electrical",
   "priority": "Low",
   "isEscalated": false,

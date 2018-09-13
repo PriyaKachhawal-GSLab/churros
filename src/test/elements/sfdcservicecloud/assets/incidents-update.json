@@ -1,0 +1,7 @@
+{
+  "description": "<<random.word>>",
+  "type": "Electrical",
+  "priority": "Low",
+  "isEscalated": false,
+  "status": "New"
+}

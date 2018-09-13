@@ -1,0 +1,5 @@
+{
+  "Email": "<<internet.email>>",
+  "FirstName": "<<name.firstName>>",
+  "LastName": "<<name.lastName>>"
+}

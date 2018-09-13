@@ -1,32 +1,30 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/incidents');
-const activityPayload = require('./assets/activities');
-const taskPayload = require('./assets/tasks');
 const tools = require('core/tools');
+const incidentsPayload = tools.requirePayload(`${__dirname}/assets/incidents-create.json`);
+const incidentsUpdatePayload = tools.requirePayload(`${__dirname}/assets/incidents-update.json`);
+const activityPayload = tools.requirePayload(`${__dirname}/assets/incidentsActivities-create.json`);
+const activityUpdatePayload = tools.requirePayload(`${__dirname}/assets/incidentsActivities-update.json`);
+const taskPayload = tools.requirePayload(`${__dirname}/assets/incidentsTasks-create.json`);
+const taskUpdatePayload = tools.requirePayload(`${__dirname}/assets/incidentsTasks-update.json`);
 const cloud = require('core/cloud');
-const build = (overrides) => Object.assign({}, payload, overrides);
-const incidentsPayload = build({ description: tools.random() });
 
 suite.forElement('helpdesk', 'incidents', { payload: incidentsPayload }, (test) => {
   it('should allow CRUDS /hubs/helpdesk/incidents ', () => {
     let incidentId;
-    return cloud.post(test.api, payload)
+    return cloud.post(test.api, incidentsPayload)
       .then(r => incidentId = r.body.Id)
       .then(r => cloud.get(`${test.api}/${incidentId}`))
       .then(r => cloud.get(test.api))
       .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(test.api))
       .then(r => cloud.withOptions({ qs: { where: `id='${incidentId}'` } }).get(test.api))
-      .then(r => cloud.patch(`${test.api}/${incidentId}`, incidentsPayload))
+      .then(r => cloud.patch(`${test.api}/${incidentId}`, incidentsUpdatePayload))
       .then(r => cloud.delete(`${test.api}/${incidentId}`));
   });
 
   it('should allow CRUDS /hubs/helpdesk/incidents/:id/activites ', () => {
     let incidentId, activityId;
-    const activityUpdatePayload = {
-      "Location": tools.random()
-    };
     return cloud.post(test.api, incidentsPayload)
       .then(r => incidentId = r.body.Id)
       .then(r => cloud.post(`${test.api}/${incidentId}/activities`, activityPayload))
@@ -42,9 +40,6 @@ suite.forElement('helpdesk', 'incidents', { payload: incidentsPayload }, (test) 
 
   it('should allow CRUDS /hubs/helpdesk/incidents/:id/tasks ', () => {
     let incidentId, taskId;
-    const taskUpdatePayload = {
-      "Status": tools.random()
-    };
     return cloud.post(test.api, incidentsPayload)
       .then(r => incidentId = r.body.Id)
       .then(r => cloud.post(`${test.api}/${incidentId}/tasks`, taskPayload))
