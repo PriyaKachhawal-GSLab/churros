@@ -1,0 +1,8 @@
+{
+  "name": "<<random.word>>",
+  "htmlContent": {
+      "type": "RawHtmlContent",
+      "html": "<html><body><div>Here is some sample text for Churros.</div></body></html>",
+      "metaTags": []
+  }
+}

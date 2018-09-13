@@ -1,0 +1,7 @@
+{
+    "is_logged": true,
+    "duration": 7200,
+    "note": "<<random.word>>",
+    "started_at": "<<date.recent>>",
+    "project_id": "{we need to replcae it with actual value}"
+}
