@@ -6,7 +6,7 @@ const chakram = require('chakram');
 const expect = chakram.expect;
 
 /**
- * This can only be run by a user
+ * This can only be run by account admins and up
  */
 suite.forPlatform('accounts/identity-providers', { payload }, (test) => {
   test.should.supportCruds();
