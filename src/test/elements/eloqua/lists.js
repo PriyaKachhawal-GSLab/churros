@@ -1,21 +1,19 @@
 'use strict';
 
 const suite = require('core/suite');
-const contactsPayload = require('./assets/contacts');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
-const payload = tools.requirePayload(`${__dirname}/assets/lists.json`);
-const build = (overrides) => Object.assign({}, contactsPayload, overrides);
-const contactUpdatePayload = build({ lastName: tools.random(), firstName: tools.random(), emailAddress: tools.randomEmail() });
 
-contactsPayload.emailAddress = tools.randomEmail();
+const contactsCreatePayload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
+const contactUpdatePayload = tools.requirePayload(`${__dirname}/assets/contacts-update.json`);
+const listsCreatePayload = tools.requirePayload(`${__dirname}/assets/lists-create.json`);
+const listsUpdatePayload = tools.requirePayload(`${__dirname}/assets/lists-update.json`);
 
-suite.forElement('marketing', 'lists', { payload: payload }, (test) => {
+
+suite.forElement('marketing', 'lists', { payload: listsCreatePayload }, (test) => {
   const opts = {
     churros: {
-      updatePayload: {
-        name: tools.random()
-      }
+      updatePayload: listsUpdatePayload
     }
   };
   test.withOptions(opts).should.supportCruds();
@@ -26,7 +24,7 @@ suite.forElement('marketing', 'lists', { payload: payload }, (test) => {
     let listId, contactId, contactPostPayload;
     return cloud.get(test.api)
       .then(r => listId = r.body[0].id)
-      .then(r => cloud.post(`/hubs/marketing/contacts`, contactsPayload))
+      .then(r => cloud.post(`/hubs/marketing/contacts`, contactsCreatePayload))
       .then(r => contactId = r.body.id)
       .then(r => contactPostPayload = [{ "id": contactId }])
       .then(r => cloud.post(`${test.api}/${listId}/contacts`, contactPostPayload))
