@@ -18,7 +18,7 @@ suite.forElement('helpdesk', 'resources/categories', { payload: payload }, (test
       .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(test.api))
       .then(r => cloud.withOptions({ qs: { where: `id='${categoryId}'` } }).get(test.api))
       .then(r => updatePayload.name = payload.name)
-      .then(r => cloud.patch(`${test.api}/${categoryId}`, updatedPayload))
+      .then(r => cloud.patch(`${test.api}/${categoryId}`, updatePayload))
       .then(r => cloud.delete(`${test.api}/${categoryId}`));
   });
 
