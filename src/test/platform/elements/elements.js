@@ -109,6 +109,14 @@ suite.forPlatform('elements', opts, (test) => {
       .then(id => cloud.get('elements/' + id + '/export', schema));
   });
 
+  it('should support counting instances by element key', () => {
+    return cloud.get('/instances/count')
+    .then(r => {
+      expect(r.body.totalInstances).to.be.above(0);
+      expect(r.body.elementInstances).to.not.be.empty;
+    });
+  });
+
   it('should support clone by key', () => {
     if (props.get('user') === 'system') {
       logger.warn('Unable to test element clone as system user. Skipping.');
