@@ -1,8 +1,8 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/smartCollections-create.json');
-const updatePayload = require('./assets/smartCollections-update.json');
+const payload = require('./assets/smart-collections-create.json');
+const updatePayload = require('./assets/smart-collections-update.json');
 
 suite.forElement('ecommerce', 'smart-collections', { payload: payload }, (test) => {
 

@@ -1,0 +1,6 @@
+{
+  "namespace": "<<random.word>>",
+  "key": "<<random.number>>",
+  "value": "<<random.word>>",
+  "value_type": "integer"
+}

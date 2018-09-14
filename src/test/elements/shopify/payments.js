@@ -3,8 +3,7 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const refund = tools.requirePayload(`${__dirname}/assets/orderPaymentsRefund-create.json`);
-const capture = tools.requirePayload(`${__dirname}/assets/orderPayments-create.json`);
+const refund = tools.requirePayload(`${__dirname}/assets/ordersPayments-create.json`);
 const order = tools.requirePayload(`${__dirname}/assets/orders-create.json`);
 
 suite.forElement('ecommerce', 'payments', (test) => {
@@ -19,14 +18,14 @@ suite.forElement('ecommerce', 'payments', (test) => {
     return cloud.get(`/hubs/ecommerce/orders/${orderId}/payments-count`);
   });
   it(`should allow POST for /hubs/ecommerce/orders/{orderId}/payments to capture`, () => {
-    return cloud.post(`/hubs/ecommerce/orders/${orderId}/payments`, capture);
+    return cloud.post(`/hubs/ecommerce/orders/${orderId}/payments`, refund);
   });
   it(`should allow POST for /hubs/ecommerce/orders/{orderId}/payments to refund`, () => {
     return cloud.post(`/hubs/ecommerce/orders/${orderId}/payments`, refund);
   });
   it(`should allow GET for /hubs/ecommerce/orders/{orderId}/payments/{paymentId}`, () => {
     let paymentId;
-    return cloud.post(`/hubs/ecommerce/orders/${orderId}/payments`, capture)
+    return cloud.post(`/hubs/ecommerce/orders/${orderId}/payments`, refund)
       .then(r => cloud.post(`/hubs/ecommerce/orders/${orderId}/payments`, refund))
       .then(r => paymentId = r.body.id)
       .then(r => cloud.get(`/hubs/ecommerce/orders/${orderId}/payments/${paymentId}`));

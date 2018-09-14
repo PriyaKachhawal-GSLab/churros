@@ -3,9 +3,9 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const capture = tools.requirePayload(`${__dirname}/assets/OrdersPayments-create.json`);
+const capture = tools.requirePayload(`${__dirname}/assets/ordersPayments-create.json`);
 const order = tools.requirePayload(`${__dirname}/assets/orders-create.json`);
-const calculateRefund = tools.requirePayload(`${__dirname}/assets/ordersRefundsCaculate-create.json`);
+const calculateRefund = tools.requirePayload(`${__dirname}/assets/ordersRefundsCalculate-create.json`);
 const refund = tools.requirePayload(`${__dirname}/assets/ordersRefunds-create.json`);
 
 suite.forElement('ecommerce', 'refunds', { skip: false }, (test) => {
@@ -14,6 +14,7 @@ suite.forElement('ecommerce', 'refunds', { skip: false }, (test) => {
     .then(r => orderId = r.body.id)
     .then(r => cloud.get(`/hubs/ecommerce/orders/${orderId}`))
     .then(r => lineId = r.body.line_items[0].id)
+    .then(r => calculateRefund.refund.refund_line_items[0].line_item_id = lineId)
     .then(r => refund.refund_line_items[0].line_item_id = lineId)
   );
   it(`should allow GET for /hubs/ecommerce/orders/{orderId}/refunds`, () => {
@@ -29,7 +30,7 @@ suite.forElement('ecommerce', 'refunds', { skip: false }, (test) => {
     let parentId, refundId;
     return cloud.post(`/hubs/ecommerce/orders/${orderId}/refunds-calculate`, calculateRefund)
       .then(r => parentId = r.body.transactions[0].parent_id)
-      .then(r => refund.transactions[0].parentId = parentId)
+      .then(r => refund.transactions[0].parent_id = parentId)
       .then(r => cloud.post(`/hubs/ecommerce/orders/${orderId}/refunds`, refund))
       .then(r => refundId = r.body.id)
       .then(r => cloud.get(`/hubs/ecommerce/orders/${orderId}/refunds/${refundId}`));

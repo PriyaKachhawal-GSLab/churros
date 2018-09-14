@@ -4,8 +4,8 @@ const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
-const payload = tools.requirePayload(`${__dirname}/assets/priceRules-create.json`);
-const discountPayload = tools.requirePayload(`${__dirname}/assets/discount-codes.json`);
+const payload = tools.requirePayload(`${__dirname}/assets/price-rules-create.json`);
+const discountPayload = tools.requirePayload(`${__dirname}/assets/price-rulesDiscountCodes-create.json`);
 
 suite.forElement('ecommerce', 'price-rules', { payload: payload }, (test) => {
   it(`should allow CRDS for ${test.api} and ${test.api}/:id/discount-codes`, () => {

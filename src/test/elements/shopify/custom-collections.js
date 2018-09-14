@@ -2,8 +2,8 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const customCollection = tools.requirePayload(`${__dirname}/assets/customCollections-create.json`);
-const updatePayload = tools.requirePayload(`${__dirname}/assets/customCollections-update.json`);
+const customCollection = tools.requirePayload(`${__dirname}/assets/custom-collections-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/custom-collections-update.json`);
 
 suite.forElement('ecommerce', 'custom-collections', { payload: customCollection }, (test) => {
   const options = {

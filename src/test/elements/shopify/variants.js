@@ -3,7 +3,7 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const payload = tools.requirePayload(`${__dirname}/assets/products.json`);
+const payload = tools.requirePayload(`${__dirname}/assets/products-create.json`);
 const variantPayload = tools.requirePayload(`${__dirname}/assets/productsVariants-create.json`);
 const variantUpdate = tools.requirePayload(`${__dirname}/assets/productsVariants-update.json`);
 
