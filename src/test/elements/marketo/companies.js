@@ -5,7 +5,7 @@ const tools = require('core/tools');
 const cloud = require('core/cloud');
 const payload = tools.requirePayload(`${__dirname}/assets/companies-create.json`);
 const updatedPayload = tools.requirePayload(`${__dirname}/assets/companies-update.json`);
-const queryPayload = tools.requirePayload(`${__dirname}/assets/companies-queryTest.json`);
+const queryPayload = tools.requirePayload(`${__dirname}/assets/companies-requiredQueryParam-s.json`);
 
 suite.forElement('marketing', 'companies', { payload: payload }, (test) => {
   it('should allow CRUDS for /companies', () => {

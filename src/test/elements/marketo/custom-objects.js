@@ -6,7 +6,7 @@ const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 const payload = tools.requirePayload(`${__dirname}/assets/custom-objectsCustomFields-create.json`);
 const updatePayload = tools.requirePayload(`${__dirname}/assets/custom-objectsCustomFields-update.json`);
-const queryPayload = tools.requirePayload(`${__dirname}/assets/custom-objects-queryType.json`);
+const queryPayload = tools.requirePayload(`${__dirname}/assets/custom-objects-requiredQueryParam-s.json`);
 
 suite.forElement('marketing', 'custom-objects', { payload: payload }, (test) => {
   let customObjectName = 'afrinCustom_c', id;

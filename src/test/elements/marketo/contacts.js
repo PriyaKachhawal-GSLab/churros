@@ -9,9 +9,9 @@ const contactToMergePayload = tools.requirePayload(`${__dirname}/assets/contacts
 const contactsMergePayload = tools.requirePayload(`${__dirname}/assets/contactsMerge-create.json`);
 const updatedPayload = tools.requirePayload(`${__dirname}/assets/contacts-update.json`);
 const interactionPayload = tools.requirePayload(`${__dirname}/assets/contactsInteractions-create.json`);
-const queryType = tools.requirePayload(`${__dirname}/assets/changed-contacts-queryType.json`);
-const queryContactsPayload = tools.requirePayload(`${__dirname}/assets/contacts-queryType.json`);
-const queryDeletedContactsPayload = tools.requirePayload(`${__dirname}/assets/deleted-contacts-queryType.json`);
+const queryType = tools.requirePayload(`${__dirname}/assets/change-contacts-requiredQueryParam-s.json`);
+const queryContactsPayload = tools.requirePayload(`${__dirname}/assets/contacts-requiredQueryParam-s.json`);
+const queryDeletedContactsPayload = tools.requirePayload(`${__dirname}/assets/deleted-contacts-requiredQueryParam-s.json`);
 
 suite.forElement('marketing', 'contacts', { payload: payload }, (test) => {
   it('should allow CRUDS for /contacts', () => {

@@ -10,7 +10,7 @@ const updatedPayload = tools.requirePayload(`${__dirname}/assets/leads-update.js
 const secondLeadPayload = tools.requirePayload(`${__dirname}/assets/leads-create.json`);
 const interactionPayload = tools.requirePayload(`${__dirname}/assets/leadsInteractions-create.json`);
 const mergePayload = tools.requirePayload(`${__dirname}/assets/leadsMerge-create.json`);
-const queryType = tools.requirePayload(`${__dirname}/assets/leads-queryTest.json`);
+const queryType = tools.requirePayload(`${__dirname}/assets/leads-requiredQueryParam-s.json`);
 
 suite.forElement('marketing', 'leads', { payload: payload }, (test) => {
   it('should allow CRUDS for /leads', () => {
