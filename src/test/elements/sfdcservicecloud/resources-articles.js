@@ -3,7 +3,7 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const articlesPayload = tools.requirePayload(`${__dirname}/assets/resourcesArticles-create.json`);
-const updatePayload = tools.requirePayload(`${__dirname}/assets/resourcesArticles-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/resourcesArticles-update.json`);
 const statusPayload = tools.requirePayload(`${__dirname}/assets/resourcesArticlesStatus-update.json`);
 const cloud = require('core/cloud');
 
