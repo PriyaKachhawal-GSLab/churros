@@ -1,0 +1,10 @@
+{
+    "adGroupId": "you should get this from ad-group api",
+    "ad": {   
+        "description": "<<random.word>>",
+        "headlinePart2": "<<random.word>>",
+        "headlinePart1": "<<random.word>>",
+        "finalUrls": "https://cloud-elements.com",
+        "AdType": "ExpandedTextAd"
+    }
+  }

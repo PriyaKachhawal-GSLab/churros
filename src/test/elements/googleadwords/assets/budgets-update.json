@@ -1,0 +1,7 @@
+{
+    "amount": {
+      "microAmount": 1000000,
+      "ComparableValue.Type": "Money"
+    },
+    "name": "<<random.uuid>>"
+  }

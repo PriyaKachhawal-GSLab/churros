@@ -312,6 +312,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
     case 'googledrive':
     case 'googlesheetsv4':
     case 'googlecalendar':
+    case 'googleadwords':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('identifierId')).sendKeys(username);
       browser.findElement(webdriver.By.id('identifierNext')).click();
