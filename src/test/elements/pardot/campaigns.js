@@ -3,12 +3,18 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
-const payload = tools.requirePayload(`${__dirname}/assets/campaigns.json`);
+const payload = tools.requirePayload(`${__dirname}/assets/campaigns-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/campaigns-update.json`);
 const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
 const leadsPayload = tools.requirePayload(`${__dirname}/assets/leads-create.json`);
 
 suite.forElement('marketing', 'campaigns', { payload: payload }, (test) => {
-  test.should.supportCrus();
+  const options = {
+    churros: {
+      updatePayload: updatePayload
+    }
+  };
+  test.withOptions(options).should.supportCrus();
   test.withOptions({ qs: { page: 1, pageSize: 5 } }).should.supportPagination();
   test.withName('should support searching campaigns by created_after').withOptions({ qs: { where: 'created_after=\'2015-01-01\'' } }).should.return200OnGet();
 

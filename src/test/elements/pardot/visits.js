@@ -3,7 +3,7 @@
 const suite = require('core/suite');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
-const queryPayload = tools.requirePayload(`${__dirname}/assets/visits-queryTest.json`);
+const queryPayload = tools.requirePayload(`${__dirname}/assets/visits-requiredQueryParam-s.json`);
 
 suite.forElement('marketing', 'visits', {}, (test) => {
   let visitorId, visitId;
