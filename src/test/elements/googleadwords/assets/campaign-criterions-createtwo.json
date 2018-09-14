@@ -1,0 +1,12 @@
+{
+    "isNegative": false,
+    "criterion": {
+      "code": "te",
+      "name": "Telugu",
+      "id": 1131,
+      "type": "LANGUAGE",
+      "CriterionType": "Language"
+    },
+    "campaignId": "you should get this from campaign api",
+    "CampaignCriterionType": "CampaignCriterion"
+  }
