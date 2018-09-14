@@ -2,6 +2,7 @@
 
 const suite = require('core/suite');
 const cloud = require('core/cloud');
+const provisioner = require('core/provisioner');
 const swaggerParser = require('swagger-parser');
 const expect = require('chakram').expect;
 
@@ -63,7 +64,7 @@ suite.forPlatform('docs', {skip: false}, () => {
       });
   });
 
-  it('should return proper swagger json with the provided base URL', () => {
+  it('should return proper /docs/<hub> swagger json with the provided base URL', () => {
     return cloud.withOptions({ qs: { baseUrl: 'https://foo.bar' } }).get(`/docs/crm`)
       .then(r => {
         expect(r.body).to.not.be.empty;
@@ -71,4 +72,45 @@ suite.forPlatform('docs', {skip: false}, () => {
         expect(r.body.schemes).to.contain('https');
       });
   });
+
+  it('should return proper /instances/:id/docs and /instances/docs swagger json with the provided base URL', () => {
+    let closeioId;
+
+    return provisioner.create('closeio', { 'event.notification.enabled': false })
+      .then(r => closeioId = r.body.id)
+      .then(() => cloud.withOptions({ qs: { baseUrl: 'https://foo.bar' } }).get(`/instances/${closeioId}/docs`))
+      .then(r => {
+        expect(r.body).to.not.be.empty;
+        expect(r.body.host).to.equal('foo.bar');
+        expect(r.body.schemes).to.contain('https');
+      })
+      .then(() => cloud.withOptions({ qs: { baseUrl: 'https://foo.bar' } }).get(`/instances/docs`))
+      .then(r => {
+        expect(r.body).to.not.be.empty;
+        expect(r.body.host).to.equal('foo.bar');
+        expect(r.body.schemes).to.contain('https');
+      })
+      .then(() => provisioner.delete(closeioId));
+  });
+
+  it('should return proper /instances/:id/docs/:opId and /instances/docs/:opId swagger json with the provided base URL', () => {
+    let closeioId;
+
+    return provisioner.create('closeio', { 'event.notification.enabled': false })
+      .then(r => closeioId = r.body.id)
+      .then(() => cloud.withOptions({ qs: { baseUrl: 'https://foo.bar' } }).get(`/instances/${closeioId}/docs/GET-contacts`))
+      .then(r => {
+        expect(r.body).to.not.be.empty;
+        expect(r.body.host).to.equal('foo.bar');
+        expect(r.body.schemes).to.contain('https');
+      })
+      .then(() => cloud.withOptions({ qs: { baseUrl: 'https://foo.bar' } }).get(`/instances/docs/GET-contacts`))
+      .then(r => {
+        expect(r.body).to.not.be.empty;
+        expect(r.body.host).to.equal('foo.bar');
+        expect(r.body.schemes).to.contain('https');
+      })
+      .then(() => provisioner.delete(closeioId));
+  });
+
 });
