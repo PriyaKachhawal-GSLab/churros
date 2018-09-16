@@ -17,7 +17,6 @@ suite.forElement('crm', 'leads', { payload: createPayload}, (test) => {
         name = r.body.FirstName;
       })
       .then(r => cloud.get(test.api))
-      .then(r => cloud.withOptions({ qs: { page: 1, pageSize: 1 } }).get(test.api))
       .then(r => cloud.withOptions({ qs: { where: `FirstName='${name}'` } }).get(test.api))
       .then(r => expect(r.body.filter(o => o.FirstName === `${name}`)).to.not.be.empty)
       .then(r => cloud.get(`${test.api}/${id}`))
