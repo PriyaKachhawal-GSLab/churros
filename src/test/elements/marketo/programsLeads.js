@@ -6,8 +6,8 @@ const tools = require('core/tools');
 const fs = require('fs');
 const expect = require('chakram').expect;
 const namePayload = tools.requirePayload(`${__dirname}/assets/programs-create.json`);
-const bulkPayload = tools.requirePayload(`${__dirname}/assets/programLeads-bulkCsv.json`);
-const bulkJsonPayload = tools.requirePayload(`${__dirname}/assets/programLeads-bulkJson.json`);
+const bulkPayload = tools.requirePayload(`${__dirname}/assets/programsLeads-bulkCsv.json`);
+const bulkJsonPayload = tools.requirePayload(`${__dirname}/assets/programsLeads-bulkJson.json`);
 
 suite.forElement('marketing', 'programsLeads', () => {
   let programId, programName;

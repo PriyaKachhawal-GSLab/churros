@@ -9,7 +9,7 @@ const contactToMergePayload = tools.requirePayload(`${__dirname}/assets/contacts
 const contactsMergePayload = tools.requirePayload(`${__dirname}/assets/contactsMerge-create.json`);
 const updatedPayload = tools.requirePayload(`${__dirname}/assets/contacts-update.json`);
 const interactionPayload = tools.requirePayload(`${__dirname}/assets/contactsInteractions-create.json`);
-const queryType = tools.requirePayload(`${__dirname}/assets/change-contacts-requiredQueryParam-s.json`);
+const queryType = tools.requirePayload(`${__dirname}/assets/changed-contacts-requiredQueryParam-s.json`);
 const queryContactsPayload = tools.requirePayload(`${__dirname}/assets/contacts-requiredQueryParam-s.json`);
 const queryDeletedContactsPayload = tools.requirePayload(`${__dirname}/assets/deleted-contacts-requiredQueryParam-s.json`);
 
