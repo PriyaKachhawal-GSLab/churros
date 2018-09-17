@@ -691,6 +691,8 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       return browser.wait(() => browser.isElementPresent(webdriver.By.id('user-approval')), 5000)
         .then(r => browser.findElement(webdriver.By.xpath('//*[@id="user-approval"]/form[2]/input[6]')))
         .then(r => r.click())
+        // redirect is slooowww
+        .then(() => browser.sleep(3000))
         .then(r => browser.getCurrentUrl())
         .catch(r => browser.getCurrentUrl());
 
