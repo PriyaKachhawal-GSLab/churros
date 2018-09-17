@@ -34,29 +34,7 @@
     "button_description": "View button",
     "enable_messenger": true
   },
-  "custom_disclaimer": {
-    "title": "Custom Disclaimer 1",
-    "body": {
-      "text": "custom disclaimer body text",
-      "url_entities": [
-        {
-          "offset": "1",
-          "length": "20",
-          "url": "www.google.com"
-        }
-      ]
-    },
-    "checkboxes": [
-      {
-        "is_required": true,
-        "is_checked_by_default": true,
-        "text": "I Agree",
-        "key": "i_agree"
-      }
-    ]
-  },
   "context_card": {
-    "cover_photo_id": "1261929010618037",
     "button_text": "Post test button",
     "style": "PARAGRAPH_STYLE",
     "title": "Post test",
