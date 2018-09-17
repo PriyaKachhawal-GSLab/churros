@@ -2,12 +2,9 @@
 
 const tools = require('core/tools');
 const suite = require('core/suite');
-const payload = require('./assets/folders');
 const cloud = require('core/cloud');
-const updatePayload = {
-  "name": "Test Folder Updated" + tools.random(),
-  "description": tools.random()
-};
+const payload = tools.requirePayload(`${__dirname}/assets/folders-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/folders-update.json`);
 
 suite.forElement('marketing', 'folders', { payload: payload }, (test) => {
   payload.name += tools.random();

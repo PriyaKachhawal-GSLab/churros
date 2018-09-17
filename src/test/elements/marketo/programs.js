@@ -1,25 +1,15 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/programs');
 const tools = require('core/tools');
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
-
-const updatePayload = {
-  "name": "Name for Program Test" + tools.random(),
-  "channel": "Email Send",
-  "type": "Email",
-  "folder": {
-    "type": "Folder",
-    "id": 2006
-  }
-};
+const payload = tools.requirePayload(`${__dirname}/assets/programs-create.json`);
+const updatePayload = tools.requirePayload(`${__dirname}/assets/programs-update.json`);
 
 suite.forElement('marketing', 'programs', { payload: payload }, (test) => {
   payload.name += tools.random();
   let id;
-
   const validMetadata = r => {
     expect(r).to.have.statusCode(200);
     let name = r.body.fields.find((obj) => { return obj.vendorPath === 'name'; });
@@ -34,7 +24,6 @@ suite.forElement('marketing', 'programs', { payload: payload }, (test) => {
       .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
-
   it('should test metadata by id for programs', () => {
     return cloud.post(test.api, payload)
       .then(r => id = r.body.id)

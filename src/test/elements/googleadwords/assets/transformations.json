@@ -1,0 +1,120 @@
+{
+  "budgets": {
+    "vendorName": "budgets",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "budgetId"
+      },
+      {
+        "path": "id",
+        "vendorPath": "BudgetId"
+      }
+    ]
+  },
+  "campaign-groups": {
+    "vendorName": "campaign-groups",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "id"
+      },
+      {
+        "path": "id",
+        "vendorPath": "Id"
+      }
+    ]
+  },
+  "labels": {
+    "vendorName": "labels",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "id"
+      },
+      {
+        "path": "id",
+        "vendorPath": "LabelId"
+      }
+    ]
+  },
+  "bidding-strategies": {
+    "vendorName": "bidding-strategies",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "id"
+      },
+      {
+        "path": "id",
+        "vendorPath": "Id"
+      }
+    ]
+  },
+  "campaigns": {
+    "vendorName": "campaigns",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "id"
+      },
+      {
+        "path": "id",
+        "vendorPath": "Id"
+      }
+    ]
+  },
+  "ad-groups": {
+    "vendorName": "ad-groups",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "id"
+      },
+      {
+        "path": "id",
+        "vendorPath": "Id"
+      }
+    ]
+  },
+  "customers": {
+    "vendorName": "customers",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "customerId"
+      }
+    ]
+  },
+  "campaign-criterions": {
+    "vendorName": "campaign-criterions",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "criterion.id"
+      }
+    ]
+  },
+  "ad-group-criterions": {
+    "vendorName": "ad-group-criterions",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "criterion.id"
+      }
+    ]
+  },
+  "ads": {
+    "vendorName": "ads",
+    "fields": [
+      {
+        "path": "id",
+        "vendorPath": "id"
+      },
+      {
+        "path": "id",
+        "vendorPath": "ad.id"
+      }
+    ]
+  }
+}

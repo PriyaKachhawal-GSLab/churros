@@ -312,6 +312,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
     case 'googledrive':
     case 'googlesheetsv4':
     case 'googlecalendar':
+    case 'googleadwords':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('identifierId')).sendKeys(username);
       browser.findElement(webdriver.By.id('identifierNext')).click();
@@ -690,6 +691,8 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       return browser.wait(() => browser.isElementPresent(webdriver.By.id('user-approval')), 5000)
         .then(r => browser.findElement(webdriver.By.xpath('//*[@id="user-approval"]/form[2]/input[6]')))
         .then(r => r.click())
+        // redirect is slooowww
+        .then(() => browser.sleep(7000))
         .then(r => browser.getCurrentUrl())
         .catch(r => browser.getCurrentUrl());
 

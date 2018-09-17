@@ -1,9 +1,0 @@
-{
-  "name": "Texas Test Program 29",
-  "channel": "Email Send",
-  "type": "Email",
-  "folder": {
-    "id": 2006,
-    "type": "Folder"
-  }
-}

@@ -1,0 +1,27 @@
+{
+  "city": "<<address.city>>",
+  "candidateId": "1469",
+  "cellPhone": "+5511 0000-9999",
+  "gender": "No Selection",
+  "lastName": "<<name.lastName>>",
+  "countryCode": "BR",
+  "country": "Brazil",
+  "jobReqId": "205",
+  "firstName": "<<name.firstName>>",
+  "contactEmail": "<<internet.email>>",
+  "appStatusSetItemId": "9",
+  "source": "1",
+  "appLocale": "en_US",
+  "address": "<<address.streetAddress>>",
+  "currentTitle": "Engenheiro de Produ",
+  "formerEmployee": false,
+  "conviction_response": {
+    "id": "30421"
+  },
+  "visaCustom": {
+    "id": "11340"
+  },
+  "citizen": {
+    "id": "5459"
+  }
+}

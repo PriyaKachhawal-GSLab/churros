@@ -2,25 +2,25 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const payload = tools.requirePayload(`${__dirname}/assets/users.json`);
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
+const usersCreatePayload = tools.requirePayload(`${__dirname}/assets/users-create.json`);
+const usersUpdatePayload = tools.requirePayload(`${__dirname}/assets/users-update.json`);
+
 const options = {
   churros: {
-    updatePayload: {
-      "username": "Userguy2",
-      "email": tools.randomEmail()
-    }
+    updatePayload: usersUpdatePayload
   }
 };
 
 
-suite.forElement('helpdesk', 'users', { payload }, (test) => {
+suite.forElement('helpdesk', 'users', { payload : usersCreatePayload }, (test) => {
   test.should.supportPagination();
   test.withOptions(options).should.supportCruds();
+  test.should.supportCeqlSearch('id');
   it('should handle unicode', () => {
-    return cloud.withOptions({qs:{where: "name='%F0%9F%92%A9'"}}).get('/users')
+    return cloud.withOptions({ qs: { where: "name='%F0%9F%92%A9'" } }).get('/users')
       .then(r => expect(r.body.length).to.equal(0));
   });
 });

@@ -1,17 +1,10 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/external-activity');
-const attributePayload = require('./assets/attributes');
-const cloud = require('core/cloud');
 const tools = require('core/tools');
-const build = (overrides) => Object.assign({}, payload, overrides);
-const activityPayload = build({
-  apiName: tools.random(),
-  triggerName: tools.random(),
-  filterName: tools.random(),
-  name: tools.random()
-});
+const attributePayload = tools.requirePayload(`${__dirname}/assets/external-activityAttributes-update.json`);
+const activityPayload = tools.requirePayload(`${__dirname}/assets/external-activityType-create.json`);
+const cloud = require('core/cloud');
 /*
 Need different permissions for external-activities (ready-talk's sandbox)
     "username": "developer@cloud-elements.com",

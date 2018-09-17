@@ -5,7 +5,7 @@ const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
 
-suite.forElement('Humancapital', 'onboardings', {skip: false}, (test) => {
+suite.forElement('humancapital', 'onboardings', {skip: false}, (test) => {
   let id;
   it('should allow Sr for onboardings', () => {
     return cloud.get(test.api)

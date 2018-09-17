@@ -1,0 +1,9 @@
+{
+  "name": "Name for Program Test + <<random.word>>",
+  "channel": "Email Send",
+  "type": "Email",
+  "folder": {
+    "type": "Folder",
+    "id": 2006
+  }
+}

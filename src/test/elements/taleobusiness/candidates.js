@@ -2,19 +2,18 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const cloud = require('core/cloud');
-const expect = require('chakram').expect;
-let payload = tools.requirePayload(`${__dirname}/assets/candidate.json`);
 
-suite.forElement('humancapital', 'candidates', {payload}, (test) => {
+let candidatesCreatePayload = tools.requirePayload(`${__dirname}/assets/candidates-create.json`);
+let candidatesUpdatePayload = tools.requirePayload(`${__dirname}/assets/candidates-update.json`);
+
+const options = {
+    churros: {
+      updatePayload: candidatesUpdatePayload
+    }
+  };
+
+suite.forElement('humancapital', 'candidates', {payload : candidatesCreatePayload}, (test) => {
     test.should.supportNextPagePagination(1);
-    test.should.supportCruds();
-    it('should support where clause', () => {
-        return cloud.get(test.api)
-        .then(r => {
-            let lastName = r.body[0].lastName;
-            return cloud.withOptions({qs: { where: `lastName = '${lastName}'`}}).get(test.api)
-            .then(r => expect(r.body.length).to.equal(r.body.filter(cand => cand.lastName === lastName).length));
-        });
-    });
+    test.withOptions(options).should.supportCruds();
+    test.should.supportCeqlSearchForMultipleRecords('city');
 });

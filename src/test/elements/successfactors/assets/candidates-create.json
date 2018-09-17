@@ -1,0 +1,7 @@
+{
+  "firstName" : "<<random.word>>",
+  "lastName" : "<<random.word>>",
+  "country" : "US",
+  "primaryEmail" : "<<internet.email>>",
+  "cellPhone": "<<random.singleNumber##20>>"
+}
