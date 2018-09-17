@@ -4,9 +4,9 @@ const expect = require('chakram').expect;
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
-const query = tools.requirePayload(`${__dirname}/assets/foldersMetadata-requiredQueryParam-r.json`);
+const query = tools.requirePayload(`${__dirname}/assets/foldersMetadata-requiredQueryParam-s.json`);
 const copy1 = tools.requirePayload(`${__dirname}/assets/folders-create.json`);
-const contentsPayload = tools.requirePayload(`${__dirname}/assets/foldersContents-requiredQueryParam-r.json`);
+const contentsPayload = tools.requirePayload(`${__dirname}/assets/foldersContents-requiredQueryParam-s.json`);
 const folderPayload = require('./assets/folders-create.json');
 const tempFolder = require('./assets/foldersMetadata-update.json');
 

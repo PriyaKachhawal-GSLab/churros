@@ -4,8 +4,8 @@ const expect = require('chakram').expect;
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
-const query = tools.requirePayload(`${__dirname}/assets/files-requiredQueryParam-c.json`);
-const queryParamPayload = tools.requirePayload(`${__dirname}/assets/filesLinks-requiredQueryParam-rd.json`);
+const query = tools.requirePayload(`${__dirname}/assets/files-requiredQueryParam-crud.json`);
+const queryParamPayload = tools.requirePayload(`${__dirname}/assets/filesLinks-requiredQueryParam-sd.json`);
 
 suite.forElement('documents', 'links', null, (test) => {
 

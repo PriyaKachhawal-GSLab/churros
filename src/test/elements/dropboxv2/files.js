@@ -3,9 +3,9 @@
 const cloud = require('core/cloud');
 const suite = require('core/suite');
 const tools = require('core/tools');
-const queryParam = tools.requirePayload(`${__dirname}/assets/files-requiredQueryParam-c.json`);
-const query = tools.requirePayload(`${__dirname}/assets/filesRevisions-requiredQueryParam-r.json`);
-const queryPayload = tools.requirePayload(`${__dirname}/assets/filesLinks-requiredQueryParam-rd.json`);
+const queryParam = tools.requirePayload(`${__dirname}/assets/files-requiredQueryParam-crud.json`);
+const query = tools.requirePayload(`${__dirname}/assets/filesRevisions-requiredQueryParam-s.json`);
+const queryPayload = tools.requirePayload(`${__dirname}/assets/filesLinks-requiredQueryParam-sd.json`);
 
 suite.forElement('documents', 'files', (test) => {
 
