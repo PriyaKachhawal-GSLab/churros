@@ -7,12 +7,12 @@ const expect = require('chakram').expect;
 
 const userAccountsCreatePayload = tools.requirePayload(`${__dirname}/assets/user-accounts-create.json`);
 const employeesCreatePayload = tools.requirePayload(`${__dirname}/assets/employees-create.json`);
-const employeesEmploymentCreatePayload = tools.requirePayload(`${__dirname}/assets/employees-employments-create.json`);
-const employeesJobCreatePayload = tools.requirePayload(`${__dirname}/assets/employees-jobs-create.json`);
-const employeesPersonalPayload = tools.requirePayload(`${__dirname}/assets/employees-personalDetails-create.json`);
+const employeesEmploymentCreatePayload = tools.requirePayload(`${__dirname}/assets/employeesEmployments-create.json`);
+const employeesJobCreatePayload = tools.requirePayload(`${__dirname}/assets/employeesJobs-create.json`);
+const employeesPersonalPayload = tools.requirePayload(`${__dirname}/assets/employeesPersonalDetails-create.json`);
 
 
-suite.forElement('Humancapital', 'employees', { payload: employeesCreatePayload }, (test) => {
+suite.forElement('humancapital', 'employees', { payload: employeesCreatePayload }, (test) => {
   let userId, employeeId, managerId;
   before((done) => cloud.post('user-accounts', userAccountsCreatePayload)
     .then(r => {

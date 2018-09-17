@@ -12,7 +12,7 @@ const options = {
   }
 };
 
-suite.forElement('Humancapital', 'requisitions', { payload: requisitionsCreatePayload }, (test) => {
+suite.forElement('humancapital', 'requisitions', { payload: requisitionsCreatePayload }, (test) => {
   test.should.supportPagination();
   test.withOptions(options).should.supportCruds();
   test.should.supportCeqlSearch('id');

@@ -8,7 +8,7 @@ const expect = require('chakram').expect;
 const applicationsCreatePayload = tools.requirePayload(`${__dirname}/assets/applications-create.json`);
 const applicationsUpdatePayload = tools.requirePayload(`${__dirname}/assets/applications-update.json`);
 
-suite.forElement('Humancapital', 'applications', null, (test) => {
+suite.forElement('humancapital', 'applications', null, (test) => {
   let id;
   it.skip(`should allow Create for ${test.api}`, () => {
     return cloud.post(test.api, applicationsCreatePayload);
