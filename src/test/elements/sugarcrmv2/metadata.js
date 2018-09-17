@@ -8,7 +8,7 @@ suite.forElement('crm', `objects`, (test) => {
   return Promise.all(objects.map(obj => {
     it(`should support GET ${test.api}/${obj}/metadata`, () => {
       return cloud.get(`${test.api}/${obj}/metadata`)
-      .then(r => expect(r.body.fields).to.not.be.empty);
+        .then(r => expect(r.body.fields).to.not.be.empty);
     });
 
     test
