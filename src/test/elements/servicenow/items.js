@@ -3,7 +3,7 @@
 const suite = require('core/suite');
 const expect = require('chakram').expect;
 const cloud = require('core/cloud');
-const payload = require('./assets/submit_producer');
+const payload = require('./assets/itemsSubmit_producer-create');
 
 
 suite.forElement('helpdesk', 'items', (test) => {
