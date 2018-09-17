@@ -8,7 +8,7 @@ const categoriesCreatePayload = tools.requirePayload(`${__dirname}/assets/catego
 const categoriesUpdatePayload = tools.requirePayload(`${__dirname}/assets/categories-create.json`);
 const sectionsCreatePayload = tools.requirePayload(`${__dirname}/assets/sections-create.json`);
 const sectionsUpdatePayload = tools.requirePayload(`${__dirname}/assets/sections-update.json`);
-const incidentsCreatePayload = tools.requirePayload(`${__dirname}/assets/incidents-create.json`);
+const resourcesCreatePayload = tools.requirePayload(`${__dirname}/assets/resources-create.json`);
 const articlesUpdatePayload = tools.requirePayload(`${__dirname}/assets/articles-update.json`);
 const articlesCreatePayload = tools.requirePayload(`${__dirname}/assets/articles-create.json`);
 
@@ -18,7 +18,7 @@ const optionsCategories = {
   }
 };
 
-suite.forElement('helpdesk', 'resources', { payload: incidentsCreatePayload }, (test) => {
+suite.forElement('helpdesk', 'resources', { payload: resourcesCreatePayload }, (test) => {
   test.withApi(`${test.api}/categories`).should.supportPagination();
 
   test.withApi(`${test.api}/categories`).withOptions(optionsCategories).withJson(categoriesCreatePayload).should.supportCruds();
