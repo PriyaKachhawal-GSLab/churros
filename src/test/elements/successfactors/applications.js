@@ -2,22 +2,23 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const payload = tools.requirePayload(`${__dirname}/assets/jobApplications.json`);
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
+const applicationsCreatePayload = tools.requirePayload(`${__dirname}/assets/applications-create.json`);
+const applicationsUpdatePayload = tools.requirePayload(`${__dirname}/assets/applications-update.json`);
 
-suite.forElement('Humancapital', 'applications', { payload: payload }, (test) => {
+suite.forElement('humancapital', 'applications', null, (test) => {
   let id;
   it.skip(`should allow Create for ${test.api}`, () => {
-    return cloud.post(test.api, payload);
+    return cloud.post(test.api, applicationsCreatePayload);
   });
   
   it(`should allow RUS for ${test.api}`, () => {
     return cloud.get(`${test.api}`)
       .then(r => id = r.body[0].id)
       .then(r => cloud.get(`${test.api}/${id}`))
-      .then(r => cloud.patch(`${test.api}/${id}`, payload));
+      .then(r => cloud.patch(`${test.api}/${id}`, applicationsUpdatePayload));
   });
   
   it(`should allow GET for ${test.api}/statuses`, () => {

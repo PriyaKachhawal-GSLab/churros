@@ -1,0 +1,11 @@
+{
+  "username": "<<random.uuid>>",
+  "password": "pwd1",
+  "gender": "M",
+  "status": "active",
+  "firstName": "Paul11",
+  "lastName": "Chris11",
+  "email": "user3@successfactors.com",
+  "department": "Retail Banking",
+  "timeZone": "PST"
+}

@@ -1,30 +1,33 @@
 'use strict';
+
 const suite = require('core/suite');
 const tools = require('core/tools');
-const payload = tools.requirePayload(`${__dirname}/assets/users.json`);
-const employeePayload = tools.requirePayload(`${__dirname}/assets/employees.json`);
-const employmentPayload = tools.requirePayload(`${__dirname}/assets/employment.json`);
-const jobPayload = tools.requirePayload(`${__dirname}/assets/job.json`);
-const personalPayload = tools.requirePayload(`${__dirname}/assets/personal.json`);
 const cloud = require('core/cloud');
 const expect = require('chakram').expect;
 
-suite.forElement('Humancapital', 'employees', { payload: employeePayload }, (test) => {
+const userAccountsCreatePayload = tools.requirePayload(`${__dirname}/assets/user-accounts-create.json`);
+const employeesCreatePayload = tools.requirePayload(`${__dirname}/assets/employees-create.json`);
+const employeesEmploymentCreatePayload = tools.requirePayload(`${__dirname}/assets/employeesEmployments-create.json`);
+const employeesJobCreatePayload = tools.requirePayload(`${__dirname}/assets/employeesJobs-create.json`);
+const employeesPersonalPayload = tools.requirePayload(`${__dirname}/assets/employeesPersonalDetails-create.json`);
+
+
+suite.forElement('humancapital', 'employees', { payload: employeesCreatePayload }, (test) => {
   let userId, employeeId, managerId;
-  before((done) => cloud.post('user-accounts', payload)
+  before((done) => cloud.post('user-accounts', userAccountsCreatePayload)
     .then(r => {
       userId = r.body.id;
-      employeePayload.userId = userId;
+      employeesCreatePayload.userId = userId;
     })
-    .then(r => cloud.post(test.api, employeePayload))
-    .then(r => employeeId = employeePayload.personIdExternal)
+    .then(r => cloud.post(test.api, employeesCreatePayload))
+    .then(r => employeeId = employeesCreatePayload.personIdExternal)
     .then(r => done())
   );
 
   it(`should support CRS for ${test.api}/{id}/employments`, () => {
-    employmentPayload.userId = userId;
-    employmentPayload.personIdExternal = employeeId;
-    return cloud.post(`${test.api}/${employeeId}/employments`, employmentPayload)
+    employeesEmploymentCreatePayload.userId = userId;
+    employeesEmploymentCreatePayload.personIdExternal = employeeId;
+    return cloud.post(`${test.api}/${employeeId}/employments`, employeesEmploymentCreatePayload)
       .then(r => cloud.get(`${test.api}/${employeeId}/employments`))
       .then(r => cloud.withOptions({ qs: {page : 1, pageSize: 1 } }).get(`${test.api}/${employeeId}/employments`))
       .then(r => cloud.get(`${test.api}/${employeeId}/employments/${userId}`));
@@ -41,7 +44,7 @@ suite.forElement('Humancapital', 'employees', { payload: employeePayload }, (tes
 
   //Skip the test as we do not have valid payload for this creation. Raised ticket with SuccessFactor support team.
   it.skip(`should support C for ${test.api}/jobs`, () => {
-    return cloud.post(`${test.api}/${userId}/jobs`, jobPayload);
+    return cloud.post(`${test.api}/${userId}/jobs`, employeesJobCreatePayload);
   });
 
   it(`should support RS for ${test.api}/jobs`, () => {
@@ -51,7 +54,7 @@ suite.forElement('Humancapital', 'employees', { payload: employeePayload }, (tes
   test.withApi(`${test.api}/jobs`).should.supportPagination();
 
   it(`should support CEQL search for ${test.api}/jobs`, () => {
-    managerId = jobPayload.managerId;
+    managerId = employeesJobCreatePayload.managerId;
     return cloud.withOptions({ qs: { where: `managerId='${managerId}'` } }).get(`${test.api}/jobs`)
       .then(r => {
         expect(r.body).to.not.be.empty;
@@ -60,7 +63,7 @@ suite.forElement('Humancapital', 'employees', { payload: employeePayload }, (tes
   });
 
   it(`should support CS for ${test.api}/{id}/personal-details`, () => {
-    return cloud.post(`${test.api}/${employeeId}/personal-details`, personalPayload)
+    return cloud.post(`${test.api}/${employeeId}/personal-details`, employeesPersonalPayload)
       .then(r => cloud.get(`${test.api}/${employeeId}/personal-details`))
       .then(r => cloud.withOptions({qs: {page: 1, pageSize: 1}}).get(`${test.api}/${employeeId}/personal-details`));
   });

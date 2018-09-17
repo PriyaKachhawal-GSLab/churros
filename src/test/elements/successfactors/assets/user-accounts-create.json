@@ -1,7 +1,6 @@
 {
   "username": "<<name.firstName>>",
   "password": "pwd1",
-  "hireDate": "2016-03-16T00:00:00",
   "gender": "M",
   "status": "active",
   "userId": "<<random.uuid>>",
