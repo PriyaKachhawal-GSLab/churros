@@ -1,24 +1,19 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/contacts');
 const tools = require('core/tools');
+
+const contactsCreatePayload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
+const contactsUpdatePayload = tools.requirePayload(`${__dirname}/assets/contacts-update.json`);
 
 const options = {
   churros: {
-    updatePayload: {
-      "name": "Changed Robot Name",
-      "alias": "Updated Data",
-      "phone": "303-555-3434",
-      "details": "This isn't the data that used to be here",
-      "notes": "This data has been changed!"
-    }
+    updatePayload: contactsUpdatePayload
   }
 };
 
-payload.email = tools.randomEmail();
-
-suite.forElement('helpdesk', 'contacts', { payload }, (test) => {
+suite.forElement('helpdesk', 'contacts', { payload : contactsCreatePayload }, (test) => {
   test.should.supportPagination();
   test.withOptions(options).should.supportCruds();
+  test.should.supportCeqlSearch('id');
 });

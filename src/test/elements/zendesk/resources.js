@@ -3,35 +3,35 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
-const categoryPayload = tools.requirePayload(`${__dirname}/assets/categories.json`);
-const sectionsPayload = require('./assets/sections');
-const incidentsPayload = tools.requirePayload(`${__dirname}/assets/incidents.json`);
-const articlesPayload = require('./assets/articles');
 
-const options = {
+const categoriesCreatePayload = tools.requirePayload(`${__dirname}/assets/resourcesCategories-create.json`);
+const categoriesUpdatePayload = tools.requirePayload(`${__dirname}/assets/resourcesCategories-update.json`);
+const sectionsCreatePayload = tools.requirePayload(`${__dirname}/assets/resourcesCategoriesSections-create.json`);
+const sectionsUpdatePayload = tools.requirePayload(`${__dirname}/assets/resourcesSections-update.json`);
+const resourcesCreatePayload = tools.requirePayload(`${__dirname}/assets/resources-create.json`);
+const articlesUpdatePayload = tools.requirePayload(`${__dirname}/assets/resourcesArticles-update.json`);
+const articlesCreatePayload = tools.requirePayload(`${__dirname}/assets/resourcesSectionsArticles-create.json`);
+
+const optionsCategories = {
   churros: {
-    updatePayload: {
-      "name": "Example Category 3",
-      "description": "An Update Done via API",
-      "position": 2,
-      "locale": "us-en"
-    }
+    updatePayload: categoriesUpdatePayload
   }
 };
 
-suite.forElement('helpdesk', 'resources', { payload: incidentsPayload }, (test) => {
+suite.forElement('helpdesk', 'resources', { payload: resourcesCreatePayload }, (test) => {
   test.withApi(`${test.api}/categories`).should.supportPagination();
-  test.withApi(`${test.api}/categories`).withOptions(options).withJson(categoryPayload).should.supportCruds();
+
+  test.withApi(`${test.api}/categories`).withOptions(optionsCategories).withJson(categoriesCreatePayload).should.supportCruds();
 
   it('should support CRUDS for /hubs/helpdesk/resources/categories/:id/sections', () => {
     let categoryId, sectionId;
-    return cloud.post(`${test.api}/categories`, categoryPayload)
+    return cloud.post(`${test.api}/categories`, categoriesCreatePayload)
       .then(r => categoryId = r.body.id)
-      .then(r => cloud.post(`${test.api}/categories/${categoryId}/sections`, sectionsPayload))
+      .then(r => cloud.post(`${test.api}/categories/${categoryId}/sections`, sectionsCreatePayload))
       .then(r => sectionId = r.body.id)
       .then(r => cloud.get(`/hubs/helpdesk/resources/sections`))
       .then(r => cloud.get(`/hubs/helpdesk/resources/sections/${sectionId}`))
-      .then(r => cloud.patch(`/hubs/helpdesk/resources/sections/${sectionId}`, sectionsPayload))
+      .then(r => cloud.patch(`/hubs/helpdesk/resources/sections/${sectionId}`, sectionsUpdatePayload))
       .then(r => cloud.delete(`/hubs/helpdesk/resources/sections/${sectionId}`))
       .then(r => cloud.delete(`${test.api}/categories/${categoryId}`));
   });
@@ -43,10 +43,18 @@ suite.forElement('helpdesk', 'resources', { payload: incidentsPayload }, (test) 
       .then(r => cloud.get(`${test.api}/articles/${articleId}`));
   });
 
-  it('should support RU for /hubs/helpdesk/resources/articles and CEQL search', () => {
-    let articleId;
-    return cloud.withOptions({ qs: { where: `title='abc'` } }).get(`${test.api}/articles`)
-      .then(r => articleId = r.body[0].id)
-      .then(r => cloud.patch(`${test.api}/articles/${articleId}`, articlesPayload));
+  it('should support CRUDS for /hubs/helpdesk/resources/sections/:id/articles', () => {
+    let categoryId, articleId, sectionId;
+    return cloud.post(`${test.api}/categories`, categoriesCreatePayload)
+      .then(r => categoryId = r.body.id)
+      .then(r => cloud.post(`${test.api}/categories/${categoryId}/sections`, sectionsCreatePayload))
+      .then(r => sectionId = r.body.id)
+      .then(r => cloud.post(`${test.api}/sections/${sectionId}/articles`, articlesCreatePayload))
+      .then(r => articleId = r.body.id)
+      .then(r => cloud.get(`/hubs/helpdesk/resources/articles/${articleId}`))
+      .then(r => cloud.patch(`/hubs/helpdesk/resources/articles/${articleId}`, articlesUpdatePayload))
+      .then(r => cloud.delete(`/hubs/helpdesk/resources/articles/${articleId}`))
+      .then(r => cloud.delete(`/hubs/helpdesk/resources/sections/${sectionId}`))
+      .then(r => cloud.delete(`${test.api}/categories/${categoryId}`));
   });
 });
