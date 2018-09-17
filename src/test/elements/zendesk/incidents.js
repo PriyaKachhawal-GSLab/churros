@@ -6,7 +6,7 @@ const cloud = require('core/cloud');
 
 const incidentsCreatePayload = tools.requirePayload(`${__dirname}/assets/incidents-create.json`);
 const incidentsUpdatePayload = tools.requirePayload(`${__dirname}/assets/incidents-update.json`);
-const commentsCreatePayload = tools.requirePayload(`${__dirname}/assets/comments-create.json`);
+const commentsCreatePayload = tools.requirePayload(`${__dirname}/assets/incidentsComments-create.json`);
 
 const options = {
   churros: {

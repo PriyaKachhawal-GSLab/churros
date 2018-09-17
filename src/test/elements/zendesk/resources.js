@@ -4,13 +4,13 @@ const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
 
-const categoriesCreatePayload = tools.requirePayload(`${__dirname}/assets/categories-create.json`);
-const categoriesUpdatePayload = tools.requirePayload(`${__dirname}/assets/categories-create.json`);
-const sectionsCreatePayload = tools.requirePayload(`${__dirname}/assets/sections-create.json`);
-const sectionsUpdatePayload = tools.requirePayload(`${__dirname}/assets/sections-update.json`);
+const categoriesCreatePayload = tools.requirePayload(`${__dirname}/assets/resourcesCategories-create.json`);
+const categoriesUpdatePayload = tools.requirePayload(`${__dirname}/assets/resourcesCategories-update.json`);
+const sectionsCreatePayload = tools.requirePayload(`${__dirname}/assets/resourcesCategoriesSections-create.json`);
+const sectionsUpdatePayload = tools.requirePayload(`${__dirname}/assets/resourcesSections-update.json`);
 const resourcesCreatePayload = tools.requirePayload(`${__dirname}/assets/resources-create.json`);
-const articlesUpdatePayload = tools.requirePayload(`${__dirname}/assets/articles-update.json`);
-const articlesCreatePayload = tools.requirePayload(`${__dirname}/assets/articles-create.json`);
+const articlesUpdatePayload = tools.requirePayload(`${__dirname}/assets/resourcesArticles-update.json`);
+const articlesCreatePayload = tools.requirePayload(`${__dirname}/assets/resourcesSectionsArticles-create.json`);
 
 const optionsCategories = {
   churros: {
