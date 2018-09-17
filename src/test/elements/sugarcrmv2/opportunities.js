@@ -1,24 +1,28 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/opportunities');
+const payload = require('./assets/opportunities-create.json');
+const updatePayload = require('./assets/opportunities-update.json');
+const notesCreate = require('./assets/opportunitiesNotes-create.json');
+const notesUpdate = require('./assets/opportunitiesNotes-update.json');
 const cloud = require('core/cloud');
-const note = {
-  "name": "Test Note",
-  "description": "I am a test note"
-};
 
 suite.forElement('crm', 'opportunities', { payload: payload }, (test) => {
-  test.should.supportCruds();
+  const options = {
+    churros: {
+      updatePayload: updatePayload
+    }
+  };
+  test.withOptions(options).should.supportCruds();
   test.should.supportPagination();
   let opportunityId, noteId;
   it('should support CRUDS for opportunities/notes', () => {
     return cloud.post(test.api, payload)
       .then(r => opportunityId = r.body.id)
-      .then(r => cloud.post(`${test.api}/${opportunityId}/notes`, note))
+      .then(r => cloud.post(`${test.api}/${opportunityId}/notes`, notesCreate))
       .then(r => noteId = r.body.id)
       .then(r => cloud.get(`${test.api}/${opportunityId}/notes/${noteId}`))
-      .then(r => cloud.patch(`${test.api}/${opportunityId}/notes/${noteId}`, { "description": "this is an updated note" }))
+      .then(r => cloud.patch(`${test.api}/${opportunityId}/notes/${noteId}`, notesUpdate))
       .then(r => cloud.delete(`${test.api}/${opportunityId}/notes/${noteId}`))
       .then(r => cloud.delete(`${test.api}/${opportunityId}`));
   });

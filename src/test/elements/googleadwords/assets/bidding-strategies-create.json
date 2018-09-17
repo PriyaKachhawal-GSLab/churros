@@ -1,0 +1,4 @@
+{
+    "name": "<<random.uuid>>",
+    "BiddingStrategyType" : "TARGET_SPEND"
+}

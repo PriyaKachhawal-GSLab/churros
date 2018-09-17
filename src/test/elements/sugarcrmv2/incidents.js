@@ -2,24 +2,28 @@
 
 const suite = require('core/suite');
 const fs = require('fs');
-const payload = require('./assets/incidents');
+const payload = require('./assets/incidents-create.json');
+const updatePayload = require('./assets/incidents-update.json');
+const notesCreate = require('./assets/incidentsNotes-create.json');
+const notesUpdate = require('./assets/incidentsNotes-update.json');
 const cloud = require('core/cloud');
-const note = {
-  "name": "Test Note",
-  "description": "I am a test note"
-};
 
 suite.forElement('crm', 'incidents', { payload: payload }, (test) => {
-  test.should.supportCruds();
+  const options = {
+    churros: {
+      updatePayload: updatePayload
+    }
+  };
+  test.withOptions(options).should.supportCruds();
   test.should.supportPagination();
   let incidentId, noteId;
   it('should support CRUDS for incidents/notes', () => {
     return cloud.post(test.api, payload)
       .then(r => incidentId = r.body.id)
-      .then(r => cloud.post(`${test.api}/${incidentId}/notes`, note))
+      .then(r => cloud.post(`${test.api}/${incidentId}/notes`, notesCreate))
       .then(r => noteId = r.body.id)
       .then(r => cloud.get(`${test.api}/${incidentId}/notes/${noteId}`))
-      .then(r => cloud.patch(`${test.api}/${incidentId}/notes/${noteId}`, { "description": "this is an updated note" }))
+      .then(r => cloud.patch(`${test.api}/${incidentId}/notes/${noteId}`, notesUpdate))
       .then(r => cloud.delete(`${test.api}/${incidentId}/notes/${noteId}`))
       .then(r => cloud.delete(`${test.api}/${incidentId}`));
   });
@@ -36,7 +40,7 @@ suite.forElement('crm', 'incidents', { payload: payload }, (test) => {
   it('should support RUD for incidents/notes/attachments', () => {
     return cloud.post(test.api, payload)
       .then(r => incidentId = r.body.id)
-      .then(r => cloud.post(`${test.api}/${incidentId}/notes`, note))
+      .then(r => cloud.post(`${test.api}/${incidentId}/notes`, notesCreate))
       .then(r => noteId = r.body.id)
       .then(r => cloud.withOptions(attachments).put(`${test.api}/${incidentId}/notes/${noteId}/attachments`, undefined))
       .then(r => cloud.get(`${test.api}/${incidentId}/notes/${noteId}/attachments`))

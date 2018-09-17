@@ -2,11 +2,18 @@
 
 const suite = require('core/suite');
 const tools = require('core/tools');
-const payload = { name: tools.randomStr('abcdefghijklmnopqrstuvwxyz11234567890', 10)};
+
+const contentSectionsCreatePayload = tools.requirePayload(`${__dirname}/assets/content-sections-create.json`);
+const contentSectionsUpdatePayload = tools.requirePayload(`${__dirname}/assets/content-sections-update.json`);
 
 
-suite.forElement('marketing', 'content-sections', { payload: payload }, (test) => {
-  test.should.supportCruds();
+suite.forElement('marketing', 'content-sections', { payload: contentSectionsCreatePayload }, (test) => {
+  const opts = {
+    churros: {
+      updatePayload : contentSectionsUpdatePayload
+    }
+  };
+  test.withOptions(opts).should.supportCruds();
   test.withOptions({ qs: { pageSize: 10 }}).should.supportPagination('id');
   test.should.supportCeqlSearchForMultipleRecords('name');
 });

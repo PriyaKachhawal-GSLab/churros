@@ -10,7 +10,11 @@ suite.forElement('finance', 'items', { payload: payload }, (test) => {
   test.should.supportPagination();
   test.withApi(test.api)
     .withOptions({ qs: { where: "unit_cost_min=4" } })
-    .withValidation(r => expect(r.body.filter(obj => obj.unit_cost.amount >= 4)).to.not.be.empty)
+    .withValidation(r => {
+      expect(r).to.statusCode(200);
+      const validValues = r.body.filter(obj => obj.unit_cost.amount >= 4);
+      expect(validValues.length).to.equal(r.body.length);
+    })
     .withName('should allow GET with option unit_cost_max')
     .should.return200OnGet();
 });

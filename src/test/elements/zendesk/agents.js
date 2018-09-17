@@ -2,18 +2,18 @@
 
 const tools = require('core/tools');
 const suite = require('core/suite');
-const payload = tools.requirePayload(`${__dirname}/assets/agents.json`);
+
+const agentsCreatePayload = tools.requirePayload(`${__dirname}/assets/agents-create.json`);
+const agentsUpdatePayload = tools.requirePayload(`${__dirname}/assets/agents-update.json`);
 
 const options = {
   churros: {
-    updatePayload: {
-      "name": "Zendesk2",
-      "email": "test_user123@cloud-elements.com"
-    }
+    updatePayload: agentsUpdatePayload
   }
 };
 
-suite.forElement('helpdesk', 'agents', { payload: payload }, (test) => {
+suite.forElement('helpdesk', 'agents', { payload: agentsCreatePayload }, (test) => {
   test.should.supportPagination();
   test.withOptions(options).should.supportCruds();
+  test.should.supportCeqlSearch('id');
 });

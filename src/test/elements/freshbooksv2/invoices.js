@@ -18,7 +18,11 @@ suite.forElement('finance', 'invoices', { payload: payload }, (test) => {
   test.should.supportPagination();
   test.withApi(test.api)
     .withOptions({ qs: { where: "currency_code='USD'" } })
-    .withValidation(r => expect(r.body.filter(obj => obj.currency_code === "USD")).to.not.be.empty)
+    .withValidation(r => {
+      expect(r).to.statusCode(200);
+      const validValues = r.body.filter(obj => obj.currency_code === "USD");
+      expect(validValues.length).to.equal(r.body.length);
+    })
     .withName('should allow GET with option currency_code')
     .should.return200OnGet();
 });
