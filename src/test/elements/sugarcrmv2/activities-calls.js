@@ -1,10 +1,10 @@
 'use strict';
 
 const suite = require('core/suite');
-const payload = require('./assets/activitiesEmails-create.json');
-const updatePayload = require('./assets/activitiesEmails-update.json');
+const payload = require('./assets/activities-calls-create.json');
+const updatePayload = require('./assets/activities-calls-update.json');
 
-suite.forElement('crm', 'activitiesEmails', { payload: payload }, (test) => {
+suite.forElement('crm', 'activities-calls', { payload: payload }, (test) => {
   const options = {
     churros: {
       updatePayload: updatePayload
