@@ -1,3 +1,7 @@
 {
-    "name": "<<commerce.productName>>"
+    "name": "<<commerce.productName>>",
+    "unit_cost": {
+        "amount": 1234.00,
+        "code": "USD"
+    }
 }

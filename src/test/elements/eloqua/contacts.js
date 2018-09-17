@@ -3,14 +3,15 @@
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
-const payload = tools.requirePayload(`${__dirname}/assets/contacts.json`);
-const updatePayload = require(`./assets/contacts-update`);
 const expect = require('chakram').expect;
 
-suite.forElement('marketing', 'contacts', { payload: payload }, (test) => {
+const contactsCreatePayload = tools.requirePayload(`${__dirname}/assets/contacts-create.json`);
+const contactsUpdatePayload = tools.requirePayload(`${__dirname}/assets/contacts-update.json`);
+
+suite.forElement('marketing', 'contacts', { payload: contactsCreatePayload }, (test) => {
   const opts = {
     churros: {
-      updatePayload
+      updatePayload : contactsUpdatePayload
     }
   };
   test.withOptions(opts).should.supportCruds();
@@ -42,12 +43,12 @@ suite.forElement('marketing', 'contacts', { payload: payload }, (test) => {
 
   it(`should allow CUD for /contacts with Eloqua field names`, () => {
     let id;
-    return cloud.post(test.api, payload)
+    return cloud.post(test.api, contactsCreatePayload)
       .then(r => id = r.body.id)
-      .then(r => cloud.patch(`${test.api}/${id}`, updatePayload))
+      .then(r => cloud.patch(`${test.api}/${id}`, contactsUpdatePayload))
       .then(r => {
         expect(r.body).to.not.be.empty;
-        expect(Object.keys(updatePayload).every(key => r.body[key] === updatePayload[key])).to.be.true;
+        expect(Object.keys(contactsUpdatePayload).every(key => r.body[key] === contactsUpdatePayload[key])).to.be.true;
       })
       .then(r => cloud.delete(`${test.api}/${id}`));
   });
