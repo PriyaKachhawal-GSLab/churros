@@ -7,9 +7,9 @@ const contactsPayload = tools.requirePayload(`${__dirname}/assets/contacts-creat
 const leadsPayload = tools.requirePayload(`${__dirname}/assets/leads-create.json`);
 const opportunitiesPayload = tools.requirePayload(`${__dirname}/assets/opportunities-create.json`);
 const tasksPayload = tools.requirePayload(`${__dirname}/assets/tasks-create.json`);
-const activitiesEmailsPayload = tools.requirePayload(`${__dirname}/assets/activitiesEmails-create.json`);
-const activitiesCallsPayload = tools.requirePayload(`${__dirname}/assets/activitiesCalls-create.json`);
-const activitiesEventsPayload = tools.requirePayload(`${__dirname}/assets/activitiesEvents-create.json`);
+const activitiesEmailsPayload = tools.requirePayload(`${__dirname}/assets/activities-emails-create.json`);
+const activitiesCallsPayload = tools.requirePayload(`${__dirname}/assets/activities-calls-create.json`);
+const activitiesEventsPayload = tools.requirePayload(`${__dirname}/assets/activities-events-create.json`);
 const campaignsPayload = tools.requirePayload(`${__dirname}/assets/campaigns-create.json`);
 const incidentsPayload = tools.requirePayload(`${__dirname}/assets/incidents-create.json`);
 

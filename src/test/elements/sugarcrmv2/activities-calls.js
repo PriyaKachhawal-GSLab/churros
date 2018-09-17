@@ -10,6 +10,7 @@ suite.forElement('crm', 'activities-calls', { payload: payload }, (test) => {
       updatePayload: updatePayload
     }
   };
+  // update timesout alot
   test.withOptions(options).should.supportCruds();
   test.should.supportPagination();
 });
