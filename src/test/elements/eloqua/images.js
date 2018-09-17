@@ -8,7 +8,6 @@ const imagesUpdatePayload = tools.requirePayload(`${__dirname}/assets/images-upd
 
 
 let jpgFile = __dirname + '/assets/brady.jpg';
-let query = { depth: 'complete' };
 suite.forElement('marketing', 'images', (test) => {
 
   it('should allow CRUDS for iamges', () => {
