@@ -2,5 +2,5 @@
    "myAddress":"<<address.streetAddress>>",
    "myCity":"<<address.city>>",
    "myExternalId":"<<random.number>>",
-   "myName":"<<name.firstName>> Object"
+   "myName":"<<name.firstName>>"
 }

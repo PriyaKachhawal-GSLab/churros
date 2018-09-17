@@ -1,9 +1,10 @@
 'use strict';
 
 const expect = require('chakram').expect;
+const tools = require('core/tools');
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const newResource = require('./assets/newResource.json');
+const newResource = tools.requirePayload(`${__dirname}/assets/resources-create.json`);
 const _ = require('lodash');
 
 // Test for extending hubspot crm and invoking the extended resource
@@ -23,7 +24,7 @@ suite.forElement('marketing', 'extended-resource', {}, (test) => {
   after(() => cloud.delete(`elements/marketo/resources/${newResourceId}`));
 
   it('should test newly added account resource extended-resource', () => {
-      return cloud.get(`extended-resource`)
+    return cloud.get(`extended-resource`)
       .then(r => {
         expect(r.body).to.not.be.empty;
       });
