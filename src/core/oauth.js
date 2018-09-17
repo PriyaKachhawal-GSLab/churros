@@ -802,7 +802,7 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.id('accept-button'))
         .then((element) => element.click(), (err) => console.warn(err));
         // WAIT for url with code to load as it takes some time at few cases
-      return browser.wait(() => browser.getCurrentUrl());   
+      return browser.wait(() => browser.getCurrentUrl());
     case 'typeform':
       browser.get(r.body.oauthUrl);
       browser.findElement(webdriver.By.id('_username')).sendKeys(username);
@@ -819,6 +819,14 @@ const manipulateDom = (element, browser, r, username, password, config) => {
       browser.findElement(webdriver.By.name('pwd')).sendKeys(password);
       browser.findElement(webdriver.By.id('signin_submit')).click();
       return browser.getCurrentUrl();
+    case 'terminus':
+        browser.get(r.body.oauthUrl);
+        browser.wait(webdriver.until.elementLocated(webdriver.By.name('lid'), 5000));
+        browser.findElement(webdriver.By.name('email')).sendKeys(username);
+        browser.findElement(webdriver.By.name('password')).sendKeys(password);
+        browser.findElement(webdriver.By.xpath('.//span[contains(text(),"Log In")]')).click();
+        browser.findElement(webdriver.By.xpath('.//span[contains(text(),"Accept")]')).click();
+        return browser.getCurrentUrl();
     default:
       throw 'No OAuth function found for element ' + element + '.  Please implement function in core/oauth so ' + element + ' can be provisioned';
   }

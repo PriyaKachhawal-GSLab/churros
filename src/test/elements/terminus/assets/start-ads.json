@@ -1,0 +1,11 @@
+{
+  "companies": [
+    {
+      "company_id": "1002",
+      "company_name": "abc",
+      "domain": "abc.com",
+      "address": "123 East ",
+      "city": "Atlanta"
+    }
+  ]
+}
