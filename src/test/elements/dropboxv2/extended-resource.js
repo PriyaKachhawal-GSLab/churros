@@ -3,7 +3,7 @@
 const expect = require('chakram').expect;
 const suite = require('core/suite');
 const cloud = require('core/cloud');
-const newResource = require('./assets/newResource.json');
+const newResource = require('./assets/resources-create.json');
 
 // Test for extending dropboxv2 and invoking the extended resource
 suite.forElement('document', 'extended-resource', {}, (test) => {

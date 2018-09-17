@@ -4,15 +4,18 @@ const expect = require('chakram').expect;
 const suite = require('core/suite');
 const cloud = require('core/cloud');
 const tools = require('core/tools');
-const folderPayload = require('./assets/folders.json');
+const query = tools.requirePayload(`${__dirname}/assets/foldersMetadata-requiredQueryParam-r.json`);
+const copy1 = tools.requirePayload(`${__dirname}/assets/folders-create.json`);
+const contentsPayload = tools.requirePayload(`${__dirname}/assets/foldersContents-requiredQueryParam-r.json`);
+const folderPayload = require('./assets/folders-create.json');
+const tempFolder = require('./assets/foldersMetadata-update.json');
+
 
 suite.forElement('documents', 'folders', (test) => {
   let rootId = "%252F";
   let rootPath = "/";
-  let random = `${tools.randomStr('abcdefghijklmnopqrstuvwxyz1234567890', 20)}`;
 
   it('should allow GET /folders/metadata for root folder', () => {
-    let query = { path: rootPath };
     return cloud.withOptions({qs: query}).get("/hubs/documents/folders/metadata")
       .then(r => {
         expect(r).to.have.statusCode(200);
@@ -36,8 +39,6 @@ suite.forElement('documents', 'folders', (test) => {
 
       const folderWrap = (cb) => {
         let folder;
-        folderPayload.path += `-${random}`;
-        folderPayload.name += `-${random}`;
         return cloud.post('/hubs/documents/folders', folderPayload)
           .then(r => folder = r.body)
           .then(r => cb(folder))
@@ -46,8 +47,6 @@ suite.forElement('documents', 'folders', (test) => {
 
       it('should allow CREATE /folders and DELETE /folders/:refId', () => {
         let folder;
-        folderPayload.path += `-${random}`;
-        folderPayload.name += `-${random}`;
         return cloud.post('/hubs/documents/folders', folderPayload)
           .then(r => folder = r.body)
           .then(r => cloud.delete(`/hubs/documents/folders/${folder.refId}`));
@@ -64,9 +63,6 @@ suite.forElement('documents', 'folders', (test) => {
 
       it('should allow RU /folders/:refId/metadata', () => {
         const cb = (folder) => {
-          let tempFolder = {
-            path: `/a-${folder.name}`
-          };
           return cloud.get(`/hubs/documents/folders/${folder.refId}/metadata`)
             .then(r => cloud.patch(`/hubs/documents/folders/${folder.refId}/metadata`, tempFolder));
         };
@@ -75,8 +71,6 @@ suite.forElement('documents', 'folders', (test) => {
       });
 
       it('should allow POST /folders/:refId/copy', () => {
-
-        const copy1 = { path: `/churrosCopy1-${random}` };
 
         const cb = (folder) => {
           let folderCopy;
@@ -88,30 +82,30 @@ suite.forElement('documents', 'folders', (test) => {
         return folderWrap(cb);
       });
 
-      test.withApi(`${test.api}/contents`).withOptions({qs: {path :'/'}}).should.supportNextPagePagination(1);
+      test.withApi(`${test.api}/contents`).withOptions({qs: contentsPayload}).should.supportNextPagePagination(1);
 
       it('should allow GET /folders/contents', () => {
-        return cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
+        return cloud.withOptions({ qs: contentsPayload }).get(`${test.api}/contents`)
           .then(r => expect(r.body.length).to.equal(r.body.filter(obj => obj.directory === true || obj.directory === false).length));
       });
 
       it.skip('should allow GET /folders/contents with name', () => {
-        return cloud.withOptions({ qs: { path: `/`, where: "name='dontdelete.jpg'" } }).get(`${test.api}/contents`)
+        return cloud.withOptions({ qs: contentsPayload }).get(`${test.api}/contents`)
           .then(r => expect(r.body[0].name).to.contain('dontdelete'));
       });
 
       it.skip('should allow GET /folders/contents with extension', () => {
-        return cloud.withOptions({ qs: { path: `/`, where: "extension='.csv'" } }).get(`${test.api}/contents`)
+        return cloud.withOptions({ qs: contentsPayload }).get(`${test.api}/contents`)
           .then(r => expect(r.body[0].name).to.contain('.csv'));
       });
 
       it('should return parentFolderId for GET /folders/content', ()=> {
-        return cloud.withOptions({ qs: { path: `/` } }).get(`${test.api}/contents`)
+        return cloud.withOptions({ qs: contentsPayload }).get(`${test.api}/contents`)
             .then(r => expect(r.body.parentFolderId).to.not.equal(null));
       });
 
       it('should allow GET /folders/contents with directory', () => {
-        return cloud.withOptions({ qs: { path: `/`, where: "directory='true'" } }).get(`${test.api}/contents`)
+        return cloud.withOptions({ qs: contentsPayload }).get(`${test.api}/contents`)
           .then(r => expect(r.body[0].directory).to.equal(true));
       });
 
